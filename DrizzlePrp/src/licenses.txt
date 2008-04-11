@@ -1,0 +1,2 @@
+The bouncycastle.org license can be found in each package's folder as LICENSE.html
+All other files are GPLv3 or later, as noted at the start of each file.

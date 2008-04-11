@@ -1,0 +1,80 @@
+/*
+    Drizzle - A general Myst tool.
+    Copyright (C) 2008  Dustin Bernard.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/ 
+
+package uru.moulprp;
+
+import uru.context; import uru.readexception;
+import uru.Bytestream;
+import uru.Bytedeque;
+import uru.e;
+import uru.m;
+import uru.b;
+//import java.util.Vector;
+
+/**
+ *
+ * @author user
+ */
+//Not working!!!!!!!!!!
+public class x000CBoundInterface extends uruobj
+{
+    //Objheader xheader;
+    PlObjInterface parent;
+    //int u1;
+    //Uruobjectref parentobject; //should be a scene node.
+    //int u2;
+    short u3;
+    int count;
+    Flt[][] u4 = new Flt[4][];
+    
+    
+    public x000CBoundInterface(context c) throws readexception
+    {
+        Bytestream data = c.in;
+        //if(hasHeader) xheader = new Objheader(c);
+        parent = new PlObjInterface(c);//,false); //I don't think this is the problem, since x0010 is the parent for other classes which work perfectly.(some use the array and some don't, but they all work.)
+        //u1 = data.readInt();
+        //parentobject = new Uruobjectref(c);
+        //u2 = data.readInt();
+        u3 = data.readShort();
+        count = data.readInt();
+        for(int i=0;i<4;i++)
+        {
+            u4[i] = new Flt[count];
+            for(int j=0;j<count;j++)
+            {
+                u4[i][j] = new Flt(c);
+            }
+        }
+        
+    }
+    public void compile(Bytedeque deque)
+    {
+        parent.compile(deque);
+        deque.writeShort(u3);
+        deque.writeInt(count);
+        
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<count;j++)
+            {
+                u4[i][j].compile(deque);
+            }
+        }
+    }
+}
