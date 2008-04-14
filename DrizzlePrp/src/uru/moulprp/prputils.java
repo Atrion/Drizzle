@@ -261,6 +261,7 @@ public class prputils
                     case plRidingAnimatedPhysicalDetector:
                     case plGrassShaderMod:
                     case plDynamicCamMap:
+                    case plSoftVolumeInvert:
                         try
                         {
                             object = new PrpRootObject(stream);
@@ -402,7 +403,11 @@ public class prputils
             //fix payiferen pageid conflict problem.
             if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
             {
-                _staticsettings.sequencePrefix = 0x64;
+                _staticsettings.sequencePrefix = 0x63;
+            }
+            else if (prp.header.agename.toString().toLowerCase().equals("kveer"))
+            {
+                _staticsettings.sequencePrefix = 0x62;
             }
 
             //fix problem with materials(referenced from plDrawableSpans) that point to LayerAnimations.
@@ -568,10 +573,10 @@ public class prputils
 
             //cleanup.
             //fix payiferen pageid conflict problem.
-            if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
-            {
+            //if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
+            //{
                 _staticsettings.sequencePrefix = 0x00;
-            }
+            //}
             m.msg("Recompilated completed!");
         }
         
@@ -1250,6 +1255,9 @@ public class prputils
                             type.plDynaPuddleMgr,
                             type.plWaveSet7,
                             type.plDynamicEnvMap,
+                            
+                            //version2
+                            type.plSoftVolumeInvert,
                         };
                         namestartswith = new String[]{
                             /*"linkinpoint",
@@ -1451,6 +1459,7 @@ public class prputils
                     case plRidingAnimatedPhysicalDetector:
                     case plGrassShaderMod:
                     case plDynamicCamMap:
+                    case plSoftVolumeInvert:
                         try
                         {
                             object = new PrpRootObject(stream);

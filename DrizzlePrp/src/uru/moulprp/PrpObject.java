@@ -283,6 +283,8 @@ public class PrpObject extends uruobj
                 return new PlDynamicCamMap(c);
             case plRideAnimatedPhysMsg:
                 return new PrpMessage.PlRideAnimatedPhysMsg(c);
+            case plSoftVolumeInvert:
+                return new PlSoftVolumeInvert(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new readexception("prpobject: unhandled type.: "+type.toString());
