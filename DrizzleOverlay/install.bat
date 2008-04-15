@@ -9,22 +9,22 @@ echo Trying to find POTS folder...
 set urupath=null
 rem used to check for PrimeToX2.exe
 
-if exist "c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
-if exist "c:\program files\ubi soft\cyan worlds\uru - complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=c:\program files\ubi soft\cyan worlds\uru - complete chronicles\
-if exist "c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
-if exist "d:\program files\ubi soft\cyan worlds\uru - ages beyond myst\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=d:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
-if exist "d:\program files\ubi soft\cyan worlds\uru - complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=d:\program files\ubi soft\cyan worlds\uru - complete chronicles\
-if exist "d:\program files\ubi soft\cyan worlds\myst uru complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=d:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
-if exist "e:\program files\ubi soft\cyan worlds\uru - ages beyond myst\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=e:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
-if exist "e:\program files\ubi soft\cyan worlds\uru - complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=e:\program files\ubi soft\cyan worlds\uru - complete chronicles\
-if exist "e:\program files\ubi soft\cyan worlds\myst uru complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=e:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
-if exist "h:\program files\ubi soft\cyan worlds\uru - ages beyond myst\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=h:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
-if exist "h:\program files\ubi soft\cyan worlds\uru - complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=h:\program files\ubi soft\cyan worlds\uru - complete chronicles\
-if exist "h:\program files\ubi soft\cyan worlds\myst uru complete chronicles\URU - The Path of the Shell Quick-Start Card.pdf" set urupath=h:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
+if exist "c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
+if exist "c:\program files\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\uru - complete chronicles\
+if exist "c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
+if exist "d:\program files\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=d:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
+if exist "d:\program files\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=d:\program files\ubi soft\cyan worlds\uru - complete chronicles\
+if exist "d:\program files\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=d:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
+if exist "e:\program files\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=e:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
+if exist "e:\program files\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=e:\program files\ubi soft\cyan worlds\uru - complete chronicles\
+if exist "e:\program files\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=e:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
+if exist "h:\program files\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=h:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
+if exist "h:\program files\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=h:\program files\ubi soft\cyan worlds\uru - complete chronicles\
+if exist "h:\program files\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=h:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
 
-rem echo path:%urupath%
 if "%urupath%"=="null" goto notfound
-echo Pots found! Press enter to continue.
+echo An installation of Uru was found: %urupath%
+echo Press enter if this is ThePathOfTheShell or CompleteChronicles and this is where you want to install, or Ctrl-C to quit.
 pause
 echo Copying files...
 xcopy ..\dat\*.* "%urupath%\dat\*.*"
