@@ -48,7 +48,7 @@ Y Poetry
 
 Misc
 ------------
-~ enter/exit flymode
+~ enter/exit flymode (or + on German keyboards)
 If your Relto book has a black swirly image it's probably because you linked to the LiveBahroCaves and didn't link out by dropping below. To fix this, either link back to the LiveBahroCaves and drop through the hole until you link out, or just exit and restart the game.
 Zandoni: Link to the rainy cleft, and hit Q to activate the telescope lens Easter egg. Or just use flymode, to go directly to the Zandoni.
 If you want to disable the Ubisoft video, just rename avi/Intro0.bik to avi/Intro0.bik.old
