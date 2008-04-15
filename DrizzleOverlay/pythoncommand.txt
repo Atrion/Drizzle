@@ -180,6 +180,7 @@ class command:
             keymap.bindKeyToConsoleCommand(letter+"_C", "Game.SetChatFadeDelay "+str(i + 424200.0)) #ctrl
             i=i+1
         keymap.bindKeyToConsoleCommand("Tilde", "Game.SetChatFadeDelay "+str(i+424200.0))
+        i=i+1
         keymap.bindKeyToConsoleCommand("RightBracket", "Game.SetChatFadeDelay "+str(i+424200.0)) # that's the + on German keyboards
         i=i+1
         
@@ -200,7 +201,7 @@ class command:
             self.showJournal("KINexusFAQ")
         elif keystroke==52+5:
             self.showJournal("Poetry1")
-        elif keystroke==78+0:
+        elif keystroke==78+0 or keystroke==78+1:
             #PtPrintToScreen("tilde")
             self.caller.isExitMode = 1
 
