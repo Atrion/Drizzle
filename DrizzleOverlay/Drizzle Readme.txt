@@ -1,3 +1,8 @@
+Version
+------------
+This is release 2, which used Drizzle v1.
+
+
 Ages - hold down Shift
 ------------
 Q Kadish Tolesa (on top of pyramid)
@@ -37,6 +42,7 @@ D Guild of Maintainers' Pub
 F Guild of Messengers' Pub
 G Guild of Writers' Pub
 
+
 Journals - hold down Ctrl
 ------------
 Q Jalak Journal
@@ -46,6 +52,7 @@ R Gahreesen Wall Help
 T KI Nexus FAQ
 Y Poetry
 
+
 Misc
 ------------
 ~ enter/exit flymode (or + on German keyboards)
@@ -54,7 +61,12 @@ Zandoni: Link to the rainy cleft, and hit Q to activate the telescope lens Easte
 If you want to disable the Ubisoft video, just rename avi/Intro0.bik to avi/Intro0.bik.old
 To install the nocd patch, rename sp.dll to sp.dll.old and rename UruExplorer.exe to UruExplorer.exe.old, then copy over the files from the nocdpatch folder to replace them.
 
+
 Installation
 ------------
-Copy the contents of each folder into the associated folder in your "Path of the Shell/Complete Chronicles" installation.
+Backup your /sav folder. I've never had a problem, but it's best to be safe.
+Either:
+  Simpler option      ) Run the install.bat file in the 'volatile' folder.  It's simpler, but not well tested.
+  More reliable option) Copy the contents of each folder into the associated folder in your 'Path of the Shell'/'Complete Chronicles' installation. That includes copying pythoncommand.txt into the main folder.
 Run the game at least once, then quit and run SoundDecompress.exe, which is located in the main folder.
+
