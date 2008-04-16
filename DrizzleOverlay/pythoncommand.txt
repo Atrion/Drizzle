@@ -181,7 +181,9 @@ class command:
             i=i+1
         keymap.bindKeyToConsoleCommand("Tilde", "Game.SetChatFadeDelay "+str(i+424200.0))
         i=i+1
-        keymap.bindKeyToConsoleCommand("RightBracket", "Game.SetChatFadeDelay "+str(i+424200.0)) # that's the + on German keyboards
+        keymap.bindKeyToConsoleCommand("Plus", "Game.SetChatFadeDelay "+str(i+424200.0)) # that's the + on German keyboards
+        i=i+1
+        keymap.bindKeyToConsoleCommand("RightBracket", "Game.SetChatFadeDelay "+str(i+424200.0)) # that's the + on German keyboards when using wine
         i=i+1
         
     def handleKeystroke(self, keystroke):
@@ -201,7 +203,7 @@ class command:
             self.showJournal("KINexusFAQ")
         elif keystroke==52+5:
             self.showJournal("Poetry1")
-        elif keystroke==78+0 or keystroke==78+1:
+        elif keystroke==78+0 or keystroke==78+1 or keystroke==78+2:
             #PtPrintToScreen("tilde")
             self.caller.isExitMode = 1
 

@@ -9,6 +9,9 @@ echo Trying to find POTS folder...
 set urupath=null
 rem used to check for PrimeToX2.exe
 
+if exist "%ProgramFiles%\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=%ProgramFiles%\ubi soft\cyan worlds\uru - ages beyond myst\
+if exist "%ProgramFiles%\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=%ProgramFiles%\ubi soft\cyan worlds\uru - complete chronicles\
+if exist "%ProgramFiles%\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=%ProgramFiles%\ubi soft\cyan worlds\myst uru complete chronicles\
 if exist "c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\uru - ages beyond myst\
 if exist "c:\program files\ubi soft\cyan worlds\uru - complete chronicles\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\uru - complete chronicles\
 if exist "c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\UruExplorer.exe" set urupath=c:\program files\ubi soft\cyan worlds\myst uru complete chronicles\
