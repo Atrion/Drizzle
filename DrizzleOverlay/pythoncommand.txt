@@ -647,18 +647,26 @@ class command:
         linkMgr.linkToAge(als)
 
     def showJournal(self, journal):
-        if(journal=="JalakJournal"):
-            self.showNotebook("todo");
-        elif(journal=="MinkataQuestJournal"):
-            self.showNotebook("todo");
-        elif(journal=="Negilahn"):
-            self.showNotebook("todo");
-        elif(journal=="GahreesenWallHelp"):
-            self.showNotebook("todo");
-        elif(journal=="KINexusFAQ"):
-            self.showNotebook("todo");
-        elif(journal=="Poetry1"):
-            self.showNotebook("todo");
+        try:
+            f = open("journals.txt", "r")
+            filecontents = f.read()
+            f.close()
+            exec(filecontents)
+            
+            if(journal=="JalakJournal"):
+                self.showNotebook(JalakJournal);
+            elif(journal=="MinkataQuestJournal"):
+                self.showNotebook(MinkataQuestJournal);
+            elif(journal=="Negilahn"):
+                self.showNotebook(Negilahn);
+            elif(journal=="GahreesenWallHelp"):
+                self.showNotebook(GahreesenWallHelp);
+            elif(journal=="KINexusFAQ"):
+                self.showNotebook(KINexusFAQ);
+            elif(journal=="Poetry1"):
+                self.showNotebook(Poetry1);
+        except:
+            self.showNotebook("Unable to find journals.txt or error while reading it.")
 
     unstableAges = [ ]
     #"ederdelin", "guildpub-cartographers", "guildpub-greeters", "guildpub-maintainers", "guildpub-messengers","guildpub-writers", "livebahrocaves", "payiferen", "dereno", "negilahn",  "tetsonot", "minkata", "jalak", "edertsogal"
