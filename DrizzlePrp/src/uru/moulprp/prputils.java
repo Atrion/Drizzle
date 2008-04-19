@@ -409,6 +409,10 @@ public class prputils
             {
                 _staticsettings.sequencePrefix = 0x62;
             }
+            else if (prp.header.agename.toString().toLowerCase().equals("edertsogal"))
+            {
+                _staticsettings.sequencePrefix = 0x61;
+            }
 
             //fix problem with materials(referenced from plDrawableSpans) that point to LayerAnimations.
             //fixMaterial(prp);
