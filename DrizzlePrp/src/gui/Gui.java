@@ -66,12 +66,12 @@ public class Gui extends javax.swing.JFrame {
         //pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
         //moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
         //out = "C:/Documents and Settings/user/Desktop/output/";
-        //pots = "/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
-        //moul = "/shared/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
-        //out = "/shared/a/leftoff/output/";
-        pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
-        moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
-        out = "D:/a/leftoff/output/";
+        pots = "/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
+        moul = "/shared/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
+        out = "/shared/a/leftoff/output/";
+        //pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
+        //moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
+        //out = "D:/a/leftoff/output/";
         uru.moulprp._staticsettings.outputdir = out;
 
         this.jComboBox1.addItem("");

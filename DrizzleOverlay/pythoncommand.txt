@@ -552,6 +552,10 @@ class command:
             self.linkToAge("GuildPub-Messengers","StartPoint");
         elif num==14:
             self.linkToAge("GuildPub-Writers","StartPoint");
+        elif num==15:
+            self.linkToAge("Garrison","LinkInPointDefaultWhite");
+        elif num==16:
+            self.linkToAge("Garrison","Black_LinkInPointDefaultBlack");
 
     def output(self, *messages):
         outputfilename = 'uruutilsoutput.txt';
