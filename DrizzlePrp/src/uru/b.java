@@ -251,7 +251,27 @@ public class b
         
         return result;
     }
-
+    
+    public static String ByteToHexString(byte b)
+    {
+        char[] chars = new char[2];
+        int upper = ((int)b & 0xF0)>>4;
+        int lower = (int)b & 0x0F;
+        chars[0] = (char)(upper<10?upper+'0':upper-10+'a');
+        chars[1] = (char)(lower<10?lower+'0':lower-10+'a');
+        return new String(chars);
+    }
+    public static String BytesToHexString(byte[] bytes)
+    {
+        //char[] result = new char[bytes.length*2];
+        StringBuilder result = new StringBuilder();
+        for(int i=0;i<bytes.length;i++)
+        {
+            byte curbyte = bytes[i];
+            result.append(ByteToHexString(curbyte));
+        }
+        return result.toString();
+    }
     public static String BytesToString(byte[] bytes)
     {
         //String result = new String(bytes, "ISO-8859-1"); //has to have a try/catch block.

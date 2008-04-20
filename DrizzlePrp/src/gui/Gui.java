@@ -307,6 +307,8 @@ public class Gui extends javax.swing.JFrame {
         jButton40 = new javax.swing.JButton();
         jButton41 = new javax.swing.JButton();
         jButton44 = new javax.swing.JButton();
+        jButton46 = new javax.swing.JButton();
+        jButton48 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -316,6 +318,7 @@ public class Gui extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jButton47 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton23 = new javax.swing.JButton();
@@ -371,14 +374,14 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(10, 10, 90, 23);
+        jButton1.setBounds(10, 10, 90, 24);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(100, 440, 490, 130);
+        jScrollPane1.setBounds(100, 440, 580, 130);
 
         jButton2.setText("Clear log.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -387,7 +390,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(0, 440, 100, 23);
+        jButton2.setBounds(0, 440, 100, 24);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -401,7 +404,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(110, 10, 610, 22);
+        jComboBox1.setBounds(110, 10, 610, 23);
 
         jButton20.setText("remove dupes.");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -410,7 +413,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton20);
-        jButton20.setBounds(0, 470, 100, 23);
+        jButton20.setBounds(0, 470, 100, 24);
 
         jButton15.setText("Process All (moul)");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -550,6 +553,20 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        jButton46.setText("read .sum file");
+        jButton46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton46ActionPerformed(evt);
+            }
+        });
+
+        jButton48.setText("create .sum file");
+        jButton48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton48ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -564,10 +581,13 @@ public class Gui extends javax.swing.JFrame {
                                 .addGap(49, 49, 49)
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton46)
+                                    .addComponent(jButton48))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -605,7 +625,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jButton33)
                             .addComponent(jButton32)
                             .addComponent(jLabel3))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,19 +656,26 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton6)
                             .addComponent(jButton41))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton21)
-                    .addComponent(jButton37))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton21)
+                            .addComponent(jButton37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton31)
+                            .addComponent(jButton36))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton34)
+                            .addComponent(jButton38)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton48)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton31)
-                    .addComponent(jButton36))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton34)
-                    .addComponent(jButton38))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton32)
@@ -715,6 +742,13 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        jButton47.setText("Calculate md5");
+        jButton47.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton47ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -722,6 +756,7 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton47)
                     .addComponent(jButton8)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton5)
@@ -741,7 +776,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addGap(10, 10, 10)
                                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap())
+                .addGap(514, 514, 514))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -762,7 +797,9 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8)
                     .addComponent(jButton12))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jButton47)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Encryption", jPanel3);
@@ -809,7 +846,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton23);
-        jButton23.setBounds(691, 280, 170, 23);
+        jButton23.setBounds(691, 280, 170, 24);
 
         jButton22.setText("clear all marks");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
@@ -818,7 +855,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton22);
-        jButton22.setBounds(741, 40, 120, 23);
+        jButton22.setBounds(741, 40, 120, 24);
 
         jButton29.setText("mark links");
         jButton29.addActionListener(new java.awt.event.ActionListener() {
@@ -827,7 +864,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton29);
-        jButton29.setBounds(751, 70, 110, 23);
+        jButton29.setBounds(751, 70, 110, 24);
 
         jButton24.setText("mark links from selected");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -836,7 +873,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton24);
-        jButton24.setBounds(715, 100, 150, 23);
+        jButton24.setBounds(715, 100, 150, 24);
 
         jButton25.setText("mark all that start with STRING");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
@@ -845,7 +882,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton25);
-        jButton25.setBounds(680, 160, 183, 23);
+        jButton25.setBounds(680, 160, 195, 24);
 
         jButton28.setText("load");
         jButton28.addActionListener(new java.awt.event.ActionListener() {
@@ -854,7 +891,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton28);
-        jButton28.setBounds(785, 10, 80, 23);
+        jButton28.setBounds(785, 10, 80, 24);
 
         jButton27.setText("mark links to selected");
         jButton27.addActionListener(new java.awt.event.ActionListener() {
@@ -863,7 +900,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton27);
-        jButton27.setBounds(689, 130, 170, 23);
+        jButton27.setBounds(689, 130, 170, 24);
 
         jButton26.setText("... end with STRING");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -872,7 +909,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton26);
-        jButton26.setBounds(700, 190, 160, 23);
+        jButton26.setBounds(700, 190, 160, 24);
 
         jButton30.setText("repaint");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
@@ -881,7 +918,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton30);
-        jButton30.setBounds(680, 10, 81, 23);
+        jButton30.setBounds(680, 10, 81, 24);
 
         jTabbedPane1.addTab("Ref fun", jPanel4);
 
@@ -912,12 +949,12 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton35)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(434, Short.MAX_VALUE))
+                .addContainerGap(389, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1061,14 +1098,14 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jButton45)
-                .addContainerGap(730, Short.MAX_VALUE))
+                .addContainerGap(725, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jButton45)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("realMyst", jPanel10);
@@ -1082,7 +1119,7 @@ public class Gui extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(31, 40, 70, 14);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(110, 40, 168, 20);
+        jTextField1.setBounds(110, 40, 168, 18);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -1790,6 +1827,33 @@ public class Gui extends javax.swing.JFrame {
         realmyst.rmcontext c = new realmyst.rmcontext(new Bytestream(filecontents));
         realmyst.dirtfile df = new realmyst.dirtfile(c);
     }//GEN-LAST:event_jButton45ActionPerformed
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        try
+        {
+            uru.moulprp.sumfile sfile = new uru.moulprp.sumfile(filecontents,true);
+        }
+        catch(Exception e)
+        {
+            m.err("Exception while processing sumfile.");
+        }
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
+        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        byte[] md5 = uru.CryptHashes.GetMd5(filecontents);
+        String md5str = b.BytesToHexString(md5);
+        m.msg("md5: "+md5str);
+    }//GEN-LAST:event_jButton47ActionPerformed
+
+    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
+        String age = this.jTextField1.getText();
+        //String infolder = this.pots+"\\dat\\";
+        String infolder = "/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/dat";
+        String outfolder = this.out;
+        uru.moulprp.sumfile.createSumfile(infolder, age, outfolder);
+    }//GEN-LAST:event_jButton48ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1851,6 +1915,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
+    private javax.swing.JButton jButton47;
+    private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
