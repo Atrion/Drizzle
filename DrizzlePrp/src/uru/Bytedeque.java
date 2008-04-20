@@ -47,7 +47,10 @@ public class Bytedeque
     {
         deque.addFirst(data);
     }
-    
+    public void writeBytes(Bytes data)
+    {
+        writeBytes(data.bytes);
+    }
     public void writeBytes(byte[] data)
     {
         deque.addLast(data);
