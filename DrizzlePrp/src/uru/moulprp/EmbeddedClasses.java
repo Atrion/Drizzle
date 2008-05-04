@@ -20,7 +20,7 @@ package uru.moulprp;
 
 import uru.context;
 import uru.Bytedeque;
-import uru.readexception;
+import shared.readexception;
 import uru.e;
 
 public class EmbeddedClasses

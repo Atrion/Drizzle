@@ -19,9 +19,9 @@
 package uru.moulprp;
 
 import uru.context;
-import uru.readexception;
+import shared.readexception;
 import uru.Bytestream;
-import uru.m;
+import shared.m;
 import java.util.Vector;
 
 public class prpprocess

@@ -19,7 +19,7 @@
 package uru;
 
 //import gui.Main;
-import uru.m;
+import shared.m;
 
 /**
  *

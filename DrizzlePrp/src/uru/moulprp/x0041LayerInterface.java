@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -41,6 +41,7 @@ public class x0041LayerInterface extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
         ref = new Uruobjectref(c);
+        //ref = Uruobjectref.createFromUruobjectdesc(new Uruobjectdesc(c));
     }
     public void compile(Bytedeque data)
     {

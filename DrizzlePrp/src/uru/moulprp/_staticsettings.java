@@ -18,7 +18,7 @@
 
 package uru.moulprp;
 
-import uru.m;
+import shared.m;
 
 /**
  *

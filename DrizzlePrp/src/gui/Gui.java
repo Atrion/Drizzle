@@ -21,21 +21,22 @@ package gui;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.util.Date;
-import uru.FileUtils;
+import shared.FileUtils;
 import javax.swing.JFileChooser;
 import java.io.File;
-import uru.UruUtils;
+import uru.UruCrypt;
 import uru.UruFileTypes;
 import uru.CryptHashes;
 //import uru.Moul;
 import uru.moulprp.prputils;
 import uru.Bytestream;
-import uru.m;
+import shared.m;
 import relationvis.visualisation;
 import uru.b;
 import uru.moulprp._staticsettings;
 import uru.context;
 import uru.moulprp.Typeid;
+import shared.Bytes;
 
 /**
  *
@@ -285,6 +286,14 @@ public class Gui extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jButton20 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel13 = new javax.swing.JPanel();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jButton51 = new javax.swing.JButton();
+        jButton52 = new javax.swing.JButton();
+        jButton53 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -352,6 +361,8 @@ public class Gui extends javax.swing.JFrame {
         jButton43 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jButton45 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jButton50 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -416,6 +427,79 @@ public class Gui extends javax.swing.JFrame {
         });
         getContentPane().add(jButton20);
         jButton20.setBounds(0, 470, 100, 24);
+
+        jTextField6.setText("/shared/DontBackup/Crowthistle");
+
+        jTextField7.setText("/shared/a/leftoff/output/Crowthistle");
+
+        jButton51.setText("select...");
+        jButton51.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton51ActionPerformed(evt);
+            }
+        });
+
+        jButton52.setText("select...");
+        jButton52.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton52ActionPerformed(evt);
+            }
+        });
+
+        jButton53.setText("start...");
+        jButton53.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton53ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Crowthistle folder:");
+
+        jLabel7.setText("Output folder:");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButton53)
+                .addContainerGap(765, Short.MAX_VALUE))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton51)
+                    .addComponent(jButton52))
+                .addGap(231, 231, 231))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton51)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton52)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(60, 60, 60)
+                .addComponent(jButton53)
+                .addContainerGap(162, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Automation", jPanel13);
 
         jButton15.setText("Process All (moul)");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -1143,6 +1227,32 @@ public class Gui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("realMyst", jPanel10);
 
+        jButton50.setText("jButton50");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jButton50)
+                .addContainerGap(710, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButton50)
+                .addContainerGap(268, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Riven", jPanel12);
+
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(10, 70, 880, 360);
         getContentPane().add(jPanel2);
@@ -1238,14 +1348,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        UruFileTypes type = UruUtils.DetectType(this.getSelectedFilename());
+        UruFileTypes type = UruCrypt.DetectType(this.getSelectedFilename());
         m.msg("Filetype is:"+type.toString());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] decodedcontents = uru.UruUtils.DecryptWhatdoyousee(filecontents);
+        byte[] decodedcontents = uru.UruCrypt.DecryptWhatdoyousee(filecontents);
         //Main.message(new String(decodedcontents));
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1253,7 +1363,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] decodedcontents = uru.UruUtils.DecryptNotthedroids(filecontents);
+        byte[] decodedcontents = uru.UruCrypt.DecryptNotthedroids(filecontents);
         //Main.message(new String(decodedcontents));
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1262,8 +1372,10 @@ public class Gui extends javax.swing.JFrame {
         //tests
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        context c = context.createDefault(new Bytestream(filecontents));
+        context c = context.createFromBytestream(new Bytestream(filecontents));
+        //try{
         uru.moulprp.prpprocess.ProcessAllObjectsOfType(c, Typeid.plLayerAnimation);
+        //}catch(Exception e){}
         
         
         //byte[] content = {'a','b','c'};
@@ -1372,14 +1484,14 @@ public class Gui extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] encodedcontents = uru.UruUtils.EncryptNotthedroids(filecontents);
+        byte[] encodedcontents = uru.UruCrypt.EncryptNotthedroids(filecontents);
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] decodedcontents = uru.UruUtils.DecryptEoa(filecontents);
+        byte[] decodedcontents = uru.UruCrypt.DecryptEoa(filecontents);
         //Main.message(new String(decodedcontents));
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -1387,28 +1499,28 @@ public class Gui extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] encodedcontents = uru.UruUtils.EncryptEoa(filecontents);
+        byte[] encodedcontents = uru.UruCrypt.EncryptEoa(filecontents);
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] encodedcontents = uru.UruUtils.EncryptWhatdoyousee(filecontents);
+        byte[] encodedcontents = uru.UruCrypt.EncryptWhatdoyousee(filecontents);
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] encodedcontents = uru.UruUtils.DecryptElf(filecontents);
+        byte[] encodedcontents = uru.UruCrypt.DecryptElf(filecontents);
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        byte[] encodedcontents = uru.UruUtils.EncryptElf(filecontents);
+        byte[] encodedcontents = uru.UruCrypt.EncryptElf(filecontents);
         FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -1454,7 +1566,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        context c = context.createDefault(new Bytestream(filecontents));
+        context c = context.createFromBytestream(new Bytestream(filecontents));
         //c.readversion = 3; //read as pots
         uru.moulprp.prputils.ProcessPotsPrp(c);
     }//GEN-LAST:event_jButton19ActionPerformed
@@ -1671,8 +1783,11 @@ public class Gui extends javax.swing.JFrame {
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
-        String report = uru.moulprp.prpreports.MakeFullReport(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+"fullreport.txt", report.getBytes());
+        //try{
+            String report = uru.moulprp.prpreports.MakeFullReport(filecontents);
+            FileUtils.WriteFile(_staticsettings.outputdir+"fullreport.txt", report.getBytes());
+        //}catch(Exception e){}
+
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
@@ -1889,13 +2004,49 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton49ActionPerformed
-        uru.moulprp.textfile tf = uru.moulprp.textfile.loadFromFile("/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/dat/EderDelin.age", true);
+        //uru.moulprp.textfile tf = uru.moulprp.textfile.loadFromFile("/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/dat/EderDelin.age", true);
+        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        uru.moulprp.textfile tf = uru.moulprp.textfile.createFromBytes(new Bytes(filecontents));
         tf.dump();
         tf.setVariable("SequencePrefix", "2pi");
         tf.dump();
         //tf.setVariable(moul, moul);
     }//GEN-LAST:event_jButton49ActionPerformed
-    
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+        try{
+            new riven.mhk("/shared/DontBackup/a_Data.MHK");
+        }catch(Exception e){}
+        //org.kc7bfi.jflac.FLACEncoder a = new org.kc7bfi.jflac.FLACEncoder();
+        //org.kc7bfi.jflac.FLACDecoder b;
+        //a.
+        
+    }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
+        this.jTextField6.setText(this.getUserSelectedFolder());
+    }//GEN-LAST:event_jButton51ActionPerformed
+
+    private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
+        this.jTextField7.setText(this.getUserSelectedFolder());
+    }//GEN-LAST:event_jButton52ActionPerformed
+
+    private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
+        //do crowthistle conversion.
+        automation.mystAutomation.convertCrowthistleToPots(jTextField6.getText(), jTextField7.getText());
+    }//GEN-LAST:event_jButton53ActionPerformed
+    private String getUserSelectedFolder()
+    {
+        if(fc==null) fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int wasFileChosen = fc.showOpenDialog(null);
+        if(wasFileChosen==0)
+        {
+            String file = fc.getSelectedFile().getAbsolutePath();
+            return file;
+        }
+        return "";
+    }
     /**
      * @param args the command line arguments
      */
@@ -1961,6 +2112,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton50;
+    private javax.swing.JButton jButton51;
+    private javax.swing.JButton jButton52;
+    private javax.swing.JButton jButton53;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -1971,9 +2126,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2000,6 +2159,8 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -46,13 +46,27 @@ public class x0000Scenenode extends uruobj
         objectrefs1 = new Uruobjectref[count1];
         for(int i=0;i<count1;i++)
         {
-            objectrefs1[i] = new Uruobjectref(c);
+            //if(c.readversion==6||c.readversion==3)
+            //{
+                objectrefs1[i] = new Uruobjectref(c);
+            //}
+            //else if(c.readversion==4)
+            //{
+            //    objectrefs1[i] = Uruobjectref.createFromUruobjectdesc(new Uruobjectdesc(c));
+            //}
         }
         count2 = data.readInt();
         objectrefs2 = new Uruobjectref[count2];
         for(int i=0;i<count2;i++)
         {
-            objectrefs2[i] = new Uruobjectref(c);
+            //if(c.readversion==6||c.readversion==3)
+            //{
+                objectrefs2[i] = new Uruobjectref(c);
+            //}
+            //else if(c.readversion==4)
+            //{
+            //    objectrefs2[i] = Uruobjectref.createFromUruobjectdesc(new Uruobjectdesc(c));
+            //}
         }
         
     }

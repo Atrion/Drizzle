@@ -20,7 +20,9 @@ package uru.moulprp;
 
 //import java.util.Vector;
 import java.lang.reflect.Field;
-import uru.m;
+import shared.m;
+import uru.context;
+import shared.Bytes;
 /**
  *
  * @author user
@@ -32,9 +34,18 @@ public class prpfile
     PrpRootObject[] objects;
     PrpObjectIndex objectindex;
     
-    public prpfile()
+    public prpfile(){}
+    
+    public static prpfile createFromContext(context c)
     {
-        //objects = new Vector<PrpRootObject>();
+        prpfile result = prputils.ProcessAllMoul(c, false);
+        return result;
+    }
+    
+    public Bytes saveAsBytes()
+    {
+        Bytes result = prputils.Compiler.RecompilePrp(this);
+        return result;
     }
     
 }

@@ -18,6 +18,8 @@
 
 package uru;
 
+import shared.mystobj;
+import shared.m;
 import java.util.Vector;
 /**
  *

@@ -99,7 +99,7 @@ public class dirtfile
             {
                 xfilestruct = new FileStruct(c);
                 name = new Ntstring(c.Fork(xfilestruct.nameOffset));
-                uru.FileUtils.AppendText("c:/log.txt", name.toString()+"\n");
+                shared.FileUtils.AppendText("c:/log.txt", name.toString()+"\n");
                 xfile = new DirtFile(c.Fork(xfilestruct.offset), xfilestruct.fileLength);
             }
         }

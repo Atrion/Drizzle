@@ -18,10 +18,10 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.Bytedeque;
 
 /**
@@ -35,12 +35,38 @@ public class Uruobjectref extends uruobj
     
     public Uruobjectref(context c)
     {
-        hasRef = c.in.readByte();
-        if(hasRef != 0)
+        if(c.readversion==6||c.readversion==3)
+        {
+            hasRef = c.in.readByte();
+            if(hasRef != 0)
+            {
+                xdesc = new Uruobjectdesc(c);
+            }
+        }
+        else if(c.readversion==4)
         {
             xdesc = new Uruobjectdesc(c);
-        }
+            //try to tell if this is a valid reference...
+            if(xdesc.objectname.unencryptedString.length==0)
+            {
+                hasRef = 0;
+            }
+            else
+            {
+                hasRef = 1;
+            }
+       }
         
+    }
+    
+    private Uruobjectref(){}
+    
+    public static Uruobjectref createFromUruobjectdesc(Uruobjectdesc desc)
+    {
+        Uruobjectref result = new Uruobjectref();
+        result.hasRef = 1;
+        result.xdesc = desc;
+        return result;
     }
     //public static Uruobjectref create(Bytestream data)
     //{

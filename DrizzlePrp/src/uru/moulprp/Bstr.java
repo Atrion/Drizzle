@@ -21,7 +21,7 @@ package uru.moulprp;
 
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 
 /**
  *
@@ -40,6 +40,14 @@ public class Bstr extends uruobj
         {
             string[i] = c.readByte();
         }
+    }
+    private Bstr(){}
+    public static Bstr createFromNothing()
+    {
+        Bstr result = new Bstr();
+        result.strlen = 0;
+        result.string = new byte[0];
+        return result;
     }
     //static public Bstr create(Bytestream data)
     //{

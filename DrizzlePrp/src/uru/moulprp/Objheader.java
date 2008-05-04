@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 
 /**
  *
@@ -43,7 +43,7 @@ public class Objheader extends uruobj
         {
             u1 = c.in.readByte();
         }
-        else if(c.readversion==3)
+        else if(c.readversion==3||c.readversion==4)
         {
             //do nothing.
         }

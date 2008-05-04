@@ -18,10 +18,10 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.m;
+import shared.m;
 import uru.b;
 
 /**
@@ -178,6 +178,8 @@ public enum Typeid implements compilable
     plDynamicCamMap,
     plRideAnimatedPhysMsg,
     
+    plRelativeMatrixChannelApplicator,
+    
     
     plLeafController,
     nil,
@@ -188,7 +190,7 @@ public enum Typeid implements compilable
     //types enumvalue;
     //plSwimStraightCurrentRegion is the highest regular member of pots.
     
-    //cc -> moul
+    //cc -> moul -> mv
     //8000 -> 8000 (null? it would mean they could just check the highest bit.) 
     //2d4 -> 2d9 plParticleEmitter
     //2d3 -> 2d8 plSimpleParticleGenerator
@@ -196,156 +198,162 @@ public enum Typeid implements compilable
     //22b -> 230 plLeafController
     public static triplet[] triplets = {
         
-        tri( 0x000, 0x000, plSceneNode ),
-        tri( 0x001, 0x001, plSceneObject ),
-        tri( 0x004, 0x004, plMipMap ),
-        tri( 0x005, 0x005, plCubicEnvironMap ),
-        tri( 0x006, 0x006, plLayer ),
-        tri( 0x007, 0x007, hsGMaterial ),
-        tri( 0x008, 0x008, plParticleSystem ),
-        tri( 0x00C, 0x00C, plBoundInterface ),
-        tri( 0x011, 0x011, plAudioInterface ),
-        tri( 0x014, 0x014, plWinAudio ),
-        tri( 0x015, 0x015, plCoordinateInterface ),
-        tri( 0x016, 0x016, plDrawInterface ),
-        tri( 0x01C, 0x01C, plSimulationInterface ),
-        tri( 0x029, 0x029, plSoundBuffer ),
-        tri( 0x02B, 0x02B, plPickingDetector ),
-        tri( 0x02D, 0x02D, plLogicModifier ),
-        tri( 0x032, 0x032, plActivatorConditionalObject ),
-        tri( 0x037, 0x037, plObjectInBoxConditionalObject ),
-        tri( 0x03D, 0x03D, plSpawnModifier ),
-        tri( 0x03E, 0x03E, plFacingConditionalObject ),
-        tri( 0x03F, 0x03F, plHKPhysical ),
-        tri( 0x040, 0x040, plViewFaceModifier ),
-        tri( 0x043, 0x043, plLayerAnimation ),
-        tri( 0x04C, 0x04C, plDrawableSpans ),
-        tri( 0x055, 0x055, plDirectionalLightInfo ),
-        tri( 0x056, 0x056, plOmniLightInfo ),
-        tri( 0x057, 0x057, plSpotLightInfo ),
-        tri( 0x067, 0x067, plOccluder ),
-        tri( 0x06A, 0x06A, plLimitedDirLightInfo ),
-        tri( 0x06C, 0x06C, plAGModifier ),
-        tri( 0x06D, 0x06D, plAGMasterMod ),
-        tri( 0x06F, 0x06F, plCameraRegionDetector ),
-        tri( 0x071, 0x071, plLineFollowMod ),
-        tri( 0x076, 0x076, plSeekPointMod ),
-        tri( 0x077, 0x077, plOneShotMod ),
-        tri( 0x079, 0x079, plRandomSoundMod ),
-        tri( 0x07B, 0x07B, plObjectInVolumeDetector ),
-        tri( 0x07C, 0x07C, plResponderModifier ),
-        tri( 0x084, 0x084, plWin32StreamingSound ),
-        tri( 0x088, 0x088, plSoftVolumeSimple ),
-        tri( 0x08A, 0x08A, plSoftVolumeUnion ),
-        tri( 0x08B, 0x08B, plSoftVolumeIntersect ),
-        tri( 0x08C, 0x08C, plSoftVolumeInvert ),
-        tri( 0x096, 0x096, plWin32StaticSound ),
-        tri( 0x099, 0x099, plCameraBrain1 ),
-        tri( 0x09B, 0x09B, plCameraModifier1 ),
-        tri( 0x09E, 0x09E, plCameraBrain1_Avatar ),
-        tri( 0x09F, 0x09F, plCameraBrain1_Fixed ),
-        tri( 0x0A2, 0x0A2, plPythonFileMod ),
-        tri( 0x0A4, 0x0A4, plExcludeRegionModifier ),
-        tri( 0x0A6, 0x0A6, plVolumeSensorConditionalObject ),
-        tri( 0x0A8, 0x0A8, plMsgForwarder ),
-        tri( 0x0AD, 0x0AD, plDynamicTextMap ),
-        tri( 0x0AE, 0x0AE, plSittingModifier ),
-        tri( 0x0B2, 0x0B2, plAvLadderMod ),
-        tri( 0x0C0, 0x0C0, plRailCameraMod ),
-        tri( 0x0C1, 0x0C1, plMultiStageBehMod ),
-        tri( 0x0C2, 0x0C2, plCameraBrain1_Circle ),
-        tri( 0x0C4, 0x0C4, plAnimEventModifier ),
-        tri( 0x0C9, 0x0C9, plParticleCollisionEffectDie ),
-        tri( 0x0CA, 0x0CA, plParticleCollisionEffectBounce ),
-        tri( 0x0CB, 0x0CB, plInterfaceInfoModifier ),
-        tri( 0x0D0, 0x0D0, plParticleLocalWind ),
-        tri( 0x0D4, 0x0D4, plShadowCaster ),
-        tri( 0x0D5, 0x0D5, plPointShadowMaster ),
-        tri( 0x0D6, 0x0D6, plDirectShadowMaster ),
-        tri( 0x0E5, 0x0E5, plEAXListenerMod ),
-        tri( 0x0E8, 0x0E8, plDynaFootMgr ),
-        tri( 0x0ED, 0x0ED, plDynaPuddleMgr ),
-        tri( 0x0F1, 0x0F1, plATCAnim ),
-        tri( 0x0F2, 0x0F2, plAgeGlobalAnim ),
-        tri( 0x0FB, 0x0FB, plWaveSet7 ),
-        tri( 0x0FC, 0x0FC, plPanicLinkRegion ),
-        tri( 0x0FF, 0x0FF, plStereizer ),
-        tri( 0x106, 0x106, plDynamicEnvMap ),
-        tri( 0x116, 0x116, plVisRegion ),
-        tri( 0x11E, 0x11E, plRelevanceRegion ), //used for .csv files
-        tri( 0x122, 0x122, plImageLibMod ),
-        tri( 0x123, 0x123, plParticleFlockEffect ),
-        tri( 0x127, 0x127, plPhysicalSndGroup ),
-        tri( 0x12B, 0x12B, plClusterGroup ),
-        tri( 0x12F, 0x12F, plFadeOpacityMod ),
+        tri( 0x000, 0x000, 0x000, plSceneNode ),
+        tri( 0x001, 0x001, 0x001, plSceneObject ),
+        tri( 0x004, 0x004, 0x004, plMipMap ),
+        tri( 0x005, 0x005, 0x005, plCubicEnvironMap ),
+        tri( 0x006, 0x006, 0x006, plLayer ),
+        tri( 0x007, 0x007, 0x007, hsGMaterial ),
+        tri( 0x008, 0x008, -2, plParticleSystem ),
+        tri( 0x00C, 0x00C, -2, plBoundInterface ),
+        tri( 0x011, 0x011, -2, plAudioInterface ),
+        tri( 0x014, 0x014, -2, plWinAudio ),
+        tri( 0x015, 0x015, 0x015, plCoordinateInterface ),
+        tri( 0x016, 0x016, 0x016, plDrawInterface ),
+        tri( 0x01C, 0x01C, 0x01C, plSimulationInterface ),
+        tri( 0x029, 0x029, -2, plSoundBuffer ),
+        tri( 0x02B, 0x02B, -2, plPickingDetector ),
+        tri( 0x02D, 0x02D, -2, plLogicModifier ),
+        tri( 0x032, 0x032, -2, plActivatorConditionalObject ),
+        tri( 0x037, 0x037, -2, plObjectInBoxConditionalObject ),
+        tri( 0x03D, 0x03D, 0x03C, plSpawnModifier ),
+        tri( 0x03E, 0x03E, -2, plFacingConditionalObject ),
+        tri( 0x03F, 0x03F, -2, plHKPhysical ),
+        tri( 0x040, 0x040, 0x03E, plViewFaceModifier ),
+        tri( 0x043, 0x043, 0x040, plLayerAnimation ),
+        tri( 0x04C, 0x04C, 0x049, plDrawableSpans ),
+        tri( 0x055, 0x055, 0x050, plDirectionalLightInfo ),
+        tri( 0x056, 0x056, 0x051, plOmniLightInfo ),
+        tri( 0x057, 0x057, -2, plSpotLightInfo ),
+        tri( 0x067, 0x067, -2, plOccluder ),
+        tri( 0x06A, 0x06A, -2, plLimitedDirLightInfo ),
+        tri( 0x06C, 0x06C, 0x05F, plAGModifier ),
+        tri( 0x06D, 0x06D, 0x060, plAGMasterMod ),
+        tri( 0x06F, 0x06F, -2, plCameraRegionDetector ),
+        tri( 0x071, 0x071, -2, plLineFollowMod ),
+        tri( 0x076, 0x076, -2, plSeekPointMod ),
+        tri( 0x077, 0x077, -2, plOneShotMod ),
+        tri( 0x079, 0x079, -2, plRandomSoundMod ),
+        tri( 0x07B, 0x07B, -2, plObjectInVolumeDetector ),
+        tri( 0x07C, 0x07C, -2, plResponderModifier ),
+        tri( 0x084, 0x084, -2, plWin32StreamingSound ),
+        tri( 0x088, 0x088, -2, plSoftVolumeSimple ),
+        tri( 0x08A, 0x08A, -2, plSoftVolumeUnion ),
+        tri( 0x08B, 0x08B, -2, plSoftVolumeIntersect ),
+        tri( 0x08C, 0x08C, -2, plSoftVolumeInvert ),
+        tri( 0x096, 0x096, -2, plWin32StaticSound ),
+        tri( 0x099, 0x099, -2, plCameraBrain1 ),
+        tri( 0x09B, 0x09B, -2, plCameraModifier1 ),
+        tri( 0x09E, 0x09E, -2, plCameraBrain1_Avatar ),
+        tri( 0x09F, 0x09F, -2, plCameraBrain1_Fixed ),
+        tri( 0x0A2, 0x0A2, -2, plPythonFileMod ),
+        tri( 0x0A4, 0x0A4, -2, plExcludeRegionModifier ),
+        tri( 0x0A6, 0x0A6, -2, plVolumeSensorConditionalObject ),
+        tri( 0x0A8, 0x0A8, -2, plMsgForwarder ),
+        tri( 0x0AD, 0x0AD, -2, plDynamicTextMap ),
+        tri( 0x0AE, 0x0AE, -2, plSittingModifier ),
+        tri( 0x0B2, 0x0B2, -2, plAvLadderMod ),
+        tri( 0x0C0, 0x0C0, -2, plRailCameraMod ),
+        tri( 0x0C1, 0x0C1, -2, plMultiStageBehMod ),
+        tri( 0x0C2, 0x0C2, -2, plCameraBrain1_Circle ),
+        tri( 0x0C4, 0x0C4, -2, plAnimEventModifier ),
+        tri( 0x0C9, 0x0C9, -2, plParticleCollisionEffectDie ),
+        tri( 0x0CA, 0x0CA, -2, plParticleCollisionEffectBounce ),
+        tri( 0x0CB, 0x0CB, -2, plInterfaceInfoModifier ),
+        tri( 0x0D0, 0x0D0, -2, plParticleLocalWind ),
+        tri( 0x0D4, 0x0D4, 0x0B4, plShadowCaster ),
+        tri( 0x0D5, 0x0D5, -2, plPointShadowMaster ),
+        tri( 0x0D6, 0x0D6, -2, plDirectShadowMaster ),
+        tri( 0x0E5, 0x0E5, -2, plEAXListenerMod ),
+        tri( 0x0E8, 0x0E8, -2, plDynaFootMgr ),
+        tri( 0x0ED, 0x0ED, -2, plDynaPuddleMgr ),
+        tri( 0x0F1, 0x0F1, 0x0CD, plATCAnim ),
+        tri( 0x0F2, 0x0F2, -2, plAgeGlobalAnim ),
+        tri( 0x0FB, 0x0FB, -2, plWaveSet7 ),
+        tri( 0x0FC, 0x0FC, -2, plPanicLinkRegion ),
+        tri( 0x0FF, 0x0FF, -2, plStereizer ),
+        tri( 0x106, 0x106, -2, plDynamicEnvMap ),
+        tri( 0x116, 0x116, -2, plVisRegion ),
+        tri( 0x11E, 0x11E, -2, plRelevanceRegion ), //used for .csv files
+        tri( 0x122, 0x122, -2, plImageLibMod ),
+        tri( 0x123, 0x123, -2, plParticleFlockEffect ),
+        tri( 0x127, 0x127, -2, plPhysicalSndGroup ),
+        tri( 0x12B, 0x12B, -2, plClusterGroup ),
+        tri( 0x12F, 0x12F, -2, plFadeOpacityMod ),
 
         
-        tri( 0x203, 0x203, plRefMsg ),
-        tri( 0x204, 0x204, plGenRefMsg ),
-        tri( 0x206, 0x206, plAnimCmdMsg ),
-        tri( 0x20A, 0x20A, plCameraMsg ),
-        tri( 0x219, 0x219, plActivatorMsg ),
-        tri( 0x22B, 0x230, plLeafController ),
-        tri( -2, 0x231, plCompoundController ), //moul-only
-        tri( 0x22F, -2, plScalarController ), //pots-only
-        tri( 0x234, -2, plMatrix44Controller ), //pots-only
-        tri( 0x236, -2, plSimpleScaleController ), //pots-only
-        tri( 0x237, -2, plSimpleRotController ), //pots-only
-        tri( 0x238, -2, plCompoundRotController ), //pots-only
-        tri( 0x239, -2, plSimplePosController ), //pots-only
-        tri( 0x23A, -2, plCompoundPosController ), //pots-only
-        tri( 0x23B, -2, plTMController ), //pots-only
-        tri( 0x24A, 0x24F, plTimerCallbackMsg ),
-        tri( 0x24B, 0x250, plEventCallbackMsg ),
-        tri( 0x24F, 0x254, plEnableMsg ),
-        tri( 0x255, 0x25A, plSoundMsg ),
-        tri( 0x258, 0x25D, plSpaceTree ),
-        tri( 0x2D3, 0x2d8, plSimpleParticleGenerator ),
-        tri( 0x2D4, 0x2d9, plParticleEmitter ),
-        tri( 0x2E1, 0x2E6, plLinkToAgeMsg ),
-        tri( 0x2E6, 0x2EB, plAnimPath ),
-        tri( 0x2E8, 0x2ED, plNotifyMsg ),
-        tri( 0x2F0, 0x2F5, plVolumeIsect ),
-        tri( 0x2F5, 0x2FA, plConvexIsect ),
-        tri( 0x2FD, 0x302, plResponderEnableMsg ),
-        tri( 0x302, 0x307, plOneShotMsg ),
-        tri( 0x330, 0x335, plExcludeRegionMsg ),
-        tri( 0x331, 0x336, plOneTimeParticleGenerator ),
-        tri( 0x38E, 0x393, plArmatureEffectStateMsg ),
-        tri( 0x3BA, 0x3BF, plSubWorldMsg ),
+        tri( 0x203, 0x203, -2, plRefMsg ),
+        tri( 0x204, 0x204, -2, plGenRefMsg ),
+        tri( 0x206, 0x206, -2, plAnimCmdMsg ),
+        tri( 0x20A, 0x20A, -2, plCameraMsg ),
+        tri( 0x219, 0x219, -2, plActivatorMsg ),
+        tri( 0x22B, 0x230, 0x21A, plLeafController ),
+        tri( -2, 0x231, 0x21B, plCompoundController ), //moul-only
+        tri( 0x22F, -2, -2, plScalarController ), //pots-only
+        tri( 0x234, -2, -2, plMatrix44Controller ), //pots-only
+        tri( 0x236, -2, -2, plSimpleScaleController ), //pots-only
+        tri( 0x237, -2, -2, plSimpleRotController ), //pots-only
+        tri( 0x238, -2, -2, plCompoundRotController ), //pots-only
+        tri( 0x239, -2, -2, plSimplePosController ), //pots-only
+        tri( 0x23A, -2, -2, plCompoundPosController ), //pots-only
+        tri( 0x23B, -2, -2, plTMController ), //pots-only
+        tri( 0x24A, 0x24F, -2, plTimerCallbackMsg ),
+        tri( 0x24B, 0x250, -2, plEventCallbackMsg ),
+        tri( 0x24F, 0x254, -2, plEnableMsg ),
+        tri( 0x255, 0x25A, -2, plSoundMsg ),
+        tri( 0x258, 0x25D, 0x240, plSpaceTree ),
+        tri( 0x2D3, 0x2d8, -2, plSimpleParticleGenerator ),
+        tri( 0x2D4, 0x2d9, -2, plParticleEmitter ),
+        tri( 0x2E1, 0x2E6, -2, plLinkToAgeMsg ),
+        tri( 0x2E6, 0x2EB, -2, plAnimPath ),
+        tri( 0x2E8, 0x2ED, -2, plNotifyMsg ),
+        tri( 0x2F0, 0x2F5, -2, plVolumeIsect ),
+        tri( 0x2F5, 0x2FA, -2, plConvexIsect ),
+        tri( 0x2FD, 0x302, -2, plResponderEnableMsg ),
+        tri( 0x302, 0x307, -2, plOneShotMsg ),
+        tri( 0x330, 0x335, -2, plExcludeRegionMsg ),
+        tri( 0x331, 0x336, -2, plOneTimeParticleGenerator ),
+        tri( 0x38E, 0x393, -2, plArmatureEffectStateMsg ),
+        tri( 0x3BA, 0x3BF, -2, plSubWorldMsg ),
         
-        tri( 0x309, 0x30E, plMatrixChannelApplicator ),
-        tri( 0x2D9, 0x2DE, plMatrixControllerChannel ),
-        tri( 0x335, 0x33A, plParticlePPSApplicator ),
-        tri( 0x313, 0x318, plScalarControllerChannel ),
-        tri( 0x30B, 0x310, plLightDiffuseApplicator ),
-        tri( 0x306, 0x30B, plPointControllerChannel ),
-        tri( 0x30D, 0x312, plLightSpecularApplicator ),
-        tri( -2, 0x22A, plOmniSqApplicator ), //moul-only
-        tri( -2, 0x13A, plRidingAnimatedPhysicalDetector ), //moul-only
-        tri( -2, 0x138, plGrassShaderMod ), //moul-only
-        tri( -2, 0x139, plDynamicCamMap ), //moul-only
-        tri( -2, 0x49D, plRideAnimatedPhysMsg ), //moul-only
+        tri( 0x309, 0x30E, 0x28A, plMatrixChannelApplicator ),
+        tri( 0x2D9, 0x2DE, 0x267, plMatrixControllerChannel ),
+        tri( 0x335, 0x33A, -2, plParticlePPSApplicator ),
+        tri( 0x313, 0x318, -2, plScalarControllerChannel ),
+        tri( 0x30B, 0x310, -2, plLightDiffuseApplicator ),
+        tri( 0x306, 0x30B, -2, plPointControllerChannel ),
+        tri( 0x30D, 0x312, -2, plLightSpecularApplicator ),
+        tri( -2, 0x22A, -2, plOmniSqApplicator ), //moul-only
+        tri( -2, 0x13A, -2, plRidingAnimatedPhysicalDetector ), //moul-only
+        tri( -2, 0x138, -2, plGrassShaderMod ), //moul-only
+        tri( -2, 0x139, 0x111, plDynamicCamMap ), //moul-only
+        tri( -2, 0x49D, -2, plRideAnimatedPhysMsg ), //moul-only
+        
+        tri( -2, -2, 0x338, plRelativeMatrixChannelApplicator ), //not in pots.
                 
-        tri( 0x8000, 0x8000, nil ),
+        tri( 0x8000, 0x8000, 0x8000, nil ),
     };
+    
+    
     public static int noval = -2;
     public static class triplet
     {
         Typeid type;
         short pots;
         short moul;
+        short mv;
         
-        public triplet(Typeid type2, short pots2, short moul2)
+        public triplet(short pots2, short moul2, short mv2, Typeid type2)
         {
             type = type2;
             pots = pots2;
             moul = moul2;
+            mv = mv2;
         }
     }
-    public static triplet tri(int pots2, int moul2, Typeid type2)
+    public static triplet tri(int pots2, int moul2, int mv2, Typeid type2)
     {
-        return new triplet(type2,(short)pots2,(short)moul2);
+        return new triplet((short)pots2,(short)moul2,(short)mv2,type2);
     }
     public static boolean validateTriplets()
     {
@@ -360,6 +368,7 @@ public enum Typeid implements compilable
                 if(t1.type==t2.type) valid = false;
                 if(t1.moul==t2.moul && t1.moul!=-2) valid = false;
                 if(t1.pots==t2.pots && t1.pots!=-2) valid = false;
+                if(t1.mv==t2.mv && t1.mv!=-2) valid = false;
             }
         }
         if(!valid) m.err("Triplets are not valid!");
@@ -383,6 +392,18 @@ public enum Typeid implements compilable
         for(int i=0;i<num;i++)
         {
             if(triplets[i].moul==moul)
+            {
+                return triplets[i];
+            }
+        }
+        return null;
+    }
+    public static triplet findTriByMv(short mv)
+    {
+        int num = triplets.length;
+        for(int i=0;i<num;i++)
+        {
+            if(triplets[i].mv==mv)
             {
                 return triplets[i];
             }
@@ -705,6 +726,19 @@ public enum Typeid implements compilable
                     m.msg("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
                     return unknown;
             }*/
+        }
+        else if(c.readversion==4)
+        {
+            triplet t = findTriByMv(type);
+            if(t!=null)
+            {
+                return t.type;
+            }
+            else
+            {
+                m.err("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                return unknown;
+            }
         }
         m.err("Unknown readversion in Typeid");
         return unknown;

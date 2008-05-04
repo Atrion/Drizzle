@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -42,6 +42,13 @@ public class x0005Environmap extends uruobj
         parent = new x0003Bitmap(c);//,false);
         for(int i=0;i<6;i++)
         {
+            if(c.readversion==4)
+            {
+                //c.readByte(); //0
+                //c.readInt(); //-1
+                //c.readBytes(9); //0
+                Uruobjectref unused = new Uruobjectref(c);
+            }
             sides[i] = new x0004MipMap(c);//,false);
         }
     }

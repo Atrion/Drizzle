@@ -16,10 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru;
+package shared;
 
 //import java.io.FileReader;
 //import gui.*;
+import uru.*;
+import shared.m;
 import java.io.FileInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,6 +49,15 @@ public class FileUtils {
         File file = new File(filename);
         return ReadFileAsString(file);
     }
+    static public Bytes ReadFileAsBytes(String filename)
+    {
+        File file = new File(filename);
+        return ReadFileAsBytes(file);
+    }
+    public static Bytes ReadFileAsBytes(File filename)
+    {
+        return new Bytes(ReadFile(filename));
+    }
     static public byte[] ReadFile(File filename)
     {
         try
@@ -72,7 +83,10 @@ public class FileUtils {
         File file = new File(filename);
         WriteFile(file,content);
     }
-    
+    static public void WriteFile(String filename, Bytes content)
+    {
+        WriteFile(filename,content.getByteArray());
+    }
     static public void WriteFile(File filename, byte[] content)
     {
         try

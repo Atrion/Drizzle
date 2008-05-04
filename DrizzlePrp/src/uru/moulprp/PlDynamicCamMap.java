@@ -18,13 +18,13 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
-import uru.readexception;
+import shared.readexception;
 //import java.util.Vector;
 
 
@@ -47,7 +47,7 @@ public class PlDynamicCamMap extends uruobj
     
     public PlDynamicCamMap(context c) throws readexception
     {
-        e.ensure(c.readversion==6);
+        e.ensure(c.readversion==6||c.readversion==4);
         
         target = new PlDynamicEnvMap.plRenderTarget(c);
         u1 = c.readVector(Flt.class, 8);

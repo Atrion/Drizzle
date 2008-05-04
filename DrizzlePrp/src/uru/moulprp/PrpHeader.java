@@ -18,11 +18,12 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.Bytedeque;
+import shared.Bytes;
 //import java.util.Vector;
 
 /**
@@ -33,9 +34,11 @@ public class PrpHeader extends uruobj
 {
     //Bytestream data;
 
-    int version;
+    short version;
+    short version2;
     Pageid pageid;
-    short pagetype;
+    //short pagetype;
+    Pagetype pagetype;
     Urustring agename;
     Urustring pagename;
     short u1;
@@ -52,33 +55,65 @@ public class PrpHeader extends uruobj
     {
         Bytestream data = c.in;
         //data = datas;
-        version = data.readInt(); e.ensure(version,5,6);
+        //version = data.readInt(); e.ensure(version,5,6);
+        version = data.readShort();
         
         //assign the context's version.
-        if(version==5) c.readversion = 3;
-        else if (version==6) c.readversion = 6;
+        //if(version==5) c.readversion = 3;
+        //else if (version==6) c.readversion = 6;
         
-        if(c.readversion==6) //moul
+        if(version==6) //moul, myst5, crowthistle
         {
             //version = data.readInt(); e.ensure(version,6); //version 6 for MOUL and possibly MystV.
-            pageid = new Pageid(c); //the id of this page(aka prp file).
-            pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin. 16 was used for garden_district_itinerantbugcloud. 20 was used in a GlobalAnimation.
-            agename = new Urustring(c); //the name of the age this prp file belongs to.
-            pagename = new Urustring(c); //the pagename of this prp file.
-            u1 = data.readShort(); e.ensure(u1,0x46);//sub-version?
-            payloadlength = data.readInt(); //length of data after this header.
-            offsetToFirstObject = data.readInt(); //absolute offset to first object(should be immediately after this header.)
-            offsetToObjectIndex = data.readInt(); //absolute offset to object index.
-            u2 = data.readShort();
-            u3 = data.readInt();
-            u4 = data.readInt();
-            uru.FileUtils.AppendText(_staticsettings.outputdir+"pageid.txt", "agename="+agename+" pagename="+pagename+" pageid="+pageid.toString()+"\n");
+            version2 = data.readShort();
+            if(version2==0)
+            {
+                c.readversion = 6; //moul
+                
+                pageid = new Pageid(c); //the id of this page(aka prp file).
+                //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin. 16 was used for garden_district_itinerantbugcloud. 20 was used in a GlobalAnimation.
+                pagetype = new Pagetype(c);
+                agename = new Urustring(c); //the name of the age this prp file belongs to.
+                pagename = new Urustring(c); //the pagename of this prp file.
+                u1 = data.readShort(); e.ensure(u1,0x46);//sub-version?
+                payloadlength = data.readInt(); //length of data after this header.
+                offsetToFirstObject = data.readInt(); //absolute offset to first object(should be immediately after this header.)
+                offsetToObjectIndex = data.readInt(); //absolute offset to object index.
+                u2 = data.readShort();
+                u3 = data.readInt();
+                u4 = data.readInt();
+                shared.FileUtils.AppendText(_staticsettings.outputdir+"pageid.txt", "agename="+agename+" pagename="+pagename+" pageid="+pageid.toString()+"\n");
+            }
+            else
+            {
+                c.readversion = 4; //crowthistle (this may be indistinguishable from Myst5)
+                
+                //let's just ignore this stuff; I think it is replaced by the object index anyway, so it isn't even used.
+                for(int i=0;i<version2;i++)
+                {
+                    short objecttype = c.readShort();
+                    short unknown1 = c.readShort();
+                }
+                
+                pageid = new Pageid(c);
+                short unknown2 = c.readShort();
+                //pagetype = Bytes.ByteToInt16(data.readByte());
+                pagetype = new Pagetype(c);
+                agename = new Urustring(c); //the name of the age this prp file belongs to.
+                pagename = new Urustring(c); //the pagename of this prp file.
+                int filesize = data.readInt(); //size of this entire file.
+                offsetToFirstObject = data.readInt();
+                offsetToObjectIndex = data.readInt();
+            }
         }
-        else if(c.readversion==3) //pots
+        else if(version==5) //pots
         {
+            c.readversion = 3; //pots
             //version = data.readInt(); e.ensure(version,5);
+            version2 = data.readShort();
             pageid = new Pageid(c);
-            pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16); //16 was garden_district_itinerantbugcloud
+            //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16); //16 was garden_district_itinerantbugcloud
+            pagetype = new Pagetype(c);
             agename = new Urustring(c);
             Urustring district = new Urustring(c);
             pagename = new Urustring(c);
@@ -89,6 +124,11 @@ public class PrpHeader extends uruobj
             payloadlength = data.readInt();
             offsetToFirstObject = data.readInt();
             offsetToObjectIndex = data.readInt();
+        }
+        else
+        {
+            //throw new readexception("prpheader: Unknown version.");
+            m.err("prpheader: Unknown version.");
         }
         //process the object index, which is *not* a part of this struct.
         //objectindex = new PrpObjectIndex(new Bytestream(data,offsetToObjectIndex));

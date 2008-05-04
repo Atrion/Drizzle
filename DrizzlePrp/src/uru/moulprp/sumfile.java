@@ -19,10 +19,10 @@
 package uru.moulprp;
 
 import java.io.File;
-import uru.m;
+import shared.m;
 import uru.Bytestream;
 import uru.context;
-import uru.readexception;
+import shared.readexception;
 import uru.Bytedeque;
 import uru.b;
 
@@ -36,7 +36,7 @@ public class sumfile
     {
         if(isencrypted)
         {
-            filedata = uru.UruUtils.DecryptWhatdoyousee(filedata);
+            filedata = uru.UruCrypt.DecryptWhatdoyousee(filedata);
         }
         
         context c = new context(new Bytestream(filedata));
@@ -105,7 +105,7 @@ public class sumfile
                 filename.compile(c);
                 
                 //md5
-                byte[] filecontents = uru.FileUtils.ReadFile(datfiles[i]);
+                byte[] filecontents = shared.FileUtils.ReadFile(datfiles[i]);
                 byte[] md5 = uru.CryptHashes.GetMd5(filecontents);
                 c.writeBytes(md5);
                 
@@ -118,8 +118,8 @@ public class sumfile
         }
         
         byte[] result = c.getAllBytes();
-        result = uru.UruUtils.EncryptWhatdoyousee(result);
+        result = uru.UruCrypt.EncryptWhatdoyousee(result);
         
-        uru.FileUtils.WriteFile(outfolder+agename+".sum", result);
+        shared.FileUtils.WriteFile(outfolder+agename+".sum", result);
     }
 }

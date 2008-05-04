@@ -18,9 +18,9 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
-import uru.m;
-import uru.readexception;
+import uru.context; import shared.readexception;
+import shared.m;
+import shared.readexception;
 import uru.Bytedeque;
 import uru.b;
 import uru.e;

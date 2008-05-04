@@ -20,9 +20,9 @@ package uru.moulprp;
 
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.m;
+import shared.m;
 import uru.context;
-import uru.readexception;
+import shared.readexception;
 import uru.e;
 import uru.b;
 
@@ -515,7 +515,7 @@ public class PrpController extends uruobj
                 easecontrollers = c.readVector(plEaseController.class, count);
                 garbage = c.readInt(); //doesn't exist in moul
             }
-            else
+            else if(c.readversion==6)
             {
                 controllertype = c.readByte(); //int in pots, byte in moul
                 count2 = c.readInt();
@@ -564,6 +564,67 @@ public class PrpController extends uruobj
                         xtype11 = c.readVector(moul11.class, count2);
                         break;
                     case 12: //plMatrix44Controller
+                        xtype12 = c.readVector(moul12.class, count2);
+                        break;
+                    default:
+                        m.err("plleafcontroller: unknown type.");
+                        break;
+                }
+            }
+            else if(c.readversion==4)
+            {
+                byte controllertype2 = c.readByte(); //int in pots, byte in moul
+                count2 = c.readInt();
+                //rawdata = c.readBytes(14*count); //each 14byte block seems to be byte[2]floatfloatfloat or maybe shortfloatfloatfloat
+                switch(controllertype2)
+                {
+                    case 1: //plPoint3Controller (plSimplePosController)
+                        controllertype = 1;
+                        xtype1 = c.readVector(moul1.class, count2);
+                        //uru.FileUtils.AppendText(_staticsettings.outputdir+"type1.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
+                        break;
+                    case 2:
+                        controllertype = 2;
+                        xtype2 = c.readVector(moul2.class, count2);
+                        break;
+                    case 3: //plScalarController
+                        controllertype = 3;
+                        //only used in the neighborhood with objects not found in pots. But, in analogy with 4, I've implemented it.
+                        xtype3 = c.readVector(moul3.class, count2);
+                        //uru.FileUtils.AppendText(_staticsettings.outputdir+"type3.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
+                        break;
+                    case 4:
+                        controllertype = 4;
+                        xtype4 = c.readVector(moul4.class, count2);
+                        break;
+                    case 5: //plScaleValueController
+                        controllertype = 5;
+                        xtype5 = c.readVector(moul5.class, count2);
+                        //uru.FileUtils.AppendText(_staticsettings.outputdir+"type5.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
+                        break;
+                    case 6:
+                        controllertype = 6;
+                        xtype6 = c.readVector(moul6.class, count2);
+                        //uru.FileUtils.AppendText(_staticsettings.outputdir+"type6.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
+                        break;
+                    case 7: //plQuatController
+                        controllertype = 7;
+                        xtype7 = c.readVector(moul7.class, count2);
+                        break;
+                    case 8:
+                        controllertype = 8;
+                        xtype8 = c.readVector(moul8.class, count2);
+                        break;
+                    case 9:
+                        controllertype = 10;
+                        xtype10 = c.readVector(moul10.class, count2);
+                        break;
+                    case 10: //plMatrix33Controller
+                        controllertype = 11;
+                        xtype11 = c.readVector(moul11.class, count2);
+                        break;
+                    case 11: //plMatrix44Controller
+                        controllertype = 12;
                         xtype12 = c.readVector(moul12.class, count2);
                         break;
                     default:
@@ -801,6 +862,36 @@ public class PrpController extends uruobj
                                     leaf.xtype6[i].data4.compile(c); //q
                             }
                     break;
+                case 7: //added for myst5.
+                    m.warn("conpile prpcontroller: case7 untested.");
+                    //plSimpleRotController
+                        //flag
+                        c.writeInt(1);
+                        //plQuatController
+                            //plLeafController parent
+                                c.writeInt(0);
+                                c.writeInt(0);
+                                c.writeInt(0);
+                            //count
+                                c.writeInt(count);
+                            //keys
+                            for(int i=0;i<count;i++)
+                            {
+                                //hsKeyFrame
+                                    //flags
+                                        c.writeInt(1);
+                                    //framenum
+                                        int framenum = b.Int16ToInt32(leaf.xtype7[i].framenum);
+                                        c.writeInt(framenum);
+                                    //time
+                                        float time = framenum/30.0f;
+                                        new Flt(time).compile(c);
+                                //data (hsQuat)
+                                    //Quat quat = PrpController.decompressQuaternion(leaf.xtype9[i].data1, leaf.xtype9[i].data2);
+                                    //quat.compile(c);
+                                    leaf.xtype7[i].data.compile(c);
+                            }
+                    break;
                 case 9:
                     //plSimpleRotController
                         //flag
@@ -867,7 +958,16 @@ public class PrpController extends uruobj
         
         public moul1(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = new Vertex(c);
         }
     }
@@ -880,7 +980,16 @@ public class PrpController extends uruobj
         
         public moul2(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data1 = new Vertex(c);
             data2 = new Vertex(c);
             data3 = new Vertex(c);
@@ -893,7 +1002,16 @@ public class PrpController extends uruobj
         
         public moul3(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = new Flt(c);
         }
     }
@@ -906,7 +1024,16 @@ public class PrpController extends uruobj
         
         public moul4(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data1 = new Flt(c);
             data2 = new Flt(c);
             data3 = new Flt(c);
@@ -920,7 +1047,16 @@ public class PrpController extends uruobj
         
         public moul5(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data1 = new Vertex(c);
             data2 = new Quat(c);
         }
@@ -935,7 +1071,16 @@ public class PrpController extends uruobj
         
         public moul6(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data1 = new Vertex(c);
             data2 = new Vertex(c);
             data3 = new Vertex(c);
@@ -949,7 +1094,16 @@ public class PrpController extends uruobj
         
         public moul7(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = new Quat(c);
         }
     }
@@ -960,7 +1114,16 @@ public class PrpController extends uruobj
         
         public moul8(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = c.readInt();
         }
     }
@@ -972,7 +1135,16 @@ public class PrpController extends uruobj
         
         public moul9(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data1 = c.readInt();
             data2 = c.readInt();
             PrpController.decompressQuaternion(data1, data2);
@@ -985,7 +1157,16 @@ public class PrpController extends uruobj
         
         public moul10(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = new PrpController.uk(c);
         }
     }
@@ -996,7 +1177,16 @@ public class PrpController extends uruobj
         
         public moul11(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             matrixdata = c.readVector(Flt.class, 9); //3x3 matrix. Is the order correct? Probably, since it was with 4x4 matrices.
         }
     }
@@ -1007,7 +1197,16 @@ public class PrpController extends uruobj
         
         public moul12(context c) throws readexception
         {
-            framenum = c.readShort();
+            if(c.readversion==6)
+            {
+                framenum = c.readShort();
+            }
+            else if(c.readversion==4)
+            {
+                Flt flt = new Flt(c);
+                //m.msg(flt.toString());
+                framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
+            }
             data = new Transmatrix(c);
         }
     }
@@ -1020,7 +1219,7 @@ public class PrpController extends uruobj
         
         public plCompoundController(context c) throws readexception
         {
-            e.ensure(c.readversion==6);
+            e.ensure(c.readversion==6||c.readversion==4);
             
             u1 = new PrpTaggedObject(c);
             u2 = new PrpTaggedObject(c);
@@ -1077,6 +1276,7 @@ public class PrpController extends uruobj
                     case 4:
                         type = 5;
                         break;
+                    case 7: //myst5 added, untested, but it's just a quat so it should be a rotation.
                     case 9:
                         type = 2;
                         break;
@@ -1289,7 +1489,7 @@ public class PrpController extends uruobj
         
         public uk(context c) throws readexception
         {
-            if(c.readversion==3)
+            if(c.readversion==3||c.readversion==4)
             {
                 xu0 = c.readInt();
                 //m.msg("xu0="+Integer.toString(xu0));

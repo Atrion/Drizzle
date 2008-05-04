@@ -18,10 +18,10 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.m;
+import shared.m;
 
 /**
  *
@@ -63,7 +63,7 @@ public class PrpObjectIndex extends uruobj
         public ObjectindexObjecttype(context c)
         {
             //type = data.readShort();
-            if(c.readversion==6)
+            if(c.readversion==6||c.readversion==4)
             {
                 type = Typeid.ReadEvenIfUnknown(c);
                 datasize = c.in.readInt(); //relative offset to next objecttype.

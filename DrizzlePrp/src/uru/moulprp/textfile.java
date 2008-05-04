@@ -18,8 +18,8 @@
 
 package uru.moulprp;
 
-import uru.Bytes;
-import uru.m;
+import shared.Bytes;
+import shared.m;
 import uru.Bytedeque;
 
 public class textfile
@@ -27,19 +27,38 @@ public class textfile
     //Bytes text;
     Bytes[] lines;
     
-    public static textfile loadFromFile(String filename, boolean isencrypted)
+    /*public static textfile loadFromFile(String filename, boolean isencrypted)
     {
         textfile result = new textfile();
-        byte[] filecontents = uru.FileUtils.ReadFile(filename);
+        byte[] filecontents = shared.FileUtils.ReadFile(filename);
         Bytes text;
         if(isencrypted)
         {
-            text = Bytes.create(uru.UruUtils.DecryptWhatdoyousee(filecontents));
+            text = Bytes.create(uru.UruCrypt.DecryptWhatdoyousee(filecontents));
         }
         else
         {
             text = Bytes.create(filecontents);
         }
+        //text.split((byte)0x0d);
+        text = text.remove((byte)0x0a);
+        result.lines = text.split((byte)0x0d);
+        
+        return result;
+    }*/
+    public static textfile createFromBytes(Bytes bytes)
+    {
+        textfile result = new textfile();
+        //byte[] filecontents = shared.FileUtils.ReadFile(filename);
+        Bytes text = bytes;
+        //if(isencrypted)
+        //{
+        //    text = Bytes.create(uru.UruCrypt.DecryptWhatdoyousee(filecontents));
+        //}
+        //else
+        //{
+        //    text = Bytes.create(filecontents);
+        //}
         //text.split((byte)0x0d);
         text = text.remove((byte)0x0a);
         result.lines = text.split((byte)0x0d);
@@ -53,7 +72,7 @@ public class textfile
             m.msg(lines[i].toString());
         }
     }
-    public void saveToFile(String filename, boolean encrypt)
+    /*public void saveToFile(String filename, boolean encrypt)
     {
         Bytedeque result = new Bytedeque();
         for(int i=0;i<lines.length;i++)
@@ -66,10 +85,22 @@ public class textfile
         byte[] result2 = result.getAllBytes();
         if(encrypt)
         {
-            result2 = uru.UruUtils.EncryptWhatdoyousee(result2);
+            result2 = uru.UruCrypt.EncryptWhatdoyousee(result2);
         }
         
-        uru.FileUtils.WriteFile(filename, result2);
+        shared.FileUtils.WriteFile(filename, result2);
+    }*/
+    public Bytes saveToBytes()
+    {
+        Bytedeque result = new Bytedeque();
+        for(Bytes line: lines)
+        {
+            result.writeBytes(line);
+            result.writeByte((byte)0x0d);
+            result.writeByte((byte)0x0a);
+        }
+        
+        return result.getBytes();
     }
     
     public boolean hasVariable(String varname)

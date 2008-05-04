@@ -18,13 +18,13 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
-import uru.readexception;
+import shared.readexception;
 //import java.util.Vector;
 
 //I reverse-engineered part of this myself.
@@ -49,7 +49,14 @@ public class PlAGMasterMod extends uruobj
         
         //u1 = c.readInt();
         parent = new PlSynchedObject(c);
-        u2 = new Bstr(c);
+        if(c.readversion==6||c.readversion==3)
+        {
+            u2 = new Bstr(c);
+        }
+        else if(c.readversion==4)
+        {
+            u2 = Bstr.createFromNothing();
+        }
         //u1 = c.readShort(); e.ensure(u1==0); //I think this is 0.
         count = c.readInt();
         ATCAnim = c.readVector(Uruobjectref.class, count);
@@ -63,6 +70,12 @@ public class PlAGMasterMod extends uruobj
             {
                 xu5 = new Uruobjectref(c);
             }
+        }
+        else if(c.readversion==4)
+        {
+            int ucount = c.readInt();
+            if(ucount!=0) throw new readexception("PlAGMasterMod: unhandled case.");
+            //I think this is an Uruobjectref count.
         }
         //u4 = new Uruobjectref(c);
     }

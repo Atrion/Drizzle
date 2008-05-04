@@ -18,7 +18,7 @@
 
 package uru;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytedeque;
 
 /**

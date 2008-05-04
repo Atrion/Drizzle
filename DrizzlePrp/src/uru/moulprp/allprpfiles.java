@@ -19,11 +19,11 @@
 package uru.moulprp;
 
 import java.io.File;
-import uru.m;
-import uru.FileUtils;
+import shared.m;
+import shared.FileUtils;
 import uru.moulprp.prpfile;
 import uru.moulprp.prputils;
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 
 /**
@@ -52,7 +52,7 @@ public class allprpfiles
                 //open prp file and process it.
                 byte[] filedata = FileUtils.ReadFile(curfile);
                 //prpfile prp = prputils.ProcessAll(filedata);
-                context c = context.createDefault(new Bytestream(filedata));
+                context c = context.createFromBytestream(new Bytestream(filedata));
                 //c.readversion = 3;
                 PrpHeader header = new PrpHeader(c);
                 PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));

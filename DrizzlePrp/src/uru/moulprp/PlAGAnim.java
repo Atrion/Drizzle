@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -57,7 +57,15 @@ public class PlAGAnim extends uruobj
             //effects[i] = new effect(c);
             effects[i] = new PrpTaggedObject(c);
         }
-        
+        if(c.readversion==4)
+        {
+            byte flag = c.readByte();
+            if((flag&0x01)!=0 && name.toString().equals("(Entire Animation)"))
+            {
+                //do something?
+                m.warn("plaganim: possibly unhandled case.");
+            }
+        }
     }
     public void compile(Bytedeque c)
     {

@@ -20,7 +20,7 @@ package uru.moulprp;
 
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.m;
+import shared.m;
 
 /**
  *

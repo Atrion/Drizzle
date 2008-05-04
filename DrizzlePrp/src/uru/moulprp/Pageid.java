@@ -18,11 +18,12 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.b;
-import uru.m;
+import shared.m;
+import shared.Bytes;
 
 /**
  *
@@ -37,6 +38,7 @@ public class Pageid extends uruobj
     {
         if(c.readversion==6)
         {
+            //first 16 bits is sequence prefix, next is pageid?
             rawdata = c.in.readInt();
         }
         else if(c.readversion==3)
@@ -45,18 +47,31 @@ public class Pageid extends uruobj
             fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
             rawdata = fixme;
         }
+        else if(c.readversion==4)
+        {
+            int fixme = Bytes.Int16ToInt32(c.readShort());
+            fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
+            rawdata = fixme;
+        }
+        
+        if(c.sequencePrefix!=null)
+        {
+            //force sequence prefix.
+            m.msg("Using forced sequence prefix.");
+            rawdata = (rawdata & 0x0000FFFF) | (c.sequencePrefix << 16);
+        }
     }
     public void compile(Bytedeque deque)
     {
         int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
         //todo: comment out the next line, it will break things.
-        byte sp = _staticsettings.sequencePrefix;
+        /*byte sp = _staticsettings.sequencePrefix;
         if(sp!=0x00)
         {
             m.msg("Using forced sequence prefix.");
             int FAKErawdata = b.ByteToInt32(sp) << 16;
             newdata = (rawdata & 0x000000FF) | ((FAKErawdata & 0x00FF0000) >>> 8);
-        }
+        }*/
         deque.writeInt(newdata);
     }
     

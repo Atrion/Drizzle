@@ -22,10 +22,10 @@ import uru.context;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
-import uru.readexception;
+import shared.readexception;
 
 /**
  *

@@ -20,8 +20,8 @@ package realmyst;
 
 //import uru.context;
 import uru.Bytestream;
-import uru.readexception;
-import uru.mystobj;
+import shared.readexception;
+import shared.mystobj;
 
 public class rmcontext //extends context
 {

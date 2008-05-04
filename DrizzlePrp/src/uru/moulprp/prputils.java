@@ -18,16 +18,17 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.m;
+import shared.m;
 import uru.b;
 import uru.e;
 import java.util.Vector;
-import uru.FileUtils;
-import uru.readexception;
+import shared.FileUtils;
+import shared.readexception;
 import java.io.File;
+import shared.Bytes;
 
 /**
  *
@@ -69,7 +70,7 @@ public class prputils
 
     public static String MakeObjectIndexReport(byte[] data)
     {
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         
         StringBuilder report = new StringBuilder();
         
@@ -79,7 +80,7 @@ public class prputils
         report.append("header:\n");
         report.append("    age:"+header.agename.toString()+"\n");
         report.append("    pagename:"+header.pagename.toString()+"\n");
-        report.append("    pagetype:0x"+Integer.toHexString(header.pagetype)+"\n");
+        report.append("    pagetype:"+header.pagetype.toString()+"\n");
         report.append("    pageid:"+header.pageid.toString()+"\n");
         report.append("Object types:\n");
         
@@ -114,7 +115,7 @@ public class prputils
     
     public static prpfile ProcessAllMoul(byte[] data)
     {
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         return ProcessAllMoul(c, false);
     }
     /*public static prpfile ProcessAll(context c)
@@ -136,6 +137,24 @@ public class prputils
 
         PrpHeader header = new PrpHeader(c);
         
+        //todo: this should be in the proper place, not here.
+            //fix payiferen pageid conflict problem.
+            if (header.agename.toString().toLowerCase().equals("payiferen"))
+            {
+                //_staticsettings.sequencePrefix = 0x63;
+                c.sequencePrefix = 0x63;
+            }
+            else if (header.agename.toString().toLowerCase().equals("kveer"))
+            {
+                //_staticsettings.sequencePrefix = 0x62;
+                c.sequencePrefix = 0x62;
+            }
+            else if (header.agename.toString().toLowerCase().equals("edertsogal"))
+            {
+                //_staticsettings.sequencePrefix = 0x61;
+                c.sequencePrefix = 0x61;
+            }
+
         //do header work.
         //_staticsettings.onHeaderLoaded(header);
         prpfile result = new prpfile();
@@ -151,6 +170,7 @@ public class prputils
         for(int i=0;i<numobjecttypes;i++)
         {
             Typeid type = objectindex.types[i].type;
+            //if(type==Typeid.plSceneObject) continue;
             int numObjects = objectindex.types[i].objectcount;
             
             //do per-type work.
@@ -329,7 +349,7 @@ public class prputils
 
     public static void DumpObjects(byte[] data, Typeid typetodump)
     {
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         
         PrpHeader header = new PrpHeader(c);
         
@@ -356,7 +376,7 @@ public class prputils
                 {
                     Bytestream bs = new Bytestream(c.in,offset);
                     byte[] bytes = bs.readBytes(size);
-                    uru.FileUtils.WriteFile(_staticsettings.outputdir+desc.toString()+".dat", bytes);
+                    shared.FileUtils.WriteFile(_staticsettings.outputdir+desc.toString()+".dat", bytes);
                 }
                 
             }
@@ -365,7 +385,7 @@ public class prputils
 
     public static void ReportCrossLinks(byte[] data)
     {
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         
         _staticsettings.reportReferences = true;
         _staticsettings.tryToFindReferencesInUnknownObjects = true;
@@ -379,7 +399,7 @@ public class prputils
     //doesn't quite work right!
     public static void ReportDeep(byte[] data)
     {
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         //_staticsettings.reportReferences = true;
         //_staticsettings.tryToFindReferencesInUnknownObjects = true;
         prpfile prp = prpprocess.ProcessAllObjects(c);
@@ -393,15 +413,23 @@ public class prputils
     {
         public static void RecompilePrp(byte[] data)
         {
-            context c = context.createDefault(new Bytestream(data));
+            context c = context.createFromBytestream(new Bytestream(data));
             //c.outputVertices = true; //works but not used.
             //c.vertices = new Vector<java.lang.Float>(); //works but not used.
             
             
-            prpfile prp = ProcessAllMoul(c,false);
+            //prpfile prp = ProcessAllMoul(c,false);
+            prpfile prp = prpfile.createFromContext(c);
             
+            Bytes fullbyte = RecompilePrp(prp);
+            String filename = prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
+            FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
+        }
+        
+        public static Bytes RecompilePrp(prpfile prp)
+        {
             //fix payiferen pageid conflict problem.
-            if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
+            /*if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
             {
                 _staticsettings.sequencePrefix = 0x63;
             }
@@ -412,7 +440,15 @@ public class prputils
             else if (prp.header.agename.toString().toLowerCase().equals("edertsogal"))
             {
                 _staticsettings.sequencePrefix = 0x61;
-            }
+            }*/
+            //else if (prp.header.agename.toString().toLowerCase().equals("marshscene"))
+            //{
+            //    _staticsettings.sequencePrefix = 96;
+            //}
+            //else if (prp.header.agename.toString().toLowerCase().equals("mountainscene"))
+            //{
+            //    _staticsettings.sequencePrefix = 95;
+            //}
 
             //fix problem with materials(referenced from plDrawableSpans) that point to LayerAnimations.
             //fixMaterial(prp);
@@ -427,7 +463,8 @@ public class prputils
             PrpHeader header = prp.header;
             headerdeque.writeInt(5);
             header.pageid.compile(headerdeque);
-            headerdeque.writeShort(header.pagetype);
+            //headerdeque.writeShort(header.pagetype);
+            header.pagetype.compile(headerdeque);
             prp.header.agename.compile(headerdeque);
             byte[] districtbytes = {'D','i','s','t','r','i','c','t'};
             Urustring district = new Urustring(districtbytes);
@@ -572,16 +609,17 @@ public class prputils
             
             //save to file. in=fulldeque out=!!!
             byte[] fullbyte = fulldeque.getAllBytes();
-            String filename = header.agename.toString()+"_District_"+header.pagename.toString()+".prp";
-            FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
+            //String filename = header.agename.toString()+"_District_"+header.pagename.toString()+".prp";
+            //FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
 
             //cleanup.
             //fix payiferen pageid conflict problem.
             //if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
             //{
-                _staticsettings.sequencePrefix = 0x00;
+                //_staticsettings.sequencePrefix = 0x00;
             //}
             m.msg("Recompilated completed!");
+            return new Bytes(fullbyte);
         }
         
         //a bit of a hack, to replace LayerAnimations with other materials.
@@ -1526,7 +1564,7 @@ public class prputils
     {
         StringBuilder report = new StringBuilder();
         
-        context c = context.createDefault(new Bytestream(data));
+        context c = context.createFromBytestream(new Bytestream(data));
         prpfile prp = ProcessAllMoul(c,false);
         for(int i=0;i<prp.objects.length;i++)
         {
@@ -1620,7 +1658,7 @@ public class prputils
                 byte[] filedata = FileUtils.ReadFile(curfile);
                 
                 //do work.
-                context c = context.createDefault(new Bytestream(filedata));
+                context c = context.createFromBytestream(new Bytestream(filedata));
                 //c.readversion = version;
                 c.curFile = curfile.getName();
                 prpprocess.ProcessAllObjects(c);

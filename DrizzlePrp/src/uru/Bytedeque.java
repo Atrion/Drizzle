@@ -19,6 +19,8 @@
 
 package uru;
 
+import shared.mystobj;
+import shared.Bytes;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 import uru.moulprp.Uruobjectdesc;
@@ -49,7 +51,7 @@ public class Bytedeque
     }
     public void writeBytes(Bytes data)
     {
-        writeBytes(data.bytes);
+        writeBytes(data.getByteArray());
     }
     public void writeBytes(byte[] data)
     {
@@ -172,5 +174,9 @@ public class Bytedeque
         }
         
         return result;
+    }
+    public Bytes getBytes()
+    {
+        return new Bytes(getAllBytes());
     }
 }

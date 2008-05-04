@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -44,7 +44,8 @@ public class PlDrawableSpans extends uruobj
     int unused;
     int listcount;
     int[] unused2;
-    byte[] unused3;
+    //byte[] unused3;
+    Uruobjectref[] unused3;
     BoundingBox[] xboundingBoxes;
     //int lightcount;
     //Vector<LightInfo> lightinfos = new Vector<LightInfo>();
@@ -100,7 +101,13 @@ public class PlDrawableSpans extends uruobj
         unused = data.readInt(); e.ensure(unused,0);
         listcount = data.readInt(); e.ensure(listcount==subsetcount);//so far so good.
         unused2 = data.readInts(listcount);
-        unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
+        //unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
+        unused3 = new Uruobjectref[subsetcount];
+        for(int i=0;i<subsetcount;i++)
+        {
+            unused3[i] = new Uruobjectref(c);
+        }
+        
         if(subsetcount>0)
         {
             xboundingBoxes = c.readVector(BoundingBox.class,3);
@@ -156,7 +163,8 @@ public class PlDrawableSpans extends uruobj
         data.writeInt(unused);
         data.writeInt(listcount);
         data.writeInts(unused2);
-        data.writeBytes(unused3);
+        //data.writeBytes(unused3);
+        data.writeVector(unused3);
         if(subsetcount>0)
         {
             data.writeVector(xboundingBoxes);
@@ -461,6 +469,8 @@ public class PlDrawableSpans extends uruobj
             //SubMeshVertex[] vertices;
             byte[] rawdata;
             
+            int rawdataversion; //not actual data, just useful for compiling.
+            
             public SubMesh(context c, byte fformat)
             {
                 if((fformat&0x80)!=0)
@@ -471,10 +481,12 @@ public class PlDrawableSpans extends uruobj
                     //for(int i=0;i<count;i++)
                     //{
                     //}
-                    context c2 = c.Fork(c.in.Fork());
+                    context c2 = c.Fork();
+                    //c2.readversion = 3;
                     //context c2 = new context(6,3,false,c.in.CreateFork(),null);
                     int dataSize = GetVertexDataSize(count, fformat, c2);
                     rawdata = c.in.readBytes(dataSize);
+                    rawdataversion = c.readversion;
                 }
                 else
                 {
@@ -490,7 +502,11 @@ public class PlDrawableSpans extends uruobj
                     //int dataSize = GetVertexDataSize(count, fformat, data.CreateFork());
                     //rawdata = data.readBytes(dataSize);
                     //Bytestream input = new Bytestream(rawdata);
-                    context c = new context(6,3,true,new Bytestream(rawdata),data,false,null);
+                    //context c = new context(6,3,true,new Bytestream(rawdata),data,false,null);
+                    context c = context.createFromBytestream(new Bytestream(rawdata));
+                    c.compile = true;
+                    c.out = data;
+                    c.readversion = rawdataversion;
                     GetVertexDataSize(count,fformat,c);
                 }
                 else
@@ -533,7 +549,7 @@ public class PlDrawableSpans extends uruobj
                                 b1 = c.in.readByte();
                                 if(c.compile && c.writeversion==6) c.out.writeByte(b1);
                             }
-                            else if(c.readversion==3)
+                            else if(c.readversion==3||c.readversion==4)
                             {
                                 //do nothing
                             }
@@ -569,7 +585,7 @@ public class PlDrawableSpans extends uruobj
                                     m.msg("unknown byte.");
                                 }
                             }
-                            else if(c.readversion==3)
+                            else if(c.readversion==3||c.readversion==4)
                             {
                                 count--;
                                 short out9 = c.in.readShort();
@@ -700,7 +716,7 @@ public class PlDrawableSpans extends uruobj
                             c.out.writeShort((short)(b.ByteToInt32(out4)*257));
                         }
                     }
-                    else if(c.readversion==3)
+                    else if(c.readversion==3||c.readversion==4)
                     {
                         short out2 = c.in.readShort();
                         short out3 = c.in.readShort();

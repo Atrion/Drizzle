@@ -18,9 +18,9 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
-import uru.FileUtils;
-import uru.m;
+import uru.context; import shared.readexception;
+import shared.FileUtils;
+import shared.m;
 import uru.b;
 import java.io.File;
 

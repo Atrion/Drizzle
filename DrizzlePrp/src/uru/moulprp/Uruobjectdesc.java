@@ -18,10 +18,10 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.Bytedeque;
 
 /**
@@ -33,7 +33,8 @@ public class Uruobjectdesc extends uruobj
     byte flag;
     //int pageid;
     Pageid pageid;
-    short pagetype;
+    //short pagetype;
+    Pagetype pagetype;
     byte xu1;
     //short objecttype;
     Typeid objecttype;
@@ -42,6 +43,7 @@ public class Uruobjectdesc extends uruobj
     //int xsomeid;
     //int xclientid;
     //byte xu1;
+    short xm5unknown;
     
     public Uruobjectdesc(context c)
     {
@@ -50,26 +52,41 @@ public class Uruobjectdesc extends uruobj
         flag = data.readByte(); e.ensure(flag,0x00,0x02);//should be 0 normally,1 and 2 also happen, but we need to study them.
         //pageid = data.readInt();
         pageid = new Pageid(c);
-        pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin.
-        if(flag==0x02)
+        //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin.
+        
+        if(c.readversion==3)
         {
-            xu1 = data.readByte();
+            pagetype = new Pagetype(c);
+            if(flag==0x02)
+            {
+                xu1 = data.readByte();
+            }
+            objecttype = Typeid.Read(c);
+            objectname = new Urustring(c);
         }
-        //objecttype = data.readShort();
-        objecttype = Typeid.Read(c);
-        if(c.readversion==6)
+        else if(c.readversion==4)
         {
+            xm5unknown = c.readShort(); //only in crowthistle?
+            pagetype = new Pagetype(c);
+            objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
+            objectname = new Urustring(c);
+            if(flag==0x02 || flag==0x04)
+            {
+                xu1 = data.readByte();
+            }
         }
-        else if(c.readversion==3)
+        else if(c.readversion==6)
         {
-            //do nothing
+            pagetype = new Pagetype(c);
+            if(flag==0x02)
+            {
+                xu1 = data.readByte();
+            }
+            objecttype = Typeid.Read(c);
+            objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
+            objectname = new Urustring(c);
         }
-        objectname = new Urustring(c);
-        //if(flag==0x02 || flag==0x04)
-        //{
-        //    xu1 = data.readByte();
-        //}
         
         _staticsettings.reportReference(this);
     }
@@ -81,7 +98,8 @@ public class Uruobjectdesc extends uruobj
     {
         deque.writeByte(flag);
         pageid.compile(deque);
-        deque.writeShort(pagetype);
+        //deque.writeShort(pagetype);
+        pagetype.compile(deque);
         if(flag==0x02)
         {
             deque.writeByte(xu1);

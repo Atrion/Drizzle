@@ -24,7 +24,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.util.Vector;
 import java.util.Random;
-import uru.m;
+import shared.m;
 
 /**
  *

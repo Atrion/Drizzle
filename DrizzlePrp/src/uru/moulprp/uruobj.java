@@ -20,8 +20,8 @@ package uru.moulprp;
 
 import uru.Bytedeque;
 import uru.Bytestream;
-import uru.m;
-import uru.mystobj;
+import shared.m;
+import shared.mystobj;
 
 /**
  *

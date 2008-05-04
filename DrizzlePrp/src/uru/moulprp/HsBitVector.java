@@ -21,8 +21,8 @@ package uru.moulprp;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context;
-import uru.readexception;
-import uru.m;
+import shared.readexception;
+import shared.m;
 
 /**
  *
@@ -47,6 +47,17 @@ public class HsBitVector extends uruobj
             values[i] = newvalues[i];
         }
     }
+    
+    private HsBitVector(){}
+    
+    public static HsBitVector createFromNothing()
+    {
+        HsBitVector result = new HsBitVector();
+        result.count = 0;
+        result.values = new int[0];
+        return result;
+    }
+    
     public void compile(Bytedeque data)
     {
         data.writeInt(count);

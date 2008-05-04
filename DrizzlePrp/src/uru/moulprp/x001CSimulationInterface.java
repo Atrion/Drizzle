@@ -18,11 +18,11 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
-import uru.m;
+import shared.m;
 import uru.b;
 //import java.util.Vector;
 
@@ -47,8 +47,17 @@ public class x001CSimulationInterface extends uruobj
         parent = new PlObjInterface(c);//,false);
         //count = c.readInt();
         //props = c.in.readInts(count);
-        props = new HsBitVector(c); //always empty in both pots and moul.
-        u2 = c.readInt(); //always zero in both pots and moul.
+        if(c.readversion==6||c.readversion==3)
+        {
+            props = new HsBitVector(c); //always empty in both pots and moul.
+            u2 = c.readInt(); //always zero in both pots and moul.
+        }
+        else if(c.readversion==4)
+        {
+            //these are always zero in moul and pots, so we are justified in doing this.
+            props = HsBitVector.createFromNothing();
+            u2 = 0;
+        }
         physical = new Uruobjectref(c);
     }
     public void compile(Bytedeque data)

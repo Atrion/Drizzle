@@ -20,8 +20,8 @@ package uru.moulprp;
 
 import uru.context;
 import uru.Bytedeque;
-import uru.readexception;
-import uru.m;
+import shared.readexception;
+import shared.m;
 
 public class PrpObject extends uruobj
 {

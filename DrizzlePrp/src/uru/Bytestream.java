@@ -20,8 +20,8 @@ package uru;
 
 //import gui.Main;
 import java.util.Vector;
-import uru.m;
-
+import shared.m;
+import shared.Bytes;
 /**
  *
  * @author user
@@ -47,6 +47,19 @@ public class Bytestream
         maxpos = length-1;
 
         pos = 0;
+    }
+    public Bytestream(){};
+    public static Bytestream createFromBytes(Bytes newData)
+    {
+        Bytestream result = new Bytestream();
+        
+        result.data = newData.getByteArray();
+        int length = result.data.length;
+        result.maxpos = length-1;
+        
+        result.pos = 0;
+        
+        return result;
     }
     public Bytestream Fork()
     {

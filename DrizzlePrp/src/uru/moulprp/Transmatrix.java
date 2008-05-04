@@ -18,10 +18,10 @@
 
 package uru.moulprp;
 
-import uru.context; import uru.readexception;
+import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.b;
-import uru.m;
+import shared.m;
 import uru.Bytedeque;
 
 //aka hsMatrix44
@@ -40,7 +40,7 @@ public class Transmatrix extends uruobj
                 xmatrix = c.in.readInts(16);
             }
         }
-        else if(c.readversion==3)
+        else if(c.readversion==3||c.readversion==4)
         {
             isnotIdentity = 1; //this byte doesn't exist in pots.
             xmatrix = c.in.readInts(16);

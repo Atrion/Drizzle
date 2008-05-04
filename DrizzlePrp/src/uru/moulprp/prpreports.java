@@ -20,6 +20,7 @@ package uru.moulprp;
 
 import uru.context;
 import uru.Bytestream;
+import shared.readexception;
 
 public class prpreports
 {
@@ -36,7 +37,7 @@ public class prpreports
     public static String MakeSoundReport(byte[] filecontents)
     {
         StringBuilder result = new StringBuilder();
-        context c = context.createDefault(new Bytestream(filecontents));
+        context c = context.createFromBytestream(new Bytestream(filecontents));
         prpfile prp = prpprocess.ProcessAllObjects(c);
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSoundBuffer);
         for(int i=0;i<objs.length;i++)
@@ -51,7 +52,7 @@ public class prpreports
     public static String MakePythonReport(byte[] filecontents)
     {
         StringBuilder result = new StringBuilder();
-        context c = context.createDefault(new Bytestream(filecontents));
+        context c = context.createFromBytestream(new Bytestream(filecontents));
         prpfile prp = prpprocess.ProcessAllObjects(c);
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
         for(int i=0;i<objs.length;i++)

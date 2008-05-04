@@ -18,11 +18,12 @@
 
 package uru;
 
+import shared.mystobj;
 import java.lang.reflect.InvocationTargetException;
 import uru.Bytestream;
 import uru.Bytedeque;
 import java.util.Vector;
-import uru.readexception;
+import shared.readexception;
 
 import uru.moulprp.Uruobjectdesc;
 
@@ -45,10 +46,21 @@ public class context
     public int curRootObjectOffset;
     public int curRootObjectSize;
     public int curRootObjectEnd;
+    public Integer sequencePrefix;
 
-    public static context createDefault(Bytestream in)
+    public static context createFromBytestream(Bytestream in)
     {
-        return new context(-1,3,false,in,null,false,null);
+        //return new context(-1,3,false,in,null,false,null);
+        context result = new context();
+        result.readversion = -1;
+        result.writeversion = 3;
+        result.compile = false;
+        result.in = in;
+        result.out = null;
+        result.outputVertices = false;
+        result.vertices = null;
+        result.sequencePrefix = null;
+        return result;
     }
     
     public static context createDefault(Bytedeque out)
@@ -60,7 +72,7 @@ public class context
     {
         return new context(readversion2,writeversion2,compile2,in2,out2);
     }*/
-    
+    private context(){}
     public context(int readversion2, int writeversion2, boolean compile2, Bytestream in2, Bytedeque out2, boolean outputVertices2, Vector<Float> vertices2)
     {
         this.readversion = readversion2;
@@ -84,12 +96,22 @@ public class context
     
     public context Fork()
     {
-        context result = new context(readversion,writeversion,compile,in,out,outputVertices,vertices);
-        result.curFile = this.curFile;
-        result.curRootObject = this.curRootObject;
-        result.curRootObjectEnd = this.curRootObjectEnd;
-        result.curRootObjectOffset = this.curRootObjectOffset;
-        result.curRootObjectSize = this.curRootObjectSize;
+        context result = new context();
+        result.readversion = readversion;
+        result.writeversion = writeversion;
+        result.compile = compile;
+        result.in = in==null?in:in.Fork();
+        result.out = out;
+        result.outputVertices = outputVertices;
+        result.vertices = vertices;
+    
+        result.curFile = curFile;
+        result.curRootObject = curRootObject;
+        result.curRootObjectEnd = curRootObjectEnd;
+        result.curRootObjectOffset = curRootObjectOffset;
+        result.curRootObjectSize = curRootObjectSize;
+        result.sequencePrefix = sequencePrefix;
+        
         return result;
     }
     
