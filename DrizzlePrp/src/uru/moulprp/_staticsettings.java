@@ -43,7 +43,7 @@ public class _staticsettings
     //set this to a value other than 0x00 to force the compiler to use this sequence prefix in Pageid.
     //todo: replace this with a member in an outputcontext.
     //0x63 is the one I'm using for Payiferen.
-    public static byte sequencePrefix = 0x00;
+    //public static byte sequencePrefix = 0x00;
     
     //set breakpoint to -1 to disable it.
     public static int breakpoint = -1;

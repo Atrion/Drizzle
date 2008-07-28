@@ -698,8 +698,8 @@ public class prputils
                 
                 //blacklist
                 if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
-                if(pageid.rawdata==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
-                if(pageid.rawdata==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+                if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
                              
                             
                              
@@ -1361,7 +1361,7 @@ public class prputils
             }*/
             if(curdesc.objectname.toString().equals(desc.objectname.toString())
                     &&(curdesc.objecttype==desc.objecttype)
-                    &&(curdesc.pageid.rawdata==desc.pageid.rawdata))
+                    &&(curdesc.pageid.getRawData()==desc.pageid.getRawData()))
             {
                 return curobj;
             }

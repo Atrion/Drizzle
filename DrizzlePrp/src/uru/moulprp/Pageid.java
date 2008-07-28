@@ -32,52 +32,65 @@ import shared.Bytes;
 //this is a class I made myself, to encapsulate changing page ids.
 public class Pageid extends uruobj
 {
-    int rawdata;
+    int prefix;
+    int suffix;
+    context ctx;
     
     public Pageid(context c)
     {
-        if(c.readversion==6)
+        int rawdata;
+        if(c.readversion==6) // moul
         {
             //first 16 bits is sequence prefix, next is pageid?
             rawdata = c.in.readInt();
         }
-        else if(c.readversion==3)
+        else if(c.readversion==3) // TPOTS 
         {
             int fixme = c.in.readInt();
             fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
             rawdata = fixme;
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4) // Crowthwistle
         {
             int fixme = Bytes.Int16ToInt32(c.readShort());
             fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
             rawdata = fixme;
+            
         }
-        
-        if(c.sequencePrefix!=null)
-        {
-            //force sequence prefix.
-            m.msg("Using forced sequence prefix.");
-            rawdata = (rawdata & 0x0000FFFF) | (c.sequencePrefix << 16);
-        }
+        else rawdata = 0;
+        prefix = rawdata >> 16;
+        suffix = rawdata << 16 >> 16;
+         
+        ctx = c;
+    }
+    public int getRawData()
+    {
+        return prefix << 16 | suffix;
     }
     public void compile(Bytedeque deque)
     {
-        int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
-        //todo: comment out the next line, it will break things.
-        /*byte sp = _staticsettings.sequencePrefix;
-        if(sp!=0x00)
+        if(ctx.sequencePrefix!=null)
         {
-            m.msg("Using forced sequence prefix.");
-            int FAKErawdata = b.ByteToInt32(sp) << 16;
-            newdata = (rawdata & 0x000000FF) | ((FAKErawdata & 0x00FF0000) >>> 8);
-        }*/
+            prefix = ctx.sequencePrefix;
+            m.msg("Using forced sequence prefix 0x"+Integer.toHexString(prefix));
+            // I have no clue why, but this seems to be necessary
+            // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
+            // found for both Cyan and fan-created ages, it is what both PRPTool and PlasmaExplorer show
+            // so I'll just believe it
+            if (suffix <= 0x20) {
+                ++prefix;
+            }
+        }
+        int rawdata = getRawData();
+        // convert it to TPOTS format
+        m.msg("Writing "+toString());
+        int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
         deque.writeInt(newdata);
     }
     
     public String toString()
     {
-        return "Pageid=0x"+Integer.toHexString(rawdata);
+        return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
     }
 
 }
