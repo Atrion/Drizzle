@@ -53,7 +53,7 @@ public class x00D0ParticleLocalWind extends uruobj
         u1 = new Flt(c);
         u2 = new Flt(c);
         u3 = new Flt(c);
-        u4 = c.readByte(); e.ensure(u4,1,0);
+        u4 = c.readByte(); e.ensureflags(u4,1,0);
         u5 = new Flt(c);
         u6 = new Flt(c);
         u7 = new Flt(c);
@@ -62,7 +62,7 @@ public class x00D0ParticleLocalWind extends uruobj
         u10 = new Flt(c);
         u11 = new Flt(c); //20.0?
         u12 = new Flt(c); //20.0?
-        u13 = c.readInt(); e.ensure(u13==0);
+        u13 = c.readInt(); e.ensure(u13==0||u13==0x40a00000); //the 0x40a00000 is a hack.  I can't remember why it should be zero, or if that is just an observation.
         u14 = new Flt(c); //15.0?
     }
     public void compile(Bytedeque data)

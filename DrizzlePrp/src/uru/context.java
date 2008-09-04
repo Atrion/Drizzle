@@ -26,6 +26,7 @@ import java.util.Vector;
 import shared.readexception;
 
 import uru.moulprp.Uruobjectdesc;
+import uru.moulprp.Typeid;
 
 /**
  *
@@ -47,6 +48,8 @@ public class context
     public int curRootObjectSize;
     public int curRootObjectEnd;
     public Integer sequencePrefix;
+
+    //public Typeid typesToRead;
 
     public static context createFromBytestream(Bytestream in)
     {

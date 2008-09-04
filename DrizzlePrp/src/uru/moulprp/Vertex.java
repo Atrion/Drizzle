@@ -49,6 +49,10 @@ public class Vertex extends uruobj
         y = y2;
         z = z2;
     }
+    public static Vertex zero()
+    {
+        return new Vertex(new Flt(0), new Flt(0), new Flt(0));
+    }
     public void compile(Bytedeque data)
     {
         x.compile(data);

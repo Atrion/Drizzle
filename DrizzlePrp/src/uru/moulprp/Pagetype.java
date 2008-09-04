@@ -37,7 +37,7 @@ public class Pagetype extends uruobj
         {
             pagetype = Bytes.ByteToInt16(c.readByte());
         }
-        e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin. 16 was used for garden_district_itinerantbugcloud. 20 was used in a GlobalAnimation.
+        e.ensure(pagetype==0||pagetype==4||pagetype==8||pagetype==16||pagetype==20); //should this be a byte? //0=page, 4=global, 8=texture/builtin. 16 was used for garden_district_itinerantbugcloud. 20 was used in a GlobalAnimation.
     }
     
     public void compile(Bytedeque c)

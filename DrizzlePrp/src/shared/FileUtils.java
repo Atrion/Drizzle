@@ -119,4 +119,9 @@ public class FileUtils {
             m.msg("Error appending file:"+filename);
         }
     }
+    static public void CreateFolder(String filename)
+    {
+        File f = new File(filename);
+        f.mkdirs();
+    }
 }

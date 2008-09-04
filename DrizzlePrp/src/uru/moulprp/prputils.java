@@ -113,10 +113,10 @@ public class prputils
         return report.toString();
     }
     
-    public static prpfile ProcessAllMoul(byte[] data)
+    public static prpfile ProcessAllMoul(byte[] data, Typeid[] typesToRead)
     {
         context c = context.createFromBytestream(new Bytestream(data));
-        return ProcessAllMoul(c, false);
+        return ProcessAllMoul(c, false, typesToRead);
     }
     /*public static prpfile ProcessAll(context c)
     {
@@ -131,7 +131,7 @@ public class prputils
         m.err("processall: Unknown readversion.");
         return null;
     }*/
-    public static prpfile ProcessAllMoul(context c, boolean reportProgress)
+    public static prpfile ProcessAllMoul(context c, boolean reportProgress, Typeid[] typesToRead)
     {
         Bytestream data = c.in;
 
@@ -174,6 +174,14 @@ public class prputils
             int numObjects = objectindex.types[i].objectcount;
             
             //do per-type work.
+            boolean parseThisType = false;
+            for(int k=0;k<typesToRead.length;k++)
+            {
+                if (typesToRead[k]==type)
+                {
+                    parseThisType = true;
+                }
+            }
             if(reportProgress) m.msg("type="+type.toString());
             for(int j=0;j<numObjects;j++)
             {
@@ -195,7 +203,9 @@ public class prputils
                 //to disable an object type, simply comment out its "object=" line.
                 _staticsettings.currentRootObj = desc; //used for reporting.
                 boolean handled = true;
-                switch(desc.objecttype)
+                if(parseThisType)
+                {
+                /*switch(desc.objecttype)
                 {
                     case plSceneNode:
                     case plSceneObject:
@@ -281,44 +291,47 @@ public class prputils
                     case plRidingAnimatedPhysicalDetector:
                     case plGrassShaderMod:
                     case plDynamicCamMap:
-                    case plSoftVolumeInvert:
-                        try
+                    case plSoftVolumeInvert:*/
+                    try
+                    {
+                        object = new PrpRootObject(stream);
+                    }catch(readexception e){}
+                    //break;
+                }
+                else
+                {
+                    //TODO: restore this line, it's just kind of annoying.
+                    m.msg("unhandled object type:"+desc.objecttype.toString());
+                    handled = false;
+
+                    //scan for string references in unparsed object:
+                    if(_staticsettings.tryToFindReferencesInUnknownObjects)
+                    {
+                        Bytestream bs = new Bytestream(data,offset);
+                        byte[] bytes = bs.readBytes(size);
+                        //Urustring.attemptRecoveryScan(bytes);
+                        for(int curbyte=0;curbyte<bytes.length;curbyte++)
                         {
-                            object = new PrpRootObject(stream);
-                        }catch(readexception e){}
-                        break;
-                    default:
-                        //TODO: restore this line, it's just kind of annoying.
-                        m.msg("unhandled object type:"+desc.objecttype.toString());
-                        handled = false;
-                        
-                        //scan for string references in unparsed object:
-                        if(_staticsettings.tryToFindReferencesInUnknownObjects)
-                        {
-                            Bytestream bs = new Bytestream(data,offset);
-                            byte[] bytes = bs.readBytes(size);
-                            //Urustring.attemptRecoveryScan(bytes);
-                            for(int curbyte=0;curbyte<bytes.length;curbyte++)
+                            if(b.ByteToInt32(bytes[curbyte])==0xF0)
                             {
-                                if(b.ByteToInt32(bytes[curbyte])==0xF0)
+                                if (curbyte==0) continue;
+                                int l = b.ByteToInt32(bytes[curbyte-1]);
+                                if (curbyte+l>=bytes.length) continue;
+                                byte[] str = new byte[l];
+                                for(int i2=0;i2<l;i2++)
                                 {
-                                    if (curbyte==0) continue;
-                                    int l = b.ByteToInt32(bytes[curbyte-1]);
-                                    if (curbyte+l>=bytes.length) continue;
-                                    byte[] str = new byte[l];
-                                    for(int i2=0;i2<l;i2++)
-                                    {
-                                        str[i2] = b.not(bytes[curbyte+i2+1]);
-                                    }
-                                    if(e.isGoodString(str))
-                                    {
-                                        _staticsettings.reportFoundUnknownReference(str);
-                                    }
+                                    str[i2] = b.not(bytes[curbyte+i2+1]);
+                                }
+                                if(e.isGoodString(str))
+                                {
+                                    _staticsettings.reportFoundUnknownReference(str);
                                 }
                             }
                         }
-                        break;
+                    }
+                    //break;
                 }
+                
                 if(object==null)
                 {
                     handled = false;
@@ -389,7 +402,7 @@ public class prputils
         
         _staticsettings.reportReferences = true;
         _staticsettings.tryToFindReferencesInUnknownObjects = true;
-        ProcessAllMoul(c,false);
+        ProcessAllMoul(c,false, automation.mystAutomation.moulReadable);
         //String report = "Cross-Reference report:\n\n" + _staticsettings.referenceReport.toString() + "\n\nScanned Reference Report:\n\n" + _staticsettings.scannedReferenceReport.toString();
         String report = "howfound;fromname;fromtype;fromnumber;toname;totype;tonumber;topageid\n" + _staticsettings.referenceReport.toString() + _staticsettings.scannedReferenceReport.toString();
         FileUtils.WriteFile(_staticsettings.outputdir+"crosslinkreport.csv", report.getBytes());
@@ -411,7 +424,12 @@ public class prputils
     
     public static class Compiler
     {
-        public static void RecompilePrp(byte[] data)
+        public interface Decider
+        {
+            boolean isObjectToBeIncluded(Uruobjectdesc desc);
+        }
+                
+        public static void RecompilePrp(byte[] data, Decider decider)
         {
             context c = context.createFromBytestream(new Bytestream(data));
             //c.outputVertices = true; //works but not used.
@@ -419,14 +437,14 @@ public class prputils
             
             
             //prpfile prp = ProcessAllMoul(c,false);
-            prpfile prp = prpfile.createFromContext(c);
+            prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.moulReadable);
             
-            Bytes fullbyte = RecompilePrp(prp);
+            Bytes fullbyte = RecompilePrp(prp, decider);
             String filename = prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
             FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
         }
         
-        public static Bytes RecompilePrp(prpfile prp)
+        public static Bytes RecompilePrp(prpfile prp, Decider decider)
         {
             //fix payiferen pageid conflict problem.
             /*if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
@@ -509,7 +527,8 @@ public class prputils
                 //Pageid pageid = curobj.getHeader().desc.pageid;
 
                 //handle normal objects
-                if(isNormalObjectToBeIncluded(curobj.header.desc) || type==type.plSceneNode)
+                //if(isNormalObjectToBeIncluded(curobj.header.desc) || type==type.plSceneNode)
+                if(decider.isObjectToBeIncluded(curobj.header.desc) || type==type.plSceneNode)
                 {
                     uncompiledObjects.add(curobj);
                     
@@ -520,7 +539,7 @@ public class prputils
                         e.ensure(haveEncounteredSceneNode==false);
                         haveEncounteredSceneNode = true;
                         curobj.header.compile(deque);
-                        ((x0000Scenenode)curobj.prpobject.object).compileSpecial(deque); //uses the isNormalObjectToBeIncluded function.
+                        ((x0000Scenenode)curobj.prpobject.object).compileSpecial(deque, decider); //uses the isNormalObjectToBeIncluded function.
                     }
                     else
                     {
@@ -683,671 +702,8 @@ public class prputils
             }
         }
         
-        public static boolean isNormalObjectToBeIncluded(Uruobjectdesc desc)
-        {
-                Typeid type = desc.objecttype;
-                int number = desc.objectnumber;
-                String name = desc.objectname.toString();
-                Pageid pageid = desc.pageid;
-
-                String[] namestartswith = {};
-                String[] nameequals = {};
-                Typeid[] typeequals = {};
-                
-                boolean useObject = false;
-                
-                //blacklist
-                if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
-                if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
-                if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
-                             
-                            
-                             
-                
-                int useCase = 11;
-                switch(useCase)
-                {
-                    case 0: //ederdelin main
-                        //blacklist
-                        if(name.equals("LampBall40")) return false; //ball in alcove lamp doesn't work. Uses LayerAnimation
-                        
-                        //whitelist
-                        
-                        //specific sceneobjects to include:
-                        if(type==type.plSceneObject) return true; //test
-                        //if(number==406 && type==type.plSceneObject) return true; //LinkInPointDefault.
-                        if(name.equals("LinkInPointDefault")) return true;
-                        //if(name.startsWith("LampRTOmniLight")) return true; //get all the omni lamps
-                        //if(name.startsWith("RTFillLight")) return true; //get all the directional lamps
-                        //if(name.startsWith("dlnMArbleLanternGlare")) return true;
-                        //if(name.startsWith("dlnLanternGlare")) return true;
-                        //if(name.startsWith("ChainPlane")) return true; //this crashes the game. It's two SceneObjects that enables two viewfacemodifiers. Those viewfacemodifier have different flags than the one's that work.  Is this a new option not available in pots? Or does it use a material that isn't loading right(i.e. one of the animated ones)?
-                        namestartswith = new String[]{
-                            "SnowParty","Garden02Snow", //required for snow.
-                            "a",
-                            "bench05","bench06","big","blend","bluedoor",
-                            "bluespiraldoorglow",
-                            ////"bluespiralglow", //side-effect of huge lampshade in alcove. Caused by my faked materials for plLayerAnimation?
-                            "bluespiralrig",
-                            "bluespiraltapestry",
-                            "blulamp",
-                            "bscamera", //not working.
-                            "bsdoortimegage",
-                            "bugpath01",
-                            "cam-sitbench","canyonpillar","chainplane",
-                            "clothglowgroup","clusterflowers",
-                            "contemplationsteps",
-                            "dln",
-                            ////"dust", //crashes the game; contains plAGMasterMod
-                            "fern0","fern1","fern2","fern3","fern4","fern5",
-                            "followcamera", "followclosecamera",
-                            ////"fountain", //has side-effect of huge lampshade.
-                            "garden02snow",
-                            ////"Garden2background", //has side-effect
-                            ////"garden2top", //has side-effect
-                            "gazebo1camera","gazebo2camera",
-                            "lamp","lapm",
-                            ////"leafgenerator", //crashes game, probably has LayerAnimation for leaves (no normal animation, though) The leaves don't seem visible in screenshots anyway.
-                            ////"leafkiller" //not needed, since we have no leaves anyway. It doesn't appear to have anything to do with the snow either.
-                            ////"lightcone", //layeranimation
-                            "MaintainersMarkerCracks",
-                            ////"MaintainersMarker", //layeranimation
-                            "NbhdBkPodiumPost",
-                            "Object",
-                            "path",
-                            "patiobench",
-                            "pythonbox",
-                            "restroom",
-                            ////"rock" //stuff related to movable and falling rocks.  Is this even used?
-                            "rope",
-                            "rt",
-                            "sfxbs",
-                            ////"sfxgrass" //run on grass sound, need physics
-                            "sfxsnd-amb","sfxsnd-birds","sfxsnd-winteramb", //can't hear most of these(i did hear a random bird sound); it may just be a setting and perhaps you can't hear them in moul either. But I think responderModifier needs to be implemented.
-                            ////"sfxsndamb" //uses linefollowmod
-                            "sfxsndfountain", //works great.
-                            ////"sfxsndloon", //use animation
-                            "sfxsndwinter",
-                            ////"sfxstone" //run on stone sound, need physics.
-                            "signpost",
-                            "smallrock",
-                            ////"soundcontrol", //needs respondermodifier
-                            "stairway02",
-                            "statuebase","statueblue","statuechrome","statueplinth",
-                            "treasure",
-                            "tree",
-                            "yeeshapage15decal","yeeshapageleafdecal",
-                            "yeeshapage15","yeeshapageleaf", //should allow use to hide/show the two pages.
-                        };
-                        nameequals = new String[]{
-                            "BigTree06",
-                            "BigTree06Decal",
-                            //"fountainpool", //layeranimation
-                            //"fountainpool01", //layeranimation
-                            "fountainwalkwaydecal",
-                            //"fountainwater", //layeranimation
-                            "Garden2",
-                        };
-                        
-                        //if(number==1 && type==type.plSpawnModifier) return true;
-                        if(type==type.plSpawnModifier) return true;
-                        //if(number==175 && type==type.plCoordinateInterface) return true;
-                        if(type==type.plCoordinateInterface) return true;
-                        if(type==type.plDrawInterface) return true;
-                        //if(number==1 && type==type.plDrawableSpans) return true;
-                        if(type==type.plDrawableSpans) return true;
-                        if(type==type.hsGMaterial) return true;
-                        if(type==type.plLayer) return true;
-                        if(type==type.plOmniLightInfo) return true;
-                        if(type==type.plPointShadowMaster) return true;
-                        if(type==type.plCubicEnvironMap) return true;
-                        if(type==type.plMipMap) return true;
-                        if(type==type.plPythonFileMod) return true;
-                        if(type==type.plDirectionalLightInfo) return true;
-                        if(type==type.plSimulationInterface) return true;
-                        if(type==type.plViewFaceModifier) return true;
-                        if(type==type.plAudioInterface) return true;
-                        if(type==type.plStereizer) return true;
-                        if(type==type.plSoundBuffer) return true;
-                        if(type==type.plRandomSoundMod) return true;
-                        if(type==type.plWin32StreamingSound) return true;
-                        if(type==type.plWin32StaticSound) return true;
-                        if(type==type.plWinAudio) return true;
-                        if(type==type.plParticleSystem) return true;
-                        if(type==type.plParticleCollisionEffectDie) return true;
-                        if(type==type.plParticleLocalWind) return true;
-                        if(type==type.plBoundInterface) return true;
-                        typeequals = new Typeid[]{
-                            type.plExcludeRegionModifier
-                            ,type.plCameraBrain1
-                            ,type.plCameraBrain1_Avatar
-                            ,type.plCameraBrain1_Circle
-                            ,type.plCameraBrain1_Fixed
-                            ,type.plCameraModifier1,
-                            type.plAGModifier
-                        };
-                        
-                        //unstable
-                        //if(name.equals("Archway")) return true;
-                        //if(name.equals("ArchwayLight")) return true;
-                        //if(type==type.plLayerAnimation) return true;
-                        break;
-                    case 1: //include all: spyroom builtin, spyroom textures, ederdelin builtin, ederdelin textures
-                        return true;
-                        //break;
-                    case 2: //spyroom main
-                        if(name.equals("LinkInPointSpyroom")) return true;
-                        if(name.equals("StartPoint01")) return true;
-                        break;
-                    case 3: //basic link in
-                        if(name.toLowerCase().startsWith("linkinpoint")) return true;
-                        if(name.toLowerCase().startsWith("startpoint")) return true;
-                        break;
-                    case 4: //basic drawables
-                        typeequals = new Typeid[]{
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                            //"atria",
-                        };
-                        break;
-                    case 5: //guild pub
-                        //if(name.toLowerCase().startsWith("imager")) return false;
-                        //if(name.toLowerCase().startsWith("billboard")) return false;
-                        //if(name.toLowerCase().startsWith("cpythgpub")) return false;
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                            //"a",
-                            //"b","c","d",
-                            //"e","f","g",//"h","i","j",
-                            //"hanging","j",
-                            //"j","half","hanginglantern",
-                            "hanginglightflare",
-                            //"agesdlhook",
-                            //"atria",
-                            //"ayhoheekrm01",
-                            //"ayhoheekrm02",
-                            //"balcony",
-                            //"ballister",
-                            //"boothwood",
-                            //"cam",
-                            //"canvashang",
-                            //"cavewalls",
-                            //"circlepath",
-                            //"convchair",
-                            //"curtain",
-                            //"doorxrgn",
-                        };
-                        break;
-                    case 6: //livebahrocaves
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                            "rt",
-                            "starfield",
-                        };
-                        break;
-                    case 7: //tetsonot
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                            
-                            type.plSpotLightInfo,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                        };
-                        break;
-                    case 8: //minkata
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                            
-                            type.plSpotLightInfo,
-
-                            type.plShadowCaster,
-                            type.plShadowCaster,
-                            type.plDirectShadowMaster,
-                            type.plRelevanceRegion,
-                            type.plSoftVolumeSimple,
-                            //type.plResponderModifier,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                        };
-                        break;
-                    case 9: //jalak, payiferen
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                            
-                            type.plSpotLightInfo,
-
-                            type.plShadowCaster,
-                            type.plShadowCaster,
-                            type.plDirectShadowMaster,
-                            type.plRelevanceRegion,
-                            type.plSoftVolumeSimple,
-                            //type.plResponderModifier,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                        };
-                        break;
-                    case 10: //negilahn, edertsogal, new ederdelin, new minkata
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                            
-                            type.plSpotLightInfo,
-
-                            type.plShadowCaster,
-                            type.plShadowCaster,
-                            type.plDirectShadowMaster,
-                            type.plRelevanceRegion,
-                            type.plSoftVolumeSimple,
-                            //type.plResponderModifier,
-                            
-                            type.plParticleFlockEffect,
-                            type.plFadeOpacityMod,
-                            type.plClusterGroup,
-                        };
-                        namestartswith = new String[]{
-                            "linkinpoint",
-                            "startpoint",
-                        };
-                        break;
-                    case 11: //new minkata
-                        typeequals = new Typeid[]{
-                            type.plSceneObject,
-                            
-                            type.plCoordinateInterface,
-                            type.plSpawnModifier,
-                            type.plDrawInterface,
-                            type.plDrawableSpans,
-                            type.hsGMaterial,
-                            type.plLayer,
-                            type.plMipMap,
-                            type.plCubicEnvironMap,
-                            
-                            type.plOmniLightInfo,
-                            type.plPointShadowMaster,
-                            type.plPythonFileMod,
-                            type.plDirectionalLightInfo,
-                            type.plSimulationInterface,
-                            type.plViewFaceModifier,
-                            type.plAudioInterface,
-                            type.plStereizer,
-                            type.plSoundBuffer,
-                            type.plRandomSoundMod,
-                            type.plWin32StreamingSound,
-                            type.plWin32StaticSound,
-                            type.plWinAudio,
-                            type.plParticleSystem,
-                            type.plParticleCollisionEffectDie,
-                            type.plParticleLocalWind,
-                            type.plBoundInterface,
-                            type.plExcludeRegionModifier,
-                            type.plCameraBrain1,
-                            type.plCameraBrain1_Avatar,
-                            type.plCameraBrain1_Circle,
-                            type.plCameraBrain1_Fixed,
-                            type.plCameraModifier1,
-                            type.plAGModifier,
-                            
-                            type.plOccluder,
-                            type.plDynamicTextMap,
-                            
-                            type.plParticleCollisionEffectBounce,
-                            
-                            type.plSpotLightInfo,
-
-                            type.plShadowCaster,
-                            type.plDirectShadowMaster,
-                            type.plRelevanceRegion,
-                            type.plSoftVolumeSimple,
-                            
-                            type.plParticleFlockEffect,
-                            type.plFadeOpacityMod,
-                            type.plClusterGroup,
-                            type.plVisRegion,
-                            type.plSoftVolumeUnion,
-                            type.plObjectInVolumeDetector,
-                            type.plObjectInBoxConditionalObject,
-                            type.plInterfaceInfoModifier,
-                            type.plVolumeSensorConditionalObject,
-                            type.plLogicModifier,
-                            type.plActivatorConditionalObject,
-                            type.plFacingConditionalObject,
-                            type.plOneShotMod,
-                            type.plAvLadderMod,
-                            type.plPickingDetector,
-                            type.plCameraRegionDetector,
-                            
-                            type.plHKPhysical,
-                            
-                            type.plSoftVolumeIntersect,
-                            type.plEAXListenerMod,
-                            type.plPhysicalSndGroup,
-                            type.plSeekPointMod,
-                            type.plRailCameraMod,
-                            type.plLayerAnimation,
-                            type.plATCAnim,
-                            type.plAGMasterMod,
-                            type.plPanicLinkRegion,
-                            type.plLineFollowMod,
-                            type.plMsgForwarder,
-                            type.plAnimEventModifier,
-                            type.plMultiStageBehMod,
-
-                            type.plDynaFootMgr,
-                            type.plResponderModifier, //crashes POD district of LiveBahroCaves, and minkCameras district of Minkata.
-                            type.plSittingModifier,
-                            type.plImageLibMod,
-                            type.plLimitedDirLightInfo,
-                            type.plAgeGlobalAnim,
-                            type.plDynaPuddleMgr,
-                            type.plWaveSet7,
-                            type.plDynamicEnvMap,
-                            
-                            //version2
-                            type.plSoftVolumeInvert,
-                        };
-                        namestartswith = new String[]{
-                            /*"linkinpoint",
-                            "startpoint",
-                            "cratercentral",
-                            "tower",
-                            "outer",
-                            "centertotem",
-                            "ground", //ground
-                            "criticalcave", //crater around caves
-                            "soccer",
-                            
-                            "crespring",
-                            "csfxresp",
-                            "respdisablejc",
-                            "respdrnowedge",
-                            "respjconeshot",
-                            "resplinkout",
-                            "RespNglnWedge",
-                            "RespPayiWedge",
-                            "RespSolutionSymbols",
-                            "RespTetsWedge",
-                            "RespWedges", //pod problem.
-                            
-                            "cRespExcludeRgn", //minkata problem.
-                            "cRespSfxLinkIn",*/
-                        };
-                        break;
-
-                }
-                
-                for(int i=0;i<nameequals.length;i++)
-                {
-                    if(name.toLowerCase().equals(nameequals[i].toLowerCase())) return true;
-                }
-                for(int i=0;i<namestartswith.length;i++)
-                {
-                    if(name.toLowerCase().startsWith(namestartswith[i].toLowerCase())) return true;
-                }
-                for(int i=0;i<typeequals.length;i++)
-                {
-                    if(type==typeequals[i]) return true;
-                }
-                
-                return useObject;
-        }
     }
-
+    
     public static PrpRootObject findObjectWithDesc(prpfile prp, Uruobjectdesc desc)
     {
         int numobjects = prp.objects.length;
@@ -1565,7 +921,7 @@ public class prputils
         StringBuilder report = new StringBuilder();
         
         context c = context.createFromBytestream(new Bytestream(data));
-        prpfile prp = ProcessAllMoul(c,false);
+        prpfile prp = ProcessAllMoul(c,false,automation.mystAutomation.moulReadable);
         for(int i=0;i<prp.objects.length;i++)
         {
             PrpRootObject curobj = prp.objects[i];

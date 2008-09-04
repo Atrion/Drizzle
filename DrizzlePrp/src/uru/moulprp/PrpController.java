@@ -863,7 +863,7 @@ public class PrpController extends uruobj
                             }
                     break;
                 case 7: //added for myst5.
-                    m.warn("conpile prpcontroller: case7 untested.");
+                    //m.warn("conpile prpcontroller: case7 untested.");
                     //plSimpleRotController
                         //flag
                         c.writeInt(1);

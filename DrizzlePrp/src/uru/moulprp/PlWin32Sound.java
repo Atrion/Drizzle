@@ -62,6 +62,9 @@ public class PlWin32Sound extends uruobj
         Uruobjectref dataBuffer; //plSoundBuffer
         plEAXSourceSettings EAXSettings;
         Uruobjectref softOcclusionRegion;
+        
+        //short xu1;
+        Urustring xu1;
 
         public PlSound(context c) throws readexception
         {
@@ -79,6 +82,15 @@ public class PlWin32Sound extends uruobj
             properties = c.readInt();
             type = c.readByte();
             priority = c.readByte();
+            if(c.readversion==4)
+            {
+                //xu1 = c.readShort();
+                xu1 = new Urustring(c);
+                if(xu1.unencryptedString.length>0)
+                {
+                    int dummy=0;
+                }
+            }
             fadeInParams = new plFadeParams(c);
             fadeOutParams = new plFadeParams(c);
             softRegion = new Uruobjectref(c);
@@ -133,7 +145,7 @@ public class PlWin32Sound extends uruobj
             volStart = new Flt(c);
             volEnd = new Flt(c);
             type = c.readByte();
-            curTime = new Flt(c);
+            curTime = new Flt(c); //can be -1.0
             stopWhenDone = c.readInt();
             fadeSoftVol = c.readInt();
         }
@@ -169,7 +181,10 @@ public class PlWin32Sound extends uruobj
         plEAXSourceSoftSettings softEnds;
         Flt occlusionSoftValue;
         
-        public plEAXSourceSettings(context c)
+        Flt xu1;
+        plEAXSourceSoftSettings xsoft;
+        
+        public plEAXSourceSettings(context c) throws readexception
         {
             enabled = c.readByte();
             if(enabled!=0)
@@ -183,9 +198,34 @@ public class PlWin32Sound extends uruobj
                 roomRolloffFactor = new Flt(c);
                 dopplerFactor = new Flt(c);
                 rolloffFactor = new Flt(c);
-                softStarts = new plEAXSourceSoftSettings(c);
-                softEnds = new plEAXSourceSoftSettings(c);
-                occlusionSoftValue = new Flt(c);
+                if(c.readversion==3||c.readversion==6)
+                {
+                    softStarts = new plEAXSourceSoftSettings(c);
+                    softEnds = new plEAXSourceSoftSettings(c);
+                    occlusionSoftValue = new Flt(c);
+                    m.msg("Sound: "+softStarts.toString()+" : "+softEnds.toString()+" : "+occlusionSoftValue.toString());
+                }
+                else if(c.readversion==4)
+                {
+                    xu1 = new Flt(c);
+                    xsoft = new plEAXSourceSoftSettings(c);
+                    m.msg("Sound: "+xu1.toString()+" : "+xsoft.toString());
+                    
+                    //set values for writing...
+                    //occlusionSoftValue = xu1;
+                    //softStarts = xsoft;
+                    //softEnds = new plEAXSourceSoftSettings();
+                    occlusionSoftValue = Flt.zero();
+                    softStarts = new plEAXSourceSoftSettings();
+                    softStarts.occlusion = 0;
+                    softStarts.occlusionDirectRatio = new Flt((float)1.0);
+                    softStarts.occlusionLFRatio = new Flt((float)0.25);
+                    softStarts.occlusionRoomRatio = new Flt((float)1.5);
+                    softEnds = softStarts;
+                    
+                    m.warn("Sound: Fudging some sound settings.");
+                    //throw new readexception("plEAXSourceSetting: can read, but throwing error to skip.");
+                }
             }
         }
         
@@ -225,12 +265,21 @@ public class PlWin32Sound extends uruobj
             occlusionDirectRatio = new Flt(c);
         }
         
+        private plEAXSourceSoftSettings()
+        {
+        }
+        
         public void compile(Bytedeque c)
         {
             c.writeShort(occlusion);
             occlusionLFRatio.compile(c);
             occlusionRoomRatio.compile(c);
             occlusionDirectRatio.compile(c);
+        }
+        
+        public String toString()
+        {
+            return "occ:"+Short.toString(occlusion)+"LF:"+occlusionLFRatio.toString()+"Room:"+occlusionRoomRatio.toString()+"Direct:"+occlusionDirectRatio.toString();
         }
     }
 }

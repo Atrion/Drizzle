@@ -40,6 +40,9 @@ public class PlHKPhysical extends uruobj
     //plPXPhysical
     PXPhysical physx;
     
+    //plODEPHysical
+    ODEPhysical ode;
+    
     public static potsflags convertMoulFlagsToPotsFlags(moulflags moul)
     {
         potsflags pots = new potsflags();
@@ -196,6 +199,11 @@ public class PlHKPhysical extends uruobj
             _version = 6;
             physx = new PXPhysical(c);
         }
+        else if(c.readversion==4)
+        {
+            _version = 4;
+            ode = new ODEPhysical(c);
+        }
         else if(c.readversion==3)
         {
             _version = 3;
@@ -208,6 +216,10 @@ public class PlHKPhysical extends uruobj
         if(_version==6)
         {
             physx.compileSpecial(c);
+        }
+        else if(_version==4)
+        {
+            ode.compileSpecial(c);
         }
         else if(_version==3)
         {

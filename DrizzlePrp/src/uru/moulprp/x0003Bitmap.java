@@ -45,8 +45,8 @@ public class x0003Bitmap extends uruobj
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         //parent = new x0002Keyedobject(data);
-        version = data.readByte(); e.ensure(version,2);
-        bpp = data.readByte(); e.ensure(bpp,32);
+        version = data.readByte(); e.ensureflags(version,2);
+        bpp = data.readByte(); e.ensureflags(bpp,32);
         cpb = data.readByte(); //unknown
         flags = data.readShort();
         type = data.readByte();
@@ -54,7 +54,7 @@ public class x0003Bitmap extends uruobj
         {
             xtexel_size = data.readByte(); //bytes per 4x4 texel.
         }
-        subtype = data.readByte(); e.ensure(subtype,0,1,5);
+        subtype = data.readByte(); e.ensureflags(subtype,0,1,5);
         u1 = data.readInt();
         u2 = data.readInt();
     }

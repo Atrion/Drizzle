@@ -59,7 +59,7 @@ public class e
         }
         Main.message("ensure: typeid element is not in set.");
     }*/
-    public static void ensure(int a, int ... options)
+    public static void ensureflags(int a, int ... options)
     {
         for(int i=0; i<options.length; i++)
         {

@@ -67,15 +67,16 @@ public class Gui extends javax.swing.JFrame {
         //pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
         //moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
         //out = "C:/Documents and Settings/user/Desktop/output/";
-        pots = "/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
-        moul = "/shared/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
-        out = "/shared/a/leftoff/output/";
-        //pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
-        //moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
-        //out = "D:/a/leftoff/output/";
+        //pots = "/shared/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
+        //moul = "/shared/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
+        //out = "/shared/a/leftoff/output/";
+        pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/";
+        moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/";
+        out = "D:/a/leftoff/output/";
         uru.moulprp._staticsettings.outputdir = out;
 
         this.jComboBox1.addItem("");
+        this.jComboBox1.addItem("C:/Documents and Settings/user/Desktop/output/dat/MarshScene_District_Exterior.prp");
         this.jComboBox1.addItem("GuildPub-Cartographers_District_Pub.prp");
         this.jComboBox1.addItem("GuildPub-Cartographers_District_Textures.prp");
         this.jComboBox1.addItem("GuildPub-Cartographers_District_BuiltIn.prp");
@@ -373,6 +374,7 @@ public class Gui extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jButton54 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Uruutils");
@@ -387,7 +389,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(10, 10, 90, 24);
+        jButton1.setBounds(10, 10, 90, 23);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -403,7 +405,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(0, 440, 100, 24);
+        jButton2.setBounds(0, 440, 100, 23);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -417,7 +419,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(110, 10, 610, 23);
+        jComboBox1.setBounds(110, 10, 610, 22);
 
         jButton20.setText("remove dupes.");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -426,11 +428,16 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton20);
-        jButton20.setBounds(0, 470, 100, 24);
+        jButton20.setBounds(0, 470, 100, 23);
 
-        jTextField6.setText("/shared/DontBackup/Crowthistle");
+        jTextField6.setText("C:\\Program Files\\Crowthistle");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
-        jTextField7.setText("/shared/a/leftoff/output/Crowthistle");
+        jTextField7.setText("C:\\Documents and Settings\\user\\Desktop\\output");
 
         jButton51.setText("select...");
         jButton51.addActionListener(new java.awt.event.ActionListener() {
@@ -464,7 +471,7 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jButton53)
-                .addContainerGap(765, Short.MAX_VALUE))
+                .addContainerGap(764, Short.MAX_VALUE))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,8 +479,8 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton51)
@@ -496,7 +503,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(60, 60, 60)
                 .addComponent(jButton53)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Automation", jPanel13);
@@ -711,7 +718,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jButton33)
                             .addComponent(jButton32)
                             .addComponent(jLabel3))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,7 +759,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton31)
                             .addComponent(jButton36))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton34)
                             .addComponent(jButton38)))
@@ -880,7 +887,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton12))
                 .addGap(40, 40, 40)
                 .addComponent(jButton47)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Encryption", jPanel3);
@@ -927,7 +934,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton23);
-        jButton23.setBounds(691, 280, 170, 24);
+        jButton23.setBounds(691, 280, 170, 23);
 
         jButton22.setText("clear all marks");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
@@ -936,7 +943,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton22);
-        jButton22.setBounds(741, 40, 120, 24);
+        jButton22.setBounds(741, 40, 120, 23);
 
         jButton29.setText("mark links");
         jButton29.addActionListener(new java.awt.event.ActionListener() {
@@ -945,7 +952,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton29);
-        jButton29.setBounds(751, 70, 110, 24);
+        jButton29.setBounds(751, 70, 110, 23);
 
         jButton24.setText("mark links from selected");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -954,7 +961,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton24);
-        jButton24.setBounds(715, 100, 150, 24);
+        jButton24.setBounds(715, 100, 150, 23);
 
         jButton25.setText("mark all that start with STRING");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
@@ -963,7 +970,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton25);
-        jButton25.setBounds(680, 160, 195, 24);
+        jButton25.setBounds(680, 160, 183, 23);
 
         jButton28.setText("load");
         jButton28.addActionListener(new java.awt.event.ActionListener() {
@@ -972,7 +979,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton28);
-        jButton28.setBounds(785, 10, 80, 24);
+        jButton28.setBounds(785, 10, 80, 23);
 
         jButton27.setText("mark links to selected");
         jButton27.addActionListener(new java.awt.event.ActionListener() {
@@ -981,7 +988,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton27);
-        jButton27.setBounds(689, 130, 170, 24);
+        jButton27.setBounds(689, 130, 170, 23);
 
         jButton26.setText("... end with STRING");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -990,7 +997,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton26);
-        jButton26.setBounds(700, 190, 160, 24);
+        jButton26.setBounds(700, 190, 160, 23);
 
         jButton30.setText("repaint");
         jButton30.addActionListener(new java.awt.event.ActionListener() {
@@ -999,7 +1006,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton30);
-        jButton30.setBounds(680, 10, 81, 24);
+        jButton30.setBounds(680, 10, 81, 23);
 
         jTabbedPane1.addTab("CrossRefTool", jPanel4);
 
@@ -1182,7 +1189,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(142, 142, 142)
                         .addComponent(jButton43)))
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addContainerGap(376, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1215,14 +1222,14 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jButton45)
-                .addContainerGap(725, Short.MAX_VALUE))
+                .addContainerGap(730, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jButton45)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("realMyst", jPanel10);
@@ -1241,14 +1248,14 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jButton50)
-                .addContainerGap(710, Short.MAX_VALUE))
+                .addContainerGap(715, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jButton50)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Riven", jPanel12);
@@ -1262,7 +1269,7 @@ public class Gui extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(31, 40, 70, 14);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(110, 40, 168, 18);
+        jTextField1.setBounds(110, 40, 168, 20);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -1320,6 +1327,15 @@ public class Gui extends javax.swing.JFrame {
         });
         getContentPane().add(jRadioButton4);
         jRadioButton4.setBounds(740, 50, 110, 10);
+
+        jButton54.setText("Alphabetise.");
+        jButton54.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton54ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton54);
+        jButton54.setBounds(1, 500, 100, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1538,7 +1554,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        prputils.ProcessAllMoul(filecontents);
+        prputils.ProcessAllMoul(filecontents, automation.mystAutomation.moulReadable);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1555,7 +1571,8 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        prputils.Compiler.RecompilePrp(filecontents);
+        
+        prputils.Compiler.RecompilePrp(filecontents, new automation.mystAutomation.moulDecider());
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -2035,6 +2052,28 @@ public class Gui extends javax.swing.JFrame {
         //do crowthistle conversion.
         automation.mystAutomation.convertCrowthistleToPots(jTextField6.getText(), jTextField7.getText());
     }//GEN-LAST:event_jButton53ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
+        //alphabetise...
+        String alltext = this.jTextArea1.getText();
+        String[] lines = alltext.split("\n");
+        java.util.List<String> list = java.util.Arrays.asList(lines);
+        java.util.Collections.sort(list);
+        
+        int linecount = list.size();
+        StringBuilder newtext = new StringBuilder();
+        for(int i=0;i<linecount;i++)
+        {
+            newtext.append(list.get(i));
+            newtext.append("\n");
+        }
+        this.jTextArea1.setText(newtext.toString());
+
+}//GEN-LAST:event_jButton54ActionPerformed
     private String getUserSelectedFolder()
     {
         if(fc==null) fc = new JFileChooser();
@@ -2116,6 +2155,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton52;
     private javax.swing.JButton jButton53;
+    private javax.swing.JButton jButton54;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

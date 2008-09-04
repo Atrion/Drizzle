@@ -26,10 +26,7 @@ import shared.m;
 import uru.b;
 //import java.util.Vector;
 
-/**
- *
- * @author user
- */
+//plSoundBuffer
 public class x0029SoundBuffer extends uruobj
 {
     //Objheader xheader;

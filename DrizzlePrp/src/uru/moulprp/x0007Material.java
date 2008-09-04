@@ -47,8 +47,8 @@ public class x0007Material extends uruobj
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
-        u1 = data.readInt(); e.ensure(u1,0);
-        flags = data.readInt(); e.ensure(flags,0x00,0x0400,0x1000,0x2000,0x2400);
+        u1 = data.readInt(); e.ensureflags(u1,0);
+        flags = data.readInt(); e.ensureflags(flags,0x00,0x0400,0x1000,0x2000,0x2400);
         layercount = data.readInt();
         lightmapcount = data.readInt();
         layerrefs = new Uruobjectref[layercount];

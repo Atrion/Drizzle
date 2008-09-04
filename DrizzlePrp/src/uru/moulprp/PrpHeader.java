@@ -75,7 +75,7 @@ public class PrpHeader extends uruobj
                 pagetype = new Pagetype(c);
                 agename = new Urustring(c); //the name of the age this prp file belongs to.
                 pagename = new Urustring(c); //the pagename of this prp file.
-                u1 = data.readShort(); e.ensure(u1,0x46);//sub-version?
+                u1 = data.readShort(); e.ensureflags(u1,0x46);//sub-version?
                 payloadlength = data.readInt(); //length of data after this header.
                 offsetToFirstObject = data.readInt(); //absolute offset to first object(should be immediately after this header.)
                 offsetToObjectIndex = data.readInt(); //absolute offset to object index.
@@ -117,10 +117,10 @@ public class PrpHeader extends uruobj
             agename = new Urustring(c);
             Urustring district = new Urustring(c);
             pagename = new Urustring(c);
-            short majorversion = data.readShort(); e.ensure(majorversion,63);
-            short minorversion = data.readShort(); e.ensure(minorversion,12);
-            int unknown3 = data.readInt(); e.ensure(unknown3,0);
-            int unknown4 = data.readInt(); e.ensure(unknown4,8);
+            short majorversion = data.readShort(); e.ensureflags(majorversion,63);
+            short minorversion = data.readShort(); e.ensureflags(minorversion,12);
+            int unknown3 = data.readInt(); e.ensureflags(unknown3,0);
+            int unknown4 = data.readInt(); e.ensureflags(unknown4,8);
             payloadlength = data.readInt();
             offsetToFirstObject = data.readInt();
             offsetToObjectIndex = data.readInt();

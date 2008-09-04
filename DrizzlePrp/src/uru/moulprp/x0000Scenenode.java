@@ -74,7 +74,7 @@ public class x0000Scenenode extends uruobj
     {
         m.msg("compile not implemented");
     }
-    public void compileSpecial(Bytedeque deque)
+    public void compileSpecial(Bytedeque deque, prputils.Compiler.Decider decider)
     {
         //prputils.Compiler.isNormalObjectToBeIncluded(desc);
         int newcount1 = 0;
@@ -86,7 +86,8 @@ public class x0000Scenenode extends uruobj
             Uruobjectref curref = objectrefs1[i];
             if(curref.hasRef!=0)
             {
-                if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
                 {
                     newcount1++;
                 }
@@ -98,7 +99,8 @@ public class x0000Scenenode extends uruobj
             Uruobjectref curref = objectrefs2[i];
             if(curref.hasRef!=0)
             {
-                if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
                 {
                     newcount2++;
                 }
@@ -112,7 +114,8 @@ public class x0000Scenenode extends uruobj
             Uruobjectref curref = objectrefs1[i];
             if(curref.hasRef!=0)
             {
-                if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
                 {
                     curref.compile(deque);
                 }
@@ -126,7 +129,8 @@ public class x0000Scenenode extends uruobj
             Uruobjectref curref = objectrefs2[i];
             if(curref.hasRef!=0)
             {
-                if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
                 {
                     curref.compile(deque);
                 }

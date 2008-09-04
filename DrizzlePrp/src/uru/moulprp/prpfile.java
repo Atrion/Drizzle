@@ -23,6 +23,8 @@ import java.lang.reflect.Field;
 import shared.m;
 import uru.context;
 import shared.Bytes;
+import uru.moulprp.Typeid;
+import uru.moulprp.prputils.Compiler.Decider;
 /**
  *
  * @author user
@@ -36,15 +38,15 @@ public class prpfile
     
     public prpfile(){}
     
-    public static prpfile createFromContext(context c)
+    public static prpfile createFromContext(context c, Typeid[] typesToRead)
     {
-        prpfile result = prputils.ProcessAllMoul(c, false);
+        prpfile result = prputils.ProcessAllMoul(c, false, typesToRead);
         return result;
     }
     
-    public Bytes saveAsBytes()
+    public Bytes saveAsBytes(Decider decider)
     {
-        Bytes result = prputils.Compiler.RecompilePrp(this);
+        Bytes result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
     

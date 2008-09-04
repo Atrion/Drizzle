@@ -39,7 +39,7 @@ public class PlGrassShaderMod extends uruobj
     
     public PlGrassShaderMod(context c) throws readexception
     {
-        e.ensure(c.readversion==6);
+        e.ensure(c.readversion==6||c.readversion==4);
         
         parent = new PlSynchedObject(c);
         ref = new Uruobjectref(c);

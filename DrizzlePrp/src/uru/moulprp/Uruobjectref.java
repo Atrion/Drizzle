@@ -59,6 +59,13 @@ public class Uruobjectref extends uruobj
         
     }
     
+    public static Uruobjectref none()
+    {
+        Uruobjectref result = new Uruobjectref();
+        result.hasRef = 0;
+        return result;
+    }
+    
     private Uruobjectref(){}
     
     public static Uruobjectref createFromUruobjectdesc(Uruobjectdesc desc)

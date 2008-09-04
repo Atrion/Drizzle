@@ -55,7 +55,7 @@ public enum Typeid implements compilable
     plSpaceTree,
     plDirectionalLightInfo,
     plOmniLightInfo,
-    plHKPhysical,
+    plHKPhysical, //plPXPhysical in Moul, plODEPhysical in Crowthistle,Myst5
     plLayerAnimation,
     
     //the rest from eder delin.
@@ -178,8 +178,13 @@ public enum Typeid implements compilable
     plDynamicCamMap,
     plRideAnimatedPhysMsg,
     
+    //crowthistle
     plRelativeMatrixChannelApplicator,
-    
+    plEAXReverbEffect,
+    plCameraBrainUru,
+    plCameraBrainUru_Fixed,
+    plCameraModifier,
+    plSpawnMod,
     
     plLeafController,
     nil,
@@ -204,28 +209,28 @@ public enum Typeid implements compilable
         tri( 0x005, 0x005, 0x005, plCubicEnvironMap ),
         tri( 0x006, 0x006, 0x006, plLayer ),
         tri( 0x007, 0x007, 0x007, hsGMaterial ),
-        tri( 0x008, 0x008, -2, plParticleSystem ),
-        tri( 0x00C, 0x00C, -2, plBoundInterface ),
-        tri( 0x011, 0x011, -2, plAudioInterface ),
-        tri( 0x014, 0x014, -2, plWinAudio ),
+        tri( 0x008, 0x008, 0x008, plParticleSystem ),
+        tri( 0x00C, 0x00C, 0x00C, plBoundInterface ),
+        tri( 0x011, 0x011, 0x011, plAudioInterface ),
+        tri( 0x014, 0x014, 0x014, plWinAudio ), //plWinAudible, really
         tri( 0x015, 0x015, 0x015, plCoordinateInterface ),
         tri( 0x016, 0x016, 0x016, plDrawInterface ),
         tri( 0x01C, 0x01C, 0x01C, plSimulationInterface ),
-        tri( 0x029, 0x029, -2, plSoundBuffer ),
+        tri( 0x029, 0x029, 0x029, plSoundBuffer ),
         tri( 0x02B, 0x02B, -2, plPickingDetector ),
         tri( 0x02D, 0x02D, -2, plLogicModifier ),
         tri( 0x032, 0x032, -2, plActivatorConditionalObject ),
         tri( 0x037, 0x037, -2, plObjectInBoxConditionalObject ),
         tri( 0x03D, 0x03D, 0x03C, plSpawnModifier ),
         tri( 0x03E, 0x03E, -2, plFacingConditionalObject ),
-        tri( 0x03F, 0x03F, -2, plHKPhysical ),
+        tri( 0x03F, 0x03F, 0x103, plHKPhysical ),
         tri( 0x040, 0x040, 0x03E, plViewFaceModifier ),
         tri( 0x043, 0x043, 0x040, plLayerAnimation ),
         tri( 0x04C, 0x04C, 0x049, plDrawableSpans ),
         tri( 0x055, 0x055, 0x050, plDirectionalLightInfo ),
         tri( 0x056, 0x056, 0x051, plOmniLightInfo ),
         tri( 0x057, 0x057, -2, plSpotLightInfo ),
-        tri( 0x067, 0x067, -2, plOccluder ),
+        tri( 0x067, 0x067, 0x05A, plOccluder ),
         tri( 0x06A, 0x06A, -2, plLimitedDirLightInfo ),
         tri( 0x06C, 0x06C, 0x05F, plAGModifier ),
         tri( 0x06D, 0x06D, 0x060, plAGMasterMod ),
@@ -233,23 +238,23 @@ public enum Typeid implements compilable
         tri( 0x071, 0x071, -2, plLineFollowMod ),
         tri( 0x076, 0x076, -2, plSeekPointMod ),
         tri( 0x077, 0x077, -2, plOneShotMod ),
-        tri( 0x079, 0x079, -2, plRandomSoundMod ),
+        tri( 0x079, 0x079, 0x06A, plRandomSoundMod ),
         tri( 0x07B, 0x07B, -2, plObjectInVolumeDetector ),
-        tri( 0x07C, 0x07C, -2, plResponderModifier ),
-        tri( 0x084, 0x084, -2, plWin32StreamingSound ),
-        tri( 0x088, 0x088, -2, plSoftVolumeSimple ),
-        tri( 0x08A, 0x08A, -2, plSoftVolumeUnion ),
+        tri( 0x07C, 0x07C, 0x06D, plResponderModifier ),
+        tri( 0x084, 0x084, 0x073, plWin32StreamingSound ),
+        tri( 0x088, 0x088, 0x076, plSoftVolumeSimple ),
+        tri( 0x08A, 0x08A, 0x078, plSoftVolumeUnion ),
         tri( 0x08B, 0x08B, -2, plSoftVolumeIntersect ),
-        tri( 0x08C, 0x08C, -2, plSoftVolumeInvert ),
-        tri( 0x096, 0x096, -2, plWin32StaticSound ),
+        tri( 0x08C, 0x08C, 0x07A, plSoftVolumeInvert ),
+        tri( 0x096, 0x096, 0x07E, plWin32StaticSound ),
         tri( 0x099, 0x099, -2, plCameraBrain1 ),
         tri( 0x09B, 0x09B, -2, plCameraModifier1 ),
         tri( 0x09E, 0x09E, -2, plCameraBrain1_Avatar ),
         tri( 0x09F, 0x09F, -2, plCameraBrain1_Fixed ),
-        tri( 0x0A2, 0x0A2, -2, plPythonFileMod ),
+        tri( 0x0A2, 0x0A2, 0x088, plPythonFileMod ),
         tri( 0x0A4, 0x0A4, -2, plExcludeRegionModifier ),
         tri( 0x0A6, 0x0A6, -2, plVolumeSensorConditionalObject ),
-        tri( 0x0A8, 0x0A8, -2, plMsgForwarder ),
+        tri( 0x0A8, 0x0A8, 0x08E, plMsgForwarder ),
         tri( 0x0AD, 0x0AD, -2, plDynamicTextMap ),
         tri( 0x0AE, 0x0AE, -2, plSittingModifier ),
         tri( 0x0B2, 0x0B2, -2, plAvLadderMod ),
@@ -257,10 +262,10 @@ public enum Typeid implements compilable
         tri( 0x0C1, 0x0C1, -2, plMultiStageBehMod ),
         tri( 0x0C2, 0x0C2, -2, plCameraBrain1_Circle ),
         tri( 0x0C4, 0x0C4, -2, plAnimEventModifier ),
-        tri( 0x0C9, 0x0C9, -2, plParticleCollisionEffectDie ),
+        tri( 0x0C9, 0x0C9, 0x0AA, plParticleCollisionEffectDie ),
         tri( 0x0CA, 0x0CA, -2, plParticleCollisionEffectBounce ),
         tri( 0x0CB, 0x0CB, -2, plInterfaceInfoModifier ),
-        tri( 0x0D0, 0x0D0, -2, plParticleLocalWind ),
+        tri( 0x0D0, 0x0D0, 0x0B0, plParticleLocalWind ),
         tri( 0x0D4, 0x0D4, 0x0B4, plShadowCaster ),
         tri( 0x0D5, 0x0D5, -2, plPointShadowMaster ),
         tri( 0x0D6, 0x0D6, -2, plDirectShadowMaster ),
@@ -271,9 +276,9 @@ public enum Typeid implements compilable
         tri( 0x0F2, 0x0F2, -2, plAgeGlobalAnim ),
         tri( 0x0FB, 0x0FB, -2, plWaveSet7 ),
         tri( 0x0FC, 0x0FC, -2, plPanicLinkRegion ),
-        tri( 0x0FF, 0x0FF, -2, plStereizer ),
-        tri( 0x106, 0x106, -2, plDynamicEnvMap ),
-        tri( 0x116, 0x116, -2, plVisRegion ),
+        tri( 0x0FF, 0x0FF, 0x0D8, plStereizer ),
+        tri( 0x106, 0x106, 0x0DA, plDynamicEnvMap ),
+        tri( 0x116, 0x116, 0x0E9, plVisRegion ),
         tri( 0x11E, 0x11E, -2, plRelevanceRegion ), //used for .csv files
         tri( 0x122, 0x122, -2, plImageLibMod ),
         tri( 0x123, 0x123, -2, plParticleFlockEffect ),
@@ -284,8 +289,8 @@ public enum Typeid implements compilable
         
         tri( 0x203, 0x203, -2, plRefMsg ),
         tri( 0x204, 0x204, -2, plGenRefMsg ),
-        tri( 0x206, 0x206, -2, plAnimCmdMsg ),
-        tri( 0x20A, 0x20A, -2, plCameraMsg ),
+        tri( 0x206, 0x206, 0x204, plAnimCmdMsg ),
+        tri( 0x20A, 0x20A, 0x206, plCameraMsg ),
         tri( 0x219, 0x219, -2, plActivatorMsg ),
         tri( 0x22B, 0x230, 0x21A, plLeafController ),
         tri( -2, 0x231, 0x21B, plCompoundController ), //moul-only
@@ -298,17 +303,17 @@ public enum Typeid implements compilable
         tri( 0x23A, -2, -2, plCompoundPosController ), //pots-only
         tri( 0x23B, -2, -2, plTMController ), //pots-only
         tri( 0x24A, 0x24F, -2, plTimerCallbackMsg ),
-        tri( 0x24B, 0x250, -2, plEventCallbackMsg ),
+        tri( 0x24B, 0x250, 0x233, plEventCallbackMsg ),
         tri( 0x24F, 0x254, -2, plEnableMsg ),
         tri( 0x255, 0x25A, -2, plSoundMsg ),
         tri( 0x258, 0x25D, 0x240, plSpaceTree ),
-        tri( 0x2D3, 0x2d8, -2, plSimpleParticleGenerator ),
-        tri( 0x2D4, 0x2d9, -2, plParticleEmitter ),
+        tri( 0x2D3, 0x2d8, 0x261, plSimpleParticleGenerator ),
+        tri( 0x2D4, 0x2d9, 0x262, plParticleEmitter ),
         tri( 0x2E1, 0x2E6, -2, plLinkToAgeMsg ),
         tri( 0x2E6, 0x2EB, -2, plAnimPath ),
-        tri( 0x2E8, 0x2ED, -2, plNotifyMsg ),
+        tri( 0x2E8, 0x2ED, 0x272, plNotifyMsg ),
         tri( 0x2F0, 0x2F5, -2, plVolumeIsect ),
-        tri( 0x2F5, 0x2FA, -2, plConvexIsect ),
+        tri( 0x2F5, 0x2FA, 0x27C, plConvexIsect ),
         tri( 0x2FD, 0x302, -2, plResponderEnableMsg ),
         tri( 0x302, 0x307, -2, plOneShotMsg ),
         tri( 0x330, 0x335, -2, plExcludeRegionMsg ),
@@ -325,11 +330,16 @@ public enum Typeid implements compilable
         tri( 0x30D, 0x312, -2, plLightSpecularApplicator ),
         tri( -2, 0x22A, -2, plOmniSqApplicator ), //moul-only
         tri( -2, 0x13A, -2, plRidingAnimatedPhysicalDetector ), //moul-only
-        tri( -2, 0x138, -2, plGrassShaderMod ), //moul-only
+        tri( -2, 0x138, 0x23, plGrassShaderMod ), //moul-only
         tri( -2, 0x139, 0x111, plDynamicCamMap ), //moul-only
         tri( -2, 0x49D, -2, plRideAnimatedPhysMsg ), //moul-only
         
         tri( -2, -2, 0x338, plRelativeMatrixChannelApplicator ), //not in pots.
+        tri( -2, -2, 0x0C1, plEAXReverbEffect ), //not in pots.
+        tri( -2, -2, 0x081, plCameraBrainUru ), //not in pots, but may correspond to plCameraBrain1
+        tri( -2, -2, 0x086, plCameraBrainUru_Fixed ), //not in pots, but may correspond to plCameraBrain1
+        tri( -2, -2, 0x083, plCameraModifier ), //not in pots, but may correspond to plCameraModifier1
+        tri( -2, -2, 0x0D0, plSpawnMod), //not in pots
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };

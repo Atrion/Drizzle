@@ -52,6 +52,10 @@ public class Quat extends uruobj
             z = new Flt(c);
         //}
     }
+    public static Quat identity()
+    {
+        return new Quat(new Flt(0), new Flt(0), new Flt(0), new Flt(1));
+    }
     public Quat(Flt w2, Flt x2, Flt y2, Flt z2)
     {
         w = w2;

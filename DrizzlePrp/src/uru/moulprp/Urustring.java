@@ -33,6 +33,15 @@ public class Urustring extends uruobj
 {
     byte[] unencryptedString; //unencrypted form of this string.
 
+    public static Urustring createFromString(String s)
+    {
+        Urustring result = new Urustring();
+        result.unencryptedString = b.StringToBytes(s);
+        return result;
+    }
+    
+    private Urustring(){}
+    
     public Urustring(context c)
     {
         if(c.readversion==6 || c.readversion==3)

@@ -34,7 +34,9 @@ public class Pageid extends uruobj
 {
     int prefix;
     int suffix;
-    context ctx;
+    
+    //context ctx;
+    Integer xOverridePrefix;
     
     public Pageid(context c)
     {
@@ -61,7 +63,8 @@ public class Pageid extends uruobj
         prefix = rawdata >> 16;
         suffix = rawdata << 16 >> 16;
          
-        ctx = c;
+        //ctx = c;
+        xOverridePrefix = c.sequencePrefix;
     }
     public int getRawData()
     {
@@ -69,9 +72,9 @@ public class Pageid extends uruobj
     }
     public void compile(Bytedeque deque)
     {
-        if(ctx.sequencePrefix!=null)
+        if(/*ctx.sequencePrefix*/xOverridePrefix!=null)
         {
-            prefix = ctx.sequencePrefix;
+            prefix = /*ctx.sequencePrefix*/xOverridePrefix;
             m.msg("Using forced sequence prefix 0x"+Integer.toHexString(prefix));
             // I have no clue why, but this seems to be necessary
             // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
@@ -84,6 +87,10 @@ public class Pageid extends uruobj
         int rawdata = getRawData();
         // convert it to TPOTS format
         m.msg("Writing "+toString());
+        if(prefix==97)
+        {
+            int dummy=0;
+        }
         int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
         deque.writeInt(newdata);
     }

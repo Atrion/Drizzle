@@ -48,7 +48,7 @@ public class PlDynamicEnvMap extends uruobj
         u4 = c.readByte();
         refcount = c.readInt();
         refs = c.readVector(Uruobjectref.class, refcount);
-        if(c.readversion==6)
+        if(c.readversion==6||c.readversion==4)
         {
             xsubcount = c.readInt();
             xsubs = c.readVector(Urustring.class, xsubcount);
@@ -85,12 +85,30 @@ public class PlDynamicEnvMap extends uruobj
         public ithinkthisisPlCubicRenderTarget(context c)
         {
             parent = new plRenderTarget(c);
-            child1 = new plRenderTarget(c);
-            child2 = new plRenderTarget(c);
-            child3 = new plRenderTarget(c);
-            child4 = new plRenderTarget(c);
-            child5 = new plRenderTarget(c);
-            child6 = new plRenderTarget(c);
+            if(c.readversion==3||c.readversion==6)
+            {
+                child1 = new plRenderTarget(c);
+                child2 = new plRenderTarget(c);
+                child3 = new plRenderTarget(c);
+                child4 = new plRenderTarget(c);
+                child5 = new plRenderTarget(c);
+                child6 = new plRenderTarget(c);
+            }
+            else if(c.readversion==4)
+            {
+                Uruobjectref ref1 = new Uruobjectref(c);
+                child1 = new plRenderTarget(c);
+                Uruobjectref ref2 = new Uruobjectref(c);
+                child2 = new plRenderTarget(c);
+                Uruobjectref ref3 = new Uruobjectref(c);
+                child3 = new plRenderTarget(c);
+                Uruobjectref ref4 = new Uruobjectref(c);
+                child4 = new plRenderTarget(c);
+                Uruobjectref ref5 = new Uruobjectref(c);
+                child5 = new plRenderTarget(c);
+                Uruobjectref ref6 = new Uruobjectref(c);
+                child6 = new plRenderTarget(c);
+            }
         }
         
         public void compile(Bytedeque c)

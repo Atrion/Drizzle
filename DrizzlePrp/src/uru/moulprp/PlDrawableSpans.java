@@ -98,7 +98,7 @@ public class PlDrawableSpans extends uruobj
                 int breakdummy = 0;
             }
         }
-        unused = data.readInt(); e.ensure(unused,0);
+        unused = data.readInt(); e.ensure(unused==0);
         listcount = data.readInt(); e.ensure(listcount==subsetcount);//so far so good.
         unused2 = data.readInts(listcount);
         //unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
@@ -227,7 +227,7 @@ public class PlDrawableSpans extends uruobj
         public SpanSubset(context c) throws readexception
         {
             Bytestream data = c.in;
-            visible = data.readInt(); e.ensure(visible,1);
+            visible = data.readInt(); e.ensureflags(visible,1);
             materialindex = data.readInt();
             if(materialindex==0 || materialindex==3)
             {

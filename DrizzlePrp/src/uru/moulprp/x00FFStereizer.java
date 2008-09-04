@@ -47,9 +47,9 @@ public class x00FFStereizer extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         
         //This should probably be a SynchedObject parent;
-        u1 = c.readInt(); e.ensure(u1==0);
+        u1 = c.readInt(); e.ensure(u1==0||u1==4);
         u2 = c.readInt(); e.ensure(u2==1);
-        u3 = c.readInt(); e.ensure(u3,0,1);
+        u3 = c.readInt(); e.ensureflags(u3,0,1);
         u4 = new Flt(c);
         u5 = new Flt(c);
         u6 = new Flt(c);

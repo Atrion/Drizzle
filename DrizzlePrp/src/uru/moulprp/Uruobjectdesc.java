@@ -32,14 +32,14 @@ public class Uruobjectdesc extends uruobj
 {
     byte flag;
     //int pageid;
-    Pageid pageid;
+    public Pageid pageid;
     //short pagetype;
     Pagetype pagetype;
     byte xu1;
     //short objecttype;
-    Typeid objecttype;
-    int objectnumber;
-    Urustring objectname;
+    public Typeid objecttype;
+    public int objectnumber;
+    public Urustring objectname;
     //int xsomeid;
     //int xclientid;
     //byte xu1;
@@ -49,9 +49,13 @@ public class Uruobjectdesc extends uruobj
     {
         Bytestream data = c.in;
         
-        flag = data.readByte(); e.ensure(flag,0x00,0x02);//should be 0 normally,1 and 2 also happen, but we need to study them.
+        flag = data.readByte(); e.ensureflags(flag,0x00,0x02);//should be 0 normally,1 and 2 also happen, but we need to study them.
         //pageid = data.readInt();
         pageid = new Pageid(c);
+        if(pageid.prefix==97)
+        {
+            int dummy=0;
+        }
         //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin.
         
         if(c.readversion==3)

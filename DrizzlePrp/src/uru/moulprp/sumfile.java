@@ -25,12 +25,50 @@ import uru.context;
 import shared.readexception;
 import uru.Bytedeque;
 import uru.b;
+//import org.bouncycastle.crypto.digests.MD5Digest;
+import shared.Bytes;
+import java.util.Vector;
 
 public class sumfile
 {
     int filecount;
     int u1; //always 0?
     sumfileFileinfo[] files;
+    
+    /*public static byte[] createSumfile(String... files)
+    {
+        Bytedeque c = new Bytedeque();
+        MD5Digest digester = new MD5Digest();
+        
+        int numfiles = files.length;
+        c.writeInt(numfiles);
+        c.writeInt(0);
+        for(int i=0;i<numfiles;i++)
+        {
+            //get name
+            File curfile = new File(files[i]);
+            String curfilename = curfile.getName();
+            Urustring name = Urustring.createFromString("dat\\"+curfilename);
+            name.compile(c);
+            
+            //read file
+            Bytes data = shared.FileUtils.ReadFileAsBytes(curfile);
+            
+            //get md5
+            digester.update(data.getByteArray(),0,data.length());
+            byte[] hash = new byte[16];
+            digester.doFinal(hash, 0);
+            
+            //write md5
+            c.writeBytes(hash);
+            
+            c.writeInt(0); //supposed to be the mtime timestamp.
+            c.writeInt(0);
+        }
+        
+        
+        return c.getAllBytes();
+    }*/
     
     public sumfile(byte[] filedata, boolean isencrypted) throws readexception
     {
@@ -66,17 +104,17 @@ public class sumfile
         }
     }
     
-    public static void createSumfile(String infolder, String agename, String outfolder)
+    public static Bytes createSumfile(String infolder, String agename)
     {
         File datdir = new File(infolder);
         if(!datdir.exists() || !datdir.isDirectory())
         {
             m.err("Dat folder not found.");
-            return;
+            return null;
         }
         
         //count the files.
-        int count = 0;
+        Vector<String> files = new Vector<String>();
         File[] datfiles = datdir.listFiles();
         for(int i=0;i<datfiles.length;i++)
         {
@@ -84,9 +122,11 @@ public class sumfile
             if(curfilename.startsWith(agename+"_") && curfilename.endsWith(".prp"))
             {
                 //add this file.
-                count++;
+                files.add(curfilename);
             }
         }
+        
+        int count = files.size();
         
         Bytedeque c = new Bytedeque();
         c.writeInt(count);
@@ -120,6 +160,7 @@ public class sumfile
         byte[] result = c.getAllBytes();
         result = uru.UruCrypt.EncryptWhatdoyousee(result);
         
-        shared.FileUtils.WriteFile(outfolder+agename+".sum", result);
+        //shared.FileUtils.WriteFile(outfolder+agename+".sum", result);
+        return new Bytes(result);
     }
 }

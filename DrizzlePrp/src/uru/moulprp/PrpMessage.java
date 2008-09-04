@@ -51,6 +51,24 @@ public class PrpMessage extends PrpTaggedObject
         }
     }*/
     
+    public static class PlDampMsg extends uruobj
+    {
+        PlMessage parent;
+        int u1;
+        
+        public PlDampMsg(context c) throws readexception
+        {
+            parent = new PlMessage(c);
+            u1 = c.readInt();
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            m.warn("compile not implemented.");
+            m.warn("compile: not tested with pots.");
+        }
+    }
+    
     public static class PlRideAnimatedPhysMsg extends uruobj
     {
         PlMessage parent;
@@ -208,7 +226,34 @@ public class PrpMessage extends PrpTaggedObject
         {
             parent = new PlMessageWithCallbacks(c);
             u1 = new HsBitVector(c);
-            u2 = c.readVector(Flt.class, 7);
+            if(c.readversion==3||c.readversion==6)
+            {
+                //this is correct.
+                u2 = c.readVector(Flt.class, 7);
+            }
+            else if(c.readversion==4)
+            {
+                u2 = new Flt[7];
+                if(u1.count>0)
+                {
+                    //m.warn("PlAnimCmdMsg: untested case.");
+                    int flags = u1.values[0];
+                    //fill the array with 0, since that is what it normally(always?) is anyway.
+                    for(int i=0;i<7;i++)
+                    {
+                        u2[i] = new Flt(0);
+                    }
+                    /*if((flags&0x10)!=0) u2[0] = new Flt(c);
+                    if((flags&0x20)!=0) u2[1] = new Flt(c);
+                    if((flags&0x80000000)!=0) u2[2] = new Flt(c);
+                    if((flags&0x40)!=0) u2[3] = new Flt(c);
+                    //the following 3 lines use BYTE1(), so i'm not sure which byte it uses.
+                    if((flags&0x01000000)!=0) u2[4] = new Flt(c);
+                    if((flags&0x01000000)!=0) u2[5] = new Flt(c);
+                    //if((flags&0x02000000)!=0 || (flags&0x3252534F)!=0 || (flags&0x01000000)!=0) u2[6] = new Flt(c); //0x3252534F="OSR2"
+                    if((flags&0x02000000)!=0 || (flags&0x3252534F)!=0 || (flags&0x01000000)!=0) u2[6] = new Flt(c); //0x3252534F="OSR2"*/
+                }
+            }
             u3 = new Urustring(c);
             u4 = new Urustring(c);
         }
@@ -510,7 +555,15 @@ public class PrpMessage extends PrpTaggedObject
             parent = new PlMessage(c);
             type = c.readInt();
             state = new Flt(c);
-            id = c.readInt();
+            if(c.readversion==3||c.readversion==6)
+            {
+                id = c.readInt();
+            }
+            else if(c.readversion==4)
+            {
+                byte idb = c.readByte();
+                id = b.ByteToInt32(idb); //is this correct?
+            }
             count = c.readInt();
             events = new proEventData[count];
             for(int i=0;i<count;i++)
@@ -759,14 +812,27 @@ public class PrpMessage extends PrpTaggedObject
         int u2;
         int flags;
         
+        int xu1;
+        
         public PlMessage(context c) throws readexception
         {
             parentobj = new Uruobjectref(c);
             refcount = c.readInt();
             refs = c.readVector(Uruobjectref.class, refcount);
-            u1 = c.readInt();
-            u2 = c.readInt();
-            flags = c.readInt();
+            if(c.readversion==3||c.readversion==6)
+            {
+                u1 = c.readInt();
+                u2 = c.readInt();
+                flags = c.readInt();
+            }
+            else if(c.readversion==4)
+            {
+                //if(refcount!=0)
+                //{
+                    xu1 = c.readInt();
+                //}
+                //the other flags will all default to 0.
+            }
         }
         
         public void compile(Bytedeque c)
