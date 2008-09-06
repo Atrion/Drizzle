@@ -49,7 +49,7 @@ public class x0003Bitmap extends uruobj
         bpp = data.readByte(); e.ensureflags(bpp,32);
         cpb = data.readByte(); //unknown
         flags = data.readShort();
-        type = data.readByte();
+        type = data.readByte(); //1=DXT1, 2=DXT2, ... 5=DXT5
         if(type!=0 && type!=2)
         {
             xtexel_size = data.readByte(); //bytes per 4x4 texel.

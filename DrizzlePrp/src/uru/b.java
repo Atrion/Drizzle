@@ -167,12 +167,64 @@ public class b
         result[3] = (byte)((value >> 24) & 0xFF);
         return result;
     }
+    public static void Int32IntoBytes(int value, byte[] bytes, int offset)
+    {
+        bytes[0+offset] = (byte)((value >> 0) & 0xFF);
+        bytes[1+offset] = (byte)((value >> 8) & 0xFF);
+        bytes[2+offset] = (byte)((value >> 16) & 0xFF);
+        bytes[3+offset] = (byte)((value >> 24) & 0xFF);
+    }
     public static byte[] Int16ToBytes(short value)
     {
         byte[] result = new byte[2];
         result[0] = (byte)((value >> 0) & 0xFF);
         result[1] = (byte)((value >> 8) & 0xFF);
         return result;
+    }
+    /*public static int[][] rotateIntGridCounterclockwise(int[][] data)
+    {
+        int count1 = data.length;
+        int count2 = data[0].length;
+        int[][] result = new int[count2][count1];
+        for(int i=0;i<count1;i++)
+        {
+            for(int j=0;j<count2;j++)
+            {
+                result[j][i] = data[i][j];
+            }
+        }
+        return result;
+    }*/
+    public static int[][] rotateIntGridClockwise(int[][] data)
+    {
+        int count1 = data.length;
+        int count2 = data[0].length;
+        int[][] result = new int[count2][count1];
+        for(int i=0;i<count1;i++)
+        {
+            for(int j=0;j<count2;j++)
+            {
+                result[j][count1-i-1] = data[i][j];
+            }
+        }
+        return result;
+    }
+    public static <T> void rotateGridClockwise(T[][] datain, T[][] dataout)
+    {
+        int count1 = datain.length;
+        int count2 = datain[0].length;
+        if(dataout.length!=count2 || dataout[0].length!=count1)
+        {
+            shared.m.err("Grids are not correctly sized.");
+            return;
+        }
+        for(int i=0;i<count1;i++)
+        {
+            for(int j=0;j<count2;j++)
+            {
+                dataout[j][count1-i-1] = datain[i][j];
+            }
+        }
     }
     /*private static void loadInt32IntoBytesEndian(int value, byte[] bytes, int startpos)
     {

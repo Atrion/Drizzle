@@ -17,8 +17,9 @@
 */ 
 
 
-package uru;
+package shared;
 
+import uru.*;
 import shared.mystobj;
 import shared.Bytes;
 import java.util.ArrayDeque;
@@ -29,27 +30,9 @@ import uru.moulprp.Uruobjectdesc;
  *
  * @author user
  */
-public class Bytedeque extends shared.Bytedeque2
+public class Bytedeque2
 {
-    public Uruobjectdesc curRootObject = null;
-    public uru.moulprp.prpfile prp = null;
-    
-    
-    //these generic functions are tied to uru.
-    public <T extends mystobj> void writeObj(T object)
-    {
-        object.compile(this);
-    }
-    public <T extends mystobj> void writeVector(T[] vector)
-    {
-        int length = vector.length;
-        for(int i=0;i<length;i++)
-        {
-            vector[i].compile(this);
-        }
-    }
-    
-    /*ArrayDeque<byte[]> deque = new ArrayDeque<byte[]>();
+    ArrayDeque<byte[]> deque = new ArrayDeque<byte[]>();
     private int curpos = 0;
 
     
@@ -60,7 +43,7 @@ public class Bytedeque extends shared.Bytedeque2
     //public int curRootObjectSize;
     //public int curRootObjectEnd;
     
-    public Bytedeque()
+    public Bytedeque2()
     {
     }
     
@@ -97,7 +80,7 @@ public class Bytedeque extends shared.Bytedeque2
             this.writeInts(data[i]);
         }
     }
-    public <T extends mystobj> void writeObj(T object)
+    /*public <T extends mystobj> void writeObj(T object)
     {
         object.compile(this);
     }
@@ -109,7 +92,7 @@ public class Bytedeque extends shared.Bytedeque2
         {
             vector[i].compile(this);
         }
-    }
+    }*/
     
     public void writeInts(int[] ints)
     {
@@ -171,12 +154,12 @@ public class Bytedeque extends shared.Bytedeque2
         byte[] data = b.Int32ToBytes(i);
         writeBytes(data);
     }
-    public void prependBytedeque(Bytedeque d)
+    public void prependBytedeque(Bytedeque2 d)
     {
         byte[] bytes = d.getAllBytes();
         prependBytes(bytes);
     }
-    public void writeBytedeque(Bytedeque d)
+    public void writeBytedeque(Bytedeque2 d)
     {
         byte[] bytes = d.getAllBytes();
         writeBytes(bytes);
@@ -211,5 +194,5 @@ public class Bytedeque extends shared.Bytedeque2
     public Bytes getBytes()
     {
         return new Bytes(getAllBytes());
-    }*/
+    }
 }

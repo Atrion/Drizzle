@@ -33,12 +33,21 @@ public class ODEPhysical extends uruobj
     PlSynchedObject parent;
     int type;
     
+    //type 5
     int vertexcount;
     Vertex[] vertices;
     int surfacecount;
     int[] surfaces;
     int xu3;
     byte[] xu3s;
+    
+    //type 1
+    Flt f1;
+    Flt f2;
+    Flt f3;
+    
+    //type 2
+    Flt u4;
     
     Flt f8;
     int u8;
@@ -75,15 +84,15 @@ public class ODEPhysical extends uruobj
         }
         else if(type==1) //box?
         {
-            m.msg("Untested ODE case1...");
-            Flt f1 = new Flt(c);
-            Flt f2 = new Flt(c);
-            Flt f3 = new Flt(c);
+            f1 = new Flt(c);
+            f2 = new Flt(c);
+            f3 = new Flt(c);
+            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else if(type==2) //sphere?
         {
-            m.msg("Untested ODE case2...");
-            Flt u4 = new Flt(c); //same as 6
+            u4 = new Flt(c); //same as 6
+            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else if(type==6) //ellipse???
         {
@@ -107,17 +116,13 @@ public class ODEPhysical extends uruobj
         sceneobject = new Uruobjectref(c); //plSceneObject
         scenenode = new Uruobjectref(c); //plSceneNode
         
-        m.msg("f8="+f8.toString()+";u8="+Integer.toString(u8)
-                +";u9="+Integer.toString(u9)+";u10="+Integer.toString(u10)
-                +";u11="+Integer.toString(u11)+";u12="+Integer.toString(u12)
-                +";u13="+Short.toString(u13));
-        if(u8==0x02000000)
+        if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
         {
-            int dummy=0;
-        }
-        else
-        {
-            int dummy=0;
+
+            m.msg("Physics: type="+Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
+                    +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
+                    +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
+                    +";u13="+Short.toString(u13));
         }
             
     }
@@ -139,16 +144,18 @@ public class ODEPhysical extends uruobj
         Flt.zero().compile(c);//RC
         Flt.zero().compile(c);//EL
         
-        c.writeInt(4); //format, proxy bounds/mesh bounds
-        c.writeShort((short)0);//u1 short
-        c.writeShort((short)0x200);//coltype short
-        c.writeInt(0);//flagsdetect int
-        c.writeInt(0);//flagsrespond int
-        c.writeByte((byte)0);//u2 byte
-        c.writeByte((byte)0);//u3 byte
         
         if(type==5)
         {
+            //write flags
+            c.writeInt(4); //format, proxy bounds/mesh bounds
+            c.writeShort((short)0);//u1 short
+            c.writeShort((short)0x200);//coltype short
+            c.writeInt(0);//flagsdetect int
+            c.writeInt(0);//flagsrespond int
+            c.writeByte((byte)0);//u2 byte
+            c.writeByte((byte)0);//u3 byte
+
             //write vertices
             c.writeInt(vertexcount);
             e.ensure(vertices.length==vertexcount);
@@ -162,6 +169,88 @@ public class ODEPhysical extends uruobj
                 c.writeShort(point2);
             }
             
+        }
+        else if(type==1) //box
+        {
+            //write flags
+            c.writeInt(1); //format, box bounds
+            c.writeShort((short)0);//u1 short
+            c.writeShort((short)0x200);//coltype short
+            c.writeInt(0);//flagsdetect int
+            c.writeInt(0);//flagsrespond int
+            c.writeByte((byte)0);//u2 byte
+            c.writeByte((byte)0);//u3 byte
+
+            Vertex center = findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            Vertex cornervector = new Vertex(f1,f2,f3); //is this order correct?
+
+            //boxbounds is just proxybounds
+            int vertexcount = 8;
+            int facecount = 12;
+            Vertex[] vertices = new Vertex[]{
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+            };
+            short[] faces = new short[]{
+                0,2,1,
+                1,2,3,
+                0,1,4,
+                1,5,4,
+                0,4,2,
+                2,4,6,
+                1,3,7,
+                7,5,1,
+                3,2,7,
+                2,6,7,
+                4,7,6,
+                4,5,7,
+            };
+            //reverse-chirality:
+            /*short[] faces = new short[]{
+                0,1,2,
+                1,3,2,
+                0,4,1,
+                1,4,5,
+                0,2,4,
+                2,6,4,
+                1,7,3,
+                7,1,5,
+                3,7,2,
+                2,7,6,
+                4,6,7,
+                4,7,5,
+            };*/
+            
+            e.ensure(vertices.length==vertexcount);
+            e.ensure(faces.length==facecount*3);
+            
+            c.writeInt(vertexcount);
+            c.writeVector(vertices);
+            c.writeInt(facecount);
+            c.writeShorts(faces);
+            
+        }
+        else if(type==2) //sphere
+        {
+            //write flags
+            c.writeInt(2); //format, sphere bounds
+            c.writeShort((short)0);//u1 short
+            c.writeShort((short)0x200);//coltype short
+            c.writeInt(0);//flagsdetect int
+            c.writeInt(0);//flagsrespond int
+            c.writeByte((byte)0);//u2 byte
+            c.writeByte((byte)0);//u3 byte
+
+            Vertex offset = findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            
+            offset.compile(c); //offset
+            u4.compile(c); //radius
         }
         else
         {
@@ -177,4 +266,19 @@ public class ODEPhysical extends uruobj
         
     }
     
+    public static Vertex findOffsetVectorFromSceneObject(prpfile prp, Uruobjectref sceneobject)
+    {
+        //find the offset vector through the coordinate interface.
+        e.ensure(prp!=null);
+        e.ensure(sceneobject.hasref());
+        PrpRootObject a = prputils.findObjectWithDesc(prp, sceneobject.xdesc);
+        e.ensure(a.header.objecttype==Typeid.plSceneObject);
+        x0001Sceneobject b = a.castTo();
+        Uruobjectref d = b.regioninfo;
+        e.ensure(d.hasref());
+        PrpRootObject f = prputils.findObjectWithDesc(prp, d.xdesc);
+        x0015CoordinateInterface g = f.castTo();
+        Vertex offset = g.matrix1.convertTo3Vector();
+        return offset;
+    }
 }

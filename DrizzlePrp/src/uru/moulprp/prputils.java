@@ -147,7 +147,7 @@ public class prputils
             else if (header.agename.toString().toLowerCase().equals("kveer"))
             {
                 //_staticsettings.sequencePrefix = 0x62;
-                c.sequencePrefix = 0x62;
+                if(c.readversion==6) c.sequencePrefix = 0x62; //only if reading from moul.
             }
             else if (header.agename.toString().toLowerCase().equals("edertsogal"))
             {
@@ -296,6 +296,10 @@ public class prputils
                     {
                         object = new PrpRootObject(stream);
                     }catch(readexception e){}
+                    catch(Exception e)
+                    {
+                        m.err("Unexpected exception: "+e.getMessage());
+                    }
                     //break;
                 }
                 else
@@ -534,6 +538,7 @@ public class prputils
                     
                     Bytedeque deque = new Bytedeque();
                     deque.curRootObject = curobj.header.desc;
+                    deque.prp = prp;
                     if(type==type.plSceneNode) //handle scene node; there should only be one of these per prp.
                     {
                         e.ensure(haveEncounteredSceneNode==false);
@@ -994,38 +999,6 @@ public class prputils
         return result2;
     }
     
-    public static void ProcessAllFiles(String prpdirname)//, int version)
-    {
-        File prpfolder = new File(prpdirname);
-        if (!prpfolder.isDirectory() || !prpfolder.exists())
-        {
-            m.err("Prp directory not in proper format or not found.");
-            return;
-        }
-        
-        File[] files = prpfolder.listFiles();
-        m.msg("Parsing files... count="+Integer.toString(files.length));
-        for(int i=0;i<files.length;i++)
-        {
-            File curfile = files[i];
-            if(curfile.getName().toLowerCase().endsWith(".prp"))
-            {
-                //open prp file and process it.
-                byte[] filedata = FileUtils.ReadFile(curfile);
-                
-                //do work.
-                context c = context.createFromBytestream(new Bytestream(filedata));
-                //c.readversion = version;
-                c.curFile = curfile.getName();
-                prpprocess.ProcessAllObjects(c);
-                //if(version==3) prputils.ProcessPotsPrp(filedata);
-                //if(version==6) prputils.ProcessAll(filedata);
-            }
-        }
-        
-        m.msg("Finished Processing all files.");
-        
-    }
     
     
 }

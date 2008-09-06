@@ -32,7 +32,7 @@ import uru.moulprp.Typeid;
  *
  * @author user
  */
-public class context
+public class context extends shared.BaseContext
 {
     public int readversion;
     public int writeversion;

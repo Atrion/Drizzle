@@ -318,9 +318,13 @@ public class PlHKPhysical extends uruobj
                 xu24d = new PXMeshBounds(c);
             }
             
-            //String text = "file="+c.curFile+"   objname="+c.curRootObject.objectname.toString()+"   format="+Integer.toHexString(format)+"   u14="+Integer.toHexString(u14)+"   u15="+Integer.toHexString(u15)+"   losdb="+Integer.toHexString(LOSDB)+"   group="+Integer.toHexString(group.values[0]);
-            String text = c.curFile+","+c.curRootObject.objectname.toString()+","+Integer.toHexString(format)+","+Integer.toHexString(u14)+","+Integer.toHexString(u15)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0]);
-            FileUtils.AppendText(_staticsettings.outputdir+"pxphysical.txt", text+"\n");
+            if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
+            {
+                //String text = "file="+c.curFile+"   objname="+c.curRootObject.objectname.toString()+"   format="+Integer.toHexString(format)+"   u14="+Integer.toHexString(u14)+"   u15="+Integer.toHexString(u15)+"   losdb="+Integer.toHexString(LOSDB)+"   group="+Integer.toHexString(group.values[0]);
+                String text = "Physics:"+c.curFile+","+c.curRootObject.objectname.toString()+","+Integer.toHexString(format)+","+Integer.toHexString(u14)+","+Integer.toHexString(u15)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0]);
+                //FileUtils.AppendText(_staticsettings.outputdir+"pxphysical.txt", text+"\n");
+                m.msg(text);
+            }
 
             //This block checks to see if we handle this combination of flags.
             moulflags moul = new moulflags();
@@ -567,9 +571,13 @@ public class PlHKPhysical extends uruobj
             subworld = new Uruobjectref(c);
             soundgroup = new Uruobjectref(c);
 
-            //String text = "file="+c.curFile+"   objname="+c.curRootObject.objectname.toString()+"   format="+Integer.toHexString(format)+"   u1="+Integer.toHexString(u1)+"   coltype="+Integer.toHexString(coltype)+"   flagsdetect="+Integer.toHexString(flagsdetect)+"   flagsrespond="+Integer.toHexString(flagsrespond)+"   u2="+Integer.toHexString(u2)+"   u3="+Integer.toHexString(u3)+"   losdb="+Integer.toHexString(LOSDB)+"   group="+Integer.toHexString(group.values[0]);
-            String text = c.curFile+","+c.curRootObject.objectname.toString()+","+Integer.toHexString(format)+","+Integer.toHexString(u1)+","+Integer.toHexString(coltype)+","+Integer.toHexString(flagsdetect)+","+Integer.toHexString(flagsrespond)+","+Integer.toHexString(u2)+","+Integer.toHexString(u3)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0]);
-            FileUtils.AppendText(_staticsettings.outputdir+"hkphysical.txt", text+"\n");
+            if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
+            {
+                //String text = "file="+c.curFile+"   objname="+c.curRootObject.objectname.toString()+"   format="+Integer.toHexString(format)+"   u1="+Integer.toHexString(u1)+"   coltype="+Integer.toHexString(coltype)+"   flagsdetect="+Integer.toHexString(flagsdetect)+"   flagsrespond="+Integer.toHexString(flagsrespond)+"   u2="+Integer.toHexString(u2)+"   u3="+Integer.toHexString(u3)+"   losdb="+Integer.toHexString(LOSDB)+"   group="+Integer.toHexString(group.values[0]);
+                String text = "Physics:"+c.curFile+","+c.curRootObject.objectname.toString()+","+Integer.toHexString(format)+","+Integer.toHexString(u1)+","+Integer.toHexString(coltype)+","+Integer.toHexString(flagsdetect)+","+Integer.toHexString(flagsrespond)+","+Integer.toHexString(u2)+","+Integer.toHexString(u3)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0]);
+                //FileUtils.AppendText(_staticsettings.outputdir+"hkphysical.txt", text+"\n");
+                m.msg(text);
+            }
             
             
         }

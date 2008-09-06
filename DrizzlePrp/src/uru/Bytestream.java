@@ -194,6 +194,24 @@ public class Bytestream
         }
         return result;
     }
+    public byte[][] readMultiDimensionBytes(int num1, int num2)
+    {
+        byte[][] result = new byte[num1][];
+        for(int i=0;i<num1;i++)
+        {
+            result[i] = this.readBytes(num2);
+        }
+        return result;
+    }
+    public int[][] readMultiDimensionInts(int num1, int num2)
+    {
+        int[][] result = new int[num1][];
+        for(int i=0;i<num1;i++)
+        {
+            result[i] = this.readInts(num2);
+        }
+        return result;
+    }
     public short[] readShorts(int num)
     {
         short[] result = new short[num];

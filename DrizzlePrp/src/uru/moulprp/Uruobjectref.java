@@ -66,6 +66,11 @@ public class Uruobjectref extends uruobj
         return result;
     }
     
+    public boolean hasref()
+    {
+        return !(hasRef==0);
+    }
+    
     private Uruobjectref(){}
     
     public static Uruobjectref createFromUruobjectdesc(Uruobjectdesc desc)

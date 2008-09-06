@@ -186,16 +186,30 @@ public enum Typeid implements compilable
     plCameraModifier,
     plSpawnMod,
     
+    //myst5
+    pfObjectFlocker,
+    plAGAnimBink,
+    plBubbleShaderMod,
+    plLayerBink,
+    
     plLeafController,
     nil,
     unknown;
 
+    public void compile(Bytedeque deque)
+    {
+        short result = lookup(this);
+        //short result = (short)
+        deque.writeShort(result);
+    }
+    
     //short type;
     
     //types enumvalue;
     //plSwimStraightCurrentRegion is the highest regular member of pots.
     
     //cc -> moul -> mv
+    //This list is done with the assumption that all pots values are listed if present, but that is not necessarily true of the other two collumns.
     //8000 -> 8000 (null? it would mean they could just check the highest bit.) 
     //2d4 -> 2d9 plParticleEmitter
     //2d3 -> 2d8 plSimpleParticleGenerator
@@ -217,29 +231,29 @@ public enum Typeid implements compilable
         tri( 0x016, 0x016, 0x016, plDrawInterface ),
         tri( 0x01C, 0x01C, 0x01C, plSimulationInterface ),
         tri( 0x029, 0x029, 0x029, plSoundBuffer ),
-        tri( 0x02B, 0x02B, -2, plPickingDetector ),
-        tri( 0x02D, 0x02D, -2, plLogicModifier ),
-        tri( 0x032, 0x032, -2, plActivatorConditionalObject ),
-        tri( 0x037, 0x037, -2, plObjectInBoxConditionalObject ),
+        tri( 0x02B, 0x02B, 0x02A, plPickingDetector ), //3rd code from myst5
+        tri( 0x02D, 0x02D, 0x02C, plLogicModifier ), //3rd code from myst5
+        tri( 0x032, 0x032, 0x031, plActivatorConditionalObject ), //3rd code from myst5
+        tri( 0x037, 0x037, 0x036, plObjectInBoxConditionalObject ), //3rd code from myst5
         tri( 0x03D, 0x03D, 0x03C, plSpawnModifier ),
-        tri( 0x03E, 0x03E, -2, plFacingConditionalObject ),
+        tri( 0x03E, 0x03E, 0x03D, plFacingConditionalObject ), //3rd code from myst5
         tri( 0x03F, 0x03F, 0x103, plHKPhysical ),
         tri( 0x040, 0x040, 0x03E, plViewFaceModifier ),
         tri( 0x043, 0x043, 0x040, plLayerAnimation ),
         tri( 0x04C, 0x04C, 0x049, plDrawableSpans ),
         tri( 0x055, 0x055, 0x050, plDirectionalLightInfo ),
         tri( 0x056, 0x056, 0x051, plOmniLightInfo ),
-        tri( 0x057, 0x057, -2, plSpotLightInfo ),
+        tri( 0x057, 0x057, 0x052, plSpotLightInfo ), //3rd code from myst5
         tri( 0x067, 0x067, 0x05A, plOccluder ),
         tri( 0x06A, 0x06A, -2, plLimitedDirLightInfo ),
         tri( 0x06C, 0x06C, 0x05F, plAGModifier ),
         tri( 0x06D, 0x06D, 0x060, plAGMasterMod ),
         tri( 0x06F, 0x06F, -2, plCameraRegionDetector ),
-        tri( 0x071, 0x071, -2, plLineFollowMod ),
+        tri( 0x071, 0x071, 0x062, plLineFollowMod ), //3rd code from myst5
         tri( 0x076, 0x076, -2, plSeekPointMod ),
         tri( 0x077, 0x077, -2, plOneShotMod ),
         tri( 0x079, 0x079, 0x06A, plRandomSoundMod ),
-        tri( 0x07B, 0x07B, -2, plObjectInVolumeDetector ),
+        tri( 0x07B, 0x07B, 0x06C, plObjectInVolumeDetector ),
         tri( 0x07C, 0x07C, 0x06D, plResponderModifier ),
         tri( 0x084, 0x084, 0x073, plWin32StreamingSound ),
         tri( 0x088, 0x088, 0x076, plSoftVolumeSimple ),
@@ -252,8 +266,8 @@ public enum Typeid implements compilable
         tri( 0x09E, 0x09E, -2, plCameraBrain1_Avatar ),
         tri( 0x09F, 0x09F, -2, plCameraBrain1_Fixed ),
         tri( 0x0A2, 0x0A2, 0x088, plPythonFileMod ),
-        tri( 0x0A4, 0x0A4, -2, plExcludeRegionModifier ),
-        tri( 0x0A6, 0x0A6, -2, plVolumeSensorConditionalObject ),
+        tri( 0x0A4, 0x0A4, 0x08A, plExcludeRegionModifier ), //3rd code from myst5
+        tri( 0x0A6, 0x0A6, 0x08C, plVolumeSensorConditionalObject ), //3rd code from myst5
         tri( 0x0A8, 0x0A8, 0x08E, plMsgForwarder ),
         tri( 0x0AD, 0x0AD, -2, plDynamicTextMap ),
         tri( 0x0AE, 0x0AE, -2, plSittingModifier ),
@@ -264,24 +278,24 @@ public enum Typeid implements compilable
         tri( 0x0C4, 0x0C4, -2, plAnimEventModifier ),
         tri( 0x0C9, 0x0C9, 0x0AA, plParticleCollisionEffectDie ),
         tri( 0x0CA, 0x0CA, -2, plParticleCollisionEffectBounce ),
-        tri( 0x0CB, 0x0CB, -2, plInterfaceInfoModifier ),
+        tri( 0x0CB, 0x0CB, 0x0AC, plInterfaceInfoModifier ), //3rd code from myst5
         tri( 0x0D0, 0x0D0, 0x0B0, plParticleLocalWind ),
         tri( 0x0D4, 0x0D4, 0x0B4, plShadowCaster ),
-        tri( 0x0D5, 0x0D5, -2, plPointShadowMaster ),
+        tri( 0x0D5, 0x0D5, 0x0B5, plPointShadowMaster ), //3rd code from myst5
         tri( 0x0D6, 0x0D6, -2, plDirectShadowMaster ),
         tri( 0x0E5, 0x0E5, -2, plEAXListenerMod ),
         tri( 0x0E8, 0x0E8, -2, plDynaFootMgr ),
         tri( 0x0ED, 0x0ED, -2, plDynaPuddleMgr ),
         tri( 0x0F1, 0x0F1, 0x0CD, plATCAnim ),
         tri( 0x0F2, 0x0F2, -2, plAgeGlobalAnim ),
-        tri( 0x0FB, 0x0FB, -2, plWaveSet7 ),
+        tri( 0x0FB, 0x0FB, 0x0D4, plWaveSet7 ), //3rd code from myst5
         tri( 0x0FC, 0x0FC, -2, plPanicLinkRegion ),
         tri( 0x0FF, 0x0FF, 0x0D8, plStereizer ),
         tri( 0x106, 0x106, 0x0DA, plDynamicEnvMap ),
         tri( 0x116, 0x116, 0x0E9, plVisRegion ),
         tri( 0x11E, 0x11E, -2, plRelevanceRegion ), //used for .csv files
         tri( 0x122, 0x122, -2, plImageLibMod ),
-        tri( 0x123, 0x123, -2, plParticleFlockEffect ),
+        tri( 0x123, 0x123, 0x0F2, plParticleFlockEffect ), //3rd code from myst5
         tri( 0x127, 0x127, -2, plPhysicalSndGroup ),
         tri( 0x12B, 0x12B, -2, plClusterGroup ),
         tri( 0x12F, 0x12F, -2, plFadeOpacityMod ),
@@ -302,21 +316,21 @@ public enum Typeid implements compilable
         tri( 0x239, -2, -2, plSimplePosController ), //pots-only
         tri( 0x23A, -2, -2, plCompoundPosController ), //pots-only
         tri( 0x23B, -2, -2, plTMController ), //pots-only
-        tri( 0x24A, 0x24F, -2, plTimerCallbackMsg ),
+        tri( 0x24A, 0x24F, 0x232, plTimerCallbackMsg ), //3rd code from myst5
         tri( 0x24B, 0x250, 0x233, plEventCallbackMsg ),
-        tri( 0x24F, 0x254, -2, plEnableMsg ),
-        tri( 0x255, 0x25A, -2, plSoundMsg ),
+        tri( 0x24F, 0x254, 0x237, plEnableMsg ), //3rd code from myst5
+        tri( 0x255, 0x25A, 0x23D, plSoundMsg ), //3rd code from myst5
         tri( 0x258, 0x25D, 0x240, plSpaceTree ),
         tri( 0x2D3, 0x2d8, 0x261, plSimpleParticleGenerator ),
         tri( 0x2D4, 0x2d9, 0x262, plParticleEmitter ),
-        tri( 0x2E1, 0x2E6, -2, plLinkToAgeMsg ),
-        tri( 0x2E6, 0x2EB, -2, plAnimPath ),
+        tri( 0x2E1, 0x2E6, 0x26E, plLinkToAgeMsg ), //3rd code from myst5
+        tri( 0x2E6, 0x2EB, 0x271, plAnimPath ), //3rd code from myst5
         tri( 0x2E8, 0x2ED, 0x272, plNotifyMsg ),
         tri( 0x2F0, 0x2F5, -2, plVolumeIsect ),
         tri( 0x2F5, 0x2FA, 0x27C, plConvexIsect ),
         tri( 0x2FD, 0x302, -2, plResponderEnableMsg ),
         tri( 0x302, 0x307, -2, plOneShotMsg ),
-        tri( 0x330, 0x335, -2, plExcludeRegionMsg ),
+        tri( 0x330, 0x335, 0x2A2, plExcludeRegionMsg ), //3rd code from myst5
         tri( 0x331, 0x336, -2, plOneTimeParticleGenerator ),
         tri( 0x38E, 0x393, -2, plArmatureEffectStateMsg ),
         tri( 0x3BA, 0x3BF, -2, plSubWorldMsg ),
@@ -334,12 +348,17 @@ public enum Typeid implements compilable
         tri( -2, 0x139, 0x111, plDynamicCamMap ), //moul-only
         tri( -2, 0x49D, -2, plRideAnimatedPhysMsg ), //moul-only
         
-        tri( -2, -2, 0x338, plRelativeMatrixChannelApplicator ), //not in pots.
+        tri( -2, -2, 0x338, plRelativeMatrixChannelApplicator ), //not in pots. //start of crowthistle section.
         tri( -2, -2, 0x0C1, plEAXReverbEffect ), //not in pots.
         tri( -2, -2, 0x081, plCameraBrainUru ), //not in pots, but may correspond to plCameraBrain1
         tri( -2, -2, 0x086, plCameraBrainUru_Fixed ), //not in pots, but may correspond to plCameraBrain1
         tri( -2, -2, 0x083, plCameraModifier ), //not in pots, but may correspond to plCameraModifier1
         tri( -2, -2, 0x0D0, plSpawnMod), //not in pots
+        
+        tri( -2, -2, 0x10E, pfObjectFlocker), //not in pots //starts of myst5 section.
+        tri( -2, -2, 0x110, plAGAnimBink), //not in pots
+        tri( -2, -2, 0x03B, plBubbleShaderMod), //not in pots
+        tri( 0x046, -2, 0x043, plLayerBink),
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };
@@ -902,12 +921,6 @@ public enum Typeid implements compilable
                 m.msg("Typeid: Compilation error.: "+t.toString());
                 return (short)0x8000;
         }*/
-    }
-    public void compile(Bytedeque deque)
-    {
-        short result = lookup(this);
-        //short result = (short)
-        deque.writeShort(result);
     }
     /*public types getType()
     {

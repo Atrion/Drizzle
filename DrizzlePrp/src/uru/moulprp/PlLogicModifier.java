@@ -35,12 +35,18 @@ public class PlLogicModifier extends uruobj
     Uruobjectref[] conditionals;
     int u1;
     
+    Uruobjectref xref;
+    
     public PlLogicModifier(context c) throws readexception
     {
         parent = new PlLogicModBase(c);
         conditionalcount = c.readInt();
         conditionals = c.readVector(Uruobjectref.class, conditionalcount);
         u1 = c.readInt();
+        if(c.readversion==4)
+        {
+            xref = new Uruobjectref(c); //e.g. KeepClickLinkLaki(plPickingDetector)
+        }
     }
     
     public void compile(Bytedeque c)

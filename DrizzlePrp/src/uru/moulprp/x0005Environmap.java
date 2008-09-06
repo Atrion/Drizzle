@@ -36,7 +36,9 @@ public class x0005Environmap extends uruobj
     x0003Bitmap parent;
     x0004MipMap[] sides = new x0004MipMap[6];
     
-    public x0005Environmap(context c)//,boolean hasHeader)
+    Uruobjectref[] unused = new Uruobjectref[6];
+    
+    public x0005Environmap(context c) throws readexception //,boolean hasHeader)
     {
         //if(hasHeader) xheader = new Objheader(c);
         parent = new x0003Bitmap(c);//,false);
@@ -47,9 +49,32 @@ public class x0005Environmap extends uruobj
                 //c.readByte(); //0
                 //c.readInt(); //-1
                 //c.readBytes(9); //0
-                Uruobjectref unused = new Uruobjectref(c);
+                unused[i] = new Uruobjectref(c);
             }
             sides[i] = new x0004MipMap(c);//,false);
+        }
+        if(c.readversion==4)
+        {
+            //fix up total inversion.
+            x0004MipMap temp = sides[0];
+            sides[0] = sides[1];
+            sides[1] = temp;
+            temp = sides[2];
+            sides[2] = sides[3];
+            sides[3] = temp;
+            temp = sides[4];
+            sides[4] = sides[5];
+            sides[5] = temp;
+            sides[0].invert();
+            sides[1].invert();
+            sides[2].invert();
+            sides[3].invert();
+            sides[4].invert();
+            sides[5].invert();
+            sides[5].rotate90clockwise(); //rotate the top
+            sides[5].rotate90clockwise();
+            sides[4].rotate90clockwise(); //is this right? Yes, PrpExplorer displays it correctly, along with original Pots Ages.
+            sides[4].rotate90clockwise();
         }
     }
     public void compile(Bytedeque deque)

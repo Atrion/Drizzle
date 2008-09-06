@@ -49,7 +49,7 @@ public class Uruobjectdesc extends uruobj
     {
         Bytestream data = c.in;
         
-        flag = data.readByte(); e.ensureflags(flag,0x00,0x02);//should be 0 normally,1 and 2 also happen, but we need to study them.
+        flag = data.readByte(); e.ensureflags(flag,0x00,0x02,0x04);//should be 0 normally,1 and 2 also happen, but we need to study them. 0x04 occurs in Myst5 for example.
         //pageid = data.readInt();
         pageid = new Pageid(c);
         if(pageid.prefix==97)

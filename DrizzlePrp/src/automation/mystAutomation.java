@@ -18,6 +18,8 @@ import uru.moulprp.Typeid;
 import uru.moulprp.prputils.Compiler.Decider;
 import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Pageid;
+import java.util.Vector;
+import java.io.File;
 
 public class mystAutomation
 {
@@ -774,9 +776,11 @@ public class mystAutomation
         Typeid.plGrassShaderMod,
         Typeid.plDynamicCamMap,
         Typeid.plSoftVolumeInvert,
+        Typeid.plLayerBink,
     };
     
-    public static Typeid[] crowReadable={
+    public static Typeid[] crowReadable = moulReadable;
+    /*public static Typeid[] crowReadable={
         Typeid.plSceneNode,
         Typeid.plSceneObject,
         Typeid.plMipMap,
@@ -862,7 +866,7 @@ public class mystAutomation
         Typeid.plGrassShaderMod,
         Typeid.plDynamicCamMap,
         Typeid.plSoftVolumeInvert,
-    };
+    };*/
     
     public static void convertEoaToWhatdoyousee(String infile, String outfile)
     {
@@ -1075,6 +1079,7 @@ public class mystAutomation
             Bytes prpdata = Bytes.createFromFile(infile);
             Bytestream bytestream = Bytestream.createFromBytes(prpdata);
             context c = context.createFromBytestream(bytestream);
+            c.curFile = filename; //helpful for debugging.
             
             //modify sequence prefix if Age is in list.
             Integer prefix = prefices.get(agename);
@@ -1100,4 +1105,183 @@ public class mystAutomation
         m.msg("Done Crowthistle work!");
     }
     
+    public static void convertMyst5ToPots(String infolder, String outfolder, Vector<String> files)
+    {
+        class compileDecider implements uru.moulprp.prputils.Compiler.Decider
+        {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc)
+            {
+                //return false;
+                Typeid type = desc.objecttype;
+                String name = desc.objectname.toString();
+                Typeid[] typeequals = new Typeid[]{
+                    Typeid.plSceneNode, Typeid.plSceneObject, Typeid.plCoordinateInterface, Typeid.plSpawnModifier,
+                    Typeid.plMipMap, Typeid.plCubicEnvironMap,
+                    Typeid.plLayer, Typeid.hsGMaterial, Typeid.plDrawableSpans,
+                    Typeid.plViewFaceModifier,
+                    Typeid.plLayerAnimation,
+                    Typeid.plBoundInterface,
+                    
+                    Typeid.plHKPhysical, Typeid.plSimulationInterface,
+                    Typeid.plDirectionalLightInfo, Typeid.plOmniLightInfo, Typeid.plSpotLightInfo,
+                    Typeid.plAGMasterMod, Typeid.plAGModifier, Typeid.plATCAnim,
+                    Typeid.plParticleSystem, Typeid.plParticleLocalWind, Typeid.plParticleCollisionEffectDie,
+                    Typeid.plAudioInterface, Typeid.plRandomSoundMod, Typeid.plSoundBuffer, Typeid.plWinAudio, Typeid.plWin32StreamingSound, Typeid.plWin32StaticSound, Typeid.plStereizer,
+                    Typeid.plDrawInterface,
+                    Typeid.plSoftVolumeSimple,
+                    Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion,
+                    Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
+                    Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
+                    Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
+                    Typeid.plPointShadowMaster,
+                    Typeid.plLayerBink,
+                    Typeid.plDynamicEnvMap,
+                    Typeid.plWaveSet7,
+                    Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
+                    Typeid.plPythonFileMod,
+                    Typeid.plResponderModifier,
+                };
+                String[] namestarts={
+                    //"boulder01",
+                    "bridge poles05", //works when plLayerBink is present.
+                    "bubble01haloa01", //works!
+                };
+                for(Typeid curtype: typeequals) if(curtype==type) return true;
+                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
+                
+                m.msg("Skipping type: "+type.toString());
+                return false;
+            }
+        }
+
+        HashMap<String, Integer> prefices = new HashMap<String, Integer>();
+        prefices.put("Descent", 94);
+        prefices.put("Direbo", 93);
+        prefices.put("Kveer", 92);
+        prefices.put("Laki", 91);
+        prefices.put("Myst", 90);
+        prefices.put("Siralehn", 89);
+        prefices.put("Tahgira", 88);
+        prefices.put("Todelmer", 87);
+        
+        Typeid[] readable = mystAutomation.moulReadable;
+        
+        
+        //Handle .fni files...
+        Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
+        for(String filename: fnifiles)
+        {
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + filename;
+            
+            Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
+            Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
+            Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }
+        
+        
+        //Handle .age files...
+        Vector<String> agefiles = filterFilenamesByExtension(files, ".age");
+        for(String filename: agefiles)
+        {
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + filename;
+            String agename = getAgenameFromFilename(filename);
+            
+            Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
+            Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
+            
+            //modify sequence prefix if Age is in list.
+            Integer prefix = prefices.get(agename);
+            if(prefix!=null)
+            {
+                textfile agefile = textfile.createFromBytes(decryptedData);
+                agefile.setVariable("SequencePrefix", Integer.toString(prefix));
+                decryptedData = agefile.saveToBytes();
+            }
+            
+            Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }
+        
+        
+        //Handle .prp files...
+        Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
+        for(String filename: prpfiles)
+        {
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + filename.replace("_", "_District_");
+            String agename = getAgenameFromFilename(filename);
+            
+            Bytes prpdata = Bytes.createFromFile(infile);
+            Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            context c = context.createFromBytestream(bytestream);
+            c.curFile = filename; //helpful for debugging.
+            
+            //modify sequence prefix if Age is in list.
+            Integer prefix = prefices.get(agename);
+            if(prefix!=null)
+            {
+                c.sequencePrefix = prefix;
+            }
+
+            prpfile prp = prpfile.createFromContext(c, readable);
+            Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+            prpoutputbytes.saveAsFile(outfile);
+        }
+        
+        
+        //Handle .sum files...
+        Vector<String> sumfiles = filterFilenamesByExtension(files, ".sum");
+        for(String filename: sumfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", agename);
+            FileUtils.WriteFile(outfolder+"/dat/"+filename, sum1);
+        }
+        
+        
+        //All done!
+        m.msg("Done MystV work!");
+    }
+    
+    public static Vector<String> filterFilenamesByExtension(Vector<String> files, String extension)
+    {
+        Vector<String> result = new Vector<String>();
+        for(String file: files) if(file.endsWith(extension)) result.add(file);
+        return result;
+    }
+    public static void readAllPotsPrps(String prpdirname)
+    {
+        File prpfolder = new File(prpdirname);
+        if (!prpfolder.isDirectory() || !prpfolder.exists())
+        {
+            m.err("Prp directory not in proper format or not found.");
+            return;
+        }
+        
+        File[] files = prpfolder.listFiles();
+        m.msg("Parsing files... count="+Integer.toString(files.length));
+        for(int i=0;i<files.length;i++)
+        {
+            File curfile = files[i];
+            if(curfile.getName().toLowerCase().endsWith(".prp"))
+            {
+                //open prp file and process it.
+                byte[] filedata = FileUtils.ReadFile(curfile);
+                
+                //do work.
+                context c = context.createFromBytestream(new Bytestream(filedata));
+                //c.readversion = version;
+                c.curFile = curfile.getName();
+                uru.moulprp.prpprocess.ProcessAllObjects(c);
+                //if(version==3) prputils.ProcessPotsPrp(filedata);
+                //if(version==6) prputils.ProcessAll(filedata);
+            }
+        }
+        
+        m.msg("Finished Processing all files.");
+        
+    }
 }

@@ -41,6 +41,14 @@ public class m
         {
             _outputTextArea.append(s+"\n");
         }
+        else
+        {
+            String errormsg = "Programming Error: shared.m messages are being generated before the output TextArea is set, or there is no output TextArea.\nThe error is: " + s;
+            System.out.println(errormsg);
+            //javax.swing.JFrame frame = new javax.swing.JFrame();
+            javax.swing.JOptionPane.showMessageDialog(null,errormsg);
+            
+        }
         
         String[] trapmessages = {"compile not implemented"};
         for(int i=0;i<trapmessages.length;i++)

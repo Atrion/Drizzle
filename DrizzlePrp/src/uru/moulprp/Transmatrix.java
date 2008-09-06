@@ -23,6 +23,7 @@ import uru.Bytestream;
 import uru.b;
 import shared.m;
 import uru.Bytedeque;
+import uru.e;
 
 //aka hsMatrix44
 public class Transmatrix extends uruobj
@@ -109,4 +110,28 @@ public class Transmatrix extends uruobj
         return result;
     }
     
+    public Flt[][] convertToFltArray()
+    {
+        Flt[][] result = new Flt[4][4];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                int datum = xmatrix[i*4+j];
+                result[i][j] = Flt.createFromData(datum);
+            }
+        }
+        return result;
+    }
+    
+    //returns null if not possible.
+    public Vertex convertTo3Vector()
+    {
+        Flt[][] flts = this.convertToFltArray();
+        Flt x = flts[0][3];
+        Flt y = flts[1][3];
+        Flt z = flts[2][3];
+        //e.ensure(flts[3][3]==1);
+        return new Vertex(x,y,z);
+    }
 }

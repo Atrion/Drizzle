@@ -50,10 +50,10 @@ public class x0001Sceneobject extends uruobj
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
-        spaninfo = new Uruobjectref(c);
-        animationinfo = new Uruobjectref(c);
-        regioninfo = new Uruobjectref(c);
-        soundinfo = new Uruobjectref(c);
+        spaninfo = new Uruobjectref(c); //drawinterface
+        animationinfo = new Uruobjectref(c); //simulation interface
+        regioninfo = new Uruobjectref(c); //coordinateinterface
+        soundinfo = new Uruobjectref(c); //audio interface
         count1 = data.readInt();
         objectrefs1 = new Uruobjectref[count1];
         for(int i=0;i<count1;i++)
@@ -88,4 +88,8 @@ public class x0001Sceneobject extends uruobj
         }
         scenenode.compile(deque);
     }
+    /*public Uruobjectref getChildByType(Typeid type)
+    {
+        return null;
+    }*/
 }

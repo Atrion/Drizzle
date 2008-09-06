@@ -65,17 +65,10 @@ public class Pageid extends uruobj
          
         //ctx = c;
         xOverridePrefix = c.sequencePrefix;
-    }
-    public int getRawData()
-    {
-        return prefix << 16 | suffix;
-    }
-    public void compile(Bytedeque deque)
-    {
         if(/*ctx.sequencePrefix*/xOverridePrefix!=null)
         {
             prefix = /*ctx.sequencePrefix*/xOverridePrefix;
-            m.msg("Using forced sequence prefix 0x"+Integer.toHexString(prefix));
+            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence prefix 0x"+Integer.toHexString(prefix));
             // I have no clue why, but this seems to be necessary
             // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
             // found for both Cyan and fan-created ages, it is what both PRPTool and PlasmaExplorer show
@@ -84,13 +77,16 @@ public class Pageid extends uruobj
                 ++prefix;
             }
         }
+    }
+    public int getRawData()
+    {
+        return prefix << 16 | suffix;
+    }
+    public void compile(Bytedeque deque)
+    {
         int rawdata = getRawData();
         // convert it to TPOTS format
-        m.msg("Writing "+toString());
-        if(prefix==97)
-        {
-            int dummy=0;
-        }
+        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing "+toString());
         int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
         deque.writeInt(newdata);
     }

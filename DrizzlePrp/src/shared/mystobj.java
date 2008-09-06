@@ -28,7 +28,7 @@ import shared.m;
  *
  * @author user
  */
-abstract public class mystobj
+abstract public class mystobj //implements compilable
 {
     public mystobj()
     {
@@ -46,7 +46,7 @@ abstract public class mystobj
     
     public void compile(Bytedeque data)
     {
-        m.err("Mystobj doesn't implement compile."+this.toString());
+        m.err("Mystobj doesn't implement compile. "+this.toString());
     }
     
     /*void compile(Bytedeque data)

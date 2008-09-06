@@ -56,6 +56,13 @@ public class PlAGAnim extends uruobj
         {
             //effects[i] = new effect(c);
             effects[i] = new PrpTaggedObject(c);
+            
+            //convert RelativeMatrixChannelApplicator to MatrixChannelApplicator
+            if(effects[i].type==Typeid.plRelativeMatrixChannelApplicator)
+            {
+                m.msg("PlAGAnim: converting RelativeMatrixChannelApplicator to MatrixChannelApplicator");
+                effects[i].type = Typeid.plMatrixChannelApplicator;
+            }
         }
         if(c.readversion==4)
         {
@@ -89,6 +96,24 @@ public class PlAGAnim extends uruobj
         {
             u1 = c.readByte();
             u2 = new Urustring(c);
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            c.writeByte(u1);
+            u2.compile(c);
+        }
+    }
+    public static class plRelativeMatrixChannelApplicator extends uruobj //myst5 only
+    {
+        byte u1;
+        Urustring u2;
+        
+        public plRelativeMatrixChannelApplicator(context c) throws readexception
+        {
+            u1 = c.readByte();
+            u2 = new Urustring(c);
+            //throw new readexception("PlRelativeMatrixChannelApplicator: Can read okay, but throwing error in order to ignore.");
         }
         
         public void compile(Bytedeque c)

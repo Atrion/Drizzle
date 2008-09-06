@@ -104,7 +104,7 @@ public class PlRailCameraMod extends uruobj
         public plAnimPath(context c) throws readexception
         {
             u1 = c.readInt();
-            if(c.readversion==6)
+            if(c.readversion==6||c.readversion==4)
             {
                 xu2a = new PrpTaggedObject(c);
                 e.ensure(xu2a.type==Typeid.plCompoundController); //It shouldn't be anything else.

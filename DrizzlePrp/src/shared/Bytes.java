@@ -66,6 +66,70 @@ public class Bytes
     {
         return create(FileUtils.ReadFile(filename));
     }
+    public static Bytes createFromArray(byte[] array, int offset, int length)
+    {
+        byte[] result = new byte[length];
+        for(int i=0;i<length;i++) result[i] = array[offset+i];
+        return new Bytes(result);
+    }
+    public static void copyFromArrayToArray(byte[] inArray, int inOffset, byte[] outArray, int outOffset, int length)
+    {
+        for(int i=0;i<length;i++)
+        {
+            outArray[outOffset+i] = inArray[inOffset+i];
+        }
+    }
+    public static int BytesToInt32(byte[] bytes, int startpos)
+    {
+        //return (((int)bytes[startpos+0])<<0) | (((int)bytes[startpos+1])<<8) | (((int)bytes[startpos+2])<<16) | (((int)bytes[startpos+3])<<24);
+        int a = ByteToInt32(bytes[startpos+0])<<0;
+        int b = ByteToInt32(bytes[startpos+1])<<8;
+        int c = ByteToInt32(bytes[startpos+2])<<16;
+        int d = ByteToInt32(bytes[startpos+3])<<24;
+        int result = a | b | c | d;
+        return result;
+    }
+    public static short BytesToInt16(byte[] bytes, int startpos)
+    {
+        int a = ByteToInt32(bytes[startpos+0])<<0;
+        int b = ByteToInt32(bytes[startpos+1])<<8;
+        short result = (short)( a | b );
+        return result;
+        
+    }
+    public static long BytesToInt64(byte[] bytes, int startpos)
+    {
+        int a = ByteToInt32(bytes[startpos+0])<<0;
+        int b = ByteToInt32(bytes[startpos+1])<<8;
+        int c = ByteToInt32(bytes[startpos+2])<<16;
+        int d = ByteToInt32(bytes[startpos+3])<<24;
+        int e = ByteToInt32(bytes[startpos+0])<<32;
+        int f = ByteToInt32(bytes[startpos+1])<<40;
+        int g = ByteToInt32(bytes[startpos+2])<<48;
+        int h = ByteToInt32(bytes[startpos+3])<<56;
+        int result = a | b | c | d | e | f | g | h;
+        return result;
+    }
+    
+    public static byte[] flatten(byte[][] bytes)
+    {
+        int size=0;
+        for(int i=0;i<bytes.length;i++)
+        {
+            size += bytes[i].length;
+        }
+
+        byte[] result = new byte[size];
+        int pos = 0;
+        for(int i=0;i<bytes.length;i++)
+        {
+            int l = bytes[i].length;
+            Bytes.copyFromArrayToArray(bytes[i], 0, result, pos, l);
+            pos += l;
+        }
+
+        return result;
+    }
     public void saveAsFile(String filename)
     {
         FileUtils.WriteFile(filename, bytes);

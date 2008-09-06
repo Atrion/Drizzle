@@ -276,13 +276,56 @@ public class PrpMessage extends PrpTaggedObject
         PlAgeLinkStruct ageLinkStruct;
         Urustring ustr;
         
+        HsBitVector xbv;
+        Wpstr xs1;
+        Wpstr xs2;
+        HsBitVector xbv2;
+        Wpstr xs3;
+        Wpstr xs4;
+        Wpstr xs5;
+        HsBitVector xbv3;
+        Wpstr xs6;
+        int xi1;
+        int xi2;
+        int xi3;
+        int xi4;
+        byte xb;
+        
         public PlLinkToAgeMsg(context c) throws readexception
         {
             parent = new PlMessage(c);
-            u1 = c.readByte();
-            ageLinkStruct = new PlAgeLinkStruct(c);
-            //c.readBytes(31);
-            ustr = new Urustring(c);
+            if(c.readversion==6||c.readversion==3)
+            {
+                u1 = c.readByte();
+                ageLinkStruct = new PlAgeLinkStruct(c);
+                //c.readBytes(31);
+                ustr = new Urustring(c);
+            }
+            else if(c.readversion==4)
+            {
+                xbv = new HsBitVector(c);
+                int flag = xbv.get(0);
+                if((flag&1)!=0) xs1 = new Wpstr(c);
+                if((flag&2)!=0) xs2 = new Wpstr(c);
+                if((flag&4)!=0)
+                {
+                    xbv2 = new HsBitVector(c);
+                    int flag2 = xbv2.get(0);
+                    if((flag2&1)!=0) xs3 = new Wpstr(c);
+                    if((flag2&2)!=0) xs4 = new Wpstr(c);
+                    if((flag2&4)!=0) xs5 = new Wpstr(c);
+                
+                }
+                xbv3 = new HsBitVector(c);
+                int flag3 = xbv3.get(0);
+                if((flag3&1)!=0) xs6 = new Wpstr(c);
+                if((flag3&2)!=0) xi1 = c.readInt();
+                if((flag3&4)!=0) xi1 = c.readInt();
+                if((flag3&8)!=0) xi1 = c.readInt();
+                if((flag3&16)!=0) xi1 = c.readInt();
+                xb = c.readByte();
+                throw new readexception("PlLinkToAgeMsg: can read okay but failing in order to ignore.");
+            }
         }
         
         public void compile(Bytedeque c)
@@ -721,7 +764,15 @@ public class PrpMessage extends PrpTaggedObject
         {
             parent = new PlMessage(c);
             u1 = c.readByte();
-            u2 = c.readInt();
+            if(c.readversion==3||c.readversion==6)
+            {
+                u2 = c.readInt();//always 0 in pots
+                //m.msg("PlExcludeRegionMsg:u2="+Integer.toString(u2));
+            }
+            else if(c.readversion==4)
+            {
+                u2 = 0; //since it's always 0 in pots anyway.
+            }
             //pageid = new Pageid(c);
         }
         

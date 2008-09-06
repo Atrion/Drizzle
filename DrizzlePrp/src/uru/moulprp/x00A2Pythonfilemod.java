@@ -104,6 +104,19 @@ public class x00A2Pythonfilemod extends uruobj
                 case 13:
                     xString = new Bstr(c);
                     break;
+                case 20:
+                case 23:
+                    if(c.readversion==4)
+                    {
+                        xString = new Bstr(c);
+                        m.warn("PythonFileMod: usinng a case that differs between versions.");
+                    }
+                    else if(c.readversion==6||c.readversion==3)
+                    {
+                        e.ensure(type!=23); //type 23 shouldn't occur.
+                        xRef = new Uruobjectref(c);
+                    }
+                    break;
                 case 5:
                 case 6:
                 case 7:
@@ -118,7 +131,6 @@ public class x00A2Pythonfilemod extends uruobj
                 case 17:
                 case 18:
                 case 19:
-                case 20:
                 case 21:
                     xRef = new Uruobjectref(c);
                     break;
@@ -146,6 +158,19 @@ public class x00A2Pythonfilemod extends uruobj
                 case 13:
                     xString.compile(deque);
                     break;
+                case 20:
+                case 23:
+                    if(xString!=null)
+                    {
+                        xString.compile(deque);
+                        m.warn("PythonFileMod: usinng a case that differs between versions.");
+                    }
+                    else
+                    {
+                        e.ensure(xRef!=null); //if it's not a string it should be a ref.
+                        xRef.compile(deque);
+                    }
+                    break;
                 case 5:
                 case 6:
                 case 7:
@@ -160,7 +185,7 @@ public class x00A2Pythonfilemod extends uruobj
                 case 17:
                 case 18:
                 case 19:
-                case 20:
+                //case 20:
                 case 21:
                     xRef.compile(deque);
                     break;

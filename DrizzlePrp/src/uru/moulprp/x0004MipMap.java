@@ -26,6 +26,7 @@ import uru.e;
 import shared.m;
 import java.util.Vector;
 import uru.generics;
+import shared.Bytes;
 
 /*BASE
 DWORD TexWidth
@@ -76,10 +77,60 @@ public class x0004MipMap extends uruobj
     int xjpgsize2;
     byte[] xjpegfile2;
     byte xmipmaplevels;
-    int[][] xagrb;
-    byte[][] xtexel;
+    //int[][] xagrb;
+    byte[][] xagrb;
+    //byte[][] xtexel;
+    Image.Dxt xDxt;
     
-    public x0004MipMap(context c)//,boolean hasHeader)
+    public void invert()
+    {
+        switch(parent.type)
+        {
+            case 0x00:
+                /*byte[] data = Bytes.flatten(xagrb);
+                Image.Agrb image = new Image.Agrb(data,xmipmaplevels,texwidth,texheight);
+                image.invert();
+                byte[][] newXagrb = image.save();
+                xagrb = newXagrb;*/
+                m.err("Image convert not implemented.");
+                break;
+            case 0x01:
+                //byte[] data2 = Bytes.flatten(xtexel);
+                //Image.Dxt image2 = new Image.Dxt(data2,xmipmaplevels,texwidth,texheight, parent.xtexel_size);
+                //image2.invert();
+                //byte[][] newDxt = image2.save();
+                //xtexel = newDxt;
+                xDxt.invert();
+                break;
+            case 0x02:
+                m.err("Image convert not implemented.");
+                break;
+            default:
+                m.err("PlMipMap: invert: unexpected type.");
+                break;
+        }
+    }
+    
+    public void rotate90clockwise()
+    {
+        switch(parent.type)
+        {
+            case 0x00:
+                m.err("Image rotate not implemented.");
+                break;
+            case 0x01:
+                xDxt.rotate90clockwise();
+                break;
+            case 0x02:
+                m.err("Image rotate not implemented.");
+                break;
+            default:
+                m.err("PlMipMap: invert: unexpected type.");
+                break;
+        }
+    }
+    
+    public x0004MipMap(context c) throws readexception //,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
@@ -93,17 +144,18 @@ public class x0004MipMap extends uruobj
         {
             case 0x00:
                 //xmipmaplevels = data.readByte();
-                xagrb = new int[xmipmaplevels][];
+                xagrb = new byte[xmipmaplevels][];
                 //this may be wrong, see how its done in case 0x01.
                 for(int i=0;i<xmipmaplevels;i++)
                 {
                     int levelsize = (texwidth >>> i)*(texheight >>> i);
-                    xagrb[i] = data.readInts(levelsize);
+                    xagrb[i] = data.readBytes(levelsize*4);
                 }
                 break;
             case 0x01:
                 //xmipmaplevels = data.readByte();
-                xtexel = new byte[xmipmaplevels][];
+                xDxt = new Image.Dxt(data, xmipmaplevels,texwidth,texheight,parent.xtexel_size);
+                /*xtexel = new byte[xmipmaplevels][];
                 for(int i=0;i<xmipmaplevels;i++)
                 {
                     //see ptMipMap in pyprp
@@ -121,7 +173,7 @@ public class x0004MipMap extends uruobj
                         levelsize = levelwidth * levelheight * b.ByteToInt32(parent.xtexel_size) / 16; //16 pixels per texel.
                     }
                     xtexel[i] = data.readBytes(levelsize);
-                }
+                }*/
                 break;
             case 0x02:
                 xtype = data.readByte();
@@ -222,12 +274,13 @@ public class x0004MipMap extends uruobj
                 for(int i=0;i<xmipmaplevels;i++)
                 {
                     int levelsize = (texwidth >>> i)*(texheight >>> i);
-                    deque.writeInts(xagrb[i]);
+                    deque.writeBytes(xagrb[i]);
                 }
                 break;
             case 0x01:
                 //deque.writeByte(xmipmaplevels);
-                for(int i=0;i<xmipmaplevels;i++)
+                xDxt.compile(deque);
+                /*for(int i=0;i<xmipmaplevels;i++)
                 {
                     int levelsize;
                     int levelwidth = texwidth >>> i;
@@ -241,7 +294,7 @@ public class x0004MipMap extends uruobj
                         levelsize = levelwidth * levelheight * b.ByteToInt32(parent.xtexel_size) / 16; //16 pixels per texel.
                     }
                     deque.writeBytes(xtexel[i]);
-                }
+                }*/
                 break;
             case 0x02:
                 //deque.writeByte(xu1);

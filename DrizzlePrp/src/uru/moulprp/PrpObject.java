@@ -285,6 +285,10 @@ public class PrpObject extends uruobj
                 return new PrpMessage.PlRideAnimatedPhysMsg(c);
             case plSoftVolumeInvert:
                 return new PlSoftVolumeInvert(c);
+            case plLayerBink:
+                return new PlLayerBink(c);
+            case plRelativeMatrixChannelApplicator:
+                return new PlAGAnim.plRelativeMatrixChannelApplicator(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new readexception("prpobject: unhandled type.: "+type.toString());
