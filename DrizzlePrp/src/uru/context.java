@@ -47,7 +47,11 @@ public class context extends shared.BaseContext
     public int curRootObjectOffset;
     public int curRootObjectSize;
     public int curRootObjectEnd;
+    
+    //overrides...
     public Integer sequencePrefix;
+    public String ageName;
+    
 
     //public Typeid typesToRead;
 

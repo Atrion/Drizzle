@@ -174,6 +174,17 @@ public class b
         bytes[2+offset] = (byte)((value >> 16) & 0xFF);
         bytes[3+offset] = (byte)((value >> 24) & 0xFF);
     }
+    public static void Int64IntoBytes(long value, byte[] bytes, int offset)
+    {
+        bytes[0+offset] = (byte)((value >> 0) & 0xFF);
+        bytes[1+offset] = (byte)((value >> 8) & 0xFF);
+        bytes[2+offset] = (byte)((value >> 16) & 0xFF);
+        bytes[3+offset] = (byte)((value >> 24) & 0xFF);
+        bytes[4+offset] = (byte)((value >> 32) & 0xFF);
+        bytes[5+offset] = (byte)((value >> 40) & 0xFF);
+        bytes[6+offset] = (byte)((value >> 48) & 0xFF);
+        bytes[7+offset] = (byte)((value >> 56) & 0xFF);
+    }
     public static byte[] Int16ToBytes(short value)
     {
         byte[] result = new byte[2];
@@ -250,7 +261,12 @@ public class b
     {
         CopyBytes(from,0,to,tostart,from.length);
     }
-
+    public static byte[] CopyBytes(byte[] from)
+    {
+        byte[] result = new byte[from.length];
+        for(int i=0;i<from.length;i++) result[i] = from[i];
+        return result;
+    }
     public static byte[][] splitBytes(byte[] bytesToSplit, byte splitter)
     {
         int length = bytesToSplit.length;

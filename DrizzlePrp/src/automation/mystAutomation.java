@@ -1120,7 +1120,8 @@ public class mystAutomation
                     Typeid.plLayer, Typeid.hsGMaterial, Typeid.plDrawableSpans,
                     Typeid.plViewFaceModifier,
                     Typeid.plLayerAnimation,
-                    Typeid.plBoundInterface,
+                    Typeid.plLayerBink, //must have the .bnk files copied over or Uru will crash.
+                    //Typeid.plBoundInterface,
                     
                     Typeid.plHKPhysical, Typeid.plSimulationInterface,
                     Typeid.plDirectionalLightInfo, Typeid.plOmniLightInfo, Typeid.plSpotLightInfo,
@@ -1128,23 +1129,22 @@ public class mystAutomation
                     Typeid.plParticleSystem, Typeid.plParticleLocalWind, Typeid.plParticleCollisionEffectDie,
                     Typeid.plAudioInterface, Typeid.plRandomSoundMod, Typeid.plSoundBuffer, Typeid.plWinAudio, Typeid.plWin32StreamingSound, Typeid.plWin32StaticSound, Typeid.plStereizer,
                     Typeid.plDrawInterface,
-                    Typeid.plSoftVolumeSimple,
-                    Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion,
-                    Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
-                    Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
-                    Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
-                    Typeid.plPointShadowMaster,
-                    Typeid.plLayerBink,
-                    Typeid.plDynamicEnvMap,
-                    Typeid.plWaveSet7,
-                    Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
-                    Typeid.plPythonFileMod,
-                    Typeid.plResponderModifier,
+                    //Typeid.plSoftVolumeSimple,
+                    //Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion,
+                    //Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
+                    //Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
+                    //Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
+                    //Typeid.plPointShadowMaster,
+                    //Typeid.plDynamicEnvMap,
+                    //Typeid.plWaveSet7,
+                    //Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
+                    //Typeid.plPythonFileMod,
+                    //Typeid.plResponderModifier,
                 };
                 String[] namestarts={
-                    //"boulder01",
+                    /*//"boulder01",
                     "bridge poles05", //works when plLayerBink is present.
-                    "bubble01haloa01", //works!
+                    "bubble01haloa01", //works!*/
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
@@ -1164,6 +1164,10 @@ public class mystAutomation
         prefices.put("Tahgira", 88);
         prefices.put("Todelmer", 87);
         
+        HashMap<String, String> agenames = new HashMap<String, String>();
+        agenames.put("Descent", "DescentMystV");
+        agenames.put("Kveer", "KveerMystV");
+        
         Typeid[] readable = mystAutomation.moulReadable;
         
         
@@ -1171,8 +1175,9 @@ public class mystAutomation
         Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
         for(String filename: fnifiles)
         {
+            String agename = getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -1185,9 +1190,9 @@ public class mystAutomation
         Vector<String> agefiles = filterFilenamesByExtension(files, ".age");
         for(String filename: agefiles)
         {
-            String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + filename;
             String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -1201,6 +1206,8 @@ public class mystAutomation
                 decryptedData = agefile.saveToBytes();
             }
             
+            //
+            
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
         }
@@ -1210,9 +1217,9 @@ public class mystAutomation
         Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
         for(String filename: prpfiles)
         {
-            String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + filename.replace("_", "_District_");
             String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames).replace("_", "_District_");
             
             Bytes prpdata = Bytes.createFromFile(infile);
             Bytestream bytestream = Bytestream.createFromBytes(prpdata);
@@ -1224,6 +1231,13 @@ public class mystAutomation
             if(prefix!=null)
             {
                 c.sequencePrefix = prefix;
+            }
+            
+            //modify agename if Age is in list.
+            String newAgename = agenames.get(agename);
+            if(newAgename!=null)
+            {
+                c.ageName = newAgename;
             }
 
             prpfile prp = prpfile.createFromContext(c, readable);
@@ -1237,13 +1251,27 @@ public class mystAutomation
         for(String filename: sumfiles)
         {
             String agename = getAgenameFromFilename(filename);
-            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", agename);
-            FileUtils.WriteFile(outfolder+"/dat/"+filename, sum1);
+            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", replaceAgenameIfApplicable(agename, agenames));
+            FileUtils.WriteFile(outfolder+"/dat/"+replaceAgenameIfApplicable(filename, agenames), sum1);
         }
         
         
         //All done!
         m.msg("Done MystV work!");
+    }
+    
+    public static String replaceAgenameIfApplicable(String filename, HashMap<String, String>agenames)
+    {
+        String agename = getAgenameFromFilename(filename);
+        String newagename = agenames.get(agename);
+        if(newagename!=null)
+        {
+            return newagename+filename.substring(agename.length());
+        }
+        else
+        {
+            return filename;
+        }
     }
     
     public static Vector<String> filterFilenamesByExtension(Vector<String> files, String extension)

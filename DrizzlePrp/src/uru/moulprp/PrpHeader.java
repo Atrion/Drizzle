@@ -132,6 +132,13 @@ public class PrpHeader extends uruobj
         }
         //process the object index, which is *not* a part of this struct.
         //objectindex = new PrpObjectIndex(new Bytestream(data,offsetToObjectIndex));
+        
+        //override the agename
+        if(c.ageName!=null)
+        {
+            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Altering agename in prp header from "+agename.toString()+" to "+c.ageName);
+            agename = Urustring.createFromString(c.ageName);
+        }
     }
     public void compile(Bytedeque deque)
     {

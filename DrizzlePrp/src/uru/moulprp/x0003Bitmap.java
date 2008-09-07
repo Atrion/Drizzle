@@ -47,14 +47,14 @@ public class x0003Bitmap extends uruobj
         //parent = new x0002Keyedobject(data);
         version = data.readByte(); e.ensureflags(version,2);
         bpp = data.readByte(); e.ensureflags(bpp,32);
-        cpb = data.readByte(); //unknown
+        cpb = data.readByte(); //unknown //space?
         flags = data.readShort();
-        type = data.readByte(); //1=DXT1, 2=DXT2, ... 5=DXT5
+        type = data.readByte();
         if(type!=0 && type!=2)
         {
             xtexel_size = data.readByte(); //bytes per 4x4 texel.
         }
-        subtype = data.readByte(); e.ensureflags(subtype,0,1,5);
+        subtype = data.readByte(); e.ensureflags(subtype,0,1,5); //1=DXT1, 2=DXT2, ... 5=DXT5
         u1 = data.readInt();
         u2 = data.readInt();
     }

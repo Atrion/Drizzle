@@ -43,6 +43,10 @@ public class PlAGMasterMod extends uruobj
     byte u4;
     Uruobjectref xu5;
     
+    int xxrefscount;
+    Uruobjectref[] xxrefs;
+    
+    
     public PlAGMasterMod(context c) throws readexception
     {
         //if(hasHeader) xheader = new Objheader(c);
@@ -73,9 +77,11 @@ public class PlAGMasterMod extends uruobj
         }
         else if(c.readversion==4)
         {
-            int ucount = c.readInt();
-            if(ucount!=0) throw new readexception("PlAGMasterMod: unhandled case.");
+            xxrefscount = c.readInt();
+            //if(ucount!=0) throw new readexception("PlAGMasterMod: unhandled case.");
             //I think this is an Uruobjectref count.
+            xxrefs = c.readVector(Uruobjectref.class, xxrefscount);
+            if(xxrefscount!=0) m.warn("PlAGMasterMod: ignoring some refs.");
         }
         //u4 = new Uruobjectref(c);
     }
