@@ -38,6 +38,7 @@ import uru.context;
 import uru.moulprp.Typeid;
 import shared.Bytes;
 import java.util.Vector;
+import shared.GuiUtils;
 
 /**
  *
@@ -70,6 +71,30 @@ public class Gui extends javax.swing.JFrame {
                 "Siralehn.age","Siralehn.fni","Siralehn.sum","Siralehn_Birds.prp","Siralehn_Drawing01.prp","Siralehn_Drawing02.prp","Siralehn_Drawing03.prp","Siralehn_Drawing04.prp","Siralehn_Drawing05.prp","Siralehn_Drawing06.prp","Siralehn_Drawing07.prp","Siralehn_Drawing08.prp","Siralehn_Exterior.prp","Siralehn_rock.prp","Siralehn_srlnEsherIdleBeach.prp","Siralehn_srlnEsherIdleLab.prp","Siralehn_srlnEsher_NolobenBeach.prp","Siralehn_srlnEsher_NolobenKeep.prp","Siralehn_srlnEsher_NolobenLab.prp","Siralehn_srlnKeepInter.prp","Siralehn_Textures.prp","Siralehn_tunnels.prp",
                 "Tahgira.age","Tahgira.fni","Tahgira.sum","Tahgira_Exterior.prp","Tahgira_IceCave.prp","Tahgira_Textures.prp","Tahgira_thgrEsherIdleIntro.prp","Tahgira_thgrEsherIdleTake.prp","Tahgira_thgrEsher_TahgiraGrave.prp","Tahgira_thgrEsher_TahgiraIntro.prp","Tahgira_thgrEsher_TahgiraTake.prp","Tahgira_thgrEsher_TahgiraThermals.prp","Tahgira_thgrEsher_TahgiraVillage.prp",
                 "Todelmer.age","Todelmer.fni","Todelmer.sum","Todelmer_Exterior.prp","Todelmer_InteriorPillar1.prp","Todelmer_InteriorPillar3.prp","Todelmer_MiniScope.prp","Todelmer_Pod.prp","Todelmer_Sky.prp","Todelmer_tdlmEsherIdleP3.prp","Todelmer_tdlmEsherIdleRing.prp","Todelmer_tdlmEsher_TodelmerP1.prp","Todelmer_tdlmEsher_TodelmerP3.prp","Todelmer_tdlmEsher_TodelmerRing.prp","Todelmer_Textures.prp",
+            };
+            public int getSize() {
+                return strings.length;
+            }
+            public Object getElementAt(int index) {
+                return strings[index];
+            }
+        });
+        listState3.setModel(new javax.swing.AbstractListModel() {
+            String strings[] = {
+                "Dereno.age","Dereno.fni","Dereno.sum","Dereno_District_DrnoExterior.prp","Dereno_District_DrnoPod.prp","Dereno_District_Textures.prp","Dereno_District_BuiltIn.prp",
+                "EderDelin.age","EderDelin.fni","EderDelin.sum","EderDelin_District_garden.prp","EderDelin_District_BuiltIn.prp","EderDelin_District_Textures.prp",
+                "EderTsogal.age","EderTsogal.fni","EderTsogal.sum","EderTsogal_District_tsoGarden.prp","EderTsogal_District_Textures.prp","EderTsogal_District_BuiltIn.prp",
+                "GuildPub-Cartographers.age","GuildPub-Cartographers.fni","GuildPub-Cartographers.sum","GuildPub-Cartographers_District_Pub.prp","GuildPub-Cartographers_District_Textures.prp","GuildPub-Cartographers_District_BuiltIn.prp",
+                "GuildPub-Greeters.age","GuildPub-Greeters.fni","GuildPub-Greeters.sum","GuildPub-Greeters_District_Pub.prp","GuildPub-Greeters_District_Textures.prp","GuildPub-Greeters_District_BuiltIn.prp",
+                "GuildPub-Maintainers.age","GuildPub-Maintainers.fni","GuildPub-Maintainers.sum","GuildPub-Maintainers_District_Pub.prp","GuildPub-Maintainers_District_Textures.prp","GuildPub-Maintainers_District_BuiltIn.prp",
+                "GuildPub-Messengers.age","GuildPub-Messengers.fni","GuildPub-Messengers.sum","GuildPub-Messengers_District_Pub.prp","GuildPub-Messengers_District_Textures.prp","GuildPub-Messengers_District_BuiltIn.prp",
+                "GuildPub-Writers.age","GuildPub-Writers.fni","GuildPub-Writers.sum","GuildPub-Writers_District_Pub.prp","GuildPub-Writers_District_Textures.prp","GuildPub-Writers_District_BuiltIn.prp",
+                "Jalak.age","Jalak.fni","Jalak.sum","Jalak_District_jlakArena.prp","Jalak_District_Textures.prp","Jalak_District_BuiltIn.prp",
+                "LiveBahroCaves.age","LiveBahroCaves.fni","LiveBahroCaves.sum","LiveBahroCaves_District_MINKcave.prp","LiveBahroCaves_District_POTScave.prp","LiveBahroCaves_District_PODcave.prp","LiveBahroCaves_District_BlueSpiralCave.prp","LiveBahroCaves_District_TheSpecialPage.prp","LiveBahroCaves_District_Textures.prp","LiveBahroCaves_District_BuiltIn.prp",
+                "Minkata.age","Minkata.fni","Minkata.sum","Minkata_District_minkExteriorDay.prp","Minkata_District_minkNightLinkSounds.prp","Minkata_District_minkExteriorNight.prp","Minkata_District_minkExcludeRegions.prp","Minkata_District_minkDistCraterPhysicals.prp","Minkata_District_minkDayLinkSounds.prp","Minkata_District_minkCameras.prp","Minkata_District_Textures.prp","Minkata_District_BuiltIn.prp",
+                "Negilahn.age","Negilahn.fni","Negilahn.sum","Negilahn_District_Jungle.prp","Negilahn_District_MuseumPod.prp","Negilahn_District_Textures.prp","Negilahn_District_BuiltIn.prp",
+                "Payiferen.age","Payiferen.fni","Payiferen.sum","Payiferen_District_Pod.prp","Payiferen_District_Textures.prp","Payiferen_District_BuiltIn.prp",
+                "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
             };
             public int getSize() {
                 return strings.length;
@@ -353,6 +378,19 @@ public class Gui extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton62 = new javax.swing.JButton();
         jButton63 = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        textfieldState6 = new shared.State.TextfieldState();
+        textfieldState8 = new shared.State.TextfieldState();
+        jButton64 = new javax.swing.JButton();
+        jButton65 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jButton66 = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        listState3 = new shared.State.ListState();
+        jButton67 = new javax.swing.JButton();
+        jButton68 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         checkboxState1 = new shared.State.CheckboxState();
         checkboxState3 = new shared.State.CheckboxState();
@@ -866,6 +904,78 @@ public class Gui extends javax.swing.JFrame {
         jButton63.setBounds(550, 40, 81, 23);
 
         jTabbedPane2.addTab("Pots", jPanel17);
+
+        jPanel19.setLayout(null);
+
+        textfieldState6.setText("C:\\Documents and Settings\\user\\Desktop\\output\\mouloffline\\final3");
+        textfieldState6.setName("moulintext"); // NOI18N
+        jPanel19.add(textfieldState6);
+        textfieldState6.setBounds(130, 10, 510, 20);
+
+        textfieldState8.setText("C:\\Documents and Settings\\user\\Desktop\\output");
+        textfieldState8.setName("moulouttext"); // NOI18N
+        jPanel19.add(textfieldState8);
+        textfieldState8.setBounds(130, 60, 510, 20);
+
+        jButton64.setText("Select...");
+        jButton64.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton64ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton64);
+        jButton64.setBounds(660, 20, 80, 23);
+
+        jButton65.setText("Select....");
+        jButton65.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton65ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton65);
+        jButton65.setBounds(660, 60, 80, 23);
+
+        jLabel12.setText("Moul folder:");
+        jPanel19.add(jLabel12);
+        jLabel12.setBounds(40, 10, 70, 14);
+
+        jLabel13.setText("Output folder:");
+        jPanel19.add(jLabel13);
+        jLabel13.setBounds(30, 50, 80, 14);
+
+        jButton66.setText("Start...");
+        jPanel19.add(jButton66);
+        jButton66.setBounds(490, 200, 71, 23);
+
+        listState3.setName("moulfiles"); // NOI18N
+        jScrollPane8.setViewportView(listState3);
+
+        jPanel19.add(jScrollPane8);
+        jScrollPane8.setBounds(180, 142, 290, 150);
+
+        jButton67.setText("Select all");
+        jButton67.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton67ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton67);
+        jButton67.setBounds(37, 140, 130, 23);
+
+        jButton68.setText("Select none");
+        jButton68.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton68ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton68);
+        jButton68.setBounds(40, 170, 130, 23);
+
+        jLabel14.setText("Files to process:");
+        jPanel19.add(jLabel14);
+        jLabel14.setBounds(140, 110, 140, 14);
+
+        jTabbedPane2.addTab("Moul", jPanel19);
 
         jPanel18.setLayout(null);
 
@@ -2461,11 +2571,11 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton50ActionPerformed
 
     private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
-        this.textfieldState4.setText(this.getUserSelectedFolder());
+        GuiUtils.getUserSelectedFolder(this.textfieldState4);
     }//GEN-LAST:event_jButton51ActionPerformed
 
     private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
-        this.textfieldState5.setText(this.getUserSelectedFolder());
+        GuiUtils.getUserSelectedFolder(this.textfieldState5);
     }//GEN-LAST:event_jButton52ActionPerformed
 
     private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
@@ -2493,14 +2603,14 @@ private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton58ActionPerformed
     //shared.State.AllStates.test();
-    int size = listState2.getModel().getSize();
-    listState2.setSelectionInterval(0, size-1);
+    listState2.selectAll();
 }//GEN-LAST:event_jButton58ActionPerformed
 
 private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton59ActionPerformed
     //shared.State.AllStates.test2();
-    listState2.getSelectionModel().clearSelection();
-    //listState2.setSelectionInterval(0, 0);
+    listState2.selectNone();
+    //listState2.setSelectionInterval(0, 0);    listState2.getSelectionModel().clearSelection();
+
 }//GEN-LAST:event_jButton59ActionPerformed
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -2564,11 +2674,11 @@ private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton60ActionPerformed
 
 private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
-        this.textfieldState2.setText(this.getUserSelectedFolder());
+        GuiUtils.getUserSelectedFolder(this.textfieldState2);
 }//GEN-LAST:event_jButton55ActionPerformed
 
 private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton56ActionPerformed
-        this.textfieldState3.setText(this.getUserSelectedFolder());
+        GuiUtils.getUserSelectedFolder(this.textfieldState3);
 }//GEN-LAST:event_jButton56ActionPerformed
 
 private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton61ActionPerformed
@@ -2587,19 +2697,35 @@ private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton57ActionPerformed
 
 private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton63ActionPerformed
-            this.textfieldState7.setText(this.getUserSelectedFolder());
+            GuiUtils.getUserSelectedFolder(this.textfieldState7);
 }//GEN-LAST:event_jButton63ActionPerformed
 
 private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton62ActionPerformed
     automation.mystAutomation.readAllPotsPrps(this.textfieldState7.getText());
 }//GEN-LAST:event_jButton62ActionPerformed
+
+private void jButton67ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton67ActionPerformed
+    listState3.selectAll();
+}//GEN-LAST:event_jButton67ActionPerformed
+
+private void jButton68ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton68ActionPerformed
+    listState3.selectNone();
+}//GEN-LAST:event_jButton68ActionPerformed
+
+private void jButton64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton64ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState6);
+}//GEN-LAST:event_jButton64ActionPerformed
+
+private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton65ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState8);
+}//GEN-LAST:event_jButton65ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
     this.
 }*/
 
-    private String getUserSelectedFolder()
+    /*private String getUserSelectedFolder()
     {
         if(fc==null) fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -2610,7 +2736,7 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             return file;
         }
         return "";
-    }
+    }*/
     /**
      * @param args the command line arguments
      */
@@ -2701,6 +2827,11 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton61;
     private javax.swing.JButton jButton62;
     private javax.swing.JButton jButton63;
+    private javax.swing.JButton jButton64;
+    private javax.swing.JButton jButton65;
+    private javax.swing.JButton jButton66;
+    private javax.swing.JButton jButton67;
+    private javax.swing.JButton jButton68;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -2709,6 +2840,9 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2727,6 +2861,7 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2749,6 +2884,7 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
@@ -2762,13 +2898,16 @@ private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JTextField jTextField5;
     private shared.State.ListState listState1;
     private shared.State.ListState listState2;
+    private shared.State.ListState listState3;
     private shared.State.TextareaState textareaState1;
     private shared.State.TextfieldState textfieldState1;
     private shared.State.TextfieldState textfieldState2;
     private shared.State.TextfieldState textfieldState3;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;
+    private shared.State.TextfieldState textfieldState6;
     private shared.State.TextfieldState textfieldState7;
+    private shared.State.TextfieldState textfieldState8;
     // End of variables declaration//GEN-END:variables
     
 }

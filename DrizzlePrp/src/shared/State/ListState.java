@@ -43,5 +43,15 @@ public class ListState extends javax.swing.JList implements IState
     {
         return this.getName();
     }
+    
+    public void selectAll()
+    {
+        int size =this.getModel().getSize();
+        this.setSelectionInterval(0, size-1);        
+    }
+    public void selectNone()
+    {
+        this.getSelectionModel().clearSelection();
+    }
 
 }
