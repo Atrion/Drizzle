@@ -82,7 +82,7 @@ public class PrpHeader extends uruobj
                 u2 = data.readShort();
                 u3 = data.readInt();
                 u4 = data.readInt();
-                shared.FileUtils.AppendText(_staticsettings.outputdir+"pageid.txt", "agename="+agename+" pagename="+pagename+" pageid="+pageid.toString()+"\n");
+                //shared.FileUtils.AppendText(_staticsettings.outputdir+"pageid.txt", "agename="+agename+" pagename="+pagename+" pageid="+pageid.toString()+"\n");
             }
             else
             {
@@ -132,6 +132,8 @@ public class PrpHeader extends uruobj
         }
         //process the object index, which is *not* a part of this struct.
         //objectindex = new PrpObjectIndex(new Bytestream(data,offsetToObjectIndex));
+        
+        if(shared.State.AllStates.getStateAsBoolean("reportPrp")) m.msg("PrpFile: name="+c.curFile+" readversion="+Integer.toString(c.readversion)+" agename="+agename+" pagename="+pagename+" pageid="+pageid.toString());
         
         //override the agename
         if(c.ageName!=null)

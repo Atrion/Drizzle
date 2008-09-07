@@ -1,6 +1,7 @@
 package shared.State;
 
 import javax.swing.event.ListSelectionEvent;
+import java.util.Vector;
 
 
 
@@ -52,6 +53,13 @@ public class ListState extends javax.swing.JList implements IState
     public void selectNone()
     {
         this.getSelectionModel().clearSelection();
+    }
+    public Vector<String> getSelectedAsStrings()
+    {
+        Object[] objs = (Object[])this.getSelectedValues();
+        Vector<String> list = new Vector<String>();
+        for(Object obj: objs) list.add((String)obj);
+        return list;
     }
 
 }

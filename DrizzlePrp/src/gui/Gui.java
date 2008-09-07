@@ -397,6 +397,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState4 = new shared.State.CheckboxState();
         checkboxState5 = new shared.State.CheckboxState();
         checkboxState6 = new shared.State.CheckboxState();
+        checkboxState7 = new shared.State.CheckboxState();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -907,7 +908,7 @@ public class Gui extends javax.swing.JFrame {
 
         jPanel19.setLayout(null);
 
-        textfieldState6.setText("C:\\Documents and Settings\\user\\Desktop\\output\\mouloffline\\final3");
+        textfieldState6.setText("D:\\a\\winedrive\\drive_c\\MystOnline\\Program Files\\Myst Online");
         textfieldState6.setName("moulintext"); // NOI18N
         jPanel19.add(textfieldState6);
         textfieldState6.setBounds(130, 10, 510, 20);
@@ -944,6 +945,11 @@ public class Gui extends javax.swing.JFrame {
         jLabel13.setBounds(30, 50, 80, 14);
 
         jButton66.setText("Start...");
+        jButton66.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton66ActionPerformed(evt);
+            }
+        });
         jPanel19.add(jButton66);
         jButton66.setBounds(490, 200, 71, 23);
 
@@ -1004,6 +1010,12 @@ public class Gui extends javax.swing.JFrame {
         checkboxState6.setName("reportSuffixes"); // NOI18N
         jPanel18.add(checkboxState6);
         checkboxState6.setBounds(130, 210, 490, 23);
+
+        checkboxState7.setSelected(true);
+        checkboxState7.setText("Report prp files processed.");
+        checkboxState7.setName("reportPrp"); // NOI18N
+        jPanel18.add(checkboxState7);
+        checkboxState7.setBounds(130, 20, 290, 23);
 
         jTabbedPane2.addTab("Reports", jPanel18);
 
@@ -2080,6 +2092,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        m.err("This method of converting Moul is deprecated, and probably doesn't work correctly.");
         byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
         prputils.ProcessAllMoul(filecontents, automation.mystAutomation.moulReadable);
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -2097,8 +2110,8 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        m.err("This method of recompiling Moul is deprecated, and probably doesn't work right.");
         byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        
         prputils.Compiler.RecompilePrp(filecontents, new automation.mystAutomation.moulDecider());
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -2689,11 +2702,7 @@ private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton57ActionPerformed
         //do myst5 conversion.
-        Object[] objs = (Object[])this.listState2.getSelectedValues();
-        Vector<String> list = new Vector<String>();
-        for(Object obj: objs) list.add((String)obj);
-        automation.mystAutomation.convertMyst5ToPots(textfieldState2.getText(), textfieldState3.getText(),list);
-
+        automation.mystAutomation.convertMyst5ToPots(textfieldState2.getText(), textfieldState3.getText(), listState2.getSelectedAsStrings());
 }//GEN-LAST:event_jButton57ActionPerformed
 
 private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton63ActionPerformed
@@ -2719,6 +2728,10 @@ private void jButton64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton65ActionPerformed
     GuiUtils.getUserSelectedFolder(textfieldState8);
 }//GEN-LAST:event_jButton65ActionPerformed
+
+private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton66ActionPerformed
+    automation.mystAutomation.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings());
+}//GEN-LAST:event_jButton66ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -2763,6 +2776,7 @@ private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;
     private shared.State.CheckboxState checkboxState6;
+    private shared.State.CheckboxState checkboxState7;
     private shared.State.ComboboxState comboboxState1;
     private shared.State.ComboboxState comboboxState2;
     private javax.swing.ButtonGroup filedirButtonGroup;

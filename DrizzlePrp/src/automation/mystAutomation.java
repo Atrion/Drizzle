@@ -903,6 +903,233 @@ public class mystAutomation
         
         return filename;
     }
+    
+    public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files)
+    {
+        class compileDecider implements uru.moulprp.prputils.Compiler.Decider
+        {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc)
+            {
+                Typeid type = desc.objecttype;
+                int number = desc.objectnumber;
+                String name = desc.objectname.toString();
+                Pageid pageid = desc.pageid;
+
+                String[] namestartswith = {};
+                String[] nameequals = {};
+                
+                boolean useObject = false;
+                
+                //blacklist
+                if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
+                if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+
+                Typeid[] typeequals = new Typeid[]{
+                        type.plSceneObject,
+
+                        type.plCoordinateInterface,
+                        type.plSpawnModifier,
+                        type.plDrawInterface,
+                        type.plDrawableSpans,
+                        type.hsGMaterial,
+                        type.plLayer,
+                        type.plMipMap,
+                        type.plCubicEnvironMap,
+
+                        type.plOmniLightInfo,
+                        type.plPointShadowMaster,
+                        type.plPythonFileMod,
+                        type.plDirectionalLightInfo,
+                        type.plSimulationInterface,
+                        type.plViewFaceModifier,
+                        type.plAudioInterface,
+                        type.plStereizer,
+                        type.plSoundBuffer,
+                        type.plRandomSoundMod,
+                        type.plWin32StreamingSound,
+                        type.plWin32StaticSound,
+                        type.plWinAudio,
+                        type.plParticleSystem,
+                        type.plParticleCollisionEffectDie,
+                        type.plParticleLocalWind,
+                        type.plBoundInterface,
+                        type.plExcludeRegionModifier,
+                        type.plCameraBrain1,
+                        type.plCameraBrain1_Avatar,
+                        type.plCameraBrain1_Circle,
+                        type.plCameraBrain1_Fixed,
+                        type.plCameraModifier1,
+                        type.plAGModifier,
+
+                        type.plOccluder,
+                        type.plDynamicTextMap,
+
+                        type.plParticleCollisionEffectBounce,
+
+                        type.plSpotLightInfo,
+
+                        type.plShadowCaster,
+                        type.plDirectShadowMaster,
+                        type.plRelevanceRegion,
+                        type.plSoftVolumeSimple,
+
+                        type.plParticleFlockEffect,
+                        type.plFadeOpacityMod,
+                        type.plClusterGroup,
+                        type.plVisRegion,
+                        type.plSoftVolumeUnion,
+                        type.plObjectInVolumeDetector,
+                        type.plObjectInBoxConditionalObject,
+                        type.plInterfaceInfoModifier,
+                        type.plVolumeSensorConditionalObject,
+                        type.plLogicModifier,
+                        type.plActivatorConditionalObject,
+                        type.plFacingConditionalObject,
+                        type.plOneShotMod,
+                        type.plAvLadderMod,
+                        type.plPickingDetector,
+                        type.plCameraRegionDetector,
+
+                        type.plHKPhysical,
+
+                        type.plSoftVolumeIntersect,
+                        type.plEAXListenerMod,
+                        type.plPhysicalSndGroup,
+                        type.plSeekPointMod,
+                        type.plRailCameraMod,
+                        type.plLayerAnimation,
+                        type.plATCAnim,
+                        type.plAGMasterMod,
+                        type.plPanicLinkRegion,
+                        type.plLineFollowMod,
+                        type.plMsgForwarder,
+                        type.plAnimEventModifier,
+                        type.plMultiStageBehMod,
+
+                        type.plDynaFootMgr,
+                        type.plResponderModifier, //crashes POD district of LiveBahroCaves, and minkCameras district of Minkata.
+                        type.plSittingModifier,
+                        type.plImageLibMod,
+                        type.plLimitedDirLightInfo,
+                        type.plAgeGlobalAnim,
+                        type.plDynaPuddleMgr,
+                        type.plWaveSet7,
+                        type.plDynamicEnvMap,
+
+                        //version2
+                        type.plSoftVolumeInvert,
+                };
+                String[] namestarts={
+                };
+                for(Typeid curtype: typeequals) if(curtype==type) return true;
+                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
+                
+                m.msg("Skipping type: "+type.toString());
+                return false;
+            }
+        }
+
+        HashMap<String, Integer> prefices = new HashMap<String, Integer>();
+        prefices.put("Payiferen", 0x63);
+        prefices.put("Kveer", 0x62);
+        prefices.put("EderTsogal", 0x61);
+        
+        HashMap<String, String> agenames = new HashMap<String, String>();
+        agenames.put("Kveer", "KveerMoul");
+        
+        Typeid[] readable = mystAutomation.moulReadable;
+        
+        
+        //Handle .fni files...
+        Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
+        for(String filename: fnifiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            
+            byte[] encryptedData = FileUtils.ReadFile(infile);
+            byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
+            byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }
+        
+        
+        //Handle .age files...
+        Vector<String> agefiles = filterFilenamesByExtension(files, ".age");
+        for(String filename: agefiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            
+            byte[] encryptedData = FileUtils.ReadFile(infile);
+            byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData); //UruCrypt.DecryptEoa(encryptedData);
+            
+            //modify sequence prefix if Age is in list.
+            Integer prefix = prefices.get(agename);
+            if(prefix!=null)
+            {
+                textfile agefile = textfile.createFromBytes(decryptedData);
+                agefile.setVariable("SequencePrefix", Integer.toString(prefix));
+                decryptedData = agefile.saveToByteArray();
+            }
+            
+            //
+            
+            byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }
+        
+        
+        //Handle .prp files...
+        Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
+        for(String filename: prpfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);//.replace("_", "_District_");
+            
+            Bytes prpdata = Bytes.createFromFile(infile);
+            Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            context c = context.createFromBytestream(bytestream);
+            c.curFile = filename; //helpful for debugging.
+            
+            //modify sequence prefix if Age is in list.
+            Integer prefix = prefices.get(agename);
+            if(prefix!=null)
+            {
+                c.sequencePrefix = prefix;
+            }
+            
+            //modify agename if Age is in list.
+            String newAgename = agenames.get(agename);
+            if(newAgename!=null)
+            {
+                c.ageName = newAgename;
+            }
+
+            prpfile prp = prpfile.createFromContext(c, readable);
+            Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+            prpoutputbytes.saveAsFile(outfile);
+        }
+        
+        
+        //Handle .sum files...
+        Vector<String> sumfiles = filterFilenamesByExtension(files, ".sum");
+        for(String filename: sumfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", replaceAgenameIfApplicable(agename, agenames));
+            FileUtils.WriteFile(outfolder+"/dat/"+replaceAgenameIfApplicable(filename, agenames), sum1);
+        }
+        
+        
+        //All done!
+        m.msg("Done Moul work!");
+    }
+    
     public static void convertCrowthistleToPots(String crowthistlefolder, String potsfolder)
     {
         class crowDecider implements uru.moulprp.prputils.Compiler.Decider

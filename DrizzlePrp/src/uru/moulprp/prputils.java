@@ -139,7 +139,7 @@ public class prputils
         
         //todo: this should be in the proper place, not here.
             //fix payiferen pageid conflict problem.
-            if (header.agename.toString().toLowerCase().equals("payiferen"))
+            /*if (header.agename.toString().toLowerCase().equals("payiferen"))
             {
                 //_staticsettings.sequencePrefix = 0x63;
                 c.sequencePrefix = 0x63;
@@ -153,7 +153,7 @@ public class prputils
             {
                 //_staticsettings.sequencePrefix = 0x61;
                 c.sequencePrefix = 0x61;
-            }
+            }*/
 
         //do header work.
         //_staticsettings.onHeaderLoaded(header);

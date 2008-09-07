@@ -46,6 +46,10 @@ public class textfile
         
         return result;
     }*/
+    public static textfile createFromBytes(byte[] bytes)
+    {
+        return createFromBytes(new Bytes(bytes));
+    }
     public static textfile createFromBytes(Bytes bytes)
     {
         textfile result = new textfile();
@@ -102,7 +106,18 @@ public class textfile
         
         return result.getBytes();
     }
-    
+    public byte[] saveToByteArray()
+    {
+        Bytedeque result = new Bytedeque();
+        for(Bytes line: lines)
+        {
+            result.writeBytes(line);
+            result.writeByte((byte)0x0d);
+            result.writeByte((byte)0x0a);
+        }
+        
+        return result.getAllBytes();
+    }
     public boolean hasVariable(String varname)
     {
         for(int i=0;i<lines.length;i++)
