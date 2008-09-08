@@ -25,7 +25,7 @@ import uru.Bytedeque;
 public class textfile
 {
     //Bytes text;
-    Bytes[] lines;
+    protected Bytes[] lines;
     
     /*public static textfile loadFromFile(String filename, boolean isencrypted)
     {
@@ -143,4 +143,5 @@ public class textfile
         }
         m.err("textfile: setVariable: Variable not found.");
     }
+    
 }

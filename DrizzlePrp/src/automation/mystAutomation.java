@@ -20,6 +20,9 @@ import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Pageid;
 import java.util.Vector;
 import java.io.File;
+import uru.moulprp.PrpRootObject;
+import uru.moulprp.prputils;
+import uru.moulprp.Uruobjectref;
 
 public class mystAutomation
 {
@@ -924,6 +927,10 @@ public class mystAutomation
                 if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
                 if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
                 if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+                if(name.toLowerCase().equals("envmap02"))
+                {
+                    int dummy=0;
+                }
 
                 Typeid[] typeequals = new Typeid[]{
                         type.plSceneObject,
@@ -1111,6 +1118,13 @@ public class mystAutomation
             }
 
             prpfile prp = prpfile.createFromContext(c, readable);
+            
+            //remove DynamicCamMap indirect refs from Materials.
+            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
+            {
+                removeDynamicCamMapsFromMaterials(prp);
+            }
+            
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
         }
@@ -1128,6 +1142,44 @@ public class mystAutomation
         
         //All done!
         m.msg("Done Moul work!");
+    }
+    public static void removeDynamicCamMapsFromMaterials(prpfile prp)
+    {
+        PrpRootObject[] mats = prputils.FindAllObjectsOfType(prp, Typeid.hsGMaterial);
+        for(PrpRootObject mat2: mats)
+        {
+            uru.moulprp.x0007Material mat = mat2.castTo();
+            for(Uruobjectref layerref: mat.layerrefs)
+            {
+                PrpRootObject layer2 = prputils.findObjectWithDesc(prp, layerref.xdesc);
+                if(layer2.getObject() instanceof uru.moulprp.x0006Layer)
+                {
+                    uru.moulprp.x0006Layer layer = layer2.castTo();
+                    if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
+                    {
+                        //found it!
+                        m.msg("Removing DynamicCamMap from layerRefs.");
+                        mat.layerrefs.remove(layerref);
+                    }
+                }
+            }
+        }
+        mats = prputils.FindAllObjectsOfType(prp, Typeid.hsGMaterial);
+        for(PrpRootObject mat2: mats)
+        {
+            uru.moulprp.x0007Material mat = mat2.castTo();
+            for(Uruobjectref layerref: mat.maplayerrefs)
+            {
+                PrpRootObject layer2 = prputils.findObjectWithDesc(prp, layerref.xdesc);
+                uru.moulprp.x0006Layer layer = layer2.castTo();
+                if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
+                {
+                    //found it!
+                    m.warn("Removing DynamicCamMap from mapLayerRefs.(untested.)");
+                    mat.maplayerrefs.remove(layerref);
+                }
+            }
+        }
     }
     
     public static void convertCrowthistleToPots(String crowthistlefolder, String potsfolder)
@@ -1318,6 +1370,13 @@ public class mystAutomation
             //c.typesToRead = typesToRead;
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
+
+            //remove DynamicCamMap indirect refs from Materials.
+            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
+            {
+                removeDynamicCamMapsFromMaterials(prp);
+            }
+
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
         }
@@ -1468,6 +1527,13 @@ public class mystAutomation
             }
 
             prpfile prp = prpfile.createFromContext(c, readable);
+            
+            //remove DynamicCamMap indirect refs from Materials.
+            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
+            {
+                removeDynamicCamMapsFromMaterials(prp);
+            }
+
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
         }
@@ -1481,6 +1547,23 @@ public class mystAutomation
             Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", replaceAgenameIfApplicable(agename, agenames));
             FileUtils.WriteFile(outfolder+"/dat/"+replaceAgenameIfApplicable(filename, agenames), sum1);
         }
+        
+        //Handle .sdl files...
+        /*Vector<String> sdlfiles = filterFilenamesByExtension(files, ".sdl");
+        for(String filename: sdlfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            String infile = infolder + "/sdl/" + filename;
+            String outfile = outfolder + "/sdl/" + replaceAgenameIfApplicable(filename, agenames);
+            
+            Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
+            Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
+            
+            uru.moulprp.sdlfile sdl = new uru.moulprp.sdlfile(decryptedData);
+            
+            Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }*/
         
         
         //All done!

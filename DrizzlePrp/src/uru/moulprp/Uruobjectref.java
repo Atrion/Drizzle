@@ -30,8 +30,8 @@ import uru.Bytedeque;
  */
 public class Uruobjectref extends uruobj
 {
-    byte hasRef;
-    Uruobjectdesc xdesc;
+    public byte hasRef;
+    public Uruobjectdesc xdesc;
     
     public Uruobjectref(context c)
     {

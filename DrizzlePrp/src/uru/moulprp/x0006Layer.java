@@ -48,7 +48,7 @@ public class x0006Layer extends uruobj
     int opacity; //float 0 to 1
     int lodbias;
     int u1; //a float with integer! values.
-    Uruobjectref texture;
+    public Uruobjectref texture;
     Uruobjectref shader1;
     Uruobjectref shader2;
     Transmatrix identity;

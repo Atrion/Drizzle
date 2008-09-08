@@ -63,5 +63,10 @@ public class PrpRootObject extends uruobj
         return result;
     }
     
+    public uruobj getObject()
+    {
+        return prpobject.object;
+    }
+    
     
 }

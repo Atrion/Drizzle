@@ -37,6 +37,7 @@ public class Bytestream
 
     //okay to change.
     private int pos;
+    public boolean throwExceptionOnEof = false;
     
 
     public Bytestream(byte[] newData)
@@ -49,6 +50,10 @@ public class Bytestream
         pos = 0;
     }
     public Bytestream(){};
+    public boolean eof()
+    {
+        return( pos > maxpos );
+    }
     public static Bytestream createFromBytes(Bytes newData)
     {
         Bytestream result = new Bytestream();
@@ -136,6 +141,7 @@ public class Bytestream
         }
         else
         {
+            //if(throwExceptionOnEof) throw new RuntimeException("Eof");
             m.msg("end of file in readByte");
             return 0;
         }
@@ -149,6 +155,7 @@ public class Bytestream
         }
         else
         {
+            //if(throwExceptionOnEof) throw new RuntimeException("Eof");
             m.msg("end of file in readShort");
             return 0;
         }

@@ -203,6 +203,10 @@ public class prputils
                 //to disable an object type, simply comment out its "object=" line.
                 _staticsettings.currentRootObj = desc; //used for reporting.
                 boolean handled = true;
+                if(desc.objectname.toString().toLowerCase().equals("envmap02"))
+                {
+                    int dummy=0;
+                }
                 if(parseThisType)
                 {
                 /*switch(desc.objecttype)
@@ -670,9 +674,11 @@ public class prputils
                             {
                                 x0007Material curMaterial = (x0007Material)curMaterial1.prpobject.object;
                                 boolean badmaterial = false;
-                                for(int k=0;k<curMaterial.layercount;k++)
+                                //for(int k=0;k<curMaterial.layercount;k++)
+                                for(Uruobjectref layerref: curMaterial.layerrefs)
                                 {
-                                    Typeid layerType = curMaterial.layerrefs[k].xdesc.objecttype;
+                                    //Typeid layerType = curMaterial.layerrefs[k].xdesc.objecttype;
+                                    Typeid layerType = layerref.xdesc.objecttype;
                                     if(layerType == Typeid.plLayerAnimation)
                                     {
                                         //replace this material;
@@ -956,9 +962,11 @@ public class prputils
                                 int dummy=0;
                             }
                             x0007Material mat = findObjectWithDesc(prp,matdesc).castTo();//x0007Material.class);
-                            for(int l=0;l<mat.layercount;l++)
+                            //for(int l=0;l<mat.layercount;l++)
+                            for(Uruobjectref layerref: mat.layerrefs)
                             {
-                                Typeid mattype = mat.layerrefs[l].xdesc.objecttype;
+                                //Typeid mattype = mat.layerrefs[l].xdesc.objecttype;
+                                Typeid mattype = layerref.xdesc.objecttype;
                                 if(mattype==Typeid.plLayerAnimation)
                                 {
                                     report.append("LayerAnimation found in: "+curobj.header.toString()+"\n");

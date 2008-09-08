@@ -24,7 +24,7 @@ import uru.Bytedeque;
 import uru.e;
 import shared.m;
 import uru.b;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -34,32 +34,36 @@ import uru.b;
 public class x0007Material extends uruobj
 {
     //Objheader xheader;
-    PlSynchedObject parent;
-    int u1;
-    int flags;
-    int layercount;
-    int lightmapcount;
-    Uruobjectref[] layerrefs;
-    Uruobjectref[] maplayerrefs;
+    public PlSynchedObject parent;
+    public int u1;
+    public int flags;
+    public int layercount;
+    public int lightmapcount;
+    //public Uruobjectref[] layerrefs;
+    //public Uruobjectref[] maplayerrefs;
+    public Vector<Uruobjectref> layerrefs = new Vector<Uruobjectref>();
+    public Vector<Uruobjectref> maplayerrefs = new Vector<Uruobjectref>();
     
     public x0007Material(context c)//,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
-        u1 = data.readInt(); e.ensureflags(u1,0);
-        flags = data.readInt(); e.ensureflags(flags,0x00,0x0400,0x1000,0x2000,0x2400);
+        u1 = data.readInt(); e.ensureflags(u1,0); //loadflags
+        flags = data.readInt(); e.ensureflags(flags,0x00,0x0400,0x1000,0x2000,0x2400); //compflags
         layercount = data.readInt();
         lightmapcount = data.readInt();
-        layerrefs = new Uruobjectref[layercount];
+        //layerrefs = new Uruobjectref[layercount];
         for(int i=0;i<layercount;i++)
         {
-            layerrefs[i] = new Uruobjectref(c);
+            //layerrefs[i] = new Uruobjectref(c);
+            layerrefs.add(new Uruobjectref(c));
         }
-        maplayerrefs = new Uruobjectref[lightmapcount];
+        //maplayerrefs = new Uruobjectref[lightmapcount];
         for(int i=0;i<lightmapcount;i++)
         {
-            maplayerrefs[i] = new Uruobjectref(c);
+            //maplayerrefs[i] = new Uruobjectref(c);
+            maplayerrefs.add(new Uruobjectref(c));
         }
     }
     public void compile(Bytedeque data)
@@ -67,7 +71,7 @@ public class x0007Material extends uruobj
         parent.compile(data);
         data.writeInt(u1);
         data.writeInt(flags);
-        data.writeInt(layercount);
+        /*data.writeInt(layercount);
         data.writeInt(lightmapcount);
         for(int i=0;i<layercount;i++)
         {
@@ -76,6 +80,16 @@ public class x0007Material extends uruobj
         for(int i=0;i<lightmapcount;i++)
         {
             maplayerrefs[i].compile(data);
+        }*/
+        data.writeInt(layerrefs.size());
+        data.writeInt(maplayerrefs.size());
+        for(int i=0;i<layerrefs.size();i++)
+        {
+            layerrefs.get(i).compile(data);
+        }
+        for(int i=0;i<maplayerrefs.size();i++)
+        {
+            maplayerrefs.get(i).compile(data);
         }
     }
 }
