@@ -374,6 +374,10 @@ public class Gui extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jComboBox2 = new javax.swing.JComboBox();
         jButton60 = new javax.swing.JButton();
+        tabsState1 = new shared.State.TabsState();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         textfieldState7 = new shared.State.TextfieldState();
         jLabel11 = new javax.swing.JLabel();
@@ -401,6 +405,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState7 = new shared.State.CheckboxState();
         jPanel20 = new javax.swing.JPanel();
         checkboxState8 = new shared.State.CheckboxState();
+        checkboxState9 = new shared.State.CheckboxState();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -546,6 +551,12 @@ public class Gui extends javax.swing.JFrame {
         });
         getContentPane().add(jButton20);
         jButton20.setBounds(0, 470, 100, 23);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jLabel8.setText("MystV folder:");
 
@@ -744,6 +755,8 @@ public class Gui extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Crowthistle", jPanel14);
 
+        jPanel16.setLayout(null);
+
         comboboxState1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboboxState1.setName("cb1"); // NOI18N
         comboboxState1.addActionListener(new java.awt.event.ActionListener() {
@@ -751,20 +764,31 @@ public class Gui extends javax.swing.JFrame {
                 comboboxState1ActionPerformed(evt);
             }
         });
+        jPanel16.add(comboboxState1);
+        comboboxState1.setBounds(280, 170, 57, 22);
 
         comboboxState2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboboxState2.setName("cb2"); // NOI18N
+        jPanel16.add(comboboxState2);
+        comboboxState2.setBounds(90, 120, 57, 22);
 
         checkboxState2.setText("checkboxState2");
         checkboxState2.setName("chebox1"); // NOI18N
+        jPanel16.add(checkboxState2);
+        checkboxState2.setBounds(50, 170, 103, 23);
 
         formattedfieldState1.setText("formattedfieldState1");
         formattedfieldState1.setName("format1"); // NOI18N
+        jPanel16.add(formattedfieldState1);
+        formattedfieldState1.setBounds(40, 140, 106, 20);
 
         textareaState1.setColumns(20);
         textareaState1.setRows(5);
         textareaState1.setName("area1"); // NOI18N
         jScrollPane6.setViewportView(textareaState1);
+
+        jPanel16.add(jScrollPane6);
+        jScrollPane6.setBounds(160, 40, 166, 96);
 
         listState1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -779,19 +803,32 @@ public class Gui extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(listState1);
 
+        jPanel16.add(jScrollPane7);
+        jScrollPane7.setBounds(340, 20, 37, 132);
+
         textfieldState1.setText("textfieldState1");
         textfieldState1.setName("field1"); // NOI18N
+        jPanel16.add(textfieldState1);
+        textfieldState1.setBounds(180, 160, 78, 20);
 
         buttongroupState1.add(jRadioButton5);
         jRadioButton5.setText("jRadioButton5");
+        jPanel16.add(jRadioButton5);
+        jRadioButton5.setBounds(60, 90, 93, 23);
 
         buttongroupState1.add(jRadioButton6);
         jRadioButton6.setText("jRadioButton6");
+        jPanel16.add(jRadioButton6);
+        jRadioButton6.setBounds(10, 70, 93, 23);
 
         buttongroupState1.add(jRadioButton7);
         jRadioButton7.setText("jRadioButton7");
+        jPanel16.add(jRadioButton7);
+        jRadioButton7.setBounds(0, 40, 93, 23);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel16.add(jComboBox2);
+        jComboBox2.setBounds(240, 10, 57, 22);
 
         jButton60.setText("jButton60");
         jButton60.addActionListener(new java.awt.event.ActionListener() {
@@ -799,82 +836,52 @@ public class Gui extends javax.swing.JFrame {
                 jButton60ActionPerformed(evt);
             }
         });
+        jPanel16.add(jButton60);
+        jButton60.setBounds(150, 10, 81, 23);
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(comboboxState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(156, 156, 156))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton5)
-                                        .addComponent(jRadioButton6))
-                                    .addComponent(jRadioButton7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton60)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(textfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(comboboxState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(checkboxState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(formattedfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(397, Short.MAX_VALUE))
+        tabsState1.setName("adfew"); // NOI18N
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 105, Short.MAX_VALUE)
         );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboboxState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkboxState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formattedfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(comboboxState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton6))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(textfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton7))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton60))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(132, Short.MAX_VALUE))
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 95, Short.MAX_VALUE)
         );
+
+        tabsState1.addTab("tab1", jPanel21);
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 105, Short.MAX_VALUE)
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 95, Short.MAX_VALUE)
+        );
+
+        tabsState1.addTab("tab2", jPanel22);
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 105, Short.MAX_VALUE)
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 95, Short.MAX_VALUE)
+        );
+
+        tabsState1.addTab("tab3", jPanel23);
+
+        jPanel16.add(tabsState1);
+        tabsState1.setBounds(350, 90, 110, 120);
 
         jTabbedPane2.addTab("tab3", jPanel16);
 
@@ -1026,13 +1033,18 @@ public class Gui extends javax.swing.JFrame {
         checkboxState8.setText("Remove PlDynamicCamMap references from Materials");
         checkboxState8.setName("removeDynamicCamMap"); // NOI18N
 
+        checkboxState9.setText("Make all PlLayers wireframe!");
+        checkboxState9.setName("makePlLayersWireframe"); // NOI18N
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(checkboxState8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkboxState9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkboxState8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(413, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
@@ -1040,7 +1052,9 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(checkboxState8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkboxState9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Settings", jPanel20);
@@ -2758,6 +2772,9 @@ private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton66ActionPerformed
     automation.mystAutomation.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings());
 }//GEN-LAST:event_jButton66ActionPerformed
+
+private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+}//GEN-LAST:event_jTabbedPane1StateChanged
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -2804,6 +2821,7 @@ private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState6;
     private shared.State.CheckboxState checkboxState7;
     private shared.State.CheckboxState checkboxState8;
+    private shared.State.CheckboxState checkboxState9;
     private shared.State.ComboboxState comboboxState1;
     private shared.State.ComboboxState comboboxState2;
     private javax.swing.ButtonGroup filedirButtonGroup;
@@ -2905,6 +2923,9 @@ private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2941,6 +2962,7 @@ private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.ListState listState1;
     private shared.State.ListState listState2;
     private shared.State.ListState listState3;
+    private shared.State.TabsState tabsState1;
     private shared.State.TextareaState textareaState1;
     private shared.State.TextfieldState textfieldState1;
     private shared.State.TextfieldState textfieldState2;

@@ -34,20 +34,20 @@ public class x0006Layer extends uruobj
 {
     //Objheader xheader;
     x0041LayerInterface parent;
-    int flags1;
-    int flags2;
-    int flags3;
-    int flags4;
-    int flags5;
+    public int flags1;
+    public int flags2;
+    public int flags3;
+    public int flags4;
+    public int flags5;
     Transmatrix matrix;
-    Rgba ambient;
-    Rgba diffuse;
-    Rgba emissive;
-    Rgba specular;
-    int vertexshader;
-    int opacity; //float 0 to 1
-    int lodbias;
-    int u1; //a float with integer! values.
+    public Rgba ambient;
+    public Rgba diffuse;
+    public Rgba emissive;
+    public Rgba specular;
+    int uvwSource;
+    public Flt opacity; //float 0 to 1
+    public Flt lodbias;
+    public Flt specularPower; //a float with integer! values.
     public Uruobjectref texture;
     Uruobjectref shader1;
     Uruobjectref shader2;
@@ -57,25 +57,26 @@ public class x0006Layer extends uruobj
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
-        parent = new x0041LayerInterface(c);//,false);
-        flags1 = data.readInt();
-        flags2 = data.readInt();
-        flags3 = data.readInt();
-        flags4 = data.readInt();
-        flags5 = data.readInt();
-        matrix = new Transmatrix(c);
-        ambient = new Rgba(data);
-        diffuse = new Rgba(data);
-        emissive = new Rgba(data);
-        specular = new Rgba(data);
-        vertexshader = data.readInt();
-        opacity = data.readInt();
-        lodbias = data.readInt();
-        u1 = data.readInt();
-        texture = new Uruobjectref(c);
-        shader1 = new Uruobjectref(c);
-        shader2 = new Uruobjectref(c);
-        identity = new Transmatrix(c);
+        parent = new x0041LayerInterface(c); //contains the plmipmap.
+        //the next 5 flags are the hsGMatState
+        flags1 = data.readInt(); //blend flags
+        flags2 = data.readInt(); //clamp flags
+        flags3 = data.readInt(); //shade flags
+        flags4 = data.readInt(); //z flags
+        flags5 = data.readInt(); //misc flags //there's a wireframe option here(0x1)!
+        matrix = new Transmatrix(c); //transform
+        ambient = new Rgba(data); //preshade
+        diffuse = new Rgba(data); //runtime
+        emissive = new Rgba(data); //ambient
+        specular = new Rgba(data); //specular
+        uvwSource = data.readInt(); //uvwsource
+        opacity = new Flt(c); //opacity //float
+        lodbias = new Flt(c); //LOD bias //float
+        specularPower = new Flt(c); //Specular power //float
+        texture = new Uruobjectref(c); //texture
+        shader1 = new Uruobjectref(c); //vertex shader
+        shader2 = new Uruobjectref(c); //pixel shader
+        identity = new Transmatrix(c); //bumpEnvXfm
         
         
     }
@@ -92,10 +93,10 @@ public class x0006Layer extends uruobj
         diffuse.compile(data);
         emissive.compile(data);
         specular.compile(data);
-        data.writeInt(vertexshader);
-        data.writeInt(opacity);
-        data.writeInt(lodbias);
-        data.writeInt(u1);
+        data.writeInt(uvwSource);
+        opacity.compile(data);
+        lodbias.compile(data);
+        specularPower.compile(data);
         texture.compile(data);
         shader1.compile(data);
         shader2.compile(data);

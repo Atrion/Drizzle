@@ -39,6 +39,13 @@ public class Rgba extends uruobj
         b = data.readInt(); //blue //float from 0.0 to 1.0
         a = data.readInt(); //alpha //float from 0.0 to 1.0
     }
+    public Rgba(int r, int g, int b, int a)
+    {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }
     public void compile(Bytedeque deque)
     {
         deque.writeInt(r);

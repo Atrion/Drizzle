@@ -34,7 +34,7 @@ public class x0041LayerInterface extends uruobj
 {
     //Objheader xheader;
     PlSynchedObject parent;
-    Uruobjectref ref;
+    Uruobjectref ref; //underlay, i.e. plMipMap
     
     public x0041LayerInterface(context c)//,boolean hasHeader)
     {

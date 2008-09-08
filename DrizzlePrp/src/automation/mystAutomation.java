@@ -23,6 +23,9 @@ import java.io.File;
 import uru.moulprp.PrpRootObject;
 import uru.moulprp.prputils;
 import uru.moulprp.Uruobjectref;
+import uru.moulprp.Flt;
+import uru.moulprp.Rgba;
+import shared.State.AllStates;
 
 public class mystAutomation
 {
@@ -1119,11 +1122,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            //remove DynamicCamMap indirect refs from Materials.
-            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
-            {
-                removeDynamicCamMapsFromMaterials(prp);
-            }
+            processPrp(prp);
             
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1143,8 +1142,52 @@ public class mystAutomation
         //All done!
         m.msg("Done Moul work!");
     }
-    public static void removeDynamicCamMapsFromMaterials(prpfile prp)
+    public static void processPrp(prpfile prp)
     {
+        if(AllStates.getStateAsBoolean("makePlLayersWireframe"))
+        {
+            PrpRootObject[] layers = prputils.FindAllObjectsOfType(prp, Typeid.plLayer);
+            for(PrpRootObject layer2: layers)
+            {
+                uru.moulprp.x0006Layer layer = layer2.castTo();
+                m.msg("Making wireframes!");
+                layer.flags5 |= 0x1; //wireframe! //misc
+            }
+        }
+        if(AllStates.getStateAsBoolean("removeDynamicCamMap"))
+        {
+            PrpRootObject[] layers = prputils.FindAllObjectsOfType(prp, Typeid.plLayer);
+            for(PrpRootObject layer2: layers)
+            {
+                uru.moulprp.x0006Layer layer = layer2.castTo();
+                if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
+                {
+                    //found it!
+                    m.msg("Removing DynamicCamMap from layerRefs.");
+                    layer.flags1 |= 0x80; //kBlendNoColor //blend //makes it invisible?
+                }
+            }
+        }
+
+    }
+    /*public static void removeDynamicCamMapsFromMaterials(prpfile prp)
+    {
+        PrpRootObject[] layers = prputils.FindAllObjectsOfType(prp, Typeid.plLayer);
+        for(PrpRootObject layer2: layers)
+        {
+            uru.moulprp.x0006Layer layer = layer2.castTo();
+            if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
+            {
+                //found it!
+                m.msg("Removing DynamicCamMap from layerRefs.");
+                //mat.layerrefs.remove(layerref);
+                //layer.flags5 = layer.flags5 | 0x1; //wireframe! //misc
+                //layer.flags1 |= 0x80; //kBlendNoColor //blend //makes it invisible?
+                //layer.opacity = Flt.zero();
+                //layer.specular = new Rgba(0x3f800000,0x3f800000,0x3f800000,0x3f800000);
+                //layer.flags3 |= 0x80; //kShadeSpecular //shade
+            }
+        }
         PrpRootObject[] mats = prputils.FindAllObjectsOfType(prp, Typeid.hsGMaterial);
         for(PrpRootObject mat2: mats)
         {
@@ -1180,7 +1223,7 @@ public class mystAutomation
                 }
             }
         }
-    }
+    }*/
     
     public static void convertCrowthistleToPots(String crowthistlefolder, String potsfolder)
     {
@@ -1371,11 +1414,7 @@ public class mystAutomation
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
 
-            //remove DynamicCamMap indirect refs from Materials.
-            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
-            {
-                removeDynamicCamMapsFromMaterials(prp);
-            }
+            processPrp(prp);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1528,11 +1567,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            //remove DynamicCamMap indirect refs from Materials.
-            if(shared.State.AllStates.getStateAsBoolean("removeDynamicCamMap"))
-            {
-                removeDynamicCamMapsFromMaterials(prp);
-            }
+            processPrp(prp);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
