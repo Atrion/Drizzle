@@ -43,6 +43,11 @@ public class x0015CoordinateInterface extends uruobj
     
     public x0015CoordinateInterface(context c) throws readexception
     {
+        if(c.curRootObject.objectname.toString().toLowerCase().startsWith("ropeladder"))
+        {
+            int dummy=0;
+        }
+
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlObjInterface(c);//,false);

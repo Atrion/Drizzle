@@ -21,6 +21,7 @@ package uru.moulprp;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
+import shared.m;
 
 /**
  *
@@ -36,7 +37,8 @@ public class Quat extends uruobj
     public Quat(context c)
     {
         //These looked different, but changing it messed up the angle of the door in EderDelin.
-        /*if(c.readversion==6)
+        m.msg("scrambling quat.");
+        if(c.readversion==6||c.readversion==4)
         {
             w = new Flt(c);
             x = new Flt(c);
@@ -45,12 +47,12 @@ public class Quat extends uruobj
             //w = new Flt(c);
         }
         else if(c.readversion==3)
-        {*/
+        {
             w = new Flt(c);
             x = new Flt(c);
             y = new Flt(c);
             z = new Flt(c);
-        //}
+        }
     }
     public static Quat identity()
     {

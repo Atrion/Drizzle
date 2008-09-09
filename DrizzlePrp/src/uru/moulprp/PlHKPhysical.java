@@ -91,8 +91,8 @@ public class PlHKPhysical extends uruobj
             pots.zzzLOSDB = LOSDB; //bugfix.
             pots.zzzgroup0 = 0x0;
         }
-        else if( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
-                //||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 )) //ladders
+        else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
+                ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 )) //ladders
         //else if( u14==0x5 )
         {
             //detector: sitting, etc.
@@ -105,6 +105,8 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x0;
             pots.zzzgroup0 = 0x4;
+            
+            pots.givemass = true;
         }
         else if( u14==0x6 && u15==0x0 && LOSDB==0x2 && group0==0x0 )
         {
@@ -143,7 +145,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzLOSDB = 0x2;
             pots.zzzgroup0 = 0x4;
         }
-        /*else if( u14==0x0 && u15==0x0 && LOSDB==0x0 && group0==0x0 ) //ladders
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x0 && group0==0x0 ) //ladders
         {
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x200;
@@ -153,7 +155,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x0;
             pots.zzzgroup0 = 0x4;
-        }*/
+        }
         else
         {
             //m.err("plHKPhysical: Unexpected combination.");
@@ -175,6 +177,9 @@ public class PlHKPhysical extends uruobj
         //HsBitVector zzzgroup = new HsBitVector(0x0);
         int zzzgroup0 = 0x0;
         
+        //extras
+        boolean givemass = false;
+        
         public potsflags()
         {
         }
@@ -194,6 +199,20 @@ public class PlHKPhysical extends uruobj
     
     public PlHKPhysical(context c) throws readexception
     {
+        String filenameStart = "";
+        String filenameEnd = "";
+        String objt = "ropeladder";
+        if(c.curFile.toLowerCase().startsWith(filenameStart.toLowerCase()))
+        {
+            if(c.curFile.toLowerCase().endsWith(filenameEnd.toLowerCase()))
+            {
+                if(c.curRootObject.objectname.toString().toLowerCase().startsWith(objt.toLowerCase()))
+                {
+                    int dummy=0;
+                }
+            }
+        }
+        
         if(c.readversion==6)
         {
             _version = 6;
@@ -255,6 +274,10 @@ public class PlHKPhysical extends uruobj
 
         public PXPhysical(context c) throws readexception
         {
+            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("shroomie"))
+            {
+                int dummy=0;
+            }
             //not fully working.
             //int dummy;
             parent = new PlSynchedObject(c);
@@ -341,14 +364,6 @@ public class PlHKPhysical extends uruobj
 
         public void compileSpecial(Bytedeque c)
         {
-            //compile as if it were an HKPhysical.
-            parent.compile(c);
-            position.compile(c);
-            orientation.compile(c);
-            mass.compile(c);
-            RC.compile(c);
-            EL.compile(c);
-            
             //This block converts the flags from moul to pots.
             moulflags moul = new moulflags();
             moul.u14 = u14;
@@ -369,6 +384,24 @@ public class PlHKPhysical extends uruobj
             byte zzzu3 = pots.zzzu3;
             int zzzLOSDB = pots.zzzLOSDB;
             HsBitVector zzzgroup = new HsBitVector(pots.zzzgroup0);
+            
+            //extras
+            if(pots.givemass) mass = Flt.one();
+
+            
+            //compile as if it were an HKPhysical.
+            parent.compile(c);
+            position.compile(c);
+            orientation.compile(c);
+            //m.msg("compiling quat differently.");
+            //orientation.x.compile(c);
+            //orientation.y.compile(c);
+            //orientation.z.compile(c);
+            //orientation.w.compile(c);
+            mass.compile(c);
+            RC.compile(c);
+            EL.compile(c);
+            
             
             //c.writeInt(zzzformat);
             c.writeInt(b.ByteToInt32(format));
@@ -501,19 +534,6 @@ public class PlHKPhysical extends uruobj
         
         public HKPhysical(context c) throws readexception
         {
-            String filenameStart = "";
-            String filenameEnd = "";
-            String objt = "marblephy06";
-            if(c.curFile.toLowerCase().startsWith(filenameStart.toLowerCase()))
-            {
-                if(c.curFile.toLowerCase().endsWith(filenameEnd.toLowerCase()))
-                {
-                    if(c.curRootObject.objectname.toString().toLowerCase().startsWith(objt.toLowerCase()))
-                    {
-                        int dummy=0;
-                    }
-                }
-            }
             parent = new PlSynchedObject(c);
             position = new Vertex(c);
             orientation = new Quat(c);

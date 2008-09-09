@@ -43,6 +43,10 @@ public class x001CSimulationInterface extends uruobj
     public x001CSimulationInterface(context c) throws readexception
     {
         //if(hasHeader) xheader = new Objheader(c);
+        if(c.curRootObject.objectname.toString().toLowerCase().startsWith("ropeladder"))
+        {
+            int dummy=0;
+        }
         
         parent = new PlObjInterface(c);//,false);
         //count = c.readInt();

@@ -34,7 +34,10 @@ import java.io.StringWriter;
 public class FileUtils {
     
     //only properly handles files less than 4GB.
-
+    public static String GetPresentWorkingDirectory()
+    {
+        return new File(".").getPath();
+    }
     static public byte[] ReadFile(String filename)
     {
         File file = new File(filename);

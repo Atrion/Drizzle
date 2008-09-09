@@ -39,6 +39,10 @@ public class PlAvLadderMod extends uruobj
     
     public PlAvLadderMod(context c) throws readexception
     {
+        if(c.curFile.toLowerCase().startsWith("ercanacity"))
+        {
+            int dummy=0;
+        }
         parent = new PlSingleModifier(c);
         type = c.readInt();
         loops = c.readInt();

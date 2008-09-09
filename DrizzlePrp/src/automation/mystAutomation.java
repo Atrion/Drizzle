@@ -1625,9 +1625,25 @@ public class mystAutomation
         for(String file: files) if(file.endsWith(extension)) result.add(file);
         return result;
     }
+    public static void readPotsPrps(String infolder, Vector<String> files)
+    {
+        for(String file: files)
+        {
+            String filename = infolder + "/dat/" + file;
+            //open prp file and process it.
+            byte[] filedata = FileUtils.ReadFile(filename);
+
+            //do work.
+            context c = context.createFromBytestream(new Bytestream(filedata));
+            //c.readversion = version;
+            c.curFile = file;
+            uru.moulprp.prpprocess.ProcessAllObjects(c);
+            //if(version==3) prputils.ProcessPotsPrp(filedata);
+        }
+    }
     public static void readAllPotsPrps(String prpdirname)
     {
-        File prpfolder = new File(prpdirname);
+        File prpfolder = new File(prpdirname+"/dat/");
         if (!prpfolder.isDirectory() || !prpfolder.exists())
         {
             m.err("Prp directory not in proper format or not found.");
