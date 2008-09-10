@@ -72,6 +72,8 @@ public class mystProxy
             //server crashed.
             m.err("Proxy server crashed.");
         }
+        
+        proxySettings.logFilesRead = shared.State.AllStates.getStateAsBoolean("proxyLogReads");
     }
     
     public static void stopServer()

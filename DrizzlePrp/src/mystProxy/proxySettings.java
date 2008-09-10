@@ -16,6 +16,7 @@ public class proxySettings
     public static String[] defaultFiles = {
         "index.htm", "index.html", "default.htm", "default.html",
     };
+    static boolean logFilesRead = false;
     
     //shared objects...
     static String basefolder;

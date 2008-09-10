@@ -507,6 +507,8 @@ public class Gui extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         textfieldState10 = new shared.State.TextfieldState();
         jButton71 = new javax.swing.JButton();
+        checkboxState10 = new shared.State.CheckboxState();
+        jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
@@ -1961,20 +1963,20 @@ public class Gui extends javax.swing.JFrame {
             textfieldState9.setText("C:\\Documents and Settings\\user\\Desktop\\web");
             textfieldState9.setName("proxyFolder"); // NOI18N
             jPanel28.add(textfieldState9);
-            textfieldState9.setBounds(140, 120, 300, 19);
+            textfieldState9.setBounds(110, 90, 300, 19);
 
             jLabel15.setText("base folder:");
             jPanel28.add(jLabel15);
-            jLabel15.setBounds(60, 110, 58, 15);
+            jLabel15.setBounds(20, 90, 80, 15);
 
             jLabel16.setText("port:");
             jPanel28.add(jLabel16);
-            jLabel16.setBounds(60, 170, 22, 15);
+            jLabel16.setBounds(60, 120, 50, 15);
 
             textfieldState10.setText("8012");
             textfieldState10.setName("proxyPort"); // NOI18N
             jPanel28.add(textfieldState10);
-            textfieldState10.setBounds(130, 170, 100, 19);
+            textfieldState10.setBounds(110, 120, 100, 19);
 
             jButton71.setText("Stop Server");
             jButton71.addActionListener(new java.awt.event.ActionListener() {
@@ -1984,6 +1986,15 @@ public class Gui extends javax.swing.JFrame {
             });
             jPanel28.add(jButton71);
             jButton71.setBounds(260, 240, 120, 25);
+
+            checkboxState10.setText("Log files read.");
+            checkboxState10.setName("proxyLogReads"); // NOI18N
+            jPanel28.add(checkboxState10);
+            checkboxState10.setBounds(250, 170, 130, 23);
+
+            jLabel17.setText("You have to stop and start the server for settings changes to take effect.");
+            jPanel28.add(jLabel17);
+            jLabel17.setBounds(40, 40, 420, 15);
 
             jTabbedPane1.addTab("Proxy", jPanel28);
 
@@ -3011,6 +3022,7 @@ private void jButton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private shared.State.ButtongroupState buttongroupState1;
     private shared.State.CheckboxState checkboxState1;
+    private shared.State.CheckboxState checkboxState10;
     private shared.State.CheckboxState checkboxState2;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
@@ -3104,6 +3116,7 @@ private void jButton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

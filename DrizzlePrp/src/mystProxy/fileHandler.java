@@ -210,8 +210,19 @@ public class fileHandler
         }
         //response.setContentType("text/html");
         handleDone(request, response);
+        if(proxySettings.logFilesRead) m.msg("Read file: "+domain+target);
+        instream.close();
         //response.setStatus(HttpServletResponse.SC_OK);
         //((Request)request).setHandled(true);
+    }
+    public static void disableCaching(HttpServletResponse response)
+    {
+        //we could remove some of these.
+        response.addHeader("Progma", "no-cache");
+        response.addHeader("Cache-Control","no-store");
+        response.addHeader("Cache-Control", "no-cache");
+        response.addHeader("Cache-Control", "must-revalidate");
+        response.addHeader("Expires", "Mon, 15 Feb 1982 10:00:00 GMT");
     }
     
     public static InputStream readFile(packageInfo p, String domain, String filename) throws IOException //filename is like /index.html or /files/pub/a.jpg
@@ -223,14 +234,14 @@ public class fileHandler
             //File file = new File(fullname);
             //File file2 = file.getCanonicalFile(); //may throw exception
             File file2 = findFileCaseInsensitive(new File(proxySettings.basefolder), fullname);
-            if( ! file2.getPath().toLowerCase().startsWith(proxySettings.basefolder.toLowerCase()) )
+            if( file2==null || !file2.exists())
+            {
+                throw new handlingException("Tried to read file that doesn't exist: "+fullname);
+            }
+            else if( ! file2.getPath().toLowerCase().startsWith(proxySettings.basefolder.toLowerCase()) )
             {
                 //security problem!  don't let them access outside the basefolder.
                 throw new handlingException("A file tried to access outside the basefolder: "+file2.getPath());
-            }
-            else if( ! file2.exists())
-            {
-                throw new handlingException("Tried to read file that doesn't exist: "+file2.getPath());
             }
             else
             {
