@@ -498,6 +498,15 @@ public class Gui extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jPanel25 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jPanel28 = new javax.swing.JPanel();
+        jButton70 = new javax.swing.JButton();
+        textfieldState9 = new shared.State.TextfieldState();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        textfieldState10 = new shared.State.TextfieldState();
+        jButton71 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
@@ -1914,18 +1923,69 @@ public class Gui extends javax.swing.JFrame {
 
             jTabbedPane1.addTab("Legacy", jPanel24);
 
+            jTextArea5.setColumns(20);
+            jTextArea5.setRows(5);
+            jTextArea5.setText("Todo: put help in here.\n");
+            jScrollPane10.setViewportView(jTextArea5);
+
             javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
             jPanel25.setLayout(jPanel25Layout);
             jPanel25Layout.setHorizontalGroup(
                 jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 877, Short.MAX_VALUE)
+                .addGroup(jPanel25Layout.createSequentialGroup()
+                    .addGap(93, 93, 93)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(334, Short.MAX_VALUE))
             );
             jPanel25Layout.setVerticalGroup(
                 jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 439, Short.MAX_VALUE)
+                .addGroup(jPanel25Layout.createSequentialGroup()
+                    .addGap(44, 44, 44)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(177, Short.MAX_VALUE))
             );
 
             jTabbedPane1.addTab("Help", jPanel25);
+
+            jPanel28.setLayout(null);
+
+            jButton70.setText("Start Server");
+            jButton70.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton70ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jButton70);
+            jButton70.setBounds(140, 240, 93, 25);
+
+            textfieldState9.setText("C:\\Documents and Settings\\user\\Desktop\\web");
+            textfieldState9.setName("proxyFolder"); // NOI18N
+            jPanel28.add(textfieldState9);
+            textfieldState9.setBounds(140, 120, 300, 19);
+
+            jLabel15.setText("base folder:");
+            jPanel28.add(jLabel15);
+            jLabel15.setBounds(60, 110, 58, 15);
+
+            jLabel16.setText("port:");
+            jPanel28.add(jLabel16);
+            jLabel16.setBounds(60, 170, 22, 15);
+
+            textfieldState10.setText("8012");
+            textfieldState10.setName("proxyPort"); // NOI18N
+            jPanel28.add(textfieldState10);
+            textfieldState10.setBounds(130, 170, 100, 19);
+
+            jButton71.setText("Stop Server");
+            jButton71.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton71ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jButton71);
+            jButton71.setBounds(260, 240, 120, 25);
+
+            jTabbedPane1.addTab("Proxy", jPanel28);
 
             jPanel26.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -2904,6 +2964,14 @@ private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-
 private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton69ActionPerformed
     automation.mystAutomation.readPotsPrps(textfieldState7.getText(), listState4.getSelectedAsStrings());
 }//GEN-LAST:event_jButton69ActionPerformed
+
+private void jButton70ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton70ActionPerformed
+    mystProxy.mystProxy.startServer(textfieldState9.getText(),textfieldState10.getText());
+}//GEN-LAST:event_jButton70ActionPerformed
+
+private void jButton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton71ActionPerformed
+    mystProxy.mystProxy.stopServer();
+}//GEN-LAST:event_jButton71ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3022,6 +3090,8 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton68;
     private javax.swing.JButton jButton69;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton70;
+    private javax.swing.JButton jButton71;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
@@ -3032,6 +3102,8 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3060,6 +3132,7 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -3075,6 +3148,7 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3088,6 +3162,7 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -3101,6 +3176,7 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.TabsState tabsState2;
     private shared.State.TextareaState textareaState1;
     private shared.State.TextfieldState textfieldState1;
+    private shared.State.TextfieldState textfieldState10;
     private shared.State.TextfieldState textfieldState2;
     private shared.State.TextfieldState textfieldState3;
     private shared.State.TextfieldState textfieldState4;
@@ -3108,6 +3184,7 @@ private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.TextfieldState textfieldState6;
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState8;
+    private shared.State.TextfieldState textfieldState9;
     // End of variables declaration//GEN-END:variables
     
 }

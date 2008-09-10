@@ -173,6 +173,11 @@ public class Bytedeque2
         {
             bytecount += iterator.next().length;
         }
+        if(bytecount>50000000)
+        {
+            int dummy=0;
+        }
+        
         
         byte[] result = null;
         //try{

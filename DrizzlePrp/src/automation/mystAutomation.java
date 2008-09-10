@@ -1321,6 +1321,10 @@ public class mystAutomation
             "MarshScene.age",
             "MountainScene.age",
         };
+        //String[] sumfiles = {
+        //    "MarshScene.sum",
+        //    "MountainScene.sum",
+        //};
         String[] prpfiles = {
             "MarshScene_Exterior.prp",
             "MarshScene_Extras.prp",
@@ -1394,6 +1398,8 @@ public class mystAutomation
         //convert .prp files...
         for(String filename: prpfiles)
         {
+            //Runtime.getRuntime().gc();
+            
             String infile = crowthistlefolder + "/dat/" + filename;
             String outfile = potsfolder + "/dat/" + filename.replace("_", "_District_");
             String agename = getAgenameFromFilename(filename);

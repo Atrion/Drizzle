@@ -71,6 +71,7 @@ public class FileUtils {
             byte[] result = new byte[filelength];
             int bytesread = reader.read(result,0,filelength);
             if(bytesread!=filelength) throw new Exception("Incorrect # of bytes read.");
+            reader.close();
             return result;
         }
         catch(Exception e)
@@ -101,6 +102,7 @@ public class FileUtils {
             writer.close();
             int actuallength = (int)filename.length(); //loss of precision.
             if(actuallength != filelength) throw new Exception("Error writing file, not correct length.");
+            writer.close();
         }
         catch(Exception e)
         {

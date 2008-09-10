@@ -1,0 +1,7 @@
+bouncycastle:
+  org.bouncycastle (only some parts)
+jetty:
+  modules(don't forget to copy the resources over as well, as if they were source files):
+    jetty (org.mortbay.io, org.mortbay.jetty, org.mortbay.resource, org.mortbay.servlet, org.mortbay.xml)
+    servlet-api-2.5 (javax.servlet, javax.servlet.http)
+    util(org.mortbay.component,org.mortbay.log,org.mortbay.servlet(again),org.mortbay.thread,org.mortbay.util)
