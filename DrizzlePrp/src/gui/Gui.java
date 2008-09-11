@@ -555,7 +555,7 @@ public class Gui extends javax.swing.JFrame {
         buttongroupState1.setName("awe");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Uruutils");
+        setTitle("Drizzle");
         setBounds(new java.awt.Rectangle(0, 0, 600, 600));
         setMinimumSize(new java.awt.Dimension(760, 550));
         addWindowListener(new java.awt.event.WindowAdapter() {

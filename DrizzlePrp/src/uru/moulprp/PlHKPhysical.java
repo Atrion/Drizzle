@@ -43,7 +43,7 @@ public class PlHKPhysical extends uruobj
     //plODEPHysical
     ODEPhysical ode;
     
-    public static potsflags convertMoulFlagsToPotsFlags(moulflags moul)
+    public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
     {
         potsflags pots = new potsflags();
         byte u14 = moul.u14;
@@ -92,11 +92,13 @@ public class PlHKPhysical extends uruobj
             pots.zzzgroup0 = 0x0;
         }
         else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
-                ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 )) //ladders
+                ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 ))
+            //ladders
         //else if( u14==0x5 )
         {
             //detector: sitting, etc.
             //footprint sounds. needs a responderModifier too, I think.
+            //works when mass is set.
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x400;
             pots.zzzflagsdetect = 0x8000000;
@@ -111,6 +113,7 @@ public class PlHKPhysical extends uruobj
         else if( u14==0x6 && u15==0x0 && LOSDB==0x2 && group0==0x0 )
         {
             //books?
+            //mass not needed coming from moul
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x400;
             pots.zzzflagsdetect = 0x0;
@@ -119,6 +122,8 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x2;
             pots.zzzgroup0 = 0x4;
+            
+            //pots.givemass = true; //delete this.
         }
         else if( u14==0x0 && u15==0x0 && LOSDB==0x45 && group0==0x120 )
         {
@@ -144,9 +149,12 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x2;
             pots.zzzgroup0 = 0x4;
+
+            //pots.givemass = true; //delete this.
         }
-        else if( u14==0x0 && u15==0x0 && LOSDB==0x0 && group0==0x0 ) //ladders
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x0 && group0==0x0 ) //ladders bounds
         {
+            //mass does not always need to be set, coming from moul.
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x200;
             pots.zzzflagsdetect = 0x0;
@@ -155,10 +163,90 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x0;
             pots.zzzgroup0 = 0x4;
+
+            pots.givemass = true; //delete this.
+        }
+        //new ones
+        else if( u14==0x6 && u15==0x0 && LOSDB==0x4 && group0==0x0 )
+        {
+            //cameras?
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x0;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x4;
+            pots.zzzgroup0 = 0x0;
+
+        }
+        else if( u14==0x6 && u15==0x0 && LOSDB==0x2 && group0==0x20 )
+        {
+            //e.g. clkBSDoor in delin
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x2;
+            pots.zzzgroup0 = 0x4;
+
+        }
+        else if( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x120 )
+        {
+            //e.g. PanicRegion in delin.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x8000000;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x0;
+            pots.zzzgroup0 = 0x104;
+
+        }
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x5 && group0==0x124 )
+        {
+            //e.g. PanicRegion in delin.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x1020000;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x5;
+            pots.zzzgroup0 = 0x124; //just a guess.
+
+        }
+        else if( u14==0x5 && u15==0x18 && LOSDB==0x0 && group0==0x0 )
+        {
+            //e.g. some stuff in Jalak
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x1020000;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x0;
+            pots.zzzgroup0 = 0x4;
+        }
+        else if( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x20 )
+        {
+            //e.g. some stuff in Jalak
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x8000000;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x0;
+            pots.zzzgroup0 = 0x4;
+
         }
         else
         {
-            //m.err("plHKPhysical: Unexpected combination.");
+            m.warn("plHKPhysical: Unhandled flag combination.: u14=0x"+Integer.toHexString(u14)+";u15=0x"+Integer.toHexString(u15)+";losdb=0x"+Integer.toHexString(LOSDB)+";group0=0x"+Integer.toHexString(group0)+";name="+objname);
             return null;
         }
         return pots;
@@ -274,7 +362,7 @@ public class PlHKPhysical extends uruobj
 
         public PXPhysical(context c) throws readexception
         {
-            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("shroomie"))
+            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("box01"))
             {
                 int dummy=0;
             }
@@ -355,7 +443,7 @@ public class PlHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul);
+            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
             if(pots==null)
             {
                 throw new readexception("plHKPhysical: Can read okay, but failing in order to ignore.");
@@ -370,7 +458,7 @@ public class PlHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul);
+            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
             if(pots==null)
             {
                 m.err("plHKPhysical: Unexpected combination.");
