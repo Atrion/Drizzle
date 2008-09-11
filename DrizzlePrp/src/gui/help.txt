@@ -1,0 +1,14 @@
+Welcome to Drizzle!
+
+
+To run the proxy server:
+------------------------
+1) Put all the zip files (or folders, if that's what you're using) into some folder together, including "index.net.zip".
+2) Start Drizzle and go to the Proxy tab.
+3) Set the base folder to the folder you put all the zip files in.
+4) Optional: set the port(default 8012) and whether you want it to log when it successfully reads a file.
+5) Click the start button.
+6) Set the proxy in your browser to 127.0.0.1:8012 (In firefox 3, go to Tools->Options->Advanced->Network->Connection Settings.  Select "Manual proxy configuration" and check "uses this proxy server for all protocols".  Set "Http proxy" to "127.0.0.1" and "Port" to "8012".)
+7) Optional: install an add-on like QuickProxy to firefox, so you can quickly switch between proxy mode and not.
+8) Go to http://index.net to start browsing.
+

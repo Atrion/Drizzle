@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package gui;
+package shared;
 
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -32,8 +32,9 @@ public class ImagePanel extends JPanel
         this.name = name;
         URL url = this.getClass().getResource(name);
         try{
-            BufferedImage img2 = javax.imageio.ImageIO.read(url);
-            img = img2;
+            //BufferedImage img2 = javax.imageio.ImageIO.read(url);
+            //img = img2;
+            img = shared.GetResource.getResourceAsImage(name);
         }catch(Exception e)
         {
             m.err("Unable to load resource: "+name);

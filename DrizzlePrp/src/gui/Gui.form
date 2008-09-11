@@ -2400,15 +2400,15 @@
                 <Component class="javax.swing.JTextArea" name="jTextArea5">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Todo: put help in here.&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="gui.ImagePanel" name="imagePanel2">
+            <Container class="shared.ImagePanel" name="imagePanel2">
               <Properties>
-                <Property name="imageFile" type="java.lang.String" value="Pterosaur2b4.png"/>
+                <Property name="imageFile" type="java.lang.String" value="/gui/Pterosaur2b4.png"/>
               </Properties>
 
               <Layout>
@@ -2528,6 +2528,19 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="javax.swing.JButton" name="jButton77">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="select..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton77ActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="410" y="80" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel29">
@@ -2607,6 +2620,7 @@
                 <Component class="shared.State.TextfieldState" name="textfieldState11">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="textfieldState11"/>
+                    <Property name="name" type="java.lang.String" value="logPrefix" noResource="true"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2647,6 +2661,7 @@
                 <Component class="shared.State.TextfieldState" name="textfieldState12">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="textfieldState12"/>
+                    <Property name="name" type="java.lang.String" value="logFile" noResource="true"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

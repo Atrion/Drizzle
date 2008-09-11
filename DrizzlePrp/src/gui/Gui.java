@@ -124,13 +124,19 @@ public class Gui extends javax.swing.JFrame {
         m.redirectStdErr();
         m.redirectStdOut();
 
-        try{
-        java.net.URL url = this.getClass().getResource("Image2.png");
+        //try{
+        //java.net.URL url = this.getClass().getResource("Image2.png");
         //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
-        java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(url);
-        this.jPanel32.getGraphics().drawImage(img, 0, 0, rootPane);
+        //java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(url);
+        //java.awt.Image img = shared.GetResource.getResourceAsImage(this, "Image2.png");
+        //this.jPanel32.getGraphics().drawImage(img, 0, 0, rootPane);
         //this.setIconImage(image.getImage());
-        }catch(Exception e){}
+        //}catch(Exception e){}
+        
+        String helpstr = shared.GetResource.getResourceAsString("/gui/help.txt");
+        jTextArea5.setText(helpstr);
+        //jTextArea5.repaint();
+        //jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
 
         
         jComboBox1.setEditable(true);
@@ -512,7 +518,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel25 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea5 = new javax.swing.JTextArea();
-        imagePanel2 = new gui.ImagePanel();
+        imagePanel2 = new shared.ImagePanel();
         jPanel28 = new javax.swing.JPanel();
         jButton70 = new javax.swing.JButton();
         textfieldState9 = new shared.State.TextfieldState();
@@ -522,6 +528,7 @@ public class Gui extends javax.swing.JFrame {
         jButton71 = new javax.swing.JButton();
         checkboxState10 = new shared.State.CheckboxState();
         jLabel17 = new javax.swing.JLabel();
+        jButton77 = new javax.swing.JButton();
         jPanel29 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTextArea6 = new javax.swing.JTextArea();
@@ -1968,11 +1975,11 @@ public class Gui extends javax.swing.JFrame {
             jTabbedPane1.addTab("Legacy", jPanel24);
 
             jTextArea5.setColumns(20);
+            jTextArea5.setEditable(false);
             jTextArea5.setRows(5);
-            jTextArea5.setText("Todo: put help in here.\n");
             jScrollPane10.setViewportView(jTextArea5);
 
-            imagePanel2.setImageFile("Pterosaur2b4.png");
+            imagePanel2.setImageFile("/gui/Pterosaur2b4.png");
 
             javax.swing.GroupLayout imagePanel2Layout = new javax.swing.GroupLayout(imagePanel2);
             imagePanel2.setLayout(imagePanel2Layout);
@@ -2055,6 +2062,15 @@ public class Gui extends javax.swing.JFrame {
             jPanel28.add(jLabel17);
             jLabel17.setBounds(40, 40, 420, 16);
 
+            jButton77.setText("select...");
+            jButton77.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton77ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jButton77);
+            jButton77.setBounds(410, 80, 66, 36);
+
             jTabbedPane1.addTab("Proxy", jPanel28);
 
             jPanel29.setLayout(null);
@@ -2083,6 +2099,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel18.setBounds(10, 10, 33, 16);
 
             textfieldState11.setText("textfieldState11");
+            textfieldState11.setName("logPrefix"); // NOI18N
             jPanel30.add(textfieldState11);
             textfieldState11.setBounds(70, 10, 160, 20);
 
@@ -2097,6 +2114,7 @@ public class Gui extends javax.swing.JFrame {
             jPanel31.setLayout(null);
 
             textfieldState12.setText("textfieldState12");
+            textfieldState12.setName("logFile"); // NOI18N
             jPanel31.add(textfieldState12);
             textfieldState12.setBounds(10, 20, 87, 20);
 
@@ -2985,6 +3003,9 @@ private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     shared.State.AllStates.loadandpush(settingsfile);
+    
+    jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
+    
 }//GEN-LAST:event_formWindowOpened
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -3044,13 +3065,16 @@ private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     //System.out.println("Hello there!");
     //throw new RuntimeException("Test exception.");
     
-    try{
+    /*try{
     java.net.URL url = this.getClass().getResource("Image4.png");
     //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
     java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(url);
     this.jPanel32.getGraphics().drawImage(img, 0, 0, rootPane);
     //this.setIconImage(image.getImage());
-    }catch(Exception e){}
+    }catch(Exception e){}*/
+    
+            jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
+
 
 }//GEN-LAST:event_jButton60ActionPerformed
 
@@ -3119,6 +3143,10 @@ private void jButton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton72ActionPerformed
     jTextArea6.setText(jTextArea1.getText());
 }//GEN-LAST:event_jButton72ActionPerformed
+
+private void jButton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton77ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState9);
+}//GEN-LAST:event_jButton77ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3171,7 +3199,7 @@ private void jButton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.ComboboxState comboboxState2;
     private javax.swing.ButtonGroup filedirButtonGroup;
     private shared.State.FormattedfieldState formattedfieldState1;
-    private gui.ImagePanel imagePanel2;
+    private shared.ImagePanel imagePanel2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -3246,6 +3274,7 @@ private void jButton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton74;
     private javax.swing.JButton jButton75;
     private javax.swing.JButton jButton76;
+    private javax.swing.JButton jButton77;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;

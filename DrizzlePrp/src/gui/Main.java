@@ -51,9 +51,11 @@ public class Main extends javax.swing.JFrame {
             public void run()
             {
                 gui = new Gui();
-                java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
-                javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
-                gui.setIconImage(image.getImage());
+                //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
+                //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
+                //java.awt.Image img = image.getImage();
+                java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
+                gui.setIconImage(img);
                 gui.setVisible(true);
             }
         });
