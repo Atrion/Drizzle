@@ -37,7 +37,7 @@ public class Quat extends uruobj
     public Quat(context c)
     {
         //These looked different, but changing it messed up the angle of the door in EderDelin.
-        m.msg("scrambling quat.");
+        //m.msg("scrambling quat.");
         if(c.readversion==6||c.readversion==4)
         {
             w = new Flt(c);

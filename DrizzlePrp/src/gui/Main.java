@@ -38,7 +38,8 @@ public class Main extends javax.swing.JFrame {
             //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
             //javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
             //javax.swing.UIManager.setLookAndFeel( sun.java.swing.plaf.gtk.GTKLooktAndFeel());
-            javax.swing.UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
+            //javax.swing.UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
+            javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
             //javax.swing.JDialog j = new javax.swing.JDialog();
             //j.
         }
@@ -50,6 +51,9 @@ public class Main extends javax.swing.JFrame {
             public void run()
             {
                 gui = new Gui();
+                java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
+                javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
+                gui.setIconImage(image.getImage());
                 gui.setVisible(true);
             }
         });

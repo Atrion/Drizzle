@@ -21,6 +21,10 @@ package shared;
 //import gui.Main;
 //import javax.swing.text.JTextComponent;
 import javax.swing.JTextArea;
+import java.io.OutputStream;
+//import java.io.Writer;
+import java.util.Vector;
+import java.io.PrintStream;
 
 /**
  *
@@ -29,6 +33,56 @@ import javax.swing.JTextArea;
 public class m
 {
     private static JTextArea _outputTextArea; //you must set this from the GUI.
+    
+    public static void redirectStdOut()
+    {
+        System.setOut(new PrintStream(new Outstream("stdout:"), true));
+    }
+    public static void redirectStdErr()
+    {
+        System.setErr(new PrintStream(new Outstream("stderr:"), true));
+    }
+    
+    public static class Outstream extends OutputStream
+    {
+        Vector<Character> unprinted=new Vector<Character>();
+        String tag;
+        public Outstream(String tag)
+        {
+            this.tag = tag;
+        }
+        /*public void close()
+        {
+        }*/
+        @Override public void flush()
+        {
+            //super.flush();
+            char[] CharString = new char[unprinted.size()];
+            for(int i=0;i<CharString.length;i++)
+            {
+                CharString[i] = unprinted.elementAt(i);
+            }
+            unprinted.clear();
+            String msg = new String(CharString);
+            if(msg.equals("\r\n")) return;
+            if(msg.equals("")) return;
+            m.msg("Console:"+tag+msg);
+        }
+        public void write(int b)
+        {
+            unprinted.add((char)b);
+        }
+        /*public void write(char[] buffer, int offset, int length)
+        {
+            //String msg = new String(buffer,offset,length);
+            //m.msg(msg);
+            for(int i=0;i<length;i++)
+            {
+                char c = buffer[offset+i];
+                unprinted.add(c);
+            }
+        }*/
+    }
     
     public static void setJTextArea(JTextArea newJTextArea)
     {
