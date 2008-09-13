@@ -967,7 +967,7 @@ public class mystAutomation
         prefices.put("EderTsogal", 0x61);
         
         HashMap<String, String> agenames = new HashMap<String, String>();
-        agenames.put("Kveer", "KveerMoul");
+        agenames.put("Kveer", "KveerMOUL");
         
         Typeid[] readable = mystAutomation.moulReadable;
         
