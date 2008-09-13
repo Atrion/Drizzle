@@ -65,10 +65,10 @@ public class x0006Layer extends uruobj
         flags4 = data.readInt(); //z flags
         flags5 = data.readInt(); //misc flags //there's a wireframe option here(0x1)!
         matrix = new Transmatrix(c); //transform
-        ambient = new Rgba(data); //preshade
-        diffuse = new Rgba(data); //runtime
-        emissive = new Rgba(data); //ambient
-        specular = new Rgba(data); //specular
+        ambient = new Rgba(c); //preshade
+        diffuse = new Rgba(c); //runtime
+        emissive = new Rgba(c); //ambient
+        specular = new Rgba(c); //specular
         uvwSource = data.readInt(); //uvwsource
         opacity = new Flt(c); //opacity //float
         lodbias = new Flt(c); //LOD bias //float

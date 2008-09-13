@@ -289,9 +289,21 @@ public class PrpObject extends uruobj
                 return new PlLayerBink(c);
             case plRelativeMatrixChannelApplicator:
                 return new PlAGAnim.plRelativeMatrixChannelApplicator(c);
+            case plSoundVolumeApplicator:
+                return new EmbeddedClasses.PlSoundVolumeApplicator(c);
+            case plPostEffectMod:
+                return new PlPostEffectMod(c);
+            case plSimSuppressMsg:
+                return new PrpMessage.PlSimSuppressMsg(c);
+            case plAxisAnimModifier:
+                return new PlAxisAnimModifier(c);
+            case pfGUIButtonMod:
+                return new PfGUIButtonMod(c);
+            case pfGUIDialogMod:
+                return new PfGUIButtonMod.PfGUIDialogMod(c);
             default:
                 //m.err("prprootobject: unhandled type.");
-                throw new readexception("prpobject: unhandled type.: "+type.toString());
+                throw new readexception("PrpObject: type constructor not in main list: "+type.toString());
         }
     }
 

@@ -96,7 +96,7 @@ public class ODEPhysical extends uruobj
         }
         else if(type==6) //ellipse???
         {
-            m.msg("Untested ODE case6...");
+            //m.msg("Untested ODE case6...");
             Flt u4 = new Flt(c); //same as 2
             Flt u6 = new Flt(c);
         }

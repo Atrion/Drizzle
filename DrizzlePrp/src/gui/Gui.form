@@ -172,10 +172,14 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton55" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton55" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton78" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="jButton56" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -192,6 +196,7 @@
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton55" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="textfieldState2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton78" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -316,6 +321,14 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Files to process:"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton78">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="read all..."/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton78ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -740,6 +753,19 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton79">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Read All Prps from All Games..."/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton79ActionPerformed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="470" y="30" width="200" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel17">
@@ -1119,6 +1145,7 @@
                   <SubComponents>
                     <Component class="shared.State.CheckboxState" name="checkboxState8">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Remove PlDynamicCamMap references from Materials(removes frostiness, makes it transparent instead)"/>
                         <Property name="name" type="java.lang.String" value="removeDynamicCamMap" noResource="true"/>
                       </Properties>

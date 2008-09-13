@@ -783,96 +783,17 @@ public class mystAutomation
         Typeid.plDynamicCamMap,
         Typeid.plSoftVolumeInvert,
         Typeid.plLayerBink,
+        
+        Typeid.plPostEffectMod,
+        Typeid.plSoundVolumeApplicator,
+        Typeid.plSimSuppressMsg,
+        Typeid.plPostEffectMod,
+        Typeid.plAxisAnimModifier,
+        Typeid.pfGUIDialogMod,
+        Typeid.pfGUIButtonMod,
     };
     
     public static Typeid[] crowReadable = moulReadable;
-    /*public static Typeid[] crowReadable={
-        Typeid.plSceneNode,
-        Typeid.plSceneObject,
-        Typeid.plMipMap,
-        Typeid.plCubicEnvironMap,
-        Typeid.plLayer,
-        Typeid.hsGMaterial,
-        Typeid.plParticleSystem,
-        Typeid.plBoundInterface,
-        Typeid.plAudioInterface,
-        Typeid.plWinAudio,
-        Typeid.plCoordinateInterface,
-        Typeid.plDrawInterface,
-        Typeid.plSpawnModifier,
-        Typeid.plDrawableSpans,
-        Typeid.plDirectionalLightInfo,
-        Typeid.plOmniLightInfo,
-        Typeid.plPythonFileMod,
-        Typeid.plPointShadowMaster,
-        Typeid.plSimulationInterface,
-        Typeid.plViewFaceModifier,
-        Typeid.plSittingModifier,
-        Typeid.plStereizer,
-        Typeid.plSoundBuffer,
-        Typeid.plRandomSoundMod,
-        Typeid.plWin32StreamingSound,
-        Typeid.plWin32StaticSound,
-        Typeid.plParticleLocalWind,
-        Typeid.plParticleCollisionEffectDie,
-        Typeid.plExcludeRegionModifier,
-        Typeid.plCameraBrain1,
-        Typeid.plCameraBrain1_Avatar,
-        Typeid.plCameraBrain1_Fixed,
-        Typeid.plCameraBrain1_Circle,
-        Typeid.plCameraModifier1,
-        Typeid.plAGModifier,
-        Typeid.plOccluder,
-        Typeid.plDynamicTextMap,
-        Typeid.plParticleCollisionEffectBounce,
-        Typeid.plSpotLightInfo,
-        Typeid.plShadowCaster,
-        Typeid.plDirectShadowMaster,
-        Typeid.plRelevanceRegion,
-        Typeid.plSoftVolumeSimple,
-        Typeid.plResponderModifier,
-        Typeid.plParticleFlockEffect,
-        Typeid.plFadeOpacityMod,
-        Typeid.plClusterGroup,
-        Typeid.plVisRegion,
-        Typeid.plSoftVolumeUnion,
-        Typeid.plObjectInVolumeDetector,
-        Typeid.plObjectInBoxConditionalObject,
-        Typeid.plInterfaceInfoModifier,
-        Typeid.plVolumeSensorConditionalObject,
-        Typeid.plLogicModifier,
-        Typeid.plActivatorConditionalObject,
-        Typeid.plFacingConditionalObject,
-        Typeid.plOneShotMod,
-        Typeid.plAvLadderMod,
-        Typeid.plDynaFootMgr,
-        Typeid.plPickingDetector,
-        Typeid.plCameraRegionDetector,
-        Typeid.plHKPhysical,
-        Typeid.plSoftVolumeIntersect,
-        Typeid.plEAXListenerMod,
-        Typeid.plPhysicalSndGroup,
-        Typeid.plSeekPointMod,
-        Typeid.plRailCameraMod,
-        Typeid.plLayerAnimation,
-        Typeid.plATCAnim,
-        Typeid.plAGMasterMod,
-        Typeid.plPanicLinkRegion,
-        Typeid.plLineFollowMod,
-        Typeid.plMsgForwarder,
-        Typeid.plAnimEventModifier,
-        Typeid.plMultiStageBehMod,
-        Typeid.plImageLibMod,
-        Typeid.plLimitedDirLightInfo,
-        Typeid.plAgeGlobalAnim,
-        Typeid.plDynaPuddleMgr,
-        Typeid.plWaveSet7,
-        Typeid.plDynamicEnvMap,
-        Typeid.plRidingAnimatedPhysicalDetector,
-        Typeid.plGrassShaderMod,
-        Typeid.plDynamicCamMap,
-        Typeid.plSoftVolumeInvert,
-    };*/
     
     public static void convertEoaToWhatdoyousee(String infile, String outfile)
     {
@@ -1164,7 +1085,29 @@ public class mystAutomation
                 {
                     //found it!
                     m.msg("Removing DynamicCamMap from layerRefs.");
-                    layer.flags1 |= 0x80; //kBlendNoColor //blend //makes it invisible?
+                    //layer.flags1 |= 0x80; //kBlendNoColor //blend //makes it invisible?
+                    //float r = (float)(15.0/255.0); //15
+                    //float g = (float)(20.0/255.0); //20
+                    //float b = (float)(26.0/255.0); //26
+                    Flt r = Flt.createFromJavaFloat((float)(0.0/255.0)); //15
+                    Flt g = Flt.createFromJavaFloat((float)(0.0/255.0)); //20
+                    Flt b = Flt.createFromJavaFloat((float)(0.0/255.0)); //26
+                    //float a = (float)1.0;
+                    //layer.ambient = new Rgba(Flt.createFromJavaFloat(r),Flt.createFromJavaFloat(g),Flt.createFromJavaFloat(b),Flt.createFromJavaFloat(a));
+                    //layer.diffuse = new Rgba(Flt.createFromJavaFloat(r),Flt.createFromJavaFloat(g),Flt.createFromJavaFloat(b),Flt.createFromJavaFloat(a));
+                    //layer.emissive = new Rgba(Flt.createFromJavaFloat(r),Flt.createFromJavaFloat(g),Flt.createFromJavaFloat(b),Flt.createFromJavaFloat(a));
+                    layer.ambient.r = r;
+                    layer.ambient.g = g;
+                    layer.ambient.b = b;
+                    layer.diffuse.r = r;
+                    layer.diffuse.g = g;
+                    layer.diffuse.b = b;
+                    layer.emissive.r = r;
+                    layer.emissive.g = g;
+                    layer.emissive.b = b;
+                    layer.specular.r = r;
+                    layer.specular.g = g;
+                    layer.specular.b = b;
                 }
             }
         }
@@ -1460,17 +1403,19 @@ public class mystAutomation
                     Typeid.plParticleSystem, Typeid.plParticleLocalWind, Typeid.plParticleCollisionEffectDie,
                     Typeid.plAudioInterface, Typeid.plRandomSoundMod, Typeid.plSoundBuffer, Typeid.plWinAudio, Typeid.plWin32StreamingSound, Typeid.plWin32StaticSound, Typeid.plStereizer,
                     Typeid.plDrawInterface,
-                    //Typeid.plSoftVolumeSimple,
-                    //Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion,
-                    //Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
-                    //Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
-                    //Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
-                    //Typeid.plPointShadowMaster,
-                    //Typeid.plDynamicEnvMap,
-                    //Typeid.plWaveSet7,
-                    //Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
-                    //Typeid.plPythonFileMod,
-                    //Typeid.plResponderModifier,
+                    Typeid.plSoftVolumeSimple,
+                    Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion, Typeid.plSoftVolumeIntersect,
+                    Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
+                    Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
+                    Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
+                    Typeid.plPointShadowMaster,
+                    Typeid.plDynamicEnvMap,
+                    Typeid.plWaveSet7,
+                    Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
+                    Typeid.plPythonFileMod,
+                    Typeid.plResponderModifier,
+                    
+                    Typeid.plParticleCollisionEffectBounce, Typeid.plPostEffectMod,
                 };
                 String[] namestarts={
                     /*//"boulder01",
@@ -1677,6 +1622,255 @@ public class mystAutomation
         }
         
         m.msg("Finished Processing all files.");
+        
+    }
+    
+    public static void readAllPrpsFromAllGames(String potsdir, String crowdir, String myst5dir, String mouldir)
+    {
+        Typeid[] alltypes = {
+            Typeid.hsGMaterial, //large
+            Typeid.pfGUIButtonMod,
+            Typeid.pfGUIDialogMod,
+            Typeid.pfObjectFlocker,
+            Typeid.plAGAnimBink,
+            Typeid.plAGMasterMod,
+            Typeid.plAGModifier, //has embedded
+            Typeid.plATCAnim, //has embedded
+            Typeid.plActivatorConditionalObject,
+            Typeid.plActivatorMsg,
+            Typeid.plAgeGlobalAnim, //has embedded
+            Typeid.plAnimCmdMsg,
+            Typeid.plAnimEventModifier,
+            Typeid.plAnimPath,
+            Typeid.plArmatureEffectStateMsg,
+            Typeid.plAudioInterface,
+            Typeid.plAvLadderMod,
+            Typeid.plAxisAnimModifier,
+            Typeid.plBoundInterface,
+            Typeid.plBubbleShaderMod,
+            Typeid.plCameraBrain1,
+            Typeid.plCameraBrain1_Avatar,
+            Typeid.plCameraBrain1_Circle,
+            Typeid.plCameraBrain1_Fixed,
+            Typeid.plCameraBrainUru,
+            Typeid.plCameraBrainUru_Fixed,
+            Typeid.plCameraModifier,
+            Typeid.plCameraModifier1,
+            Typeid.plCameraMsg,
+            Typeid.plCameraRegionDetector,
+            Typeid.plClusterGroup, //large
+            Typeid.plCompoundController,
+            Typeid.plCompoundPosController,
+            Typeid.plCompoundRotController,
+            Typeid.plConvexIsect,
+            Typeid.plCoordinateInterface,
+            Typeid.plCubicEnvironMap, //large
+            Typeid.plDirectMusicSound,
+            Typeid.plDirectShadowMaster,
+            Typeid.plDirectionalLightInfo,
+            Typeid.plDrawInterface,
+            Typeid.plDrawableSpans, //large
+            Typeid.plDynaFootMgr,
+            Typeid.plDynaPuddleMgr,
+            Typeid.plDynamicCamMap,
+            Typeid.plDynamicEnvMap,
+            Typeid.plDynamicTextMap,
+            Typeid.plEAXListenerMod,
+            Typeid.plEAXReverbEffect,
+            Typeid.plEnableMsg,
+            Typeid.plEventCallbackMsg,
+            Typeid.plExcludeRegionModifier,
+            Typeid.plExcludeRegionMsg,
+            Typeid.plFacingConditionalObject,
+            Typeid.plFadeOpacityMod,
+            Typeid.plGenRefMsg,
+            Typeid.plGrassShaderMod,
+            
+            Typeid.plHKPhysical, //large
+            Typeid.plImageLibMod,
+            Typeid.plInterfaceInfoModifier,
+            Typeid.plLayer,
+            Typeid.plLayerAnimation,
+            Typeid.plLayerBink,
+            Typeid.plLeafController,
+            Typeid.plLightDiffuseApplicator,
+            Typeid.plLightSpecularApplicator,
+            Typeid.plLimitedDirLightInfo,
+            Typeid.plLineFollowMod,
+            Typeid.plLinkToAgeMsg,
+            Typeid.plLogicModifier,
+            
+            Typeid.plMatrix44Controller,
+            Typeid.plMatrixChannelApplicator,
+            Typeid.plMatrixControllerChannel,
+            Typeid.plMipMap, //large
+            Typeid.plMsgForwarder,
+            Typeid.plMultiStageBehMod,
+            Typeid.plNodeRegionModifier,
+            Typeid.plNotifyMsg,
+            Typeid.plObjectInBoxConditionalObject,
+            Typeid.plObjectInVolumeDetector,
+            Typeid.plOccluder,
+            Typeid.plOmniLightInfo,
+            Typeid.plOmniSqApplicator,
+            Typeid.plOneShotMod,
+            Typeid.plOneShotMsg,
+            Typeid.plOneTimeParticleGenerator,
+            Typeid.plPanicLinkRegion,
+            Typeid.plParticleCollisionEffectBounce,
+            Typeid.plParticleCollisionEffectDie,
+            Typeid.plParticleEmitter,
+            Typeid.plParticleFlockEffect,
+            Typeid.plParticleLocalWind,
+            Typeid.plParticlePPSApplicator,
+            Typeid.plParticleSystem,
+            Typeid.plPhysicalSndGroup,
+            Typeid.plPickingDetector,
+            Typeid.plPointControllerChannel,
+            Typeid.plPointShadowMaster,
+            Typeid.plPostEffectMod,
+            Typeid.plPythonFileMod,
+            
+            Typeid.plRailCameraMod,
+            Typeid.plRandomSoundMod,
+            Typeid.plRefMsg,
+            Typeid.plRelativeMatrixChannelApplicator,
+            Typeid.plRelevanceRegion,
+            Typeid.plResponderEnableMsg,
+            Typeid.plResponderModifier,
+            Typeid.plRideAnimatedPhysMsg,
+            Typeid.plRidingAnimatedPhysicalDetector,
+            Typeid.plScalarController,
+            Typeid.plScalarControllerChannel,
+            Typeid.plSceneNode,
+            Typeid.plSceneObject,
+            Typeid.plSeekPointMod,
+            Typeid.plShadowCaster,
+            Typeid.plSimSuppressMsg,
+            Typeid.plSimpleParticleGenerator,
+            Typeid.plSimplePosController,
+            Typeid.plSimpleRotController,
+            Typeid.plSimpleScaleController,
+            Typeid.plSimulationInterface,
+            Typeid.plSittingModifier,
+            Typeid.plSoftVolumeIntersect,
+            Typeid.plSoftVolumeInvert,
+            Typeid.plSoftVolumeSimple,
+            Typeid.plSoftVolumeUnion,
+            Typeid.plSoundBuffer,
+            Typeid.plSoundMsg,
+            Typeid.plSoundVolumeApplicator,
+            Typeid.plSpaceTree,
+            Typeid.plSpawnMod,
+            Typeid.plSpawnModifier,
+            Typeid.plSpotLightInfo,
+            Typeid.plStereizer,
+            Typeid.plSubWorldMsg,
+            
+            Typeid.plTMController,
+            Typeid.plTimerCallbackMsg,
+            Typeid.plViewFaceModifier,
+            Typeid.plVisRegion,
+            Typeid.plVolumeIsect,
+            Typeid.plVolumeSensorConditionalObject,
+            Typeid.plWaveSet7,
+            Typeid.plWin32StaticSound,
+            Typeid.plWin32StreamingSound,
+            Typeid.plWinAudio,
+            
+        };
+        Typeid[] potstypes = {};
+        Typeid[] myst5types = {};
+        Typeid[] moultypes = {};
+        boolean dopots = true;
+        boolean docrow = true;
+        boolean domyst5 = true;
+        boolean domoul = true;
+        
+        
+        //Typeid[] crowtypes = {}; //this should just be the myst5types.
+        String[] dirs = {potsdir,crowdir,myst5dir,mouldir};
+        
+        Typeid[] potstypes2 = new Typeid[alltypes.length+potstypes.length];
+        int i=0;
+        for(int j=0;j<alltypes.length;j++) { potstypes2[i] = alltypes[j]; i++; }
+        for(int j=0;j<potstypes.length;j++) { potstypes2[i] = potstypes[j]; i++; }
+        
+        Typeid[] myst5types2 = new Typeid[alltypes.length+myst5types.length];
+        i=0;
+        for(int j=0;j<alltypes.length;j++) { myst5types2[i] = alltypes[j]; i++; }
+        for(int j=0;j<myst5types.length;j++) { myst5types2[i] = myst5types[j]; i++; }
+
+        Typeid[] moultypes2 = new Typeid[alltypes.length+moultypes.length];
+        i=0;
+        for(int j=0;j<alltypes.length;j++) { moultypes2[i] = alltypes[j]; i++; }
+        for(int j=0;j<moultypes.length;j++) { moultypes2[i] = moultypes[j]; i++; }
+        /*class fileinfo
+        {
+            File file;
+        }*/
+        
+        //get a list of all the prp files.
+        //Vector<File> allfiles = new Vector<File>();
+        for(int dircount = 0;dircount<dirs.length;dircount++)
+        {
+            String dir = dirs[dircount];
+            
+            Typeid[] readable = null;
+            if(dircount==0)
+            {
+                readable = potstypes2;
+                if(!dopots) continue;
+            }
+            else if(dircount==1)
+            {
+                readable = myst5types2;
+                if(!docrow) continue;
+            }
+            else if(dircount==2)
+            {
+                readable = myst5types2;
+                if(!domyst5) continue;
+            }
+            else if(dircount==3)
+            {
+                readable = moultypes2;
+                if(!domoul) continue;
+            }
+            else
+            {
+                m.err("Programming error.");
+                return;
+            }
+            
+            File prpfolder = new File(dir+"/dat/");
+            if (!prpfolder.isDirectory() || !prpfolder.exists())
+            {
+                m.err("Prp directory not in proper format or not found: "+dir);
+                return;
+            }
+            File[] files = prpfolder.listFiles();
+            for(File curfile: files)
+            {
+                if(curfile.getName().toLowerCase().endsWith(".prp"))
+                {
+                    //process file...
+                    //allfiles.add(file);
+                    
+                    //open prp file and process it.
+                    byte[] filedata = FileUtils.ReadFile(curfile);
+
+                    //do work.
+                    context c = context.createFromBytestream(new Bytestream(filedata));
+                    //c.readversion = version;
+                    c.curFile = curfile.getPath();
+                    //uru.moulprp.prpprocess.ProcessAllObjects(c);
+                    prpfile prp = prpfile.createFromContext(c, readable);
+                }
+            }
+        }
+        //m.msg("Parsing files... count="+Integer.toString(allfiles.size()));
+        
         
     }
 }

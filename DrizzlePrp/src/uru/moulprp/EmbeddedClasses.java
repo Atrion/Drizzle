@@ -25,6 +25,25 @@ import uru.e;
 
 public class EmbeddedClasses
 {
+    public static class PlSoundVolumeApplicator extends uruobj
+    {
+        byte u1;
+        Urustring u2;
+        int u3;
+        
+        public PlSoundVolumeApplicator(context c) throws readexception
+        {
+            u1 = c.readByte();
+            u2 = new Urustring(c);
+            u3 = c.readInt();
+        }
+        public void compile(Bytedeque c)
+        {
+            c.writeByte(u1);
+            u2.compile(c);
+            c.writeInt(u3);
+        }
+    }
     public static class PlOmniSqApplicator extends uruobj
     {
         byte u1;

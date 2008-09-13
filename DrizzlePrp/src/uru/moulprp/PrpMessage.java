@@ -51,6 +51,24 @@ public class PrpMessage extends PrpTaggedObject
         }
     }*/
     
+    public static class PlSimSuppressMsg extends uruobj
+    {
+        PlMessage parent;
+        byte b1;
+        
+        public PlSimSuppressMsg(context c) throws readexception
+        {
+            parent = new PlMessage(c);
+            b1 = c.readByte();
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeByte(b1);
+        }
+    }
+    
     public static class PlDampMsg extends uruobj
     {
         PlMessage parent;

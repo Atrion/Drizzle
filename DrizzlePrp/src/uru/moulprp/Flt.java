@@ -62,6 +62,12 @@ strictfp public class Flt extends uruobj
     {
         this.rawdata = Float.floatToRawIntBits(f);
     }
+    public static Flt createFromJavaFloat(float f)
+    {
+        Flt result = new Flt();
+        result.rawdata = Float.floatToRawIntBits(f);
+        return result;
+    }
     public static Flt createFromData(int datum)
     {
         Flt result = new Flt();

@@ -36,7 +36,7 @@ public class PrpRootObject extends uruobj
     {
         header = new Objheader(c);
         //String breakname = "map #2159";
-        String breakname = "respwedges";
+        String breakname = "fanroomcrank_drag";
         Typeid breaktype = null;
         //Typeid breaktype = Typeid.plATCAnim;
         if(header.desc.objectname.toString().toLowerCase().startsWith(breakname.toLowerCase()) && (breaktype==null || breaktype==header.desc.objecttype))

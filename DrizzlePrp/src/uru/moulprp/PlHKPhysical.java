@@ -246,7 +246,10 @@ public class PlHKPhysical extends uruobj
         }
         else
         {
-            m.warn("plHKPhysical: Unhandled flag combination.: u14=0x"+Integer.toHexString(u14)+";u15=0x"+Integer.toHexString(u15)+";losdb=0x"+Integer.toHexString(LOSDB)+";group0=0x"+Integer.toHexString(group0)+";name="+objname);
+            if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
+            {
+                m.warn("plHKPhysical: Unhandled flag combination.: u14=0x"+Integer.toHexString(u14)+";u15=0x"+Integer.toHexString(u15)+";losdb=0x"+Integer.toHexString(LOSDB)+";group0=0x"+Integer.toHexString(group0)+";name="+objname);
+            }
             return null;
         }
         return pots;

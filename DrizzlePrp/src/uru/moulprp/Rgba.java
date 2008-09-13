@@ -20,6 +20,8 @@ package uru.moulprp;
 
 import uru.Bytestream;
 import uru.Bytedeque;
+import uru.moulprp.Flt;
+import uru.context;
 
 /**
  *
@@ -27,19 +29,34 @@ import uru.Bytedeque;
  */
 public class Rgba extends uruobj
 {
-    int r;
-    int g;
-    int b;
-    int a;
+    //int r;
+    //int g;
+    //int b;
+    //int a;
+    public Flt r;
+    public Flt g;
+    public Flt b;
+    public Flt a;
     
-    public Rgba(Bytestream data)
+    public Rgba(context c)
     {
-        r = data.readInt(); //red //float from 0.0 to 1.0
-        g = data.readInt(); //green //float from 0.0 to 1.0
-        b = data.readInt(); //blue //float from 0.0 to 1.0
-        a = data.readInt(); //alpha //float from 0.0 to 1.0
+        //r = data.readInt(); //red //float from 0.0 to 1.0
+        //g = data.readInt(); //green //float from 0.0 to 1.0
+        //b = data.readInt(); //blue //float from 0.0 to 1.0
+        //a = data.readInt(); //alpha //float from 0.0 to 1.0
+        r = new Flt(c);
+        g = new Flt(c);
+        b = new Flt(c);
+        a = new Flt(c);
     }
-    public Rgba(int r, int g, int b, int a)
+    /*public Rgba(int r, int g, int b, int a)
+    {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }*/
+    public Rgba(Flt r, Flt g, Flt b, Flt a)
     {
         this.r = r;
         this.g = g;
@@ -48,18 +65,26 @@ public class Rgba extends uruobj
     }
     public void compile(Bytedeque deque)
     {
-        deque.writeInt(r);
-        deque.writeInt(g);
-        deque.writeInt(b);
-        deque.writeInt(a);
+        //deque.writeInt(r);
+        //deque.writeInt(g);
+        //deque.writeInt(b);
+        //deque.writeInt(a);
+        r.compile(deque);
+        g.compile(deque);
+        b.compile(deque);
+        a.compile(deque);
     }
 
     public String toString()
     {
-        return Flt.toString(r)
+        /*return Flt.toString(r)
                 +":"+Flt.toString(g)
                 +":"+Flt.toString(b)
-                +":"+Flt.toString(a);
+                +":"+Flt.toString(a);*/
+        return r.toString()
+                +":"+g.toString()
+                +":"+b.toString()
+                +":"+a.toString();
     }
     
 }

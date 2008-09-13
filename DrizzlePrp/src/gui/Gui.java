@@ -375,6 +375,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState2 = new shared.State.TextfieldState();
         textfieldState3 = new shared.State.TextfieldState();
         jLabel10 = new javax.swing.JLabel();
+        jButton78 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -403,6 +404,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
+        jButton79 = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         textfieldState7 = new shared.State.TextfieldState();
         jLabel11 = new javax.swing.JLabel();
@@ -625,6 +627,13 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel10.setText("Files to process:");
 
+        jButton78.setText("read all...");
+        jButton78.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton78ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -653,9 +662,12 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(textfieldState2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton55)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jButton55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton78))
                     .addComponent(jButton56))
-                .addGap(104, 104, 104))
+                .addGap(24, 24, 24))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel10)
@@ -668,7 +680,8 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jButton55)
-                    .addComponent(textfieldState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textfieldState2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton78))
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -916,6 +929,15 @@ public class Gui extends javax.swing.JFrame {
         jPanel16.add(jPanel32);
         jPanel32.setBounds(150, 130, 230, 140);
 
+        jButton79.setText("Read All Prps from All Games...");
+        jButton79.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton79ActionPerformed(evt);
+            }
+        });
+        jPanel16.add(jButton79);
+        jButton79.setBounds(470, 30, 200, 36);
+
         tabsState2.addTab("tab3", jPanel16);
 
         jPanel17.setLayout(null);
@@ -1084,6 +1106,7 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState2.addTab("Reports", jPanel18);
 
+            checkboxState8.setSelected(true);
             checkboxState8.setText("Remove PlDynamicCamMap references from Materials(removes frostiness, makes it transparent instead)");
             checkboxState8.setName("removeDynamicCamMap"); // NOI18N
 
@@ -3147,6 +3170,14 @@ private void jButton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton77ActionPerformed
     GuiUtils.getUserSelectedFolder(textfieldState9);
 }//GEN-LAST:event_jButton77ActionPerformed
+
+private void jButton78ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton78ActionPerformed
+    automation.mystAutomation.readAllPotsPrps(this.textfieldState2.getText());
+}//GEN-LAST:event_jButton78ActionPerformed
+
+private void jButton79ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton79ActionPerformed
+    automation.mystAutomation.readAllPrpsFromAllGames(textfieldState7.getText(),textfieldState4.getText(),textfieldState2.getText(),textfieldState6.getText());
+}//GEN-LAST:event_jButton79ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3275,6 +3306,8 @@ private void jButton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton75;
     private javax.swing.JButton jButton76;
     private javax.swing.JButton jButton77;
+    private javax.swing.JButton jButton78;
+    private javax.swing.JButton jButton79;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;

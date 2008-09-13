@@ -186,11 +186,20 @@ public enum Typeid implements compilable
     plCameraModifier,
     plSpawnMod,
     
-    //myst5
+    //myst5 direbo
     pfObjectFlocker,
     plAGAnimBink,
     plBubbleShaderMod,
     plLayerBink,
+    
+    //myst5 kveer
+    plDirectMusicSound,
+    plNodeRegionModifier,
+    plSoundVolumeApplicator,
+    plPostEffectMod,
+    plAxisAnimModifier,
+    pfGUIDialogMod,
+    pfGUIButtonMod,
     
     plLeafController,
     nil,
@@ -258,7 +267,7 @@ public enum Typeid implements compilable
         tri( 0x084, 0x084, 0x073, plWin32StreamingSound ),
         tri( 0x088, 0x088, 0x076, plSoftVolumeSimple ),
         tri( 0x08A, 0x08A, 0x078, plSoftVolumeUnion ),
-        tri( 0x08B, 0x08B, -2, plSoftVolumeIntersect ),
+        tri( 0x08B, 0x08B, 0x079, plSoftVolumeIntersect ),
         tri( 0x08C, 0x08C, 0x07A, plSoftVolumeInvert ),
         tri( 0x096, 0x096, 0x07E, plWin32StaticSound ),
         tri( 0x099, 0x099, -2, plCameraBrain1 ),
@@ -275,9 +284,9 @@ public enum Typeid implements compilable
         tri( 0x0C0, 0x0C0, -2, plRailCameraMod ),
         tri( 0x0C1, 0x0C1, -2, plMultiStageBehMod ),
         tri( 0x0C2, 0x0C2, -2, plCameraBrain1_Circle ),
-        tri( 0x0C4, 0x0C4, -2, plAnimEventModifier ),
+        tri( 0x0C4, 0x0C4, 0x0A5, plAnimEventModifier ), //3rd code from myst5
         tri( 0x0C9, 0x0C9, 0x0AA, plParticleCollisionEffectDie ),
-        tri( 0x0CA, 0x0CA, -2, plParticleCollisionEffectBounce ),
+        tri( 0x0CA, 0x0CA, 0x0AB, plParticleCollisionEffectBounce ), //3rd code from myst5
         tri( 0x0CB, 0x0CB, 0x0AC, plInterfaceInfoModifier ), //3rd code from myst5
         tri( 0x0D0, 0x0D0, 0x0B0, plParticleLocalWind ),
         tri( 0x0D4, 0x0D4, 0x0B4, plShadowCaster ),
@@ -331,16 +340,16 @@ public enum Typeid implements compilable
         tri( 0x2FD, 0x302, -2, plResponderEnableMsg ),
         tri( 0x302, 0x307, -2, plOneShotMsg ),
         tri( 0x330, 0x335, 0x2A2, plExcludeRegionMsg ), //3rd code from myst5
-        tri( 0x331, 0x336, -2, plOneTimeParticleGenerator ),
+        tri( 0x331, 0x336, 0x2A3, plOneTimeParticleGenerator ), //3rd code from myst5
         tri( 0x38E, 0x393, -2, plArmatureEffectStateMsg ),
         tri( 0x3BA, 0x3BF, -2, plSubWorldMsg ),
         
         tri( 0x309, 0x30E, 0x28A, plMatrixChannelApplicator ),
         tri( 0x2D9, 0x2DE, 0x267, plMatrixControllerChannel ),
-        tri( 0x335, 0x33A, -2, plParticlePPSApplicator ),
-        tri( 0x313, 0x318, -2, plScalarControllerChannel ),
-        tri( 0x30B, 0x310, -2, plLightDiffuseApplicator ),
-        tri( 0x306, 0x30B, -2, plPointControllerChannel ),
+        tri( 0x335, 0x33A, 0x2A7, plParticlePPSApplicator ), //3rd code from myst5
+        tri( 0x313, 0x318, 0x294, plScalarControllerChannel ), //3rd code from myst5
+        tri( 0x30B, 0x310, 0x28C, plLightDiffuseApplicator ), //3rd code from myst5
+        tri( 0x306, 0x30B, 0x287, plPointControllerChannel ), //3rd code from myst5
         tri( 0x30D, 0x312, -2, plLightSpecularApplicator ),
         tri( -2, 0x22A, -2, plOmniSqApplicator ), //moul-only
         tri( -2, 0x13A, -2, plRidingAnimatedPhysicalDetector ), //moul-only
@@ -359,6 +368,15 @@ public enum Typeid implements compilable
         tri( -2, -2, 0x110, plAGAnimBink), //not in pots
         tri( -2, -2, 0x03B, plBubbleShaderMod), //not in pots
         tri( 0x046, -2, 0x043, plLayerBink),
+        
+        tri( -2, -2, 0x100, plDirectMusicSound), //not in pots, but apparently plDirectMusicStream is.
+        tri( -2, -2, 0x113, plNodeRegionModifier), //not in pots
+        tri( 0x39F, -2, 0x2D0, plSoundVolumeApplicator),
+        tri( 0x45B, -2, 0x2EC, plSimSuppressMsg),
+        tri( 0x07A, -2, 0x06B, plPostEffectMod),
+        tri( 0x07D, -2, 0x06E, plAxisAnimModifier),
+        tri( 0x098, -2, 0x080, pfGUIDialogMod),
+        tri( 0x0A1, -2, 0x087, pfGUIButtonMod),
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };
@@ -477,7 +495,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Moul isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
                 //throw new readexception("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
             }
@@ -618,7 +636,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Pots isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
             }
             /*switch(type)
@@ -765,7 +783,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Myst5 isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
             }
         }
@@ -785,13 +803,13 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Typeid: Compilation error2: "+t.toString());
+                m.err("Typeid: Compilation error: Pots isn't listed as having type: "+t.toString());
                 return (short)0x8000;
             }
         }
         else
         {
-            m.err("Typeid: Compilation error.: "+t.toString());
+            m.err("Typeid: Compilation error(you shouldn't see this): "+t.toString());
             return (short)0x8000;
         }
         /*switch(t)
