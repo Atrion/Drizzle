@@ -904,7 +904,6 @@ public class prputils
         return result;
         
     }
-    
     public static void findAllObjectsOfType(String prpdir, Typeid type)
     {
         class callback implements uru.moulprp.allprpfiles.RootobjCallbackInterface
@@ -1007,6 +1006,25 @@ public class prputils
         return result2;
     }
     
+    public static PrpRootObject[] FindAllObjectsWithName(prpfile prp, String name)
+    {
+        Vector<PrpRootObject> result = new Vector<PrpRootObject>();
+        String name2 = name.toLowerCase();
+        
+        int numobjs = prp.objects.length;
+        for(int i=0;i<numobjs;i++)
+        {
+            PrpRootObject curobj = prp.objects[i];
+            if(curobj!=null && curobj.header.desc.objectname.toString().toLowerCase().equals(name2))
+            {
+                result.add(curobj);
+            }
+        }
+        
+        PrpRootObject[] result2 = new PrpRootObject[0];
+        result2 = result.toArray(result2);
+        return result2;
+    }
     
     
 }

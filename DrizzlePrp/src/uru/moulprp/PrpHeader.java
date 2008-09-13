@@ -39,8 +39,8 @@ public class PrpHeader extends uruobj
     Pageid pageid;
     //short pagetype;
     Pagetype pagetype;
-    Urustring agename;
-    Urustring pagename;
+    public Urustring agename;
+    public Urustring pagename;
     short u1;
     int payloadlength;
     int offsetToFirstObject;

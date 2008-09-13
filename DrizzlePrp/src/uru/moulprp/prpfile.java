@@ -31,10 +31,10 @@ import uru.moulprp.prputils.Compiler.Decider;
  */
 public class prpfile
 {
-    PrpHeader header;
+    public PrpHeader header;
     //Vector<PrpRootObject> objects;
-    PrpRootObject[] objects;
-    PrpObjectIndex objectindex;
+    public PrpRootObject[] objects;
+    public PrpObjectIndex objectindex;
     
     public prpfile(){}
     

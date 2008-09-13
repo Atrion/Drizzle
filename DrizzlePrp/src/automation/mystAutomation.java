@@ -26,6 +26,7 @@ import uru.moulprp.Uruobjectref;
 import uru.moulprp.Flt;
 import uru.moulprp.Rgba;
 import shared.State.AllStates;
+import uru.moulprp.Urustring;
 
 public class mystAutomation
 {
@@ -962,12 +963,14 @@ public class mystAutomation
         }
 
         HashMap<String, Integer> prefices = new HashMap<String, Integer>();
-        prefices.put("Payiferen", 0x63);
-        prefices.put("Kveer", 0x62);
-        prefices.put("EderTsogal", 0x61);
+        prefices.put("Payiferen", 99);
+        prefices.put("Kveer", 98);
+        prefices.put("EderTsogal", 97);
+        prefices.put("Neighborhood02",86);
         
         HashMap<String, String> agenames = new HashMap<String, String>();
         agenames.put("Kveer", "KveerMOUL");
+        agenames.put("Neighborhood02", "KirelMOUL");
         
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -1043,7 +1046,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            processPrp(prp);
+            processPrp(prp,agename,agenames);
             
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1063,8 +1066,27 @@ public class mystAutomation
         //All done!
         m.msg("Done Moul work!");
     }
-    public static void processPrp(prpfile prp)
+    public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames)
     {
+        if(AllStates.getStateAsBoolean("changeVerySpecialPython"))
+        {
+            String newagename = agenames.get(agename);
+            if(newagename!=null)
+            {
+                if(prp.header.pagename.toString().toLowerCase().equals("builtin"))
+                {
+                    PrpRootObject[] objs = prputils.FindAllObjectsWithName(prp, "VeryVerySpecialPythonFileMod");
+                    if(objs.length>0)
+                    {
+                        if(objs.length>1) m.warn("More than one VeryVerySpecialPythonFileMod found, just handling the first.");
+                        uru.moulprp.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
+                        Urustring oldpyfile = pythfilemod.pyfile;
+                        pythfilemod.pyfile = Urustring.createFromString(pythfilemod.pyfile.toString().replace(agename, newagename));
+                        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Changing Agename in VeryVerySpecialPythonFileMod from "+agename+" to "+newagename);
+                    }
+                }
+            }
+        }
         if(AllStates.getStateAsBoolean("makePlLayersWireframe"))
         {
             PrpRootObject[] layers = prputils.FindAllObjectsOfType(prp, Typeid.plLayer);
@@ -1363,7 +1385,7 @@ public class mystAutomation
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
 
-            processPrp(prp);
+            processPrp(prp,agename,null);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1518,7 +1540,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            processPrp(prp);
+            processPrp(prp,agename,agenames);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);

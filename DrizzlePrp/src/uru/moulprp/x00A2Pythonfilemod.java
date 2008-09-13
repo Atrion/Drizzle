@@ -32,7 +32,7 @@ public class x00A2Pythonfilemod extends uruobj
 {
     //Objheader xheader;
     PlMultiModifier parent;
-    Urustring pyfile;
+    public Urustring pyfile;
     int refcount;
     Uruobjectref[] pythonrefs;
     int listcount;

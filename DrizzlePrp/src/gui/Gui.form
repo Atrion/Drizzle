@@ -1125,6 +1125,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="checkboxState9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkboxState11" alignment="0" min="-2" pref="425" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="131" max="32767" attributes="0"/>
                           </Group>
@@ -1137,7 +1138,9 @@
                               <Component id="checkboxState8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="258" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkboxState11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="224" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1154,6 +1157,13 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Make all PlLayers wireframe!"/>
                         <Property name="name" type="java.lang.String" value="makePlLayersWireframe" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="shared.State.CheckboxState" name="checkboxState11">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="When renaming Ages, changes the VeryVerySpecialPythonFileMod too."/>
+                        <Property name="name" type="java.lang.String" value="changeVerySpecialPython" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
