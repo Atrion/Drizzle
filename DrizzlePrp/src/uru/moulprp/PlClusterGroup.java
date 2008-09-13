@@ -37,11 +37,11 @@ public class PlClusterGroup extends uruobj
     byte[] block1;
     byte[] block2;
     
-    Uruobjectref ref;
+    public Uruobjectref ref;
     int count;
     subclustergroup[] subclustergroups;
-    int count2;
-    Uruobjectref[] refs;
+    public int count2;
+    public Uruobjectref[] refs;
     int count3;
     Uruobjectref[] refs2;
     Flt u1;
@@ -75,7 +75,7 @@ public class PlClusterGroup extends uruobj
         refs = new Uruobjectref[count2];
         for(int i=0;i<count2;i++)
         {
-            refs[i] = new Uruobjectref(c); //visregion
+            refs[i] = new Uruobjectref(c); //visregion, sometimes empty in pots.
         }
         
         count3 = c.readInt();

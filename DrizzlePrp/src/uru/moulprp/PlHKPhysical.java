@@ -435,7 +435,7 @@ public class PlHKPhysical extends uruobj
             if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
             {
                 //String text = "file="+c.curFile+"   objname="+c.curRootObject.objectname.toString()+"   format="+Integer.toHexString(format)+"   u14="+Integer.toHexString(u14)+"   u15="+Integer.toHexString(u15)+"   losdb="+Integer.toHexString(LOSDB)+"   group="+Integer.toHexString(group.values[0]);
-                String text = "Physics:"+c.curFile+","+c.curRootObject.objectname.toString()+","+Integer.toHexString(format)+","+Integer.toHexString(u14)+","+Integer.toHexString(u15)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0]);
+                String text = "Physics:"+Integer.toHexString(format)+","+Integer.toHexString(u14)+","+Integer.toHexString(u15)+","+Integer.toHexString(LOSDB)+","+Integer.toHexString(group.values[0])+","+c.curFile+","+c.curRootObject.objectname.toString();
                 //FileUtils.AppendText(_staticsettings.outputdir+"pxphysical.txt", text+"\n");
                 m.msg(text);
             }

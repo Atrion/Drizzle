@@ -27,6 +27,7 @@ import uru.moulprp.Flt;
 import uru.moulprp.Rgba;
 import shared.State.AllStates;
 import uru.moulprp.Urustring;
+import uru.moulprp.Uruobjectdesc;
 
 public class mystAutomation
 {
@@ -1068,6 +1069,36 @@ public class mystAutomation
     }
     public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames)
     {
+        if(true) //attempts to fix the invisible minkata craters.
+        {
+            PrpRootObject[] clustergroups = prputils.FindAllObjectsOfType(prp, Typeid.plClusterGroup);
+            for(PrpRootObject clustergroup: clustergroups)
+            {
+                uru.moulprp.PlClusterGroup cgroup = clustergroup.castTo();
+                
+                //disable visregion.
+                /*cgroup.count2 = 0; //disable visregion.
+                cgroup.refs = new Uruobjectref[0]; //disable visregion.*/
+                
+                //replace material.
+                /*PrpRootObject[] objs = prputils.FindAllObjectsWithName(prp, "RegMoundNew_3");
+                uru.moulprp.x0007Material mat = objs[0].castTo();
+                Uruobjectdesc desc = objs[0].header.desc;
+                cgroup.ref = Uruobjectref.createFromUruobjectdesc(desc);*/
+                
+                //change material flags.
+                /*PrpRootObject obj = cgroup.ref.xdesc.getObjectDescribed(prp);
+                uru.moulprp.x0007Material mat = obj.castTo();
+                for(Uruobjectref layerref: mat.layerrefs)
+                {
+                    PrpRootObject layer = layerref.xdesc.getObjectDescribed(prp);
+                    uru.moulprp.x0006Layer layer2 = layer.castTo();
+                    layer2.flags1 = 8;
+                    int dummy=0;
+                }*/
+                int dummy=0;
+            }
+        }
         if(AllStates.getStateAsBoolean("changeVerySpecialPython"))
         {
             String newagename = agenames.get(agename);

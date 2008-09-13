@@ -31,9 +31,9 @@ import shared.m;
 public class Objheader extends uruobj
 {
     //short objecttype;
-    Typeid objecttype;
+    public Typeid objecttype;
     byte u1;
-    Uruobjectdesc desc;
+    public Uruobjectdesc desc;
     
     public Objheader(context c) throws readexception
     {

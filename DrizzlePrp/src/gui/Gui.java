@@ -63,6 +63,7 @@ public class Gui extends javax.swing.JFrame {
         listState4.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {
                 "Dereno_District_DrnoPod.prp",
+                "Minkata_District_minkExteriorDay.prp",
             };
             public int getSize() {
                 return strings.length;

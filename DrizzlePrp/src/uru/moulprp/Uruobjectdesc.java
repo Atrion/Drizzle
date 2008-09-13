@@ -116,4 +116,9 @@ public class Uruobjectdesc extends uruobj
     {
         return objectname.toString();
     }
+    public PrpRootObject getObjectDescribed(prpfile prp)
+    {
+        PrpRootObject result = prputils.findObjectWithDesc(prp, this);
+        return result;
+    }
 }
