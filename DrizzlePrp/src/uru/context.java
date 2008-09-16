@@ -52,6 +52,9 @@ public class context extends shared.BaseContext
     public Integer sequencePrefix;
     public String ageName;
     
+    //whether to just read the PrpRootObject as raw data.
+    public boolean isRaw;
+    
 
     //public Typeid typesToRead;
 
@@ -118,6 +121,8 @@ public class context extends shared.BaseContext
         result.curRootObjectOffset = curRootObjectOffset;
         result.curRootObjectSize = curRootObjectSize;
         result.sequencePrefix = sequencePrefix;
+        
+        result.isRaw = isRaw;
         
         return result;
     }

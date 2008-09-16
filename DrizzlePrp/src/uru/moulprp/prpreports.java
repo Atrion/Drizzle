@@ -38,7 +38,7 @@ public class prpreports
     {
         StringBuilder result = new StringBuilder();
         context c = context.createFromBytestream(new Bytestream(filecontents));
-        prpfile prp = prpprocess.ProcessAllObjects(c);
+        prpfile prp = prpprocess.ProcessAllObjects(c,false);
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSoundBuffer);
         for(int i=0;i<objs.length;i++)
         {
@@ -53,7 +53,7 @@ public class prpreports
     {
         StringBuilder result = new StringBuilder();
         context c = context.createFromBytestream(new Bytestream(filecontents));
-        prpfile prp = prpprocess.ProcessAllObjects(c);
+        prpfile prp = prpprocess.ProcessAllObjects(c,false);
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
         for(int i=0;i<objs.length;i++)
         {

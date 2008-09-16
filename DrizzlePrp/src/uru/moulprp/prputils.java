@@ -298,7 +298,7 @@ public class prputils
                     case plSoftVolumeInvert:*/
                     try
                     {
-                        object = new PrpRootObject(stream);
+                        object = new PrpRootObject(stream, false, size);
                     }catch(readexception e){}
                     catch(Exception e)
                     {
@@ -423,7 +423,7 @@ public class prputils
         context c = context.createFromBytestream(new Bytestream(data));
         //_staticsettings.reportReferences = true;
         //_staticsettings.tryToFindReferencesInUnknownObjects = true;
-        prpfile prp = prpprocess.ProcessAllObjects(c);
+        prpfile prp = prpprocess.ProcessAllObjects(c, false);
         uru.reflection.reflectionReportToFile(prp);
         //String report = "Cross-Reference report:\n\n" + _staticsettings.referenceReport.toString() + "\n\nScanned Reference Report:\n\n" + _staticsettings.scannedReferenceReport.toString();
         //FileUtils.WriteFile(_staticsettings.outputdir+"deepreport.txt", report.getBytes());
@@ -871,7 +871,7 @@ public class prputils
                     case plSoftVolumeInvert:
                         try
                         {
-                            object = new PrpRootObject(stream);
+                            object = new PrpRootObject(stream, false, size);
                         }
                         catch(readexception e)
                         {

@@ -30,9 +30,9 @@ import shared.m;
 public class PrpObjectIndex extends uruobj
 {
 
-    int indexCount;
+    public int indexCount;
     //Vector<ObjectindexObjecttype> types = new Vector<ObjectindexObjecttype>();
-    ObjectindexObjecttype[] types;
+    public ObjectindexObjecttype[] types;
 
     public PrpObjectIndex(context c)
     {
@@ -56,9 +56,9 @@ public class PrpObjectIndex extends uruobj
         Typeid type;
         int datasize;
         byte u1;
-        int objectcount;
+        public int objectcount;
         //Vector<ObjectindexObjecttypeObjectdesc> descs = new Vector<ObjectindexObjecttypeObjectdesc>();
-        ObjectindexObjecttypeObjectdesc[] descs;
+        public ObjectindexObjecttypeObjectdesc[] descs;
 
         public ObjectindexObjecttype(context c)
         {
@@ -96,9 +96,9 @@ public class PrpObjectIndex extends uruobj
     
     public static class ObjectindexObjecttypeObjectdesc extends uruobj
     {
-        Uruobjectdesc desc;
-        int offset;
-        int size;
+        public Uruobjectdesc desc;
+        public int offset;
+        public int size;
 
         //_uruobj object;
 

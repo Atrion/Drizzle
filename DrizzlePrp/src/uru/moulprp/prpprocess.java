@@ -26,7 +26,7 @@ import java.util.Vector;
 
 public class prpprocess
 {
-    public static prpfile ProcessAllObjects(context c)
+    public static prpfile ProcessAllObjects(context c, boolean isRaw)
     {
         PrpHeader header = new PrpHeader(c);
         PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
@@ -38,7 +38,7 @@ public class prpprocess
             int numObjects = objectindex.types[i_type].objectcount;
             for(int j_obj=0;j_obj<numObjects;j_obj++)
             {
-                PrpRootObject ro = ProcessObjectindexObjecttypeObjectdesc( c, objectindex.types[i_type].descs[j_obj] );
+                PrpRootObject ro = ProcessObjectindexObjecttypeObjectdesc( c, objectindex.types[i_type].descs[j_obj], isRaw );
                 rootobjects.add(ro);
             }
         }
@@ -64,7 +64,7 @@ public class prpprocess
                 int numObjects = objectindex.types[i_type].objectcount;
                 for(int j_obj=0;j_obj<numObjects;j_obj++)
                 {
-                    ProcessObjectindexObjecttypeObjectdesc( c, objectindex.types[i_type].descs[j_obj] );
+                    ProcessObjectindexObjecttypeObjectdesc( c, objectindex.types[i_type].descs[j_obj], false );
                 }
             }
         }
@@ -72,7 +72,7 @@ public class prpprocess
         m.msg("Done Processing All Object of Type: "+typeid.toString());
     }
     
-    public static PrpRootObject ProcessObjectindexObjecttypeObjectdesc(context c, PrpObjectIndex.ObjectindexObjecttypeObjectdesc d)
+    public static PrpRootObject ProcessObjectindexObjecttypeObjectdesc(context c, PrpObjectIndex.ObjectindexObjecttypeObjectdesc d, boolean isRaw)
     {
         int offset = d.offset;
         int size = d.size;
@@ -84,7 +84,7 @@ public class prpprocess
         stream.curRootObjectSize = size;
         stream.curRootObjectEnd = offset+size;
         
-        PrpRootObject result = ProcessRootObject(stream,type);
+        PrpRootObject result = ProcessRootObject(stream,type,isRaw,size);
         if(result!=null)
         {
             int shortby = offset+size-stream.in.getAbsoluteOffset();
@@ -97,12 +97,12 @@ public class prpprocess
         
         return result;
     }
-    private static PrpRootObject ProcessRootObject(context c, Typeid type)
+    private static PrpRootObject ProcessRootObject(context c, Typeid type, boolean isRaw, int length)
     {
         PrpRootObject object = null;
         try
         {
-            object = new PrpRootObject(c);
+            object = new PrpRootObject(c, isRaw, length);
         }catch(readexception e){}
         
         if(object==null)

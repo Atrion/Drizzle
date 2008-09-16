@@ -44,7 +44,7 @@ public class PrpHeader extends uruobj
     short u1;
     int payloadlength;
     int offsetToFirstObject;
-    int offsetToObjectIndex;
+    public int offsetToObjectIndex;
     short u2;
     int u3;
     int u4;

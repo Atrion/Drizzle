@@ -22,6 +22,7 @@ import shared.readexception;
 import uru.context; import shared.readexception;
 import shared.m;
 import uru.Bytedeque;
+import uru.Bytestream;
 
 /**
  *
@@ -31,10 +32,15 @@ public class PrpRootObject extends uruobj
 {
     public Objheader header;
     PrpObject prpobject;
+    public boolean isRaw = false;
+    byte[] rawdata;
     
-    public PrpRootObject(context c) throws readexception
+    public PrpRootObject(context c, boolean isRaw, int length) throws readexception
     {
+        int headerStart = c.in.getAbsoluteOffset();
         header = new Objheader(c);
+        int headerEnd = c.in.getAbsoluteOffset();
+        this.isRaw = isRaw;
         //String breakname = "map #2159";
         String breakname = "fanroomcrank_drag";
         Typeid breaktype = null;
@@ -43,13 +49,48 @@ public class PrpRootObject extends uruobj
         {
             int breakdummy = 0;
         }
-        prpobject = new PrpObject(c, header.objecttype);
+        if(!isRaw)
+        {
+            prpobject = new PrpObject(c, header.objecttype);
+        }
+        else
+        {
+            rawdata = c.readBytes(length-(headerEnd-headerStart));
+        }
     }
+    
+    private PrpRootObject(){}
+    
+    public void parseRawDataNow() throws readexception
+    {
+        if(isRaw)
+        {
+            context c = context.createFromBytestream(new Bytestream(rawdata));
+            prpobject = new PrpObject(c, header.objecttype);
+            isRaw = false;
+        }
+    }
+    
+    /*public static PrpRootObject createAsRawData(context c, int length) throws readexception
+    {
+        PrpRootObject result = new PrpRootObject();
+        result.header = new Objheader(c);
+        result.rawdata = c.readBytes(length);
+        return result;
+    }*/
     
     public void compile(Bytedeque c)
     {
         //header.compile(c); //should we have this here?
-        prpobject.compile(c);
+        if(!isRaw)
+        {
+            prpobject.compile(c);
+        }
+        else
+        {
+            m.warn("Untested compilation in PrpRootObject.");
+            c.writeBytes(rawdata);
+        }
     }
     
     public String toString()

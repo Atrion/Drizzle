@@ -44,6 +44,7 @@ public class x00A2Pythonfilemod extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlMultiModifier(c);//,false);
         pyfile = new Urustring(c);
+        if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod: file="+pyfile.toString());
         refcount = data.readInt();
         pythonrefs = new Uruobjectref[refcount];
         for(int i=0;i<refcount;i++)
@@ -93,28 +94,34 @@ public class x00A2Pythonfilemod extends uruobj
             {
                 case 1:
                     xInteger = data.readInt();
+                    if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   int="+Integer.toString(xInteger));
                     break;
                 case 2:
                     xFloat = data.readInt();
+                    if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   float="+Integer.toString(xFloat));
                     break;
                 case 3:
                     xBoolean = data.readInt();
+                    if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   bool="+Integer.toString(xBoolean));
                     break;
                 case 4:
                 case 13:
                     xString = new Bstr(c);
+                    if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   string="+xString.toString());
                     break;
                 case 20:
                 case 23:
                     if(c.readversion==4)
                     {
                         xString = new Bstr(c);
+                        if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   string="+xString.toString());
                         m.warn("PythonFileMod: usinng a case that differs between versions.");
                     }
                     else if(c.readversion==6||c.readversion==3)
                     {
                         e.ensure(type!=23); //type 23 shouldn't occur.
                         xRef = new Uruobjectref(c);
+                        if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   ref="+xRef.toString());
                     }
                     break;
                 case 5:
@@ -133,6 +140,7 @@ public class x00A2Pythonfilemod extends uruobj
                 case 19:
                 case 21:
                     xRef = new Uruobjectref(c);
+                    if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   ref="+xRef.toString());
                     break;
                 default:
                     m.msg("unknown pythonfilemod type."); //we *may* encounter 22 in moul; if so, it has no match in pots.

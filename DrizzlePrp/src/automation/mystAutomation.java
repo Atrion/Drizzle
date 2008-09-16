@@ -1641,7 +1641,7 @@ public class mystAutomation
             context c = context.createFromBytestream(new Bytestream(filedata));
             //c.readversion = version;
             c.curFile = file;
-            uru.moulprp.prpprocess.ProcessAllObjects(c);
+            uru.moulprp.prpprocess.ProcessAllObjects(c,false);
             //if(version==3) prputils.ProcessPotsPrp(filedata);
         }
     }
@@ -1668,7 +1668,7 @@ public class mystAutomation
                 context c = context.createFromBytestream(new Bytestream(filedata));
                 //c.readversion = version;
                 c.curFile = curfile.getName();
-                uru.moulprp.prpprocess.ProcessAllObjects(c);
+                uru.moulprp.prpprocess.ProcessAllObjects(c,false);
                 //if(version==3) prputils.ProcessPotsPrp(filedata);
                 //if(version==6) prputils.ProcessAll(filedata);
             }
