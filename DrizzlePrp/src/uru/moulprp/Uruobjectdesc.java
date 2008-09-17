@@ -92,7 +92,8 @@ public class Uruobjectdesc extends uruobj
             objectname = new Urustring(c);
         }
         
-        _staticsettings.reportReference(this);
+        //_staticsettings.reportReference(this);
+        deepview.deepview.allreflinks.add(c.curRootObject, this);
     }
     //public static Uruobjectdesc create(Bytestream data)
     //{
@@ -120,5 +121,17 @@ public class Uruobjectdesc extends uruobj
     {
         PrpRootObject result = prputils.findObjectWithDesc(prp, this);
         return result;
+    }
+    public boolean equals(Object obj)
+    {
+        if(obj==null) return false;
+        if(!(obj instanceof Uruobjectdesc)) return false;
+        Uruobjectdesc o=(Uruobjectdesc)obj;
+        //if(this.flag!=o.flag) return false;
+        if(!this.objectname.equals(o.objectname)) return false;
+        if(!this.objecttype.equals(o.objecttype)) return false;
+        if(!this.pageid.equals(o.pageid)) return false;
+        if(!this.pagetype.equals(o.pagetype)) return false;
+        return true;
     }
 }

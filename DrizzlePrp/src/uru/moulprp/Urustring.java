@@ -122,5 +122,12 @@ public class Urustring extends uruobj
     {
         unencryptedString = unencrypted;
     }
+    
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(!(o instanceof Urustring)) return false;
+        return o.toString().equals(this.toString());
+    }
 }
 

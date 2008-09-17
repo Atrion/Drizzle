@@ -23,29 +23,53 @@ import uru.moulprp.Uruobjectref;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
 import java.lang.reflect.Field;
+import java.util.Vector;
 
 public class deepview
 {
+    public static Vector<Uruobjectref> allrefs;
+    public static refLinks allreflinks = new refLinks();
+    public static prpfile prp;
+    
     public static void read(String filename, JPanel panel)
     {
-        byte[] filedata = FileUtils.ReadFile(filename);
                 
         //process all the objects as raw data.
+        //allreflinks = new refLinks();
+        allreflinks.reflinks.clear();
+        byte[] filedata = FileUtils.ReadFile(filename);
         context c = context.createFromBytestream(new Bytestream(filedata));
         c.curFile = filename;
-        prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c,true);
+        allreflinks.acceptNewEntries = true;
+        uru.moulprp.prpprocess.ProcessAllObjects(c.Fork(), false); //parse all to find all Uruobjectdesc links.
+        allreflinks.acceptNewEntries = false;
+        prp = uru.moulprp.prpprocess.ProcessAllObjects(c,true);
         
-        try
+        //get all Uruobjectrefs.
+        allrefs = new Vector<Uruobjectref>();
+        for(PrpRootObject curRootObject: prp.objects)
         {
-            prp.objects[0].parseRawDataNow(); //actually parse the object.
-            reflect(prp.objects[0],panel);
+            allrefs.add(Uruobjectref.createFromUruobjectdesc(curRootObject.header.desc));
         }
-        catch(Exception e)
+        
+        for(PrpRootObject curRootObject: prp.objects)
         {
-            m.err("Error during reflection.");
-            e.printStackTrace();
+            try
+            {
+                curRootObject.parseRawDataNow(); //actually parse the object.
+                reflect(curRootObject,panel);
+            }
+            catch(Exception e)
+            {
+                m.err("Error during reflection.");
+                e.printStackTrace();
+            }
         }
         
     }
@@ -55,11 +79,14 @@ public class deepview
         uruobj uo = obj.getObject();
         //panel.setLayout(new FlowLayout());
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        JPanel panel2 = new dvPanel();
+        panel.add(panel2);
         
-        panel.add(new JLabel("Name:"+obj.header.desc.objectname.toString()));
-        panel.add(new JLabel("Type:"+obj.header.desc.objecttype.toString()));
+        //panel2.add(new JLabel("Name:"+obj.header.desc.objectname.toString()));
+        //panel2.add(new JLabel("Type:"+obj.header.desc.objecttype.toString()));
 
-        reflect2(panel,uo,uo.getClass(),"putnamehere");
+        //reflect2(panel2,uo,uo.getClass(),"putnamehere");
+        reflect2(panel2,obj,obj.getClass(),"putnamehere");
         
         //panel.setVisible(false);
         //panel.setVisible(true);
@@ -86,9 +113,23 @@ public class deepview
         m.msg("doing "+obj.toString() + " of class "+objclass.getName());
         
         //Class objclass = obj.getClass();
+        
+        if(objclass==Uruobjectref.class)
+        {
+            panel.add(new dvUruobjectref((Uruobjectref)obj,name));
+            return;
+        }
+        
+        if(objclass==PrpRootObject.class)
+        {
+            //PrpRootObject pro = (PrpRootObject)obj;
+            //panel.add(dvWidgets.jlabel("PrpRootObject Name:"+pro.header.desc.objectname.toString()+"Type:"+pro.header.desc.objecttype.toString()));
+            panel.add(new dvPrpRootObject((PrpRootObject)obj));
+
+        }
 
         //if simple, just output
-        if(objclass.isPrimitive()||objclass==String.class||objclass.isEnum())
+        if(objclass.isPrimitive()||objclass==String.class||objclass.isEnum()||objclass==Byte.class||objclass==Integer.class||objclass==Short.class||objclass==Boolean.class||objclass==Long.class||objclass==Float.class||objclass==Double.class||objclass==Character.class)
         {
             panel.add(new JLabel("name:"+name+" type:"+objclass.getName()+" value:"+obj.toString()));
         }
@@ -102,8 +143,12 @@ public class deepview
         {
             if(objclass==Class.class) return;
             
+            //JPanel subpanel = dvWidgets.jpanel();
+            JPanel subpanel = new dvPanel();
+            panel.add(subpanel);
+
             //depthString(result,depth);
-            label(panel,"type:"+objclass.getName()+" class members:");
+            subpanel.add(dvWidgets.jlabel("name:"+name+" type:"+objclass.getName()+" class members:"));
 
             //if inherited, do parent
             if(objclass.getSuperclass()!=Object.class) //get ancestor's info
@@ -113,21 +158,26 @@ public class deepview
                 m.msg("unhandled inheritance");
             }
 
+            
             Field[] fields = objclass.getDeclaredFields(); //get all fields
             java.lang.reflect.AccessibleObject.setAccessible(fields, true);
             for(int i=0;i<fields.length;i++)
             {
-                Class curclass = fields[i].getType();
+                Class curclass;
                 Object curfield = fields[i].get(obj);
+                if(curfield!=null)
+                {
+                    curclass = curfield.getClass(); //bugfix: get the actual class, not some ancestor or interface.
+                }
+                else
+                {
+                    curclass = fields[i].getType();
+                }
                 //deepReflectionReportText(curfield,curclass,result,depth+1);
                 String curname = fields[i].getName();
-                reflect2(panel, curfield, curclass, curname);
+                reflect2(subpanel, curfield, curclass, curname);
             }
         }
     }
     
-    public static void label(JPanel panel, String text)
-    {
-        panel.add(new JLabel(text));
-    }
 }

@@ -1001,7 +1001,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel16.add(tabsState1);
         tabsState1.setBounds(350, 90, 110, 120);
 
-        jPanel32.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel32.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);

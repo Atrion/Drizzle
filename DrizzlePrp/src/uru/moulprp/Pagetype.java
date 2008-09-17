@@ -49,4 +49,13 @@ public class Pagetype extends uruobj
     {
         return Short.toString(pagetype);
     }
+    
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(!(o instanceof Pagetype)) return false;
+        Pagetype o2 = (Pagetype)o;
+        if(this.pagetype!=o2.pagetype) return false;
+        return true;
+    }
 }

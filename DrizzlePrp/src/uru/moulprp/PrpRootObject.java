@@ -34,6 +34,7 @@ public class PrpRootObject extends uruobj
     PrpObject prpobject;
     public boolean isRaw = false;
     byte[] rawdata;
+    int readversion;
     
     public PrpRootObject(context c, boolean isRaw, int length) throws readexception
     {
@@ -41,6 +42,7 @@ public class PrpRootObject extends uruobj
         header = new Objheader(c);
         int headerEnd = c.in.getAbsoluteOffset();
         this.isRaw = isRaw;
+        this.readversion = c.readversion;
         //String breakname = "map #2159";
         String breakname = "fanroomcrank_drag";
         Typeid breaktype = null;
@@ -66,6 +68,7 @@ public class PrpRootObject extends uruobj
         if(isRaw)
         {
             context c = context.createFromBytestream(new Bytestream(rawdata));
+            c.readversion = this.readversion;
             prpobject = new PrpObject(c, header.objecttype);
             isRaw = false;
         }

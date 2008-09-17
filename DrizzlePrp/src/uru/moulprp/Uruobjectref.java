@@ -80,6 +80,12 @@ public class Uruobjectref extends uruobj
         result.xdesc = desc;
         return result;
     }
+    
+    public void shallowCopyFrom(Uruobjectref src)
+    {
+        this.hasRef = src.hasRef;
+        this.xdesc = src.xdesc;
+    }
     //public static Uruobjectref create(Bytestream data)
     //{
     //    return new Uruobjectref(data);

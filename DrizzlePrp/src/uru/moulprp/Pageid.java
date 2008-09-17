@@ -96,4 +96,14 @@ public class Pageid extends uruobj
         return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
     }
 
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(!(o instanceof Pageid)) return false;
+        Pageid o2 = (Pageid)o;
+        if(this.prefix!=o2.prefix) return false;
+        if(this.suffix!=o2.suffix) return false;
+        return true;
+    }
+
 }

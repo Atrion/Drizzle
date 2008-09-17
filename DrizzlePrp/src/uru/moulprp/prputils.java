@@ -332,7 +332,8 @@ public class prputils
                                 }
                                 if(e.isGoodString(str))
                                 {
-                                    _staticsettings.reportFoundUnknownReference(str);
+                                    //_staticsettings.reportFoundUnknownReference(str);
+                                    m.msg("Found unknown reference:"+str);
                                 }
                             }
                         }
