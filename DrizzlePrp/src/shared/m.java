@@ -32,6 +32,7 @@ import java.io.PrintStream;
  */
 public class m
 {
+    
     private static JTextArea _outputTextArea; //you must set this from the GUI.
     
     public static void redirectStdOut()

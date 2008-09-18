@@ -32,16 +32,24 @@ public class PrpRootObject extends uruobj
 {
     public Objheader header;
     PrpObject prpobject;
-    public boolean isRaw = false;
+    //public boolean isRaw = false;
+    //public boolean saveRaw = false;
+    public boolean hasChanged;
+    public boolean hasRaw;
+    public boolean hasParsed;
     byte[] rawdata;
     int readversion;
     
-    public PrpRootObject(context c, boolean isRaw, int length) throws readexception
+    public PrpRootObject(context c, boolean readRaw, int length) throws readexception
     {
         int headerStart = c.in.getAbsoluteOffset();
         header = new Objheader(c);
         int headerEnd = c.in.getAbsoluteOffset();
-        this.isRaw = isRaw;
+        //this.isRaw = isRaw;
+        //if(isRaw) saveRaw = true;
+        this.hasChanged = false;
+        this.hasRaw = readRaw;
+        this.hasParsed = true;
         this.readversion = c.readversion;
         //String breakname = "map #2159";
         String breakname = "fanroomcrank_drag";
@@ -51,27 +59,32 @@ public class PrpRootObject extends uruobj
         {
             int breakdummy = 0;
         }
-        if(!isRaw)
+        if(readRaw)
         {
-            prpobject = new PrpObject(c, header.objecttype);
+            rawdata = c.Fork().readBytes(length-(headerEnd-headerStart));
         }
-        else
-        {
-            rawdata = c.readBytes(length-(headerEnd-headerStart));
-        }
+        prpobject = new PrpObject(c, header.objecttype);
     }
     
     private PrpRootObject(){}
     
     public void parseRawDataNow() throws readexception
     {
-        if(isRaw)
+        //if(isRaw)
+        if(!hasParsed)
         {
             context c = context.createFromBytestream(new Bytestream(rawdata));
             c.readversion = this.readversion;
             prpobject = new PrpObject(c, header.objecttype);
-            isRaw = false;
+            //isRaw = false;
+            hasParsed = true;
         }
+    }
+    
+    public void markAsChanged()
+    {
+        //saveRaw = false;
+        hasChanged = true;
     }
     
     /*public static PrpRootObject createAsRawData(context c, int length) throws readexception
@@ -85,14 +98,16 @@ public class PrpRootObject extends uruobj
     public void compile(Bytedeque c)
     {
         //header.compile(c); //should we have this here?
-        if(!isRaw)
-        {
-            prpobject.compile(c);
-        }
-        else
+        //if(!isRaw)
+        //if(!saveRaw)
+        if(hasRaw && !hasChanged)
         {
             m.warn("Untested compilation in PrpRootObject.");
             c.writeBytes(rawdata);
+        }
+        else
+        {
+            prpobject.compile(c);
         }
     }
     

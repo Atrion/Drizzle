@@ -93,7 +93,8 @@ public class Uruobjectdesc extends uruobj
         }
         
         //_staticsettings.reportReference(this);
-        deepview.deepview.allreflinks.add(c.curRootObject, this);
+        //deepview.deepview.allreflinks.add(c.curRootObject, this);
+        shared.reporter.reportEvent(new uru.reporterReports.refEncountered(c.curRootObject, this), "refEncountered");
     }
     //public static Uruobjectdesc create(Bytestream data)
     //{

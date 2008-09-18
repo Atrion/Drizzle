@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import shared.m;
 
 public class dvWidgets
 {

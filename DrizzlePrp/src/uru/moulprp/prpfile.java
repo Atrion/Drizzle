@@ -36,6 +36,8 @@ public class prpfile
     public PrpRootObject[] objects;
     public PrpObjectIndex objectindex;
     
+    public String filename;
+    
     public prpfile(){}
     
     public static prpfile createFromContext(context c, Typeid[] typesToRead)
