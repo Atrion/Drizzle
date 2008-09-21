@@ -975,6 +975,8 @@ public class mystAutomation
         
         Typeid[] readable = mystAutomation.moulReadable;
         
+        //create folders...
+        FileUtils.CreateFolder(outfolder+"/dat/");
         
         //Handle .fni files...
         Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
@@ -1500,6 +1502,8 @@ public class mystAutomation
         
         Typeid[] readable = mystAutomation.moulReadable;
         
+        //create folders...
+        FileUtils.CreateFolder(outfolder+"/dat/");
         
         //Handle .fni files...
         Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
