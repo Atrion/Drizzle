@@ -1496,6 +1496,7 @@ public class mystAutomation
         HashMap<String, String> agenames = new HashMap<String, String>();
         agenames.put("Descent", "DescentMystV");
         agenames.put("Kveer", "KveerMystV");
+        agenames.put("Myst", "MystMystV");
         
         Typeid[] readable = mystAutomation.moulReadable;
         
