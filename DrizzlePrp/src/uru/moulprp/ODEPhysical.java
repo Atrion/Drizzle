@@ -59,6 +59,8 @@ public class ODEPhysical extends uruobj
     Uruobjectref sceneobject;
     Uruobjectref scenenode;
     
+    PlHKPhysical.HKPhysical convertee;
+    
     public ODEPhysical(context c) throws readexception
     {
         parent = new PlSynchedObject(c);
@@ -87,18 +89,19 @@ public class ODEPhysical extends uruobj
             f1 = new Flt(c);
             f2 = new Flt(c);
             f3 = new Flt(c);
-            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
+            //throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else if(type==2) //sphere?
         {
             u4 = new Flt(c); //same as 6
-            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
+            //throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else if(type==6) //ellipse???
         {
             //m.msg("Untested ODE case6...");
             Flt u4 = new Flt(c); //same as 2
             Flt u6 = new Flt(c);
+            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else
         {
@@ -122,9 +125,87 @@ public class ODEPhysical extends uruobj
             m.msg("Physics: type="+Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
                     +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
                     +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
-                    +";u13="+Short.toString(u13));
+                    +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
+        }
+        
+        
+        //make converted version...
+        convertee = PlHKPhysical.HKPhysical.createBlank();
+        convertee.parent = this.parent;
+        convertee.position = Vertex.zero();
+        convertee.orientation = Quat.identity();
+        convertee.mass = Flt.zero();
+        convertee.RC = Flt.zero();
+        convertee.EL = Flt.zero();
+        if(type==5) convertee.format = 4;
+        else if(type==1) convertee.format = 1;
+        else if(type==2) convertee.format = 2;
+        else throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
+        convertee.u1 = 0;
+        convertee.coltype = 0x200;
+        convertee.flagsdetect = 0;
+        convertee.flagsrespond = 0;
+        convertee.u2 = 0;
+        convertee.u3 = 0;
+        convertee.sceneobject = this.sceneobject;
+        convertee.group = new HsBitVector(0);
+        convertee.scenenode = this.scenenode;
+        convertee.LOSDB = 0x44;
+        convertee.subworld = Uruobjectref.none();
+        convertee.soundgroup = Uruobjectref.none();
+        
+        //handle flags...
+        if(
+                (u8==0x2000000 && u9==0x0) //ordinary surface.
+                ||(u8==0x4800000 && u9==0x20000 && u10==0x0)
+                )
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x200;
+            convertee.flagsdetect = 0;
+            convertee.flagsrespond = 0;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x44;
+            convertee.group = new HsBitVector(0);
+        }
+        else if(
+                (u8==0x4000000 && u9==0x0 && u10==0x20000) //detection
+              ||(u8==0x4000000 && u9==0x0 && u10==0x8000000) //detection
+                
+                )
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0x8000000;
+            convertee.flagsrespond = 0;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x0;
+            convertee.group = new HsBitVector(4);
+            //convertee.mass = Flt.one(); //assign mass
+        }
+        else if((u8==0x4000000 && u9==0x0 && u10==0x0) //clickables
+            //|| (u8==0x4000000 && u9==0x0 && u10==0x8000000))
+            //|| (u8==0x4000000 && u9==0x20000)
+                )
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0;
+            convertee.flagsrespond = 0x20000;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x2;
+            convertee.group = new HsBitVector(0x4);
+            //convertee.mass = Flt.one(); //assign mass
+        }
+        else
+        {
+            //throw new readexception("ODEPhysical: unhandled case.");
         }
             
+        
     }
     
     public void compile(Bytedeque c)
@@ -135,9 +216,117 @@ public class ODEPhysical extends uruobj
     
     public void compileSpecial(Bytedeque c)
     {
+        convertee.parent.compile(c);
+        convertee.position.compile(c);
+        convertee.orientation.compile(c);
+        convertee.mass.compile(c);
+        convertee.RC.compile(c);
+        convertee.EL.compile(c);
+        
+        c.writeInt(convertee.format); //format, proxy bounds/mesh bounds
+        c.writeShort(convertee.u1);//u1 short
+        c.writeShort(convertee.coltype);//coltype short
+        c.writeInt(convertee.flagsdetect);//flagsdetect int
+        c.writeInt(convertee.flagsrespond);//flagsrespond int
+        c.writeByte(convertee.u2);//u2 byte
+        c.writeByte(convertee.u3);//u3 byte
+        
+        if(type==5)
+        {
+            //write vertices
+            c.writeInt(vertexcount);
+            e.ensure(vertices.length==vertexcount);
+            c.writeVector(vertices);
+
+            //write surfaces
+            c.writeInt(surfacecount);
+            for(int point: surfaces)
+            {
+                short point2 = (short)point;
+                c.writeShort(point2);
+            }
+        }
+        else if(type==1) //box
+        {
+            Vertex center = findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            m.msg("Resizing boxes in ODEPhysical...");
+            Vertex cornervector = new Vertex(f1.mult((float)0.5),f2.mult((float)0.5),f3.mult((float)0.5)); //is this order correct?
+
+            //boxbounds is just proxybounds
+            int vertexcount = 8;
+            int facecount = 12;
+            Vertex[] vertices = new Vertex[]{
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+            };
+            short[] faces = new short[]{
+                0,2,1,
+                1,2,3,
+                0,1,4,
+                1,5,4,
+                0,4,2,
+                2,4,6,
+                1,3,7,
+                7,5,1,
+                3,2,7,
+                2,6,7,
+                4,7,6,
+                4,5,7,
+            };
+            //reverse-chirality:
+            //short[] faces = new short[]{
+            //    0,1,2,
+            //    1,3,2,
+            //    0,4,1,
+            //    1,4,5,
+            //    0,2,4,
+            //    2,6,4,
+            //    1,7,3,
+            //    7,1,5,
+            //    3,7,2,
+            //    2,7,6,
+            //    4,6,7,
+            //    4,7,5,
+            //};
+            
+            e.ensure(vertices.length==vertexcount);
+            e.ensure(faces.length==facecount*3);
+            
+            c.writeInt(vertexcount);
+            c.writeVector(vertices);
+            c.writeInt(facecount);
+            c.writeShorts(faces);
+            
+        }
+        else if(type==2) //sphere
+        {
+            Vertex offset = findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            
+            offset.compile(c); //offset
+            u4.compile(c); //radius
+        }
+        else
+        {
+            m.err("cricial error: ODEPhysical: currently unable to compile this type");
+        }
+        
+        convertee.sceneobject.compile(c);
+        convertee.group.compile(c);
+        convertee.scenenode.compile(c);
+        c.writeInt(convertee.LOSDB);
+        convertee.subworld.compile(c);
+        convertee.soundgroup.compile(c);
+
+        
         //m.err("ODE compile not implemented.");
         
-        parent.compile(c);
+        /*parent.compile(c);
         Vertex.zero().compile(c);//position
         Quat.identity().compile(c);//orientation;
         Flt.zero().compile(c);//mass
@@ -212,20 +401,20 @@ public class ODEPhysical extends uruobj
                 4,5,7,
             };
             //reverse-chirality:
-            /*short[] faces = new short[]{
-                0,1,2,
-                1,3,2,
-                0,4,1,
-                1,4,5,
-                0,2,4,
-                2,6,4,
-                1,7,3,
-                7,1,5,
-                3,7,2,
-                2,7,6,
-                4,6,7,
-                4,7,5,
-            };*/
+            //short[] faces = new short[]{
+            //    0,1,2,
+            //    1,3,2,
+            //    0,4,1,
+            //    1,4,5,
+            //    0,2,4,
+            //    2,6,4,
+            //    1,7,3,
+            //    7,1,5,
+            //    3,7,2,
+            //    2,7,6,
+            //    4,6,7,
+            //    4,7,5,
+            //};
             
             e.ensure(vertices.length==vertexcount);
             e.ensure(faces.length==facecount*3);
@@ -263,7 +452,9 @@ public class ODEPhysical extends uruobj
         c.writeInt(0x44);//LOSDB int, could also be 0x40 or 0x45, I guess.
         Uruobjectref.none().compile(c);//subworld uruobjectref
         Uruobjectref.none().compile(c);//soundgroup uruobjectref
-        
+        */
+                
+                
     }
     
     public static Vertex findOffsetVectorFromSceneObject(prpfile prp, Uruobjectref sceneobject)

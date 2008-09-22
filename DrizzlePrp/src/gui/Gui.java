@@ -400,26 +400,11 @@ public class Gui extends javax.swing.JFrame {
         textfieldState4 = new shared.State.TextfieldState();
         textfieldState5 = new shared.State.TextfieldState();
         jPanel16 = new javax.swing.JPanel();
-        comboboxState1 = new shared.State.ComboboxState();
-        comboboxState2 = new shared.State.ComboboxState();
-        checkboxState2 = new shared.State.CheckboxState();
-        formattedfieldState1 = new shared.State.FormattedfieldState();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        textareaState1 = new shared.State.TextareaState();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        listState1 = new shared.State.ListState();
-        textfieldState1 = new shared.State.TextfieldState();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton60 = new javax.swing.JButton();
-        tabsState1 = new shared.State.TabsState();
-        jPanel21 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel32 = new javax.swing.JPanel();
         jButton79 = new javax.swing.JButton();
+        checkboxState2 = new shared.State.CheckboxState();
+        checkboxState14 = new shared.State.CheckboxState();
+        checkboxState15 = new shared.State.CheckboxState();
+        checkboxState16 = new shared.State.CheckboxState();
         jPanel17 = new javax.swing.JPanel();
         textfieldState7 = new shared.State.TextfieldState();
         jLabel11 = new javax.swing.JLabel();
@@ -449,6 +434,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState6 = new shared.State.CheckboxState();
         checkboxState7 = new shared.State.CheckboxState();
         checkboxState12 = new shared.State.CheckboxState();
+        checkboxState13 = new shared.State.CheckboxState();
         jPanel20 = new javax.swing.JPanel();
         checkboxState8 = new shared.State.CheckboxState();
         checkboxState9 = new shared.State.CheckboxState();
@@ -885,148 +871,6 @@ public class Gui extends javax.swing.JFrame {
 
         jPanel16.setLayout(null);
 
-        comboboxState1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboboxState1.setName("cb1"); // NOI18N
-        comboboxState1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboboxState1ActionPerformed(evt);
-            }
-        });
-        jPanel16.add(comboboxState1);
-        comboboxState1.setBounds(280, 170, 62, 22);
-
-        comboboxState2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboboxState2.setName("cb2"); // NOI18N
-        jPanel16.add(comboboxState2);
-        comboboxState2.setBounds(90, 120, 62, 22);
-
-        checkboxState2.setText("checkboxState2");
-        checkboxState2.setName("chebox1"); // NOI18N
-        jPanel16.add(checkboxState2);
-        checkboxState2.setBounds(50, 170, 111, 28);
-
-        formattedfieldState1.setText("formattedfieldState1");
-        formattedfieldState1.setName("format1"); // NOI18N
-        jPanel16.add(formattedfieldState1);
-        formattedfieldState1.setBounds(40, 140, 114, 20);
-
-        textareaState1.setColumns(20);
-        textareaState1.setRows(5);
-        textareaState1.setName("area1"); // NOI18N
-        jScrollPane6.setViewportView(textareaState1);
-
-        jPanel16.add(jScrollPane6);
-        jScrollPane6.setBounds(160, 40, 222, 82);
-
-        listState1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        listState1.setName("list1"); // NOI18N
-        listState1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listState1ValueChanged(evt);
-            }
-        });
-        jScrollPane7.setViewportView(listState1);
-
-        jPanel16.add(jScrollPane7);
-        jScrollPane7.setBounds(340, 20, 38, 146);
-
-        textfieldState1.setText("textfieldState1");
-        textfieldState1.setName("field1"); // NOI18N
-        jPanel16.add(textfieldState1);
-        textfieldState1.setBounds(180, 160, 80, 20);
-
-        buttongroupState1.add(jRadioButton5);
-        jRadioButton5.setText("jRadioButton5");
-        jPanel16.add(jRadioButton5);
-        jRadioButton5.setBounds(60, 90, 104, 28);
-
-        buttongroupState1.add(jRadioButton6);
-        jRadioButton6.setText("jRadioButton6");
-        jPanel16.add(jRadioButton6);
-        jRadioButton6.setBounds(10, 70, 104, 28);
-
-        buttongroupState1.add(jRadioButton7);
-        jRadioButton7.setText("jRadioButton7");
-        jPanel16.add(jRadioButton7);
-        jRadioButton7.setBounds(0, 40, 104, 28);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel16.add(jComboBox2);
-        jComboBox2.setBounds(240, 10, 62, 22);
-
-        jButton60.setText("jButton60");
-        jButton60.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton60ActionPerformed(evt);
-            }
-        });
-        jPanel16.add(jButton60);
-        jButton60.setBounds(150, 10, 76, 36);
-
-        tabsState1.setName("adfew"); // NOI18N
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
-        );
-
-        tabsState1.addTab("tab1", jPanel21);
-
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
-        );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
-        );
-
-        tabsState1.addTab("tab2", jPanel22);
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
-        );
-
-        tabsState1.addTab("tab3", jPanel23);
-
-        jPanel16.add(tabsState1);
-        tabsState1.setBounds(350, 90, 110, 120);
-
-        jPanel32.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
-        );
-        jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 136, Short.MAX_VALUE)
-        );
-
-        jPanel16.add(jPanel32);
-        jPanel32.setBounds(150, 130, 230, 140);
-
         jButton79.setText("Read All Prps from All Games...");
         jButton79.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1034,7 +878,31 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel16.add(jButton79);
-        jButton79.setBounds(470, 30, 200, 36);
+        jButton79.setBounds(50, 190, 200, 36);
+
+        checkboxState2.setSelected(true);
+        checkboxState2.setText("Read from Pots");
+        checkboxState2.setName("readAllFromPots"); // NOI18N
+        jPanel16.add(checkboxState2);
+        checkboxState2.setBounds(60, 20, 160, 28);
+
+        checkboxState14.setSelected(true);
+        checkboxState14.setText("Read from Crowthistle");
+        checkboxState14.setName("readAllFromCrowthistle"); // NOI18N
+        jPanel16.add(checkboxState14);
+        checkboxState14.setBounds(60, 50, 180, 28);
+
+        checkboxState15.setSelected(true);
+        checkboxState15.setText("Read from MystV");
+        checkboxState15.setName("readAllFromMystv"); // NOI18N
+        jPanel16.add(checkboxState15);
+        checkboxState15.setBounds(60, 80, 140, 28);
+
+        checkboxState16.setSelected(true);
+        checkboxState16.setText("Read from Moul");
+        checkboxState16.setName("readAllFromMoul"); // NOI18N
+        jPanel16.add(checkboxState16);
+        checkboxState16.setBounds(60, 110, 180, 28);
 
         tabsState2.addTab("tab3", jPanel16);
 
@@ -1206,6 +1074,11 @@ public class Gui extends javax.swing.JFrame {
             checkboxState12.setName("reportPythonFileMod"); // NOI18N
             jPanel18.add(checkboxState12);
             checkboxState12.setBounds(130, 250, 190, 28);
+
+            checkboxState13.setText("Report Decryption info.");
+            checkboxState13.setName("reportDecryption"); // NOI18N
+            jPanel18.add(checkboxState13);
+            checkboxState13.setBounds(130, 280, 170, 28);
 
             tabsState2.addTab("Reports", jPanel18);
 
@@ -3179,73 +3052,8 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     shared.State.AllStates.pullandsave(settingsfile);
 }//GEN-LAST:event_formWindowClosing
-
-private void comboboxState1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxState1ActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_comboboxState1ActionPerformed
 int[] oldlist={};
 boolean skip=false;
-private void listState1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listState1ValueChanged
-    //java.util.bit
-    if(true)return;
-    if(skip) return;
-    //if(evt.getValueIsAdjusting()) return;
-    //int i = evt.getFirstIndex();
-    //int j= evt.getLastIndex();
-    int[] newlist = listState1.getSelectedIndices();
-    //java.util.Vector<Integer> newlist2 = new java.util.Vector<Integer>(newlist.length);
-    //for(int i:newlist) newlist2.add(i);
-    
-    //java.util.HashSet<Integer> newlist3 = new java.util.HashSet<Integer>(newlist2);
-    //ava.util.Collections.
-    
-    boolean changed = false;
-    if(oldlist.length==newlist.length)
-    {
-        for(int i=0;i<oldlist.length;i++)
-        {
-            if(oldlist[i]!=newlist[i]) changed = true;
-        }
-    }
-    else
-    {
-        changed = true;
-    }
-    if(changed)
-    {
-        int[] newestlist = new int[oldlist.length+newlist.length];
-        //java.util.Arrays.
-        for(int i=0;i<oldlist.length;i++) newestlist[i] = oldlist[i];
-        for(int j=0;j<newlist.length;j++) newestlist[oldlist.length+j] = newlist[j];
-        oldlist = newestlist;
-        skip = true;
-        listState1.setSelectedIndices(newestlist);
-        skip = false;
-    }
-        
-    
-}//GEN-LAST:event_listState1ValueChanged
-
-private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
-    //Object a = this.listState1.getValue();
-    //this.listState1.setValue(new int[]{1,2});
-    //int dummy=0;
-    //System.out.println("Hello there!");
-    //throw new RuntimeException("Test exception.");
-    
-    /*try{
-    java.net.URL url = this.getClass().getResource("Image4.png");
-    //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
-    java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(url);
-    this.jPanel32.getGraphics().drawImage(img, 0, 0, rootPane);
-    //this.setIconImage(image.getImage());
-    }catch(Exception e){}*/
-    
-            jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
-
-
-}//GEN-LAST:event_jButton60ActionPerformed
-
 private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
         GuiUtils.getUserSelectedFolder(this.textfieldState2);
 }//GEN-LAST:event_jButton55ActionPerformed
@@ -3386,6 +3194,10 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState10;
     private shared.State.CheckboxState checkboxState11;
     private shared.State.CheckboxState checkboxState12;
+    private shared.State.CheckboxState checkboxState13;
+    private shared.State.CheckboxState checkboxState14;
+    private shared.State.CheckboxState checkboxState15;
+    private shared.State.CheckboxState checkboxState16;
     private shared.State.CheckboxState checkboxState2;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
@@ -3394,10 +3206,7 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState7;
     private shared.State.CheckboxState checkboxState8;
     private shared.State.CheckboxState checkboxState9;
-    private shared.State.ComboboxState comboboxState1;
-    private shared.State.ComboboxState comboboxState2;
     private javax.swing.ButtonGroup filedirButtonGroup;
-    private shared.State.FormattedfieldState formattedfieldState1;
     private shared.ImagePanel imagePanel2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -3455,7 +3264,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton58;
     private javax.swing.JButton jButton59;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton60;
     private javax.swing.JButton jButton61;
     private javax.swing.JButton jButton62;
     private javax.swing.JButton jButton63;
@@ -3485,7 +3293,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton85;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -3519,9 +3326,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
@@ -3531,7 +3335,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -3543,9 +3346,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -3554,8 +3354,6 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
@@ -3569,15 +3367,11 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private shared.State.ListState listState1;
     private shared.State.ListState listState2;
     private shared.State.ListState listState3;
     private shared.State.ListState listState4;
-    private shared.State.TabsState tabsState1;
     private shared.State.TabsState tabsState2;
     private shared.State.TabsState tabsState3;
-    private shared.State.TextareaState textareaState1;
-    private shared.State.TextfieldState textfieldState1;
     private shared.State.TextfieldState textfieldState10;
     private shared.State.TextfieldState textfieldState11;
     private shared.State.TextfieldState textfieldState12;

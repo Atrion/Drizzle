@@ -116,4 +116,17 @@ strictfp public class Flt extends uruobj
         float neg = -1*this.toJavaFloat();
         return new Flt(neg);
     }
+    public Flt mult(float f)
+    {
+        float f1 = this.toJavaFloat();
+        float result = f1*f;
+        return new Flt(result);
+    }
+    public Flt mult(Flt f)
+    {
+        float f1 = this.toJavaFloat();
+        float f2 = f.toJavaFloat();
+        float result = f1*f2;
+        return new Flt(result);
+    }
 }

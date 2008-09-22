@@ -496,9 +496,12 @@ public class UruCrypt {
         byte[] lbytes = Arrays.copyOfRange(filecontents, 12, 16);
         //int innerlength = (lbytes[0]<<0) | (lbytes[1]<<8) | (lbytes[2]<<16) | (lbytes[3]<<24);
         int innerlength = b.BytesToInt32(lbytes,0);
-        m.msg("decrypting notthedroids...");
-        m.msg("header:"+new String(header));
-        m.msg("payload length:"+Integer.toString(innerlength));
+        if(shared.State.AllStates.getStateAsBoolean("reportDecryption"))
+        {
+            m.msg("decrypting notthedroids...");
+            m.msg("header:"+new String(header));
+            m.msg("payload length:"+Integer.toString(innerlength));
+        }
         
         byte[] result = new byte[innerlength];
         byte[] decodedBlock = new byte[8];
@@ -525,9 +528,12 @@ public class UruCrypt {
         byte[] lbytes = Arrays.copyOfRange(filecontents, 12, 16);
         //int innerlength = (lbytes[0]<<0) | (lbytes[1]<<8) | (lbytes[2]<<16) | (lbytes[3]<<24);
         int innerlength = b.BytesToInt32(lbytes,0);
-        m.msg("decrypting whatdoyousee...");
-        m.msg("header:"+new String(header));
-        m.msg("payload length:"+Integer.toString(innerlength));
+        if(shared.State.AllStates.getStateAsBoolean("reportDecryption"))
+        {
+            m.msg("decrypting whatdoyousee...");
+            m.msg("header:"+new String(header));
+            m.msg("payload length:"+Integer.toString(innerlength));
+        }
         
         byte[] result = new byte[innerlength];
         byte[] decodedBlock = new byte[8];

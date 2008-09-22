@@ -32,8 +32,8 @@ import shared.Bytes;
 //this is a class I made myself, to encapsulate changing page ids.
 public class Pageid extends uruobj
 {
-    int prefix;
-    int suffix;
+    public int prefix;
+    public int suffix;
     
     //context ctx;
     Integer xOverridePrefix;

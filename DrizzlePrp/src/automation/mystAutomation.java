@@ -1139,7 +1139,7 @@ public class mystAutomation
                 if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
                 {
                     //found it!
-                    m.msg("Removing DynamicCamMap from layerRefs.");
+                    m.msg("Blackifying DynamicCamMap in PlLayer.");
                     //layer.flags1 |= 0x80; //kBlendNoColor //blend //makes it invisible?
                     //float r = (float)(15.0/255.0); //15
                     //float g = (float)(20.0/255.0); //20
@@ -1443,6 +1443,18 @@ public class mystAutomation
                 //return false;
                 Typeid type = desc.objecttype;
                 String name = desc.objectname.toString();
+                Pageid pageid = desc.pageid;
+                
+                //blacklist
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
+                
+                if(type==Typeid.plBoundInterface)
+                {
+                    int dummy=0;
+                }
+                
                 Typeid[] typeequals = new Typeid[]{
                     Typeid.plSceneNode, Typeid.plSceneObject, Typeid.plCoordinateInterface, Typeid.plSpawnModifier,
                     Typeid.plMipMap, Typeid.plCubicEnvironMap,
@@ -1469,13 +1481,25 @@ public class mystAutomation
                     Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
                     Typeid.plPythonFileMod,
                     Typeid.plResponderModifier,
-                    
                     Typeid.plParticleCollisionEffectBounce, Typeid.plPostEffectMod,
+                    
+                    Typeid.pfGUIButtonMod,
+                    Typeid.pfGUIDialogMod,
+                    Typeid.plAGAnimBink,
+                    Typeid.plAnimEventModifier,
+                    Typeid.plAxisAnimModifier,
+                    Typeid.plBoundInterface,
                 };
                 String[] namestarts={
                     /*//"boulder01",
                     "bridge poles05", //works when plLayerBink is present.
                     "bubble01haloa01", //works!*/
+                    //"partcoll06", //breaks it.
+                    //"partcoll07", //breaks it.
+                    //"partcoll08", //breaks it.
+                    //"partcoll09",
+                    //"partcollidtablet",
+                    //"particlegroundcollide",
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
@@ -1840,10 +1864,10 @@ public class mystAutomation
         Typeid[] potstypes = {};
         Typeid[] myst5types = {};
         Typeid[] moultypes = {};
-        boolean dopots = true;
-        boolean docrow = true;
-        boolean domyst5 = true;
-        boolean domoul = true;
+        boolean dopots = shared.State.AllStates.getStateAsBoolean("readAllFromPots");
+        boolean docrow = shared.State.AllStates.getStateAsBoolean("readAllFromCrowthistle");
+        boolean domyst5 = shared.State.AllStates.getStateAsBoolean("readAllFromMystv");
+        boolean domoul = shared.State.AllStates.getStateAsBoolean("readAllFromMoul");
         
         
         //Typeid[] crowtypes = {}; //this should just be the myst5types.

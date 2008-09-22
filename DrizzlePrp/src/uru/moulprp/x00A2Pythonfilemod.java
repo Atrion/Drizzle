@@ -38,7 +38,7 @@ public class x00A2Pythonfilemod extends uruobj
     int listcount;
     Pythonlisting[] listings;
     
-    public x00A2Pythonfilemod(context c)//,boolean hasHeader)
+    public x00A2Pythonfilemod(context c) throws readexception//,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
@@ -55,7 +55,7 @@ public class x00A2Pythonfilemod extends uruobj
         listings = new Pythonlisting[listcount];
         for(int i=0;i<listcount;i++)
         {
-            listings[i] = new Pythonlisting(c);
+            listings[i] = new Pythonlisting(c,pyfile);
         }
     }
     public void compile(Bytedeque deque)
@@ -84,12 +84,13 @@ public class x00A2Pythonfilemod extends uruobj
         Bstr xString;
         Uruobjectref xRef;
         
-        public Pythonlisting(context c)
+        public Pythonlisting(context c, Urustring pyfile) throws readexception
         {
             Bytestream data = c.in;
 
             index = data.readInt();
             type = data.readInt();
+            if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonType: type="+Integer.toString(type)+" index="+Integer.toString(index)+" pyfile="+pyfile.toString());
             switch(type)
             {
                 case 1:
@@ -115,11 +116,12 @@ public class x00A2Pythonfilemod extends uruobj
                     {
                         xString = new Bstr(c);
                         if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   string="+xString.toString());
-                        m.warn("PythonFileMod: usinng a case that differs between versions.");
+                        //m.warn("PythonFileMod: usinng a case that differs between versions.");
+                        throw new readexception("PythonFileMod: can read okay, but throwing error to ignore.");
                     }
                     else if(c.readversion==6||c.readversion==3)
                     {
-                        e.ensure(type!=23); //type 23 shouldn't occur.
+                        e.ensure(type!=23); //type 23 shouldn't occur, according to my stats.
                         xRef = new Uruobjectref(c);
                         if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   ref="+xRef.toString());
                     }

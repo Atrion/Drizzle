@@ -288,6 +288,7 @@ public class PlHKPhysical extends uruobj
         }
     }
     
+    
     public PlHKPhysical(context c) throws readexception
     {
         String filenameStart = "";
@@ -622,6 +623,12 @@ public class PlHKPhysical extends uruobj
         int LOSDB; //45,2,44,5,4,80,40,1,20,41,
         Uruobjectref subworld;
         Uruobjectref soundgroup;
+        
+        private HKPhysical(){}
+        public static HKPhysical createBlank()
+        {
+            return new HKPhysical();
+        }
         
         public HKPhysical(context c) throws readexception
         {

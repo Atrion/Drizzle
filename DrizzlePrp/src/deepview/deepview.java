@@ -77,8 +77,19 @@ public class deepview
         //allrefs = new Vector<Uruobjectref>();
         for(PrpRootObject curRootObject: prp.objects)
         {
-            allrefs.add(Uruobjectref.createFromUruobjectdesc(curRootObject.header.desc));
-            alltypes.add(curRootObject.header.desc.objecttype);
+            if(curRootObject!=null)
+            {
+                if(curRootObject.header==null)
+                {
+                    int dummy=0;
+                }
+                if(curRootObject.header.desc==null)
+                {
+                    int dummy=0;
+                }
+                allrefs.add(Uruobjectref.createFromUruobjectdesc(curRootObject.header.desc));
+                alltypes.add(curRootObject.header.desc.objecttype);
+            }
         }
         
         return prp;
@@ -119,6 +130,10 @@ public class deepview
             for(PrpRootObject curRootObject: prp.objects)
             {
                 curobj = curRootObject;
+                if(curRootObject==null)
+                {
+                    continue;
+                }
                 if(curRootObject.header.desc.equals(desc))
                 {
                     try
@@ -203,7 +218,28 @@ public class deepview
             allrefs.add(Uruobjectref.createFromUruobjectdesc(curRootObject.header.desc));
         }*/
         
-        prpfile prp = addPrp(filename);
+        //if it ends with * then 
+        File f = new File(filename);
+        if(filename.endsWith("*"))
+        {
+            String name = f.getName();
+            name = name.substring(0, name.length()-1).toLowerCase();
+            File folder = f.getParentFile();
+            for(File curfile: folder.listFiles())
+            {
+                if(curfile.getName().toLowerCase().startsWith(name))
+                {
+                    if(curfile.getName().toLowerCase().endsWith(".prp"))
+                    {
+                        prpfile prp = addPrp(curfile.getPath());
+                    }
+                }
+            }
+        }
+        else
+        {
+            prpfile prp = addPrp(filename);
+        }
 
         /*dvWindow newwindow = new dvWindow();
         desktop.add(newwindow);
