@@ -65,6 +65,8 @@ public class Gui extends javax.swing.JFrame {
         
         deep = new deepview.deepview(jDesktopPane1);
         
+        GuiUtils.SetKeymaps();
+        
         listState4.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {
                 "Dereno_District_DrnoPod.prp",

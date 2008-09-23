@@ -57,6 +57,9 @@ sprites: plViewFaceModifier
 animation layers: plLayerAnimation, (comment out fixMaterials in the compiler), and a load of plLeafController junk.(which replaces a ton of classes in pots.)
 animation: plMasterMod, plATCAnim
 //I think this is false: plResponderModifier may crash it, presumeably depending on whether its links are in place, etc.
+sometimes, plBoundInterface can crash Uru.
+If plCoordinateInterfaces are crashing Uru, it can be caused by not having plFilterCoordInterfaces.  Make sure all CoordinateInterfaces and FilterCoordInterfaces are being exported.
+If atcAnims are crashing Uru, you may be able to disable them and still link in, even with all drawinterfaces.
 
 verified working:
 plCoordinateInterface, //contains position info for an object.

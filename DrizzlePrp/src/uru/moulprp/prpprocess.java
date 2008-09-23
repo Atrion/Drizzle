@@ -103,7 +103,9 @@ public class prpprocess
         try
         {
             object = new PrpRootObject(c, isRaw, length);
-        }catch(readexception e){}
+        }catch(readexception e){
+            m.msg("Problem reading object:"+e.toString());
+        }
         
         if(object==null)
         {

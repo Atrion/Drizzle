@@ -34,12 +34,12 @@ public class x0015CoordinateInterface extends uruobj
 {
     //Objheader xheader;
     PlObjInterface parent;
-    Transmatrix matrix1; //1 and 2 should be inverses of each other.
-    Transmatrix matrix2;
-    Transmatrix matrix3; //3 and 4 should be inverses of each other.
-    Transmatrix matrix4;
+    Transmatrix localToParent; //1 and 2 should be inverses of each other.
+    Transmatrix parentToLocal;
+    Transmatrix localToWorld; //3 and 4 should be inverses of each other.
+    Transmatrix worldToLocal;
     int count;
-    Uruobjectref[] u1;
+    Uruobjectref[] children;
     
     public x0015CoordinateInterface(context c) throws readexception
     {
@@ -51,28 +51,28 @@ public class x0015CoordinateInterface extends uruobj
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlObjInterface(c);//,false);
-        matrix1 = new Transmatrix(c);
-        matrix2 = new Transmatrix(c);
-        matrix3 = new Transmatrix(c);
-        matrix4 = new Transmatrix(c);
+        localToParent = new Transmatrix(c);
+        parentToLocal = new Transmatrix(c);
+        localToWorld = new Transmatrix(c);
+        worldToLocal = new Transmatrix(c);
         count = data.readInt();
-        u1 = new Uruobjectref[count];
+        children = new Uruobjectref[count];
         for(int i=0;i<count;i++)
         {
-            u1[i] = new Uruobjectref(c);
+            children[i] = new Uruobjectref(c);
         }
     }
     public void compile(Bytedeque deque)
     {
         parent.compile(deque);
-        matrix1.compile(deque);
-        matrix2.compile(deque);
-        matrix3.compile(deque);
-        matrix4.compile(deque);
+        localToParent.compile(deque);
+        parentToLocal.compile(deque);
+        localToWorld.compile(deque);
+        worldToLocal.compile(deque);
         deque.writeInt(count);
         for(int i=0;i<count;i++)
         {
-            u1[i].compile(deque);
+            children[i].compile(deque);
         }
     }
 }

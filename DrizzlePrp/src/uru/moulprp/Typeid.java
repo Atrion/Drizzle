@@ -201,6 +201,25 @@ public enum Typeid implements compilable
     pfGUIDialogMod,
     pfGUIButtonMod,
     
+    //myst5 descent
+    plElevatorModifier,
+    plPythonFileModConditionalObject,
+    plConstAccelEaseCurve,
+    plMobileOccluder,
+    plLadderModifier,
+    
+    //myst5 laki
+    plPiranhaRegionModifier,
+    plCrossfade,
+    plCrossfadeMsg,
+    plWindBoneMod,
+    plLayerLinkAnimation,
+    plArmatureMod,
+    plAvBrainPirahna,
+    plAvBrainQuab, //in pots
+    plArmatureEffectsMgr,
+    plFilterCoordInterface,
+    
     plLeafController,
     nil,
     unknown;
@@ -291,7 +310,7 @@ public enum Typeid implements compilable
         tri( 0x0D0, 0x0D0, 0x0B0, plParticleLocalWind ),
         tri( 0x0D4, 0x0D4, 0x0B4, plShadowCaster ),
         tri( 0x0D5, 0x0D5, 0x0B5, plPointShadowMaster ), //3rd code from myst5
-        tri( 0x0D6, 0x0D6, -2, plDirectShadowMaster ),
+        tri( 0x0D6, 0x0D6, 0x0B6, plDirectShadowMaster ),
         tri( 0x0E5, 0x0E5, -2, plEAXListenerMod ),
         tri( 0x0E8, 0x0E8, -2, plDynaFootMgr ),
         tri( 0x0ED, 0x0ED, -2, plDynaPuddleMgr ),
@@ -303,7 +322,7 @@ public enum Typeid implements compilable
         tri( 0x106, 0x106, 0x0DA, plDynamicEnvMap ),
         tri( 0x116, 0x116, 0x0E9, plVisRegion ),
         tri( 0x11E, 0x11E, -2, plRelevanceRegion ), //used for .csv files
-        tri( 0x122, 0x122, -2, plImageLibMod ),
+        tri( 0x122, 0x122, 0x0F1, plImageLibMod ),
         tri( 0x123, 0x123, 0x0F2, plParticleFlockEffect ), //3rd code from myst5
         tri( 0x127, 0x127, -2, plPhysicalSndGroup ),
         tri( 0x12B, 0x12B, -2, plClusterGroup ),
@@ -377,6 +396,24 @@ public enum Typeid implements compilable
         tri( 0x07D, -2, 0x06E, plAxisAnimModifier),
         tri( 0x098, -2, 0x080, pfGUIDialogMod),
         tri( 0x0A1, -2, 0x087, pfGUIButtonMod),
+        
+        tri( -2, -2, 0x106, plElevatorModifier), //not in pots
+        tri( -2, -2, 0x026, plPythonFileModConditionalObject), //not in pots
+        tri( 0x31A, -2, 0x299, plConstAccelEaseCurve),
+        tri( 0x068, -2, 0x05B, plMobileOccluder),
+        tri( -2, -2, 0x098, plLadderModifier), //not in pots
+        
+        tri( -2, -2, 0x114, plPiranhaRegionModifier), //not in pots (surprise!)
+        tri( -2, -2, 0x01B, plCrossfade), //not in pots
+        tri( -2, -2, 0x20D, plCrossfadeMsg), //not in pots
+        tri( -2, -2, 0x021, plWindBoneMod), //not in pots
+        tri( 0x08E, -2, 0x07C, plLayerLinkAnimation),
+        tri( 0x08F, -2, 0x07D, plArmatureMod),
+        tri( -2, -2, 0x200, plAvBrainPirahna), //not in pots
+        tri( 0x494, -2, -2, plAvBrainQuab),
+        tri( 0x0CD, -2, 0x0AE, plArmatureEffectsMgr),
+        tri( 0x0FE, -2, 0x0D7, plFilterCoordInterface),
+        
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };

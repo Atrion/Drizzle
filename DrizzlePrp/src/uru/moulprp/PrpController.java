@@ -481,6 +481,7 @@ public class PrpController extends uruobj
             }
         }
     }
+    
     public static class plLeafController extends uruobj implements uru.writesOwnTypeid
     {
         //pots:
@@ -1273,7 +1274,12 @@ public class PrpController extends uruobj
                     case 2:
                         type = 1;
                         break;
+                    case 3:
                     case 4:
+                        if(leaf.controllertype==3)
+                        {
+                            m.warn("Experimental prpcontroller case...");
+                        }
                         type = 5;
                         break;
                     case 7: //myst5 added, untested, but it's just a quat so it should be a rotation.
@@ -1414,7 +1420,7 @@ public class PrpController extends uruobj
                 else if(u1.type==Typeid.plLeafController)
                 {
                     plLeafController lc = (plLeafController)u1.prpobject.object;
-                    if(lc.controllertype==4)
+                    if(lc.controllertype==4||lc.controllertype==3)
                     {
                         c.writeInt(1); //flag1
                         u1.prpobject.object.compile(c); //scalarcontroller1
@@ -1435,7 +1441,7 @@ public class PrpController extends uruobj
                 else if(u2.type==Typeid.plLeafController)
                 {
                     plLeafController lc = (plLeafController)u2.prpobject.object;
-                    if(lc.controllertype==4)
+                    if(lc.controllertype==4||lc.controllertype==3)
                     {
                         c.writeInt(1); //flag2
                         u2.prpobject.object.compile(c); //scalarcontroller2
@@ -1456,7 +1462,7 @@ public class PrpController extends uruobj
                 else if(u3.type==Typeid.plLeafController)
                 {
                     plLeafController lc = (plLeafController)u3.prpobject.object;
-                    if(lc.controllertype==4)
+                    if(lc.controllertype==4||lc.controllertype==3)
                     {
                         c.writeInt(1); //flag3
                         u3.prpobject.object.compile(c); //scalarcontroller3

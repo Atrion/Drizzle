@@ -59,6 +59,10 @@ public class ODEPhysical extends uruobj
     Uruobjectref sceneobject;
     Uruobjectref scenenode;
     
+    //type 6
+    Flt f6a;
+    Flt f6b;
+    
     PlHKPhysical.HKPhysical convertee;
     
     public ODEPhysical(context c) throws readexception
@@ -99,9 +103,10 @@ public class ODEPhysical extends uruobj
         else if(type==6) //ellipse???
         {
             //m.msg("Untested ODE case6...");
-            Flt u4 = new Flt(c); //same as 2
-            Flt u6 = new Flt(c);
-            throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
+            f6a = new Flt(c); //same as 2
+            f6b = new Flt(c);
+            //Vertex offset = this.findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            //throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
         else
         {
@@ -140,6 +145,7 @@ public class ODEPhysical extends uruobj
         if(type==5) convertee.format = 4;
         else if(type==1) convertee.format = 1;
         else if(type==2) convertee.format = 2;
+        else if(type==6) throw new readexception("ODEPhysical: able to read, but ignoring unhandled type 6."); //convertee.format = 0;//changethis!!!
         else throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
         convertee.u1 = 0;
         convertee.coltype = 0x200;
@@ -185,6 +191,7 @@ public class ODEPhysical extends uruobj
             convertee.group = new HsBitVector(4);
             //convertee.mass = Flt.one(); //assign mass
         }
+        //myst5 has a kind of clickable that is dragable, e.g. the door handle in k'veer.
         else if((u8==0x4000000 && u9==0x0 && u10==0x0) //clickables
             //|| (u8==0x4000000 && u9==0x0 && u10==0x8000000))
             //|| (u8==0x4000000 && u9==0x20000)
@@ -231,7 +238,15 @@ public class ODEPhysical extends uruobj
         c.writeByte(convertee.u2);//u2 byte
         c.writeByte(convertee.u3);//u3 byte
         
-        if(type==5)
+        if(type==6)
+        {
+            //unknown type, using f6a and f6b;
+            Vertex offset = findOffsetVectorFromSceneObject(c.prp, sceneobject);
+            Flt wha1 = f6a;
+            Flt wha2 = f6b;
+            int dummy=0;
+        }
+        else if(type==5)
         {
             //write vertices
             c.writeInt(vertexcount);
@@ -469,7 +484,7 @@ public class ODEPhysical extends uruobj
         e.ensure(d.hasref());
         PrpRootObject f = prputils.findObjectWithDesc(prp, d.xdesc);
         x0015CoordinateInterface g = f.castTo();
-        Vertex offset = g.matrix1.convertTo3Vector();
+        Vertex offset = g.localToParent.convertTo3Vector();
         return offset;
     }
 }

@@ -793,6 +793,12 @@ public class mystAutomation
         Typeid.plAxisAnimModifier,
         Typeid.pfGUIDialogMod,
         Typeid.pfGUIButtonMod,
+        
+        Typeid.plMobileOccluder,
+        Typeid.plLayerLinkAnimation,
+        Typeid.plArmatureMod,
+        Typeid.plArmatureEffectsMgr,
+        Typeid.plFilterCoordInterface,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1456,13 +1462,14 @@ public class mystAutomation
                 }
                 
                 Typeid[] typeequals = new Typeid[]{
-                    Typeid.plSceneNode, Typeid.plSceneObject, Typeid.plCoordinateInterface, Typeid.plSpawnModifier,
+                    Typeid.plSceneNode, Typeid.plSceneObject, Typeid.plCoordinateInterface, Typeid.plSpawnModifier, Typeid.plFilterCoordInterface, //not having plFilterCoordInterface can crash Uru.
+
                     Typeid.plMipMap, Typeid.plCubicEnvironMap,
                     Typeid.plLayer, Typeid.hsGMaterial, Typeid.plDrawableSpans,
                     Typeid.plViewFaceModifier,
                     Typeid.plLayerAnimation,
+                    Typeid.plLayerLinkAnimation,
                     Typeid.plLayerBink, //must have the .bnk files copied over or Uru will crash.
-                    //Typeid.plBoundInterface,
                     
                     Typeid.plHKPhysical, Typeid.plSimulationInterface,
                     Typeid.plDirectionalLightInfo, Typeid.plOmniLightInfo, Typeid.plSpotLightInfo,
@@ -1489,6 +1496,15 @@ public class mystAutomation
                     Typeid.plAnimEventModifier,
                     Typeid.plAxisAnimModifier,
                     Typeid.plBoundInterface,
+                    Typeid.plMobileOccluder,
+                    Typeid.plDirectShadowMaster,
+                    Typeid.plVisRegion,
+                    Typeid.plParticleFlockEffect,
+                    Typeid.plImageLibMod,
+                    
+                    Typeid.plMobileOccluder,
+                    Typeid.plArmatureMod,
+                    Typeid.plArmatureEffectsMgr,
                 };
                 String[] namestarts={
                     /*//"boulder01",
@@ -1500,9 +1516,20 @@ public class mystAutomation
                     //"partcoll09",
                     //"partcollidtablet",
                     //"particlegroundcollide",
+                    //"craterupper", //works
+                    "spawnwindmill",
+                    "startpoint01_1",
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
+                
+                if(type==Typeid.plCoordinateInterface)
+                {
+                    for(String start: new String[]{
+                        "arenagateleft",
+                        //"arenalift",
+                    }) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
+                }
                 
                 m.msg("Skipping type: "+type.toString());
                 return false;

@@ -301,6 +301,22 @@ public class PrpObject extends uruobj
                 return new PfGUIButtonMod(c);
             case pfGUIDialogMod:
                 return new PfGUIButtonMod.PfGUIDialogMod(c);
+            case plConstAccelEaseCurve:
+                return new PlConstAccelEaseCurve(c);
+            case plMobileOccluder:
+                return new PlMobileOccluder(c);
+            case plLayerLinkAnimation:
+                return new PlLayerLinkAnimation(c);
+            case plArmatureMod:
+                return new PlArmatureMod(c);
+            case plAvBrainPirahna:
+                return new PlAvBrainPirahna(c);
+            case plAvBrainQuab:
+                return new PlAvBrainQuab(c);
+            case plArmatureEffectsMgr:
+                return new PlArmatureEffectsMgr(c);
+            case plFilterCoordInterface:
+                return new PlFilterCoordInterface(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new readexception("PrpObject: type constructor not in main list: "+type.toString());

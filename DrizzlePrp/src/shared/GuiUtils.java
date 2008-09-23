@@ -8,6 +8,17 @@ package shared;
 import javax.swing.text.JTextComponent;
 import javax.swing.JFileChooser;
 
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import javax.swing.text.DefaultEditorKit;
+import java.awt.event.InputEvent;
+import javax.swing.text.Keymap;
+import javax.swing.JTextArea;
+import javax.swing.JFormattedTextField;
+//import javax.swing.text.Keymap;
+import javax.swing.ActionMap;
+
 public class GuiUtils
 {
     public static boolean onlyUseASingleJFileChooser = true;
@@ -59,5 +70,23 @@ public class GuiUtils
             field.setText(file);
         }
     }
-
+    
+    public static void SetKeymaps()
+    {
+        SetKeymap(new JTextField());
+        SetKeymap(new JTextArea());
+        SetKeymap(new JFormattedTextField()); //todo: is this necessary?
+    }
+    
+    public static void SetKeymap(JTextComponent componentExample)
+    {
+        Keymap keymap = componentExample.getKeymap();
+        ActionMap actionmap = componentExample.getActionMap();
+        keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK),new DefaultEditorKit.CopyAction());
+        keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK),new DefaultEditorKit.PasteAction());
+        keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK),new DefaultEditorKit.CutAction());
+        keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, InputEvent.SHIFT_DOWN_MASK),new DefaultEditorKit.PasteAction());
+        keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK),actionmap.get(DefaultEditorKit.selectAllAction));
+        
+    }
 }

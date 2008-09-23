@@ -26,11 +26,141 @@ import shared.m;
 import uru.b;
 //import java.util.Vector;
 
-/**
- *
- * @author user
- */
 public class PlOccluder extends uruobj
+{
+    //Objheader xheader;
+    
+    PlObjInterface parent;
+    Flt f1;
+    short counta;
+    SubOccluder[] blocks;
+    Uruobjectref scenenode;
+    short countd;
+    Uruobjectref[] visRegion;
+    
+    int u1;
+    int u2;
+    Vertex v1;
+    Vertex v2;
+    
+    Flt[] conglomerate;
+    
+    //Flt[] u3;
+    //short counta;
+    //SubOccluder[] blocks;
+    //Uruobjectref scenenode;
+    //short countd;
+    //Uruobjectref[] visRegion;
+    
+    public PlOccluder(context c) throws readexception
+    {
+        //if(hasHeader) xheader = new Objheader(c);
+        
+        parent = new PlObjInterface(c);//,false);
+        
+        //same as in PlMobileOccluder:
+        //in pots: sub_48a930, in m5: sub_643ca0
+        //int u1,int,vertex,vertex,
+        //if u1&1==0 then vertex, 3*(vertex, flt, flt)
+        u1 = c.readInt();
+        u2 = c.readInt();
+        v1 = new Vertex(c);
+        v2 = new Vertex(c);
+        if((u1&0x1)==0)
+        {
+            //if u1&1==0 then vertex, 3*(vertex, flt, flt)
+            //m.warn("untested case in PlOccluder.");
+            conglomerate = c.readVector(Flt.class, 18);
+        }
+        f1 = new Flt(c);
+        counta = c.readShort();
+        blocks = c.readVector(SubOccluder.class, b.Int16ToInt32(counta));
+        scenenode = new Uruobjectref(c);
+        countd = c.readShort();
+        visRegion = c.readVector(Uruobjectref.class, b.Int16ToInt32(countd));
+        
+        //u1 = c.readInt();
+        //u2 = c.readInt();
+        //u3 = c.readVector(Flt.class, 7);
+        //counta = c.readShort();
+        //blocks = c.readVector(SubOccluder.class, counta);
+        //scenenode = new Uruobjectref(c);
+        //countd = c.readShort();
+        //visRegion = c.readVector(Uruobjectref.class, countd);
+        
+    }
+    public void compile(Bytedeque c)
+    {
+        parent.compile(c);
+        
+        //same as in PlMobileOccluder:
+        c.writeInt(u1);
+        c.writeInt(u2);
+        v1.compile(c);
+        v2.compile(c);
+        if((u1&0x1)==0)
+        {
+            c.writeVector(conglomerate);
+        }
+        
+        f1.compile(c);
+        c.writeShort(counta);
+        c.writeVector(blocks);
+        scenenode.compile(c);
+        c.writeShort(countd);
+        c.writeVector(visRegion);
+    }
+    
+    public static class SubOccluder extends uruobj
+    {
+        int u1;
+        Vertex v1;
+        Flt f1;
+        Vertex v2;
+        Flt f2;
+        int count;
+        Vertex[] vertices;
+        
+        //int countb;
+        //Flt[] floats1;
+        //int countc;
+        //Flt[] floats2;
+        
+        public SubOccluder(context c) throws readexception
+        {
+            u1 = c.readInt();
+            v1 = new Vertex(c);
+            f1 = new Flt(c);
+            v2 = new Vertex(c);
+            f2 = new Flt(c);
+            count = c.readInt();
+            vertices = c.readVector(Vertex.class, count);
+            
+            //countb = c.readInt();
+            //int countb2 = (countb==0) ? 2 : countb; //if countb=0, set it to 2.
+            //floats1 = c.readVector(Flt.class, countb2*4);
+            //countc = c.readInt();
+            //floats2 = c.readVector(Flt.class, countc*3);
+            
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(u1);
+            v1.compile(c);
+            f1.compile(c);
+            v2.compile(c);
+            f2.compile(c);
+            c.writeInt(count);
+            c.writeVector(vertices);
+            //c.writeInt(countb);
+            //c.writeVector(floats1);
+            //c.writeInt(countc);
+            //c.writeVector(floats2);
+        }
+    }
+}
+/*public class PlOccluder extends uruobj
 {
     //Objheader xheader;
     
@@ -97,4 +227,4 @@ public class PlOccluder extends uruobj
             c.writeVector(floats2);
         }
     }
-}
+}*/
