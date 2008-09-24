@@ -34,10 +34,10 @@ public class x0015CoordinateInterface extends uruobj
 {
     //Objheader xheader;
     PlObjInterface parent;
-    Transmatrix localToParent; //1 and 2 should be inverses of each other.
-    Transmatrix parentToLocal;
-    Transmatrix localToWorld; //3 and 4 should be inverses of each other.
-    Transmatrix worldToLocal;
+    public Transmatrix localToParent; //1 and 2 should be inverses of each other.
+    public Transmatrix parentToLocal;
+    public Transmatrix localToWorld; //3 and 4 should be inverses of each other.
+    public Transmatrix worldToLocal;
     int count;
     Uruobjectref[] children;
     

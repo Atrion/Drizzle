@@ -52,7 +52,7 @@ public class PlRidingAnimatedPhysicalDetector extends uruobj
             xu4 = new PrpTaggedObject(c);
         }
 
-        throw new readexception("plRidingAnimatedPhysicalDetector: can read okay, but failing in order to ignore.");
+        throw new shared.readwarningexception("plRidingAnimatedPhysicalDetector: can read okay, but failing in order to ignore.");
     }
     
     public void compile(Bytedeque c)

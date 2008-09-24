@@ -24,12 +24,16 @@ import uru.b;
 import shared.m;
 import uru.Bytedeque;
 import uru.e;
+import org.apache.commons.math.linear.RealMatrix;
+import org.apache.commons.math.linear.RealMatrixImpl;
 
 //aka hsMatrix44
-public class Transmatrix extends uruobj
+public strictfp class Transmatrix extends uruobj
 {
     byte isnotIdentity;
     int[] xmatrix = new int[16]; //raw data (floats are 32bit, so they fit in integer.)
+    
+    Transmatrix(){}
     
     public Transmatrix(context c)
     {
@@ -119,6 +123,39 @@ public class Transmatrix extends uruobj
             {
                 int datum = xmatrix[i*4+j];
                 result[i][j] = Flt.createFromData(datum);
+            }
+        }
+        return result;
+    }
+    
+    public RealMatrix convertToMatrix()
+    {
+        double[][] rawdata = new double[4][4];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                int datum = xmatrix[i*4+j];
+                rawdata[i][j] = (double)Flt.createFromData(datum).toJavaFloat();
+            }
+        }
+        RealMatrix rm = new RealMatrixImpl(rawdata);
+        return rm;
+    }
+    
+    public static Transmatrix createFromMatrix(RealMatrix rm)
+    {
+        double[][] rawdata = rm.getData();
+        Transmatrix result = new Transmatrix();
+        result.isnotIdentity = 1;
+        result.xmatrix = new int[16];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                float f = (float)rawdata[i][j];
+                int rawflt = Flt.createFromJavaFloat(f).rawdata;
+                result.xmatrix[i*4+j] = rawflt;
             }
         }
         return result;

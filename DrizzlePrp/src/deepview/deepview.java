@@ -39,6 +39,7 @@ import java.util.EnumSet;
 import java.io.File;
 import uru.moulprp.prputils;
 import shared.Bytes;
+import uru.moulprp.Urustring;
 
 public class deepview
 {
@@ -309,6 +310,11 @@ public class deepview
         if(objclass==Uruobjectref.class)
         {
             panel.add(new dvUruobjectref((Uruobjectref)obj,name,this,true));
+            return;
+        }
+        else if(objclass==uru.moulprp.Urustring.class)
+        {
+            panel.add(new dvUrustring((Urustring)obj,name,this));
             return;
         }
         

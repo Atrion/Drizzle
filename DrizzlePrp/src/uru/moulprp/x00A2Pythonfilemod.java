@@ -117,7 +117,7 @@ public class x00A2Pythonfilemod extends uruobj
                         xString = new Bstr(c);
                         if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:   string="+xString.toString());
                         //m.warn("PythonFileMod: usinng a case that differs between versions.");
-                        throw new readexception("PythonFileMod: can read okay, but throwing error to ignore.");
+                        throw new shared.readwarningexception("PythonFileMod: can read okay, but throwing error to ignore.");
                     }
                     else if(c.readversion==6||c.readversion==3)
                     {

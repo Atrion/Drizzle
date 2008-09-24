@@ -33,16 +33,16 @@ public class x0001Sceneobject extends uruobj
 {
     //Objheader xheader;
     PlSynchedObject parent;
-    Uruobjectref spaninfo;
-    Uruobjectref animationinfo;
-    Uruobjectref regioninfo;
-    Uruobjectref soundinfo;
+    public Uruobjectref spaninfo; //draw
+    public Uruobjectref animationinfo; //simulation
+    public Uruobjectref regioninfo; //coordinate
+    public Uruobjectref soundinfo; //audio
     int count1;
     //Vector<Uruobjectref> objectrefs1 = new Vector<Uruobjectref>();
-    Uruobjectref[] objectrefs1;
+    public Uruobjectref[] objectrefs1;
     int count2;
     //Vector<Uruobjectref> objectrefs2 = new Vector<Uruobjectref>();
-    Uruobjectref[] objectrefs2;
+    public Uruobjectref[] objectrefs2;
     Uruobjectref scenenode;
     
     public x0001Sceneobject(context c)//,boolean hasHeader)

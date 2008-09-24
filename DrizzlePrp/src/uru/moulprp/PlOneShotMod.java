@@ -31,12 +31,12 @@ import shared.readexception;
 public class PlOneShotMod extends uruobj
 {
     PlMultiModifier parent;
-    Urustring animobjectname;
-    Flt seekDuration;
-    byte drivable;
-    byte reversable;
-    byte smartseek;
-    byte noseek;
+    public Urustring animobjectname;
+    public Flt seekDuration;
+    public byte drivable;
+    public byte reversable;
+    public byte smartseek;
+    public byte noseek;
     
     public PlOneShotMod(context c) throws readexception
     {

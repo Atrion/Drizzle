@@ -63,7 +63,7 @@ public class PlArmatureMod extends uruobj
             {
                 xref = new Uruobjectref(c);
             }
-            throw new readexception("PlArmatureMod: can read okay, but throwing exception to ignore, since I haven't implemented conversion.");
+            throw new shared.readwarningexception("PlArmatureMod: can read okay, but throwing exception to ignore, since I haven't implemented conversion.");
         }
         else if(c.readversion==3)
         {

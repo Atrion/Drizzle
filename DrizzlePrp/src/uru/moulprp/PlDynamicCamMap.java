@@ -66,7 +66,7 @@ public class PlDynamicCamMap extends uruobj
         int count2 = b.ByteToInt32(u12);
         u13 = c.readVector(Uruobjectref.class, count2);
         
-        throw new readexception("plDynamicCamMap: can read okay, but failing in order to ignore.");
+        throw new shared.readwarningexception("plDynamicCamMap: can read okay, but failing in order to ignore.");
     }
     
     public void compile(Bytedeque c)

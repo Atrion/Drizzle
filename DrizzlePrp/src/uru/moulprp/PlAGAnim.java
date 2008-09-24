@@ -62,7 +62,7 @@ public class PlAGAnim extends uruobj
             {
                 //m.msg("PlAGAnim: converting RelativeMatrixChannelApplicator to MatrixChannelApplicator");
                 effects[i].type = Typeid.plMatrixChannelApplicator;
-                throw new readexception("RelativeMatrixChannelApplicator: not converting.");
+                throw new shared.readwarningexception("RelativeMatrixChannelApplicator: not converting.");
             }
         }
         if(c.readversion==4)

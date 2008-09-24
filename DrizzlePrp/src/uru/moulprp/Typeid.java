@@ -220,6 +220,11 @@ public enum Typeid implements compilable
     plArmatureEffectsMgr,
     plFilterCoordInterface,
     
+    //siralehn
+    plParticleFollowSystemEffect,
+    plParticleCollisionEffectBeat,
+    plParticleFadeVolumeEffect,
+    
     plLeafController,
     nil,
     unknown;
@@ -413,6 +418,10 @@ public enum Typeid implements compilable
         tri( 0x494, -2, -2, plAvBrainQuab),
         tri( 0x0CD, -2, 0x0AE, plArmatureEffectsMgr),
         tri( 0x0FE, -2, 0x0D7, plFilterCoordInterface),
+        
+        tri( 0x135, -2, 0x101, plParticleFollowSystemEffect),
+        tri( 0x00A, -2, 0x00A, plParticleCollisionEffectBeat),
+        tri( 0x00B, -2, 0x00B, plParticleFadeVolumeEffect),
         
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
@@ -840,7 +849,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Typeid: Compilation error: Pots isn't listed as having type: "+t.toString());
+                m.warn("Typeid: Compilation problem: Pots isn't listed as having type: "+t.toString());
                 return (short)0x8000;
             }
         }

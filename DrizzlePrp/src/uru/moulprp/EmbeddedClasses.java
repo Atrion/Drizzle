@@ -56,7 +56,7 @@ public class EmbeddedClasses
             u1 = c.readByte();
             u2 = new Urustring(c);
 
-            throw new readexception("plOmniSqApplicator: can read okay, but failing in order to ignore.");
+            throw new shared.readwarningexception("plOmniSqApplicator: can read okay, but failing in order to ignore.");
         }
     }
     public static class PlLightSpecularApplicator extends uruobj

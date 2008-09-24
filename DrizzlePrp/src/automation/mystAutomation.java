@@ -28,6 +28,9 @@ import uru.moulprp.Rgba;
 import shared.State.AllStates;
 import uru.moulprp.Urustring;
 import uru.moulprp.Uruobjectdesc;
+import uru.moulprp.Transmatrix;
+import org.apache.commons.math.linear.RealMatrix;
+import org.apache.commons.math.linear.RealMatrixImpl;
 
 public class mystAutomation
 {
@@ -799,6 +802,10 @@ public class mystAutomation
         Typeid.plArmatureMod,
         Typeid.plArmatureEffectsMgr,
         Typeid.plFilterCoordInterface,
+        
+        Typeid.plParticleFollowSystemEffect,
+        Typeid.plParticleCollisionEffectBeat,
+        Typeid.plParticleFadeVolumeEffect,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1105,6 +1112,44 @@ public class mystAutomation
                     int dummy=0;
                 }*/
                 int dummy=0;
+            }
+        }
+        if(AllStates.getStateAsBoolean("translateSmartseeks"))
+        {
+            PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSceneObject);
+            for(PrpRootObject obj: objs)
+            {
+                uru.moulprp.x0001Sceneobject so = obj.castTo();
+                for(Uruobjectref ref: so.objectrefs2)
+                {
+                    if(ref.hasref()&&ref.xdesc.objecttype==Typeid.plOneShotMod)
+                    {
+                        uru.moulprp.PlOneShotMod osm = prputils.findObjectWithDesc(prp, ref.xdesc).castTo();
+                        if(osm.smartseek!=0)
+                        {
+                            //found it!
+                            Uruobjectref coordsref = so.regioninfo;
+                            if(coordsref.hasref())
+                            {
+                                m.msg("Translating smartseek for object... "+obj.header.desc.toString());
+                                uru.moulprp.x0015CoordinateInterface coords = prputils.findObjectWithDesc(prp, coordsref.xdesc).castTo();
+                                Transmatrix m = coords.localToParent;
+                                RealMatrix m2 = m.convertToMatrix();
+                                //org.apache.commons.math.linear.RealMatrixImpl b;
+                                double[][] rawdata = m2.getData();
+                                rawdata[0][3] += rawdata[0][0];
+                                rawdata[1][3] -= rawdata[1][0];
+                                rawdata[2][3] += 0.6;
+                                m2 = new RealMatrixImpl(rawdata);
+                                coords.localToParent = Transmatrix.createFromMatrix(m2);
+                                coords.localToWorld = coords.localToParent;
+                                RealMatrix m3 = m2.inverse();
+                                coords.parentToLocal = Transmatrix.createFromMatrix(m3);
+                                coords.worldToLocal = coords.parentToLocal;
+                            }
+                        }
+                    }
+                }
             }
         }
         if(AllStates.getStateAsBoolean("changeVerySpecialPython"))
@@ -1452,9 +1497,16 @@ public class mystAutomation
                 Pageid pageid = desc.pageid;
                 
                 //blacklist
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false;
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
+                if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
+                if(type==Typeid.plBoundInterface && pageid.prefix==89) //Siralehn/Todelmer
+                {
+                    if(name.equals("Cone01") || name.equals("doorParticleColliderMesh") || name.startsWith("RainDef0") || name.startsWith("RainDef1") || name.equals("RsinDefTop"))
+                    {
+                        return false;
+                    }
+                }
                 
                 if(type==Typeid.plBoundInterface)
                 {
@@ -1495,7 +1547,6 @@ public class mystAutomation
                     Typeid.plAGAnimBink,
                     Typeid.plAnimEventModifier,
                     Typeid.plAxisAnimModifier,
-                    Typeid.plBoundInterface,
                     Typeid.plMobileOccluder,
                     Typeid.plDirectShadowMaster,
                     Typeid.plVisRegion,
@@ -1505,6 +1556,11 @@ public class mystAutomation
                     Typeid.plMobileOccluder,
                     Typeid.plArmatureMod,
                     Typeid.plArmatureEffectsMgr,
+                    
+                    Typeid.plParticleCollisionEffectBeat,
+                    Typeid.plParticleFadeVolumeEffect,
+                    Typeid.plParticleFollowSystemEffect,
+                    Typeid.plBoundInterface,
                 };
                 String[] namestarts={
                     /*//"boulder01",
@@ -1517,8 +1573,15 @@ public class mystAutomation
                     //"partcollidtablet",
                     //"particlegroundcollide",
                     //"craterupper", //works
-                    "spawnwindmill",
-                    "startpoint01_1",
+                    //"spawnwindmill",
+                    //"startpoint01_1",
+                    "box",
+                    //"cone",
+                    //"door",
+                    //"raindef0",
+                    //"raindef1",
+                    "raindeflector",
+                    "rsin",
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;

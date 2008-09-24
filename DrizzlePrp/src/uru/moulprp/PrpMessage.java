@@ -342,7 +342,7 @@ public class PrpMessage extends PrpTaggedObject
                 if((flag3&8)!=0) xi1 = c.readInt();
                 if((flag3&16)!=0) xi1 = c.readInt();
                 xb = c.readByte();
-                throw new readexception("PlLinkToAgeMsg: can read okay but failing in order to ignore.");
+                throw new shared.readwarningexception("PlLinkToAgeMsg: can read okay but failing in order to ignore.");
             }
         }
         

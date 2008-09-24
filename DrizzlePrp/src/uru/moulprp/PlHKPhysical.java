@@ -450,7 +450,7 @@ public class PlHKPhysical extends uruobj
             potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
             if(pots==null)
             {
-                throw new readexception("plHKPhysical: Can read okay, but failing in order to ignore.");
+                throw new shared.readwarningexception("plHKPhysical: Can read okay, but failing in order to ignore.");
             }
         }
 

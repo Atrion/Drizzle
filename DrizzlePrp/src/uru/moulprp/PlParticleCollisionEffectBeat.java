@@ -28,33 +28,19 @@ import shared.readexception;
 //import java.util.Vector;
 
 
-public class PlGrassShaderMod extends uruobj
+public class PlParticleCollisionEffectBeat extends uruobj
 {
-    PlSynchedObject parent;
     Uruobjectref ref;
-    Flt[] u1;
-    Flt[] u2;
-    Flt[] u3;
-    Flt[] u4;
     
-    public PlGrassShaderMod(context c) throws readexception
+    public PlParticleCollisionEffectBeat(context c) throws readexception
     {
-        e.ensure(c.readversion==6||c.readversion==4);
-        
-        parent = new PlSynchedObject(c);
         ref = new Uruobjectref(c);
-        u1 = c.readVector(Flt.class, 6);
-        u2 = c.readVector(Flt.class, 6);
-        u3 = c.readVector(Flt.class, 6);
-        u4 = c.readVector(Flt.class, 6);
-
-        throw new shared.readwarningexception("plGrassShaderMod: can read okay, but failing in order to ignore.");
+        
     }
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented."+this.toString());
-        m.warn("not tested with pots."+this.toString());
+        ref.compile(c);
     }
     
 }

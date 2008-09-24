@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.File;
+import java.util.Stack;
 
 public class AllStates //implements java.io.Serializable
 {
@@ -39,6 +40,8 @@ public class AllStates //implements java.io.Serializable
     static HashMap<String, Object> states;
     static Vector<IState> refs;
     
+    static Stack<HashMap<String, Object>> stackedStates;
+    
     static
     {
         //allStates = new Vector<AllStates>();
@@ -48,6 +51,19 @@ public class AllStates //implements java.io.Serializable
         //states = new Vector<pair>();
         states = new HashMap<String, Object>();
         refs = new Vector<IState>();
+        stackedStates = new Stack<HashMap<String, Object>>();
+    }
+    
+    static void push()
+    {
+        HashMap<String, Object> oldstates = (HashMap<String, Object>)states.clone();
+        stackedStates.push(oldstates);
+    }
+    
+    static void pop()
+    {
+        HashMap<String, Object> oldstates = stackedStates.pop();
+        states = oldstates;
     }
     
     //public AllStates() //called by inheritors. Finalizer will never be called, since it is in this list, at least.

@@ -444,6 +444,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState8 = new shared.State.CheckboxState();
         checkboxState9 = new shared.State.CheckboxState();
         checkboxState11 = new shared.State.CheckboxState();
+        checkboxState17 = new shared.State.CheckboxState();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -1098,6 +1099,9 @@ public class Gui extends javax.swing.JFrame {
             checkboxState11.setText("When renaming Ages, changes the VeryVerySpecialPythonFileMod too.");
             checkboxState11.setName("changeVerySpecialPython"); // NOI18N
 
+            checkboxState17.setText("Translate avatar away from smartseeks by 1 unit");
+            checkboxState17.setName("translateSmartseeks"); // NOI18N
+
             javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
             jPanel20.setLayout(jPanel20Layout);
             jPanel20Layout.setHorizontalGroup(
@@ -1105,6 +1109,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel20Layout.createSequentialGroup()
                     .addGap(114, 114, 114)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(checkboxState17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState11, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1119,7 +1124,9 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(194, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(checkboxState17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(160, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -3203,6 +3210,7 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState14;
     private shared.State.CheckboxState checkboxState15;
     private shared.State.CheckboxState checkboxState16;
+    private shared.State.CheckboxState checkboxState17;
     private shared.State.CheckboxState checkboxState2;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;

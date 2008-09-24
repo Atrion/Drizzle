@@ -31,4 +31,8 @@ public class readexception extends Exception
         super(msg);
         m.err(msg);
     }
+    protected readexception(String msg, boolean dummy)
+    {
+        super(msg);
+    }
 }

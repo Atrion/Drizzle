@@ -2,4 +2,5 @@ The bouncycastle.org license can be found in each package's folder as LICENSE.ht
 The jetty license is LGPL/GPL/Apache2.0/X11-like
   The readme files say that the javax.servlet classes are CDDL1.0, but Sun has also made them GPLv2+classpathException.
   Consequently all licenses are compatible(the classpath exception allows us to make this project GPLv3+ even though the javax.servlet classes are GPLv2). 
+The apache commons-math license is Apache2.0
 All other files are GPLv3 or later, as noted at the start of each file.
