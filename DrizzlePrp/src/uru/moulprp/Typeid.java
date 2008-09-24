@@ -225,6 +225,10 @@ public enum Typeid implements compilable
     plParticleCollisionEffectBeat,
     plParticleFadeVolumeEffect,
     
+    //todelmer
+    plParticleVelMinApplicator,
+    pfGUIKnobCtrl,
+    
     plLeafController,
     nil,
     unknown;
@@ -422,6 +426,9 @@ public enum Typeid implements compilable
         tri( 0x135, -2, 0x101, plParticleFollowSystemEffect),
         tri( 0x00A, -2, 0x00A, plParticleCollisionEffectBeat),
         tri( 0x00B, -2, 0x00B, plParticleFadeVolumeEffect),
+        
+        tri( -2, -2, 0x2A9, plParticleVelMinApplicator), //not in pots
+        tri( 0x0B1, -2, 0x097, pfGUIKnobCtrl),
         
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),

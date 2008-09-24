@@ -806,6 +806,8 @@ public class mystAutomation
         Typeid.plParticleFollowSystemEffect,
         Typeid.plParticleCollisionEffectBeat,
         Typeid.plParticleFadeVolumeEffect,
+        
+        Typeid.pfGUIKnobCtrl,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1507,6 +1509,10 @@ public class mystAutomation
                         return false;
                     }
                 }
+                if(type==Typeid.plBoundInterface && pageid.prefix==88) //tahgira
+                {
+                    if(name.equals("CaveSnowKiller01")) return false;
+                }
                 
                 if(type==Typeid.plBoundInterface)
                 {
@@ -1560,6 +1566,9 @@ public class mystAutomation
                     Typeid.plParticleCollisionEffectBeat,
                     Typeid.plParticleFadeVolumeEffect,
                     Typeid.plParticleFollowSystemEffect,
+                    
+                    Typeid.pfGUIKnobCtrl,
+                    
                     Typeid.plBoundInterface,
                 };
                 String[] namestarts={
@@ -1575,13 +1584,15 @@ public class mystAutomation
                     //"craterupper", //works
                     //"spawnwindmill",
                     //"startpoint01_1",
-                    "box",
+                    //"box",
                     //"cone",
                     //"door",
                     //"raindef0",
                     //"raindef1",
-                    "raindeflector",
-                    "rsin",
+                    //"raindeflector",
+                    //"rsin",
+                    //"CaveSnowKiller01",
+                    //"FieldBubbleKiller",
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;

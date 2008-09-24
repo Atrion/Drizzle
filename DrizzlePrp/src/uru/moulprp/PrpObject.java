@@ -323,6 +323,8 @@ public class PrpObject extends uruobj
                 return new PlParticleCollisionEffectBeat(c);
             case plParticleFadeVolumeEffect:
                 return new PlParticleFadeVolumeEffect(c);
+            case pfGUIKnobCtrl:
+                return new PfGUIButtonMod.PfGUIKnobCtrl(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new readexception("PrpObject: type constructor not in main list: "+type.toString());

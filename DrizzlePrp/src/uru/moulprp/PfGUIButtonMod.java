@@ -156,6 +156,72 @@ public class PfGUIButtonMod extends uruobj
             c.writeByte(xb5);
         }
     }
+    
+    public static class PfGUIKnobCtrl extends uruobj
+    {
+        PfGUIValueCtrl parent;
+        int count;
+        Uruobjectref[] refs;
+        Urustring str;
+        Vertex v1;
+        Vertex v2;
+        
+        public PfGUIKnobCtrl(context c) throws readexception
+        {
+            parent = new PfGUIValueCtrl(c);
+            count = c.readInt();
+            refs = c.readVector(Uruobjectref.class, count);
+            str = new Urustring(c);
+            v1 = new Vertex(c);
+            v2 = new Vertex(c);
+            if(c.readversion==4)
+            {
+                int u1 = c.readInt();
+                int u2 = c.readInt();
+                int u3 = c.readInt();
+                int u4 = c.readInt();
+                Flt f1 = new Flt(c);
+                Flt f2 = new Flt(c);
+                Flt f3 = new Flt(c);
+                Flt f4 = new Flt(c);
+            }
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(count);
+            c.writeVector(refs);
+            str.compile(c);
+            v1.compile(c);
+            v2.compile(c);
+        }
+    }
+    
+    public static class PfGUIValueCtrl extends uruobj
+    {
+        PfGUIControlMod parent;
+        Flt f1;
+        Flt f2;
+        Flt f3;
+        
+        public PfGUIValueCtrl(context c) throws readexception
+        {
+            parent = new PfGUIControlMod(c);
+            f1 = new Flt(c);
+            f2 = new Flt(c);
+            f3 = new Flt(c);
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            f1.compile(c);
+            f2.compile(c);
+            f3.compile(c);
+        }
+    }
+    
     public static class PfGUIControlMod extends uruobj
     {
         PlSingleModifier parent;
