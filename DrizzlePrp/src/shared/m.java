@@ -34,14 +34,21 @@ public class m
 {
     
     private static JTextArea _outputTextArea; //you must set this from the GUI.
+    private static boolean justUseConsole = false;
     
     public static void redirectStdOut()
     {
-        System.setOut(new PrintStream(new Outstream("stdout:"), true));
+        if(justUseConsole==false)
+        {
+            System.setOut(new PrintStream(new Outstream("stdout:"), true));
+        }
     }
     public static void redirectStdErr()
     {
-        System.setErr(new PrintStream(new Outstream("stderr:"), true));
+        if(justUseConsole==false)
+        {
+            System.setErr(new PrintStream(new Outstream("stderr:"), true));
+        }
     }
     
     public static class Outstream extends OutputStream
@@ -87,12 +94,24 @@ public class m
     
     public static void setJTextArea(JTextArea newJTextArea)
     {
-        _outputTextArea = newJTextArea;
+        if(newJTextArea==null)
+        {
+            justUseConsole = true;
+        }
+        else
+        {
+            justUseConsole = false;
+            _outputTextArea = newJTextArea;
+        }
     }
     
     private static void message(String s)
     {
-        if(_outputTextArea!=null)
+        if(justUseConsole)
+        {
+            System.out.println(s);
+        }
+        else if(_outputTextArea!=null)
         {
             _outputTextArea.append(s+"\n");
         }

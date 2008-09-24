@@ -1,6 +1,16 @@
 Welcome to Drizzle!
 
 
+To use DeepView:
+--------------------------
+1) Enter the input filename in the first box.  Use a * to include all prps files of an Age.  E.g.: "C:\Pots\dat\Negilahn*"
+2) Click the "read" button to read the file(s) into memory.
+3) Click the "all types" button to get a list of all the Prp object types found.
+4) Explore from there!
+5) Optional: If you want to remove all the currently loaded files, click the "clear" button.
+6) Optional: If you want to save your changes, select the folder to save them to in the second box.  Then click the "save changes" button.
+
+
 To run the proxy server:
 ------------------------
 1) Put all the zip files (or folders, if that's what you're using) into some folder together, including "index.net.zip".
