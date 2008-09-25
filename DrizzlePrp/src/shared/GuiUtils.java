@@ -59,6 +59,17 @@ public class GuiUtils
             field.setText(file);
         }
     }
+    public static void getUserSelectedFileWithNoPath(JTextComponent field)
+    {
+        JFileChooser fc = getJFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int wasFileChosen = fc.showOpenDialog(null);
+        if(wasFileChosen==0)
+        {
+            String file = fc.getSelectedFile().getName();
+            field.setText(file);
+        }
+    }
     public static void getUserSelectedFileOrFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();

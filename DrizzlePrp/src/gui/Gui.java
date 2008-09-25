@@ -84,7 +84,7 @@ public class Gui extends javax.swing.JFrame {
         listState2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {
                 "Descent.age","Descent.fni","Descent.sum","Descent_dsntBahro_Idle02.prp","Descent_dsntBahro_Idle03.prp","Descent_dsntBahro_Idle04.prp","Descent_dsntBahro_Idle05.prp","Descent_dsntBahro_Idle06.prp","Descent_dsntBahro_Idle07.prp","Descent_dsntBahro_Idle08.prp","Descent_dsntBahro_Idle09.prp","Descent_dsntBahro_Shot02.prp","Descent_dsntBahro_Shot03.prp","Descent_dsntBahro_Shot04.prp","Descent_dsntBahro_Shot05.prp","Descent_dsntBahro_Shot06.prp","Descent_dsntBahro_Shot07.prp","Descent_dsntBahro_Shot08.prp","Descent_dsntBahro_Shot09.prp","Descent_dsntBahro_Tunnel01.prp","Descent_dsntBahro_Tunnel01Idle.prp","Descent_dsntBats.prp","Descent_dsntEsherIdleTopOfShaft.prp","Descent_dsntEsher_BottomOfShaft.prp","Descent_dsntEsher_FirstHub.prp","Descent_dsntEsher_Intro.prp","Descent_dsntEsher_TopOfShaft.prp","Descent_dsntGreatShaftBalcony.prp","Descent_dsntGreatShaftLowerRm.prp","Descent_dsntLowerBats.prp","Descent_dsntMapGUI.prp","Descent_dsntPostBats.prp","Descent_dsntPostShaftNodeAndTunnels.prp","Descent_dsntShaftGeneratorRoom.prp","Descent_dsntShaftTunnelSystem.prp","Descent_dsntTianaCave.prp","Descent_dsntTianaCaveNode2.prp","Descent_dsntTianaCaveTunnel1.prp","Descent_dsntTianaCaveTunnel3.prp","Descent_dsntUpperBats.prp","Descent_dsntUpperShaft.prp","Descent_dsntVolcano.prp","Descent_Textures.prp",
-                "Direbo.sdl","Direbo.age","Direbo.fni","Direbo.sum","Direbo_DragonFly.prp","Direbo_drboEsherIdleDirebo.prp","Direbo_drboEsher_DireboLaki.prp","Direbo_drboEsher_DireboSrln.prp","Direbo_drboEsher_DireboTdlm.prp","Direbo_drboEsher_DireboThgr.prp","Direbo_drboUrwinShape.prp","Direbo_RestAge.prp","Direbo_Textures.prp","Direbo_UrwinIdle.prp","Direbo_UrwinWalk.prp",
+                /*"Direbo.sdl",*/"Direbo.age","Direbo.fni","Direbo.sum","Direbo_DragonFly.prp","Direbo_drboEsherIdleDirebo.prp","Direbo_drboEsher_DireboLaki.prp","Direbo_drboEsher_DireboSrln.prp","Direbo_drboEsher_DireboTdlm.prp","Direbo_drboEsher_DireboThgr.prp","Direbo_drboUrwinShape.prp","Direbo_RestAge.prp","Direbo_Textures.prp","Direbo_UrwinIdle.prp","Direbo_UrwinWalk.prp",
                 "Kveer.age","Kveer.fni","Kveer.sum","Kveer_bkMystBookLocked.prp","Kveer_GreatRm.prp","Kveer_KveerBats.prp","Kveer_kverAtrus.prp","Kveer_kverAtrus_1.prp","Kveer_kverAtrus_Idle.prp","Kveer_kverBahroWingsGUI.prp","Kveer_kverBahro_1.prp","Kveer_kverBahro_2.prp","Kveer_kverBahro_Ballroom01.prp","Kveer_kverBahro_Ballroom02.prp","Kveer_kverBahro_Ballroom03.prp","Kveer_kverBahro_Exit01.prp","Kveer_kverBahro_Exit02.prp","Kveer_kverBahro_Idle05.prp","Kveer_kverBahro_Idle06.prp","Kveer_kverBahro_Idle07.prp","Kveer_kverBahro_Idle08.prp","Kveer_kverBahro_Idle09.prp","Kveer_kverBahro_Shot03.prp","Kveer_kverBahro_Shot04.prp","Kveer_kverBahro_Shot05.prp","Kveer_kverBahro_Shot06.prp","Kveer_kverBahro_Shot07.prp","Kveer_kverBahro_Shot08.prp","Kveer_kverBahro_Shot09.prp","Kveer_kverConc3Music.prp","Kveer_kverEsher_1.prp","Kveer_kverReleeshan.prp","Kveer_kverYeesha_1.prp","Kveer_kverYeesha_Conc01.prp","Kveer_kverYeesha_Conc02.prp","Kveer_kverYeesha_Conc03.prp","Kveer_kverYeesha_ConcIntro.prp","Kveer_kverYeesha_ConcIntro2.prp","Kveer_kverYeesha_IdleForIntro.prp","Kveer_kverYeesha_Intro.prp","Kveer_Prison.prp","Kveer_Textures.prp",
                 "Laki.age","Laki.fni","Laki.sum","Laki_Exterior.prp","Laki_LakiArenaVillaInt.prp","Laki_LakiCreatures.prp","Laki_lakiEsher-Arena.prp","Laki_lakiEsher-FighterBeach.prp","Laki_lakiEsher-Keep.prp","Laki_lakiEsher-Villa.prp","Laki_lakiEsherIdleKeep.prp","Laki_lakiEsherIdleVilla.prp","Laki_LakiMaze.prp","Laki_lakiMazeClue.prp","Laki_LakiTrees01.prp","Laki_PirBirdActor.prp","Laki_PirBirdChomp.prp","Laki_PirBirdIdle.prp","Laki_PirBirdSwallow.prp","Laki_PirBirdVocalize.prp","Laki_PirBirdWalk.prp","Laki_Textures.prp",
                 "Myst.age","Myst.fni","Myst.sum","Myst_Island.prp","Myst_mystEsher-Conc01.prp","Myst_mystEsher-Conc02.prp","Myst_Textures.prp",
@@ -425,12 +425,17 @@ public class Gui extends javax.swing.JFrame {
         jButton65 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton66 = new javax.swing.JButton();
+        jPanel21 = new javax.swing.JPanel();
+        jButton67 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jButton68 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         listState3 = new shared.State.ListState();
-        jButton67 = new javax.swing.JButton();
-        jButton68 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
+        jButton66 = new javax.swing.JButton();
+        jPanel22 = new javax.swing.JPanel();
+        textfieldState1 = new shared.State.TextfieldState();
+        jButton60 = new javax.swing.JButton();
+        jButton86 = new javax.swing.JButton();
         jPanel18 = new javax.swing.JPanel();
         checkboxState1 = new shared.State.CheckboxState();
         checkboxState3 = new shared.State.CheckboxState();
@@ -1004,20 +1009,7 @@ public class Gui extends javax.swing.JFrame {
             jPanel19.add(jLabel13);
             jLabel13.setBounds(30, 50, 80, 16);
 
-            jButton66.setText("Start...");
-            jButton66.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton66ActionPerformed(evt);
-                }
-            });
-            jPanel19.add(jButton66);
-            jButton66.setBounds(490, 200, 58, 36);
-
-            listState3.setName("moulfiles"); // NOI18N
-            jScrollPane8.setViewportView(listState3);
-
-            jPanel19.add(jScrollPane8);
-            jScrollPane8.setBounds(180, 142, 290, 150);
+            jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder("Process a bunch of files..."));
 
             jButton67.setText("Select all");
             jButton67.addActionListener(new java.awt.event.ActionListener() {
@@ -1025,8 +1017,8 @@ public class Gui extends javax.swing.JFrame {
                     jButton67ActionPerformed(evt);
                 }
             });
-            jPanel19.add(jButton67);
-            jButton67.setBounds(37, 140, 130, 36);
+
+            jLabel14.setText("Files to process:");
 
             jButton68.setText("Select none");
             jButton68.addActionListener(new java.awt.event.ActionListener() {
@@ -1034,12 +1026,100 @@ public class Gui extends javax.swing.JFrame {
                     jButton68ActionPerformed(evt);
                 }
             });
-            jPanel19.add(jButton68);
-            jButton68.setBounds(40, 170, 130, 36);
 
-            jLabel14.setText("Files to process:");
-            jPanel19.add(jLabel14);
-            jLabel14.setBounds(140, 110, 140, 16);
+            listState3.setName("moulfiles"); // NOI18N
+            jScrollPane8.setViewportView(listState3);
+
+            jButton66.setText("Start...");
+            jButton66.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton66ActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+            jPanel21.setLayout(jPanel21Layout);
+            jPanel21Layout.setHorizontalGroup(
+                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton67, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton68, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(jButton66)
+                    .addContainerGap())
+            );
+            jPanel21Layout.setVerticalGroup(
+                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton67)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton68))
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addComponent(jButton66))
+                        .addGroup(jPanel21Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(14, Short.MAX_VALUE))
+            );
+
+            jPanel19.add(jPanel21);
+            jPanel21.setBounds(10, 90, 570, 170);
+
+            jPanel22.setBorder(javax.swing.BorderFactory.createTitledBorder("Process a single file..."));
+
+            textfieldState1.setText("Kveer_District_BuiltIn.prp");
+            textfieldState1.setName("moulParticularFile"); // NOI18N
+
+            jButton60.setText("select...");
+            jButton60.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton60ActionPerformed(evt);
+                }
+            });
+
+            jButton86.setText("start...");
+            jButton86.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton86ActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+            jPanel22.setLayout(jPanel22Layout);
+            jPanel22Layout.setHorizontalGroup(
+                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel22Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(textfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton60)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton86)
+                    .addContainerGap(87, Short.MAX_VALUE))
+            );
+            jPanel22Layout.setVerticalGroup(
+                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel22Layout.createSequentialGroup()
+                    .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textfieldState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton60)
+                        .addComponent(jButton86))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+
+            jPanel19.add(jPanel22);
+            jPanel22.setBounds(10, 270, 490, 60);
 
             tabsState2.addTab("Moul", jPanel19);
 
@@ -3172,6 +3252,16 @@ private void jButton85ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton84ActionPerformed
     deep.saveChanges(textfieldState14.getText());
 }//GEN-LAST:event_jButton84ActionPerformed
+
+private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
+    GuiUtils.getUserSelectedFileWithNoPath(textfieldState1);
+}//GEN-LAST:event_jButton60ActionPerformed
+
+private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton86ActionPerformed
+    Vector<String> v = new Vector<String>();
+    v.add(textfieldState1.getText());
+    automation.mystAutomation.convertMoulToPots(textfieldState6.getText(),textfieldState8.getText(), v);
+}//GEN-LAST:event_jButton86ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3286,6 +3376,7 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton58;
     private javax.swing.JButton jButton59;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton60;
     private javax.swing.JButton jButton61;
     private javax.swing.JButton jButton62;
     private javax.swing.JButton jButton63;
@@ -3313,6 +3404,7 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton83;
     private javax.swing.JButton jButton84;
     private javax.swing.JButton jButton85;
+    private javax.swing.JButton jButton86;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -3348,6 +3440,8 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
@@ -3394,6 +3488,7 @@ private void jButton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.ListState listState4;
     private shared.State.TabsState tabsState2;
     private shared.State.TabsState tabsState3;
+    private shared.State.TextfieldState textfieldState1;
     private shared.State.TextfieldState textfieldState10;
     private shared.State.TextfieldState textfieldState11;
     private shared.State.TextfieldState textfieldState12;

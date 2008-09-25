@@ -145,7 +145,7 @@ public class ODEPhysical extends uruobj
         if(type==5) convertee.format = 4;
         else if(type==1) convertee.format = 1;
         else if(type==2) convertee.format = 2;
-        else if(type==6) throw new readexception("ODEPhysical: able to read, but ignoring unhandled type 6."); //convertee.format = 0;//changethis!!!
+        else if(type==6) throw new shared.readwarningexception("ODEPhysical: able to read, but ignoring unhandled type 6."); //convertee.format = 0;//changethis!!!
         else throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
         convertee.u1 = 0;
         convertee.coltype = 0x200;
@@ -161,9 +161,11 @@ public class ODEPhysical extends uruobj
         convertee.soundgroup = Uruobjectref.none();
         
         //handle flags...
+        //ordinary surface.
         if(
-                (u8==0x2000000 && u9==0x0) //ordinary surface.
-                ||(u8==0x4800000 && u9==0x20000 && u10==0x0)
+                (u8==0x2000000 && u9==0x0) //verified - all over!
+                //||(u8==0x4800000 && u9==0x20000 && u10==0x0)
+                ||(u8==0x2800000 && u9==0x0 && u10==0x0) //verified, bubble collider in direbo
                 )
         {
             convertee.u1 = 0;
@@ -175,9 +177,34 @@ public class ODEPhysical extends uruobj
             convertee.LOSDB = 0x44;
             convertee.group = new HsBitVector(0);
         }
-        else if(
-                (u8==0x4000000 && u9==0x0 && u10==0x20000) //detection
-              ||(u8==0x4000000 && u9==0x0 && u10==0x8000000) //detection
+        else if(u8==0x2000000 && u9==0x20000 && u10==0x0) //descent
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x200;
+            convertee.flagsdetect = 0;
+            convertee.flagsrespond = 0x20000;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x2;
+            convertee.group = new HsBitVector(4);
+        }
+        else if(u8==0x1800000 && u9==0x3000000 && u10==0x0) //descent, dragable
+        {
+            //guessing...
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0x20000;
+            convertee.flagsrespond = 0;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x2;
+            convertee.group = new HsBitVector(4);
+        }
+        //detection
+        else if( false
+                //(u8==0x4000000 && u9==0x0 && u10==0x20000)
+              ||(u8==0x4000000 && u9==0x0 && u10==0x8000000) //verified Direbo linking books to descent
+              ||(u8==0x4800000 && u9==0x0 && u10==0x8000000) //verified direbo pedestal buttons
                 
                 )
         {
@@ -191,10 +218,26 @@ public class ODEPhysical extends uruobj
             convertee.group = new HsBitVector(4);
             //convertee.mass = Flt.one(); //assign mass
         }
+        else if(u8==0x4000000 && u9==0x0 && u10==0x20000) //verified - direbo gates
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0x20000;
+            convertee.flagsrespond = 0;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x2; //stting this to 2 seemed to make everything else a clickable, except the exclude regions covering the gate and switch.  Is this because it thinks the gate is open?
+            convertee.group = new HsBitVector(4);
+            //convertee.mass = Flt.one(); //assign mass
+        }
         //myst5 has a kind of clickable that is dragable, e.g. the door handle in k'veer.
-        else if((u8==0x4000000 && u9==0x0 && u10==0x0) //clickables
+        else if((u8==0x4000000 && u9==0x0 && u10==0x0)
             //|| (u8==0x4000000 && u9==0x0 && u10==0x8000000))
             //|| (u8==0x4000000 && u9==0x20000)
+              ||(u8==0x4800000 && u9==0x0 && u10==0x0) //verified - direbo pedestal buttons
+              ||(u8==0x4000000 && u9==0x20000 && u10==0x0) //verified - Direbo descent linking books.
+              ||(u8==0x4800000 && u9==0x20000 && u10==0x0) //verified - direbo gates
+              ||(u8==0x4000000 && u9==0x1020000 && u10==0x0) //verified - Direbo gates
                 )
         {
             convertee.u1 = 0;
@@ -207,11 +250,24 @@ public class ODEPhysical extends uruobj
             convertee.group = new HsBitVector(0x4);
             //convertee.mass = Flt.one(); //assign mass
         }
+        else if(false)//u8==0x4000000 && u9==0x1020000 && u10==0x0)
+        {
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0;
+            convertee.flagsrespond = 0x1020000;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x0;
+            convertee.group = new HsBitVector(0x4);
+            //convertee.mass = Flt.one(); //assign mass
+        }
         else
         {
-            //throw new readexception("ODEPhysical: unhandled case.");
+            m.msg("Skipping physics:"+c.curRootObject.toString());
+            throw new readexception("ODEPhysical: unhandled case.");
         }
-            
+       convertee.LOSDB = b.Int16ToInt32(u13);
         
     }
     
