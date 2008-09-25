@@ -77,7 +77,7 @@ public class x0016DrawInterface extends uruobj
         int subsetgroupindex;
         Uruobjectref span;
         
-        public SubsetGroup(context c)
+        public SubsetGroup(context c) throws readexception
         {
             subsetgroupindex = c.in.readInt();
             span = new Uruobjectref(c);

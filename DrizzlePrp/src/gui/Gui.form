@@ -1018,6 +1018,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="checkboxState18" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState17" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState8" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1038,7 +1039,9 @@
                               <Component id="checkboxState11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="160" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkboxState18" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="126" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1068,6 +1071,13 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Translate avatar away from smartseeks by 1 unit"/>
                         <Property name="name" type="java.lang.String" value="translateSmartseeks" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="shared.State.CheckboxState" name="checkboxState18">
+                      <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Remove plLogicModifiers that reference plLadderModifiers."/>
+                        <Property name="name" type="java.lang.String" value="removeLadders" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>

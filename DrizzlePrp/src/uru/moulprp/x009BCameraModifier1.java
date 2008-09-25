@@ -122,7 +122,7 @@ public class x009BCameraModifier1 extends uruobj
         Flt POAAccel;
         Flt POADecel;
 
-        public CamTrans(context c)
+        public CamTrans(context c) throws readexception
         {
             transTo = new Uruobjectref(c);
             cutPos = c.readByte();

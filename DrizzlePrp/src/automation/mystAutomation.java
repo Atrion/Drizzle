@@ -1502,7 +1502,7 @@ public class mystAutomation
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
-                if(type==Typeid.plBoundInterface && pageid.prefix==89) //Siralehn/Todelmer
+                if(type==Typeid.plBoundInterface && pageid.prefix==89) //Siralehn/Noloben
                 {
                     if(name.equals("Cone01") || name.equals("doorParticleColliderMesh") || name.startsWith("RainDef0") || name.startsWith("RainDef1") || name.equals("RsinDefTop"))
                     {
@@ -1640,6 +1640,17 @@ public class mystAutomation
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
+            
+            //laki needs these lines.
+            if(agename.toLowerCase().equals("laki"))
+            {
+                textfile fnifile = textfile.createFromBytes(decryptedData);
+                //fnifile.appendLine("Graphics.Renderer.SetClearColor 0 0 0");
+                //fnifile.appendLine("Graphics.Renderer.Fog.SetDefColor 0 0 0");
+                fnifile.appendLine("Graphics.Renderer.Fog.SetDefLinear 0 0 0");
+                decryptedData = fnifile.saveToBytes();
+            }
+
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
         }

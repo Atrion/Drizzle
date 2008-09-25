@@ -38,7 +38,7 @@ public class x0014WinAudio extends uruobj
     Uruobjectref[] objectrefs;
     Uruobjectref scenenode;
     
-    public x0014WinAudio(context c)//,boolean hasHeader)
+    public x0014WinAudio(context c) throws readexception //,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);

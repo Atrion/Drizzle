@@ -33,7 +33,7 @@ public class Uruobjectref extends uruobj
     public byte hasRef;
     public Uruobjectdesc xdesc;
     
-    public Uruobjectref(context c)
+    public Uruobjectref(context c) throws readexception
     {
         if(c.readversion==6||c.readversion==3)
         {
@@ -55,8 +55,16 @@ public class Uruobjectref extends uruobj
             {
                 hasRef = 1;
             }
-       }
+        }
         
+        //trap
+        if(xdesc!=null && xdesc.objecttype==Typeid.plLadderModifier && c.curRootObject!= null && c.curRootObject.objecttype==Typeid.plLogicModifier)
+        {
+            if(shared.State.AllStates.getStateAsBoolean("removeLadders"))
+            {
+                throw new shared.readwarningexception("Removing plLogicModifier that references plLadderModifier.");
+            }
+        }
     }
     
     public static Uruobjectref none()

@@ -82,7 +82,7 @@ public class PlDynamicEnvMap extends uruobj
         plRenderTarget child5;
         plRenderTarget child6;
         
-        public ithinkthisisPlCubicRenderTarget(context c)
+        public ithinkthisisPlCubicRenderTarget(context c) throws readexception
         {
             parent = new plRenderTarget(c);
             if(c.readversion==3||c.readversion==6)

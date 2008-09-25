@@ -44,7 +44,7 @@ public class x0007Material extends uruobj
     public Vector<Uruobjectref> layerrefs = new Vector<Uruobjectref>();
     public Vector<Uruobjectref> maplayerrefs = new Vector<Uruobjectref>();
     
-    public x0007Material(context c)//,boolean hasHeader)
+    public x0007Material(context c) throws readexception //,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);

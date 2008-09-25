@@ -36,7 +36,7 @@ public class x0041LayerInterface extends uruobj
     PlSynchedObject parent;
     Uruobjectref ref; //underlay, i.e. plMipMap
     
-    public x0041LayerInterface(context c)//,boolean hasHeader)
+    public x0041LayerInterface(context c) throws readexception //,boolean hasHeader)
     {
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);

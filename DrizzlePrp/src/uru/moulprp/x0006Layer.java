@@ -53,7 +53,7 @@ public class x0006Layer extends uruobj
     Uruobjectref shader2;
     Transmatrix identity;
     
-    public x0006Layer(context c)//,boolean hasHeader)
+    public x0006Layer(context c) throws readexception //,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);

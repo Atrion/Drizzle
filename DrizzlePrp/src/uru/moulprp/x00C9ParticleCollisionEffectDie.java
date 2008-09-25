@@ -32,7 +32,7 @@ public class x00C9ParticleCollisionEffectDie extends uruobj
     //Objheader xheader;
     Uruobjectref refToSceneObject;
     
-    public x00C9ParticleCollisionEffectDie(context c)//,boolean hasHeader)
+    public x00C9ParticleCollisionEffectDie(context c) throws readexception //,boolean hasHeader)
     {
         //if(hasHeader) xheader = new Objheader(c);
         

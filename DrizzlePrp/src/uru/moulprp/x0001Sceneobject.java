@@ -45,7 +45,7 @@ public class x0001Sceneobject extends uruobj
     public Uruobjectref[] objectrefs2;
     Uruobjectref scenenode;
     
-    public x0001Sceneobject(context c)//,boolean hasHeader)
+    public x0001Sceneobject(context c) throws readexception //,boolean hasHeader)
     {
         Bytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);

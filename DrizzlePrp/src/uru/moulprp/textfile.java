@@ -94,6 +94,19 @@ public class textfile
         
         shared.FileUtils.WriteFile(filename, result2);
     }*/
+    
+    public void appendLine(String line)
+    {
+        Bytes newline = Bytes.create(line);
+        Bytes[] newlines = new Bytes[lines.length+1];
+        for(int i=0;i<lines.length;i++)
+        {
+            newlines[i] = lines[i];
+        }
+        newlines[lines.length] = newline;
+        lines = newlines;
+    }
+    
     public Bytes saveToBytes()
     {
         Bytedeque result = new Bytedeque();
