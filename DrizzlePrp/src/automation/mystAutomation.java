@@ -1156,9 +1156,11 @@ public class mystAutomation
                                 RealMatrix m2 = m.convertToMatrix();
                                 //org.apache.commons.math.linear.RealMatrixImpl b;
                                 double[][] rawdata = m2.getData();
-                                rawdata[0][3] += rawdata[0][0];
-                                rawdata[1][3] -= rawdata[1][0];
-                                rawdata[2][3] += 0.6;
+                                double scalar = 0.0; //set this to determine the number of feet back from the cloth to be.  A negative value will move you closer.
+                                double height = 0.8; //the height to translate the avatar.  1.0 works.  0.6 is too small for the tsogal cloth on the back of the hood book structure.  0.8 seems just right.
+                                rawdata[0][3] -= scalar*rawdata[1][0];
+                                rawdata[1][3] += scalar*rawdata[0][0];
+                                rawdata[2][3] += height; //set this to move the avatar up.  A negative value will move it down.
                                 m2 = new RealMatrixImpl(rawdata);
                                 coords.localToParent = Transmatrix.createFromMatrix(m2);
                                 coords.localToWorld = coords.localToParent;
