@@ -486,6 +486,10 @@ public class Gui extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton47 = new javax.swing.JButton();
+        textfieldState15 = new shared.State.TextfieldState();
+        textfieldState16 = new shared.State.TextfieldState();
+        jButton88 = new javax.swing.JButton();
+        jButton89 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton23 = new javax.swing.JButton();
@@ -560,6 +564,7 @@ public class Gui extends javax.swing.JFrame {
         jButton74 = new javax.swing.JButton();
         jButton75 = new javax.swing.JButton();
         jButton76 = new javax.swing.JButton();
+        jButton87 = new javax.swing.JButton();
         jPanel33 = new javax.swing.JPanel();
         textfieldState13 = new shared.State.TextfieldState();
         jButton80 = new javax.swing.JButton();
@@ -1573,34 +1578,73 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
+            textfieldState15.setText("D:\\a\\leftoff\\decrypted\\sdl\\personal.sdl");
+            textfieldState15.setName("encryptionIn"); // NOI18N
+
+            textfieldState16.setText("C:\\Documents and Settings\\user\\Desktop\\output");
+            textfieldState16.setName("encryptionOut"); // NOI18N
+
+            jButton88.setText("select");
+            jButton88.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton88ActionPerformed(evt);
+                }
+            });
+
+            jButton89.setText("select...");
+            jButton89.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton89ActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
             jPanel3.setLayout(jPanel3Layout);
             jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(19, 19, 19)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButton5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(19, 19, 19)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jButton5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton4)
+                                        .addComponent(jButton8)
+                                        .addComponent(jButton11))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButton47)))
                         .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textfieldState16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textfieldState15, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                            .addGap(6, 6, 6)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton4)
-                                .addComponent(jButton8)
-                                .addComponent(jButton11))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jButton47))
-                    .addGap(533, 533, 533))
+                                .addComponent(jButton88)
+                                .addComponent(jButton89))))
+                    .addContainerGap(429, Short.MAX_VALUE))
             );
             jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(5, 5, 5)
+                    .addGap(25, 25, 25)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textfieldState15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton88))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textfieldState16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton89))
+                    .addGap(29, 29, 29)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton5)
                         .addComponent(jButton7))
@@ -1616,9 +1660,9 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton11)
                         .addComponent(jButton12))
-                    .addGap(40, 40, 40)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton47)
-                    .addContainerGap(171, Short.MAX_VALUE))
+                    .addContainerGap(78, Short.MAX_VALUE))
             );
 
             tabsState3.addTab("Encryption", jPanel3);
@@ -2240,6 +2284,15 @@ public class Gui extends javax.swing.JFrame {
             jPanel29.add(jPanel31);
             jPanel31.setBounds(330, 250, 200, 100);
 
+            jButton87.setText("Copy all text to clipboard");
+            jButton87.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton87ActionPerformed(evt);
+                }
+            });
+            jPanel29.add(jButton87);
+            jButton87.setBounds(280, 350, 160, 36);
+
             tabsState3.addTab("List Analysis", jPanel29);
 
             textfieldState13.setText("C:\\Documents and Settings\\user\\Desktop\\output\\ahny\\Ahnonay_District_BuiltIn.prp");
@@ -2425,19 +2478,19 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] decodedcontents = uru.UruCrypt.DecryptWhatdoyousee(filecontents);
         //Main.message(new String(decodedcontents));
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] decodedcontents = uru.UruCrypt.DecryptNotthedroids(filecontents);
         //Main.message(new String(decodedcontents));
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -2554,46 +2607,46 @@ public class Gui extends javax.swing.JFrame {
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] encodedcontents = uru.UruCrypt.EncryptNotthedroids(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] decodedcontents = uru.UruCrypt.DecryptEoa(filecontents);
         //Main.message(new String(decodedcontents));
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), decodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), decodedcontents);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] encodedcontents = uru.UruCrypt.EncryptEoa(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] encodedcontents = uru.UruCrypt.EncryptWhatdoyousee(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] encodedcontents = uru.UruCrypt.DecryptElf(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        File file = new File(this.getSelectedFilename());
+        File file = new File(textfieldState15.getText());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
         byte[] encodedcontents = uru.UruCrypt.EncryptElf(filecontents);
-        FileUtils.WriteFile(_staticsettings.outputdir+file.getName(), encodedcontents);
+        FileUtils.WriteFile(textfieldState16.getText()+"/"+file.getName(), encodedcontents);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -3065,7 +3118,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
-        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        byte[] filecontents = FileUtils.ReadFile(textfieldState15.getText());
         byte[] md5 = uru.CryptHashes.GetMd5(filecontents);
         String md5str = b.BytesToHexString(md5);
         m.msg("md5: "+md5str);
@@ -3263,6 +3316,21 @@ private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     v.add(textfieldState1.getText());
     automation.mystAutomation.convertMoulToPots(textfieldState6.getText(),textfieldState8.getText(), v);
 }//GEN-LAST:event_jButton86ActionPerformed
+
+private void jButton87ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton87ActionPerformed
+    String s2 = jTextArea6.getText();
+    s2 = s2.replace("\0", "");
+    java.awt.datatransfer.StringSelection s = new java.awt.datatransfer.StringSelection(s2);
+    java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(s, null);
+}//GEN-LAST:event_jButton87ActionPerformed
+
+private void jButton88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton88ActionPerformed
+    GuiUtils.getUserSelectedFile(textfieldState15);
+}//GEN-LAST:event_jButton88ActionPerformed
+
+private void jButton89ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton89ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState16);
+}//GEN-LAST:event_jButton89ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3406,6 +3474,9 @@ private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton84;
     private javax.swing.JButton jButton85;
     private javax.swing.JButton jButton86;
+    private javax.swing.JButton jButton87;
+    private javax.swing.JButton jButton88;
+    private javax.swing.JButton jButton89;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -3495,6 +3566,8 @@ private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.TextfieldState textfieldState12;
     private shared.State.TextfieldState textfieldState13;
     private shared.State.TextfieldState textfieldState14;
+    private shared.State.TextfieldState textfieldState15;
+    private shared.State.TextfieldState textfieldState16;
     private shared.State.TextfieldState textfieldState2;
     private shared.State.TextfieldState textfieldState3;
     private shared.State.TextfieldState textfieldState4;
