@@ -653,6 +653,10 @@ public class mystAutomation
                             
                             //version2
                             type.plSoftVolumeInvert,
+                            
+                            //personal
+                            type.plDynaRippleMgr,
+                            type.plLayerSDLAnimation,
                         };
                         namestartswith = new String[]{
                             /*"linkinpoint",
@@ -808,6 +812,9 @@ public class mystAutomation
         Typeid.plParticleFadeVolumeEffect,
         
         Typeid.pfGUIKnobCtrl,
+        
+        Typeid.plDynaRippleMgr,
+        Typeid.plLayerSDLAnimation,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -967,6 +974,12 @@ public class mystAutomation
 
                         //version2
                         type.plSoftVolumeInvert,
+                        
+                        //moul personal
+                        type.plDynaRippleMgr,
+                        type.plLayerSDLAnimation,
+                        type.plParticleCollisionEffectBeat,
+                        type.plParticleFadeVolumeEffect,
                 };
                 String[] namestarts={
                 };
@@ -983,10 +996,12 @@ public class mystAutomation
         prefices.put("Kveer", 98);
         prefices.put("EderTsogal", 97);
         prefices.put("Neighborhood02",86);
+        prefices.put("Personal",85);
         
         HashMap<String, String> agenames = new HashMap<String, String>();
         agenames.put("Kveer", "KveerMOUL");
         agenames.put("Neighborhood02", "KirelMOUL");
+        agenames.put("Personal", "PersonalMOUL");
         
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -1015,6 +1030,8 @@ public class mystAutomation
             String agename = getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
             String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            
+            if(agename.toLowerCase().equals("personal")) m.warn("Relto may corrupt your savegame, be sure to back up your /sav folder!");
             
             byte[] encryptedData = FileUtils.ReadFile(infile);
             byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData); //UruCrypt.DecryptEoa(encryptedData);

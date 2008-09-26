@@ -91,16 +91,19 @@ public class x009BCameraModifier1 extends uruobj
         FOVw.compile(c);
         FOVh.compile(c);
         c.writeInt(count2);
-        if(count2!=0)
+        /*if(count2!=0)
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
-        }
+        }*/
+        c.writeVector(messageQueue);
+        c.writeVector(messageQueueSenders);
         
         c.writeInt(count3);
-        if(count3!=0)
+        /*if(count3!=0)
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
-        }
+        }*/
+        c.writeVector(FOVInstructions);
         
         c.writeByte(animated);
         c.writeByte(startAnimOnPush);
