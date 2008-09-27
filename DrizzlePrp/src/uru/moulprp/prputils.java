@@ -729,7 +729,7 @@ public class prputils
             }*/
             if(curdesc.objectname.toString().equals(desc.objectname.toString())
                     &&(curdesc.objecttype==desc.objecttype)
-                    &&(curdesc.pageid.getRawData()==desc.pageid.getRawData()))
+                    &&(curdesc.pageid.equals(desc.pageid)))
             {
                 return curobj;
             }

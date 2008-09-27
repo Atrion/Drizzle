@@ -24,6 +24,7 @@ import uru.Bytedeque;
 import uru.b;
 import shared.m;
 import shared.Bytes;
+import uru.e;
 
 /**
  *
@@ -40,28 +41,52 @@ public class Pageid extends uruobj
     
     public Pageid(context c)
     {
-        int rawdata;
+        //int rawdata;
         if(c.readversion==6) // moul
         {
             //first 16 bits is sequence prefix, next is pageid?
-            rawdata = c.in.readInt();
+            int rawdata = c.in.readInt();
+            prefix = rawdata >>> 16;
+            suffix = rawdata & 0x0000FFFF;
+            if((prefix&0xFF00)==0xFF00)
+            {
+                prefix = -(prefix&0xFF);
+                m.msg("Encountered negative sequence prefix.");
+            }
+            if((suffix&0xFF00)==0xFF00)
+            {
+                m.warn("Pageid: untested case.");
+                suffix = -(suffix&0xFF);
+            }
         }
         else if(c.readversion==3) // TPOTS 
         {
+            if(c.curFile.toLowerCase().startsWith("gui"))
+            {
+                int dummy=0;
+            }
             int fixme = c.in.readInt();
-            fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
-            rawdata = fixme;
+            //fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
+            //rawdata = fixme;
+            suffix = fixme & 0x000000FF;
+            if((fixme & 0xFFFF0000)==0xFFFF0000) prefix = -((fixme & 0x0000FF00)>>>8);
+            else prefix = (fixme & 0xFFFFFF00)>>>8;
         }
         else if(c.readversion==4) // Crowthwistle
         {
-            int fixme = Bytes.Int16ToInt32(c.readShort());
-            fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
-            rawdata = fixme;
+            //int fixme = Bytes.Int16ToInt32(c.readShort());
+            //fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
+            //rawdata = fixme;
+            short rawdata = c.readShort();
+            prefix = (rawdata & 0x0000FF00) >>> 8;
+            suffix = (rawdata & 0x000000FF);
             
         }
-        else rawdata = 0;
-        prefix = rawdata >> 16;
-        suffix = rawdata << 16 >> 16;
+        e.ensure(suffix>=0 && suffix<=255);
+        e.ensure(prefix>=-255 && prefix<=8388607);
+        //else rawdata = 0;
+        //prefix = rawdata >> 16;
+        //suffix = rawdata << 16 >> 16;
          
         //ctx = c;
         xOverridePrefix = c.sequencePrefix;
@@ -78,16 +103,18 @@ public class Pageid extends uruobj
             }
         }
     }
-    public int getRawData()
-    {
-        return prefix << 16 | suffix;
-    }
+    //public int getRawData()
+    //{
+    //    return prefix << 16 | suffix;
+    //}
     public void compile(Bytedeque deque)
     {
-        int rawdata = getRawData();
+        //int rawdata = getRawData();
         // convert it to TPOTS format
         if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing "+toString());
-        int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
+        //int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
+        int newprefix = prefix<0 ? (0xFFFF00|(0xFF & (-prefix))) : prefix;
+        int newdata = (suffix & 0x000000FF) | ((newprefix & 0x00FFFFFF)<<8);
         deque.writeInt(newdata);
     }
     

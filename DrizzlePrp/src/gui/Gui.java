@@ -72,6 +72,8 @@ public class Gui extends javax.swing.JFrame {
                 "Dereno_District_DrnoPod.prp",
                 "Minkata_District_minkExteriorDay.prp",
                 "EderTsogal_District_tsoGarden.prp",
+                "GUI_District_AdvancedGameSettingsDialog.prp",
+                "Cleft_District_YeeshaVisionBlocked.prp",
             };
             public int getSize() {
                 return strings.length;
