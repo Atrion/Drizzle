@@ -1186,7 +1186,7 @@ public class Gui extends javax.swing.JFrame {
             checkboxState11.setText("When renaming Ages, changes the VeryVerySpecialPythonFileMod too.");
             checkboxState11.setName("changeVerySpecialPython"); // NOI18N
 
-            checkboxState17.setText("Translate avatar away from smartseeks by 1 unit");
+            checkboxState17.setText("Translate avatar away from smartseeks. (Warning: looks kind-of bad)");
             checkboxState17.setName("translateSmartseeks"); // NOI18N
 
             checkboxState18.setSelected(true);

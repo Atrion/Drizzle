@@ -1172,7 +1172,7 @@
                     </Component>
                     <Component class="shared.State.CheckboxState" name="checkboxState17">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Translate avatar away from smartseeks by 1 unit"/>
+                        <Property name="text" type="java.lang.String" value="Translate avatar away from smartseeks. (Warning: looks kind-of bad)"/>
                         <Property name="name" type="java.lang.String" value="translateSmartseeks" noResource="true"/>
                       </Properties>
                     </Component>

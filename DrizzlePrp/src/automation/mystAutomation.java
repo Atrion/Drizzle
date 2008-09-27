@@ -1382,6 +1382,8 @@ public class mystAutomation
         HashMap<String, Integer> prefices = new HashMap<String, Integer>();
         prefices.put("MarshScene", 96);
         prefices.put("MountainScene", 95);
+
+        HashMap<String, String> agenames = new HashMap<String, String>();
         
         String[] fnifiles = {
             "MarshScene.fni",
@@ -1490,7 +1492,7 @@ public class mystAutomation
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
 
-            processPrp(prp,agename,null);
+            processPrp(prp,agename,agenames);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
