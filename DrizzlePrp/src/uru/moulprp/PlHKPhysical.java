@@ -230,6 +230,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x0;
             pots.zzzgroup0 = 0x4;
+            pots.givemass = true; //otherwise wall detectors don't work.
         }
         else if( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x20 )
         {
