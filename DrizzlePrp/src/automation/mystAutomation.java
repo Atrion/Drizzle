@@ -1478,7 +1478,7 @@ public class mystAutomation
             //Runtime.getRuntime().gc();
             
             String infile = crowthistlefolder + "/dat/" + filename;
-            String outfile = potsfolder + "/dat/" + filename.replace("_", "_District_");
+            String outfile = potsfolder + "/dat/" + filename.replaceFirst("_", "_District_");
             String agename = getAgenameFromFilename(filename);
             
             Bytes prpdata = Bytes.createFromFile(infile);
@@ -1715,7 +1715,7 @@ public class mystAutomation
         {
             String agename = getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames).replace("_", "_District_");
+            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames).replaceFirst("_", "_District_");
             
             Bytes prpdata = Bytes.createFromFile(infile);
             Bytestream bytestream = Bytestream.createFromBytes(prpdata);
