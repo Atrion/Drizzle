@@ -31,6 +31,9 @@ import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Transmatrix;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
+import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
+import uru.moulprp.x00A2Pythonfilemod;
+import uru.moulprp.*;
 
 public class mystAutomation
 {
@@ -1108,7 +1111,93 @@ public class mystAutomation
     }
     public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames)
     {
-        if(true) //attempts to fix the invisible minkata craters.
+        String newagename = agenames.get(agename);
+        String finalname = newagename;
+        if(finalname==null) finalname = agename;
+        
+        if(shared.State.AllStates.getStateAsBoolean("automateMystV"))
+        {
+            //fix direbo links.
+            PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
+            for(PrpRootObject obj: objs)
+            {
+                x00A2Pythonfilemod pfm = obj.castTo();
+                if(finalname.toLowerCase().equals("descentmystv")||finalname.toLowerCase().equals("direbo"))
+                {
+                    if(pfm.pyfile.toString().toLowerCase().equals("xlinkingbookguipopup"))
+                    {
+                        String oldlink = pfm.listings[2].xString.toString();
+                        String age;
+                        String spawnpoint;
+                        if(oldlink.equals("DireboLaki"))
+                        {
+                            age = "Direbo";
+                            spawnpoint = "LinkInPoint2";
+                        }
+                        else if(oldlink.equals("DireboSrln"))
+                        {
+                            age = "Direbo";
+                            spawnpoint = "LinkInPoint1";
+                        }
+                        else if(oldlink.equals("DireboThgr"))
+                        {
+                            age = "Direbo";
+                            spawnpoint = "LinkInPoint4";
+                        }
+                        else if(oldlink.equals("DireboTdlm"))
+                        {
+                            age = "Direbo";
+                            spawnpoint = "LinkInPoint3";
+                        }
+                        else if(oldlink.equals("DescentRestAreaA"))
+                        {
+                            age = "DescentMystV";
+                            spawnpoint = "LinkInFromThgrDirebo";
+                        }
+                        else if(oldlink.equals("DescentRestAreaB"))
+                        {
+                            age = "DescentMystV";
+                            spawnpoint = "LinkInFromTdlmDirebo";
+                        }
+                        else if(oldlink.equals("DescentRestAreaC"))
+                        {
+                            age = "DescentMystV";
+                            spawnpoint = "LinkInFromSrlnDirebo";
+                        }
+                        else if(oldlink.equals("DescentRestAreaD"))
+                        {
+                            age = "DescentMystV";
+                            spawnpoint = "LinkInFromLakiDirebo";
+                        }
+                        else
+                        {
+                            m.err("Broken linking book in prpprocess.");
+                            age="";
+                            spawnpoint="";
+                        }
+                        pfm.pyfile = Urustring.createFromString("dusttest");
+                        pfm.listcount = 3;
+                        pfm.listings = new Pythonlisting[3];
+                        pfm.listings[0] = new Pythonlisting();
+                        pfm.listings[0].index = 1;
+                        pfm.listings[0].type = 4; //string
+                        pfm.listings[0].xString = Bstr.createFromString("linktoage");
+                        pfm.listings[1] = new Pythonlisting();
+                        pfm.listings[1].index = 2;
+                        pfm.listings[1].type = 4; //string
+                        pfm.listings[1].xString = Bstr.createFromString(age);
+                        pfm.listings[2] = new Pythonlisting();
+                        pfm.listings[2].index = 3;
+                        pfm.listings[2].type = 4; //string
+                        pfm.listings[2].xString = Bstr.createFromString(spawnpoint);
+                        
+                        //Vector<Pythonlisting> pls = new Vector<Pythonlisting>();
+                        //for(Pythonlisting pl: pfm.listings)
+                    }
+                }
+            }
+        }
+        if(false) //attempts to fix the invisible minkata craters.
         {
             PrpRootObject[] clustergroups = prputils.FindAllObjectsOfType(prp, Typeid.plClusterGroup);
             for(PrpRootObject clustergroup: clustergroups)
@@ -1138,6 +1227,59 @@ public class mystAutomation
                 int dummy=0;
             }
         }
+
+        if(AllStates.getStateAsBoolean("removeLadders"))
+        {
+            //find all sceneobjects that contain LogicModifiers that contain LadderModifiers, and remove them.
+            PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSceneObject);
+            Vector<PrpRootObject> objsToDelete = new Vector<PrpRootObject>();
+            for(PrpRootObject obj: objs)
+            {
+                boolean removeThisSceneobject = false;
+                uru.moulprp.x0001Sceneobject so = obj.castTo();
+                for(Uruobjectref ref: so.objectrefs2)
+                {
+                    if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
+                    {
+                        uru.moulprp.PlLogicModifier lmod = prputils.findObjectWithDesc(prp, ref.xdesc).castTo();
+                        if(lmod.parent.message.type==Typeid.plNotifyMsg)
+                        {
+                            uru.moulprp.uruobj a = lmod.parent.message.prpobject.object;
+                            if(a instanceof uru.moulprp.PrpMessage.PlNotifyMsg)
+                            {
+                                uru.moulprp.PrpMessage.PlNotifyMsg notifymsg = (uru.moulprp.PrpMessage.PlNotifyMsg)a;
+                                for(Uruobjectref notmsgref: notifymsg.parent.refs)
+                                {
+                                    if(notmsgref.hasref()&&notmsgref.xdesc.objecttype==Typeid.plLadderModifier)
+                                    {
+                                        //remove this root sceneobject.
+                                        removeThisSceneobject = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(removeThisSceneobject)
+                {
+                    //actually remove it.
+                    m.msg("Removing SceneObject that indirectly references PlLadderModifier: "+obj.header.desc.toString());
+                    //prp.removeRootObject(obj);
+                    objsToDelete.add(obj);
+                }
+            }
+            for(PrpRootObject obj: objsToDelete)
+            {
+                prp.tagRootObjectAsDeleted(obj);
+            }
+            //if(xdesc!=null && xdesc.objecttype==Typeid.plLadderModifier && c.curRootObject!= null && c.curRootObject.objecttype==Typeid.plLogicModifier)
+            //{
+            //    {
+            //        //throw new shared.readwarningexception("Removing plLogicModifier that references plLadderModifier:"+xdesc.objectname.toString());
+            //    }
+            //}
+        }
+        
         if(AllStates.getStateAsBoolean("translateSmartseeks"))
         {
             PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSceneObject);
@@ -1180,7 +1322,7 @@ public class mystAutomation
         }
         if(AllStates.getStateAsBoolean("changeVerySpecialPython"))
         {
-            String newagename = agenames.get(agename);
+            //String newagename = agenames.get(agename);
             if(newagename!=null)
             {
                 if(prp.header.pagename.toString().toLowerCase().equals("builtin"))

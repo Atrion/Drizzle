@@ -25,7 +25,7 @@ import shared.m;
 
 public class PrpObject extends uruobj
 {
-    uruobj object;
+    public uruobj object;
     
     public uruobj getObject(context c, Typeid type) throws readexception
     {

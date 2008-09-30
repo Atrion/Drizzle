@@ -62,7 +62,8 @@ public class Uruobjectref extends uruobj
         {
             if(shared.State.AllStates.getStateAsBoolean("removeLadders"))
             {
-                throw new shared.readwarningexception("Removing plLogicModifier that references plLadderModifier.");
+                int dummy=0;
+                //throw new shared.readwarningexception("Removing plLogicModifier that references plLadderModifier:"+xdesc.objectname.toString());
             }
         }
     }

@@ -353,6 +353,21 @@ public class b
         }
         return new String(result);
     }
+    public static String NullTerminatedBytesToString(byte[] bytes)
+    {
+        //String result = new String(bytes, "ISO-8859-1"); //has to have a try/catch block.
+        /*String result = new String(bytes, 0); //deprecated, but acts like ascii.
+        return result;*/
+        e.ensure(bytes[bytes.length-1]==0);
+
+        int length = bytes.length-1;
+        char[] result = new char[length];
+        for(int i=0;i<length;i++)
+        {
+            result[i] = (char)ByteToInt16(bytes[i]);
+        }
+        return new String(result);
+    }
     public static byte[] StringToBytes(String str)
     {
         /*byte[] result = null;
@@ -371,6 +386,17 @@ public class b
         {
             result[i] = (byte)(str.charAt(i) & 0xFF);
         }
+        return result;
+    }
+    public static byte[] StringToNullTerminatedBytes(String str)
+    {
+        int length = str.length();
+        byte[] result = new byte[length+1];
+        for(int i=0;i<length;i++)
+        {
+            result[i] = (byte)(str.charAt(i) & 0xFF);
+        }
+        result[length] = 0;
         return result;
     }
     public static byte[] appendBytes(byte[]... byteblocks)

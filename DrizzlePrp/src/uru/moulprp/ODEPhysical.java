@@ -160,6 +160,12 @@ public class ODEPhysical extends uruobj
         convertee.subworld = Uruobjectref.none();
         convertee.soundgroup = Uruobjectref.none();
         
+        if(c.curRootObject.objectname.toString().toLowerCase().equals("rgncliffladdertop"))
+        {
+            int dummy=0;
+            //throw new readexception("skip rgncliffladdertop");
+        }
+        
         //handle flags...
         //ordinary surface.
         if(
@@ -265,9 +271,11 @@ public class ODEPhysical extends uruobj
         else
         {
             m.msg("Skipping physics:"+c.curRootObject.toString());
-            throw new readexception("ODEPhysical: unhandled case.");
+            if(shared.State.AllStates.getStateAsBoolean("skipPhysics")) throw new readexception("ODEPhysical: unhandled case.");
         }
        convertee.LOSDB = b.Int16ToInt32(u13);
+       
+       //if(convertee.flagsdetect!=0x0) convertee.mass = Flt.one();
         
     }
     

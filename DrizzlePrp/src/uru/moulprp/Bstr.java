@@ -22,6 +22,7 @@ package uru.moulprp;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
+import uru.b;
 
 /**
  *
@@ -49,6 +50,14 @@ public class Bstr extends uruobj
         result.string = new byte[0];
         return result;
     }
+    
+    public static Bstr createFromString(String s)
+    {
+        Bstr result = new Bstr();
+        result.string = b.StringToNullTerminatedBytes(s);
+        result.strlen = result.string.length;
+        return result;
+    }
     //static public Bstr create(Bytestream data)
     //{
     //    return new Bstr(data);
@@ -61,7 +70,12 @@ public class Bstr extends uruobj
     
     public String toString()
     {
-        return new String(string);
+        if(string.length==0) return "";
+        String result;
+        if(string[string.length-1]==0) result = b.NullTerminatedBytesToString(string);
+        else result = b.BytesToString(string);
+        return result;
+        //return new String(string);
     }
 
 }

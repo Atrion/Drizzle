@@ -26,8 +26,8 @@ import uru.writesOwnTypeid;
 
 public class PrpTaggedObject extends uruobj
 {
-    Typeid type;
-    PrpObject prpobject;
+    public Typeid type;
+    public PrpObject prpobject;
     
     public PrpTaggedObject(context c) throws readexception
     {

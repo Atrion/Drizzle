@@ -604,7 +604,7 @@ public class PrpMessage extends PrpTaggedObject
     }
     public static class PlNotifyMsg extends uruobj
     {
-        PlMessage parent;
+        public PlMessage parent;
         int type;
         Flt state;
         int id;
@@ -874,9 +874,9 @@ public class PrpMessage extends PrpTaggedObject
     
     public static class PlMessage extends uruobj
     {
-        Uruobjectref parentobj;
-        int refcount;
-        Uruobjectref[] refs;
+        public Uruobjectref parentobj;
+        public int refcount;
+        public Uruobjectref[] refs;
         int u1;
         int u2;
         int flags;

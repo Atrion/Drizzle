@@ -454,6 +454,8 @@ public class Gui extends javax.swing.JFrame {
         checkboxState11 = new shared.State.CheckboxState();
         checkboxState17 = new shared.State.CheckboxState();
         checkboxState18 = new shared.State.CheckboxState();
+        checkboxState19 = new shared.State.CheckboxState();
+        checkboxState20 = new shared.State.CheckboxState();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -1195,6 +1197,14 @@ public class Gui extends javax.swing.JFrame {
             checkboxState18.setText("Remove plLogicModifiers that reference plLadderModifiers.");
             checkboxState18.setName("removeLadders"); // NOI18N
 
+            checkboxState19.setSelected(true);
+            checkboxState19.setText("Skip physics with unhandled flags.");
+            checkboxState19.setName("skipPhysics"); // NOI18N
+
+            checkboxState20.setSelected(true);
+            checkboxState20.setText("Do automated work on Myst5(PythonFileMods, etc)");
+            checkboxState20.setName("automateMystV"); // NOI18N
+
             javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
             jPanel20.setLayout(jPanel20Layout);
             jPanel20Layout.setHorizontalGroup(
@@ -1202,6 +1212,8 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel20Layout.createSequentialGroup()
                     .addGap(114, 114, 114)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1222,7 +1234,11 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(126, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -3381,7 +3397,9 @@ private void jButton89ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState16;
     private shared.State.CheckboxState checkboxState17;
     private shared.State.CheckboxState checkboxState18;
+    private shared.State.CheckboxState checkboxState19;
     private shared.State.CheckboxState checkboxState2;
+    private shared.State.CheckboxState checkboxState20;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;

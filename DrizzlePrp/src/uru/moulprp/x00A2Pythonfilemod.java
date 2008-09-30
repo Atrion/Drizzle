@@ -35,8 +35,8 @@ public class x00A2Pythonfilemod extends uruobj
     public Urustring pyfile;
     int refcount;
     Uruobjectref[] pythonrefs;
-    int listcount;
-    Pythonlisting[] listings;
+    public int listcount;
+    public Pythonlisting[] listings;
     
     public x00A2Pythonfilemod(context c) throws readexception//,boolean hasHeader)
     {
@@ -76,13 +76,17 @@ public class x00A2Pythonfilemod extends uruobj
     
     static public class Pythonlisting extends uruobj
     {
-        int index;
-        int type;
-        int xInteger;
-        int xFloat; //this is really a floating point number, but why bother to convert it?
-        int xBoolean;
-        Bstr xString;
-        Uruobjectref xRef;
+        public int index;
+        public int type;
+        public int xInteger;
+        public int xFloat; //this is really a floating point number, but why bother to convert it?
+        public int xBoolean;
+        public Bstr xString;
+        public Uruobjectref xRef;
+        
+        public Pythonlisting()
+        {
+        }
         
         public Pythonlisting(context c, Urustring pyfile) throws readexception
         {

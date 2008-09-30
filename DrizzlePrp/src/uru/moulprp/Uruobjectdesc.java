@@ -116,7 +116,7 @@ public class Uruobjectdesc extends uruobj
     }
     public String toString()
     {
-        return objectname.toString();
+        return objectname.toString()+"("+objecttype.toString()+")";
     }
     public PrpRootObject getObjectDescribed(prpfile prp)
     {

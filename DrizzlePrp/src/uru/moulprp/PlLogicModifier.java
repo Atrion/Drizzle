@@ -30,7 +30,7 @@ import shared.readexception;
 
 public class PlLogicModifier extends uruobj
 {
-    PlLogicModBase parent;
+    public PlLogicModBase parent;
     int conditionalcount;
     Uruobjectref[] conditionals;
     int u1;
@@ -62,7 +62,7 @@ public class PlLogicModifier extends uruobj
         PlSingleModifier parent;
         int count; //we don't handle it if this is not 0. This could be changed in the future, though.
         //short[] unused;
-        PrpMessage message;
+        public PrpMessage message;
         HsBitVector u1;
         byte u2;
         

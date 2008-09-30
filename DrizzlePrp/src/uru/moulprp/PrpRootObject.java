@@ -40,6 +40,8 @@ public class PrpRootObject extends uruobj
     byte[] rawdata;
     int readversion;
     
+    boolean tagDeleted = false;
+    
     public PrpRootObject(context c, boolean readRaw, int length) throws readexception
     {
         int headerStart = c.in.getAbsoluteOffset();

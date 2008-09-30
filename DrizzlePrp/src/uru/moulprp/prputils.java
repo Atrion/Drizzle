@@ -516,6 +516,14 @@ public class prputils
             {
                 //rootobj curobj = iter.next();
                 PrpRootObject curobj = prp.objects[i];
+                
+                //skip this object if it's tagged as deleted.
+                if(curobj.tagDeleted)
+                {
+                    m.msg("Skipping RootObject tagged as deleted.");
+                    continue;
+                }
+                
                 //if(i==494)
                 //{
                 //    i = 494;

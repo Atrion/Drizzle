@@ -52,4 +52,47 @@ public class prpfile
         return result;
     }
     
+    public PrpRootObject findObjectWithRef(Uruobjectref ref)
+    {
+        if(!ref.hasref())
+        {
+            m.warn("Tried to remove object, but the ref given has no desc.");
+            return null;
+        }
+        PrpRootObject result = prputils.findObjectWithDesc(this, ref.xdesc);
+        return result;
+    }
+    public void tagRootObjectAsDeleted(PrpRootObject obj)
+    {
+        if(obj==null) return;
+        /*PrpRootObject[] newobjects = new PrpRootObject[objects.length-1];
+        int pos = 0;
+        for(int i=0;i<objects.length;i++)
+        {
+            PrpRootObject curobj = objects[i];
+            if(obj!=curobj)
+            {
+                newobjects[pos] = curobj;
+                pos++;
+            }
+            else
+            {
+                int dummy=0;
+            }
+        }
+        objects = newobjects;*/
+        for(PrpRootObject curobj: objects)
+        {
+            if(obj==curobj)
+            {
+                curobj.tagDeleted = true;
+            }
+        }
+    }
+    public void tagRootObjectAsDeleted(Uruobjectref ref)
+    {
+        PrpRootObject obj = findObjectWithRef(ref);
+        tagRootObjectAsDeleted(obj);
+    }
+    
 }
