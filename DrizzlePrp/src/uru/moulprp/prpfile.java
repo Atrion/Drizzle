@@ -51,7 +51,17 @@ public class prpfile
         Bytes result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
-    
+    public PrpRootObject findObject(String name, Typeid type)
+    {
+        for(PrpRootObject obj: objects)
+        {
+            if(obj.header.desc.objectname.toString().equals(name) && obj.header.desc.objecttype.equals(type))
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
     public PrpRootObject findObjectWithRef(Uruobjectref ref)
     {
         if(!ref.hasref())

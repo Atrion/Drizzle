@@ -32,7 +32,7 @@ public class PlLogicModifier extends uruobj
 {
     public PlLogicModBase parent;
     int conditionalcount;
-    Uruobjectref[] conditionals;
+    public Uruobjectref[] conditionals;
     int u1;
     
     Uruobjectref xref;

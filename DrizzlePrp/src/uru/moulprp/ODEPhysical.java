@@ -224,7 +224,7 @@ public class ODEPhysical extends uruobj
             convertee.group = new HsBitVector(4);
             //convertee.mass = Flt.one(); //assign mass
         }
-        else if(u8==0x4000000 && u9==0x0 && u10==0x20000) //verified - direbo gates
+        else if(u8==0x4000000 && u9==0x0 && u10==0x20000) //not verified - direbo gates: may actually just be blocker.
         {
             convertee.u1 = 0;
             convertee.coltype = 0x400;
@@ -242,8 +242,8 @@ public class ODEPhysical extends uruobj
             //|| (u8==0x4000000 && u9==0x20000)
               ||(u8==0x4800000 && u9==0x0 && u10==0x0) //verified - direbo pedestal buttons
               ||(u8==0x4000000 && u9==0x20000 && u10==0x0) //verified - Direbo descent linking books.
-              ||(u8==0x4800000 && u9==0x20000 && u10==0x0) //verified - direbo gates
-              ||(u8==0x4000000 && u9==0x1020000 && u10==0x0) //verified - Direbo gates
+              ||(u8==0x4800000 && u9==0x20000 && u10==0x0) //not verified - direbo gates
+              ||(u8==0x4000000 && u9==0x1020000 && u10==0x0) //not verified - Direbo gates(may actually just be physical blocker)
                 )
         {
             convertee.u1 = 0;
@@ -270,7 +270,10 @@ public class ODEPhysical extends uruobj
         }
         else
         {
-            m.msg("Skipping physics:"+c.curRootObject.toString());
+            m.msg("Skipping physics: type="+Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
+                    +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
+                    +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
+                    +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
             if(shared.State.AllStates.getStateAsBoolean("skipPhysics")) throw new readexception("ODEPhysical: unhandled case.");
         }
        convertee.LOSDB = b.Int16ToInt32(u13);

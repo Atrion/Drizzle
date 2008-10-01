@@ -1196,6 +1196,29 @@ public class mystAutomation
                     }
                 }
             }
+            
+            //restore SDL limited clickables
+            if(finalname.toLowerCase().equals("direbo") && prp.header.pagename.toString().toLowerCase().equals("restage"))
+            {
+                x0001Sceneobject so = prp.findObject("PedButton03ClickProxyLaki", Typeid.plSceneObject).castTo();
+                for(Uruobjectref ref: so.objectrefs2)
+                {
+                    if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
+                    {
+                        PlLogicModifier lm = prp.findObjectWithRef(ref).castTo();
+                        for(Uruobjectref condref: lm.conditionals)
+                        {
+                            if(condref.hasref()&&condref.xdesc.objecttype==Typeid.plActivatorConditionalObject)
+                            {
+                                PlActivatorConditionalObject aco = prp.findObjectWithRef(condref).castTo();
+                                int dummy=0;
+                            }                                
+                        }
+                        int dummy=0;
+                    }
+                }
+            }
+            
         }
         if(false) //attempts to fix the invisible minkata craters.
         {
