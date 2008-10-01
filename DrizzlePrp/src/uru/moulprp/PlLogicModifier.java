@@ -62,18 +62,20 @@ public class PlLogicModifier extends uruobj
         PlSingleModifier parent;
         int count; //we don't handle it if this is not 0. This could be changed in the future, though.
         //short[] unused;
-        public PrpMessage message;
+        //public PrpMessage message;
+        public PrpTaggedObject message;
         HsBitVector u1;
-        byte u2;
+        public byte disabled;
         
         public PlLogicModBase(context c) throws readexception
         {
             parent = new PlSingleModifier(c);
             count = c.readInt(); e.ensure(count==0); //we don't handle the other situation, which is an array of PrpMessages
             //unused = c.readInts(count);
-            message = new PrpMessage(c);
+            //message = new PrpMessage(c);
+            message = new PrpTaggedObject(c);
             u1 = new HsBitVector(c);
-            u2 = c.readByte();
+            disabled = c.readByte();
 
         }
 
@@ -84,7 +86,7 @@ public class PlLogicModifier extends uruobj
             //unhandled part if count!=0
             message.compile(c);
             u1.compile(c);
-            c.writeByte(u2);
+            c.writeByte(disabled);
         }
     }
     

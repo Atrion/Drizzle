@@ -30,9 +30,9 @@ import shared.readexception;
 
 public class PlActivatorConditionalObject extends uruobj
 {
-    PlConditionalObject parent;
-    int count;
-    Uruobjectref[] pickingdetectors;
+    public PlConditionalObject parent;
+    public int count;
+    public Uruobjectref[] pickingdetectors;
     
     public PlActivatorConditionalObject(context c) throws readexception
     {

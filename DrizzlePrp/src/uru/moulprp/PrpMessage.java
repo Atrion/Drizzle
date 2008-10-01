@@ -25,7 +25,7 @@ import uru.Bytedeque;
 import uru.b;
 import uru.e;
 
-public class PrpMessage extends PrpTaggedObject
+public abstract class PrpMessage extends PrpTaggedObject
 {
 
     public PrpMessage(context c) throws readexception
@@ -805,13 +805,13 @@ public class PrpMessage extends PrpTaggedObject
     {
         PlMessage parent;
         int count;
-        PrpMessage[] callbacks;
+        PrpTaggedObject[] callbacks;
         
         public PlMessageWithCallbacks(context c) throws readexception
         {
             parent = new PlMessage(c);
             count = c.readInt();
-            callbacks = c.readVector(PrpMessage.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
+            callbacks = c.readVector(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
         }
         
         public void compile(Bytedeque c)

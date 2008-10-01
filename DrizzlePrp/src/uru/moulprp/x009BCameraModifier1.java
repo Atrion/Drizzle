@@ -37,10 +37,10 @@ public class x009BCameraModifier1 extends uruobj
     Flt FOVw;
     Flt FOVh;
     int count2;
-    PrpMessage[] messageQueue;
+    PrpTaggedObject[] messageQueue;
     Uruobjectref[] messageQueueSenders;
     int count3;
-    PrpMessage[] FOVInstructions;
+    PrpTaggedObject[] FOVInstructions;
     byte animated;
     byte startAnimOnPush;
     byte stopAnimOnPop;
@@ -65,7 +65,7 @@ public class x009BCameraModifier1 extends uruobj
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        messageQueue = c.readVector(PrpMessage.class, count2);
+        messageQueue = c.readVector(PrpTaggedObject.class, count2);
         messageQueueSenders = c.readVector(Uruobjectref.class, count2);
         
         count3 = c.readInt();
@@ -73,7 +73,7 @@ public class x009BCameraModifier1 extends uruobj
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        FOVInstructions = c.readVector(PrpMessage.class, count3);
+        FOVInstructions = c.readVector(PrpTaggedObject.class, count3);
         animated = c.readByte();
         startAnimOnPush = c.readByte();
         stopAnimOnPop = c.readByte();

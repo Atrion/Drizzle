@@ -111,12 +111,12 @@ public class PlResponderModifier extends uruobj
     
     public static class PlResponderCmd extends uruobj
     {
-        PrpMessage message;
+        PrpTaggedObject message;
         byte waitOn;
         
         public PlResponderCmd(context c) throws readexception
         {
-            message = new PrpMessage(c);
+            message = new PrpTaggedObject(c);
             waitOn = c.readByte();
         }
         

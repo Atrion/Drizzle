@@ -1109,6 +1109,27 @@ public class mystAutomation
         //All done!
         m.msg("Done Moul work!");
     }
+    public static void restoreClickability(prpfile prp, String clickableSceneObject)
+    {
+        x0001Sceneobject so = prp.findObject(clickableSceneObject, Typeid.plSceneObject).castTo();
+        for(Uruobjectref ref: so.objectrefs2)
+        {
+            if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
+            {
+                PlLogicModifier lm2 = prp.findObjectWithRef(ref).castTo();
+                lm2.parent.disabled = 0; //set disabled to false.
+                //for(Uruobjectref condref: lm2.conditionals)
+                //{
+                //    if(condref.hasref()&&condref.xdesc.objecttype==Typeid.plActivatorConditionalObject)
+                //    {
+                //        aco2 = prp.findObjectWithRef(condref).castTo();
+                //        int dummy=0;
+                //    }                                
+                //}
+                //int dummy=0;
+            }
+        }
+    }
     public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames)
     {
         String newagename = agenames.get(agename);
@@ -1197,29 +1218,39 @@ public class mystAutomation
                 }
             }
             
-            //restore SDL limited clickables
+            //restore limited clickables
             if(finalname.toLowerCase().equals("direbo") && prp.header.pagename.toString().toLowerCase().equals("restage"))
             {
-                x0001Sceneobject so = prp.findObject("PedButton03ClickProxyLaki", Typeid.plSceneObject).castTo();
-                for(Uruobjectref ref: so.objectrefs2)
+                String[] clickables = new String[]{
+                    "PedButton02ClickProxyLaki",
+                    "PedButton03ClickProxyLaki",
+                    "PedButton04ClickProxyLaki",
+                    "PedButton05ClickProxyLaki",
+                    "PedButton02ClickProxyTdlm",
+                    "PedButton03ClickProxyTdlm",
+                    //"PedButton04ClickProxyTdlm",
+                    "PedButton05ClickProxyTdlm",
+                    "PedButton02ClickProxyThgr",
+                    "PedButton03ClickProxyThgr",
+                    "PedButton04ClickProxyThgr",
+                    "PedButton05ClickProxyThgr",
+                    "PedButton02ClickProxySrln",
+                    "PedButton03ClickProxySrln",
+                    //"PedButton04ClickProxySrln",
+                    "PedButton05ClickProxySrln",
+                    
+                };
+                for(String clickable: clickables)
                 {
-                    if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
-                    {
-                        PlLogicModifier lm = prp.findObjectWithRef(ref).castTo();
-                        for(Uruobjectref condref: lm.conditionals)
-                        {
-                            if(condref.hasref()&&condref.xdesc.objecttype==Typeid.plActivatorConditionalObject)
-                            {
-                                PlActivatorConditionalObject aco = prp.findObjectWithRef(condref).castTo();
-                                int dummy=0;
-                            }                                
-                        }
-                        int dummy=0;
-                    }
+                    restoreClickability(prp, clickable);
                 }
             }
-            
+            //pd1 = prp.findObjectWithRef(aco1.pickingdetectors[0]).castTo();
+            //pd2 = prp.findObjectWithRef(aco2.pickingdetectors[0]).castTo();
+            //lm2.parent.u2 = 0; //set disabled to false.
+            int dummy=0;
         }
+                
         if(false) //attempts to fix the invisible minkata craters.
         {
             PrpRootObject[] clustergroups = prputils.FindAllObjectsOfType(prp, Typeid.plClusterGroup);

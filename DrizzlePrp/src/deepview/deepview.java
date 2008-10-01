@@ -377,7 +377,8 @@ public class deepview
             subpanel.add(dvWidgets.jlabel("name:"+name+" type:"+objclass.getName()+" class members:"));
 
             //if inherited, do parent
-            if(objclass.getSuperclass()!=Object.class) //get ancestor's info
+            Class superclass = objclass.getSuperclass();
+            if(superclass!=Object.class && superclass!=uru.moulprp.uruobj.class) //get ancestor's info
             {
                 //we don't actually use inheritance this way.
                 //deepReflectionReport(obj,objclass.getSuperclass(),result, depth+0);
