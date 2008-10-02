@@ -1249,6 +1249,16 @@ public class mystAutomation
             //pd2 = prp.findObjectWithRef(aco2.pickingdetectors[0]).castTo();
             //lm2.parent.u2 = 0; //set disabled to false.
             int dummy=0;
+            
+            if(finalname.toLowerCase().equals("descentmystv") && prp.header.pagename.toString().toLowerCase().equals("dsntgreatshaftlowerrm"))
+            {
+                PlHKPhysical erf = prp.findObject("ElevRisingFloor", Typeid.plHKPhysical).castTo();
+                erf.ode.convertee.coltype = 0x200;
+                erf.ode.convertee.LOSDB = 0x44;
+                erf.ode.convertee.group = new HsBitVector(4);
+                erf.ode.convertee.flagsdetect = 0x0;
+                erf.ode.convertee.mass = Flt.one();
+            }
         }
                 
         if(false) //attempts to fix the invisible minkata craters.

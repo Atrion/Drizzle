@@ -188,6 +188,7 @@ public class prputils
                 Uruobjectdesc desc = objectindex.types[i].descs[j].desc;
                 int offset = objectindex.types[i].descs[j].offset;
                 int size = objectindex.types[i].descs[j].size;
+                if(shared.State.AllStates.getStateAsBoolean("reportObjects")) m.msg("ObjectReport: "+desc.toString());
                 
                 //do per-object work.
                 if(!_staticsettings.doVisit(desc)) continue; //should we process this object?

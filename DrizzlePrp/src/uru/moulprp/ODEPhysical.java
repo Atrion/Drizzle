@@ -63,7 +63,7 @@ public class ODEPhysical extends uruobj
     Flt f6a;
     Flt f6b;
     
-    PlHKPhysical.HKPhysical convertee;
+    public PlHKPhysical.HKPhysical convertee;
     
     public ODEPhysical(context c) throws readexception
     {
@@ -169,7 +169,7 @@ public class ODEPhysical extends uruobj
         //handle flags...
         //ordinary surface.
         if(
-                (u8==0x2000000 && u9==0x0) //verified - all over!
+                (u8==0x2000000 && u9==0x0 && u10==0x0) //verified - all over!
                 //||(u8==0x4800000 && u9==0x20000 && u10==0x0)
                 ||(u8==0x2800000 && u9==0x0 && u10==0x0) //verified, bubble collider in direbo
                 )
@@ -224,24 +224,36 @@ public class ODEPhysical extends uruobj
             convertee.group = new HsBitVector(4);
             //convertee.mass = Flt.one(); //assign mass
         }
-        else if(u8==0x4000000 && u9==0x0 && u10==0x20000) //not verified - direbo gates: may actually just be blocker.
-        {
+        else if((u8==0x4000000 && u9==0x0 && u10==0x20000) //not verified - direbo gates: may actually just be blocker.
+                ||(u8==0x4800000 && u9==0x0 && u10==0x20000) //dtctFloot greatShaft platform
+        ){
             convertee.u1 = 0;
             convertee.coltype = 0x400;
             convertee.flagsdetect = 0x20000;
             convertee.flagsrespond = 0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x2; //stting this to 2 seemed to make everything else a clickable, except the exclude regions covering the gate and switch.  Is this because it thinks the gate is open?
+            convertee.LOSDB = 0x0; //stting this to 2 seemed to make everything else a clickable, except the exclude regions covering the gate and switch.  Is this because it thinks the gate is open?
             convertee.group = new HsBitVector(4);
-            //convertee.mass = Flt.one(); //assign mass
+            convertee.mass = Flt.one(); //assign mass
         }
         //myst5 has a kind of clickable that is dragable, e.g. the door handle in k'veer.
-        else if((u8==0x4000000 && u9==0x0 && u10==0x0)
+        else if((u8==0x4000000 && u9==0x0 && u10==0x0) //wrong, it produces blockers, when it shouldn't
             //|| (u8==0x4000000 && u9==0x0 && u10==0x8000000))
             //|| (u8==0x4000000 && u9==0x20000)
               ||(u8==0x4800000 && u9==0x0 && u10==0x0) //verified - direbo pedestal buttons
-              ||(u8==0x4000000 && u9==0x20000 && u10==0x0) //verified - Direbo descent linking books.
+        ){
+            convertee.u1 = 0;
+            convertee.coltype = 0x400;
+            convertee.flagsdetect = 0;
+            convertee.flagsrespond = 0x0;
+            convertee.u2 = 0;
+            convertee.u3 = 0;
+            convertee.LOSDB = 0x2;
+            convertee.group = new HsBitVector(0x4);
+            //convertee.mass = Flt.one(); //assign mass
+        }
+        else if((u8==0x4000000 && u9==0x20000 && u10==0x0) //verified - Direbo descent linking books.
               ||(u8==0x4800000 && u9==0x20000 && u10==0x0) //not verified - direbo gates
               ||(u8==0x4000000 && u9==0x1020000 && u10==0x0) //not verified - Direbo gates(may actually just be physical blocker)
                 )

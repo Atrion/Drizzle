@@ -32,16 +32,16 @@ import shared.FileUtils;
 //About the <=256 branches: 256 should be the right number, but in any event, I tested to find that x is such that: 254<=x<262.
 public class PlHKPhysical extends uruobj
 {
-    int _version; //do not compile!
+    public int _version; //do not compile!
     
     //plHKPhysical
-    HKPhysical havok;
+    public HKPhysical havok;
     
     //plPXPhysical
-    PXPhysical physx;
+    public PXPhysical physx;
     
     //plODEPHysical
-    ODEPhysical ode;
+    public ODEPhysical ode;
     
     public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
     {
@@ -603,14 +603,14 @@ public class PlHKPhysical extends uruobj
         PlSynchedObject parent;
         Vertex position;
         Quat orientation;
-        Flt mass; //mass
+        public Flt mass; //mass
         Flt RC; //friction coefficient
         Flt EL; //elasticity
         int format;
         short u1; //2,
-        short coltype; //200,400,100,2
-        int flagsdetect; //8000000,1020000,20000,800000,1000000
-        int flagsrespond; //1020000,20000,1800002,3800000,3820000,3800002,3840000,3860000,2000000,3840002,1000000,3800004
+        public short coltype; //200,400,100,2
+        public int flagsdetect; //8000000,1020000,20000,800000,1000000
+        public int flagsrespond; //1020000,20000,1800002,3800000,3820000,3800002,3840000,3860000,2000000,3840002,1000000,3800004
         byte u2; //1
         byte u3; //1
         HKBoxBounds xboxbounds;
@@ -619,9 +619,9 @@ public class PlHKPhysical extends uruobj
         HKProxyBounds xproxybounds;
         HKExplicitBounds xexplicitbounds;
         Uruobjectref sceneobject;
-        HsBitVector group; //0,4,200,104,100,10,80,24,a4,300,124,184,2000,700  //count always equals 1.
+        public HsBitVector group; //0,4,200,104,100,10,80,24,a4,300,124,184,2000,700  //count always equals 1.
         Uruobjectref scenenode;
-        int LOSDB; //45,2,44,5,4,80,40,1,20,41,
+        public int LOSDB; //45,2,44,5,4,80,40,1,20,41,
         Uruobjectref subworld;
         Uruobjectref soundgroup;
         

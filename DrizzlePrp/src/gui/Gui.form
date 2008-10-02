@@ -1104,6 +1104,17 @@
                         </Constraint>
                       </Constraints>
                     </Component>
+                    <Component class="shared.State.CheckboxState" name="checkboxState21">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Report all object name &amp; types."/>
+                        <Property name="name" type="java.lang.String" value="reportObjects" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="130" y="310" width="220" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel20">
@@ -1191,7 +1202,6 @@
                     </Component>
                     <Component class="shared.State.CheckboxState" name="checkboxState19">
                       <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Skip physics with unhandled flags."/>
                         <Property name="name" type="java.lang.String" value="skipPhysics" noResource="true"/>
                       </Properties>

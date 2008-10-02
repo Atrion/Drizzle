@@ -448,6 +448,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState7 = new shared.State.CheckboxState();
         checkboxState12 = new shared.State.CheckboxState();
         checkboxState13 = new shared.State.CheckboxState();
+        checkboxState21 = new shared.State.CheckboxState();
         jPanel20 = new javax.swing.JPanel();
         checkboxState8 = new shared.State.CheckboxState();
         checkboxState9 = new shared.State.CheckboxState();
@@ -1177,6 +1178,11 @@ public class Gui extends javax.swing.JFrame {
             jPanel18.add(checkboxState13);
             checkboxState13.setBounds(130, 280, 170, 28);
 
+            checkboxState21.setText("Report all object name & types.");
+            checkboxState21.setName("reportObjects"); // NOI18N
+            jPanel18.add(checkboxState21);
+            checkboxState21.setBounds(130, 310, 220, 28);
+
             tabsState2.addTab("Reports", jPanel18);
 
             checkboxState8.setSelected(true);
@@ -1197,7 +1203,6 @@ public class Gui extends javax.swing.JFrame {
             checkboxState18.setText("Remove plLogicModifiers that reference plLadderModifiers.");
             checkboxState18.setName("removeLadders"); // NOI18N
 
-            checkboxState19.setSelected(true);
             checkboxState19.setText("Skip physics with unhandled flags.");
             checkboxState19.setName("skipPhysics"); // NOI18N
 
@@ -3400,6 +3405,7 @@ private void jButton89ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.CheckboxState checkboxState19;
     private shared.State.CheckboxState checkboxState2;
     private shared.State.CheckboxState checkboxState20;
+    private shared.State.CheckboxState checkboxState21;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;
