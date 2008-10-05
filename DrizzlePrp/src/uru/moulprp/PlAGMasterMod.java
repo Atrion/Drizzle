@@ -63,7 +63,7 @@ public class PlAGMasterMod extends uruobj
         }
         //u1 = c.readShort(); e.ensure(u1==0); //I think this is 0.
         count = c.readInt();
-        ATCAnim = c.readVector(Uruobjectref.class, count);
+        ATCAnim = c.readArray(Uruobjectref.class, count);
         
         if(c.readversion==6)
         {
@@ -80,7 +80,7 @@ public class PlAGMasterMod extends uruobj
             xxrefscount = c.readInt();
             //if(ucount!=0) throw new readexception("PlAGMasterMod: unhandled case.");
             //I think this is an Uruobjectref count.
-            xxrefs = c.readVector(Uruobjectref.class, xxrefscount);
+            xxrefs = c.readArray(Uruobjectref.class, xxrefscount);
             if(xxrefscount!=0) m.warn("PlAGMasterMod: ignoring some refs.");
         }
         //u4 = new Uruobjectref(c);
@@ -90,7 +90,7 @@ public class PlAGMasterMod extends uruobj
         parent.compile(c);
         u2.compile(c);
         c.writeInt(count);
-        c.writeVector(ATCAnim);
+        c.writeArray(ATCAnim);
         //skip the last part, which is moul-only.
     }
 }

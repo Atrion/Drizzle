@@ -92,14 +92,14 @@ public class PrpVolumeIsect extends uruobj
             parent = new PlVolumeIsect(c);
             count = c.readShort();
             int count2 = b.Int16ToInt32(count);
-            planes = c.readVector(PlConvexPlane.class, count2);
+            planes = c.readArray(PlConvexPlane.class, count2);
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
             c.writeShort(count);
-            c.writeVector(planes);
+            c.writeArray(planes);
         }
     }
     

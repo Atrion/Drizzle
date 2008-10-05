@@ -48,10 +48,10 @@ public class PfGUIButtonMod extends uruobj
     {
         parent = new PfGUIControlMod(c);
         refcount = c.readInt();
-        refs = c.readVector(Uruobjectref.class, refcount); //really uruobjectrefs?
+        refs = c.readArray(Uruobjectref.class, refcount); //really uruobjectrefs?
         str = new Urustring(c);
         refcount2 = c.readInt();
-        refs2 = c.readVector(Uruobjectref.class, refcount2); //really uruobjectrefs?
+        refs2 = c.readArray(Uruobjectref.class, refcount2); //really uruobjectrefs?
         str2 = new Urustring(c);
         if(c.readversion==3)
         {
@@ -77,10 +77,10 @@ public class PfGUIButtonMod extends uruobj
     {
         parent.compile(c);
         c.writeInt(refcount);
-        c.writeVector(refs);
+        c.writeArray(refs);
         str.compile(c);
         c.writeInt(refcount2);
-        c.writeVector(refs2);
+        c.writeArray(refs2);
         str2.compile(c);
 
         //these next 2 lines are justified by the fact that they are usually 0, and I couldn't see a relation between them and the new flags.
@@ -107,7 +107,7 @@ public class PfGUIButtonMod extends uruobj
             ref = new Uruobjectref(c);
             bs1 = c.readBytes(128);
             refcount = c.readInt();
-            refs = c.readVector(Uruobjectref.class, refcount);
+            refs = c.readArray(Uruobjectref.class, refcount);
             u1 = c.readInt();
             ref2 = new Uruobjectref(c);
             u2 = c.readInt();
@@ -121,7 +121,7 @@ public class PfGUIButtonMod extends uruobj
             ref.compile(c);
             c.writeBytes(bs1);
             c.writeInt(refcount);
-            c.writeVector(refs);
+            c.writeArray(refs);
             c.writeInt(u1);
             ref2.compile(c);
             c.writeInt(u2);
@@ -141,7 +141,7 @@ public class PfGUIButtonMod extends uruobj
         public whattheheck(context c) throws readexception
         {
             //16 flt, 1 int, 1 urustring, 2 bytes
-            xflts = c.readVector(Flt.class, 16);
+            xflts = c.readArray(Flt.class, 16);
             xu3 = c.readInt();
             xstr1 = new Urustring(c);
             xb4 = c.readByte();
@@ -149,7 +149,7 @@ public class PfGUIButtonMod extends uruobj
         }
         public void compile(Bytedeque c)
         {
-            c.writeVector(xflts);
+            c.writeArray(xflts);
             c.writeInt(xu3);
             xstr1.compile(c);
             c.writeByte(xb4);
@@ -170,7 +170,7 @@ public class PfGUIButtonMod extends uruobj
         {
             parent = new PfGUIValueCtrl(c);
             count = c.readInt();
-            refs = c.readVector(Uruobjectref.class, count);
+            refs = c.readArray(Uruobjectref.class, count);
             str = new Urustring(c);
             v1 = new Vertex(c);
             v2 = new Vertex(c);
@@ -191,7 +191,7 @@ public class PfGUIButtonMod extends uruobj
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeVector(refs);
+            c.writeArray(refs);
             str.compile(c);
             v1.compile(c);
             v2.compile(c);

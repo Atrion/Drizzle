@@ -513,7 +513,7 @@ public class PrpController extends uruobj
             {
                 u1 = c.readInt(); //int in pots, byte in moul
                 count = c.readInt();
-                easecontrollers = c.readVector(plEaseController.class, count);
+                easecontrollers = c.readArray(plEaseController.class, count);
                 garbage = c.readInt(); //doesn't exist in moul
             }
             else if(c.readversion==6)
@@ -524,48 +524,48 @@ public class PrpController extends uruobj
                 switch(controllertype)
                 {
                     case 1: //plPoint3Controller (plSimplePosController)
-                        xtype1 = c.readVector(moul1.class, count2);
+                        xtype1 = c.readArray(moul1.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type1.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 2:
-                        xtype2 = c.readVector(moul2.class, count2);
+                        xtype2 = c.readArray(moul2.class, count2);
                         break;
                     case 3: //plScalarController
                         //only used in the neighborhood with objects not found in pots. But, in analogy with 4, I've implemented it.
-                        xtype3 = c.readVector(moul3.class, count2);
+                        xtype3 = c.readArray(moul3.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type3.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 4:
-                        xtype4 = c.readVector(moul4.class, count2);
+                        xtype4 = c.readArray(moul4.class, count2);
                         break;
                     case 5: //plScaleValueController
-                        xtype5 = c.readVector(moul5.class, count2);
+                        xtype5 = c.readArray(moul5.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type5.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 6:
-                        xtype6 = c.readVector(moul6.class, count2);
+                        xtype6 = c.readArray(moul6.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type6.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 7: //plQuatController
-                        xtype7 = c.readVector(moul7.class, count2);
+                        xtype7 = c.readArray(moul7.class, count2);
                         break;
                     case 8:
-                        xtype8 = c.readVector(moul8.class, count2);
+                        xtype8 = c.readArray(moul8.class, count2);
                         break;
                     case 9:
-                        xtype9 = c.readVector(moul9.class, count2);
+                        xtype9 = c.readArray(moul9.class, count2);
                         //m.msg("type9 encountered:"+c.curFile);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type9.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type9.txt", uru.debug.getStackTrace());
                         break;
                     case 10:
-                        xtype10 = c.readVector(moul10.class, count2);
+                        xtype10 = c.readArray(moul10.class, count2);
                         break;
                     case 11: //plMatrix33Controller
-                        xtype11 = c.readVector(moul11.class, count2);
+                        xtype11 = c.readArray(moul11.class, count2);
                         break;
                     case 12: //plMatrix44Controller
-                        xtype12 = c.readVector(moul12.class, count2);
+                        xtype12 = c.readArray(moul12.class, count2);
                         break;
                     default:
                         m.err("plleafcontroller: unknown type.");
@@ -581,52 +581,52 @@ public class PrpController extends uruobj
                 {
                     case 1: //plPoint3Controller (plSimplePosController)
                         controllertype = 1;
-                        xtype1 = c.readVector(moul1.class, count2);
+                        xtype1 = c.readArray(moul1.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type1.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 2:
                         controllertype = 2;
-                        xtype2 = c.readVector(moul2.class, count2);
+                        xtype2 = c.readArray(moul2.class, count2);
                         break;
                     case 3: //plScalarController
                         controllertype = 3;
                         //only used in the neighborhood with objects not found in pots. But, in analogy with 4, I've implemented it.
-                        xtype3 = c.readVector(moul3.class, count2);
+                        xtype3 = c.readArray(moul3.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type3.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 4:
                         controllertype = 4;
-                        xtype4 = c.readVector(moul4.class, count2);
+                        xtype4 = c.readArray(moul4.class, count2);
                         break;
                     case 5: //plScaleValueController
                         controllertype = 5;
-                        xtype5 = c.readVector(moul5.class, count2);
+                        xtype5 = c.readArray(moul5.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type5.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 6:
                         controllertype = 6;
-                        xtype6 = c.readVector(moul6.class, count2);
+                        xtype6 = c.readArray(moul6.class, count2);
                         //uru.FileUtils.AppendText(_staticsettings.outputdir+"type6.txt", c.curFile+"::"+c.curRootObject.objectname.toString()+"::"+c.curRootObject.objecttype.toString()+"\n");
                         break;
                     case 7: //plQuatController
                         controllertype = 7;
-                        xtype7 = c.readVector(moul7.class, count2);
+                        xtype7 = c.readArray(moul7.class, count2);
                         break;
                     case 8:
                         controllertype = 8;
-                        xtype8 = c.readVector(moul8.class, count2);
+                        xtype8 = c.readArray(moul8.class, count2);
                         break;
                     case 9:
                         controllertype = 10;
-                        xtype10 = c.readVector(moul10.class, count2);
+                        xtype10 = c.readArray(moul10.class, count2);
                         break;
                     case 10: //plMatrix33Controller
                         controllertype = 11;
-                        xtype11 = c.readVector(moul11.class, count2);
+                        xtype11 = c.readArray(moul11.class, count2);
                         break;
                     case 11: //plMatrix44Controller
                         controllertype = 12;
-                        xtype12 = c.readVector(moul12.class, count2);
+                        xtype12 = c.readArray(moul12.class, count2);
                         break;
                     default:
                         m.err("plleafcontroller: unknown type.");
@@ -1188,7 +1188,7 @@ public class PrpController extends uruobj
                 //m.msg(flt.toString());
                 framenum = (short)java.lang.Math.round(flt.toJavaFloat()*30.0f);
             }
-            matrixdata = c.readVector(Flt.class, 9); //3x3 matrix. Is the order correct? Probably, since it was with 4x4 matrices.
+            matrixdata = c.readArray(Flt.class, 9); //3x3 matrix. Is the order correct? Probably, since it was with 4x4 matrices.
         }
     }
     public static class moul12 extends uruobj

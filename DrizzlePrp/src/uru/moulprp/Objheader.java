@@ -49,6 +49,14 @@ public class Objheader extends uruobj
         }
         desc = new Uruobjectdesc(c);
     }
+    private Objheader(){}
+    public static Objheader createFromDesc(Uruobjectdesc desc)
+    {
+        Objheader result = new Objheader();
+        result.desc = desc;
+        result.objecttype = desc.objecttype;
+        return result;
+    }
     public void compile(Bytedeque deque)
     {
         //this could be wrong.

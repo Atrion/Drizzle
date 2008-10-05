@@ -72,7 +72,7 @@ public class PlArmatureMod extends uruobj
             ref = new Uruobjectref(c);
             s1 = new Urustring(c);
             count = c.readInt();
-            objects = c.readVector(PrpTaggedObject.class, count);
+            objects = c.readArray(PrpTaggedObject.class, count);
             b1 = c.readByte();
             if(b1!=0)
             {
@@ -113,10 +113,10 @@ public class PlArmatureMod extends uruobj
         {
             parent = new PlAGMasterMod(c);
             count1 = c.readInt();
-            c.readVector(subPlArmatureModBase.class, count1);
+            c.readArray(subPlArmatureModBase.class, count1);
             count2 = c.readInt();
                 //Urustring str = new Urustring(c);
-            objects = c.readVector(PrpTaggedObject.class, count2);
+            objects = c.readArray(PrpTaggedObject.class, count2);
             ref1 = new Uruobjectref(c);
         }
         
@@ -130,7 +130,7 @@ public class PlArmatureMod extends uruobj
             {
                 ref = new Uruobjectref(c);
                 count = c.readInt();
-                refs = c.readVector(Uruobjectref.class, count);
+                refs = c.readArray(Uruobjectref.class, count);
             }
         }
     }

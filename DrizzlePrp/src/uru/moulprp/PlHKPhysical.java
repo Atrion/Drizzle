@@ -740,7 +740,7 @@ public class PlHKPhysical extends uruobj
         {
             //parent = new HKBounds(c);
             vertexcount = c.readInt();
-            vertices = c.readVector(Vertex.class, vertexcount);
+            vertices = c.readArray(Vertex.class, vertexcount);
         }
     }
     public static class HKProxyBounds extends uruobj
@@ -753,7 +753,7 @@ public class PlHKPhysical extends uruobj
         {
             parent = new HKHullBounds(c);
             facecount = c.readInt();
-            faces = c.readVector(ShortTriplet.class, facecount);
+            faces = c.readArray(ShortTriplet.class, facecount);
         }
     }
     public static class HKExplicitBounds extends uruobj
@@ -844,7 +844,7 @@ public class PlHKPhysical extends uruobj
             e.ensure(faces.length==facecount*3);
             
             c.writeInt(vertexcount);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
             c.writeInt(facecount);
             c.writeShorts(faces);
         }
@@ -899,7 +899,7 @@ public class PlHKPhysical extends uruobj
             y10 = c.readInt(); //
 
             //read vertices
-            vertices = c.readVector(Vertex.class, vertexcount); //vertices
+            vertices = c.readArray(Vertex.class, vertexcount); //vertices
 
             y11 = c.readInt(); //highest index(=y5-1)
             /*if(y11!=vertexcount-1)
@@ -928,7 +928,7 @@ public class PlHKPhysical extends uruobj
         {
             c.writeInt(vertexcount);
             e.ensure(vertices.length==vertexcount);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
         }
     }
     
@@ -965,7 +965,7 @@ public class PlHKPhysical extends uruobj
             surfacecount = c.readInt(); //1044,44 //surfacecount?
 
             //read vertices
-            vertices = c.readVector(Vertex.class, vertexcount); //vertices
+            vertices = c.readArray(Vertex.class, vertexcount); //vertices
 
             //read surfaces
             /*if(vertexcount>254 && vertexcount <262)
@@ -1006,7 +1006,7 @@ public class PlHKPhysical extends uruobj
         {
             c.writeInt(vertexcount);
             e.ensure(vertices.length==vertexcount);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
             
             c.writeInt(surfacecount);
             if(vertexcount<=256) //this may need tweeking.

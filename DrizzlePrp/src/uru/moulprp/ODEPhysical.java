@@ -72,7 +72,7 @@ public class ODEPhysical extends uruobj
         if(type==5)
         {
             vertexcount = c.readInt(); //vertex count
-            vertices = c.readVector(Vertex.class, vertexcount); //vertices
+            vertices = c.readArray(Vertex.class, vertexcount); //vertices
 
             surfacecount = c.readInt(); //face count
             surfaces = c.readInts(3*surfacecount); //faces
@@ -102,9 +102,10 @@ public class ODEPhysical extends uruobj
         }
         else if(type==6) //ellipse???
         {
+            //cylinder.  I would have to convert it to a discreet cylinder.
             //m.msg("Untested ODE case6...");
-            f6a = new Flt(c); //same as 2
-            f6b = new Flt(c);
+            f6a = new Flt(c); //same as 2 //cylinder length
+            f6b = new Flt(c); //cylinder radius
             //Vertex offset = this.findOffsetVectorFromSceneObject(c.prp, sceneobject);
             //throw new readexception("ODEPhysical: can read okay but throwing error to ignore.");
         }
@@ -113,13 +114,13 @@ public class ODEPhysical extends uruobj
             m.msg("Untested ODE case unknown...");
         }
         
-        f8 = new Flt(c);
-        u8 = c.readInt();
+        f8 = new Flt(c); //mass
+        u8 = c.readInt(); //category (=coltype?)
         u9 = c.readInt();
         u10 = c.readInt();
         u11 = c.readInt();
-        u12 = c.readInt();
-        u13 = c.readShort();
+        u12 = c.readInt(); //flags
+        u13 = c.readShort(); //LOSDB
         
         sceneobject = new Uruobjectref(c); //plSceneObject
         scenenode = new Uruobjectref(c); //plSceneNode
@@ -145,7 +146,7 @@ public class ODEPhysical extends uruobj
         if(type==5) convertee.format = 4;
         else if(type==1) convertee.format = 1;
         else if(type==2) convertee.format = 2;
-        else if(type==6) throw new shared.readwarningexception("ODEPhysical: able to read, but ignoring unhandled type 6."); //convertee.format = 0;//changethis!!!
+        else if(type==6) throw new shared.readwarningexception("ODEPhysical: able to read, but ignoring unhandled type 6.(cylinder)"); //convertee.format = 0;//changethis!!!
         else throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
         convertee.u1 = 0;
         convertee.coltype = 0x200;
@@ -330,7 +331,7 @@ public class ODEPhysical extends uruobj
             //write vertices
             c.writeInt(vertexcount);
             e.ensure(vertices.length==vertexcount);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
 
             //write surfaces
             c.writeInt(surfacecount);
@@ -393,7 +394,7 @@ public class ODEPhysical extends uruobj
             e.ensure(faces.length==facecount*3);
             
             c.writeInt(vertexcount);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
             c.writeInt(facecount);
             c.writeShorts(faces);
             

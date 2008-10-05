@@ -23,6 +23,7 @@ import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
 import shared.m;
+import java.util.Vector;
 
 /**
  *
@@ -31,12 +32,12 @@ import shared.m;
 public class x00A2Pythonfilemod extends uruobj
 {
     //Objheader xheader;
-    PlMultiModifier parent;
+    public PlMultiModifier parent;
     public Urustring pyfile;
-    int refcount;
-    Uruobjectref[] pythonrefs;
+    public int refcount;
+    public Uruobjectref[] pythonrefs;
     public int listcount;
-    public Pythonlisting[] listings;
+    public Vector<Pythonlisting> listings;
     
     public x00A2Pythonfilemod(context c) throws readexception//,boolean hasHeader)
     {
@@ -52,11 +53,29 @@ public class x00A2Pythonfilemod extends uruobj
             pythonrefs[i] = new Uruobjectref(c);
         }
         listcount = data.readInt();
-        listings = new Pythonlisting[listcount];
+        /*listings = new Pythonlisting[listcount];
         for(int i=0;i<listcount;i++)
         {
             listings[i] = new Pythonlisting(c,pyfile);
-        }
+        }*/
+        listings = c.readVector(Pythonlisting.class, listcount);
+    }
+    private x00A2Pythonfilemod(){}
+    public static x00A2Pythonfilemod createEmpty()
+    {
+        return new x00A2Pythonfilemod();
+    }
+    public static x00A2Pythonfilemod createDefault()
+    {
+        x00A2Pythonfilemod result = x00A2Pythonfilemod.createEmpty();
+        result.parent = PlMultiModifier.createDefault();
+        result.pyfile = Urustring.createFromString("changeme");
+        result.refcount = 0;
+        result.pythonrefs = new Uruobjectref[0];
+        result.listcount = 0;
+        //result.listings = new Pythonlisting[0];
+        result.listings = new Vector<Pythonlisting>();
+        return result;
     }
     public void compile(Bytedeque deque)
     {
@@ -68,12 +87,22 @@ public class x00A2Pythonfilemod extends uruobj
             pythonrefs[i].compile(deque);
         }
         deque.writeInt(listcount);
-        for(int i=0;i<listcount;i++)
+        /*for(int i=0;i<listcount;i++)
         {
             listings[i].compile(deque);
-        }
+        }*/
+        deque.writeVector(listings);
     }
-    
+    public void addListing(Pythonlisting listing)
+    {
+        listcount++;
+        listings.add(listing);
+    }
+    public void clearListings()
+    {
+        listcount = 0;
+        listings.clear();
+    }
     static public class Pythonlisting extends uruobj
     {
         public int index;
@@ -88,6 +117,26 @@ public class x00A2Pythonfilemod extends uruobj
         {
         }
         
+        public static Pythonlisting createWithRef(int type, int index, Uruobjectref ref)
+        {
+            Pythonlisting result = new Pythonlisting();
+            result.type = type;
+            result.index = index;
+            result.xRef = ref;
+            return result;
+        }
+        public static Pythonlisting createWithString(int type, int index, Bstr str)
+        {
+            Pythonlisting result = new Pythonlisting();
+            result.type = type;
+            result.index = index;
+            result.xString = str;
+            return result;
+        }
+        public Pythonlisting(context c) throws readexception
+        {
+            this(c,Urustring.createFromString("(this constructor doesn't show the pyfile)"));
+        }
         public Pythonlisting(context c, Urustring pyfile) throws readexception
         {
             Bytestream data = c.in;

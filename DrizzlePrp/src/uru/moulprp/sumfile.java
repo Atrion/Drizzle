@@ -81,7 +81,7 @@ public class sumfile
         
         filecount = c.readInt();
         u1 = c.readInt();
-        files = c.readVector(sumfileFileinfo.class, filecount);
+        files = c.readArray(sumfileFileinfo.class, filecount);
     }
     
     public static class sumfileFileinfo extends uruobj

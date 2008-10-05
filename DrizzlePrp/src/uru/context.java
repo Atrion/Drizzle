@@ -127,7 +127,7 @@ public class context extends shared.BaseContext
         return result;
     }
     
-    public <T extends mystobj> T[] readVector( Class<T> objclass,int size) throws readexception
+    public <T extends mystobj> T[] readArray( Class<T> objclass,int size) throws readexception
     {
         T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, size);
         for(int i=0;i<size;i++)
@@ -177,6 +177,17 @@ public class context extends shared.BaseContext
             //mystobj newobj = T.create(this); //create the object.
             //T newT = (T)newobj; //cast the object.
             //result.add(newT); //put it in the array.
+        }
+        return result;
+    }
+    public <T extends mystobj> Vector<T> readVector( Class<T> objclass,int size) throws readexception
+    {
+        //T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, size);
+        Vector<T> result = new Vector<T>();
+        for(int i=0;i<size;i++)
+        {
+            //result[i] = (T)this.readObj(objclass);
+            result.add((T)this.readObj(objclass));
         }
         return result;
     }

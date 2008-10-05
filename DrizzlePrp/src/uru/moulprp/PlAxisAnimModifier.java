@@ -55,9 +55,9 @@ public class PlAxisAnimModifier extends uruobj
         if(c.readversion==4)
         {
             int count1 = c.readInt();
-            Flt[] flts1 = c.readVector(Flt.class, count1);
+            Flt[] flts1 = c.readArray(Flt.class, count1);
             int count2 = c.readInt();
-            Flt[] flts2 = c.readVector(Flt.class, count2);
+            Flt[] flts2 = c.readArray(Flt.class, count2);
             byte b4 = c.readByte();
             Flt f1 = new Flt(c);
             Flt f2 = new Flt(c);

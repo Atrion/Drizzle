@@ -38,7 +38,7 @@ public class PlSoftVolumeIntersect extends uruobj
     {
         parent = new PlSoftVolume(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
         
     }
     
@@ -46,7 +46,7 @@ public class PlSoftVolumeIntersect extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
     }
     
 }

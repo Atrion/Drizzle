@@ -23,24 +23,25 @@ import uru.context; import shared.readexception;
 import shared.m;
 import uru.Bytedeque;
 import uru.Bytestream;
+import java.lang.Comparable;
 
 /**
  *
  * @author user
  */
-public class PrpRootObject extends uruobj
+public class PrpRootObject extends uruobj implements Comparable
 {
     public Objheader header;
     PrpObject prpobject;
     //public boolean isRaw = false;
     //public boolean saveRaw = false;
-    public boolean hasChanged;
-    public boolean hasRaw;
-    public boolean hasParsed;
+    public boolean hasChanged; //does it have changes that need to be written
+    public boolean hasRaw; //does it have raw byte[] data.
+    public boolean hasParsed; //does it have a real prpobject
     byte[] rawdata;
     int readversion;
     
-    boolean tagDeleted = false;
+    public boolean tagDeleted = false;
     
     public PrpRootObject(context c, boolean readRaw, int length) throws readexception
     {
@@ -67,8 +68,29 @@ public class PrpRootObject extends uruobj
         }
         prpobject = new PrpObject(c, header.objecttype);
     }
-    
+    public int compareTo(Object o)
+    {
+        if(!(o instanceof PrpRootObject)) return -1;
+        PrpRootObject obj = (PrpRootObject)o;
+        int a = this.header.desc.objecttype.compareTo(obj.header.desc.objecttype);
+        if(a<0) return -1;
+        if(a>0) return 1;
+        return this.header.desc.objectname.toString().compareTo(obj.header.desc.objectname.toString());
+    }
     private PrpRootObject(){}
+    public static PrpRootObject createFromDescAndObject(Uruobjectdesc desc, uruobj object)
+    {
+        PrpRootObject result = new PrpRootObject();
+        result.prpobject = PrpObject.createFromUruobj(object);
+        result.header = Objheader.createFromDesc(desc);
+        
+        result.readversion = 3;
+        result.hasChanged = false;
+        result.hasRaw = false;
+        result.hasParsed = true;
+        
+        return result;
+    }
     
     public void parseRawDataNow() throws readexception
     {
@@ -121,6 +143,31 @@ public class PrpRootObject extends uruobj
     public <T> T castTo() //java.lang.Class<T> objclass)
     {
         T result = (T)this.prpobject.object;
+        return result;
+    }
+    
+    public <T> T castTo(T dummy)
+    {
+        //PrpRootObject a = c.cast(this.prpobject.object);
+        T result = (T)this.prpobject.object;
+        return result;
+    }
+    
+    public <T> T castTo(Class<T> cls)
+    {
+        T result = (T)this.prpobject.object;
+        return result;
+    }
+    
+    public x0000Scenenode castToSceneNode()
+    {
+        x0000Scenenode result = this.castTo();
+        return result;
+    }
+    
+    public x0001Sceneobject castToSceneObject()
+    {
+        x0001Sceneobject result = this.castTo();
         return result;
     }
     

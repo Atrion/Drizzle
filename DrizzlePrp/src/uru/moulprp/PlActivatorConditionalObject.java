@@ -38,14 +38,14 @@ public class PlActivatorConditionalObject extends uruobj
     {
         parent = new PlConditionalObject(c);
         count = c.readInt();
-        pickingdetectors = c.readVector(Uruobjectref.class, count);
+        pickingdetectors = c.readArray(Uruobjectref.class, count);
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(pickingdetectors);
+        c.writeArray(pickingdetectors);
     }
     
 }

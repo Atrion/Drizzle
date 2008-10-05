@@ -47,9 +47,9 @@ public class PlWaveSet7 extends uruobj
         u1 = new Flt(c);
         sub1 = new waveset7sub(c);
         refcount1 = c.readInt();
-        refs1 = c.readVector(Uruobjectref.class, refcount1);
+        refs1 = c.readArray(Uruobjectref.class, refcount1);
         refcount2 = c.readInt();
-        refs2 = c.readVector(Uruobjectref.class, refcount2);
+        refs2 = c.readArray(Uruobjectref.class, refcount2);
         ref3 = new Uruobjectref(c);
         //_EDI+104 = PlMultiModifier.count
         //_EDI+100 = PlMultiModifier.DWArray
@@ -69,9 +69,9 @@ public class PlWaveSet7 extends uruobj
         u1.compile(c);
         sub1.compile(c);
         c.writeInt(refcount1);
-        c.writeVector(refs1);
+        c.writeArray(refs1);
         c.writeInt(refcount2);
-        c.writeVector(refs2);
+        c.writeArray(refs2);
         ref3.compile(c);
         
         if(parent.count!=0)
@@ -102,8 +102,8 @@ public class PlWaveSet7 extends uruobj
         
         public waveset7sub(context c) throws readexception
         {
-            u2 = c.readVector(Flt.class, 5);
-            u3 = c.readVector(Flt.class, 5);
+            u2 = c.readArray(Flt.class, 5);
+            u3 = c.readArray(Flt.class, 5);
             u4 = new Flt(c);
             u5 = new Vertex(c);
             u6 = new Vertex(c);
@@ -112,7 +112,7 @@ public class PlWaveSet7 extends uruobj
             u9 = new Vertex(c);
             u10 = new Vertex(c);
             u11 = new Vertex(c);
-            u12 = c.readVector(Flt.class, 25);
+            u12 = c.readArray(Flt.class, 25);
             u13 = new Vertex(c);
             u14 = new Flt(c);
             u15 = new Flt(c);
@@ -120,8 +120,8 @@ public class PlWaveSet7 extends uruobj
         
         public void compile(Bytedeque c)
         {
-            c.writeVector(u2);
-            c.writeVector(u3);
+            c.writeArray(u2);
+            c.writeArray(u3);
             u4.compile(c);
             u5.compile(c);
             u6.compile(c);
@@ -130,7 +130,7 @@ public class PlWaveSet7 extends uruobj
             u9.compile(c);
             u10.compile(c);
             u11.compile(c);
-            c.writeVector(u12);
+            c.writeArray(u12);
             u13.compile(c);
             u14.compile(c);
             u15.compile(c);

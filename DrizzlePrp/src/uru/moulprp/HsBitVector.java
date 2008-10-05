@@ -50,7 +50,7 @@ public class HsBitVector extends uruobj
     
     private HsBitVector(){}
     
-    public static HsBitVector createFromNothing()
+    public static HsBitVector createDefault()
     {
         HsBitVector result = new HsBitVector();
         result.count = 0;

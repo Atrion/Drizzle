@@ -59,7 +59,7 @@ public class x001CSimulationInterface extends uruobj
         else if(c.readversion==4)
         {
             //these are always zero in moul and pots, so we are justified in doing this.
-            props = HsBitVector.createFromNothing();
+            props = HsBitVector.createDefault();
             u2 = 0;
         }
         physical = new Uruobjectref(c);

@@ -43,10 +43,10 @@ public class PlGrassShaderMod extends uruobj
         
         parent = new PlSynchedObject(c);
         ref = new Uruobjectref(c);
-        u1 = c.readVector(Flt.class, 6);
-        u2 = c.readVector(Flt.class, 6);
-        u3 = c.readVector(Flt.class, 6);
-        u4 = c.readVector(Flt.class, 6);
+        u1 = c.readArray(Flt.class, 6);
+        u2 = c.readArray(Flt.class, 6);
+        u3 = c.readArray(Flt.class, 6);
+        u4 = c.readArray(Flt.class, 6);
 
         throw new shared.readwarningexception("plGrassShaderMod: can read okay, but failing in order to ignore.");
     }

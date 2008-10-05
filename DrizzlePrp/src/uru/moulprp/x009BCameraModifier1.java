@@ -65,15 +65,15 @@ public class x009BCameraModifier1 extends uruobj
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        messageQueue = c.readVector(PrpTaggedObject.class, count2);
-        messageQueueSenders = c.readVector(Uruobjectref.class, count2);
+        messageQueue = c.readArray(PrpTaggedObject.class, count2);
+        messageQueueSenders = c.readArray(Uruobjectref.class, count2);
         
         count3 = c.readInt();
         /*if(count3!=0)
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        FOVInstructions = c.readVector(PrpTaggedObject.class, count3);
+        FOVInstructions = c.readArray(PrpTaggedObject.class, count3);
         animated = c.readByte();
         startAnimOnPush = c.readByte();
         stopAnimOnPop = c.readByte();
@@ -95,15 +95,15 @@ public class x009BCameraModifier1 extends uruobj
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        c.writeVector(messageQueue);
-        c.writeVector(messageQueueSenders);
+        c.writeArray(messageQueue);
+        c.writeArray(messageQueueSenders);
         
         c.writeInt(count3);
         /*if(count3!=0)
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        c.writeVector(FOVInstructions);
+        c.writeArray(FOVInstructions);
         
         c.writeByte(animated);
         c.writeByte(startAnimOnPush);

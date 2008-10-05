@@ -56,7 +56,7 @@ public class PlMobileOccluder extends uruobj
         {
             //if u1&1==0 then vertex, 3*(vertex, flt, flt)
             //m.warn("untested case in PlMobileOccluder.");
-            conglomerate = c.readVector(Flt.class, 18);
+            conglomerate = c.readArray(Flt.class, 18);
         }
         
     }
@@ -74,7 +74,7 @@ public class PlMobileOccluder extends uruobj
         v2.compile(c);
         if((u1&0x1)==0)
         {
-            c.writeVector(conglomerate);
+            c.writeArray(conglomerate);
         }
     }
     

@@ -79,7 +79,7 @@ public class PlLimitedDirLightInfo extends uruobj
             //u3 = c.readInt();
             parent = new PlRegionBase(c);
             //floats = c.readVector(Flt.class, 76); //76=12+16+16+16+16
-            floats = c.readVector(Flt.class, 12);
+            floats = c.readArray(Flt.class, 12);
             m1 = new Transmatrix(c);
             m2 = new Transmatrix(c);
             m3 = new Transmatrix(c);
@@ -88,13 +88,13 @@ public class PlLimitedDirLightInfo extends uruobj
             softvolume = new Uruobjectref(c);
             scenenode = new Uruobjectref(c);
             count = c.readInt();
-            visRegion = c.readVector(Uruobjectref.class, count);
+            visRegion = c.readArray(Uruobjectref.class, count);
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
-            c.writeVector(floats);
+            c.writeArray(floats);
             m1.compile(c);
             m2.compile(c);
             m3.compile(c);
@@ -103,7 +103,7 @@ public class PlLimitedDirLightInfo extends uruobj
             softvolume.compile(c);
             scenenode.compile(c);
             c.writeInt(count);
-            c.writeVector(visRegion);
+            c.writeArray(visRegion);
         }
     }
 }

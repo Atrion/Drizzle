@@ -1053,7 +1053,15 @@ public class mystAutomation
                 decryptedData = agefile.saveToByteArray();
             }
             
-            //
+            //modify Minkata's Age file.
+            if(agename.toLowerCase().equals("minkata"))
+            {
+                textfile agefile = textfile.createFromBytes(decryptedData);
+                agefile.appendLine("Page=minkDusttestDay,11");
+                agefile.appendLine("Page=minkDusttestNight,12");
+                agefile.appendLine("Page=minkDusttest,10");
+                decryptedData = agefile.saveToByteArray();
+            }
             
             byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
@@ -1089,7 +1097,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            processPrp(prp,agename,agenames);
+            processPrp(prp,agename,agenames,outfolder);
             
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1130,7 +1138,7 @@ public class mystAutomation
             }
         }
     }
-    public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames)
+    public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder)
     {
         String newagename = agenames.get(agename);
         String finalname = newagename;
@@ -1147,7 +1155,7 @@ public class mystAutomation
                 {
                     if(pfm.pyfile.toString().toLowerCase().equals("xlinkingbookguipopup"))
                     {
-                        String oldlink = pfm.listings[2].xString.toString();
+                        String oldlink = pfm.listings.get(2).xString.toString();
                         String age;
                         String spawnpoint;
                         if(oldlink.equals("DireboLaki"))
@@ -1197,9 +1205,13 @@ public class mystAutomation
                             spawnpoint="";
                         }
                         pfm.pyfile = Urustring.createFromString("dusttest");
-                        pfm.listcount = 3;
-                        pfm.listings = new Pythonlisting[3];
-                        pfm.listings[0] = new Pythonlisting();
+                        pfm.clearListings();
+                        //pfm.listcount = 3;
+                        //pfm.listings = new Pythonlisting[3];
+                        pfm.addListing(Pythonlisting.createWithString(4, 1, Bstr.createFromString("linktoage")));
+                        pfm.addListing(Pythonlisting.createWithString(4, 2, Bstr.createFromString(age)));
+                        pfm.addListing(Pythonlisting.createWithString(4, 3, Bstr.createFromString(spawnpoint)));
+                        /*pfm.listings[0] = new Pythonlisting();
                         pfm.listings[0].index = 1;
                         pfm.listings[0].type = 4; //string
                         pfm.listings[0].xString = Bstr.createFromString("linktoage");
@@ -1210,7 +1222,7 @@ public class mystAutomation
                         pfm.listings[2] = new Pythonlisting();
                         pfm.listings[2].index = 3;
                         pfm.listings[2].type = 4; //string
-                        pfm.listings[2].xString = Bstr.createFromString(spawnpoint);
+                        pfm.listings[2].xString = Bstr.createFromString(spawnpoint);*/
                         
                         //Vector<Pythonlisting> pls = new Vector<Pythonlisting>();
                         //for(Pythonlisting pl: pfm.listings)
@@ -1261,13 +1273,31 @@ public class mystAutomation
             }
         }
                 
-        if(false) //attempts to fix the invisible minkata craters.
+        if(true) //attempts to fix the invisible minkata craters.
         {
-            PrpRootObject[] clustergroups = prputils.FindAllObjectsOfType(prp, Typeid.plClusterGroup);
-            for(PrpRootObject clustergroup: clustergroups)
+            if(finalname.toLowerCase().equals("minkata") && prp.header.pagename.toString().toLowerCase().equals("minkexteriorday"))
             {
-                uru.moulprp.PlClusterGroup cgroup = clustergroup.castTo();
+                fixCraters.fixCraters(prp, finalname, "minkDusttestDay", outfolder, Pageid.createFromPrefixPagenum(42, 11));
                 
+                //go ahead and make the dummy prp while we're at it.
+                hackFactory.createMinkataClusterGroupPythonMod(outfolder);
+                
+                /*PrpRootObject[] clustergroups = prp.FindAllObjectsOfType(Typeid.plClusterGroup);
+                for(PrpRootObject clustergroup: clustergroups)
+                {
+                    uru.moulprp.PlClusterGroup plcg = clustergroup.castTo();
+                    plcg.count2 = 0;
+                    plcg.fRegions = new Uruobjectref[0];
+                }*/
+                
+            }
+            
+            if(finalname.toLowerCase().equals("minkata") && prp.header.pagename.toString().toLowerCase().equals("minkexteriornight"))
+            {
+                fixCraters.fixCraters(prp, finalname, "minkDusttestNight", outfolder, Pageid.createFromPrefixPagenum(42, 12));
+            
+            }
+            
                 //disable visregion.
                 /*cgroup.count2 = 0; //disable visregion.
                 cgroup.refs = new Uruobjectref[0]; //disable visregion.*/
@@ -1289,7 +1319,7 @@ public class mystAutomation
                     int dummy=0;
                 }*/
                 int dummy=0;
-            }
+            //}
         }
 
         if(AllStates.getStateAsBoolean("removeLadders"))
@@ -1506,7 +1536,7 @@ public class mystAutomation
         }
     }*/
     
-    public static void convertCrowthistleToPots(String crowthistlefolder, String potsfolder)
+    public static void convertCrowthistleToPots(String crowthistlefolder, String outfolder)
     {
         class crowDecider implements uru.moulprp.prputils.Compiler.Decider
         {
@@ -1641,13 +1671,13 @@ public class mystAutomation
         };
 
         //create folders...
-        FileUtils.CreateFolder(potsfolder+"/dat/");
+        FileUtils.CreateFolder(outfolder+"/dat/");
 
         //convert .fni files...
         for(String filename: fnifiles)
         {
             String infile = crowthistlefolder + "/dat/" + filename;
-            String outfile = potsfolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + filename;
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -1659,7 +1689,7 @@ public class mystAutomation
         for(String filename: agefiles)
         {
             String infile = crowthistlefolder + "/dat/" + filename;
-            String outfile = potsfolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + filename;
             String agename = getAgenameFromFilename(filename);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
@@ -1684,7 +1714,7 @@ public class mystAutomation
             //Runtime.getRuntime().gc();
             
             String infile = crowthistlefolder + "/dat/" + filename;
-            String outfile = potsfolder + "/dat/" + filename.replaceFirst("_", "_District_");
+            String outfile = outfolder + "/dat/" + filename.replaceFirst("_", "_District_");
             String agename = getAgenameFromFilename(filename);
             
             Bytes prpdata = Bytes.createFromFile(infile);
@@ -1703,17 +1733,17 @@ public class mystAutomation
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
 
-            processPrp(prp,agename,agenames);
+            processPrp(prp,agename,agenames,outfolder);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
         }
         
         //create .sum files...
-        Bytes sum1 = uru.moulprp.sumfile.createSumfile(potsfolder+"/dat/", "MarshScene");
-        FileUtils.WriteFile(potsfolder+"/dat/MarshScene.sum", sum1);
-        Bytes sum2 = uru.moulprp.sumfile.createSumfile(potsfolder+"/dat/", "MountainScene");
-        FileUtils.WriteFile(potsfolder+"/dat/MountainScene.sum", sum2);
+        Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MarshScene");
+        FileUtils.WriteFile(outfolder+"/dat/MarshScene.sum", sum1);
+        Bytes sum2 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MountainScene");
+        FileUtils.WriteFile(outfolder+"/dat/MountainScene.sum", sum2);
         
         
         m.msg("Done Crowthistle work!");
@@ -1944,7 +1974,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            processPrp(prp,agename,agenames);
+            processPrp(prp,agename,agenames,outfolder);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);

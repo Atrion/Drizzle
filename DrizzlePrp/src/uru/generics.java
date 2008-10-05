@@ -37,7 +37,16 @@ public class generics
         }
         return result;
     }
-    
+    public static <T> Vector<T> convertArrayToVector(T[] arry)
+    {
+        //m.msg("Using untested convertArrayToVector method.");
+        Vector<T> result = new Vector<T>();
+        for(int i=0;i<arry.length;i++)
+        {
+            result.add(arry[i]);
+        }
+        return result;
+    }
     public static <T> T[] makeArray(Class objclass, int length)
     {
         T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, length);

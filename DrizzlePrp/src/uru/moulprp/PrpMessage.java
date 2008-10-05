@@ -247,7 +247,7 @@ public abstract class PrpMessage extends PrpTaggedObject
             if(c.readversion==3||c.readversion==6)
             {
                 //this is correct.
-                u2 = c.readVector(Flt.class, 7);
+                u2 = c.readArray(Flt.class, 7);
             }
             else if(c.readversion==4)
             {
@@ -280,7 +280,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parent.compile(c);
             u1.compile(c);
-            c.writeVector(u2);
+            c.writeArray(u2);
             u3.compile(c);
             u4.compile(c);
         }
@@ -571,14 +571,14 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parent = new PlMessage(c);
             count = c.readInt();
-            callbacks = c.readVector(PlOneShotCallback.class, count);
+            callbacks = c.readArray(PlOneShotCallback.class, count);
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeVector(callbacks);
+            c.writeArray(callbacks);
         }
         
         public static class PlOneShotCallback extends uruobj
@@ -811,14 +811,14 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parent = new PlMessage(c);
             count = c.readInt();
-            callbacks = c.readVector(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
+            callbacks = c.readArray(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeVector(callbacks);
+            c.writeArray(callbacks);
         }
     }
     public static class PlSoundMsg extends uruobj
@@ -887,7 +887,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parentobj = new Uruobjectref(c);
             refcount = c.readInt();
-            refs = c.readVector(Uruobjectref.class, refcount);
+            refs = c.readArray(Uruobjectref.class, refcount);
             if(c.readversion==3||c.readversion==6)
             {
                 u1 = c.readInt();
@@ -908,7 +908,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parentobj.compile(c);
             c.writeInt(refcount);
-            c.writeVector(refs);
+            c.writeArray(refs);
             c.writeInt(u1);
             c.writeInt(u2);
             c.writeInt(flags);

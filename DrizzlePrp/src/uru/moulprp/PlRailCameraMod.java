@@ -52,7 +52,7 @@ public class PlRailCameraMod extends uruobj
         ref1 = new Uruobjectref(c);
         ref2 = new Uruobjectref(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
         u2 = c.readInt();
         if(((u2)&0x60000)!=0)
         {
@@ -74,7 +74,7 @@ public class PlRailCameraMod extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
         c.writeInt(u2);
         if(((u2)&0x60000)!=0)
         {

@@ -70,14 +70,14 @@ public class PlOccluder extends uruobj
         {
             //if u1&1==0 then vertex, 3*(vertex, flt, flt)
             //m.warn("untested case in PlOccluder.");
-            conglomerate = c.readVector(Flt.class, 18);
+            conglomerate = c.readArray(Flt.class, 18);
         }
         f1 = new Flt(c);
         counta = c.readShort();
-        blocks = c.readVector(SubOccluder.class, b.Int16ToInt32(counta));
+        blocks = c.readArray(SubOccluder.class, b.Int16ToInt32(counta));
         scenenode = new Uruobjectref(c);
         countd = c.readShort();
-        visRegion = c.readVector(Uruobjectref.class, b.Int16ToInt32(countd));
+        visRegion = c.readArray(Uruobjectref.class, b.Int16ToInt32(countd));
         
         //u1 = c.readInt();
         //u2 = c.readInt();
@@ -100,15 +100,15 @@ public class PlOccluder extends uruobj
         v2.compile(c);
         if((u1&0x1)==0)
         {
-            c.writeVector(conglomerate);
+            c.writeArray(conglomerate);
         }
         
         f1.compile(c);
         c.writeShort(counta);
-        c.writeVector(blocks);
+        c.writeArray(blocks);
         scenenode.compile(c);
         c.writeShort(countd);
-        c.writeVector(visRegion);
+        c.writeArray(visRegion);
     }
     
     public static class SubOccluder extends uruobj
@@ -134,7 +134,7 @@ public class PlOccluder extends uruobj
             v2 = new Vertex(c);
             f2 = new Flt(c);
             count = c.readInt();
-            vertices = c.readVector(Vertex.class, count);
+            vertices = c.readArray(Vertex.class, count);
             
             //countb = c.readInt();
             //int countb2 = (countb==0) ? 2 : countb; //if countb=0, set it to 2.
@@ -152,7 +152,7 @@ public class PlOccluder extends uruobj
             v2.compile(c);
             f2.compile(c);
             c.writeInt(count);
-            c.writeVector(vertices);
+            c.writeArray(vertices);
             //c.writeInt(countb);
             //c.writeVector(floats1);
             //c.writeInt(countc);

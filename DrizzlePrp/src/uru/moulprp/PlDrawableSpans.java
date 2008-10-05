@@ -90,7 +90,7 @@ public class PlDrawableSpans extends uruobj
         }
         
         subsetcount = data.readInt();
-        subsets = c.readVector(SpanSubset.class,subsetcount);
+        subsets = c.readArray(SpanSubset.class,subsetcount);
         for(int i=0;i<subsetcount;i++)
         {
             if(subsets[i].materialindex==58)
@@ -110,7 +110,7 @@ public class PlDrawableSpans extends uruobj
         
         if(subsetcount>0)
         {
-            xboundingBoxes = c.readVector(BoundingBox.class,3);
+            xboundingBoxes = c.readArray(BoundingBox.class,3);
         }
 
         //lightcount = data.readInt();
@@ -125,14 +125,14 @@ public class PlDrawableSpans extends uruobj
         lightinfos = new GrowVector<Uruobjectref>(Uruobjectref.class, c);
         
         matrixsetcount = data.readInt();
-        blendmatrix = c.readVector(Transmatrix.class,matrixsetcount);
-        matrix2 = c.readVector(Transmatrix.class,matrixsetcount);
-        matrix3 = c.readVector(Transmatrix.class,matrixsetcount);
-        matrix4 = c.readVector(Transmatrix.class,matrixsetcount);
+        blendmatrix = c.readArray(Transmatrix.class,matrixsetcount);
+        matrix2 = c.readArray(Transmatrix.class,matrixsetcount);
+        matrix3 = c.readArray(Transmatrix.class,matrixsetcount);
+        matrix4 = c.readArray(Transmatrix.class,matrixsetcount);
         subsetgroupcount = data.readInt();
-        subsetgroups = c.readVector(SubsetGroup.class,subsetgroupcount);
+        subsetgroups = c.readArray(SubsetGroup.class,subsetgroupcount);
         meshcount = data.readInt(); //so far so good.
-        meshes = c.readVector(Mesh.class,meshcount);
+        meshes = c.readArray(Mesh.class,meshcount);
         embeddedtype = Typeid.Read(c);
         switch(embeddedtype)
         {
@@ -157,28 +157,28 @@ public class PlDrawableSpans extends uruobj
         data.writeInt(zbias);
         data.writeInt(blendflags);
         data.writeInt(matcount);
-        data.writeVector(materials);
+        data.writeArray(materials);
         data.writeInt(subsetcount);
-        data.writeVector(subsets);
+        data.writeArray(subsets);
         data.writeInt(unused);
         data.writeInt(listcount);
         data.writeInts(unused2);
         //data.writeBytes(unused3);
-        data.writeVector(unused3);
+        data.writeArray(unused3);
         if(subsetcount>0)
         {
-            data.writeVector(xboundingBoxes);
+            data.writeArray(xboundingBoxes);
         }
         lightinfos.compile(data);
         data.writeInt(matrixsetcount);
-        data.writeVector(blendmatrix);
-        data.writeVector(matrix2);
-        data.writeVector(matrix3);
-        data.writeVector(matrix4);
+        data.writeArray(blendmatrix);
+        data.writeArray(matrix2);
+        data.writeArray(matrix3);
+        data.writeArray(matrix4);
         data.writeInt(subsetgroupcount);
-        data.writeVector(subsetgroups);
+        data.writeArray(subsetgroups);
         data.writeInt(meshcount);
-        data.writeVector(meshes);
+        data.writeArray(meshes);
         //TODO: remove next line, it's a hack.
         //embeddedtype = Typeid.nil;
         embeddedtype.compile(data);

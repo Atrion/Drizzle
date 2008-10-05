@@ -398,7 +398,7 @@ public class PlParticleSystem extends uruobj
             u4 = new Flt(c);
             u5 = new Flt(c);
             u6 = new Flt(c);
-            u7 = c.readVector(Vertex.class, count*2);
+            u7 = c.readArray(Vertex.class, count*2);
         }
         
         public void compile(Bytedeque c)
@@ -409,7 +409,7 @@ public class PlParticleSystem extends uruobj
             u4.compile(c);
             u5.compile(c);
             u6.compile(c);
-            c.writeVector(u7);
+            c.writeArray(u7);
         }
     }
     /*public static class plParticleEmitter extends uruobj
@@ -470,18 +470,18 @@ public class PlParticleSystem extends uruobj
         
         public plSimpleParticleGenerator(context c) throws readexception
         {
-            u1 = c.readVector(Flt.class, 4);
+            u1 = c.readArray(Flt.class, 4);
             count = c.readInt();
-            u2 = c.readVector(Flt.class, count*5); //5 actually consists of a vertex and 2 floats.
-            u3 = c.readVector(Flt.class, 9);
+            u2 = c.readArray(Flt.class, count*5); //5 actually consists of a vertex and 2 floats.
+            u3 = c.readArray(Flt.class, 9);
         }
         
         public void compile(Bytedeque c)
         {
-            c.writeVector(u1);
+            c.writeArray(u1);
             c.writeInt(count);
-            c.writeVector(u2);
-            c.writeVector(u3);
+            c.writeArray(u2);
+            c.writeArray(u3);
         }
     }
     /*public static class plSimpleParticleGenerator extends uruobj

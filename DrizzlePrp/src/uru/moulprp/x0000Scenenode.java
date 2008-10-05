@@ -24,7 +24,7 @@ import uru.Bytedeque;
 import uru.e;
 import shared.m;
 import uru.b;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -33,17 +33,19 @@ import uru.b;
 public class x0000Scenenode extends uruobj
 {
     //Objheader xheader;
-    int count1;
-    Uruobjectref[] objectrefs1; //all x0001Sceneobject
-    int count2;
-    Uruobjectref[] objectrefs2; //misc others.
+    public int count1;
+    //public Uruobjectref[] objectrefs1; //all x0001Sceneobject
+    public Vector<Uruobjectref> objectrefs1;
+    public int count2;
+    //public Uruobjectref[] objectrefs2; //misc others.
+    public Vector<Uruobjectref> objectrefs2;
     
     public x0000Scenenode(context c) throws readexception
     {
         Bytestream data = c.in;
         ////if(hasHeader) xheader = new Objheader(c);
         count1 = data.readInt();
-        objectrefs1 = new Uruobjectref[count1];
+        /*objectrefs1 = new Uruobjectref[count1];
         for(int i=0;i<count1;i++)
         {
             //if(c.readversion==6||c.readversion==3)
@@ -54,9 +56,10 @@ public class x0000Scenenode extends uruobj
             //{
             //    objectrefs1[i] = Uruobjectref.createFromUruobjectdesc(new Uruobjectdesc(c));
             //}
-        }
+        }*/
+        objectrefs1 = c.readVector(Uruobjectref.class, count1);
         count2 = data.readInt();
-        objectrefs2 = new Uruobjectref[count2];
+        /*objectrefs2 = new Uruobjectref[count2];
         for(int i=0;i<count2;i++)
         {
             //if(c.readversion==6||c.readversion==3)
@@ -67,15 +70,57 @@ public class x0000Scenenode extends uruobj
             //{
             //    objectrefs2[i] = Uruobjectref.createFromUruobjectdesc(new Uruobjectdesc(c));
             //}
-        }
+        }*/
+        objectrefs2 = c.readVector(Uruobjectref.class, count2);
         
+    }
+    private x0000Scenenode(){}
+    public static x0000Scenenode createDefault()
+    {
+        x0000Scenenode result = new x0000Scenenode();
+        result.count1 = 0;
+        //result.objectrefs1 = new Uruobjectref[0];
+        result.objectrefs1 = new Vector<Uruobjectref>();
+        result.count2 = 0;
+        //result.objectrefs2 = new Uruobjectref[0];
+        result.objectrefs2 = new Vector<Uruobjectref>();
+        return result;
+    }
+    public void regenerateAllSceneobjectsFromPrpRootObjects(PrpRootObject[] objs)
+    {
+        this.count1 = 0;
+        this.objectrefs1.clear();
+        
+        for(PrpRootObject obj: objs)
+        {
+            if(obj.tagDeleted) continue;
+            
+            if(obj.header.desc.objecttype==Typeid.plSceneObject)
+            {
+                this.addToObjectrefs1(obj.header.desc.toRef());
+            }
+        }
+    }
+    public void addToObjectrefs1(Uruobjectref ref)
+    {
+        count1++;
+        objectrefs1.add(ref);
+    }
+    public void addToObjectrefs2(Uruobjectref ref)
+    {
+        count2++;
+        objectrefs2.add(ref);
     }
     public void compile(Bytedeque deque)
     {
         m.msg("compile not implemented");
     }
-    public void compileSpecial(Bytedeque deque, prputils.Compiler.Decider decider)
+    public void compileSpecial(Bytedeque deque, PrpRootObject[] allobjects, prputils.Compiler.Decider decider)
     {
+        //this will get all the sceneobjects, except those tagged as deleted.
+        this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects);
+
+        
         //prputils.Compiler.isNormalObjectToBeIncluded(desc);
         int newcount1 = 0;
         int newcount2 = 0;
@@ -83,7 +128,8 @@ public class x0000Scenenode extends uruobj
         //count refs to be used from the first group.
         for(int i=0;i<count1;i++)
         {
-            Uruobjectref curref = objectrefs1[i];
+            //Uruobjectref curref = objectrefs1[i];
+            Uruobjectref curref = objectrefs1.get(i);
             if(curref.hasRef!=0)
             {
                 //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
@@ -96,7 +142,8 @@ public class x0000Scenenode extends uruobj
         //count refs to be used from the second group.
         for(int i=0;i<count2;i++)
         {
-            Uruobjectref curref = objectrefs2[i];
+            //Uruobjectref curref = objectrefs2[i];
+            Uruobjectref curref = objectrefs2.get(i);
             if(curref.hasRef!=0)
             {
                 //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
@@ -111,7 +158,8 @@ public class x0000Scenenode extends uruobj
         deque.writeInt(newcount1);
         for(int i=0;i<count1;i++)
         {
-            Uruobjectref curref = objectrefs1[i];
+            //Uruobjectref curref = objectrefs1[i];
+            Uruobjectref curref = objectrefs1.get(i);
             if(curref.hasRef!=0)
             {
                 //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
@@ -126,7 +174,77 @@ public class x0000Scenenode extends uruobj
         deque.writeInt(newcount2);
         for(int i=0;i<count2;i++)
         {
-            Uruobjectref curref = objectrefs2[i];
+            //Uruobjectref curref = objectrefs2[i];
+            Uruobjectref curref = objectrefs2.get(i);
+            if(curref.hasRef!=0)
+            {
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
+                {
+                    curref.compile(deque);
+                }
+            }
+        }
+    }
+    public void compileSpecial(Bytedeque deque, prputils.Compiler.Decider decider)
+    {
+        m.warn("Using deprecated Scenenode compileSpecial.  Change this!");
+        
+        //prputils.Compiler.isNormalObjectToBeIncluded(desc);
+        int newcount1 = 0;
+        int newcount2 = 0;
+
+        //count refs to be used from the first group.
+        for(int i=0;i<count1;i++)
+        {
+            //Uruobjectref curref = objectrefs1[i];
+            Uruobjectref curref = objectrefs1.get(i);
+            if(curref.hasRef!=0)
+            {
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
+                {
+                    newcount1++;
+                }
+            }
+        }
+        //count refs to be used from the second group.
+        for(int i=0;i<count2;i++)
+        {
+            //Uruobjectref curref = objectrefs2[i];
+            Uruobjectref curref = objectrefs2.get(i);
+            if(curref.hasRef!=0)
+            {
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
+                {
+                    newcount2++;
+                }
+            }
+        }
+        
+        //output first group.
+        deque.writeInt(newcount1);
+        for(int i=0;i<count1;i++)
+        {
+            //Uruobjectref curref = objectrefs1[i];
+            Uruobjectref curref = objectrefs1.get(i);
+            if(curref.hasRef!=0)
+            {
+                //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))
+                if(decider.isObjectToBeIncluded(curref.xdesc))
+                {
+                    curref.compile(deque);
+                }
+            }
+        }
+        
+        //output second group.
+        deque.writeInt(newcount2);
+        for(int i=0;i<count2;i++)
+        {
+            //Uruobjectref curref = objectrefs2[i];
+            Uruobjectref curref = objectrefs2.get(i);
             if(curref.hasRef!=0)
             {
                 //if(prputils.Compiler.isNormalObjectToBeIncluded(curref.xdesc))

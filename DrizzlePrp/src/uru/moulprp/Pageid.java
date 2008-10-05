@@ -103,6 +103,29 @@ public class Pageid extends uruobj
             }
         }
     }
+    private Pageid(){}
+    public static Pageid createFromPrefixSuffix(int prefix, int suffix)
+    {
+        Pageid result = new Pageid();
+        result.prefix = prefix;
+        result.suffix = suffix;
+        return result;
+    }
+    public static Pageid createFromPrefixPagenum(int prefix, int pagenum)
+    {
+        if(pagenum<0) m.err("Unhandled pagenum: investigate now!");
+        return createFromPrefixSuffix(prefix,pagenum+33);
+    }
+    public void setPagenum(int pagenum)
+    {
+        if(pagenum<0) m.err("Unhandled pagenum: investigate now!");
+        suffix = pagenum+33;
+    }
+    public int getPageNumber()
+    {
+        if(suffix<33) m.err("Unhandled pageid suffix: investigate now!");
+        return suffix - 33;
+    }
     //public int getRawData()
     //{
     //    return prefix << 16 | suffix;
@@ -120,7 +143,8 @@ public class Pageid extends uruobj
     
     public String toString()
     {
-        return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
+        //return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
+        return Integer.toString(prefix) + ":" + Integer.toString(suffix);
     }
 
     public boolean equals(Object o)

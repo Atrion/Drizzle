@@ -52,17 +52,17 @@ public class PlDynaDecalMgr extends uruobj
         ref1 = new Uruobjectref(c);
         ref2 = new Uruobjectref(c);
         count1 = c.readInt();
-        refs1 = c.readVector(Uruobjectref.class, count1);
+        refs1 = c.readArray(Uruobjectref.class, count1);
         count2 = c.readInt();
-        refs2 = c.readVector(Uruobjectref.class, count2);
+        refs2 = c.readArray(Uruobjectref.class, count2);
         u1 = c.readInt();
         u2 = c.readInt();
         u3 = c.readInt();
-        flts = c.readVector(Flt.class, 7);
+        flts = c.readArray(Flt.class, 7);
         u4 = new Vertex(c);
         u5 = new Flt(c);
         count3 = c.readInt();
-        refs3 = c.readVector(Uruobjectref.class, count3);
+        refs3 = c.readArray(Uruobjectref.class, count3);
     }
     
     public void compile(Bytedeque c)
@@ -71,17 +71,17 @@ public class PlDynaDecalMgr extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count1);
-        c.writeVector(refs1);
+        c.writeArray(refs1);
         c.writeInt(count2);
-        c.writeVector(refs2);
+        c.writeArray(refs2);
         c.writeInt(u1);
         c.writeInt(u2);
         c.writeInt(u3);
-        c.writeVector(flts);
+        c.writeArray(flts);
         u4.compile(c);
         u5.compile(c);
         c.writeInt(count3);
-        c.writeVector(refs3);
+        c.writeArray(refs3);
     }
     
 }

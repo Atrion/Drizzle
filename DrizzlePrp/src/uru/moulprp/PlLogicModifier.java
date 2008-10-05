@@ -41,7 +41,7 @@ public class PlLogicModifier extends uruobj
     {
         parent = new PlLogicModBase(c);
         conditionalcount = c.readInt();
-        conditionals = c.readVector(Uruobjectref.class, conditionalcount);
+        conditionals = c.readArray(Uruobjectref.class, conditionalcount);
         u1 = c.readInt();
         if(c.readversion==4)
         {
@@ -53,7 +53,7 @@ public class PlLogicModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(conditionalcount);
-        c.writeVector(conditionals);
+        c.writeArray(conditionals);
         c.writeInt(u1);
     }
     

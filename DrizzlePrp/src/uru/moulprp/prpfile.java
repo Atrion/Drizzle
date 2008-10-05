@@ -25,6 +25,7 @@ import uru.context;
 import shared.Bytes;
 import uru.moulprp.Typeid;
 import uru.moulprp.prputils.Compiler.Decider;
+import java.util.Vector;
 /**
  *
  * @author user
@@ -40,14 +41,48 @@ public class prpfile
     
     public prpfile(){}
     
+    public void orderObjects()
+    {
+        java.util.Arrays.sort(objects);
+        //java.util.Collections.sort(objects);
+    }
+    
     public static prpfile createFromContext(context c, Typeid[] typesToRead)
     {
         prpfile result = prputils.ProcessAllMoul(c, false, typesToRead);
         return result;
     }
+    public static prpfile createFromObjectsAndInfo(Vector<PrpRootObject> objs, String agename, String pagename, Pageid pageid, Pagetype pagetype)
+    {
+        PrpRootObject[] objs2 = uru.generics.convertVectorToArray(objs, PrpRootObject.class);
+        return createFromObjectsAndInfo(objs2,agename,pagename,pageid,pagetype);
+    }
     
+    public static prpfile createFromObjectsAndInfo(PrpRootObject[] objs, String agename, String pagename, Pageid pageid, Pagetype pagetype)
+    {
+        prpfile result = new prpfile();
+        result.objects = objs;
+        result.header = PrpHeader.createFromInfo(agename, pageid, pagetype, pagename);
+        
+        //these don't seem to be needed for compilation.  We may need to regenerate the ObjectIndex if we want to merge objects in and parse them.
+        //result.objectindex = PrpObjectIndex.
+        //result.filename
+        
+        return result;
+    }
+    public Bytes saveAsBytes()
+    {
+        //use the decider that always returns true by default.
+        class compileDecider implements uru.moulprp.prputils.Compiler.Decider{
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc){
+                return true;
+            }
+        }
+        return saveAsBytes(new compileDecider());
+    }
     public Bytes saveAsBytes(Decider decider)
     {
+        orderObjects();
         Bytes result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
@@ -103,6 +138,11 @@ public class prpfile
     {
         PrpRootObject obj = findObjectWithRef(ref);
         tagRootObjectAsDeleted(obj);
+    }
+    
+    public PrpRootObject[] FindAllObjectsOfType(Typeid type)
+    {
+        return prputils.FindAllObjectsOfType(this, type);
     }
     
 }

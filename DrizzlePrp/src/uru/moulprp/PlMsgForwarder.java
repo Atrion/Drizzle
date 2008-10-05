@@ -36,13 +36,13 @@ public class PlMsgForwarder extends uruobj
     public PlMsgForwarder(context c) throws readexception
     {
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
     }
     
     public void compile(Bytedeque c)
     {
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
     }
     
 }

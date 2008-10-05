@@ -38,14 +38,14 @@ public class PlImageLibMod extends uruobj
     {
         parent = new PlSingleModifier(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
     }
     
 }

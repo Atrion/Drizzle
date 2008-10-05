@@ -40,7 +40,7 @@ public class PlDetectorModifier extends uruobj
     {
         parent = new PlSingleModifier(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
         ref2 = new Uruobjectref(c);
         ref3 = new Uruobjectref(c);
         
@@ -50,7 +50,7 @@ public class PlDetectorModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
         ref2.compile(c);
         ref3.compile(c);
     }

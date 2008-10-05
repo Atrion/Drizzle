@@ -33,13 +33,13 @@ import uru.b;
 public class x0015CoordinateInterface extends uruobj
 {
     //Objheader xheader;
-    PlObjInterface parent;
+    public PlObjInterface parent;
     public Transmatrix localToParent; //1 and 2 should be inverses of each other.
     public Transmatrix parentToLocal;
     public Transmatrix localToWorld; //3 and 4 should be inverses of each other.
     public Transmatrix worldToLocal;
-    int count;
-    Uruobjectref[] children;
+    public int count;
+    public Uruobjectref[] children;
     
     public x0015CoordinateInterface(context c) throws readexception
     {
@@ -61,6 +61,19 @@ public class x0015CoordinateInterface extends uruobj
         {
             children[i] = new Uruobjectref(c);
         }
+    }
+    private x0015CoordinateInterface(){}
+    public static x0015CoordinateInterface createDefault(Uruobjectref sceneobject)
+    {
+        x0015CoordinateInterface result = new x0015CoordinateInterface();
+        result.parent = PlObjInterface.createDefault(sceneobject);
+        result.localToParent = Transmatrix.createDefault();
+        result.parentToLocal = Transmatrix.createDefault();
+        result.localToWorld = Transmatrix.createDefault();
+        result.worldToLocal = Transmatrix.createDefault();
+        result.count = 0;
+        result.children = new Uruobjectref[0];
+        return result;
     }
     public void compile(Bytedeque deque)
     {

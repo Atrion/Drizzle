@@ -46,9 +46,9 @@ public class PlMultiStageBehMod extends uruobj
         u2 = c.readByte();
         u3 = c.readByte();
         count1 = c.readInt();
-        animStages = c.readVector(plAnimStage.class, count1);
+        animStages = c.readArray(plAnimStage.class, count1);
         count2 = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count2);
+        refs = c.readArray(Uruobjectref.class, count2);
     }
     
     public void compile(Bytedeque c)
@@ -58,9 +58,9 @@ public class PlMultiStageBehMod extends uruobj
         c.writeByte(u2);
         c.writeByte(u3);
         c.writeInt(count1);
-        c.writeVector(animStages);
+        c.writeArray(animStages);
         c.writeInt(count2);
-        c.writeVector(refs);
+        c.writeArray(refs);
     }
     
     public static class plAnimStage extends uruobj

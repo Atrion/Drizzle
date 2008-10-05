@@ -38,7 +38,7 @@ public class PlInterfaceInfoModifier extends uruobj
     {
         parent = new PlSingleModifier(c);
         count = c.readInt();
-        logicmodifiers = c.readVector(Uruobjectref.class, count);
+        logicmodifiers = c.readArray(Uruobjectref.class, count);
         
     }
     
@@ -46,7 +46,7 @@ public class PlInterfaceInfoModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(logicmodifiers);
+        c.writeArray(logicmodifiers);
     }
     
 }

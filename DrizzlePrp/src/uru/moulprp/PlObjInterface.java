@@ -35,8 +35,9 @@ public class PlObjInterface extends uruobj
     //Objheader xheader;
     PlSynchedObject parent;
     Uruobjectref sceneobject;
-    int count;
-    int[] dwarray;
+    //int count;
+    //int[] dwarray;
+    public HsBitVector bv;
     
     
     public PlObjInterface(context c) throws readexception
@@ -45,14 +46,25 @@ public class PlObjInterface extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);
         sceneobject = new Uruobjectref(c);
-        count = data.readInt();
-        dwarray = data.readInts(count);
+        //count = data.readInt();
+        //dwarray = data.readInts(count);
+        bv = new HsBitVector(c);
+    }
+    private PlObjInterface(){}
+    public static PlObjInterface createDefault(Uruobjectref sceneobject)
+    {
+        PlObjInterface result = new PlObjInterface();
+        result.parent = PlSynchedObject.createDefault();
+        result.sceneobject = sceneobject;
+        result.bv = HsBitVector.createDefault();
+        return result;
     }
     public void compile(Bytedeque deque)
     {
         parent.compile(deque);
         sceneobject.compile(deque);
-        deque.writeInt(count);
-        deque.writeInts(dwarray);
+        //deque.writeInt(count);
+        //deque.writeInts(dwarray);
+        bv.compile(deque);
     }
 }

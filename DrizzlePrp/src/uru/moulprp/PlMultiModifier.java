@@ -33,9 +33,9 @@ import shared.m;
 public class PlMultiModifier extends uruobj
 {
     //Objheader xheader;
-    PlSynchedObject parent;
-    int count;
-    int[] DWarray;
+    public PlSynchedObject parent;
+    public int count;
+    public int[] DWarray;
     public PlMultiModifier(context c)//,boolean hasHeader)
     {
         //if(hasHeader) xheader = new Objheader(c);
@@ -46,6 +46,19 @@ public class PlMultiModifier extends uruobj
         {
             DWarray[i] = c.in.readInt();
         }
+    }
+    private PlMultiModifier(){}
+    public static PlMultiModifier createEmtpy()
+    {
+        return new PlMultiModifier();
+    }
+    public static PlMultiModifier createDefault()
+    {
+        PlMultiModifier result = PlMultiModifier.createEmtpy();
+        result.parent = PlSynchedObject.createDefault();
+        result.count = 0;
+        result.DWarray = new int[0];
+        return result;
     }
     public void compile(Bytedeque deque)
     {

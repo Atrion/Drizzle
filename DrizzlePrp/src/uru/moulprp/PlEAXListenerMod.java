@@ -63,7 +63,7 @@ public class PlEAXListenerMod extends uruobj
         u10 = c.readInt();
         u11 = new Flt(c);
         u12 = c.readInt();
-        u13 = c.readVector(Flt.class, 9);
+        u13 = c.readArray(Flt.class, 9);
         u14 = c.readInt();
         
     }
@@ -84,7 +84,7 @@ public class PlEAXListenerMod extends uruobj
         c.writeInt(u10);
         u11.compile(c);
         c.writeInt(u12);
-        c.writeVector(u13);
+        c.writeArray(u13);
         c.writeInt(u14);
     }
     

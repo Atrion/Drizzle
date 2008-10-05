@@ -339,7 +339,13 @@ public class PrpObject extends uruobj
     {
         object = this.getObject(c, type);
     }
-    
+    private PrpObject(){}
+    public static PrpObject createFromUruobj(uruobj obj)
+    {
+        PrpObject result = new PrpObject();
+        result.object = obj;
+        return result;
+    }
     public void compile(Bytedeque c)
     {
         object.compile(c);

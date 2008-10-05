@@ -45,7 +45,7 @@ public class x00A4ExcludeRegionModifier extends uruobj
         
         parent = new PlSingleModifier(c);//,false);
         count = c.readInt();
-        safepoints = c.readVector(Uruobjectref.class, count);
+        safepoints = c.readArray(Uruobjectref.class, count);
         seek = c.readByte();
         seektime = new Flt(c);
     }
@@ -53,7 +53,7 @@ public class x00A4ExcludeRegionModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(safepoints);
+        c.writeArray(safepoints);
         c.writeByte(seek);
         seektime.compile(c);
     }

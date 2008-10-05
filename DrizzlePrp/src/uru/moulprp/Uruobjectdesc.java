@@ -96,6 +96,22 @@ public class Uruobjectdesc extends uruobj
         //deepview.deepview.allreflinks.add(c.curRootObject, this);
         shared.reporter.reportEvent(new uru.reporterReports.refEncountered(c.curRootObject, this), "refEncountered");
     }
+    private Uruobjectdesc(){}
+    public static Uruobjectdesc createDefaultWithTypeNamePage(Typeid type, String name, Pageid page)
+    {
+        Uruobjectdesc result = new Uruobjectdesc();
+        result.flag = 0;
+        result.objectname = Urustring.createFromString(name);
+        result.objecttype = type;
+        result.pageid = page;
+        result.pagetype = Pagetype.createDefault();
+        return result;
+    }
+    public Uruobjectref toRef()
+    {
+        Uruobjectref result = Uruobjectref.createFromUruobjectdesc(this);
+        return result;
+    }
     //public static Uruobjectdesc create(Bytestream data)
     //{
     //    return new Uruobjectdesc(data);
@@ -116,7 +132,7 @@ public class Uruobjectdesc extends uruobj
     }
     public String toString()
     {
-        return objectname.toString()+"("+objecttype.toString()+")";
+        return objectname.toString()+"("+objecttype.toString()+")("+pageid.toString()+")";
     }
     public PrpRootObject getObjectDescribed(prpfile prp)
     {

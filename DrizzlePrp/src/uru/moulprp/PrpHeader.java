@@ -142,6 +142,24 @@ public class PrpHeader extends uruobj
             agename = Urustring.createFromString(c.ageName);
         }
     }
+    private PrpHeader(){}
+    public static PrpHeader createFromInfo(String agename, Pageid pid, Pagetype pagetype, String pagename)
+    {
+        PrpHeader result = new PrpHeader();
+        result.version = 5;
+        result.version2 = 0;
+        result.pageid = pid;
+        result.pagetype = pagetype;
+        result.agename = Urustring.createFromString(agename);
+        result.pagename = Urustring.createFromString(pagename);
+        
+        //these are only used for further reading.
+        result.payloadlength = -1;
+        result.offsetToFirstObject = -1;
+        result.offsetToObjectIndex = -1;
+        
+        return result;
+    }
     public void compile(Bytedeque deque)
     {
         m.msg("compile not implemented");

@@ -34,7 +34,7 @@ public class PlSynchedObject extends uruobj
 {
     //Objheader xheader;
     //x0002Keyedobject parent;
-    int flags;
+    public int flags;
     short xstringcount;
     Wpstr[] sdllinks;
     
@@ -45,6 +45,17 @@ public class PlSynchedObject extends uruobj
     {
         this(c);//,false);
     }*/
+    private PlSynchedObject(){}
+    public static PlSynchedObject createEmpty()
+    {
+        return new PlSynchedObject();
+    }
+    public static PlSynchedObject createDefault()
+    {
+        PlSynchedObject result = PlSynchedObject.createEmpty();
+        result.flags = 0;
+        return result;
+    }
     public PlSynchedObject(context c)//,boolean hasHeader)
     {
         Bytestream data = c.in;

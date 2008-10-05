@@ -39,7 +39,7 @@ public class PlAnimEventModifier extends uruobj
     {
         parent = new PlSingleModifier(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
         emb = new PrpTaggedObject(c);
     }
     
@@ -47,7 +47,7 @@ public class PlAnimEventModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
         emb.compile(c);
     }
     

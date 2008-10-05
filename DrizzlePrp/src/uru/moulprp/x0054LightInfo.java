@@ -82,7 +82,7 @@ public class x0054LightInfo extends uruobj
         softvolume = new Uruobjectref(c);
         scenenode = new Uruobjectref(c);
         count = data.readInt();
-        visregion = c.readVector(Uruobjectref.class, count);
+        visregion = c.readArray(Uruobjectref.class, count);
     }
     public void compile(Bytedeque data)
     {
@@ -107,7 +107,7 @@ public class x0054LightInfo extends uruobj
         softvolume.compile(data);
         scenenode.compile(data);
         data.writeInt(count);
-        data.writeVector(visregion);
+        data.writeArray(visregion);
         
     }
 }

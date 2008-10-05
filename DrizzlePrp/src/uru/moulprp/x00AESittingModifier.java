@@ -43,13 +43,13 @@ public class x00AESittingModifier extends uruobj
         parent = new PlSingleModifier(c);//,false);
         u1 = c.readByte();
         count = c.readInt();
-        references = c.readVector(Uruobjectref.class, count);
+        references = c.readArray(Uruobjectref.class, count);
     }
     public void compile(Bytedeque data)
     {
         parent.compile(data);
         data.writeByte(u1);
         data.writeInt(count);
-        data.writeVector(references);
+        data.writeArray(references);
     }
 }

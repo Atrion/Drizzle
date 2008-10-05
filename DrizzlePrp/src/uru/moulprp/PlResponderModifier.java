@@ -45,7 +45,7 @@ public class PlResponderModifier extends uruobj
         
         parent = new PlSingleModifier(c);//,false);
         count = c.readByte();
-        messages = c.readVector(PlResponderState.class, count);
+        messages = c.readArray(PlResponderState.class, count);
         state = c.readByte();
         enabled = c.readByte();
         flags = c.readByte();
@@ -54,7 +54,7 @@ public class PlResponderModifier extends uruobj
     {
         parent.compile(c);
         c.writeByte(count);
-        c.writeVector(messages);
+        c.writeArray(messages);
         c.writeByte(state);
         c.writeByte(enabled);
         c.writeByte(flags);

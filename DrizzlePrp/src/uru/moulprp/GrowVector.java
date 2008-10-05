@@ -78,7 +78,7 @@ public class GrowVector<T extends uruobj> extends uruobj
                     elements[i] = (T)T.create(data);
                 }*/
                 //elements = data.readVector(count);
-                elements = c.readVector(objclass, count);
+                elements = c.readArray(objclass, count);
             }
         }
         //static public GrowVectorElement<S> create(Bytestream data)
@@ -91,7 +91,7 @@ public class GrowVector<T extends uruobj> extends uruobj
             data.writeInt(count);
             if(count > 0)
             {
-                data.writeVector(elements);
+                data.writeArray(elements);
             }
         }
     }

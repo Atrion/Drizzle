@@ -44,14 +44,14 @@ public class PlDynamicEnvMap extends uruobj
     {
         u1 = new ithinkthisisPlCubicRenderTarget(c);
         u2 = new Vertex(c);
-        u3 = c.readVector(Flt.class, 8);
+        u3 = c.readArray(Flt.class, 8);
         u4 = c.readByte();
         refcount = c.readInt();
-        refs = c.readVector(Uruobjectref.class, refcount);
+        refs = c.readArray(Uruobjectref.class, refcount);
         if(c.readversion==6||c.readversion==4)
         {
             xsubcount = c.readInt();
-            xsubs = c.readVector(Urustring.class, xsubcount);
+            xsubs = c.readArray(Urustring.class, xsubcount);
             xref2 = new Uruobjectref(c);
         }
     }
@@ -60,10 +60,10 @@ public class PlDynamicEnvMap extends uruobj
     {
         u1.compile(c);
         u2.compile(c);
-        c.writeVector(u3);
+        c.writeArray(u3);
         c.writeByte(u4);
         c.writeInt(refcount);
-        c.writeVector(refs);
+        c.writeArray(refs);
         //skip this next block, since it's moul-only.
         /*if(c.readversion==6)
         {

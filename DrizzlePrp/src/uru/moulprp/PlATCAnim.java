@@ -76,7 +76,7 @@ public class PlATCAnim extends uruobj
         u13 = new Flt(c);
         count1 = data.readInt();
         //u14 = data.readInts(count1);
-        u14 = c.readVector(SubAtcanim2.class, count1);
+        u14 = c.readArray(SubAtcanim2.class, count1);
         count2 = data.readInt();
         substuff = new SubAtcanim[count2];
         for(int i=0;i<count2;i++)
@@ -85,7 +85,7 @@ public class PlATCAnim extends uruobj
         }
         count3 = data.readInt();
         //u15 = data.readInts(count3);
-        u15 = c.readVector(Flt.class, count3);
+        u15 = c.readArray(Flt.class, count3);
     }
     public void compile(Bytedeque c)
     {
@@ -104,14 +104,14 @@ public class PlATCAnim extends uruobj
         u12.compile(c);
         u13.compile(c);
         c.writeInt(count1);
-        c.writeVector(u14);
+        c.writeArray(u14);
         c.writeInt(count2);
         for(int i=0;i<count2;i++)
         {
             substuff[i].compile(c);
         }
         c.writeInt(count3);
-        c.writeVector(u15);
+        c.writeArray(u15);
     }
     
     public static class SubAtcanim2 extends uruobj

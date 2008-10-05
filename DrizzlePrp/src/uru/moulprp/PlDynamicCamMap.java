@@ -50,21 +50,21 @@ public class PlDynamicCamMap extends uruobj
         e.ensure(c.readversion==6||c.readversion==4);
         
         target = new PlDynamicEnvMap.plRenderTarget(c);
-        u1 = c.readVector(Flt.class, 8);
+        u1 = c.readArray(Flt.class, 8);
         u2 = c.readByte();
         u3 = new Uruobjectref(c);
         u4 = new Uruobjectref(c);
         u5 = c.readByte();
         int count = b.ByteToInt32(u5); //should this be signed instead?
-        u6 = c.readVector(Uruobjectref.class, count);
+        u6 = c.readArray(Uruobjectref.class, count);
         u7 = c.readInt();
-        u8 = c.readVector(Uruobjectref.class, u7);
+        u8 = c.readArray(Uruobjectref.class, u7);
         u9 = c.readInt();
-        u10 = c.readVector(Urustring.class, u9);
+        u10 = c.readArray(Urustring.class, u9);
         u11 = new Uruobjectref(c);
         u12 = c.readByte();
         int count2 = b.ByteToInt32(u12);
-        u13 = c.readVector(Uruobjectref.class, count2);
+        u13 = c.readArray(Uruobjectref.class, count2);
         
         throw new shared.readwarningexception("plDynamicCamMap: can read okay, but failing in order to ignore.");
     }

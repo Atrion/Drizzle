@@ -93,7 +93,7 @@ public class PlLayerAnimation extends uruobj
                 others[i] = new PrpTaggedObject(c);
             }
             count2 = c.in.readInt();
-            others2 = c.readVector(Flt.class, count2);
+            others2 = c.readArray(Flt.class, count2);
             /*flag = c.in.readInt();
             if(flag==1)
             {
@@ -120,7 +120,7 @@ public class PlLayerAnimation extends uruobj
                 others[i].compile(c);
             }
             c.writeInt(count2);
-            c.writeVector(others2);
+            c.writeArray(others2);
         }
     }
     public static class plLayerAnimationBase extends uruobj

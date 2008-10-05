@@ -24,6 +24,7 @@ import shared.Bytes;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 import uru.moulprp.Uruobjectdesc;
+import java.util.Vector;
 
 /**
  *
@@ -40,12 +41,22 @@ public class Bytedeque extends shared.Bytedeque2
     {
         object.compile(this);
     }
-    public <T extends mystobj> void writeVector(T[] vector)
+    public <T extends mystobj> void writeArray(T[] vector)
     {
         int length = vector.length;
         for(int i=0;i<length;i++)
         {
             vector[i].compile(this);
+        }
+    }
+    public <T extends mystobj> void writeVector(Vector<T> vector)
+    {
+        //int length = vector.length;
+        int length = vector.size();
+        for(int i=0;i<length;i++)
+        {
+            //vector[i].compile(this);
+            vector.get(i).compile(this);
         }
     }
     

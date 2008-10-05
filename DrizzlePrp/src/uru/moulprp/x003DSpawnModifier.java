@@ -41,6 +41,13 @@ public class x003DSpawnModifier extends uruobj
         parent = new PlMultiModifier(c);//,false);
         
     }
+    private x003DSpawnModifier(){}
+    public static x003DSpawnModifier createDefault()
+    {
+        x003DSpawnModifier result = new x003DSpawnModifier();
+        result.parent = PlMultiModifier.createDefault();
+        return result;
+    }
     public void compile(Bytedeque deque)
     {
         parent.compile(deque);

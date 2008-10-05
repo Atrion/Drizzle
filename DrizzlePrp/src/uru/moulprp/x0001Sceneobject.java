@@ -23,7 +23,7 @@ import uru.Bytestream;
 import uru.Bytedeque;
 import uru.e;
 import shared.m;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -37,12 +37,12 @@ public class x0001Sceneobject extends uruobj
     public Uruobjectref animationinfo; //simulation
     public Uruobjectref regioninfo; //coordinate
     public Uruobjectref soundinfo; //audio
-    int count1;
-    //Vector<Uruobjectref> objectrefs1 = new Vector<Uruobjectref>();
-    public Uruobjectref[] objectrefs1;
-    int count2;
-    //Vector<Uruobjectref> objectrefs2 = new Vector<Uruobjectref>();
-    public Uruobjectref[] objectrefs2;
+    public int count1;
+    public Vector<Uruobjectref> objectrefs1 = new Vector<Uruobjectref>();
+    //public Uruobjectref[] objectrefs1;
+    public int count2;
+    public Vector<Uruobjectref> objectrefs2 = new Vector<Uruobjectref>();
+    //public Uruobjectref[] objectrefs2;
     Uruobjectref scenenode;
     
     public x0001Sceneobject(context c) throws readexception //,boolean hasHeader)
@@ -55,18 +55,43 @@ public class x0001Sceneobject extends uruobj
         regioninfo = new Uruobjectref(c); //coordinateinterface
         soundinfo = new Uruobjectref(c); //audio interface
         count1 = data.readInt();
-        objectrefs1 = new Uruobjectref[count1];
+        /*objectrefs1 = new Uruobjectref[count1];
         for(int i=0;i<count1;i++)
         {
             objectrefs1[i] = new Uruobjectref(c);
-        }
+        }*/
+        objectrefs1 = c.readVector(Uruobjectref.class, count1);
         count2 = data.readInt();
-        objectrefs2 = new Uruobjectref[count2];
+        /*objectrefs2 = new Uruobjectref[count2];
         for(int i=0;i<count2;i++)
         {
             objectrefs2[i] = new Uruobjectref(c);
-        }
+        }*/
+        objectrefs2 = c.readVector(Uruobjectref.class, count2);
         scenenode = new Uruobjectref(c);
+    }
+    private x0001Sceneobject(){}
+    public static x0001Sceneobject createDefaultWithScenenode(Uruobjectref scenenode)
+    {
+        x0001Sceneobject result = new x0001Sceneobject();
+        result.parent = PlSynchedObject.createDefault();
+        result.spaninfo = Uruobjectref.none();
+        result.animationinfo = Uruobjectref.none();
+        result.regioninfo = Uruobjectref.none();
+        result.soundinfo = Uruobjectref.none();
+        result.count1 = 0;
+        //result.objectrefs1 = new Uruobjectref[0];
+        result.objectrefs1 = new Vector<Uruobjectref>();
+        result.count2 = 0;
+        //result.objectrefs2 = new Uruobjectref[0];
+        result.objectrefs2 = new Vector<Uruobjectref>();
+        result.scenenode = scenenode;
+        return result;
+    }
+    public void addToObjectrefs2(Uruobjectref ref)
+    {
+        count2++;
+        objectrefs2.add(ref);
     }
     public void compile(Bytedeque deque)
     {
@@ -77,15 +102,17 @@ public class x0001Sceneobject extends uruobj
         regioninfo.compile(deque);
         soundinfo.compile(deque);
         deque.writeInt(count1);
-        for(int i=0;i<count1;i++)
+        /*for(int i=0;i<count1;i++)
         {
             objectrefs1[i].compile(deque);
-        }
+        }*/
+        deque.writeVector(objectrefs1);
         deque.writeInt(count2);
-        for(int i=0;i<count2;i++)
+        /*for(int i=0;i<count2;i++)
         {
             objectrefs2[i].compile(deque);
-        }
+        }*/
+        deque.writeVector(objectrefs2);
         scenenode.compile(deque);
     }
     /*public Uruobjectref getChildByType(Typeid type)

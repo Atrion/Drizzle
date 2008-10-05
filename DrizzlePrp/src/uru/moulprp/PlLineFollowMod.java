@@ -48,7 +48,7 @@ public class PlLineFollowMod extends uruobj
         ref1 = new Uruobjectref(c);
         ref2 = new Uruobjectref(c);
         count = c.readInt();
-        refs = c.readVector(Uruobjectref.class, count);
+        refs = c.readArray(Uruobjectref.class, count);
         flags = c.readInt();
         if((flags&0x060000)!=0)
         {
@@ -71,7 +71,7 @@ public class PlLineFollowMod extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count);
-        c.writeVector(refs);
+        c.writeArray(refs);
         c.writeInt(flags);
         if((flags&0x060000)!=0)
         {

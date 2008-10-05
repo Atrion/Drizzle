@@ -558,7 +558,10 @@ public class prputils
                         e.ensure(haveEncounteredSceneNode==false);
                         haveEncounteredSceneNode = true;
                         curobj.header.compile(deque);
-                        ((x0000Scenenode)curobj.prpobject.object).compileSpecial(deque, decider); //uses the isNormalObjectToBeIncluded function.
+                        //curobj.castTo(x0000Scenenode.class).regenerateAllSceneobjectsFromPrpRootObjects(uncompiledObjects);
+                        //curobj.castTo(x0000Scenenode.class).compile(deque);
+                        //((x0000Scenenode)curobj.prpobject.object).compileSpecial(deque, decider); //uses the isNormalObjectToBeIncluded function.
+                        curobj.castTo(x0000Scenenode.class).compileSpecial(deque, prp.objects, decider);
                     }
                     else
                     {

@@ -33,7 +33,7 @@ public strictfp class Transmatrix extends uruobj
     byte isnotIdentity;
     int[] xmatrix = new int[16]; //raw data (floats are 32bit, so they fit in integer.)
     
-    Transmatrix(){}
+    private Transmatrix(){}
     
     public Transmatrix(context c)
     {
@@ -50,6 +50,12 @@ public strictfp class Transmatrix extends uruobj
             isnotIdentity = 1; //this byte doesn't exist in pots.
             xmatrix = c.in.readInts(16);
         }
+    }
+    public static Transmatrix createDefault()
+    {
+        Transmatrix result = new Transmatrix();
+        result.isnotIdentity = 0;
+        return result;
     }
     
     public void compile(Bytedeque deque)
