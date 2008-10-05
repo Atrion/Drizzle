@@ -99,12 +99,16 @@ public class Uruobjectdesc extends uruobj
     private Uruobjectdesc(){}
     public static Uruobjectdesc createDefaultWithTypeNamePage(Typeid type, String name, Pageid page)
     {
+        return createDefaultWithTypeNamePagePagetype(type,name,page,Pagetype.createDefault());
+    }
+    public static Uruobjectdesc createDefaultWithTypeNamePagePagetype(Typeid type, String name, Pageid page, Pagetype pagetype)
+    {
         Uruobjectdesc result = new Uruobjectdesc();
         result.flag = 0;
         result.objectname = Urustring.createFromString(name);
         result.objecttype = type;
         result.pageid = page;
-        result.pagetype = Pagetype.createDefault();
+        result.pagetype = pagetype;
         return result;
     }
     public Uruobjectref toRef()

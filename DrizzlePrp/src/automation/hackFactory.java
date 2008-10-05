@@ -26,6 +26,39 @@ import java.util.Vector;
 public class hackFactory
 {
     
+    public static void createDireboBuiltInPrp(String outfolder)
+    {
+        String agename = "Direbo";
+        Pageid pid = Pageid.createFromPrefixPagenum(93, -2);
+        
+        //create
+        prpfile prp = createBuiltInPrp(agename,pid);
+        
+        //compile
+        Bytes prpoutputbytes = prp.saveAsBytes();
+        prpoutputbytes.saveAsFile(outfolder+"/dat/"+agename+"_District_"+prp.header.pagename.toString()+".prp");
+    }
+    
+    public static prpfile createBuiltInPrp(String agename, Pageid pid)
+    {        
+        //create pythonfilemod
+        x00A2Pythonfilemod pm = x00A2Pythonfilemod.createDefault();
+        Uruobjectref pmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plPythonFileMod, "VeryVerySpecialPythonFileMod", pid, Pagetype.createWithType(8));
+        PrpRootObject pmroot = PrpRootObject.createFromDescAndObject(pmref.xdesc, pm);
+        pm.pyfile = Urustring.createFromString(agename);
+        
+        //create sceneobject
+        x0001Sceneobject so = x0001Sceneobject.createDefaultWithScenenode(Uruobjectref.none());
+        Uruobjectref soref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plSceneObject, "AgeSDLHook", pid, Pagetype.createWithType(8));
+        PrpRootObject soroot = PrpRootObject.createFromDescAndObject(soref.xdesc, so);
+        so.addToObjectrefs2(pmref);
+        
+        //create the prpfile
+        PrpRootObject[] objects = new PrpRootObject[]{ pmroot, soroot };
+        prpfile prp = prpfile.createFromObjectsAndInfo(objects, agename, "BuiltIn", pid, Pagetype.createWithType(8));
+        return prp;
+    }
+    
     public static PrpRootObject createSceneNode(String name, Pageid pid)
     {
         x0000Scenenode sn = x0000Scenenode.createDefault();

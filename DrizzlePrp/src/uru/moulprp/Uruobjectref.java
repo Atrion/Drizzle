@@ -69,9 +69,13 @@ public class Uruobjectref extends uruobj
     }
     public static Uruobjectref createDefaultWithTypeNamePage(Typeid type, String name, Pageid page)
     {
+        return createDefaultWithTypeNamePagePagetype(type,name,page, Pagetype.createDefault());
+    }
+    public static Uruobjectref createDefaultWithTypeNamePagePagetype(Typeid type, String name, Pageid page, Pagetype pagetype)
+    {
         Uruobjectref result = new Uruobjectref();
         result.hasRef = 1;
-        result.xdesc = Uruobjectdesc.createDefaultWithTypeNamePage(type, name, page);
+        result.xdesc = Uruobjectdesc.createDefaultWithTypeNamePagePagetype(type, name, page, pagetype);
         return result;
     }
     public static Uruobjectref none()

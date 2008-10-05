@@ -22,6 +22,7 @@ import uru.context;
 import shared.Bytes;
 import uru.Bytedeque;
 import uru.e;
+import shared.m;
 
 public class Pagetype extends uruobj
 {
@@ -44,6 +45,13 @@ public class Pagetype extends uruobj
     {
         Pagetype result = new Pagetype();
         result.pagetype = 0;
+        return result;
+    }
+    public static Pagetype createWithType(int pagetype)
+    {
+        if(pagetype<0 || pagetype>20) m.err("Incorrect pagetype in Pagetype.createWithType.");
+        Pagetype result = new Pagetype();
+        result.pagetype = (short)pagetype;
         return result;
     }
     public void compile(Bytedeque c)

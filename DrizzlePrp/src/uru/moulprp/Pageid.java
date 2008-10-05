@@ -113,12 +113,12 @@ public class Pageid extends uruobj
     }
     public static Pageid createFromPrefixPagenum(int prefix, int pagenum)
     {
-        if(pagenum<0) m.err("Unhandled pagenum: investigate now!");
+        if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower.
         return createFromPrefixSuffix(prefix,pagenum+33);
     }
     public void setPagenum(int pagenum)
     {
-        if(pagenum<0) m.err("Unhandled pagenum: investigate now!");
+        if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower
         suffix = pagenum+33;
     }
     public int getPageNumber()
