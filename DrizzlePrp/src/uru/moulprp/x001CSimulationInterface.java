@@ -38,7 +38,7 @@ public class x001CSimulationInterface extends uruobj
     //int[] props;
     HsBitVector props;
     int u2;
-    Uruobjectref physical;
+    public Uruobjectref physical;
     
     public x001CSimulationInterface(context c) throws readexception
     {

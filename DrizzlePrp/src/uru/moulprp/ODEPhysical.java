@@ -168,6 +168,7 @@ public class ODEPhysical extends uruobj
         }
         
         //handle flags...
+        convertee.LOSDB = b.Int16ToInt32(u13);
         //ordinary surface.
         if(
                 (u8==0x2000000 && u9==0x0 && u10==0x0) //verified - all over!
@@ -181,7 +182,8 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x44;
+            //convertee.LOSDB = 0x44;
+            convertee.LOSDB = convertee.LOSDB | 0x4;
             convertee.group = new HsBitVector(0);
         }
         else if(u8==0x2000000 && u9==0x20000 && u10==0x0) //descent
@@ -192,7 +194,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0x20000;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x2;
+            //convertee.LOSDB = 0x2;
             convertee.group = new HsBitVector(4);
         }
         else if(u8==0x1800000 && u9==0x3000000 && u10==0x0) //descent, dragable
@@ -204,7 +206,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x2;
+            //convertee.LOSDB = 0x2;
             convertee.group = new HsBitVector(4);
         }
         //detection
@@ -221,7 +223,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x0;
+            //convertee.LOSDB = 0x0;
             convertee.group = new HsBitVector(4);
             //convertee.mass = Flt.one(); //assign mass
         }
@@ -234,7 +236,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x0; //stting this to 2 seemed to make everything else a clickable, except the exclude regions covering the gate and switch.  Is this because it thinks the gate is open?
+            //convertee.LOSDB = 0x0; //stting this to 2 seemed to make everything else a clickable, except the exclude regions covering the gate and switch.  Is this because it thinks the gate is open?
             convertee.group = new HsBitVector(4);
             convertee.mass = Flt.one(); //assign mass
         }
@@ -250,7 +252,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0x0;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x2;
+            //convertee.LOSDB = 0x2;
             convertee.group = new HsBitVector(0x4);
             //convertee.mass = Flt.one(); //assign mass
         }
@@ -265,7 +267,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0x20000;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x2;
+            //convertee.LOSDB = 0x2;
             convertee.group = new HsBitVector(0x4);
             //convertee.mass = Flt.one(); //assign mass
         }
@@ -277,7 +279,7 @@ public class ODEPhysical extends uruobj
             convertee.flagsrespond = 0x1020000;
             convertee.u2 = 0;
             convertee.u3 = 0;
-            convertee.LOSDB = 0x0;
+            //convertee.LOSDB = 0x0;
             convertee.group = new HsBitVector(0x4);
             //convertee.mass = Flt.one(); //assign mass
         }
@@ -289,7 +291,6 @@ public class ODEPhysical extends uruobj
                     +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
             if(shared.State.AllStates.getStateAsBoolean("skipPhysics")) throw new readexception("ODEPhysical: unhandled case.");
         }
-       convertee.LOSDB = b.Int16ToInt32(u13);
        
        //if(convertee.flagsdetect!=0x0) convertee.mass = Flt.one();
         

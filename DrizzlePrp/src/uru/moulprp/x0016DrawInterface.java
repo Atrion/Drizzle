@@ -34,8 +34,8 @@ public class x0016DrawInterface extends uruobj
 {
     //Objheader xheader;
     PlObjInterface parent;
-    int subsetgroupcount;
-    SubsetGroup[] subsetgroups;
+    public int subsetgroupcount;
+    public SubsetGroup[] subsetgroups;
     int visregioncount;
     Uruobjectref[] visibleregion;
     
@@ -74,8 +74,8 @@ public class x0016DrawInterface extends uruobj
     
     static public class SubsetGroup extends uruobj
     {
-        int subsetgroupindex;
-        Uruobjectref span;
+        public int subsetgroupindex;
+        public Uruobjectref span;
         
         public SubsetGroup(context c) throws readexception
         {

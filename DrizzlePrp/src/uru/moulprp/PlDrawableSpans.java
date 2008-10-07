@@ -223,7 +223,7 @@ public class PlDrawableSpans extends uruobj
         Flt u4;
         Flt u5;
         Flt xu6;
-        int meshindex;
+        public int meshindex;
         int unused1;
         int unused2;
         int vertexstart1;

@@ -38,29 +38,59 @@ public class inplaceModifications
         {
             obj.hasChanged = true; //make sure to write new version.
             PlDrawableSpans drawspan = obj.castTo();
-            /*if(drawspan.subsetcount>0)
+            
+            if(drawspan.subsetcount>0)
             {
-                drawspan.xLocalBounds.transform(translation);
+                //drawspan.xLocalBounds.transform(translation);
                 //drawspan.xWorldBounds.transform(translation);
                 //drawspan.xMaxWorldBounds.transform(translation);
             }
             for(int i=0;i<drawspan.subsets.length;i++)
             {
-                drawspan.subsets[i].localBounds.transform(translation);
+                //drawspan.subsets[i].localBounds.transform(translation);
                 //drawspan.subsets[i].worldBounds.transform(translation);
-            }*/
+            }
             
             for(int i=0;i<drawspan.localToWorlds.length;i++)
             {
-                drawspan.localToWorlds[i] = translation.mult(drawspan.localToWorlds[i]);
+                int dummy=0;
+                //drawspan.localToWorlds[i] = translation.mult(drawspan.localToWorlds[i]);
             }
             for(int i=0;i<drawspan.worldToLocals.length;i++)
             {
-                drawspan.worldToLocals[i] = drawspan.worldToLocals[i].mult(invtranslation);
+                int dummy=0;
+                //drawspan.worldToLocals[i] = drawspan.worldToLocals[i].mult(invtranslation);
             }
             
             for(int i=0;i<drawspan.subsets.length;i++)
             {
+                
+                /*boolean hascoordinterface = false;
+                for(PrpRootObject drawobj: prp.FindAllObjectsOfType(Typeid.plDrawInterface))
+                {
+                    x0016DrawInterface drawint = drawobj.castTo();
+                    for(x0016DrawInterface.SubsetGroup subgrp: drawint.subsetgroups)
+                    {
+                        if(obj.header.desc.equals(subgrp.span.xdesc) && subgrp.subsetgroupindex==drawspan.subsets[i].meshindex)
+                        {
+                            //found a drawinterface that uses this group. Try to find a coordinate interface now.
+                            for(PrpRootObject scobj: prp.FindAllObjectsOfType(Typeid.plSceneObject))
+                            {
+                                x0001Sceneobject so = scobj.castToSceneObject();
+                                if(drawobj.header.desc.equals(so.spaninfo.xdesc))
+                                {
+                                    if(so.regioninfo.xdesc!=null)
+                                    {
+                                        hascoordinterface = true;
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                if(hascoordinterface) continue;*/
+                
                 //moves e.g. tree trunks.
                 drawspan.subsets[i].localToWorld = translation.mult(drawspan.subsets[i].localToWorld);
                 drawspan.subsets[i].worldToLocal = drawspan.subsets[i].worldToLocal.mult(invtranslation);
@@ -104,6 +134,25 @@ public class inplaceModifications
         {
             obj.hasChanged = true;
             PlHKPhysical phys = obj.castTo();
+            
+            /*boolean hascoordinterface = false;
+            for(PrpRootObject scobj: prp.FindAllObjectsOfType(Typeid.plSceneObject))
+            {
+                x0001Sceneobject so = scobj.castToSceneObject();
+                PrpRootObject siminterface = prp.findObjectWithRef(so.animationinfo);
+                if(siminterface==null) continue;
+                x001CSimulationInterface simint = siminterface.castTo();
+                if(obj.header.desc.equals(simint.physical.xdesc))
+                {
+                    if(so.regioninfo.xdesc!=null)
+                    {
+                        hascoordinterface = true;
+                        break;
+                    }
+                }
+            }
+            if(hascoordinterface) continue;*/
+
             
             if(phys.havok.mass.equals(Flt.zero()))
             {
