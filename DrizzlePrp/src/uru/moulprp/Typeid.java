@@ -233,6 +233,15 @@ public enum Typeid implements compilable
     plDynaRippleMgr,
     plLayerSDLAnimation,
     
+    //ahnonay
+    plDynaRippleVSMgr,
+    plSwimDetector,
+    plSwimRegionInterface,
+    plSwimCircularCurrentRegion,
+    plSwimStraightCurrentRegion,
+    plObjectInVolumeAndFacingDetector,
+    plNPCSpawnMod,
+    
     plLeafController,
     nil,
     unknown;
@@ -325,21 +334,28 @@ public enum Typeid implements compilable
         tri( 0x0D5, 0x0D5, 0x0B5, plPointShadowMaster ), //3rd code from myst5
         tri( 0x0D6, 0x0D6, 0x0B6, plDirectShadowMaster ),
         tri( 0x0E5, 0x0E5, -2, plEAXListenerMod ),
+        tri( 0x0E7, -2, -2, plObjectInVolumeAndFacingDetector),
         tri( 0x0E8, 0x0E8, -2, plDynaFootMgr ),
         tri( 0x0ED, 0x0ED, -2, plDynaPuddleMgr ),
         tri( 0x0F1, 0x0F1, 0x0CD, plATCAnim ),
         tri( 0x0F2, 0x0F2, -2, plAgeGlobalAnim ),
+        tri( 0x0F5, -2, -2, plNPCSpawnMod),
         tri( 0x0FB, 0x0FB, 0x0D4, plWaveSet7 ), //3rd code from myst5
         tri( 0x0FC, 0x0FC, -2, plPanicLinkRegion ),
         tri( 0x0FF, 0x0FF, 0x0D8, plStereizer ),
         tri( 0x106, 0x106, 0x0DA, plDynamicEnvMap ),
+        tri( 0x10A, -2, -2, plDynaRippleVSMgr),
         tri( 0x116, 0x116, 0x0E9, plVisRegion ),
         tri( 0x11E, 0x11E, -2, plRelevanceRegion ), //used for .csv files
         tri( 0x122, 0x122, 0x0F1, plImageLibMod ),
         tri( 0x123, 0x123, 0x0F2, plParticleFlockEffect ), //3rd code from myst5
         tri( 0x127, 0x127, -2, plPhysicalSndGroup ),
         tri( 0x12B, 0x12B, -2, plClusterGroup ),
+        tri( 0x12E, -2, -2, plSwimDetector),
         tri( 0x12F, 0x12F, -2, plFadeOpacityMod ),
+        tri( 0x133, -2, -2, plSwimRegionInterface),
+        tri( 0x134, -2, -2, plSwimCircularCurrentRegion),
+        tri( 0x136, -2, -2, plSwimStraightCurrentRegion),
 
         
         tri( 0x203, 0x203, -2, plRefMsg ),

@@ -294,7 +294,7 @@ public class PlHKPhysical extends uruobj
     {
         String filenameStart = "";
         String filenameEnd = "";
-        String objt = "ropeladder";
+        String objt = "swimsurfacemaint";
         if(c.curFile.toLowerCase().startsWith(filenameStart.toLowerCase()))
         {
             if(c.curFile.toLowerCase().endsWith(filenameEnd.toLowerCase()))
@@ -367,7 +367,7 @@ public class PlHKPhysical extends uruobj
 
         public PXPhysical(context c) throws readexception
         {
-            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("box01"))
+            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("swimdetectregion"))
             {
                 int dummy=0;
             }
@@ -601,8 +601,8 @@ public class PlHKPhysical extends uruobj
     public static class HKPhysical extends uruobj
     {
         PlSynchedObject parent;
-        Vertex position;
-        Quat orientation;
+        public Vertex position;
+        public Quat orientation;
         public Flt mass; //mass
         Flt RC; //friction coefficient
         Flt EL; //elasticity
@@ -703,7 +703,73 @@ public class PlHKPhysical extends uruobj
         
         public void compile(Bytedeque c)
         {
-            m.err("hkphysical: compile not implemented.");
+            parent.compile(c);
+            position.compile(c);
+            orientation.compile(c);
+            mass.compile(c);
+            RC.compile(c);
+            EL.compile(c);
+            c.writeInt(format);
+            c.writeShort(u1);
+            c.writeShort(coltype);
+            c.writeInt(flagsdetect);
+            c.writeInt(flagsrespond);
+            c.writeByte(u2);
+            c.writeByte(u3);
+            switch(format)
+            {
+                case 0x01: //box
+                    xboxbounds.compile(c);
+                    break;
+                case 0x02: //sphere
+                    xspherebounds.compile(c);
+                    break;
+                case 0x03: //hull
+                    xhullbounds.compile(c);
+                    break;
+                case 0x04: //proxy
+                    xproxybounds.compile(c);
+                    break;
+                case 0x05: //explicit
+                    xexplicitbounds.compile(c);
+                    break;
+                default:
+                    m.err("Unknown hkphysical flag");
+                    break;
+            }
+
+            sceneobject.compile(c);
+            group.compile(c);
+            scenenode.compile(c);
+            c.writeInt(LOSDB);
+            subworld.compile(c);
+            soundgroup.compile(c);
+            
+        }
+
+        public void transformVertices(Transmatrix mat)
+        {
+            switch(format)
+            {
+                case 0x01: //box
+                    xboxbounds.transformVertices(mat);
+                    break;
+                case 0x02: //sphere
+                    xspherebounds.transformVertices(mat);
+                    break;
+                case 0x03: //hull
+                    xhullbounds.transformVertices(mat);
+                    break;
+                case 0x04: //proxy
+                    xproxybounds.transformVertices(mat);
+                    break;
+                case 0x05: //explicit
+                    xexplicitbounds.transformVertices(mat);
+                    break;
+                default:
+                    m.err("Unknown hkphysical flag");
+                    break;
+            }
         }
         
     }
@@ -716,6 +782,16 @@ public class PlHKPhysical extends uruobj
         {
             parent = new HKProxyBounds(c);
         }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+        }
+        public void transformVertices(Transmatrix m)
+        {
+            parent.transformVertices(m);
+        }
+        
     }
     public static class HKSphereBounds extends uruobj
     {
@@ -729,6 +805,16 @@ public class PlHKPhysical extends uruobj
             offset = new Vertex(c);
             radius = new Flt(c);
         }
+        public void compile(Bytedeque c)
+        {
+            offset.compile(c);
+            radius.compile(c);
+        }
+        public void transformVertices(Transmatrix m)
+        {
+            offset = m.mult(offset);
+        }
+        
     }
     public static class HKHullBounds extends uruobj
     {
@@ -742,6 +828,19 @@ public class PlHKPhysical extends uruobj
             vertexcount = c.readInt();
             vertices = c.readArray(Vertex.class, vertexcount);
         }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(vertexcount);
+            c.writeArray(vertices);
+        }
+        public void transformVertices(Transmatrix m)
+        {
+            for(int i=0;i<vertexcount;i++)
+            {
+                vertices[i] = m.mult(vertices[i]);
+            }
+        }
+        
     }
     public static class HKProxyBounds extends uruobj
     {
@@ -755,6 +854,17 @@ public class PlHKPhysical extends uruobj
             facecount = c.readInt();
             faces = c.readArray(ShortTriplet.class, facecount);
         }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(facecount);
+            c.writeArray(faces);
+        }
+        public void transformVertices(Transmatrix m)
+        {
+            parent.transformVertices(m);
+        }
+        
     }
     public static class HKExplicitBounds extends uruobj
     {
@@ -763,6 +873,14 @@ public class PlHKPhysical extends uruobj
         public HKExplicitBounds(context c) throws readexception
         {
             parent = new HKProxyBounds(c);
+        }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+        }
+        public void transformVertices(Transmatrix m)
+        {
+            parent.transformVertices(m);
         }
     }
     

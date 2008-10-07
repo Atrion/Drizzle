@@ -73,12 +73,12 @@ public class prpfile
     public Bytes saveAsBytes()
     {
         //use the decider that always returns true by default.
-        class compileDecider implements uru.moulprp.prputils.Compiler.Decider{
+        /*class compileDecider implements uru.moulprp.prputils.Compiler.Decider{
             public boolean isObjectToBeIncluded(Uruobjectdesc desc){
                 return true;
             }
-        }
-        return saveAsBytes(new compileDecider());
+        }*/
+        return saveAsBytes(uru.moulprp.prputils.Compiler.getDefaultDecider());
     }
     public Bytes saveAsBytes(Decider decider)
     {

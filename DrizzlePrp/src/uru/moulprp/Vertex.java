@@ -27,7 +27,7 @@ import shared.readexception;
  *
  * @author user
  */
-public class Vertex extends uruobj
+public strictfp class Vertex extends uruobj
 {
     Flt x;
     Flt y;
@@ -49,9 +49,18 @@ public class Vertex extends uruobj
         y = y2;
         z = z2;
     }
+    private Vertex(){}
     public static Vertex zero()
     {
         return new Vertex(new Flt(0), new Flt(0), new Flt(0));
+    }
+    public static Vertex createFromFloats(float x, float y, float z)
+    {
+        Vertex result = new Vertex();
+        result.x = Flt.createFromJavaFloat(x);
+        result.y = Flt.createFromJavaFloat(y);
+        result.z = Flt.createFromJavaFloat(z);
+        return result;
     }
     public void compile(Bytedeque data)
     {
@@ -59,7 +68,36 @@ public class Vertex extends uruobj
         y.compile(data);
         z.compile(data);
     }
-    
+    public double[] convertToDouble4Vector()
+    {
+        double[] result = new double[4];
+        result[0] = x.toJavaFloat();
+        result[1] = y.toJavaFloat();
+        result[2] = z.toJavaFloat();
+        result[3] = 1.0;
+        return result;
+    }
+    public double[][] convertToDouble4x1Matrix()
+    {
+        double[][] result = new double[4][1];
+        result[0][0] = x.toJavaFloat();
+        result[1][0] = y.toJavaFloat();
+        result[2][0] = z.toJavaFloat();
+        result[3][0] = 1.0;
+        return result;
+    }
+    public static Vertex createFromDouble4x1Matrix(double[][] mat)
+    {
+        Vertex result = new Vertex();
+        double x = mat[0][0];
+        double y = mat[1][0];
+        double z = mat[2][0];
+        double h = mat[3][0];
+        result.x = Flt.createFromJavaFloat((float)(x/h));
+        result.y = Flt.createFromJavaFloat((float)(y/h));
+        result.z = Flt.createFromJavaFloat((float)(z/h));
+        return result;
+    }
     public Vertex add(Vertex v)
     {
         Flt x2 = this.x.add(v.x);

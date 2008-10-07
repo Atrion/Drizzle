@@ -107,6 +107,12 @@ strictfp public class Flt extends uruobj
         float result3 = f1+f2;
         return new Flt(result3);
     }
+    public Flt add(float f)
+    {
+        float f1 = this.toJavaFloat();
+        float result = f1+f;
+        return Flt.createFromJavaFloat(result);
+    }
     public Flt sub(Flt f)
     {
         return this.add(f.neg());
@@ -128,5 +134,19 @@ strictfp public class Flt extends uruobj
         float f2 = f.toJavaFloat();
         float result = f1*f2;
         return new Flt(result);
+    }
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(o instanceof Float)
+        {
+            Flt o2 = Flt.createFromJavaFloat((Float)o);
+            return o2.rawdata==this.rawdata;
+        }
+        if(o instanceof Flt)
+        {
+            return ((Flt)o).rawdata==this.rawdata;
+        }
+        return false;
     }
 }

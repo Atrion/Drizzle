@@ -1230,10 +1230,29 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton90" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="textfieldState17" alignment="0" min="-2" pref="319" max="-2" attributes="0"/>
+                                  <Component id="jButton90" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="430" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="textfieldState18" min="-2" pref="241" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton92" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="textfieldState19" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton93" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="textfieldState20" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="491" max="32767" attributes="0"/>
+                              <Component id="jButton91" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1241,10 +1260,29 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                              <Component id="textfieldState17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton90" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="196" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="textfieldState17" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textfieldState18" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton92" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButton90" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="textfieldState19" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton93" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Component id="textfieldState20" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="jButton91" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="120" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1263,6 +1301,48 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton90ActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState18">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="textfieldState18"/>
+                        <Property name="name" type="java.lang.String" value="translateInput" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState19">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="c:\documents and settings\user\desktop\output\"/>
+                        <Property name="name" type="java.lang.String" value="translateOutput" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton91">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Translate"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton91ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton92">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="select"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton92ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton93">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="select"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton93ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState20">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="0,0,-20"/>
+                        <Property name="name" type="java.lang.String" value="translateVector" noResource="true"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

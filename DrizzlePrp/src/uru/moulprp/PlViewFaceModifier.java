@@ -35,12 +35,12 @@ public class PlViewFaceModifier extends uruobj
     //Objheader xheader;
     
     PlSingleModifier parent;
-    Vertex scale;
-    Transmatrix LocalToParent;
-    Transmatrix ParentToLocal;
+    public Vertex scale;
+    public Transmatrix LocalToParent;
+    public Transmatrix ParentToLocal;
     Uruobjectref xFaceObj;
-    Vertex offset;
-    BoundingBox xMaxBounds;
+    public Vertex offset;
+    public BoundingBox xMaxBounds;
     
     public PlViewFaceModifier(context c) throws readexception
     {

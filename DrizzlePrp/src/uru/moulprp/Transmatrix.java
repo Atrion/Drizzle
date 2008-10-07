@@ -57,7 +57,48 @@ public strictfp class Transmatrix extends uruobj
         result.isnotIdentity = 0;
         return result;
     }
-    
+    /*public void fillInMatrix()
+    {
+        if(isnotIdentity==0)
+        {
+            for(int i=0;i<4;i++)
+                for(int j=0;j<4;j++)
+                    result[i][j] = i==j?1:0;
+        }
+    }*/
+    public static Transmatrix createFromVector(float x, float y, float z)
+    {
+        double[][] doublemat = new double[4][4];
+        for(int i=0;i<4;i++)
+            for(int j=0;j<4;j++)
+                doublemat[i][j] = i==j?1:0;
+        doublemat[0][3] = x;
+        doublemat[1][3] = y;
+        doublemat[2][3] = z;
+        RealMatrix rm = new RealMatrixImpl(doublemat);
+        return createFromMatrix(rm);
+    }
+    public Transmatrix mult(Transmatrix t2)
+    {
+        double[][] m1 = this.convertToDoubleArray();
+        double[][] m2 = t2.convertToDoubleArray();
+        RealMatrix rm1 = new RealMatrixImpl(m1);
+        RealMatrix rm2 = new RealMatrixImpl(m2);
+        RealMatrix result = rm1.multiply(rm2);
+        Transmatrix result2 = Transmatrix.createFromMatrix(result);
+        return result2;
+    }
+    public Vertex mult(Vertex v)
+    {
+        double[][] m1 = this.convertToDoubleArray();
+        double[][] m2 = v.convertToDouble4x1Matrix();
+        RealMatrix rm1 = new RealMatrixImpl(m1);
+        RealMatrix rm2 = new RealMatrixImpl(m2);
+        RealMatrix result = rm1.multiply(rm2);
+        double[][] result2 = result.getData();
+        Vertex result3 = Vertex.createFromDouble4x1Matrix(result2);
+        return result3;
+    }
     public void compile(Bytedeque deque)
     {
         //there is no isnotIdentity flag in pots, it always has the full matrix.
@@ -119,16 +160,47 @@ public strictfp class Transmatrix extends uruobj
         }
         return result;
     }
-    
+    public double[][] convertToDoubleArray()
+    {
+        double[][] result = new double[4][4];
+        if(isnotIdentity==0)
+        {
+            for(int i=0;i<4;i++)
+                for(int j=0;j<4;j++)
+                    result[i][j] = i==j?1:0;
+        }
+        else
+        {
+            for(int i=0;i<4;i++)
+            {
+                for(int j=0;j<4;j++)
+                {
+                    int datum = xmatrix[i*4+j];
+                    result[i][j] = Flt.createFromData(datum).toJavaFloat();
+                }
+            }
+        }
+        return result;
+        
+    }
     public Flt[][] convertToFltArray()
     {
         Flt[][] result = new Flt[4][4];
-        for(int i=0;i<4;i++)
+        if(isnotIdentity==0)
         {
-            for(int j=0;j<4;j++)
+            for(int i=0;i<4;i++)
+                for(int j=0;j<4;j++)
+                    result[i][j] = i==j?Flt.one():Flt.zero();
+        }
+        else
+        {
+            for(int i=0;i<4;i++)
             {
-                int datum = xmatrix[i*4+j];
-                result[i][j] = Flt.createFromData(datum);
+                for(int j=0;j<4;j++)
+                {
+                    int datum = xmatrix[i*4+j];
+                    result[i][j] = Flt.createFromData(datum);
+                }
             }
         }
         return result;

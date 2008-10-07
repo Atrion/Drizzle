@@ -64,9 +64,14 @@ public class PrpRootObject extends uruobj implements Comparable
         }
         if(readRaw)
         {
-            rawdata = c.Fork().readBytes(length-(headerEnd-headerStart));
+            //rawdata = c.Fork().readBytes(length-(headerEnd-headerStart));
+            rawdata = c.readBytes(length-(headerEnd-headerStart));
+            this.hasParsed = false;
         }
-        prpobject = new PrpObject(c, header.objecttype);
+        else
+        {
+            prpobject = new PrpObject(c, header.objecttype);
+        }
     }
     public int compareTo(Object o)
     {
@@ -91,7 +96,17 @@ public class PrpRootObject extends uruobj implements Comparable
         
         return result;
     }
-    
+    public void ensureParsed()
+    {
+        try
+        {
+            parseRawDataNow();
+        }
+        catch(readexception e)
+        {
+            m.err("Unable to parse rawdata: "+e.getMessage());
+        }
+    }
     public void parseRawDataNow() throws readexception
     {
         //if(isRaw)
@@ -99,6 +114,7 @@ public class PrpRootObject extends uruobj implements Comparable
         {
             context c = context.createFromBytestream(new Bytestream(rawdata));
             c.readversion = this.readversion;
+            c.curRootObject = this.header.desc;
             prpobject = new PrpObject(c, header.objecttype);
             //isRaw = false;
             hasParsed = true;
@@ -126,7 +142,7 @@ public class PrpRootObject extends uruobj implements Comparable
         //if(!saveRaw)
         if(hasRaw && !hasChanged)
         {
-            m.warn("Untested compilation in PrpRootObject.");
+            //m.warn("Untested compilation in PrpRootObject.");
             c.writeBytes(rawdata);
         }
         else
@@ -137,17 +153,23 @@ public class PrpRootObject extends uruobj implements Comparable
     
     public String toString()
     {
-        return prpobject.toString();
+        /*if(prpobject!=null)
+            return prpobject.toString();
+        else
+            return "(raw)";*/
+        return "PrpRootObject: "+this.header.desc.toString();
     }
     
     public <T> T castTo() //java.lang.Class<T> objclass)
     {
+        this.ensureParsed();
         T result = (T)this.prpobject.object;
         return result;
     }
     
     public <T> T castTo(T dummy)
     {
+        this.ensureParsed();
         //PrpRootObject a = c.cast(this.prpobject.object);
         T result = (T)this.prpobject.object;
         return result;
@@ -155,26 +177,29 @@ public class PrpRootObject extends uruobj implements Comparable
     
     public <T> T castTo(Class<T> cls)
     {
+        this.ensureParsed();
         T result = (T)this.prpobject.object;
         return result;
     }
     
     public x0000Scenenode castToSceneNode()
     {
+        this.ensureParsed();
         x0000Scenenode result = this.castTo();
         return result;
     }
     
     public x0001Sceneobject castToSceneObject()
     {
+        this.ensureParsed();
         x0001Sceneobject result = this.castTo();
         return result;
     }
     
     public uruobj getObject()
     {
+        this.ensureParsed();
         return prpobject.object;
     }
-    
     
 }

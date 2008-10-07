@@ -39,22 +39,25 @@ public class PlDrawableSpans extends uruobj
     int blendflags;
     int matcount;
     Uruobjectref[] materials;
-    int subsetcount;
-    SpanSubset[] subsets;
+    public int subsetcount;
+    public SpanSubset[] subsets;
     int unused;
     int listcount;
     int[] unused2;
     //byte[] unused3;
     Uruobjectref[] unused3;
-    BoundingBox[] xboundingBoxes;
+    //BoundingBox[] xboundingBoxes;
+    public BoundingBox xLocalBounds;
+    public BoundingBox xWorldBounds;
+    public BoundingBox xMaxWorldBounds;
     //int lightcount;
     //Vector<LightInfo> lightinfos = new Vector<LightInfo>();
     GrowVector<Uruobjectref> lightinfos;
-    int matrixsetcount;
-    Transmatrix[] blendmatrix;
-    Transmatrix[] matrix2;
-    Transmatrix[] matrix3;
-    Transmatrix[] matrix4;
+    public int matrixsetcount;
+    public Transmatrix[] localToWorlds; //was blendmatrix
+    public Transmatrix[] worldToLocals; //was matrix2
+    public Transmatrix[] localToBones; //was matrix3
+    public Transmatrix[] boneToLocals; //was matrix4
     int subsetgroupcount;
     SubsetGroup[] subsetgroups;
     int meshcount;
@@ -110,7 +113,10 @@ public class PlDrawableSpans extends uruobj
         
         if(subsetcount>0)
         {
-            xboundingBoxes = c.readArray(BoundingBox.class,3);
+            //xboundingBoxes = c.readArray(BoundingBox.class,3);
+            xLocalBounds = new BoundingBox(c);
+            xWorldBounds = new BoundingBox(c);
+            xMaxWorldBounds = new BoundingBox(c);
         }
 
         //lightcount = data.readInt();
@@ -125,10 +131,10 @@ public class PlDrawableSpans extends uruobj
         lightinfos = new GrowVector<Uruobjectref>(Uruobjectref.class, c);
         
         matrixsetcount = data.readInt();
-        blendmatrix = c.readArray(Transmatrix.class,matrixsetcount);
-        matrix2 = c.readArray(Transmatrix.class,matrixsetcount);
-        matrix3 = c.readArray(Transmatrix.class,matrixsetcount);
-        matrix4 = c.readArray(Transmatrix.class,matrixsetcount);
+        localToWorlds = c.readArray(Transmatrix.class,matrixsetcount);
+        worldToLocals = c.readArray(Transmatrix.class,matrixsetcount);
+        localToBones = c.readArray(Transmatrix.class,matrixsetcount);
+        boneToLocals = c.readArray(Transmatrix.class,matrixsetcount);
         subsetgroupcount = data.readInt();
         subsetgroups = c.readArray(SubsetGroup.class,subsetgroupcount);
         meshcount = data.readInt(); //so far so good.
@@ -167,14 +173,17 @@ public class PlDrawableSpans extends uruobj
         data.writeArray(unused3);
         if(subsetcount>0)
         {
-            data.writeArray(xboundingBoxes);
+            //data.writeArray(xboundingBoxes);
+            xLocalBounds.compile(data);
+            xWorldBounds.compile(data);
+            xMaxWorldBounds.compile(data);
         }
         lightinfos.compile(data);
         data.writeInt(matrixsetcount);
-        data.writeArray(blendmatrix);
-        data.writeArray(matrix2);
-        data.writeArray(matrix3);
-        data.writeArray(matrix4);
+        data.writeArray(localToWorlds);
+        data.writeArray(worldToLocals);
+        data.writeArray(localToBones);
+        data.writeArray(boneToLocals);
         data.writeInt(subsetgroupcount);
         data.writeArray(subsetgroups);
         data.writeInt(meshcount);
@@ -201,13 +210,13 @@ public class PlDrawableSpans extends uruobj
     {
         int visible;
         int materialindex;
-        Transmatrix transforms1;
-        Transmatrix transforms2;
+        public Transmatrix localToWorld; //was transforms1
+        public Transmatrix worldToLocal; //was transforms2
         int lightingflags;
-        BoundingBox uegclassesca1;
-        BoundingBox uegclassesca2;
-        int blendflag;
-        int blendindex;
+        public BoundingBox localBounds; //was uegclassesca1
+        public BoundingBox worldBounds; //was uegclassesca2
+        public int blendflag;
+        public int blendindex;
         short u1;
         short u2;
         short u3;
@@ -236,11 +245,11 @@ public class PlDrawableSpans extends uruobj
                     int breakdummy= 0;
                 }
             }
-            transforms1 = c.readObj(Transmatrix.class);
-            transforms2 = c.readObj(Transmatrix.class);
+            localToWorld = c.readObj(Transmatrix.class);
+            worldToLocal = c.readObj(Transmatrix.class);
             lightingflags = data.readInt();
-            uegclassesca1 = c.readObj(BoundingBox.class);
-            uegclassesca2 = c.readObj(BoundingBox.class);
+            localBounds = c.readObj(BoundingBox.class);
+            worldBounds = c.readObj(BoundingBox.class);
             blendflag = data.readInt();
             blendindex = data.readInt();
             u1 = data.readShort();
@@ -267,11 +276,11 @@ public class PlDrawableSpans extends uruobj
         {
             data.writeInt(visible);
             data.writeInt(materialindex);
-            transforms1.compile(data);
-            transforms2.compile(data);
+            localToWorld.compile(data);
+            worldToLocal.compile(data);
             data.writeInt(lightingflags);
-            uegclassesca1.compile(data);
-            uegclassesca2.compile(data);
+            localBounds.compile(data);
+            worldBounds.compile(data);
             data.writeInt(blendflag);
             data.writeInt(blendindex);
             data.writeShort(u1);

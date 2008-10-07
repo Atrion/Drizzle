@@ -32,7 +32,7 @@ public class PlWaveSet7 extends uruobj
 {
     PlMultiModifier parent;
     Flt u1;
-    waveset7sub sub1;
+    public waveset7sub sub1;
     int refcount1;
     Uruobjectref[] refs1;
     int refcount2;
@@ -90,13 +90,13 @@ public class PlWaveSet7 extends uruobj
         Flt u4;
         Vertex u5;
         Vertex u6;
-        Flt u7;
-        Vertex u8;
+        public Flt u7; //fWaterHeight
+        public Vertex u8; //waterOffset
         Vertex u9;
         Vertex u10;
         Vertex u11;
         Flt[] u12; //25, actually seperately listed.
-        Vertex u13;
+        public Vertex u13; //fEnvCenter
         Flt u14;
         Flt u15;
         

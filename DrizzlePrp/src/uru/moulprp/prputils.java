@@ -438,6 +438,15 @@ public class prputils
         {
             boolean isObjectToBeIncluded(Uruobjectdesc desc);
         }
+        
+        public static Decider getDefaultDecider()
+        {
+            return new prputils.Compiler.Decider() {
+                public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
+                    return true;
+                }
+            };
+        }
                 
         public static void RecompilePrp(byte[] data, Decider decider)
         {

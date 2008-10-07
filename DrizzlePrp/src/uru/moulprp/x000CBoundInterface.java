@@ -52,7 +52,7 @@ public class x000CBoundInterface extends uruobj
         //parentobject = new Uruobjectref(c);
         //u2 = data.readInt();
         u3 = data.readShort();
-        count = data.readInt();
+        count = data.readInt(); //number of planes, each plane has 4 flts: a vertex(the normal) and W
         for(int i=0;i<4;i++)
         {
             u4[i] = new Flt[count];

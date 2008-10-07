@@ -187,11 +187,7 @@ public class deepview
                 //then save changes.
                 String filename2 = prp.filename;
                 String filename = foldername+"/" + new File(filename2).getName();
-                Bytes result = prp.saveAsBytes(new prputils.Compiler.Decider() {
-                    public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
-                        return true;
-                    }
-                });
+                Bytes result = prp.saveAsBytes();
                 FileUtils.WriteFile(filename, result);
             }
         }

@@ -30,20 +30,20 @@ import shared.readexception;
 //aka hsBounds3Ext
 public class BoundingBox extends uruobj
 {
-    int flags;
-    int mode;
-    Vertex min;
-    Vertex max;
-    Vertex xboundingboxcorner;
-    Vertex xdiff0;
-    Flt xdot0;
-    Flt xmag20;
-    Vertex xdiff1;
-    Flt xdot1;
-    Flt xmag21;
-    Vertex xdiff2;
-    Flt xdot2;
-    Flt xmag22;
+    public int flags;
+    public int mode;
+    public Vertex min;
+    public Vertex max;
+    public Vertex xboundingboxcorner;
+    public Vertex xdiff0;
+    public Flt xdot0;
+    public Flt xmag20;
+    public Vertex xdiff1;
+    public Flt xdot1;
+    public Flt xmag21;
+    public Vertex xdiff2;
+    public Flt xdot2;
+    public Flt xmag22;
 
     public BoundingBox(context c) throws readexception
     {
@@ -55,18 +55,27 @@ public class BoundingBox extends uruobj
         if((flags&0x00000001)==0)
         {
             xboundingboxcorner = c.readObj(Vertex.class);
-            xdiff0 = c.readObj(Vertex.class);
-            xdot0 = c.readObj(Flt.class);
-            xmag20 = c.readObj(Flt.class);
-            xdiff1 = c.readObj(Vertex.class);
-            xdot1 = c.readObj(Flt.class);
-            xmag21 = c.readObj(Flt.class);
-            xdiff2 = c.readObj(Vertex.class);
-            xdot2 = c.readObj(Flt.class);
-            xmag22 = c.readObj(Flt.class);
+            xdiff0 = c.readObj(Vertex.class); //axis
+            xdot0 = c.readObj(Flt.class); //x
+            xmag20 = c.readObj(Flt.class); //y
+            xdiff1 = c.readObj(Vertex.class); //axis
+            xdot1 = c.readObj(Flt.class); //x
+            xmag21 = c.readObj(Flt.class); //y
+            xdiff2 = c.readObj(Vertex.class); //axis
+            xdot2 = c.readObj(Flt.class); //x
+            xmag22 = c.readObj(Flt.class); //y
         }
     }
-
+    public void transform(Transmatrix mat)
+    {
+        m.warn("BoundingBox transform may not be correct.");
+        min = mat.mult(min);
+        max = mat.mult(max);
+        if((flags&0x00000001)==0)
+        {
+            xboundingboxcorner = mat.mult(xboundingboxcorner);
+        }
+    }
     public void compile(Bytedeque data)
     {
         data.writeInt(flags);
