@@ -40,6 +40,7 @@ import java.io.File;
 import uru.moulprp.prputils;
 import shared.Bytes;
 import uru.moulprp.Urustring;
+import uru.moulprp.*;
 
 public class deepview
 {
@@ -311,6 +312,21 @@ public class deepview
         else if(objclass==uru.moulprp.Urustring.class)
         {
             panel.add(new dvUrustring((Urustring)obj,name,this));
+            return;
+        }
+        else if(objclass==uru.moulprp.Wpstr.class)
+        {
+            panel.add(new dvWpstr((Wpstr)obj,name,this));
+            return;
+        }
+        else if(objclass==uru.moulprp.Transmatrix.class)
+        {
+            panel.add(new dvTransmatrix((Transmatrix)obj,name,this));
+            return;
+        }
+        else if(objclass==uru.moulprp.Flt.class)
+        {
+            panel.add(new dvFlt((Flt)obj,name,this));
             return;
         }
         

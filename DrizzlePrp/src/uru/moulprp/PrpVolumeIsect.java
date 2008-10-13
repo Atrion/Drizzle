@@ -33,7 +33,7 @@ import uru.b;
 public class PrpVolumeIsect extends uruobj
 {
     Typeid vitype;
-    uruobj isect;
+    public uruobj isect;
     
     public PrpVolumeIsect(context c) throws readexception
     {
@@ -85,7 +85,7 @@ public class PrpVolumeIsect extends uruobj
     {
         PlVolumeIsect parent;
         short count;
-        PlConvexPlane[] planes;
+        public PlConvexPlane[] planes;
         
         public PlConvexIsect(context c) throws readexception
         {
@@ -105,11 +105,11 @@ public class PrpVolumeIsect extends uruobj
     
     public static class PlConvexPlane extends uruobj
     {
-        Vertex normal;
-        Vertex point;
-        Flt distance;
-        Vertex scaledNormal;
-        Flt scaledDist;
+        public Vertex normal; //norm
+        public Vertex point; //pos
+        public Flt distance; //dist, the dot product of normal and point.
+        public Vertex scaledNormal; //worldnorm
+        public Flt scaledDist; //worlddist, the dot product of scaledNormal and point.
         
         public PlConvexPlane(context c) throws readexception
         {

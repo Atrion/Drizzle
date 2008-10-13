@@ -46,4 +46,11 @@ public class x001EModifier extends uruobj
     {
         parent.compile(deque);
     }
+    private x001EModifier(){}
+    public static x001EModifier createDefault()
+    {
+        x001EModifier result = new x001EModifier();
+        result.parent = PlSynchedObject.createDefault();
+        return result;
+    }
 }

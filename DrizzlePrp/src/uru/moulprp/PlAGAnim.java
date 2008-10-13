@@ -37,9 +37,9 @@ public class PlAGAnim extends uruobj
     Urustring name;
     Flt starttime; //float
     Flt stoptime; //float
-    int effectcount;
+    public int effectcount;
     //effect[] effects;
-    PrpTaggedObject[] effects;
+    public PrpTaggedObject[] effects;
     
     public PlAGAnim(context c) throws readexception
     {
@@ -125,9 +125,9 @@ public class PlAGAnim extends uruobj
     }
     public static class plMatrixControllerChannel extends uruobj
     {
-        Urustring u1;
-        PrpTaggedObject u2;
-        PrpController.uk u3;
+        public Urustring u1;
+        public PrpTaggedObject u2;
+        public PrpController.uk u3;
         
         public plMatrixControllerChannel(context c) throws readexception
         {

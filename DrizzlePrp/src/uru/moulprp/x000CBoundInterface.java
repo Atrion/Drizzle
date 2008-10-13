@@ -51,6 +51,8 @@ public class x000CBoundInterface extends uruobj
         //u1 = data.readInt();
         //parentobject = new Uruobjectref(c);
         //u2 = data.readInt();
+        
+        //this is an embedded object.  Check the type and implement it.
         u3 = data.readShort();
         count = data.readInt(); //number of planes, each plane has 4 flts: a vertex(the normal) and W
         for(int i=0;i<4;i++)

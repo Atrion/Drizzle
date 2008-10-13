@@ -35,12 +35,12 @@ public class PlClusterGroup extends uruobj
     short fFormat;
     short fNumTris;
     //byte[] fData;
-    FData[] fData2;
+    public FData[] fData2;
     short[] fIndices;
     
     public Uruobjectref fMaterial;
-    int count;
-    plCluster[] subclustergroups;
+    public int count;
+    public plCluster[] subclustergroups;
     public int count2;
     public Uruobjectref[] fRegions;
     int count3;
@@ -164,7 +164,7 @@ public class PlClusterGroup extends uruobj
     {
         private short fFormat;
         
-        Vertex v1,v2,v3,v4;
+        public Vertex v1,v2,v3,v4;
         int u1,u2,u3,u4;
         Vertex[] uvws;
         int[] weights;
@@ -227,8 +227,8 @@ public class PlClusterGroup extends uruobj
     {
         byte fCode;
         Flt fPosScale;
-        int count;
-        plSpanInstance[] fInstances;
+        public int count;
+        public plSpanInstance[] fInstances;
         
         public plCluster(context c, short numVerts) throws readexception //was subclustergroup(context c, short varA)
         {
@@ -260,7 +260,7 @@ public class PlClusterGroup extends uruobj
         public static class plSpanInstance extends uruobj
         {
             //byte[] fL2W; //was u1, float[3][4]
-            Flt[][] fL2W = new Flt[3][4];
+            public Flt[][] fL2W = new Flt[3][4];
             byte[] fPosDelta; //was u2, vertices?
             byte[] fCol; //was u3, color data
             

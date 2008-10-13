@@ -78,12 +78,12 @@ public class PrpController extends uruobj
     }*/
     public static class plCompoundPosController extends uruobj
     {
-        int flag1;
-        plScalarController pos1;
-        int flag2;
-        plScalarController pos2;
-        int flag3;
-        plScalarController pos3;
+        public int flag1;
+        public plScalarController pos1;
+        public int flag2;
+        public plScalarController pos2;
+        public int flag3;
+        public plScalarController pos3;
         
         public plCompoundPosController(context c) throws readexception
         {
@@ -103,6 +103,24 @@ public class PrpController extends uruobj
             if(flag3!=0)
             {
                 pos3 = new plScalarController(c);
+            }
+        }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(flag1);
+            if(flag1!=0)
+            {
+                pos1.compile(c);
+            }
+            c.writeInt(flag2);
+            if(flag2!=0)
+            {
+                pos2.compile(c);
+            }
+            c.writeInt(flag3);
+            if(flag3!=0)
+            {
+                pos3.compile(c);
             }
         }
     }
@@ -193,6 +211,24 @@ public class PrpController extends uruobj
                 pos3 = new plScalarController(c);
             }
         }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(flag1);
+            if(flag1!=0)
+            {
+                pos1.compile(c);
+            }
+            c.writeInt(flag2);
+            if(flag2!=0)
+            {
+                pos2.compile(c);
+            }
+            c.writeInt(flag3);
+            if(flag3!=0)
+            {
+                pos3.compile(c);
+            }
+        }
     }
     public static class plSimpleScaleController extends uruobj
     {
@@ -268,8 +304,8 @@ public class PrpController extends uruobj
     }
     public static class hsMatrix44Key extends uruobj
     {
-        hsKeyFrame parent;
-        Transmatrix value;
+        public hsKeyFrame parent;
+        public Transmatrix value;
         
         public hsMatrix44Key(context c)
         {
@@ -278,12 +314,17 @@ public class PrpController extends uruobj
             parent = new hsKeyFrame(c);
             value = new Transmatrix(c);
         }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            value.compile(c);
+        }
     }
     public static class plMatrix44Controller extends uruobj
     {
         plLeafController parent;
-        int count;
-        hsMatrix44Key[] keys;
+        public int count;
+        public hsMatrix44Key[] keys;
         
         public plMatrix44Controller(context c) throws readexception
         {
@@ -297,13 +338,19 @@ public class PrpController extends uruobj
                 keys[i] = new hsMatrix44Key(c);
             }
         }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(count);
+            c.writeArray(keys);
+        }
     }
     public static class hsPoint3Key extends uruobj
     {
         hsKeyFrame parent;
-        Vertex xintan;
-        Vertex xouttan;
-        Vertex value;
+        public Vertex xintan;
+        public Vertex xouttan;
+        public Vertex value;
         
         public hsPoint3Key(context c) throws readexception
         {
@@ -316,12 +363,23 @@ public class PrpController extends uruobj
                 xouttan = new Vertex(c);
             }
             value = new Vertex(c);
+            m.msg("hspoint3key: "+c.curRootObject.objecttype.toString()+":"+c.curRootObject.objectname.toString());
+        }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            if((parent.flags & 0x02)!=0)
+            {
+                xintan.compile(c);
+                xouttan.compile(c);
+            }
+            value.compile(c);
         }
     }
     public static class hsPoint3KeyList extends uruobj
     {
-        int count;
-        hsPoint3Key[] keys;
+        public int count;
+        public hsPoint3Key[] keys;
         
         public hsPoint3KeyList(context c) throws readexception
         {
@@ -334,12 +392,17 @@ public class PrpController extends uruobj
                 keys[i] = new hsPoint3Key(c);
             }
         }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(count);
+            c.writeArray(keys);
+        }
     }
     public static class plPoint3Controller extends uruobj
     {
         plLeafController parent;
-        int flag;
-        hsPoint3KeyList xkeylist;
+        public int flag;
+        public hsPoint3KeyList xkeylist;
         
         public plPoint3Controller(context c) throws readexception
         {
@@ -352,11 +415,20 @@ public class PrpController extends uruobj
                 xkeylist = new hsPoint3KeyList(c);
             }
         }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(flag);
+            if(flag !=0)
+            {
+                xkeylist.compile(c);
+            }
+        }
     }
     public static class plSimplePosController extends uruobj
     {
-        int flag;
-        plPoint3Controller xpoint3controller;
+        public int flag;
+        public plPoint3Controller xpoint3controller;
         
         public plSimplePosController(context c) throws readexception
         {
@@ -367,12 +439,21 @@ public class PrpController extends uruobj
             {
                 xpoint3controller = new plPoint3Controller(c);
             }
+            m.msg("simpleposcontroller:"+c.curRootObject.toString());
+        }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(flag);
+            if(flag != 0)
+            {
+                xpoint3controller.compile(c);
+            }
         }
     }
     public static class hsScalarKeyList extends uruobj //same as hsEaseKeyList
     {
-        int count;
-        hsScalarKey[] keys;
+        public int count;
+        public hsScalarKey[] keys;
         
         public hsScalarKeyList(context c)
         {
@@ -386,12 +467,18 @@ public class PrpController extends uruobj
                 keys[i] = new hsScalarKey(c);
             }
         }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(count);
+            
+            c.writeArray(keys);
+        }
     }
     public static class plScalarController extends uruobj
     {
         plLeafController parent;
-        int flag;
-        hsScalarKeyList xkeylist;
+        public int flag;
+        public hsScalarKeyList xkeylist;
         
         public plScalarController(context c) throws readexception
         {
@@ -402,6 +489,16 @@ public class PrpController extends uruobj
             if(flag != 0)
             {
                 xkeylist = new hsScalarKeyList(c);
+            }
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(flag);
+            if(flag != 0)
+            {
+                xkeylist.compile(c);
             }
         }
     }
@@ -419,16 +516,22 @@ public class PrpController extends uruobj
             framenum = c.readInt();
             frametime = new Flt(c);
         }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(flags);
+            c.writeInt(framenum);
+            frametime.compile(c);
+        }
     }
     public static class hsScalarKey extends uruobj
     {
         hsKeyFrame parent;
         //Vertex xintan;
         //Vertex xouttan;
-        Flt value;
+        public Flt value;
         
-        Flt test1;
-        Flt test2;
+        public Flt test1;
+        public Flt test2;
         
         public hsScalarKey(context c)
         {
@@ -443,6 +546,16 @@ public class PrpController extends uruobj
                 test2 = new Flt(c);
             }
             value = new Flt(c);
+        }
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            if((parent.flags & 0x02)!=0)
+            {
+                test1.compile(c);
+                test2.compile(c);
+            }
+            value.compile(c);
         }
     }
     public static class hsEaseKeyList extends uruobj
@@ -507,8 +620,12 @@ public class PrpController extends uruobj
         moul11[] xtype11;
         moul12[] xtype12;
         
+        private int readversion; //keep track of read version for compilation.
+        
         public plLeafController(context c) throws readexception
         {
+            this.readversion = c.readversion;
+            
             if(c.readversion==3)
             {
                 u1 = c.readInt(); //int in pots, byte in moul
@@ -638,7 +755,22 @@ public class PrpController extends uruobj
         public void compile(Bytedeque c)
         {
             //m.err("plLeafController doesn't implement compile directly.");
-            compileSpecial(c);
+            
+            if(this.readversion==4 || this.readversion==6)
+            {
+                compileSpecial(c);
+            }
+            else if(this.readversion==3)
+            {
+                c.writeInt(u1);
+                c.writeInt(count);
+                c.writeArray(easecontrollers);
+                c.writeInt(garbage);
+            }
+            else
+            {
+                throw new shared.uncaughtexception("PlLeafController: unexpected readversion in compile.");
+            }
         }
         public void compileTypeid(Bytedeque c)
         {
@@ -1484,14 +1616,14 @@ public class PrpController extends uruobj
         }
     }
     
-    public static class uk extends uruobj
+    public static class uk extends uruobj //hsAffineParts
     {
         int xu0; //apparently always zero.
-        Vertex u1;
-        Quat u2;
-        Quat u3;
-        Vertex u4;
-        Flt u5;
+        public Vertex u1; //T
+        public Quat u2; //Q
+        public Quat u3; //U
+        public Vertex u4; //K
+        public Flt u5; //F
         
         public uk(context c) throws readexception
         {
@@ -1519,12 +1651,12 @@ public class PrpController extends uruobj
     }
     public static class plTMController extends uruobj
     {
-        int type1;
-        int type2;
-        int type3;
-        PrpObject poscontroller;
-        PrpObject rotcontroller;
-        PrpObject scalecontroller;
+        public int type1;
+        public int type2;
+        public int type3;
+        public PrpObject poscontroller;
+        public PrpObject rotcontroller;
+        public PrpObject scalecontroller;
         
         public plTMController(context c) throws readexception
         {
@@ -1572,6 +1704,51 @@ public class PrpController extends uruobj
                     throw new readexception("pltmcontroller: error");
             }
 
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(type1);
+            switch(type1) //posController
+            {
+                case 0x00: //nil
+                    break;
+                case 0x01: //plSimplePosController
+                    poscontroller.compile(c);
+                    break;
+                case 0x02: //plCompoundPosController
+                    poscontroller.compile(c);
+                    break;
+                default:
+                    throw new shared.uncaughtexception("pltmcontroller: error");
+            }
+            
+            c.writeInt(type2);
+            switch(type2)
+            {
+                case 0x00: //nil
+                    break;
+                case 0x01: //plSimpleRotController
+                    rotcontroller.compile(c);
+                    break;
+                case 0x03: //plCompoundRotController
+                    rotcontroller.compile(c);
+                    break;
+                default:
+                    throw new shared.uncaughtexception("pltmcontroller: error");
+            }
+            
+            c.writeInt(type3);
+            switch(type3)
+            {
+                case 0x00: //nil
+                    break;
+                case 0x01: //plSimpleScaleController
+                    scalecontroller.compile(c);
+                    break;
+                default:
+                    throw new shared.uncaughtexception("pltmcontroller: error");
+            }
         }
     }
     

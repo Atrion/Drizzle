@@ -632,6 +632,16 @@ public abstract class PrpMessage extends PrpTaggedObject
                 events[i] = new proEventData(c);
             }
         }
+        private PlNotifyMsg(){}
+        public static PlNotifyMsg createWithRef(Uruobjectref ref)
+        {
+            PlNotifyMsg result = new PlNotifyMsg();
+            result.parent = PlMessage.createWithRef(ref);
+            result.state = Flt.zero();
+            result.count = 0;
+            result.events = new proEventData[0];
+            return result;
+        }
         
         public void compile(Bytedeque c)
         {
@@ -903,7 +913,15 @@ public abstract class PrpMessage extends PrpTaggedObject
                 //the other flags will all default to 0.
             }
         }
-        
+        private PlMessage(){}
+        public static PlMessage createWithRef(Uruobjectref ref)
+        {
+            PlMessage result = new PlMessage();
+            result.parentobj = Uruobjectref.none();
+            result.refcount = 1;
+            result.refs = new Uruobjectref[]{ ref };
+            return result;
+        }
         public void compile(Bytedeque c)
         {
             parentobj.compile(c);

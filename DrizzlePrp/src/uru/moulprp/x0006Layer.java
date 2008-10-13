@@ -39,7 +39,7 @@ public class x0006Layer extends uruobj
     public int flags3;
     public int flags4;
     public int flags5;
-    Transmatrix matrix;
+    public Transmatrix matrix;
     public Rgba ambient;
     public Rgba diffuse;
     public Rgba emissive;

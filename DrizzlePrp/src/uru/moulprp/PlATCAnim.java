@@ -33,7 +33,7 @@ import uru.b;
 public class PlATCAnim extends uruobj
 {
     //Objheader xheader;
-    PlAGAnim parent;
+    public PlAGAnim parent;
     Flt u1; //float
     byte u2; //bool
     Flt u3; //float

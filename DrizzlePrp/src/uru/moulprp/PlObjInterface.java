@@ -34,7 +34,7 @@ public class PlObjInterface extends uruobj
 {
     //Objheader xheader;
     PlSynchedObject parent;
-    Uruobjectref sceneobject;
+    public Uruobjectref sceneobject;
     //int count;
     //int[] dwarray;
     public HsBitVector bv;

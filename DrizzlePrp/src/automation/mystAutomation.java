@@ -1117,27 +1117,6 @@ public class mystAutomation
         //All done!
         m.msg("Done Moul work!");
     }
-    public static void restoreClickability(prpfile prp, String clickableSceneObject)
-    {
-        x0001Sceneobject so = prp.findObject(clickableSceneObject, Typeid.plSceneObject).castTo();
-        for(Uruobjectref ref: so.objectrefs2)
-        {
-            if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
-            {
-                PlLogicModifier lm2 = prp.findObjectWithRef(ref).castTo();
-                lm2.parent.disabled = 0; //set disabled to false.
-                //for(Uruobjectref condref: lm2.conditionals)
-                //{
-                //    if(condref.hasref()&&condref.xdesc.objecttype==Typeid.plActivatorConditionalObject)
-                //    {
-                //        aco2 = prp.findObjectWithRef(condref).castTo();
-                //        int dummy=0;
-                //    }                                
-                //}
-                //int dummy=0;
-            }
-        }
-    }
     public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder)
     {
         String newagename = agenames.get(agename);
@@ -1146,6 +1125,7 @@ public class mystAutomation
         
         if(shared.State.AllStates.getStateAsBoolean("automateMystV"))
         {
+            myst5Fixes.fixClickables(finalname, prp);
             //fix direbo links.
             PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
             for(PrpRootObject obj: objs)
@@ -1230,33 +1210,6 @@ public class mystAutomation
                 }
             }
             
-            //restore limited clickables
-            if(finalname.toLowerCase().equals("direbo") && prp.header.pagename.toString().toLowerCase().equals("restage"))
-            {
-                String[] clickables = new String[]{
-                    "PedButton02ClickProxyLaki",
-                    "PedButton03ClickProxyLaki",
-                    "PedButton04ClickProxyLaki",
-                    "PedButton05ClickProxyLaki",
-                    "PedButton02ClickProxyTdlm",
-                    "PedButton03ClickProxyTdlm",
-                    //"PedButton04ClickProxyTdlm",
-                    "PedButton05ClickProxyTdlm",
-                    "PedButton02ClickProxyThgr",
-                    "PedButton03ClickProxyThgr",
-                    "PedButton04ClickProxyThgr",
-                    "PedButton05ClickProxyThgr",
-                    "PedButton02ClickProxySrln",
-                    "PedButton03ClickProxySrln",
-                    //"PedButton04ClickProxySrln",
-                    "PedButton05ClickProxySrln",
-                    
-                };
-                for(String clickable: clickables)
-                {
-                    restoreClickability(prp, clickable);
-                }
-            }
             //pd1 = prp.findObjectWithRef(aco1.pickingdetectors[0]).castTo();
             //pd2 = prp.findObjectWithRef(aco2.pickingdetectors[0]).castTo();
             //lm2.parent.u2 = 0; //set disabled to false.

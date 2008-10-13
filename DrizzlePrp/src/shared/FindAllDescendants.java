@@ -20,7 +20,7 @@ public class FindAllDescendants
         return foundObjs;
     }
     
-    public static <T> void FindAllDescendantsByClass2(Class<T> classToFind, Object obj, Class objclass, Vector<T> foundObjs, IdentityHashMap<Object,Object> seenObjects)
+    private static <T> void FindAllDescendantsByClass2(Class<T> classToFind, Object obj, Class objclass, Vector<T> foundObjs, IdentityHashMap<Object,Object> seenObjects)
     {
         if(obj==null) return;
         

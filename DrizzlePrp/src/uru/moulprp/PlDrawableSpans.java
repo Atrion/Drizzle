@@ -63,7 +63,7 @@ public class PlDrawableSpans extends uruobj
     int meshcount;
     Mesh[] meshes;
     Typeid embeddedtype;
-    x0240plSpaceTree xspacetree;
+    public x0240plSpaceTree xspacetree;
     Uruobjectref scenenode;
     
     public PlDrawableSpans(context c) throws readexception
@@ -86,10 +86,10 @@ public class PlDrawableSpans extends uruobj
             {
                 if(i==17 || i==24 || i==34) materials[i] = materials[0];
             }*/
-            /*if(materials[i].xdesc.objectname.toString().toLowerCase().startsWith("crater"))
+            if(materials[i].hasref() && materials[i].xdesc.objectname.toString().toLowerCase().startsWith("watercurrent"))
             {
                 int dummy=0;
-            }*/
+            }
         }
         
         subsetcount = data.readInt();
@@ -345,10 +345,10 @@ public class PlDrawableSpans extends uruobj
     static public class x0240plSpaceTree extends uruobj
     {
         ////Objheader xheader;
-        short childnodes;
-        int leafnodes;
-        int allnodes;
-        Nodes[] nodes2;
+        public short childnodes;
+        public int leafnodes;
+        public int allnodes;
+        public Nodes[] nodes2;
 
 
         public x0240plSpaceTree(context c) throws readexception
@@ -378,7 +378,7 @@ public class PlDrawableSpans extends uruobj
 
         public class Nodes
         {
-            BoundingBox boundingbox;
+            public BoundingBox boundingbox;
             short type;
             short parent;
             short left;

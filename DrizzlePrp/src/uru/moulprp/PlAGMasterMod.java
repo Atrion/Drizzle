@@ -37,8 +37,8 @@ public class PlAGMasterMod extends uruobj
     PlSynchedObject parent;
     Bstr u2;
     //short u1;
-    int count;
-    Uruobjectref[] ATCAnim;
+    public int count;
+    public Uruobjectref[] ATCAnim;
     byte u3;
     byte u4;
     Uruobjectref xu5;

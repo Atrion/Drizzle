@@ -26,6 +26,9 @@ import shared.Bytes;
 import uru.moulprp.Typeid;
 import uru.moulprp.prputils.Compiler.Decider;
 import java.util.Vector;
+import shared.FileUtils;
+import java.io.File;
+import uru.Bytestream;
 /**
  *
  * @author user
@@ -33,20 +36,49 @@ import java.util.Vector;
 public class prpfile
 {
     public PrpHeader header;
-    //Vector<PrpRootObject> objects;
+    public Vector<PrpRootObject> extraobjects;
     public PrpRootObject[] objects;
     public PrpObjectIndex objectindex;
     
     public String filename;
     
-    public prpfile(){}
+    public prpfile()
+    {
+        extraobjects = new Vector<PrpRootObject>();
+    }
     
     public void orderObjects()
     {
         java.util.Arrays.sort(objects);
         //java.util.Collections.sort(objects);
     }
-    
+    public void mergeExtras()
+    {
+        int newsize = objects.length + extraobjects.size();
+        PrpRootObject[] newobjects = new PrpRootObject[newsize];
+        
+        for(int i=0;i<objects.length;i++)
+        {
+            newobjects[i] = objects[i];
+        }
+        for(int i=0;i<extraobjects.size();i++)
+        {
+            newobjects[objects.length+i] = extraobjects.get(i);
+        }
+        
+        extraobjects.clear();
+        objects = newobjects;
+    }
+    /*public PrpRootObject[] getObjects()
+    {
+        int size = objects.size();
+        PrpRootObject[] result = new PrpRootObject[size];
+        for(int i=0;i<size;i++)
+        {
+            result[i] = objects.get(i);
+        }
+        return result;
+    }*/
     public static prpfile createFromContext(context c, Typeid[] typesToRead)
     {
         prpfile result = prputils.ProcessAllMoul(c, false, typesToRead);
@@ -62,6 +94,12 @@ public class prpfile
     {
         prpfile result = new prpfile();
         result.objects = objs;
+        result.extraobjects = new Vector<PrpRootObject>();
+        /*result.objects = new Vector<PrpRootObject>();
+        for(PrpRootObject obj: objs)
+        {
+            result.objects.add(obj);
+        }*/
         result.header = PrpHeader.createFromInfo(agename, pageid, pagetype, pagename);
         
         //these don't seem to be needed for compilation.  We may need to regenerate the ObjectIndex if we want to merge objects in and parse them.
@@ -69,6 +107,19 @@ public class prpfile
         //result.filename
         
         return result;
+    }
+    
+    public static prpfile createFromFile(String filename, boolean readRaw)
+    {
+        //read file
+        byte[] filedata = shared.FileUtils.ReadFile(filename);
+        File f = new File(filename);
+        context c = context.createFromBytestream(new Bytestream(filedata));
+        c.curFile = filename;
+        prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c,readRaw); //read raw
+        prp.filename = filename;
+        
+        return prp;
     }
     public Bytes saveAsBytes()
     {
@@ -82,6 +133,7 @@ public class prpfile
     }
     public Bytes saveAsBytes(Decider decider)
     {
+        mergeExtras();
         orderObjects();
         Bytes result = prputils.Compiler.RecompilePrp(this, decider);
         return result;

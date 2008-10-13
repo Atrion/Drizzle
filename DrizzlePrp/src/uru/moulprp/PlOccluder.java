@@ -32,18 +32,18 @@ public class PlOccluder extends uruobj
     
     PlObjInterface parent;
     Flt f1;
-    short counta;
-    SubOccluder[] blocks;
+    public short counta;
+    public plCullPoly[] blocks;
     Uruobjectref scenenode;
     short countd;
     Uruobjectref[] visRegion;
     
-    int u1;
-    int u2;
-    Vertex v1;
-    Vertex v2;
-    
-    Flt[] conglomerate;
+    //int u1;
+    //int u2;
+    //Vertex v1;
+    //Vertex v2;
+    //Flt[] conglomerate;
+    public BoundingBox fWorldBounds;
     
     //Flt[] u3;
     //short counta;
@@ -62,7 +62,8 @@ public class PlOccluder extends uruobj
         //in pots: sub_48a930, in m5: sub_643ca0
         //int u1,int,vertex,vertex,
         //if u1&1==0 then vertex, 3*(vertex, flt, flt)
-        u1 = c.readInt();
+        
+        /*u1 = c.readInt();
         u2 = c.readInt();
         v1 = new Vertex(c);
         v2 = new Vertex(c);
@@ -71,10 +72,12 @@ public class PlOccluder extends uruobj
             //if u1&1==0 then vertex, 3*(vertex, flt, flt)
             //m.warn("untested case in PlOccluder.");
             conglomerate = c.readArray(Flt.class, 18);
-        }
+        }*/
+        fWorldBounds = new BoundingBox(c);
+        
         f1 = new Flt(c);
         counta = c.readShort();
-        blocks = c.readArray(SubOccluder.class, b.Int16ToInt32(counta));
+        blocks = c.readArray(plCullPoly.class, b.Int16ToInt32(counta));
         scenenode = new Uruobjectref(c);
         countd = c.readShort();
         visRegion = c.readArray(Uruobjectref.class, b.Int16ToInt32(countd));
@@ -94,14 +97,15 @@ public class PlOccluder extends uruobj
         parent.compile(c);
         
         //same as in PlMobileOccluder:
-        c.writeInt(u1);
+        /*c.writeInt(u1);
         c.writeInt(u2);
         v1.compile(c);
         v2.compile(c);
         if((u1&0x1)==0)
         {
             c.writeArray(conglomerate);
-        }
+        }*/
+        fWorldBounds.compile(c);
         
         f1.compile(c);
         c.writeShort(counta);
@@ -111,27 +115,27 @@ public class PlOccluder extends uruobj
         c.writeArray(visRegion);
     }
     
-    public static class SubOccluder extends uruobj
+    public static class plCullPoly extends uruobj//was SubOccluder
     {
         int u1;
-        Vertex v1;
-        Flt f1;
-        Vertex v2;
-        Flt f2;
-        int count;
-        Vertex[] vertices;
+        public Vertex fNorm; //was v1
+        Flt f1; //dist
+        public Vertex fCenter; //was v2
+        Flt f2; //radius
+        public int count;
+        public Vertex[] vertices;
         
         //int countb;
         //Flt[] floats1;
         //int countc;
         //Flt[] floats2;
         
-        public SubOccluder(context c) throws readexception
+        public plCullPoly(context c) throws readexception
         {
             u1 = c.readInt();
-            v1 = new Vertex(c);
+            fNorm = new Vertex(c);
             f1 = new Flt(c);
-            v2 = new Vertex(c);
+            fCenter = new Vertex(c);
             f2 = new Flt(c);
             count = c.readInt();
             vertices = c.readArray(Vertex.class, count);
@@ -147,9 +151,9 @@ public class PlOccluder extends uruobj
         public void compile(Bytedeque c)
         {
             c.writeInt(u1);
-            v1.compile(c);
+            fNorm.compile(c);
             f1.compile(c);
-            v2.compile(c);
+            fCenter.compile(c);
             f2.compile(c);
             c.writeInt(count);
             c.writeArray(vertices);

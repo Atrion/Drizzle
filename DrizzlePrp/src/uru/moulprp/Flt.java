@@ -31,6 +31,10 @@ strictfp public class Flt extends uruobj
     public Flt(context c)
     {
         rawdata = c.in.readInt();
+        if(this.approxequals((float)190.0352, (float)0.01))
+        {
+            int dummy=0;
+        }
     }
     public Flt(int intToConvert)
     {
@@ -62,6 +66,10 @@ strictfp public class Flt extends uruobj
     {
         this.rawdata = Float.floatToRawIntBits(f);
     }
+    private void assign(float f)
+    {
+        this.rawdata = Float.floatToRawIntBits(f);
+    }
     public static Flt createFromJavaFloat(float f)
     {
         Flt result = new Flt();
@@ -85,7 +93,8 @@ strictfp public class Flt extends uruobj
     public String toString()
     {
         //float value = java.lang.Float.intBitsToFloat(rawdata);
-        return "Float=" + java.lang.Float.toString(this.toJavaFloat());
+        //return "Float=" + java.lang.Float.toString(this.toJavaFloat());
+        return java.lang.Float.toString(this.toJavaFloat());
     }
     public static String toString(int intvalue)
     {
@@ -113,6 +122,12 @@ strictfp public class Flt extends uruobj
         float result = f1+f;
         return Flt.createFromJavaFloat(result);
     }
+    public void addModify(float f)
+    {
+        float f1 = this.toJavaFloat();
+        float result = f1+f;
+        this.assign(result);
+    }
     public Flt sub(Flt f)
     {
         return this.add(f.neg());
@@ -134,6 +149,35 @@ strictfp public class Flt extends uruobj
         float f2 = f.toJavaFloat();
         float result = f1*f2;
         return new Flt(result);
+    }
+    public static double[][] convertFltArrayToDoubleArray(Flt[][] arr)
+    {
+        int a = arr.length;
+        int b = arr[0].length;
+        double[][] result = new double[a][b];
+        for(int i=0;i<a;i++)
+            for(int j=0;j<b;j++)
+                result[i][j] = arr[i][j].toJavaFloat();
+        return result;
+    }
+    public boolean approxequals(float f, float tolerance)
+    {
+        float f2 = this.toJavaFloat();
+        float diff = f2-f;
+        diff = java.lang.Math.abs(diff);
+        if(diff<tolerance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public boolean approxequals(float f)
+    {
+        float tolerance = (float)0.000001;
+        return approxequals(f,tolerance);
     }
     public boolean equals(Object o)
     {

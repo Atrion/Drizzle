@@ -33,6 +33,8 @@ public strictfp class Transmatrix extends uruobj
     byte isnotIdentity;
     int[] xmatrix = new int[16]; //raw data (floats are 32bit, so they fit in integer.)
     
+    private Flt[][] testvals;
+    
     private Transmatrix(){}
     
     public Transmatrix(context c)
@@ -50,6 +52,8 @@ public strictfp class Transmatrix extends uruobj
             isnotIdentity = 1; //this byte doesn't exist in pots.
             xmatrix = c.in.readInts(16);
         }
+        
+        testvals = this.convertToFltArray();
     }
     public static Transmatrix createDefault()
     {
@@ -155,7 +159,8 @@ public strictfp class Transmatrix extends uruobj
         {
             for(int i=0;i<16;i++)
             {
-                result += ":"+uru.moulprp.Flt.toString(xmatrix[i]);
+                if(i%4==0) result += "\n";
+                result += ", "+uru.moulprp.Flt.toString(xmatrix[i]);
             }
         }
         return result;
@@ -220,7 +225,61 @@ public strictfp class Transmatrix extends uruobj
         RealMatrix rm = new RealMatrixImpl(rawdata);
         return rm;
     }
-    
+    public static Transmatrix createFromDoubleArray(double[][] arr)
+    {
+        m.warn("Untested createFromDoubleArray");
+        RealMatrix mat = createMatrixFromDoubleArray(arr);
+        return createFromMatrix(mat);
+    }
+    public static RealMatrix createMatrixFromDoubleArray(double[][] arr)
+    {
+        m.warn("Untested createMatrixFromDoubleArray");
+        RealMatrix mat = new RealMatrixImpl(arr);
+        return mat;
+    }
+    public Flt[][] convertTo3x4FltArray()
+    {
+        Flt[][] result = new Flt[3][4];
+        if(this.isnotIdentity==0) throw new shared.uncaughtexception("Unhandled case in convertTo3x4FltArray");
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                int raw = this.xmatrix[i*4+j];
+                Flt raw2 = Flt.createFromData(raw);
+                if(i==3)
+                {
+                    if((j==3 && !raw2.approxequals(1)) || (j!=3 && !raw2.approxequals(0)))
+                        throw new shared.uncaughtexception("Unhandled case2 in convertTo3x4FltArray");
+                }
+                else
+                {
+                    result[i][j] = raw2;
+                }
+            }
+        }
+        return result;
+    }
+    public static Transmatrix createFrom3x4Array(double[][] arr)
+    {
+        Transmatrix result = new Transmatrix();
+        result.isnotIdentity = 1;
+        result.xmatrix = new int[16];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                float f;
+                if(i==3)
+                    f = j==3?1:0;
+                else
+                    f = (float)arr[i][j];
+                int rawflt = Flt.createFromJavaFloat(f).rawdata;
+                result.xmatrix[i*4+j] = rawflt;
+            }
+        }
+        return result;
+    }
     public static Transmatrix createFromMatrix(RealMatrix rm)
     {
         double[][] rawdata = rm.getData();

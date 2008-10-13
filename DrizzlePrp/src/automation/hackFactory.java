@@ -26,6 +26,20 @@ import java.util.Vector;
 public class hackFactory
 {
     
+    public static void createAndAddCoordinateInterface(prpfile prp, PrpRootObject sceneobject)
+    {
+        x0015CoordinateInterface ci = x0015CoordinateInterface.createDefault(sceneobject.header.desc.toRef());
+        Uruobjectref ciref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plCoordinateInterface, sceneobject.header.desc.objectname.toString()+"_ci", prp.header.pageid, prp.header.pagetype);
+        PrpRootObject ciroot = PrpRootObject.createFromDescAndObject(ciref.xdesc, ci);
+        ci.parent.bv = HsBitVector.createWithValues(0);
+        
+        x0001Sceneobject so = prp.findObjectWithRef(sceneobject.header.desc.toRef()).castTo();
+        so.regioninfo = ciref;
+        sceneobject.hasChanged = true;
+        
+        prp.extraobjects.add(ciroot);
+    }
+    
     public static void createDireboBuiltInPrp(String outfolder)
     {
         String agename = "Direbo";

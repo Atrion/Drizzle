@@ -73,7 +73,14 @@ public class PrpTaggedObject extends uruobj
             prpobject.compile(c);
         }
     }
-    
+    private PrpTaggedObject(){}
+    public static PrpTaggedObject createWithTypeidUruobj(Typeid typeid, uruobj obj)
+    {
+        PrpTaggedObject result = new PrpTaggedObject();
+        result.type = typeid;
+        result.prpobject = PrpObject.createFromUruobj(obj);
+        return result;
+    }
     public String toString()
     {
         return "type:"+type.toString()+" info:"+prpobject.toString();

@@ -129,4 +129,14 @@ public class Uruobjectref extends uruobj
             return xdesc.toString();
         }
     }
+    
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(!(o instanceof Uruobjectref)) return false;
+        Uruobjectref o2 = (Uruobjectref)o;
+        if(this.hasRef != o2.hasRef)  return false;
+        if(!this.hasref()) return true;
+        return this.xdesc.equals(o2.xdesc);
+    }
 }

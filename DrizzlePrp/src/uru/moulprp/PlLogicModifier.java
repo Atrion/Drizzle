@@ -31,7 +31,7 @@ import shared.readexception;
 public class PlLogicModifier extends uruobj
 {
     public PlLogicModBase parent;
-    int conditionalcount;
+    public int conditionalcount;
     public Uruobjectref[] conditionals;
     int u1;
     
@@ -48,7 +48,13 @@ public class PlLogicModifier extends uruobj
             xref = new Uruobjectref(c); //e.g. KeepClickLinkLaki(plPickingDetector)
         }
     }
-    
+    private PlLogicModifier(){}
+    /*public static PlLogicModifier createWithRef(Uruobjectref ref)
+    {
+        PlLogicModifier result = new PlLogicModifier();
+        result.parent = PlLogicModBase.createWithRef(ref);
+        
+    }*/
     public void compile(Bytedeque c)
     {
         parent.compile(c);
@@ -78,7 +84,17 @@ public class PlLogicModifier extends uruobj
             disabled = c.readByte();
 
         }
-
+        private PlLogicModBase(){}
+        public static PlLogicModBase createWithRef(Uruobjectref ref)
+        {
+            PlLogicModBase result = new PlLogicModBase();
+            result.parent = PlSingleModifier.createDefault();
+            PrpMessage.PlNotifyMsg msg = PrpMessage.PlNotifyMsg.createWithRef(ref);
+            result.message = PrpTaggedObject.createWithTypeidUruobj(Typeid.plNotifyMsg, msg);
+            result.u1 = new HsBitVector(1); //just copying from known object
+            result.disabled = 0; //enable it.
+            return result;
+        }
         public void compile(Bytedeque c)
         {
             parent.compile(c);

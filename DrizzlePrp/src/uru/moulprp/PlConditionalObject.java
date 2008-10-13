@@ -30,8 +30,8 @@ import shared.readexception;
 
 public class PlConditionalObject extends uruobj
 {
-    byte satisfied;
-    byte toggle;
+    public byte satisfied;
+    public byte toggle;
     
     public PlConditionalObject(context c) throws readexception
     {

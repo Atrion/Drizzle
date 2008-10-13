@@ -45,7 +45,14 @@ public class PlSingleModifier extends uruobj
         //u1 = c.readInt(); e.ensure(u1==1); //this should apparently be an hsBitVector.
         //flag = c.readInt();
     }
-    
+    private PlSingleModifier(){}
+    public static PlSingleModifier createDefault()
+    {
+        PlSingleModifier result = new PlSingleModifier();
+        result.parent = x001EModifier.createDefault();
+        result.flagvector = HsBitVector.createDefault();
+        return result;
+    }
     public void compile(Bytedeque data)
     {
         parent.compile(data);

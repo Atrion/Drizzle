@@ -68,6 +68,11 @@ public strictfp class Vertex extends uruobj
         y.compile(data);
         z.compile(data);
     }
+    public float dot(Vertex v2)
+    {
+        float result = this.x.toJavaFloat()*v2.x.toJavaFloat() + this.y.toJavaFloat()*v2.y.toJavaFloat() + this.z.toJavaFloat()*v2.z.toJavaFloat();
+        return result;
+    }
     public double[] convertToDouble4Vector()
     {
         double[] result = new double[4];
@@ -105,6 +110,12 @@ public strictfp class Vertex extends uruobj
         Flt z2 = this.z.add(v.z);
         Vertex result = new Vertex(x2,y2,z2);
         return result;
+    }
+    public void addModify(Vertex v)
+    {
+        x = this.x.add(v.x);
+        y = this.y.add(v.y);
+        z = this.z.add(v.z);
     }
     public String toString()
     {

@@ -31,8 +31,8 @@ import shared.readexception;
 public class PlDynaRippleMgr extends uruobj
 {
     PlDynaDecalMgr parent;
-    Vertex v1;
-    Vertex v2;
+    Vertex v1; //initUVW
+    Vertex v2; //finalUVW
     
     public PlDynaRippleMgr(context c) throws readexception
     {

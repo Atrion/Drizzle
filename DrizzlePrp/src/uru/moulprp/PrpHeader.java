@@ -36,9 +36,9 @@ public class PrpHeader extends uruobj
 
     short version;
     short version2;
-    Pageid pageid;
+    public Pageid pageid;
     //short pagetype;
-    Pagetype pagetype;
+    public Pagetype pagetype;
     public Urustring agename;
     public Urustring pagename;
     short u1;

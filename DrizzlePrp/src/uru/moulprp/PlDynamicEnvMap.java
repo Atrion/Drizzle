@@ -31,7 +31,7 @@ import shared.readexception;
 public class PlDynamicEnvMap extends uruobj
 {
     ithinkthisisPlCubicRenderTarget u1;
-    Vertex u2;
+    public Vertex fPos;
     Flt[] u3; //8
     byte u4;
     int refcount;
@@ -43,7 +43,7 @@ public class PlDynamicEnvMap extends uruobj
     public PlDynamicEnvMap(context c) throws readexception
     {
         u1 = new ithinkthisisPlCubicRenderTarget(c);
-        u2 = new Vertex(c);
+        fPos = new Vertex(c);
         u3 = c.readArray(Flt.class, 8);
         u4 = c.readByte();
         refcount = c.readInt();
@@ -59,7 +59,7 @@ public class PlDynamicEnvMap extends uruobj
     public void compile(Bytedeque c)
     {
         u1.compile(c);
-        u2.compile(c);
+        fPos.compile(c);
         c.writeArray(u3);
         c.writeByte(u4);
         c.writeInt(refcount);

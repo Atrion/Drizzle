@@ -73,6 +73,10 @@ public class PrpRootObject extends uruobj implements Comparable
             prpobject = new PrpObject(c, header.objecttype);
         }
     }
+    public Uruobjectref getref()
+    {
+        return this.header.desc.toRef();
+    }
     public int compareTo(Object o)
     {
         if(!(o instanceof PrpRootObject)) return -1;

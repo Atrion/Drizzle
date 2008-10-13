@@ -36,7 +36,7 @@ public class PlSoftVolumeSimple extends uruobj
     
     PlSoftVolume parent;
     Flt u1;
-    PrpVolumeIsect prpvolumeisect;
+    public PrpVolumeIsect prpvolumeisect;
     
     public PlSoftVolumeSimple(context c) throws readexception
     {
