@@ -1727,6 +1727,7 @@ public class mystAutomation
                 if(type==Typeid.plBoundInterface && pageid.prefix==88) //tahgira
                 {
                     if(name.equals("CaveSnowKiller01")) return false;
+                    //if(name.equals("FieldBubbleKiller")) return false;
                 }
                 
                 if(type==Typeid.plBoundInterface)

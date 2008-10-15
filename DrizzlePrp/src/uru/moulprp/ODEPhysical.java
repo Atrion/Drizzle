@@ -174,6 +174,7 @@ public class ODEPhysical extends uruobj
                 (u8==0x2000000 && u9==0x0 && u10==0x0) //verified - all over!
                 //||(u8==0x4800000 && u9==0x20000 && u10==0x0)
                 ||(u8==0x2800000 && u9==0x0 && u10==0x0) //verified, bubble collider in direbo
+                ||(u8==0x2000000 && u9==0x7860000 && u10==0x0) //laki collision
                 )
         {
             convertee.u1 = 0;
@@ -229,6 +230,8 @@ public class ODEPhysical extends uruobj
         }
         else if((u8==0x4000000 && u9==0x0 && u10==0x20000) //not verified - direbo gates: may actually just be blocker.
                 ||(u8==0x4800000 && u9==0x0 && u10==0x20000) //dtctFloot greatShaft platform
+                ||(u8==0x4000000 && u9==0x0 && u10==0x20002) //laki detector
+                ||(u8==0x4800000 && u9==0x0 && u10==0x20002) //laki detector
         ){
             convertee.u1 = 0;
             convertee.coltype = 0x400;
@@ -245,6 +248,7 @@ public class ODEPhysical extends uruobj
             //|| (u8==0x4000000 && u9==0x0 && u10==0x8000000))
             //|| (u8==0x4000000 && u9==0x20000)
               ||(u8==0x4800000 && u9==0x0 && u10==0x0) //verified - direbo pedestal buttons
+              ||(u8==0x4000000 && u9==0x0 && u10==0x2) //e.g. Tahgira CrackBahroDtct
         ){
             convertee.u1 = 0;
             convertee.coltype = 0x400;
@@ -259,6 +263,7 @@ public class ODEPhysical extends uruobj
         else if((u8==0x4000000 && u9==0x20000 && u10==0x0) //verified - Direbo descent linking books.
               ||(u8==0x4800000 && u9==0x20000 && u10==0x0) //not verified - direbo gates
               ||(u8==0x4000000 && u9==0x1020000 && u10==0x0) //not verified - Direbo gates(may actually just be physical blocker)
+              ||(u8==0x4800000 && u9==0x1020000 && u10==0x0) //e.g. some telescope stuff in Todelmer
                 )
         {
             convertee.u1 = 0;

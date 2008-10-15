@@ -46,7 +46,18 @@ public class prpfile
     {
         extraobjects = new Vector<PrpRootObject>();
     }
-    
+    public void removeObject(Typeid type, String name)
+    {
+        for(PrpRootObject obj: objects)
+        {
+            if(obj.header.desc.objecttype==type && obj.header.desc.objectname.toString().equals(name))
+            {
+                obj.tagDeleted = true;
+                return;
+            }
+        }
+        m.msg("Could not find object to remove.");
+    }
     public void orderObjects()
     {
         java.util.Arrays.sort(objects);

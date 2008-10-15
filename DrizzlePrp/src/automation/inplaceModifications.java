@@ -32,6 +32,7 @@ public class inplaceModifications
         //hacks
         if(f.getName().toLowerCase().equals("ahnysphere01_district_sphere01.prp"))
         {
+            //perhaps the way to automate this is: drawinterfaces that use a layeranimation and don't already have a coordinateinterface, need one created.
             PrpRootObject outtide = prp.findObject("PoolSurfaceOuterTide", Typeid.plSceneObject);
             PrpRootObject intide = prp.findObject("PoolSurfaceInnerTide", Typeid.plSceneObject);
             hackFactory.createAndAddCoordinateInterface(prp, outtide);

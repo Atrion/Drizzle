@@ -50,7 +50,26 @@ public class myst5Fixes
                 "PedButton05ClickProxy",
             };
         }
-        if(agename.equals("siralehn") && pagename.equals("srlnkeepinter"))
+        if(agename.equals("laki") && pagename.equals("exterior"))
+        {
+            clickables = new String[]{
+                //"PedButton01ClickProxy", //don't link to self.
+                "PedButton02ClickProxy",
+                "PedButton03ClickProxy",
+                "PedButton04ClickProxy",
+                "PedButton05ClickProxy",
+            };
+            makeClickableUsePythonfilemod(prp, "ClickPed1DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
+            makeClickableUsePythonfilemod(prp, "ClickPed3DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
+            //makeClickableUsePythonfilemod(prp, "Ped1ClickableProxy", "linktoage", "Todelmer", "LinkInPointDefault"); //this is the tablet button.
+            //PedestalClickableProxy is the tablet symbol on the take
+            makeClickableUsePythonfilemod(prp, "TakeOrDireboLinkProxy", "linktoage", "Direbo", "LinkInPoint2"); //link to direbo
+        }
+        if(agename.equals("laki") && pagename.equals("lakiarenavillaint"))
+        {
+            makeClickableUsePythonfilemod(prp, "ClickPed2DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
+        }
+        /*if(agename.equals("siralehn") && pagename.equals("srlnkeepinter"))
         {
             clickables = new String[]{
                 "LakiTakeLinkProxy",
@@ -66,7 +85,7 @@ public class myst5Fixes
             //logmod.conditionalcount = 2;
             //logmod.conditionals = new Uruobjectref[]{logmod.conditionals[2],logmod.conditionals[3]};
             //int dummy=0;
-        }
+        }*/
 
         for(String clickable: clickables)
         {
@@ -77,10 +96,48 @@ public class myst5Fixes
         {
             makeClickableUsePythonfilemod(prp, "DireboLinkProxy", "linktoage", "Direbo", "LinkInPoint1");
             makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Siralehn", "LinkInTake");
+            prp.removeObject(Typeid.plSceneObject,"LandTopCollision"); //so we can jump off the top
+            prp.removeObject(Typeid.plSceneObject,"XrgnKeepDoor"); //so we can enter the keep
         }
         if(agename.equals("siralehn") && pagename.equals("rock"))
         {
             makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Siralehn", "LinkInTake"); //same name, different page from above.
+        }
+        if(agename.equals("tahgira") && pagename.equals("icecave"))
+        {
+            //disable physics on IceCaveCrackMesh
+            prp.removeObject(Typeid.plSceneObject,"IceCaveCrackMesh");
+            //restoreClickability(prp, "PedButton01ClickProxy");
+            restoreClickability(prp, "PedButton02ClickProxy");
+            restoreClickability(prp, "PedButton03ClickProxy");
+            restoreClickability(prp, "PedButton04ClickProxy");
+            restoreClickability(prp, "PedButton05ClickProxy");
+            makeClickableUsePythonfilemod(prp, "DireboLinkProxy", "linktoage", "Direbo", "LinkInPoint4");
+        }
+        if(agename.equals("tahgira") && pagename.equals("exterior"))
+        {
+            makeClickableUsePythonfilemod(prp, "TakeLink1Proxy", "fakelink", "Tahgira", "LinkInTake");
+            makeClickableUsePythonfilemod(prp, "TakeLink2Proxy", "fakelink", "Tahgira", "LinkInTake");
+            makeClickableUsePythonfilemod(prp, "TakeLink3Proxy", "fakelink", "Tahgira", "LinkInTake");
+        }
+        if(agename.equals("todelmer") && pagename.equals("exterior"))
+        {
+            //restoreClickability(prp, "PedButton01ClickProxy");
+            restoreClickability(prp, "PedButton02ClickProxy");
+            restoreClickability(prp, "PedButton03ClickProxy");
+            //restoreClickability(prp, "PedButton04ClickProxy");
+            restoreClickability(prp, "PedButton05ClickProxy");
+            makeClickableUsePythonfilemod(prp, "DireboLinkProxy", "linktoage", "Direbo", "LinkInPoint3");
+            makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Todelmer", "LinkInTake");
+            makeClickableUsePythonfilemod(prp, "TakeLinkProxy01", "fakelink", "Todelmer", "LinkInTake");
+        }
+        if(agename.equals("todelmer") && pagename.equals("interiorpillar1"))
+        {
+            prp.removeObject(Typeid.plSceneObject,"XrgnStairs01"); //the blocker for the stairs in the building on the main pillar.
+        }
+        if(agename.equals("todelmer") && pagename.equals("interiorpillar3"))
+        {
+            prp.removeObject(Typeid.plSceneObject,"XrgnStairs01"); //the blocker for the stairs in the building on the main pillar.
         }
 
     }

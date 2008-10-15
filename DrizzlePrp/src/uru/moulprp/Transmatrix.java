@@ -53,7 +53,7 @@ public strictfp class Transmatrix extends uruobj
             xmatrix = c.in.readInts(16);
         }
         
-        testvals = this.convertToFltArray();
+        //testvals = this.convertToFltArray();
     }
     public static Transmatrix createDefault()
     {

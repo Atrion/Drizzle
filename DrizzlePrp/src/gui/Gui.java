@@ -1299,7 +1299,7 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
 
-                    textfieldState20.setText("0,0,-20");
+                    textfieldState20.setText("0,0,-100");
                     textfieldState20.setName("translateVector"); // NOI18N
 
                     textfieldState21.setText("textfieldState21");
@@ -1348,7 +1348,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(textfieldState20, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addContainerGap(10, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                            .addContainerGap(497, Short.MAX_VALUE)
+                            .addContainerGap(491, Short.MAX_VALUE)
                             .addComponent(jButton91)
                             .addGap(259, 259, 259))
                         .addGroup(jPanel23Layout.createSequentialGroup()
