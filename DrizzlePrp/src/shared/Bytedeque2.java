@@ -55,6 +55,15 @@ public class Bytedeque2
     {
         writeBytes(data.getByteArray());
     }
+    public void writeBytes(byte[] data, int offset, int length)
+    {
+        byte[] result = new byte[length];
+        for(int i=0;i<length;i++)
+        {
+            result[i] = data[offset+i];
+        }
+        writeBytes(result);
+    }
     public void writeBytes(byte[] data)
     {
         deque.addLast(data);

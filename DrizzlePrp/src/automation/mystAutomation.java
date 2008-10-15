@@ -1892,6 +1892,13 @@ public class mystAutomation
                 decryptedData = agefile.saveToBytes();
             }
             
+            //add dusttest page, dynamically loaded.
+            if(agename.equals("Descent") || agename.equals("Todelmer") || agename.equals("Tahgira") || agename.equals("Siralehn") || agename.equals("Laki") || agename.equals("Kveer"))
+            {
+                textfile agefile = textfile.createFromBytes(decryptedData);
+                agefile.appendLine("Page=dusttest,90");
+                decryptedData = agefile.saveToBytes();
+            }
             //
             
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
@@ -1903,35 +1910,45 @@ public class mystAutomation
         Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
         for(String filename: prpfiles)
         {
+           
             String agename = getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames).replaceFirst("_", "_District_");
+            String outfilename = replaceAgenameIfApplicable(filename, agenames).replaceFirst("_", "_District_");
+            String outfile = outfolder + "/dat/" + outfilename;
             
-            Bytes prpdata = Bytes.createFromFile(infile);
-            Bytestream bytestream = Bytestream.createFromBytes(prpdata);
-            context c = context.createFromBytestream(bytestream);
-            c.curFile = filename; //helpful for debugging.
-            
-            //modify sequence prefix if Age is in list.
-            Integer prefix = prefices.get(agename);
-            if(prefix!=null)
+            if(shared.GetResource.hasResource("/files/myst5/"+outfilename))
             {
-                c.sequencePrefix = prefix;
+                Bytes bytes = shared.GetResource.getResourceAsBytes("/files/myst5/"+outfilename);
+                bytes.saveAsFile(outfile);
             }
-            
-            //modify agename if Age is in list.
-            String newAgename = agenames.get(agename);
-            if(newAgename!=null)
+            else
             {
-                c.ageName = newAgename;
-            }
-
-            prpfile prp = prpfile.createFromContext(c, readable);
+                Bytes prpdata = Bytes.createFromFile(infile);
+                Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+                context c = context.createFromBytestream(bytestream);
+                c.curFile = filename; //helpful for debugging.
             
-            processPrp(prp,agename,agenames,outfolder);
+                //modify sequence prefix if Age is in list.
+                Integer prefix = prefices.get(agename);
+                if(prefix!=null)
+                {
+                    c.sequencePrefix = prefix;
+                }
+            
+                //modify agename if Age is in list.
+                String newAgename = agenames.get(agename);
+                if(newAgename!=null)
+                {
+                    c.ageName = newAgename;
+                }
 
-            Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
-            prpoutputbytes.saveAsFile(outfile);
+                prpfile prp = prpfile.createFromContext(c, readable);
+            
+                processPrp(prp,agename,agenames,outfolder);
+
+                Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+                prpoutputbytes.saveAsFile(outfile);
+            }
         }
         
         
