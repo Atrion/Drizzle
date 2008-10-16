@@ -4,6 +4,8 @@ package shared.State;
 
 public class ComboboxState extends javax.swing.JComboBox implements IState
 {
+    private Object _default;
+    
     public ComboboxState()
     {
         super();
@@ -40,6 +42,15 @@ public class ComboboxState extends javax.swing.JComboBox implements IState
     public String getStateName()
     {
         return this.getName();
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (Object)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }

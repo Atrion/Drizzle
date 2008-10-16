@@ -7,6 +7,8 @@ import java.util.Vector;
 
 public class ListState extends javax.swing.JList implements IState
 {
+    private int[] _default;
+    
     public ListState()
     {
         super();
@@ -60,6 +62,15 @@ public class ListState extends javax.swing.JList implements IState
         Vector<String> list = new Vector<String>();
         for(Object obj: objs) list.add((String)obj);
         return list;
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (int[])obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }

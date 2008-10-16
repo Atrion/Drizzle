@@ -6,6 +6,7 @@ import javax.swing.event.ChangeEvent;
 
 public class TabsState extends javax.swing.JTabbedPane implements IState
 {
+    private Integer _default;
     
     public TabsState()
     {
@@ -43,5 +44,14 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
         return this.getName();
     }
     
+    public void setDefault(Object obj)
+    {
+        this._default = (Integer)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
+    }
 
 }

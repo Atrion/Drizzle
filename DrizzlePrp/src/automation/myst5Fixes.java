@@ -16,12 +16,20 @@ public class myst5Fixes
     public static void convertABunchOfMyst5Stuff(String myst5folder, String potsfolder)
     {
         m.state.push();
-        
         m.state.curstate.showConsoleMessages = true;
         m.state.curstate.showErrorMessages = true;
         m.state.curstate.showNormalMessages = false;
         m.state.curstate.showWarningMessages = false;
         m.state.curstate.showStatusMessages = true;
+
+        shared.State.AllStates.push();
+        //shared.State.AllStates.revertToDefaults();
+        shared.State.AllStates.setState("removeDynamicCamMap", true);
+        shared.State.AllStates.setState("makePlLayersWireframe", false);
+        shared.State.AllStates.setState("changeVerySpecialPython", true);
+        shared.State.AllStates.setState("translateSmartseeks", false);
+        shared.State.AllStates.setState("removeLadders", true);
+        shared.State.AllStates.setState("automateMystV", true);
         
         //verify folders
         m.status("Checking the folders you gave...");
@@ -79,6 +87,7 @@ public class myst5Fixes
         automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files);
         
         
+        shared.State.AllStates.pop();
         m.state.pop();
         m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!");
         m.status("Conversion completed!");

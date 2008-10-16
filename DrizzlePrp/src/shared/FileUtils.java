@@ -53,6 +53,8 @@ public class FileUtils {
     {
         File in = new File(infile);
         File out = new File(outfile);
+        FileChannel inchan = null;
+        FileChannel outchan = null;
         if(out.exists())
         {
             if(!overwrite) return;
@@ -63,13 +65,25 @@ public class FileUtils {
         
         try
         {
-            FileChannel inchan = new FileInputStream(in).getChannel();
-            FileChannel outchan = new FileOutputStream(out).getChannel();
+            inchan = new FileInputStream(in).getChannel();
+            outchan = new FileOutputStream(out).getChannel();
             inchan.transferTo(0, inchan.size(), outchan);
         }
         catch(Exception e)
         {
             m.err("Unable to copy file "+infile+" to "+outfile);
+        }
+        finally
+        {
+            try
+            {
+                if(inchan!=null) inchan.close();
+                if(outchan!=null) outchan.close();
+            }
+            catch(Exception e)
+            {
+                m.err("Unable to close file copying channel.");
+            }
         }
     }
     static public byte[] ReadFile(String filename)

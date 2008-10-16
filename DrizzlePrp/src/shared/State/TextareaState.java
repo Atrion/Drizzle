@@ -6,6 +6,8 @@ import javax.swing.event.DocumentEvent;
 
 public class TextareaState extends javax.swing.JTextArea implements IState
 {
+    private String _default = "";
+    
     public TextareaState()
     {
         super();
@@ -51,6 +53,15 @@ public class TextareaState extends javax.swing.JTextArea implements IState
     public String getStateName()
     {
         return this.getName();
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (String)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }

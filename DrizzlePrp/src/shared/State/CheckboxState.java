@@ -15,6 +15,8 @@ package shared.State;
  */
 public class CheckboxState extends javax.swing.JCheckBox implements IState
 {
+    private Boolean _default = false;
+    
     public CheckboxState()
     {
         super();
@@ -57,6 +59,16 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
     public String getStateName()
     {
         return this.getName();
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (Boolean)obj;
+        //this.setValue(obj);
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
     
 }

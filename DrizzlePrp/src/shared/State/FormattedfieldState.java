@@ -6,6 +6,8 @@ import javax.swing.event.DocumentEvent;
 
 public class FormattedfieldState extends javax.swing.JFormattedTextField implements IState
 {
+    private String _default = "";
+    
     public FormattedfieldState()
     {
         super();
@@ -52,6 +54,15 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
     public String getStateName()
     {
         return this.getName();
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (String)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }

@@ -6,6 +6,7 @@ import javax.swing.AbstractButton;
 public class ButtongroupState extends javax.swing.ButtonGroup implements IState
 {
     private String _name;
+    private Integer _default;
     
     public ButtongroupState()
     {
@@ -71,6 +72,15 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
     public void setName(String newname)
     {
         _name = newname;
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (Integer)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }

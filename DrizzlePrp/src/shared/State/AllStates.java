@@ -54,13 +54,13 @@ public class AllStates //implements java.io.Serializable
         stackedStates = new Stack<HashMap<String, Object>>();
     }
     
-    static void push()
+    public static void push()
     {
         HashMap<String, Object> oldstates = (HashMap<String, Object>)states.clone();
         stackedStates.push(oldstates);
     }
     
-    static void pop()
+    public static void pop()
     {
         HashMap<String, Object> oldstates = stackedStates.pop();
         states = oldstates;
@@ -258,11 +258,24 @@ public class AllStates //implements java.io.Serializable
                 names.add(name);
             
                 Object value = states.get(name);
-                if(value!=null) state.setValue(value);
+                if(value!=null)
+                {
+                    state.setValue(value);
+                }
+                else
+                {
+                    state.setValue(state.getDefault());
+                }
             }
         }
     }
-    
+    public static void revertToDefaults()
+    {
+        for(IState state: refs)
+        {
+            state.setValue(state.getDefault());
+        }
+    }
     public static void resetSettings(String filename)
     {
         File f = new File(filename);

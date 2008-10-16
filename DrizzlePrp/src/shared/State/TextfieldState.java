@@ -6,6 +6,8 @@ import javax.swing.event.DocumentEvent;
 
 public class TextfieldState extends javax.swing.JTextField implements IState
 {
+    private String _default = "";
+    
     public TextfieldState()
     {
         super();
@@ -58,6 +60,15 @@ public class TextfieldState extends javax.swing.JTextField implements IState
     public String getStateName()
     {
         return this.getName();
+    }
+    public void setDefault(Object obj)
+    {
+        this._default = (String)obj;
+    }
+    public Object getDefault()
+    {
+        if(_default==null) return getValue();
+        else return this._default;
     }
 
 }
