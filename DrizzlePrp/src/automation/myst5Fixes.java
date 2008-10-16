@@ -139,6 +139,10 @@ public class myst5Fixes
         {
             prp.removeObject(Typeid.plSceneObject,"XrgnStairs01"); //the blocker for the stairs in the building on the main pillar.
         }
+        if(agename.equals("mystmystv") && pagename.equals("island"))
+        {
+            prp.removeObject(Typeid.plSceneObject, "PlanetariumDoorBlocker");
+        }
 
     }
     public static void createPythonLoader(prpfile prp, int type, Uruobjectref ref)

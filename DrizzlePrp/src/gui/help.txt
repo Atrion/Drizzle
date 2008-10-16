@@ -22,3 +22,12 @@ To run the proxy server:
 7) Optional: install an add-on like QuickProxy to firefox, so you can quickly switch between proxy mode and not.
 8) Go to http://index.net to start browsing.
 
+
+To convert just the Releeshan part of Kveer(Myst 5):
+----------------------------------------------------
+1) Go to the Automation->MystV tab and select these files: Kveer.age, Kveer.fni, Kveer.sum, Kveer_kverReleeshan.prp, Kveer_Textures.prp, Kveer_dusttest.prp.
+2) Convert them.
+3) Edit KveerMystV.age and comment out or remove all the "Page=" lines except:
+3a) Change the "Page=kverReleeshan,22,1" line to "Page=kverReleeshan,22"
+3b) Leave the "Page=dusttest,90" line alone.
+
