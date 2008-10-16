@@ -25,6 +25,7 @@ import java.io.OutputStream;
 //import java.io.Writer;
 import java.util.Vector;
 import java.io.PrintStream;
+import java.util.Stack;
 
 /**
  *
@@ -35,6 +36,27 @@ public class m
     
     private static JTextArea _outputTextArea; //you must set this from the GUI.
     private static boolean justUseConsole = false;
+    
+    public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
+    {
+        public boolean showNormalMessages = true;
+        public boolean showWarningMessages = true;
+        public boolean showErrorMessages = true;
+        public boolean showConsoleMessages = true;
+        public boolean showStatusMessages = true;
+        public stateclass clone() //used for shallow clone, if you want.
+        {
+            stateclass result = new stateclass();
+            result.showNormalMessages = this.showNormalMessages;
+            result.showConsoleMessages = this.showConsoleMessages;
+            result.showErrorMessages = this.showErrorMessages;
+            result.showStatusMessages = this.showStatusMessages;
+            result.showWarningMessages = this.showWarningMessages;
+            return result;
+        }
+    }
+    public static StateStack<stateclass> state = new StateStack<stateclass>(new stateclass(),true,true);
+    
     
     public static void redirectStdOut()
     {
@@ -74,7 +96,8 @@ public class m
             String msg = new String(CharString);
             if(msg.equals("\r\n")) return;
             if(msg.equals("")) return;
-            m.msg("Console:"+tag+msg);
+            m.console(tag+msg);
+            //m.msg("Console:"+tag+msg);
         }
         public void write(int b)
         {
@@ -137,19 +160,33 @@ public class m
     public static void msg(String s)
     {
         //Main.message(s);
-        message(s);
+        if(state.curstate.showNormalMessages)
+            message(s);
     }
 
     public static void err(String s)
     {
         //Main.message(s);
-        message("Error: "+s);
+        if(state.curstate.showErrorMessages)
+            message("Error: "+s);
         //throw new Exception(s);
     }
     
     public static void warn(String s)
     {
-        message("Warning: "+s);
+        if(state.curstate.showWarningMessages)
+            message("Warning: "+s);
     }
     
+    public static void console(String s)
+    {
+        if(state.curstate.showConsoleMessages)
+            message("Console:"+s);
+    }
+
+    public static void status(String s)
+    {
+        if(state.curstate.showStatusMessages)
+            message(s);
+    }
 }

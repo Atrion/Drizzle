@@ -1846,6 +1846,26 @@ public class mystAutomation
         //create folders...
         FileUtils.CreateFolder(outfolder+"/dat/");
         
+        //Handle .bik files...
+        Vector<String> bikfiles = filterFilenamesByExtension(files, ".bik");
+        for(String filename: bikfiles)
+        {
+            String infile = infolder + "/avi/" + filename;
+            String outfile = outfolder + "/avi/" + filename;
+            
+            FileUtils.CopyFile(infile, outfile, true);
+        }
+        
+        //Handle .ogg files...
+        Vector<String> oggfiles = filterFilenamesByExtension(files, ".ogg");
+        for(String filename: oggfiles)
+        {
+            String infile = infolder + "/sfx/" + filename;
+            String outfile = outfolder + "/sfx/" + filename;
+            
+            FileUtils.CopyFile(infile, outfile, true);
+        }
+        
         //Handle .fni files...
         Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
         for(String filename: fnifiles)

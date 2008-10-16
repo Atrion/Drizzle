@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
 
+import java.nio.channels.FileChannel;
+
 /**
  *
  * @author user
@@ -37,6 +39,38 @@ public class FileUtils {
     public static String GetPresentWorkingDirectory()
     {
         return new File(".").getPath();
+    }
+    public static void DeleteFile(String filename)
+    {
+        File file = new File(filename);
+        if(file.exists())
+        {
+            boolean result = file.delete();
+            if(!result) m.err("Unable to delete file: "+filename);
+        }
+    }
+    public static void CopyFile(String infile, String outfile, boolean overwrite)
+    {
+        File in = new File(infile);
+        File out = new File(outfile);
+        if(out.exists())
+        {
+            if(!overwrite) return;
+            
+            FileUtils.DeleteFile(outfile);
+        }
+        
+        
+        try
+        {
+            FileChannel inchan = new FileInputStream(in).getChannel();
+            FileChannel outchan = new FileOutputStream(out).getChannel();
+            inchan.transferTo(0, inchan.size(), outchan);
+        }
+        catch(Exception e)
+        {
+            m.err("Unable to copy file "+infile+" to "+outfile);
+        }
     }
     static public byte[] ReadFile(String filename)
     {
@@ -76,7 +110,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.msg("Error reading file:"+filename.getAbsolutePath()+":"+e.getMessage());
+            m.err("Error reading file:"+filename.getAbsolutePath()+":"+e.getMessage());
             return null;
         }
         
@@ -106,7 +140,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.msg("Error writing file:"+filename.getAbsolutePath()+":"+e.getMessage());
+            m.err("Error writing file:"+filename.getAbsolutePath()+":"+e.getMessage());
         }
         
     }
@@ -121,7 +155,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.msg("Error appending file:"+filename);
+            m.err("Error appending file:"+filename);
         }
     }
     static public void CreateFolder(String filename)

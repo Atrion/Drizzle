@@ -95,6 +95,7 @@ public class Gui extends javax.swing.JFrame {
                 "Siralehn.age","Siralehn.fni","Siralehn.sum","Siralehn_Birds.prp","Siralehn_Drawing01.prp","Siralehn_Drawing02.prp","Siralehn_Drawing03.prp","Siralehn_Drawing04.prp","Siralehn_Drawing05.prp","Siralehn_Drawing06.prp","Siralehn_Drawing07.prp","Siralehn_Drawing08.prp","Siralehn_Exterior.prp","Siralehn_rock.prp","Siralehn_srlnEsherIdleBeach.prp","Siralehn_srlnEsherIdleLab.prp","Siralehn_srlnEsher_NolobenBeach.prp","Siralehn_srlnEsher_NolobenKeep.prp","Siralehn_srlnEsher_NolobenLab.prp","Siralehn_srlnKeepInter.prp","Siralehn_Textures.prp","Siralehn_tunnels.prp","Siralehn_dusttest.prp",
                 "Tahgira.age","Tahgira.fni","Tahgira.sum","Tahgira_Exterior.prp","Tahgira_IceCave.prp","Tahgira_Textures.prp","Tahgira_thgrEsherIdleIntro.prp","Tahgira_thgrEsherIdleTake.prp","Tahgira_thgrEsher_TahgiraGrave.prp","Tahgira_thgrEsher_TahgiraIntro.prp","Tahgira_thgrEsher_TahgiraTake.prp","Tahgira_thgrEsher_TahgiraThermals.prp","Tahgira_thgrEsher_TahgiraVillage.prp","Tahgira_dusttest.prp",
                 "Todelmer.age","Todelmer.fni","Todelmer.sum","Todelmer_Exterior.prp","Todelmer_InteriorPillar1.prp","Todelmer_InteriorPillar3.prp","Todelmer_MiniScope.prp","Todelmer_Pod.prp","Todelmer_Sky.prp","Todelmer_tdlmEsherIdleP3.prp","Todelmer_tdlmEsherIdleRing.prp","Todelmer_tdlmEsher_TodelmerP1.prp","Todelmer_tdlmEsher_TodelmerP3.prp","Todelmer_tdlmEsher_TodelmerRing.prp","Todelmer_Textures.prp","Todelmer_dusttest.prp",
+                "restStop1.bik","restStop2.bik","restStop3.bik","restStop4.bik",
             };
             public int getSize() {
                 return strings.length;
@@ -385,6 +386,17 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         tabsState3 = new shared.State.TabsState();
+        jPanel32 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel34 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        textfieldState22 = new shared.State.TextfieldState();
+        jLabel20 = new javax.swing.JLabel();
+        textfieldState23 = new shared.State.TextfieldState();
+        jButton96 = new javax.swing.JButton();
+        jButton97 = new javax.swing.JButton();
+        jButton98 = new javax.swing.JButton();
+        jPanel35 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -471,6 +483,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState21 = new shared.State.TextfieldState();
         jButton94 = new javax.swing.JButton();
         jButton95 = new javax.swing.JButton();
+        jButton99 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -695,6 +708,87 @@ public class Gui extends javax.swing.JFrame {
         );
 
         tabsState3.setName("mainTabs"); // NOI18N
+
+        jPanel34.setLayout(null);
+
+        jLabel19.setText("Myst 5 Folder:");
+        jPanel34.add(jLabel19);
+        jLabel19.setBounds(40, 30, 75, 16);
+
+        textfieldState22.setText("Click the select button to pick a folder.");
+        textfieldState22.setName("simpleMystvIn"); // NOI18N
+        jPanel34.add(textfieldState22);
+        textfieldState22.setBounds(130, 30, 340, 20);
+
+        jLabel20.setText("Pots Folder:");
+        jPanel34.add(jLabel20);
+        jLabel20.setBounds(40, 70, 66, 16);
+
+        textfieldState23.setText("Click the select button to pick a folder.");
+        textfieldState23.setName("simpleMystvOut"); // NOI18N
+        jPanel34.add(textfieldState23);
+        textfieldState23.setBounds(130, 70, 340, 20);
+
+        jButton96.setText("Start...");
+        jButton96.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton96ActionPerformed(evt);
+            }
+        });
+        jPanel34.add(jButton96);
+        jButton96.setBounds(30, 110, 58, 36);
+
+        jButton97.setText("select...");
+        jButton97.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton97ActionPerformed(evt);
+            }
+        });
+        jPanel34.add(jButton97);
+        jButton97.setBounds(480, 20, 80, 36);
+
+        jButton98.setText("select...");
+        jButton98.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton98ActionPerformed(evt);
+            }
+        });
+        jPanel34.add(jButton98);
+        jButton98.setBounds(480, 60, 80, 36);
+
+        jTabbedPane1.addTab("MystV", jPanel34);
+
+        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+        jPanel35.setLayout(jPanel35Layout);
+        jPanel35Layout.setHorizontalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 785, Short.MAX_VALUE)
+        );
+        jPanel35Layout.setVerticalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel35);
+
+        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
+        jPanel32.setLayout(jPanel32Layout);
+        jPanel32Layout.setHorizontalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel32Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel32Layout.setVerticalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel32Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        tabsState3.addTab("Simplicity", jPanel32);
 
         tabsState2.setName("tabs1"); // NOI18N
 
@@ -1319,6 +1413,13 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
 
+                    jButton99.setText("Sound test");
+                    jButton99.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton99ActionPerformed(evt);
+                        }
+                    });
+
                     javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
                     jPanel23.setLayout(jPanel23Layout);
                     jPanel23Layout.setHorizontalGroup(
@@ -1355,6 +1456,10 @@ public class Gui extends javax.swing.JFrame {
                             .addContainerGap()
                             .addComponent(textfieldState17, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addContainerGap(501, Short.MAX_VALUE))
+                        .addGroup(jPanel23Layout.createSequentialGroup()
+                            .addGap(325, 325, 325)
+                            .addComponent(jButton99)
+                            .addContainerGap(418, Short.MAX_VALUE))
                     );
                     jPanel23Layout.setVerticalGroup(
                         jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1384,7 +1489,9 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(jButton95))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButton94)))
-                            .addContainerGap(120, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                            .addComponent(jButton99)
+                            .addGap(55, 55, 55))
                     );
 
                     tabsState2.addTab("tab8", jPanel23);
@@ -3527,6 +3634,106 @@ private void jButton94ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton95ActionPerformed
     GuiUtils.getUserSelectedFile(this.textfieldState21);
 }//GEN-LAST:event_jButton95ActionPerformed
+
+private void jButton97ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton97ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState22);
+}//GEN-LAST:event_jButton97ActionPerformed
+
+private void jButton98ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton98ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState23);
+}//GEN-LAST:event_jButton98ActionPerformed
+
+private void jButton96ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton96ActionPerformed
+    automation.myst5Fixes.convertABunchOfMyst5Stuff(this.textfieldState22.getText(), this.textfieldState23.getText());
+}//GEN-LAST:event_jButton96ActionPerformed
+
+private void jButton99ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton99ActionPerformed
+    File f = new File("g:/prps/pots/sfx/");
+    Vector<String> pots = new Vector<String>();
+    for(File f2: f.listFiles())
+    {
+        String name = f2.getName();
+        if(f2.isFile() && name.toLowerCase().endsWith(".ogg"))
+        {
+            pots.add(name);
+        }
+    }
+    
+    File f3 = new File("g:/prps/mouloffline/sfx/");
+    Vector<String> moul = new Vector<String>();
+    for(File f2: f3.listFiles())
+    {
+        String name = f2.getName();
+        if(f2.isFile() && name.toLowerCase().endsWith(".ogg"))
+        {
+            moul.add(name);
+        }
+    }
+    File f4 = new File("g:/prps/mystv/sfx/");
+    Vector<String> mystv = new Vector<String>();
+    for(File f2: f4.listFiles())
+    {
+        String name = f2.getName();
+        if(f2.isFile() && name.toLowerCase().endsWith(".ogg"))
+        {
+            mystv.add(name);
+        }
+    }
+    
+    
+    //find the sfx that are in mystv, but not pots
+    Vector<String> mystvNotPots = new Vector<String>();
+    for(String f1: mystv)
+    {
+        boolean cond = true;
+        for(String f2: pots)
+        {
+            if(f1.toLowerCase().equals(f2.toLowerCase()))
+            {
+                cond = false;
+                break;
+            }
+        }
+        if(cond) mystvNotPots.add(f1);
+    }
+    
+    //find the sfx that are in mystv, but not pots nor moul
+    Vector<String> mystvNotPotsNorMoul = new Vector<String>();
+    for(String f1: mystv)
+    {
+        boolean cond = true;
+        for(String f2: pots)
+        {
+            if(f1.toLowerCase().equals(f2.toLowerCase()))
+            {
+                cond = false;
+                break;
+            }
+        }
+        if(cond)
+        {
+            for(String f2: moul)
+            {
+                if(f1.toLowerCase().equals(f2.toLowerCase()))
+                {
+                    cond = false;
+                    break;
+                }
+            }
+        }
+        if(cond) mystvNotPotsNorMoul.add(f1);
+    }
+    
+    StringBuilder sb = new StringBuilder();
+    for(String s: mystvNotPotsNorMoul)
+    {
+        sb.append("\""+s+"\",");
+    }
+    String sb2 = sb.toString();
+    shared.clipboard.SetString(sb2);
+    
+    int dummy=0;
+}//GEN-LAST:event_jButton99ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3683,6 +3890,10 @@ private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton93;
     private javax.swing.JButton jButton94;
     private javax.swing.JButton jButton95;
+    private javax.swing.JButton jButton96;
+    private javax.swing.JButton jButton97;
+    private javax.swing.JButton jButton98;
+    private javax.swing.JButton jButton99;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -3696,7 +3907,9 @@ private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3729,7 +3942,10 @@ private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -3750,6 +3966,7 @@ private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
@@ -3780,6 +3997,8 @@ private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.TextfieldState textfieldState2;
     private shared.State.TextfieldState textfieldState20;
     private shared.State.TextfieldState textfieldState21;
+    private shared.State.TextfieldState textfieldState22;
+    private shared.State.TextfieldState textfieldState23;
     private shared.State.TextfieldState textfieldState3;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;

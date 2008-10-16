@@ -331,7 +331,7 @@ public class PrpObject extends uruobj
                 return new PlLayerSDLAnimation(c);
             default:
                 //m.err("prprootobject: unhandled type.");
-                throw new readexception("PrpObject: type constructor not in main list: "+type.toString());
+                throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
         }
     }
 
