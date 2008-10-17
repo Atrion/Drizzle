@@ -662,6 +662,7 @@ public class mystAutomation
                             //personal
                             type.plDynaRippleMgr,
                             type.plLayerSDLAnimation,
+                            
                         };
                         namestartswith = new String[]{
                             /*"linkinpoint",
@@ -820,6 +821,8 @@ public class mystAutomation
         
         Typeid.plDynaRippleMgr,
         Typeid.plLayerSDLAnimation,
+        
+        Typeid.pfGUIDragBarCtrl,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -988,6 +991,12 @@ public class mystAutomation
                         type.plLayerSDLAnimation,
                         type.plParticleCollisionEffectBeat,
                         type.plParticleFadeVolumeEffect,
+
+                        //some GUI stuff
+                        type.pfGUIButtonMod,
+                        type.pfGUIDialogMod,
+                        type.plPostEffectMod,
+                        type.pfGUIDragBarCtrl,
                 };
                 String[] namestarts={
                 };
@@ -1010,6 +1019,10 @@ public class mystAutomation
         agenames.put("Kveer", "KveerMOUL");
         agenames.put("Neighborhood02", "KirelMOUL");
         agenames.put("Personal", "PersonalMOUL");
+        
+        HashMap<String, Integer> suffices = new HashMap<String, Integer>();
+        suffices.put("GUI_District_YeeshaPageGUI.prp", 86);
+        suffices.put("GUI_District_jalakControlPanel.prp", 90);
         
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -1086,6 +1099,13 @@ public class mystAutomation
             if(prefix!=null)
             {
                 c.sequencePrefix = prefix;
+            }
+            
+            //modify sequence suffix if Age is in list.
+            Integer suffix = suffices.get(filename);
+            if(suffix!=null)
+            {
+                c.sequenceSuffix = suffix;
             }
             
             //modify agename if Age is in list.

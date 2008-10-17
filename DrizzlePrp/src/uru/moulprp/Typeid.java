@@ -242,6 +242,9 @@ public enum Typeid implements compilable
     plObjectInVolumeAndFacingDetector,
     plNPCSpawnMod,
     
+    //GUI_jalakControlPanel
+    pfGUIDragBarCtrl,
+    
     plLeafController,
     nil,
     unknown;
@@ -421,10 +424,10 @@ public enum Typeid implements compilable
         tri( -2, -2, 0x113, plNodeRegionModifier), //not in pots
         tri( 0x39F, -2, 0x2D0, plSoundVolumeApplicator),
         tri( 0x45B, -2, 0x2EC, plSimSuppressMsg),
-        tri( 0x07A, -2, 0x06B, plPostEffectMod),
+        tri( 0x07A, 0x07A, 0x06B, plPostEffectMod),
         tri( 0x07D, -2, 0x06E, plAxisAnimModifier),
-        tri( 0x098, -2, 0x080, pfGUIDialogMod),
-        tri( 0x0A1, -2, 0x087, pfGUIButtonMod),
+        tri( 0x098, 0x098, 0x080, pfGUIDialogMod),
+        tri( 0x0A1, 0x0A1, 0x087, pfGUIButtonMod),
         
         tri( -2, -2, 0x106, plElevatorModifier), //not in pots
         tri( -2, -2, 0x026, plPythonFileModConditionalObject), //not in pots
@@ -452,6 +455,8 @@ public enum Typeid implements compilable
         
         tri( 0x0E9, 0x0E9, -2, plDynaRippleMgr),
         tri( 0x0F0, 0x0F0, -2, plLayerSDLAnimation),
+        
+        tri( 0x0B9, 0x0B9, -2, pfGUIDragBarCtrl),
         
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),

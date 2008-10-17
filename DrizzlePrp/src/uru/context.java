@@ -50,6 +50,7 @@ public class context extends shared.BaseContext
     
     //overrides...
     public Integer sequencePrefix;
+    public Integer sequenceSuffix;
     public String ageName;
     
     //whether to just read the PrpRootObject as raw data.
@@ -121,6 +122,7 @@ public class context extends shared.BaseContext
         result.curRootObjectOffset = curRootObjectOffset;
         result.curRootObjectSize = curRootObjectSize;
         result.sequencePrefix = sequencePrefix;
+        result.sequenceSuffix = sequenceSuffix;
         
         result.isRaw = isRaw;
         

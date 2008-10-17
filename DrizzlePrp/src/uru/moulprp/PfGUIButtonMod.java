@@ -53,7 +53,7 @@ public class PfGUIButtonMod extends uruobj
         refcount2 = c.readInt();
         refs2 = c.readArray(Uruobjectref.class, refcount2); //really uruobjectrefs?
         str2 = new Urustring(c);
-        if(c.readversion==3)
+        if(c.readversion==3||c.readversion==6)
         {
             //b1 is always 0
             //u1: 1(x1) 2(x4) 0(x~230)
@@ -62,7 +62,7 @@ public class PfGUIButtonMod extends uruobj
             b1 = c.readByte();
             //m.msg("pfguibuttonmod: delme: "+Integer.toString(u1)+":"+Byte.toString(b1));
         }
-        else if(c.readversion==4||c.readversion==6) //does 6 go here?
+        else if(c.readversion==4) //does 6 go here? no, it goes in the above one.
         {
             //these have no clear relation to the pots flags above.
             xu1 = c.readInt();
@@ -130,6 +130,22 @@ public class PfGUIButtonMod extends uruobj
         }
             
     }
+    
+    public static class PfGUIDragBarCtrl extends uruobj
+    {
+        PfGUIControlMod parent;
+        
+        public PfGUIDragBarCtrl(context c) throws readexception
+        {
+            parent = new PfGUIControlMod(c);
+        }
+        
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+        }
+    }
+    
     static class whattheheck
     {
         Flt[] xflts;

@@ -102,6 +102,13 @@ public class Pageid extends uruobj
                 ++prefix;
             }
         }
+        
+        //change suffix
+        if(c.sequenceSuffix!=null)
+        {
+            suffix = c.sequenceSuffix;
+            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence suffix 0x"+Integer.toHexString(suffix));
+        }
     }
     private Pageid(){}
     public static Pageid createFromPrefixSuffix(int prefix, int suffix)
