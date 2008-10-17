@@ -1747,7 +1747,7 @@ public class mystAutomation
                 if(type==Typeid.plBoundInterface && pageid.prefix==88) //tahgira
                 {
                     if(name.equals("CaveSnowKiller01")) return false;
-                    //if(name.equals("FieldBubbleKiller")) return false;
+                    if(name.equals("FieldBubbleKiller")) return false; //this makes tahgira crash when you link there in 3rd person, I think.
                 }
                 
                 if(type==Typeid.plBoundInterface)
