@@ -38,6 +38,16 @@ public class inplaceModifications
             hackFactory.createAndAddCoordinateInterface(prp, outtide);
             hackFactory.createAndAddCoordinateInterface(prp, intide);
             prp.mergeExtras();
+            
+            //translate the swimdetectregion, so it is below the spawnpoints but still above the swimsurfaces.
+            //info: current swimdetectregion01 z:-148.52159(bottom) to -48.52159(top)
+            //              spawnpoints: -84.7542 -82.03227 -81.3682 -81.43706 -89.75337 (and some duplicates) (lowest quab spawn is -85.97157)
+            //              swimsurfaces: -91.871 -100.0 (and some duplicates)
+            //So, -42 will take the top of the swimregion below the spawnpoints, but above the swimsurfaces.
+            PrpRootObject sdrroot = prp.findObject("SwimDetectRegion01", Typeid.plHKPhysical);
+            PlHKPhysical sdr = sdrroot.castTo();
+            Transmatrix translation = Transmatrix.createFromVector(0, 0, -42);
+            sdr.havok.transformVertices(translation);
         }
         
         //translate...

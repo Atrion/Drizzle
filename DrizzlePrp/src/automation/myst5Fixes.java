@@ -86,6 +86,9 @@ public class myst5Fixes
 
         automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files);
         
+        //create the KveerMystV.age file especially for Releeshan.
+        
+        
         
         shared.State.AllStates.pop();
         m.state.pop();
@@ -95,51 +98,40 @@ public class myst5Fixes
     public static void fixClickables(String finalname, prpfile prp)
     {
         //restore limited clickables
-        String[] clickables = {};
+        //String[] clickables = {};
         String agename = finalname.toLowerCase();
         String pagename = prp.header.pagename.toString().toLowerCase();
         
         if(agename.equals("direbo") && pagename.equals("restage"))
         {
-            clickables = new String[]{
-                "PedButton02ClickProxyLaki",
-                "PedButton03ClickProxyLaki",
-                "PedButton04ClickProxyLaki",
-                "PedButton05ClickProxyLaki",
-                "PedButton02ClickProxyTdlm",
-                "PedButton03ClickProxyTdlm",
-                //"PedButton04ClickProxyTdlm",
-                "PedButton05ClickProxyTdlm",
-                "PedButton02ClickProxyThgr",
-                "PedButton03ClickProxyThgr",
-                "PedButton04ClickProxyThgr",
-                "PedButton05ClickProxyThgr",
-                "PedButton02ClickProxySrln",
-                "PedButton03ClickProxySrln",
-                //"PedButton04ClickProxySrln",
-                "PedButton05ClickProxySrln",
-
-            };
-        }
-        if(agename.equals("siralehn") && pagename.equals("exterior"))
-        {
-            clickables = new String[]{
-                //"PedButton01ClickProxy", //don't link to self.
-                "PedButton02ClickProxy",
-                "PedButton03ClickProxy",
-                //"PedButton04ClickProxy", //links to the area with Esher on the beach.
-                "PedButton05ClickProxy",
-            };
+            //clickables = new String[]{
+            restoreClickability(prp, "PedButton02ClickProxyLaki");
+            restoreClickability(prp, "PedButton03ClickProxyLaki");
+            restoreClickability(prp, "PedButton04ClickProxyLaki");
+            restoreClickability(prp, "PedButton05ClickProxyLaki");
+            restoreClickability(prp, "PedButton02ClickProxyTdlm");
+            restoreClickability(prp, "PedButton03ClickProxyTdlm");
+            //restoreClickability(prp, "PedButton04ClickProxyTdlm");
+            restoreClickability(prp, "PedButton05ClickProxyTdlm");
+            restoreClickability(prp, "PedButton02ClickProxyThgr");
+            restoreClickability(prp, "PedButton03ClickProxyThgr");
+            restoreClickability(prp, "PedButton04ClickProxyThgr");
+            restoreClickability(prp, "PedButton05ClickProxyThgr");
+            restoreClickability(prp, "PedButton02ClickProxySrln");
+            restoreClickability(prp, "PedButton03ClickProxySrln");
+            //restoreClickability(prp, "PedButton04ClickProxySrln");
+            restoreClickability(prp, "PedButton05ClickProxySrln");
+            //};
         }
         if(agename.equals("laki") && pagename.equals("exterior"))
         {
-            clickables = new String[]{
-                //"PedButton01ClickProxy", //don't link to self.
-                "PedButton02ClickProxy",
-                "PedButton03ClickProxy",
-                "PedButton04ClickProxy",
-                "PedButton05ClickProxy",
-            };
+            //clickables = new String[]{
+                //restoreClickability(prp, "PedButton01ClickProxy"); //don't link to self.
+            restoreClickability(prp, "PedButton02ClickProxy");
+            restoreClickability(prp, "PedButton03ClickProxy");
+            restoreClickability(prp, "PedButton04ClickProxy");
+            restoreClickability(prp, "PedButton05ClickProxy");
+            //};
             makeClickableUsePythonfilemod(prp, "ClickPed1DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
             makeClickableUsePythonfilemod(prp, "ClickPed3DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
             //makeClickableUsePythonfilemod(prp, "Ped1ClickableProxy", "linktoage", "Todelmer", "LinkInPointDefault"); //this is the tablet button.
@@ -149,6 +141,20 @@ public class myst5Fixes
         if(agename.equals("laki") && pagename.equals("lakiarenavillaint"))
         {
             makeClickableUsePythonfilemod(prp, "ClickPed2DireboLinkProxy", "fakelink", "Laki", "LinkInTake");
+        }
+        if(agename.equals("siralehn") && pagename.equals("exterior"))
+        {
+            //clickables = new String[]{
+            //restoreClickability(prp, "PedButton01ClickProxy", //don't link to self.
+            restoreClickability(prp, "PedButton02ClickProxy");
+            restoreClickability(prp, "PedButton03ClickProxy");
+            //restoreClickability(prp, "PedButton04ClickProxy"); //links to the area with Esher on the beach.
+            restoreClickability(prp, "PedButton05ClickProxy");
+            //};
+            makeClickableUsePythonfilemod(prp, "DireboLinkProxy", "linktoage", "Direbo", "LinkInPoint1");
+            makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Siralehn", "LinkInTake");
+            prp.removeObject(Typeid.plSceneObject,"LandTopCollision"); //so we can jump off the top
+            prp.removeObject(Typeid.plSceneObject,"XrgnKeepDoor"); //so we can enter the keep
         }
         /*if(agename.equals("siralehn") && pagename.equals("srlnkeepinter"))
         {
@@ -168,18 +174,11 @@ public class myst5Fixes
             //int dummy=0;
         }*/
 
-        for(String clickable: clickables)
-        {
-            restoreClickability(prp, clickable);
-        }
+        //for(String clickable: clickables)
+        //{
+        //    restoreClickability(prp, clickable);
+        //}
 
-        if(agename.equals("siralehn") && pagename.equals("exterior"))
-        {
-            makeClickableUsePythonfilemod(prp, "DireboLinkProxy", "linktoage", "Direbo", "LinkInPoint1");
-            makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Siralehn", "LinkInTake");
-            prp.removeObject(Typeid.plSceneObject,"LandTopCollision"); //so we can jump off the top
-            prp.removeObject(Typeid.plSceneObject,"XrgnKeepDoor"); //so we can enter the keep
-        }
         if(agename.equals("siralehn") && pagename.equals("rock"))
         {
             makeClickableUsePythonfilemod(prp, "TakeLinkProxy", "fakelink", "Siralehn", "LinkInTake"); //same name, different page from above.
@@ -251,6 +250,32 @@ public class myst5Fixes
             prp.extraobjects.add(soroot);
             prp.extraobjects.add(modroot);
         }
+    }
+    public static void modifyPythonfilemod(prpfile prp, String sceneobjectname, String... pythonparams)
+    {
+        m.warn("Untested modifyPythonfilemod.");
+        x0001Sceneobject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
+        PlLogicModifier logmod=null;
+        for(Uruobjectref curref: so.objectrefs2)
+        {
+            if(curref.hasref() && curref.xdesc.objecttype==Typeid.plLogicModifier)
+            {
+                logmod = prp.findObjectWithRef(curref).castTo();
+                break;
+            }
+        }
+        if(logmod==null) throw new shared.uncaughtexception("modifyPythonfilemod couldn't find a ref.");
+        if(logmod.parent.message.type!=Typeid.plNotifyMsg) throw new shared.uncaughtexception("modifyPythonfilemod found the wrong type.");
+        PrpMessage.PlNotifyMsg msg = (PrpMessage.PlNotifyMsg)logmod.parent.message.prpobject.object;
+        if(msg.parent.refcount!=1) throw new shared.uncaughtexception("Should only be one ref in modifyPythonfilemod.");
+        x00A2Pythonfilemod pfm = prp.findObjectWithRef(msg.parent.refs[0]).castTo(x00A2Pythonfilemod.class);
+        pfm.pyfile = Urustring.createFromString("dusttest");
+        pfm.clearListings();
+        for(int i=0;i<pythonparams.length;i++)
+        {
+            pfm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithString(4, i+1, Bstr.createFromString(pythonparams[i])));
+        }
+        
     }
     public static void makeClickableUsePythonfilemod(prpfile prp, String sceneobjectname, String... pythonparams)
     {
