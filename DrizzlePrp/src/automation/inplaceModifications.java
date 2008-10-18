@@ -44,10 +44,35 @@ public class inplaceModifications
             //              spawnpoints: -84.7542 -82.03227 -81.3682 -81.43706 -89.75337 (and some duplicates) (lowest quab spawn is -85.97157)
             //              swimsurfaces: -91.871 -100.0 (and some duplicates)
             //So, -42 will take the top of the swimregion below the spawnpoints, but above the swimsurfaces.
+            //But then when you leave the water in the maintenance area, you freeze, presumably, because you're leaving the swimdetectregion during an animation.
+            //Instead translate by -38.47841 to move to -87
+            //but now 3 spwanpoints are inside the swimdetectregion, so move them up.
             PrpRootObject sdrroot = prp.findObject("SwimDetectRegion01", Typeid.plHKPhysical);
             PlHKPhysical sdr = sdrroot.castTo();
-            Transmatrix translation = Transmatrix.createFromVector(0, 0, -42);
+            //Transmatrix translation = Transmatrix.createFromVector(0, 0, -42);
+            Transmatrix translation = Transmatrix.createFromVector(0, 0, -38.47841f);
             sdr.havok.transformVertices(translation);
+        }
+        if(f.getName().toLowerCase().equals("ahnysphere01_district_maintroom01.prp"))
+        {
+            float cz = +4f;
+            Transmatrix translation2 = Transmatrix.createFromVector(0, 0, cz);
+            Transmatrix invtranslation2 = Transmatrix.createFromVector(0, 0, -cz);
+            x0015CoordinateInterface c1 = prp.findObject("SaveClothPoint4", Typeid.plCoordinateInterface).castTo();
+            x0015CoordinateInterface c2 = prp.findObject("SaveClothPoint5", Typeid.plCoordinateInterface).castTo();
+            x0015CoordinateInterface c3 = prp.findObject("SaveClothPoint6", Typeid.plCoordinateInterface).castTo();
+            c1.localToParent.multModify(translation2);
+            c1.parentToLocal.multModify(invtranslation2);
+            c1.localToWorld.multModify(translation2);
+            c1.worldToLocal.multModify(invtranslation2);
+            c2.localToParent.multModify(translation2);
+            c2.parentToLocal.multModify(invtranslation2);
+            c2.localToWorld.multModify(translation2);
+            c2.worldToLocal.multModify(invtranslation2);
+            c3.localToParent.multModify(translation2);
+            c3.parentToLocal.multModify(invtranslation2);
+            c3.localToWorld.multModify(translation2);
+            c3.worldToLocal.multModify(invtranslation2);
         }
         
         //translate...

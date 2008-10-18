@@ -33,7 +33,7 @@ public strictfp class Transmatrix extends uruobj
     byte isnotIdentity;
     int[] xmatrix = new int[16]; //raw data (floats are 32bit, so they fit in integer.)
     
-    private Flt[][] testvals;
+    //private Flt[][] testvals;
     
     private Transmatrix(){}
     
@@ -102,6 +102,16 @@ public strictfp class Transmatrix extends uruobj
         double[][] result2 = result.getData();
         Vertex result3 = Vertex.createFromDouble4x1Matrix(result2);
         return result3;
+    }
+    private void assign(Transmatrix t2)
+    {
+        this.isnotIdentity = t2.isnotIdentity;
+        this.xmatrix = t2.xmatrix;
+    }
+    public void multModify(Transmatrix t2)
+    {
+        Transmatrix newmat = this.mult(t2);
+        this.assign(newmat);
     }
     public void compile(Bytedeque deque)
     {
