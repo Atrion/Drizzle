@@ -84,9 +84,7 @@ public class myst5Fixes
         Vector<String> oggfiles = uru.generics.convertArrayToVector(automation.fileLists.mystvOggsNotInPotsNorMoulofflineMinusSpeeches);
         files.addAll(oggfiles);
 
-        automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files);
-        
-        //create the KveerMystV.age file especially for Releeshan.
+        automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files, true);
         
         
         

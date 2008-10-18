@@ -26,7 +26,26 @@ public class textfile
 {
     //Bytes text;
     protected Bytes[] lines;
-    
+    public static class textline
+    {
+        Bytes line;
+        
+        public textline(Bytes[] lines, int index)
+        {
+            line = lines[index];
+        }
+        
+        public String getString()
+        {
+            return line.toString();
+        }
+        
+        public void setString(String newvalue)
+        {
+            line.setWithString(newvalue);
+        }
+        
+    }
     /*public static textfile loadFromFile(String filename, boolean isencrypted)
     {
         textfile result = new textfile();
@@ -46,6 +65,15 @@ public class textfile
         
         return result;
     }*/
+    public textline[] getLines()
+    {
+        textline[] result = new textline[lines.length];
+        for(int i=0;i<lines.length;i++)
+        {
+            result[i] = new textline(lines,i);
+        }
+        return result;
+    }
     public static textfile createFromBytes(byte[] bytes)
     {
         return createFromBytes(new Bytes(bytes));

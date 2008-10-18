@@ -182,6 +182,10 @@ public class Bytes
     {
         return b.BytesToString(bytes);
     }
+    public void setWithString(String str)
+    {
+        this.bytes = b.StringToBytes(str);
+    }
     public Bytes append(Bytes appendage)
     {
         byte[] result = new byte[bytes.length+appendage.length()];

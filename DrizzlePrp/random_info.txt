@@ -22,3 +22,49 @@ Problem: other players may have loaded some, And you'll see those too, and every
 
 Solution: Don't load any quabs if the Age is already running.  Perhaps we could check to see if there's any other avatars(quabs included) before loading ours.
   Use len(PtGetPlayerList()) to find out if you're alone.  0 means you're alone.
+
+
+****************************Events********************
+Known Startup Order:
+__init__
+OnInit
+OnPageLoad //not just at startup.
+OnFirstUpdate
+OnServerInitComplete
+OnAvatarSpawn //not just at startup, I would think.
+
+Untested:
+BeginAgeUnload
+AvatarPage
+__del__
+OnTimer
+OnMovieEvent
+OnNotify
+OnGUINotify
+OnDefaultKeyCaught
+OnSDLNotify
+OnControlKeyEvent
+Load (?)
+Save (?)
+OnUpdate
+OnClothingUpdate
+OnKIMsg
+OnMemberUpdate
+OnRemoteAvatarInfo
+OnRTChat
+OnVaultEvent
+OnOwnershipChanged
+OnAgeVaultEvent
+OnCCRMsg
+OnVaultNotify
+OnBackdoorMsg
+OnNetPythonMsg
+OnBehaviorNotify
+OnLOSNotify
+BeginAgeUnLoad
+OnScreenCaptureDone
+OnClimbingWallEvent
+OnClimbingWallInit
+OnClimbingBlockerEvent
+
+

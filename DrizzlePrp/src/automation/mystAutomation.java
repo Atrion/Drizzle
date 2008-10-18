@@ -1722,7 +1722,7 @@ public class mystAutomation
         m.msg("Done Crowthistle work!");
     }
     
-    public static void convertMyst5ToPots(String infolder, String outfolder, Vector<String> files)
+    public static void convertMyst5ToPots(String infolder, String outfolder, Vector<String> files, boolean makeMinimalReleeshan)
     {
         class compileDecider implements uru.moulprp.prputils.Compiler.Decider
         {
@@ -1939,7 +1939,26 @@ public class mystAutomation
                 agefile.appendLine("Page=dusttest,90");
                 decryptedData = agefile.saveToBytes();
             }
-            //
+            
+            //Remove all the KveerMystV pages except kverReleeshan and dusttest from the .age file.
+            if(makeMinimalReleeshan)
+            {
+                if(agename.equals("Kveer"))
+                {
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    for(textfile.textline line: agefile.getLines())
+                    {
+                        String l = line.getString();
+                        if(l.startsWith("Page="))
+                        {
+                            line.setString("#"+l); //comment it out.
+                        }
+                    }
+                    agefile.appendLine("Page=kverReleeshan,22"); //remove the ,1 from the end so that it loads.
+                    agefile.appendLine("Page=dusttest,90"); //leave it alone.
+                    decryptedData = agefile.saveToBytes();
+                }
+            }
             
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);

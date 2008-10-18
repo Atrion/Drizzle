@@ -3495,7 +3495,7 @@ private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton57ActionPerformed
         //do myst5 conversion.
-        automation.mystAutomation.convertMyst5ToPots(textfieldState2.getText(), textfieldState3.getText(), listState2.getSelectedAsStrings());
+        automation.mystAutomation.convertMyst5ToPots(textfieldState2.getText(), textfieldState3.getText(), listState2.getSelectedAsStrings(), false);
 }//GEN-LAST:event_jButton57ActionPerformed
 
 private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton63ActionPerformed
