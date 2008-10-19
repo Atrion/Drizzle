@@ -27,6 +27,9 @@ import shared.readexception;
 
 import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Typeid;
+import shared.Pair;
+import java.util.HashMap;
+import shared.cmap;
 
 /**
  *
@@ -50,7 +53,8 @@ public class context extends shared.BaseContext
     
     //overrides...
     public Integer sequencePrefix;
-    public Integer sequenceSuffix;
+    //public Integer sequenceSuffix;
+    public cmap<Integer,Integer> sequenceSuffixMap;
     public String ageName;
     
     //whether to just read the PrpRootObject as raw data.
@@ -122,7 +126,8 @@ public class context extends shared.BaseContext
         result.curRootObjectOffset = curRootObjectOffset;
         result.curRootObjectSize = curRootObjectSize;
         result.sequencePrefix = sequencePrefix;
-        result.sequenceSuffix = sequenceSuffix;
+        //result.sequenceSuffix = sequenceSuffix;
+        result.sequenceSuffixMap = sequenceSuffixMap;
         
         result.isRaw = isRaw;
         

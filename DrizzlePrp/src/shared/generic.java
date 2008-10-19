@@ -91,5 +91,12 @@ public class generic
         T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, length);
         return result;
     }
-    
+    public static <T> Vector<T> makeVector(T... values)
+    {
+        return convertArrayToVector(values);
+    }
+    public static <T> T[] makeArray(T... values)
+    {
+        return values;
+    }
 }

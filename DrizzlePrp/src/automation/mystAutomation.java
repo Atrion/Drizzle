@@ -34,6 +34,9 @@ import org.apache.commons.math.linear.RealMatrixImpl;
 import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
 import uru.moulprp.x00A2Pythonfilemod;
 import uru.moulprp.*;
+import shared.Pair;
+import shared.generic;
+import shared.cmap;
 
 public class mystAutomation
 {
@@ -1020,9 +1023,14 @@ public class mystAutomation
         agenames.put("Neighborhood02", "KirelMOUL");
         agenames.put("Personal", "PersonalMOUL");
         
-        HashMap<String, Integer> suffices = new HashMap<String, Integer>();
-        suffices.put("GUI_District_YeeshaPageGUI.prp", 86);
-        suffices.put("GUI_District_jalakControlPanel.prp", 90);
+        //these map from filename to oldsuffix to newsuffix
+        //HashMap<String, HashMap<Integer,Integer>> suffices = new HashMap();
+        //suffices.put("GUI_District_YeeshaPageGUI.prp", new Pair(50,86));
+        //suffices.put("GUI_District_jalakControlPanel.prp", new Pair(68,90));
+        cmap<String,cmap<Integer,Integer>> suffices = new cmap();
+        suffices.put( "GUI", 50, 86);
+        suffices.put( "GUI", 68, 90);
+        
         
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -1102,10 +1110,10 @@ public class mystAutomation
             }
             
             //modify sequence suffix if Age is in list.
-            Integer suffix = suffices.get(filename);
+            cmap<Integer,Integer> suffix = suffices.get(agename);
             if(suffix!=null)
             {
-                c.sequenceSuffix = suffix;
+                c.sequenceSuffixMap = suffix;
             }
             
             //modify agename if Age is in list.

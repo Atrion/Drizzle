@@ -104,10 +104,14 @@ public class Pageid extends uruobj
         }
         
         //change suffix
-        if(c.sequenceSuffix!=null)
+        if(c.sequenceSuffixMap!=null)
         {
-            suffix = c.sequenceSuffix;
-            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence suffix 0x"+Integer.toHexString(suffix));
+            Integer newsuffix = c.sequenceSuffixMap.get(suffix);
+            if(newsuffix!=null)
+            {
+                if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing sequence suffix "+Integer.toString(suffix)+" with "+Integer.toString(newsuffix));
+                suffix = newsuffix;
+            }
         }
     }
     private Pageid(){}
