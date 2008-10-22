@@ -113,6 +113,48 @@ public class inplaceModifications
         PrpRootObject[] anims = prp.FindAllObjectsOfType(Typeid.plATCAnim);
         PrpRootObject[] mastermods = prp.FindAllObjectsOfType(Typeid.plAGMasterMod);
         PrpRootObject[] agmods = prp.FindAllObjectsOfType(Typeid.plAGModifier);
+        
+        PrpRootObject[] cams1 = prp.FindAllObjectsOfType(Typeid.plCameraBrain1);
+        PrpRootObject[] cams2 = prp.FindAllObjectsOfType(Typeid.plCameraBrain1_Avatar);
+        PrpRootObject[] cams3 = prp.FindAllObjectsOfType(Typeid.plCameraBrain1_Circle);
+        PrpRootObject[] cams4 = prp.FindAllObjectsOfType(Typeid.plCameraBrain1_Fixed);
+        PrpRootObject[] cams5 = prp.FindAllObjectsOfType(Typeid.plCameraModifier1);
+        PrpRootObject[] cams6 = prp.FindAllObjectsOfType(Typeid.plCameraRegionDetector);
+        PrpRootObject[] cams7 = prp.FindAllObjectsOfType(Typeid.plRailCameraMod);
+        PrpRootObject[] cams = shared.generic.mergeArrays(PrpRootObject.class, cams1,cams2,cams3,cams4,cams5,cams6,cams7);
+        //for(PrpRootObject obj: cams)
+        //{
+        //    obj.ensureParsed();
+        //    int dummy=0;
+        //}
+        for(PrpRootObject obj: cams3)
+        {
+            obj.hasChanged = true;
+            PlCameraBrain1_Circle o = obj.castTo();
+            o.centre.addModify(translationvertex);
+        }
+        for(PrpRootObject obj: cams7)
+        {
+            PlRailCameraMod o = obj.castTo();
+            if(o.u1a.type==Typeid.plAnimPath)
+            {
+                obj.hasChanged = true;
+                PlRailCameraMod.plAnimPath ap = o.u1a.castTo();
+                
+                ap.u3.u1.addModify(translationvertex);
+                
+                Vector<PrpController.plSimplePosController> spcs = shared.FindAllDescendants.FindAllDescendantsByClass(PrpController.plSimplePosController.class, ap);
+                for(PrpController.plSimplePosController pc: spcs)
+                {
+                    m.msg("Changing RailCameraMod plSimplePosController("+obj.toString()+") from:"+pc.xpoint3controller.xkeylist.keys[0].value.toString());
+                    for(PrpController.hsPoint3Key key: pc.xpoint3controller.xkeylist.keys)
+                    {
+                        key.value.addModify(translationvertex);
+                    }
+                }
+            }
+        }
+        
         /*for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plLayer))
         {
             x0006Layer o = obj.castTo();

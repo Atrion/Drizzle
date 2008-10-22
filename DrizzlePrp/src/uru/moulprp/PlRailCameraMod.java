@@ -32,7 +32,7 @@ public class PlRailCameraMod extends uruobj
     //Objheader xheader;
     
     PlMultiModifier parent;
-    PrpTaggedObject u1a;
+    public PrpTaggedObject u1a;
     //PrpController.plTMController u1b;
     Uruobjectref ref1;
     Uruobjectref ref2;
@@ -94,15 +94,18 @@ public class PlRailCameraMod extends uruobj
     {
         int u1;
         PrpTaggedObject xu2a;
-        PrpController.plTMController xu2b;
-        PrpController.uk u3;
+        public PrpController.plTMController xu2b;
+        public PrpController.uk u3;
         Transmatrix u4;
         Transmatrix u5;
         Flt u6;
         Flt u7;
         
+        int readversion;
         public plAnimPath(context c) throws readexception
         {
+            readversion = c.readversion;
+            
             u1 = c.readInt();
             if(c.readversion==6||c.readversion==4)
             {
@@ -123,7 +126,14 @@ public class PlRailCameraMod extends uruobj
         public void compile(Bytedeque c)
         {
             c.writeInt(u1);
-            xu2a.compileWithoutTypeid(c); //really a compileSpecial. This compiles it without the typeid, since pots has a naked plTMController. This must be a plCompoundController, which is ensured while reading.
+            if(readversion==6||readversion==4)
+            {
+                xu2a.compileWithoutTypeid(c); //really a compileSpecial. This compiles it without the typeid, since pots has a naked plTMController. This must be a plCompoundController, which is ensured while reading.
+            }
+            else if(readversion==3)
+            {
+                xu2b.compile(c);
+            }
             u3.compile(c);
             u4.compile(c);
             u5.compile(c);

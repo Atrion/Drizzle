@@ -42,6 +42,16 @@ public class PrpTaggedObject extends uruobj
         }
     }
     
+    public <T> T castTo(Class<T> cls)
+    {
+        T result = (T)this.prpobject.object;
+        return result;
+    }
+    public <T> T castTo()
+    {
+        T result = (T)this.prpobject.object;
+        return result;
+    }
     public void compile(Bytedeque c)
     {
         if(type==type.plSceneNode || type==type.nil)

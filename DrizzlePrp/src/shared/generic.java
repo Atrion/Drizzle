@@ -99,4 +99,30 @@ public class generic
     {
         return values;
     }
+    public static <T> T[] mergeArrays(Class objclass, T[]... values)
+    {
+        int size = 0;
+        //Vector<T> result = new Vector<T>();
+        for(T[] t: values)
+        {
+            size += t.length;
+            //for(int i=0;i<t.length;i++)
+            //{
+            //    result.add(t[i]);
+            //}
+        }
+        T[] result = (T[])generic.makeArray(objclass, size);
+        int pos = 0;
+        for(T[] t: values)
+        {
+            for(T t2: t)
+            {
+                result[pos] = t2;
+                pos++;
+            }
+        }
+        return result;
+        //return convertVectorToArray(result, objclass);
+        
+    }
 }

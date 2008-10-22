@@ -36,7 +36,7 @@ public class PlCameraBrain1_Circle extends uruobj
     
     PlCameraBrain1 parent;
     int circleFlags;
-    Vertex centre;
+    public Vertex centre;
     Flt radius;
     Uruobjectref centreObject;
     Uruobjectref POAObj;

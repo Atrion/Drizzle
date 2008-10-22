@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
 //import javax.swing.text.Keymap;
 import javax.swing.ActionMap;
+import java.io.File;
 
 public class GuiUtils
 {
@@ -40,6 +41,8 @@ public class GuiUtils
     public static void getUserSelectedFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
+        File cwd = new File(field.getText()).getParentFile();
+        fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
         if(wasFileChosen==0)
@@ -51,6 +54,8 @@ public class GuiUtils
     public static void getUserSelectedFile(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
+        File cwd = new File(field.getText()).getParentFile();
+        fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
         if(wasFileChosen==0)
@@ -62,6 +67,8 @@ public class GuiUtils
     public static void getUserSelectedFileWithNoPath(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
+        File cwd = new File(field.getText()).getParentFile();
+        fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
         if(wasFileChosen==0)
@@ -73,6 +80,8 @@ public class GuiUtils
     public static void getUserSelectedFileOrFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
+        File cwd = new File(field.getText()).getParentFile();
+        fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         int wasFileChosen = fc.showOpenDialog(null);
         if(wasFileChosen==0)
