@@ -73,4 +73,20 @@ public class x0003Bitmap extends uruobj
         deque.writeInt(u1);
         deque.writeInt(u2);
     }
+    private x0003Bitmap(){}
+    public static x0003Bitmap createForDynamicTextMap()
+    {
+        x0003Bitmap result = new x0003Bitmap();
+        
+        result.version = 2;
+        result.bpp = 32;
+        result.cpb = 1;
+        result.flags = 1; //0 is none, 1 is that it has an alpha channel.
+        result.type = 0;
+        result.subtype = 0;
+        result.u1 = 0;
+        result.u2 = 0;
+        
+        return  result;
+    }
 }

@@ -25,6 +25,15 @@ import java.util.Vector;
 
 public class hackFactory
 {
+    public static PrpRootObject createAndAddDynamicTextMap(prpfile prp, String name, int visWidth, int visHeight)
+    {
+        PlDynamicTextMap map = PlDynamicTextMap.createBlank(visWidth,visHeight);//1024,1024);
+        Uruobjectref mapref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, name, prp.header.pageid, prp.header.pagetype);
+        PrpRootObject maproot = PrpRootObject.createFromDescAndObject(mapref.xdesc, map);
+        prp.extraobjects.add(maproot);
+        
+        return maproot;
+    }
     
     public static void createAndAddCoordinateInterface(prpfile prp, PrpRootObject sceneobject)
     {
@@ -40,9 +49,9 @@ public class hackFactory
         prp.extraobjects.add(ciroot);
     }
     
-    public static void createDireboBuiltInPrp(String outfolder)
+    public static void createBuiltInPrpFile(String agename, String outfolder)
     {
-        String agename = "Direbo";
+        //String agename = "Direbo";
         Pageid pid = Pageid.createFromPrefixPagenum(93, -2);
         
         //create

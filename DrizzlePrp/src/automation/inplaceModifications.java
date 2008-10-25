@@ -6,6 +6,7 @@
 package automation;
 
 import uru.moulprp.*;
+import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
 import shared.FileUtils;
 import uru.context;
 import uru.Bytestream;
@@ -18,6 +19,36 @@ import java.util.Vector;
 
 public class inplaceModifications
 {
+    public static void addDynamicTextMapAndMiscToFile(String filename, String outfolder)
+    {
+        //open
+        prpfile prp = prpfile.createFromFile(filename, true);
+        
+        //create the dynamictextmap
+        //the images written in python must be no greater than this size, or it won't draw it.
+        //the width and height are each rounded up to the nearest power of 2.
+        //the image can be stretched to fit with python.
+        //int width = 350; int height = 604;
+        //int width = 512; int height = 1024;
+        int width = 1024; int height = 1024;
+        PrpRootObject dtmroot = automation.hackFactory.createAndAddDynamicTextMap(prp, "dustDynamicBookTexture", width, height);
+        
+        //replace the texture with our dynamictextmap:
+        PrpRootObject layerroot = prp.findObject("Map #8251", Typeid.plLayer);
+        layerroot.hasChanged = true;
+        x0006Layer layer = layerroot.castTo();
+        layer.texture = dtmroot.getref();
+        
+        //add ptAttribDynamicMap to the pythonfilemod.
+        PrpRootObject pfmroot = prp.findObject("cPythMachineBrain", Typeid.plPythonFileMod);
+        pfmroot.hasChanged = true;
+        x00A2Pythonfilemod pfm = pfmroot.castTo();
+        pfm.addListing(Pythonlisting.createWithRef(9, 90, dtmroot.getref()));
+        
+        //save
+        String filename2 = outfolder+"/dat/"+new File(filename).getName();
+        prp.saveAsFile(filename2);
+    }
     public static void atranslateAllObjects(String filename, String outfolder, float x, float y, float z)
     {
         

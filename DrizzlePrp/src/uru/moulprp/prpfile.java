@@ -132,6 +132,13 @@ public class prpfile
         
         return prp;
     }
+    public void saveAsFile(String filename)
+    {
+        this.mergeExtras();
+        Bytes result = this.saveAsBytes();
+        FileUtils.WriteFile(filename, result);
+        
+    }
     public Bytes saveAsBytes()
     {
         //use the decider that always returns true by default.

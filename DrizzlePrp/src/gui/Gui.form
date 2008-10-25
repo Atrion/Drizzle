@@ -396,8 +396,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tabsState2" min="-2" pref="376" max="-2" attributes="0"/>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <Component id="tabsState2" pref="400" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -667,7 +667,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton53" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="218" max="32767" attributes="0"/>
+                              <EmptySpace pref="242" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1317,7 +1317,7 @@
                               <Component id="checkboxState19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState20" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="58" max="32767" attributes="0"/>
+                              <EmptySpace pref="82" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1383,106 +1383,130 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton90" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton94" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="textfieldState21" alignment="0" min="-2" pref="228" max="-2" attributes="0"/>
+                                          <Component id="jButton91" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton90" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jButton94" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jButton100" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace pref="164" max="32767" attributes="0"/>
+                                              <Component id="jButton99" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="textfieldState17" min="-2" pref="108" max="-2" attributes="0"/>
+                                                  <Component id="textfieldState18" pref="398" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="textfieldState20" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
+                                                  <Component id="textfieldState19" alignment="0" min="-2" pref="395" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jButton92" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton93" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton95" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textfieldState18" min="-2" pref="241" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton92" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textfieldState19" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton93" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="textfieldState20" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="491" max="32767" attributes="0"/>
-                              <Component id="jButton91" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="textfieldState17" min="-2" pref="319" max="-2" attributes="0"/>
-                              <EmptySpace pref="501" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
-                              <Component id="jButton99" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="418" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="textfieldState17" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="textfieldState17" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="textfieldState18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton92" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="jButton92" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="textfieldState19" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton93" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Component id="textfieldState20" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="jButton93" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="textfieldState20" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="jButton90" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton94" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton100" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton91" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton90" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="textfieldState21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton95" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton94" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="jButton99" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
-                              <Component id="jButton99" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace pref="47" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="shared.State.TextfieldState" name="textfieldState17">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="c:\documents and settings\user\desktop\output\"/>
-                        <Property name="name" type="java.lang.String" value="hackOutput" noResource="true"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JButton" name="jButton90">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Create BuiltIn District prp"/>
+                        <Property name="text" type="java.lang.String" value="Create BuiltIn District prp (Agename, Output)"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton90ActionPerformed"/>
@@ -1490,7 +1514,7 @@
                     </Component>
                     <Component class="shared.State.TextfieldState" name="textfieldState18">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="textfieldState18"/>
+                        <Property name="text" type="java.lang.String" value="g:\prps\pots\dat\Nexus_District_nxusBookMachine.prp"/>
                         <Property name="name" type="java.lang.String" value="translateInput" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1502,7 +1526,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton91">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Translate"/>
+                        <Property name="text" type="java.lang.String" value="Translate (File, Output, Translation)"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton91ActionPerformed"/>
@@ -1530,26 +1554,12 @@
                         <Property name="name" type="java.lang.String" value="translateVector" noResource="true"/>
                       </Properties>
                     </Component>
-                    <Component class="shared.State.TextfieldState" name="textfieldState21">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="textfieldState21"/>
-                        <Property name="name" type="java.lang.String" value="listSpawnpointsFile" noResource="true"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JButton" name="jButton94">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="List Spawnpoint Sceneobjects"/>
+                        <Property name="text" type="java.lang.String" value="List Spawnpoint Sceneobjects (File)"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton94ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton95">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="select..."/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton95ActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton99">
@@ -1559,6 +1569,40 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton99ActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton100">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Add DynamicTextMap (File, Output)"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton100ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel21">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="File:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel22">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Output:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState17">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Direbo"/>
+                        <Property name="name" type="java.lang.String" value="agename" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel23">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agename:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel24">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Translation:"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

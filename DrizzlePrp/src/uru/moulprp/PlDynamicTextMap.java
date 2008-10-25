@@ -31,36 +31,52 @@ public class PlDynamicTextMap extends uruobj
     //Objheader xheader;
     
     x0003Bitmap parent; //cobbs lists this as MipMap, but it's actually a Bitmap.
-    int u1;
-    int u2;
-    byte u3;
-    byte u4;
-    byte u5;
-    byte u6;
-    byte u7;
+    int visWidth;  //was u1
+    int visHeight;  //was u2
+    byte hasAlpha; //was u3
+    //byte u4;
+    //byte u5;
+    //byte u6;
+    //byte u7;
+    int initBufferLen; //was u4to7
     
     public PlDynamicTextMap(context c)//,boolean hasHeader)
     {
         //if(hasHeader) xheader = new Objheader(c);
         
         parent = new x0003Bitmap(c);//,false);
-        u1 = c.readInt();
-        u2 = c.readInt();
-        u3 = c.readByte();
-        u4 = c.readByte();
-        u5 = c.readByte();
-        u6 = c.readByte();
-        u7 = c.readByte();
+        visWidth = c.readInt();
+        visHeight = c.readInt();
+        hasAlpha = c.readByte();
+        //u4 = c.readByte();
+        //u5 = c.readByte();
+        //u6 = c.readByte();
+        //u7 = c.readByte();
+        initBufferLen = c.readInt();
     }
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeInt(u1);
-        c.writeInt(u2);
-        c.writeByte(u3);
-        c.writeByte(u4);
-        c.writeByte(u5);
-        c.writeByte(u6);
-        c.writeByte(u7);
+        c.writeInt(visWidth);
+        c.writeInt(visHeight);
+        c.writeByte(hasAlpha);
+        //c.writeByte(u4);
+        //c.writeByte(u5);
+        //c.writeByte(u6);
+        //c.writeByte(u7);
+        c.writeInt(initBufferLen);
+    }
+    private PlDynamicTextMap(){}
+    public static PlDynamicTextMap createBlank(int visWidth, int visHeight)
+    {
+        PlDynamicTextMap result = new PlDynamicTextMap();
+        
+        result.parent = x0003Bitmap.createForDynamicTextMap();
+        result.visWidth = visWidth; //1024;
+        result.visHeight = visHeight; //1024;
+        result.hasAlpha = 0;
+        result.initBufferLen = 0;
+        
+        return result;
     }
 }
