@@ -244,6 +244,9 @@ public enum Typeid implements compilable
     
     //GUI_jalakControlPanel
     pfGUIDragBarCtrl,
+    pfGUICheckBoxCtrl,
+    pfGUIRadioGroupCtrl,
+    pfGUIPopUpMenu,
     
     plLeafController,
     nil,
@@ -457,6 +460,9 @@ public enum Typeid implements compilable
         tri( 0x0F0, 0x0F0, -2, plLayerSDLAnimation),
         
         tri( 0x0B9, 0x0B9, -2, pfGUIDragBarCtrl),
+        tri( 0x0BA, -2, -2, pfGUICheckBoxCtrl),
+        tri( 0x0BB, -2, -2, pfGUIRadioGroupCtrl),
+        tri( 0x119, -2, -2, pfGUIPopUpMenu),
         
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
