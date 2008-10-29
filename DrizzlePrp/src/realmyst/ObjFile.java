@@ -8,7 +8,7 @@ package realmyst;
 import shared.*;
 import java.util.zip.Inflater;
 import java.io.ByteArrayOutputStream;
-import uru.e;
+import shared.e;
 
 public class ObjFile
 {

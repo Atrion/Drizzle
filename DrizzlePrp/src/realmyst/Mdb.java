@@ -6,7 +6,7 @@
 package realmyst;
 
 import shared.*;
-import uru.e;
+import shared.e;
 
 public class Mdb
 {

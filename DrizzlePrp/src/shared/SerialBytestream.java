@@ -8,7 +8,7 @@ package shared;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
-import uru.b;
+import shared.b;
 import java.util.Vector;
 import shared.*;
 

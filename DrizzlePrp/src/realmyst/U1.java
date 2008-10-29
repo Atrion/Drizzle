@@ -16,43 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
+package realmyst;
 
-import uru.context; import shared.readexception;
-import uru.Bytestream;
-import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-//import java.util.Vector;
+import shared.*;
 
-/**
- *
- * @author user
- */
-public class PlSoftVolume extends uruobj
+public class U1
 {
-    //Objheader xheader;
+    int tag;
+    int blockSizeMaybe;
+    int sub1;
+    Bstr xsubs;
+    int sub2;
     
-    PlRegionBase parent;
-    int u1;
-    Flt u2;
-    Flt u3;
-    
-    public PlSoftVolume(context c) throws readexception
+    public U1(IBytestream c)
     {
-        //if(hasHeader) xheader = new Objheader(c);
+        tag = c.readInt(); e.ensure(Typeid.has(tag));
+        blockSizeMaybe = c.readInt(); //size of rest of block?
+
+        sub1 = c.readInt();
+        if(sub1!=0)
+        {
+            //45a950 block
+            xsubs = new Bstr(c);
+            int dummy=0;
+        }
+        sub2 = c.readInt();
+        for(int j=0;j<sub2;j++)
+        {
+            //45a950 block
+            //m.err("unhandled");
+            Bstr subs2 = new Bstr(c);
+        }
         
-        parent = new PlRegionBase(c);//,false);
-        u1 = c.readInt();
-        u2 = new Flt(c);
-        u3 = new Flt(c);
-    }
-    public void compile(Bytedeque c)
-    {
-        parent.compile(c);
-        c.writeInt(u1);
-        u2.compile(c);
-        u3.compile(c);
     }
 }

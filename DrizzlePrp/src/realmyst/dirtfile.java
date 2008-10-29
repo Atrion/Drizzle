@@ -18,8 +18,8 @@
 
 package realmyst;
 
-import uru.e;
-import uru.b;
+import shared.e;
+import shared.b;
 import java.util.Vector;
 import shared.*;
 import java.io.File;

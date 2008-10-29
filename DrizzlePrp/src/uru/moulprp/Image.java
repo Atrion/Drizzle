@@ -6,10 +6,10 @@
 package uru.moulprp;
 
 import shared.Bytes;
-import uru.e;
+import shared.e;
 import shared.m;
 import uru.Bytestream;
-import uru.b;
+import shared.b;
 import uru.Bytedeque;
 import shared.readexception;
 import shared.IBytestream;

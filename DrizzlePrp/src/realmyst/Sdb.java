@@ -6,7 +6,7 @@
 package realmyst;
 
 import shared.*;
-import uru.e;
+import shared.e;
 
 public class Sdb
 {
@@ -24,7 +24,7 @@ public class Sdb
         tag = c.readInt();
         if(tag==0x02000000)
         {
-            //sdb
+            //sdb header
             u1 = c.readInt(); //filesize (including header) Sometimes not, though.
             filesizeMinusHeader = c.readInt(); //filesize minus header
             name = new Bstr(c);
@@ -44,7 +44,7 @@ public class Sdb
                 int dummy=0;
             }
             
-            if(true)return;
+            //if(true)return;
             
             //hsObjectGroup
             int tag2 = c.readInt(); //should actually be a reverse int.
@@ -130,26 +130,7 @@ public class Sdb
                                         if(count10!=0)
                                         {
                                             //m.err("unhandled.");
-                                            for(int i=0;i<count10;i++)
-                                            {
-                                                int subtag1 = c.readInt();
-                                                int subtag2 = c.readInt(); //size of rest of block?
-                                                
-                                                int sub1 = c.readInt();
-                                                if(sub1!=0)
-                                                {
-                                                    //45a950 block
-                                                    Bstr subs = new Bstr(c);
-                                                    int dummy=0;
-                                                }
-                                                int sub2 = c.readInt();
-                                                for(int j=0;j<sub2;j++)
-                                                {
-                                                    //45a950 block
-                                                    //m.err("unhandled");
-                                                    Bstr subs2 = new Bstr(c);
-                                                }
-                                            }
+                                            U1[] u1s = c.readArray(U1.class, count10);
                                         }
                                         else
                                         {

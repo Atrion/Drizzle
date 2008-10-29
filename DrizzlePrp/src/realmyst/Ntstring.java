@@ -7,7 +7,7 @@ package realmyst;
 
 import shared.*;
 import java.util.Vector;
-import uru.b;
+import shared.b;
 
 public class Ntstring
 {

@@ -21,9 +21,9 @@ package uru.moulprp;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.e;
+import shared.e;
 import shared.m;
-import uru.b;
+import shared.b;
 //import java.util.Vector;
 
 //apparently different from pots. Used for the great zero light, for example.

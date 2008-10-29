@@ -6,7 +6,7 @@
 package realmyst;
 
 import shared.*;
-import uru.e;
+import shared.e;
 import java.util.Vector;
 
 //this file contains 3 blocks, each one of which maps a name onto a list of indexes.  The names don't seem to be files, but the indexes seem to be present as the file names in /sdb (and maybe /mdb).

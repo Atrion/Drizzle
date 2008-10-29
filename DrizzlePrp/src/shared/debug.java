@@ -16,43 +16,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
-
-import uru.context; import shared.readexception;
-import uru.Bytestream;
-import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-//import java.util.Vector;
+package shared;
 
 /**
  *
  * @author user
  */
-public class PlSoftVolume extends uruobj
+public class debug
 {
-    //Objheader xheader;
-    
-    PlRegionBase parent;
-    int u1;
-    Flt u2;
-    Flt u3;
-    
-    public PlSoftVolume(context c) throws readexception
+    public static String getStackTrace()
     {
-        //if(hasHeader) xheader = new Objheader(c);
-        
-        parent = new PlRegionBase(c);//,false);
-        u1 = c.readInt();
-        u2 = new Flt(c);
-        u3 = new Flt(c);
-    }
-    public void compile(Bytedeque c)
-    {
-        parent.compile(c);
-        c.writeInt(u1);
-        u2.compile(c);
-        u3.compile(c);
+        Throwable e = new Throwable();
+        StackTraceElement[] stack = e.getStackTrace();
+        StringBuilder result = new StringBuilder();
+        result.append("***Stack Trace***\n");
+        for(int i=0;i<stack.length;i++)
+        {
+            result.append(stack[i].toString()+"\n");
+        }
+        return result.toString();
     }
 }

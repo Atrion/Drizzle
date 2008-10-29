@@ -21,10 +21,10 @@ package uru.moulprp;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.b;
+import shared.b;
 import shared.m;
 import shared.Bytes;
-import uru.e;
+import shared.e;
 
 /**
  *

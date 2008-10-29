@@ -21,7 +21,7 @@ package uru.moulprp;
 import uru.context;
 import shared.Bytes;
 import uru.Bytedeque;
-import uru.e;
+import shared.e;
 import shared.m;
 
 public class Pagetype extends uruobj

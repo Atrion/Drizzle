@@ -19,6 +19,7 @@
 package uru;
 
 //import gui.Main;
+import shared.b;
 import java.util.Vector;
 import shared.m;
 import shared.Bytes;

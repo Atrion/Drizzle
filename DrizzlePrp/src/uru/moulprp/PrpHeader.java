@@ -20,7 +20,7 @@ package uru.moulprp;
 
 import uru.context; import shared.readexception;
 import uru.Bytestream;
-import uru.e;
+import shared.e;
 import shared.m;
 import uru.Bytedeque;
 import shared.Bytes;

@@ -22,8 +22,8 @@ import uru.context; import shared.readexception;
 import shared.m;
 import shared.readexception;
 import uru.Bytedeque;
-import uru.b;
-import uru.e;
+import shared.b;
+import shared.e;
 
 public abstract class PrpMessage extends PrpTaggedObject
 {

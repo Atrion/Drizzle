@@ -21,7 +21,7 @@ package uru.moulprp;
 import uru.context; import shared.readexception;
 import shared.FileUtils;
 import shared.m;
-import uru.b;
+import shared.b;
 import java.io.File;
 
 /**

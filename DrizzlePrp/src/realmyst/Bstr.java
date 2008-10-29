@@ -20,7 +20,7 @@
 package realmyst;
 
 import shared.readexception;
-import uru.b;
+import shared.b;
 import shared.*;
 
 /**

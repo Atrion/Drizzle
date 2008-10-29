@@ -23,8 +23,8 @@ import uru.Bytedeque;
 import shared.m;
 import uru.context;
 import shared.readexception;
-import uru.e;
-import uru.b;
+import shared.e;
+import shared.b;
 
 //the following work fine in pots:
 //Point3Key, LeafController, ScalarController, Point3Controller, Point3KeyList, SimplePosController, ScalarKeyList, ScalarKey(apparently done wrong in pyprp, though), KeyFrame

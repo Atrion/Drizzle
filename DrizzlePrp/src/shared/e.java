@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru;
+package shared;
 
 //import gui.Main;
 import shared.m;

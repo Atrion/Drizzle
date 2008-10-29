@@ -26,13 +26,13 @@ import javax.swing.JFileChooser;
 import java.io.File;
 import uru.UruCrypt;
 import uru.UruFileTypes;
-import uru.CryptHashes;
+import shared.CryptHashes;
 //import uru.Moul;
 import uru.moulprp.prputils;
 import uru.Bytestream;
 import shared.m;
 import relationvis.visualisation;
-import uru.b;
+import shared.b;
 import uru.moulprp._staticsettings;
 import uru.context;
 import uru.moulprp.Typeid;
@@ -3490,7 +3490,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton47ActionPerformed
         byte[] filecontents = FileUtils.ReadFile(textfieldState15.getText());
-        byte[] md5 = uru.CryptHashes.GetMd5(filecontents);
+        byte[] md5 = shared.CryptHashes.GetMd5(filecontents);
         String md5str = b.BytesToHexString(md5);
         m.msg("md5: "+md5str);
     }//GEN-LAST:event_jButton47ActionPerformed
@@ -3877,6 +3877,14 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     else if(filename.toLowerCase().endsWith(".shp"))
     {
         shp = new realmyst.Shp(bs);
+    }
+    else if(filename.toLowerCase().endsWith(".wav"))
+    {
+        m.msg("It's just a normal wav file.");
+    }
+    else if(filename.toLowerCase().endsWith(".dat"))
+    {
+        m.msg("It's just a text file.");
     }
     //realmyst.Idx idx = new realmyst.Idx(bs);
     //realmyst.SceneObject so = new realmyst.SceneObject(bs);

@@ -16,24 +16,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru;
+package realmyst;
 
-/**
- *
- * @author user
- */
-public class debug
+import shared.*;
+
+public class AAA_Template
 {
-    public static String getStackTrace()
+    
+    
+    public AAA_Template(IBytestream c)
     {
-        Throwable e = new Throwable();
-        StackTraceElement[] stack = e.getStackTrace();
-        StringBuilder result = new StringBuilder();
-        result.append("***Stack Trace***\n");
-        for(int i=0;i<stack.length;i++)
-        {
-            result.append(stack[i].toString()+"\n");
-        }
-        return result.toString();
+        
     }
 }

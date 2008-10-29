@@ -22,9 +22,9 @@ import shared.readexception;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import uru.e;
+import shared.e;
 import shared.m;
-import uru.b;
+import shared.b;
 //import java.util.Vector;
 
 //untested and needs PrpMessages to be at least partially complete.

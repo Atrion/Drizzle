@@ -6,7 +6,7 @@
 package realmyst;
 
 import shared.*;
-import uru.b;
+import shared.b;
 
 public class ReverseInt
 {

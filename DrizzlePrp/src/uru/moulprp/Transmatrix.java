@@ -20,10 +20,10 @@ package uru.moulprp;
 
 import uru.context; import shared.readexception;
 import uru.Bytestream;
-import uru.b;
+import shared.b;
 import shared.m;
 import uru.Bytedeque;
-import uru.e;
+import shared.e;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
 

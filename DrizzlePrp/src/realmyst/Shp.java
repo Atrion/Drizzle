@@ -6,7 +6,7 @@
 package realmyst;
 
 import shared.*;
-import uru.e;
+import shared.e;
 
 public class Shp
 {
@@ -41,6 +41,11 @@ public class Shp
         v3 = c.readInt();
         v35 = c.readInt();
         for(int i=0;i<v3;i++)
+        {
+            //does something???
+        }
+        int counter = v3>0?v3:v35; //this seems to be what the decomilation shows.
+        for(int i=0;i<counter;i++)
         {
             
         }

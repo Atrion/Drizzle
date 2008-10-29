@@ -21,8 +21,8 @@ package uru.moulprp;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import shared.m;
-import uru.e;
-import uru.b;
+import shared.e;
+import shared.b;
 import uru.Bytedeque;
 
 /**

@@ -24,7 +24,7 @@ import uru.Bytestream;
 import uru.context;
 import shared.readexception;
 import uru.Bytedeque;
-import uru.b;
+import shared.b;
 //import org.bouncycastle.crypto.digests.MD5Digest;
 import shared.Bytes;
 import java.util.Vector;
@@ -146,7 +146,7 @@ public class sumfile
                 
                 //md5
                 byte[] filecontents = shared.FileUtils.ReadFile(datfiles[i]);
-                byte[] md5 = uru.CryptHashes.GetMd5(filecontents);
+                byte[] md5 = shared.CryptHashes.GetMd5(filecontents);
                 c.writeBytes(md5);
                 
                 //long timestamp = datfiles[i].lastModified()/1000L;
