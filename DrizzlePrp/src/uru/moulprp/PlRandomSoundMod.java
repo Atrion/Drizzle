@@ -40,7 +40,7 @@ public class PlRandomSoundMod extends uruobj
     Flt u4;
     Flt u5;
     short u6;*/
-    PlRandomCommandMod parent;
+    public PlRandomCommandMod parent;
     short count;
     subRandomSoundMod[] subs;
     
@@ -103,27 +103,27 @@ public class PlRandomSoundMod extends uruobj
     public static class PlRandomCommandMod extends uruobj
     {
         PlSingleModifier parent;
-        byte u1;
-        byte u2;
-        Flt u3;
-        Flt u4;
+        public byte mode;
+        public byte state;
+        public Flt minDelay;
+        public Flt maxDelay;
         
         public PlRandomCommandMod(context c)
         {
             parent = new PlSingleModifier(c);
-            u1 = c.readByte();
-            u2 = c.readByte();
-            u3 = new Flt(c);
-            u4 = new Flt(c);
+            mode = c.readByte();
+            state = c.readByte();
+            minDelay = new Flt(c);
+            maxDelay = new Flt(c);
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
-            c.writeByte(u1);
-            c.writeByte(u2);
-            u3.compile(c);
-            u4.compile(c);
+            c.writeByte(mode);
+            c.writeByte(state);
+            minDelay.compile(c);
+            maxDelay.compile(c);
         }
     }
 }

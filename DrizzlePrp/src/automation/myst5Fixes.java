@@ -220,6 +220,15 @@ public class myst5Fixes
         if(agename.equals("mystmystv") && pagename.equals("island"))
         {
             prp.removeObject(Typeid.plSceneObject, "PlanetariumDoorBlocker");
+            
+            PlRandomSoundMod rsm = prp.findObject("cSfxRndThunder", Typeid.plRandomSoundMod).castTo();
+            rsm.parent.state = 0; //turn it on
+            rsm.parent.mode = 3; //must disable the kOneCmd
+            rsm.parent.minDelay = Flt.createFromJavaFloat(4); //just picked a number.
+            rsm.parent.maxDelay = Flt.createFromJavaFloat(30); //just picked a number.
+            
+            //PlRandomSoundMod rs2 = prp.findObject("cSfxRandomCreaks", Typeid.plRandomSoundMod).castTo();
+            //rs2.parent.state = 0;
         }
 
     }

@@ -20,40 +20,29 @@ package realmyst;
 
 import shared.*;
 
-public class U1
+//45a950
+public class Flagsen
 {
-    int tag;
-    int blockSizeMaybe;
-    int sub1;
-    //Bstr xsubs;
-    Flagsen xsubs;
-    int sub2;
-    //Flagsen[] subs2;
-    TaggedObj[] subs2;
+    Bstr name;
+    byte type;
     
-    public U1(IBytestream c)
+    public Flagsen(IBytestream c)
     {
-        tag = c.readInt(); e.ensure(Typeid.has(tag));
-        blockSizeMaybe = c.readInt(); //size of rest of block?
-
-        sub1 = c.readInt();
-        if(sub1!=0)
+        //45a950
+        name = new Bstr(c);
+        type = c.readByte();
+        switch(type)
         {
-            //45a950 block
-            //xsubs = new Bstr(c);
-            //byte type = c.readByte();
-            xsubs = new Flagsen(c);
-            int dummy=0;
+            case 16:
+                int u1 = c.readInt();
+                int u2 = c.readInt();
+                int u3 = c.readInt();
+                int u4 = c.readInt();
+                Bstr str2 = new Bstr(c);
+                break;
+            default:
+                m.err("Unhandled flag in flagsen.");
+                break;
         }
-        sub2 = c.readInt();
-        subs2 = new TaggedObj[sub2];
-        for(int j=0;j<sub2;j++)
-        {
-            //45a950 block
-            //m.err("unhandled");
-            //Bstr subs2 = new Bstr(c);
-            subs2[j] = new TaggedObj(c);
-        }
-        
     }
 }

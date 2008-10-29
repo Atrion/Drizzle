@@ -1,3 +1,6 @@
+notes:
+Perhaps the sdb file structure just needs U1, and the object after it to read up to the number 8.  Then we read 5 vectors of a preknown type.
+
 5442a0:
 
 (base is the same as base2 functionally)

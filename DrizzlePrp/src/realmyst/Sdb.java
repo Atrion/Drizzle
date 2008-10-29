@@ -57,31 +57,31 @@ public class Sdb
             int u8 = c.readInt(); //v6
             if(u8!=0)
             {
-                m.err("unhandled.");
+                throw new uncaughtexception("Unhandled.");
             }
             int count = c.readInt(); //v65
             Bstr[] morestrs = c.readArray(Bstr.class, count);
             int count2 = c.readInt(); //v69
             if(count2!=0)
             {
-                m.err("unhandled.");
+                throw new uncaughtexception("Unhandled.");
             }
             int count3 = c.readInt(); //v72
             if(count3!=0)
             {
-                m.err("unhandled.");
+                throw new uncaughtexception("Unhandled.");
             }
             else
             {
                 int hasThing = c.readInt();
                 if(hasThing!=0)
                 {
-                    m.err("unhandled.");
+                    throw new uncaughtexception("Unhandled.");
                 }
                 int count4 = c.readInt(); //v78
                 if(count4!=0)
                 {
-                    m.err("unhandled.");
+                    throw new uncaughtexception("Unhandled.");
                 }
                 else
                 {
@@ -89,40 +89,40 @@ public class Sdb
                     int u11 = c.readInt(); //v15
                     if(u11!=0)
                     {
-                        m.err("unhandled.");
+                        throw new uncaughtexception("Unhandled.");
                     }
                     int count5 = c.readInt(); //v84
                     if(count5!=0)
                     {
-                        m.err("unhandled.");
+                        throw new uncaughtexception("Unhandled.");
                     }
                     else
                     {
                         int count6 = c.readInt(); //v86
                         if(count6!=0)
                         {
-                            m.err("unhandled.");
+                            throw new uncaughtexception("Unhandled.");
                         }
                         else
                         {
                             int count7 = c.readInt(); //v91
                             if(count7!=0)
                             {
-                                m.err("unhandled.");
+                                throw new uncaughtexception("Unhandled.");
                             }
                             else
                             {
                                 int count8 = c.readInt(); //v96
                                 if(count8!=0)
                                 {
-                                    m.err("unhandled.");
+                                    throw new uncaughtexception("unhandled.");
                                 }
                                 else
                                 {
                                     int count9 = c.readInt(); //v101
                                     if(count9!=0)
                                     {
-                                        m.err("unhandled.");
+                                        throw new uncaughtexception("unhandled.");
                                     }
                                     else
                                     {
@@ -130,6 +130,7 @@ public class Sdb
                                         if(count10!=0)
                                         {
                                             //m.err("unhandled.");
+                                            if(true) throw new uncaughtexception("unhandled.");
                                             U1[] u1s = c.readArray(U1.class, count10);
                                         }
                                         else
@@ -137,7 +138,7 @@ public class Sdb
                                             int count11 = c.readInt(); //result
                                             if(count11!=0)
                                             {
-                                                m.err("unhandled.");
+                                                throw new uncaughtexception("unhandled.");
                                             }
                                         }
                                     }

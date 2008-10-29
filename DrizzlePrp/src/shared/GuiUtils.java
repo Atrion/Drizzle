@@ -19,11 +19,50 @@ import javax.swing.JFormattedTextField;
 //import javax.swing.text.Keymap;
 import javax.swing.ActionMap;
 import java.io.File;
+import java.awt.TrayIcon;
+import java.awt.SystemTray;
 
 public class GuiUtils
 {
     public static boolean onlyUseASingleJFileChooser = true;
     private static JFileChooser _fc;
+    private static TrayIcon _trayicon;
+    
+    public static void DisplayTrayMessage(String caption, String message)
+    {
+        if(_trayicon==null)
+        {
+            m.err("You must have shown the tray icon first.");
+        }
+        else
+        {
+            _trayicon.displayMessage(caption, message, java.awt.TrayIcon.MessageType.NONE);
+        }
+    }
+    
+    public static void showTrayIcon(String imgpath)
+    {
+        try{
+            if(_trayicon!=null)
+            {
+                //m.err("A tray icon has already been shown; doing nothing.");
+                return;
+            }
+            java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+            //java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
+            java.awt.Image img = shared.GetResource.getResourceAsImage(imgpath);
+            //java.awt.PopupMenu menu = new java.awt.PopupMenu();
+            //menu.add(new java.awt.MenuItem("test"));
+            //java.awt.TrayIcon ti = new java.awt.TrayIcon(img,"Drizzle",menu);
+            java.awt.TrayIcon ti = new java.awt.TrayIcon(img);
+            _trayicon = ti;
+            ti.setImageAutoSize(true);
+            tray.add(ti);
+            //ti.displayMessage("caption", "message", java.awt.TrayIcon.MessageType.NONE);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     
     private static JFileChooser getJFileChooser()
     {

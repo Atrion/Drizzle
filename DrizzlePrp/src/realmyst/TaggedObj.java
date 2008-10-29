@@ -20,40 +20,23 @@ package realmyst;
 
 import shared.*;
 
-public class U1
+public class TaggedObj
 {
-    int tag;
-    int blockSizeMaybe;
-    int sub1;
-    //Bstr xsubs;
-    Flagsen xsubs;
-    int sub2;
-    //Flagsen[] subs2;
-    TaggedObj[] subs2;
+    Typeid type;
+    X5c3e0f00 x1;
     
-    public U1(IBytestream c)
+    public TaggedObj(IBytestream c)
     {
-        tag = c.readInt(); e.ensure(Typeid.has(tag));
-        blockSizeMaybe = c.readInt(); //size of rest of block?
-
-        sub1 = c.readInt();
-        if(sub1!=0)
-        {
-            //45a950 block
-            //xsubs = new Bstr(c);
-            //byte type = c.readByte();
-            xsubs = new Flagsen(c);
-            int dummy=0;
-        }
-        sub2 = c.readInt();
-        subs2 = new TaggedObj[sub2];
-        for(int j=0;j<sub2;j++)
-        {
-            //45a950 block
-            //m.err("unhandled");
-            //Bstr subs2 = new Bstr(c);
-            subs2[j] = new TaggedObj(c);
-        }
+        type = Typeid.read(c);
         
+        switch(type)
+        {
+            case x5c3e0f00:
+                x1 = new X5c3e0f00(c);
+                break;
+            default:
+                m.err("Unhandled type in TaggedObj.");
+                break;
+        }
     }
 }
