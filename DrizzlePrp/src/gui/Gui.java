@@ -558,6 +558,17 @@ public class Gui extends javax.swing.JFrame {
         jButton43 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jButton45 = new javax.swing.JButton();
+        textfieldState21 = new shared.State.TextfieldState();
+        jButton95 = new javax.swing.JButton();
+        jButton101 = new javax.swing.JButton();
+        textfieldState24 = new shared.State.TextfieldState();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        textfieldState25 = new shared.State.TextfieldState();
+        jButton102 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        jButton103 = new javax.swing.JButton();
+        jButton104 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -2279,29 +2290,88 @@ public class Gui extends javax.swing.JFrame {
 
                 tabsState3.addTab("GameHelp", jPanel7);
 
-                jButton45.setText("jButton45");
+                jPanel10.setLayout(null);
+
+                jButton45.setText("Depack");
                 jButton45.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         jButton45ActionPerformed(evt);
                     }
                 });
+                jPanel10.add(jButton45);
+                jButton45.setBounds(50, 120, 66, 36);
 
-                javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-                jPanel10.setLayout(jPanel10Layout);
-                jPanel10Layout.setHorizontalGroup(
-                    jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton45)
-                        .addContainerGap(713, Short.MAX_VALUE))
-                );
-                jPanel10Layout.setVerticalGroup(
-                    jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jButton45)
-                        .addContainerGap(314, Short.MAX_VALUE))
-                );
+                textfieldState21.setText("textfieldState21");
+                textfieldState21.setName("realmystIn"); // NOI18N
+                jPanel10.add(textfieldState21);
+                textfieldState21.setBounds(80, 30, 410, 20);
+
+                jButton95.setText("select");
+                jButton95.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton95ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton95);
+                jButton95.setBounds(500, 20, 57, 36);
+
+                jButton101.setText("select");
+                jButton101.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton101ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton101);
+                jButton101.setBounds(510, 70, 57, 36);
+
+                textfieldState24.setText("textfieldState24");
+                textfieldState24.setName("realmystOut"); // NOI18N
+                jPanel10.add(textfieldState24);
+                textfieldState24.setBounds(80, 80, 410, 20);
+
+                jLabel25.setText("in file:");
+                jPanel10.add(jLabel25);
+                jLabel25.setBounds(10, 30, 32, 16);
+
+                jLabel26.setText("out folder:");
+                jPanel10.add(jLabel26);
+                jLabel26.setBounds(10, 80, 60, 16);
+
+                textfieldState25.setText("textfieldState25");
+                textfieldState25.setName("realmystObjFile"); // NOI18N
+                jPanel10.add(textfieldState25);
+                textfieldState25.setBounds(90, 210, 340, 20);
+
+                jButton102.setText("Attempt to read.");
+                jButton102.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton102ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton102);
+                jButton102.setBounds(90, 250, 160, 36);
+
+                jLabel27.setText("File:");
+                jPanel10.add(jLabel27);
+                jLabel27.setBounds(30, 210, 48, 16);
+
+                jButton103.setText("select");
+                jButton103.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton103ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton103);
+                jButton103.setBounds(440, 200, 57, 36);
+
+                jButton104.setText("test");
+                jButton104.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton104ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton104);
+                jButton104.setBounds(260, 120, 44, 36);
 
                 tabsState3.addTab("realMyst", jPanel10);
 
@@ -3396,9 +3466,14 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton44ActionPerformed
 
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
-        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        realmyst.rmcontext c = new realmyst.rmcontext(new Bytestream(filecontents));
-        realmyst.dirtfile df = new realmyst.dirtfile(c);
+        //byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        //byte[] filecontents = FileUtils.ReadFile(this.textfieldState21.getText());
+        //realmyst.rmcontext c = new realmyst.rmcontext(new Bytestream(filecontents));
+        //realmyst.dirtfile df = new realmyst.dirtfile(c);
+        shared.IBytestream bs = shared.SerialBytestream.createFromFilename(this.textfieldState21.getText());
+        realmyst.dirtfile df = new realmyst.dirtfile(bs);
+        df.saveAllFiles(this.textfieldState24.getText());
+        int dummy=0;
     }//GEN-LAST:event_jButton45ActionPerformed
 
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
@@ -3762,6 +3837,103 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     automation.inplaceModifications.addDynamicTextMapAndMiscToFile(in, outfolder);
 }//GEN-LAST:event_jButton100ActionPerformed
+
+private void jButton95ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton95ActionPerformed
+    GuiUtils.getUserSelectedFile(this.textfieldState21);
+}//GEN-LAST:event_jButton95ActionPerformed
+
+private void jButton101ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton101ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState24);
+}//GEN-LAST:event_jButton101ActionPerformed
+
+private void jButton103ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton103ActionPerformed
+    GuiUtils.getUserSelectedFile(this.textfieldState25);
+}//GEN-LAST:event_jButton103ActionPerformed
+
+private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton102ActionPerformed
+    String filename = this.textfieldState25.getText();
+    File f = new File(filename);
+    shared.IBytestream bs = shared.SerialBytestream.createFromFilename(filename);
+    realmyst.Hsm hsm;
+    realmyst.Idx idx;
+    realmyst.Mdb mdb;
+    realmyst.Sdb sdb;
+    realmyst.Shp shp;
+    if(filename.toLowerCase().endsWith(".hsm"))
+    {
+        hsm = new realmyst.Hsm(bs);
+    }
+    else if(filename.toLowerCase().endsWith(".idx"))
+    {
+        idx = new realmyst.Idx(bs);
+    }
+    else if(filename.toLowerCase().endsWith(".vdb"))
+    {
+        if(f.getParentFile().getName().toLowerCase().equals("sdb"))
+            sdb = new realmyst.Sdb(bs);
+        else if(f.getParentFile().getName().toLowerCase().equals("mdb"))
+            mdb = new realmyst.Mdb(bs);
+    }
+    else if(filename.toLowerCase().endsWith(".shp"))
+    {
+        shp = new realmyst.Shp(bs);
+    }
+    //realmyst.Idx idx = new realmyst.Idx(bs);
+    //realmyst.SceneObject so = new realmyst.SceneObject(bs);
+    //realmyst.Sdb mdb = new realmyst.Sdb(bs);
+    if(bs.getBytesRemaining()!=0) m.warn("Didn't read all data.");
+}//GEN-LAST:event_jButton102ActionPerformed
+
+private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton104ActionPerformed
+    String outfol = this.textfieldState24.getText();
+    
+    File f = new File(outfol+"/sdb");
+    for(File child: f.listFiles())
+    {
+        if(child.getName().toLowerCase().endsWith(".vdb"))
+        {
+            int fs = (int)child.length();
+            shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+            realmyst.Sdb mdb = new realmyst.Sdb(bs);
+            int offset = bs.getAbsoluteOffset();
+            int bytesleft = bs.getBytesRemaining();
+            
+            if (mdb.filesizeMinusHeader!=fs-offset)
+            {
+                int dummy=0;
+            }
+            if(bytesleft!=0)
+            {
+                int dummy=0;
+            }
+            int dummy=0;
+        }
+    }
+    
+    File f2 = new File(outfol+"/mdb");
+    for(File child: f2.listFiles())
+    {
+        if(child.getName().toLowerCase().endsWith(".vdb"))
+        {
+            int fs = (int)child.length();
+            shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+            realmyst.Mdb mdb = new realmyst.Mdb(bs);
+            int offset = bs.getAbsoluteOffset();
+            int bytesleft = bs.getBytesRemaining();
+            
+            if (mdb.u2!=fs-offset)
+            {
+                int dummy=0;
+            }
+            if(bytesleft!=0)
+            {
+                int dummy=0;
+            }
+            int dummy=0;
+        }
+    }
+    
+}//GEN-LAST:event_jButton104ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -3826,6 +3998,10 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton100;
+    private javax.swing.JButton jButton101;
+    private javax.swing.JButton jButton102;
+    private javax.swing.JButton jButton103;
+    private javax.swing.JButton jButton104;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -3918,6 +4094,7 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton92;
     private javax.swing.JButton jButton93;
     private javax.swing.JButton jButton94;
+    private javax.swing.JButton jButton95;
     private javax.swing.JButton jButton96;
     private javax.swing.JButton jButton97;
     private javax.swing.JButton jButton98;
@@ -3942,6 +4119,9 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -4028,8 +4208,11 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState19;
     private shared.State.TextfieldState textfieldState2;
     private shared.State.TextfieldState textfieldState20;
+    private shared.State.TextfieldState textfieldState21;
     private shared.State.TextfieldState textfieldState22;
     private shared.State.TextfieldState textfieldState23;
+    private shared.State.TextfieldState textfieldState24;
+    private shared.State.TextfieldState textfieldState25;
     private shared.State.TextfieldState textfieldState3;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;

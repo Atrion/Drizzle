@@ -21,6 +21,8 @@ package realmyst;
 import uru.e;
 import uru.b;
 import java.util.Vector;
+import shared.*;
+import java.io.File;
 
 //pera.dni seems to contain only .wav files.
 
@@ -31,55 +33,46 @@ public class dirtfile
     
     dirttree tree;
     
-    public dirtfile(rmcontext c)
+    public dirtfile(IBytestream c)
     {
         header = new Header(c);
         //dirtable = new DirectoryTable(c.Fork(header.dirOffset));
         tree = new dirttree(c.Fork(header.dirOffset), header.FTOffset, true);
     }
-    public static class Ntstring
+    public void saveAllFiles(String outputdir)
     {
-        byte[] bytes;
-        public Ntstring(rmcontext c)
+        for(dirttree child: tree.xchildren)
         {
-            Vector<Byte> readbytes = new Vector<Byte>();
-            byte curbyte;
-            do
-            {
-                curbyte = c.readByte();
-                readbytes.add(curbyte);
-            }while(curbyte!=0);
-            bytes = new byte[readbytes.size()];
-            for(int i=0;i<bytes.length;i++)
-            {
-                bytes[i] = readbytes.get(i);
-            }
-        }
-        public String toString()
-        {
-            return b.BytesToString(bytes);
+            saveAllFiles(child,outputdir);
         }
     }
-    public static class DirtFile
+    private void saveAllFiles(dirttree node, String outputdir)
     {
-        byte[] rawdata;
-        
-        public DirtFile(rmcontext c, int length)
+        String filename = outputdir+"/"+node.name.toString();
+        if(node.isdir)
         {
-            rawdata = c.readBytes(length);
+            FileUtils.CreateFolder(filename);
+            for(dirttree child: node.xchildren)
+            {
+                saveAllFiles(child,filename);
+            }
+        }
+        else
+        {
+            FileUtils.WriteFile(filename, node.xfile.rawdata);
         }
     }
     public static class dirttree
     {
         Ntstring name;
-        DirtFile xfile;
+        ObjFile xfile;
         DirectoryTable xdirtable;
         FileStruct xfilestruct;
         
         boolean isdir;
         dirttree[] xchildren;
         
-        public dirttree(rmcontext c, int FTOffset, boolean isdirectory)
+        public dirttree(IBytestream c, int FTOffset, boolean isdirectory)
         {
             isdir = isdirectory;
             if(isdir)
@@ -99,8 +92,8 @@ public class dirtfile
             {
                 xfilestruct = new FileStruct(c);
                 name = new Ntstring(c.Fork(xfilestruct.nameOffset));
-                shared.FileUtils.AppendText("c:/log.txt", name.toString()+"\n");
-                xfile = new DirtFile(c.Fork(xfilestruct.offset), xfilestruct.fileLength);
+                //shared.FileUtils.AppendText("c:/log.txt", name.toString()+"\n");
+                xfile = new ObjFile(c.Fork(xfilestruct.offset), xfilestruct.fileLength, xfilestruct.isEmpty);
             }
         }
         
@@ -118,9 +111,9 @@ public class dirtfile
         int FTOffset;
         int NLOffset;
         int dataOffset;
-        int FTOffset2;
+        int FTOffset2; //equals FTOffset
         
-        public Header(rmcontext c)
+        public Header(IBytestream c)
         {
             header = c.readBytes(4); e.ensure(b.isEqual(header, new byte[]{'D','i','r','t'}));
             version = c.readInt(); e.ensure(version==0x10000);
@@ -139,7 +132,7 @@ public class dirtfile
         int numFiles;
         int[] fileOffsets;
         
-        public DirectoryTable(rmcontext c)
+        public DirectoryTable(IBytestream c)
         {
             nameOffset = c.readInt();
             numFiles = c.readInt();
@@ -150,18 +143,43 @@ public class dirtfile
     public static class FileStruct
     {
         int nameOffset;
-        int extOffset;
+        int extOffset; //the offset to this structure, this var is redundent.
         int fileLength;
         int offset;
         int isEmpty; //is this what it is?
         
-        public FileStruct(rmcontext c)
+        static int sum = 0;
+        static int all = 0;
+        static int diff = 0;
+        static int test = 0;
+        static int type1 = 0;
+        static int type2 = 0;
+        
+        public FileStruct(IBytestream c)
         {
             nameOffset = c.readInt();
             extOffset = c.readInt();
             fileLength = c.readInt();
             offset = c.readInt();
             isEmpty = c.readInt();
+            all += fileLength;
+            diff += fileLength-isEmpty;
+            test += isEmpty==0?fileLength:isEmpty;
+            if(isEmpty!=0)
+            {
+                int dummy=0;
+                sum += isEmpty;
+                type2++;
+                //m.msg("fileLength="+Integer.toString(fileLength)+" isEmpty="+Integer.toString(isEmpty)+" sum="+Integer.toString(sum)+" all="+Integer.toString(all)+" diff="+Integer.toString(diff));
+                //m.msg("offsetstart="+Integer.toString(offset)+" offsetend"+Integer.toString(offset+fileLength));
+                //m.msg("test="+Integer.toString(test));
+            }
+            else
+            {
+                type1++;
+            }
+            m.msg("type1="+Integer.toString(type1)+" type2="+Integer.toString(type2));
+            //m.msg(Integer.toString(extOffset));
         }
     }
 }

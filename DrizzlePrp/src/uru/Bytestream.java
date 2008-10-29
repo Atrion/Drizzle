@@ -22,11 +22,16 @@ package uru;
 import java.util.Vector;
 import shared.m;
 import shared.Bytes;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import shared.*;
 /**
  *
  * @author user
  */
-public class Bytestream
+//public class Bytestream implements IBytestream
+public class Bytestream extends IBytestream
 {
     
     //do not change.
@@ -34,12 +39,25 @@ public class Bytestream
     private int minpos;
     private int maxpos;
     //private int length; //fullLength
+    //private boolean serial = false;
+    //private FileInputStream in;
 
     //okay to change.
     private int pos;
     public boolean throwExceptionOnEof = false;
     
-
+    public int getBytesRemaining()
+    {
+        throw new uncaughtexception("Haven't implemented GetBytesRemaining yet.");
+    }
+    public int getFilelength()
+    {
+        throw new uncaughtexception("Haven't implemented GetFileLength yet.");
+    }
+    public IBytestream Fork(long offset)
+    {
+        throw new uncaughtexception("Haven't implemented fork yet.");
+    }
     public Bytestream(byte[] newData)
     {
         
@@ -49,7 +67,7 @@ public class Bytestream
 
         pos = 0;
     }
-    public Bytestream(){};
+    private Bytestream(){};
     public boolean eof()
     {
         return( pos > maxpos );
@@ -66,6 +84,22 @@ public class Bytestream
         
         return result;
     }
+    /*public static Bytestream createSerial(String filename)
+    {
+        Bytestream result = new Bytestream();
+        result.serial = true;
+        File f = new File(filename);
+        if(!f.exists()) throw new shared.uncaughtexception("File doesn't exist:"+filename);
+        try
+        {
+            result.in = new FileInputStream(f);
+        }
+        catch(java.io.FileNotFoundException e)
+        {
+            throw new shared.uncaughtexception("File doesn't exist:"+filename);
+        }
+        return result;
+    }*/
     public Bytestream Fork()
     {
         return new Bytestream(this,pos);
@@ -198,24 +232,6 @@ public class Bytestream
         for(int i=0;i<num;i++)
         {
             result[i] = readByte();
-        }
-        return result;
-    }
-    public byte[][] readMultiDimensionBytes(int num1, int num2)
-    {
-        byte[][] result = new byte[num1][];
-        for(int i=0;i<num1;i++)
-        {
-            result[i] = this.readBytes(num2);
-        }
-        return result;
-    }
-    public int[][] readMultiDimensionInts(int num1, int num2)
-    {
-        int[][] result = new int[num1][];
-        for(int i=0;i<num1;i++)
-        {
-            result[i] = this.readInts(num2);
         }
         return result;
     }

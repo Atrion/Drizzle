@@ -12,6 +12,7 @@ import uru.Bytestream;
 import uru.b;
 import uru.Bytedeque;
 import shared.readexception;
+import shared.IBytestream;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Image
             //int[] extraPixels;
             int[][] extraPixels;
             
-            public Level(Bytestream data, int width, int height, int texelsize) throws readexception
+            public Level(IBytestream data, int width, int height, int texelsize) throws readexception
             {
                 this.width = width;
                 this.height = height;
@@ -150,7 +151,7 @@ public class Image
         {
             byte[] rawdata;
             
-            public Texel(Bytestream data, int texelsize)
+            public Texel(IBytestream data, int texelsize)
             {
                 rawdata = data.readBytes(texelsize);
             }
@@ -261,7 +262,7 @@ public class Image
             }
         }
         
-        public Dxt(Bytestream data, int numLevels, int texwidth, int texheight, byte texelsize) throws readexception
+        public Dxt(IBytestream data, int numLevels, int texwidth, int texheight, byte texelsize) throws readexception
         {
             //e.ensure(texelsize==8); //DXT1
             e.ensure((texwidth&3)==0); //divisible by 4

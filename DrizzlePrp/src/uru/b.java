@@ -114,6 +114,15 @@ public class b
         int result = a | b | c | d;
         return result;
     }
+    public static int BytesToInt32(byte b0, byte b1, byte b2, byte b3)
+    {
+        int a = ByteToInt32(b0)<<0;
+        int b = ByteToInt32(b1)<<8;
+        int c = ByteToInt32(b2)<<16;
+        int d = ByteToInt32(b3)<<24;
+        int result = a | b | c | d;
+        return result;
+    }
     public static short BytesToInt16(byte[] bytes, int startpos)
     {
         int a = ByteToInt32(bytes[startpos+0])<<0;

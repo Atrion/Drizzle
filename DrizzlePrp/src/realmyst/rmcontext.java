@@ -19,24 +19,39 @@
 package realmyst;
 
 //import uru.context;
-import uru.Bytestream;
+import shared.*;
 import shared.readexception;
 import shared.mystobj;
 
-public class rmcontext //extends context
+public class rmcontext extends SerialBytestream
 {
-    Bytestream in;
+    //IBytestream in;
     
-    public rmcontext(Bytestream in2)
+    /*public rmcontext(IBytestream in2)
     {
         this.in = in2;
-    }
-    
-    private rmcontext()
+    }*/
+    /*public rmcontext(String filename)
     {
+        super(filename);
+    }*/
+    static rmcontext _curcontext = new rmcontext();
+    public static rmcontext get()
+    {
+        return _curcontext;
     }
     
-    public rmcontext Fork(int offset)
+    private rmcontext(){}
+    
+    /*public rmcontext Fork()
+    {
+        rmcontext result = new rmcontext();
+        
+        
+        return result;
+    }*/
+    
+    /*public rmcontext Fork(int offset)
     {
         rmcontext result = this.Fork();
         result.in = result.in.Fork(offset);
@@ -49,10 +64,10 @@ public class rmcontext //extends context
         result.in = this.in.Fork();
         
         return result;
-    }
+    }*/
     
     
-    public <T extends mystobj> T[] readVector( Class<T> objclass,int size) throws readexception
+    /*public <T extends mystobj> T[] readVector( Class<T> objclass,int size) throws readexception
     {
         T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, size);
         for(int i=0;i<size;i++)
@@ -130,6 +145,6 @@ public class rmcontext //extends context
         //return "(no info)";
         
         return result;
-    }
+    }*/
     
 }

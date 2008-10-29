@@ -86,7 +86,7 @@ public class generic
         }
         return result;
     }
-    public static <T> T[] makeArray(Class objclass, int length)
+    public static <T> T[] makeArray(Class<T> objclass, int length)
     {
         T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, length);
         return result;
