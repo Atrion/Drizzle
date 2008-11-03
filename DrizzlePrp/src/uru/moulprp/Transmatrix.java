@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import shared.b;
@@ -170,7 +172,7 @@ public strictfp class Transmatrix extends uruobj
             for(int i=0;i<16;i++)
             {
                 if(i%4==0) result += "\n";
-                result += ", "+uru.moulprp.Flt.toString(xmatrix[i]);
+                result += ", "+shared.Flt.toString(xmatrix[i]);
             }
         }
         return result;
@@ -284,7 +286,7 @@ public strictfp class Transmatrix extends uruobj
                     f = j==3?1:0;
                 else
                     f = (float)arr[i][j];
-                int rawflt = Flt.createFromJavaFloat(f).rawdata;
+                int rawflt = Flt.createFromJavaFloat(f).toRawdata();
                 result.xmatrix[i*4+j] = rawflt;
             }
         }
@@ -301,7 +303,7 @@ public strictfp class Transmatrix extends uruobj
             for(int j=0;j<4;j++)
             {
                 float f = (float)rawdata[i][j];
-                int rawflt = Flt.createFromJavaFloat(f).rawdata;
+                int rawflt = Flt.createFromJavaFloat(f).toRawdata();
                 result.xmatrix[i*4+j] = rawflt;
             }
         }

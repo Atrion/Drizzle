@@ -106,13 +106,13 @@ public class x0001Sceneobject extends uruobj
         {
             objectrefs1[i].compile(deque);
         }*/
-        deque.writeVector(objectrefs1);
+        deque.writeVector2(objectrefs1);
         deque.writeInt(count2);
         /*for(int i=0;i<count2;i++)
         {
             objectrefs2[i].compile(deque);
         }*/
-        deque.writeVector(objectrefs2);
+        deque.writeVector2(objectrefs2);
         scenenode.compile(deque);
     }
     /*public Uruobjectref getChildByType(Typeid type)

@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -107,7 +108,7 @@ public class x0054LightInfo extends uruobj
         softvolume.compile(data);
         scenenode.compile(data);
         data.writeInt(count);
-        data.writeArray(visregion);
+        data.writeArray2(visregion);
         
     }
 }

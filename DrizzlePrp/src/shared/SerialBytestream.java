@@ -15,7 +15,7 @@ import shared.*;
 //public class SerialBytestream implements IBytestream
 public class SerialBytestream extends IBytestream
 {
-    String filename;
+    //String sourceName; //was filename
     //FileInputStream in;
     BufferedInputStream in;
     int pos = 0;
@@ -46,7 +46,7 @@ public class SerialBytestream extends IBytestream
     {
         SerialBytestream result = new SerialBytestream();
         //serial = true;
-        result.filename = filename;
+        result.sourceName = filename;
         result.openfile();
         result.skip(offset);
         return result;
@@ -136,16 +136,16 @@ public class SerialBytestream extends IBytestream
     
     private void openfile()
     {
-        File f = new File(filename);
+        File f = new File(sourceName);
         this.filelength = (int)f.length();
-        if(!f.exists()) throw new shared.uncaughtexception("File doesn't exist:"+filename);
+        if(!f.exists()) throw new shared.uncaughtexception("File doesn't exist:"+sourceName);
         try
         {
             this.in = new BufferedInputStream(new FileInputStream(f));
         }
         catch(java.io.FileNotFoundException e)
         {
-            throw new shared.uncaughtexception("File doesn't exist:"+filename);
+            throw new shared.uncaughtexception("File doesn't exist:"+sourceName);
         }
     }
     public IBytestream Fork()
@@ -155,7 +155,7 @@ public class SerialBytestream extends IBytestream
     public IBytestream Fork(long offset)
     {
         SerialBytestream result = new SerialBytestream();
-        result.filename = this.filename;
+        result.sourceName = this.sourceName;
         result.openfile();
         result.skip(offset);
         return result;
@@ -180,10 +180,12 @@ public class SerialBytestream extends IBytestream
         //in.mark(readahead + 1024);
         IBytestream fork = this.Fork();
         
-        String result = "";
+        String result = "\n(source="+this.sourceName+")\n";
         try
         {
-            result = "(pos=0x"+Integer.toHexString(fork.getAbsoluteOffset())+")\nData:\n";
+            result += "(pos=0x"+Integer.toHexString(fork.getAbsoluteOffset())+"="+Integer.toString(fork.getAbsoluteOffset())+")\n";
+            result += "(bytes remaining="+Integer.toString(this.getBytesRemaining())+")\n";
+            result += "Data:\n";
             //if(!( pos + readahead <= maxpos+1 ))
             //{
             //    //this would go past the end of the file.

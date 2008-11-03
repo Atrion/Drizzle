@@ -5,6 +5,7 @@
 
 package deepview;
 
+import shared.Flt;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.event.ListSelectionEvent;

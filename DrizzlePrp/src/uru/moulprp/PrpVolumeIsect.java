@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -99,7 +101,7 @@ public class PrpVolumeIsect extends uruobj
         {
             parent.compile(c);
             c.writeShort(count);
-            c.writeArray(planes);
+            c.writeArray2(planes);
         }
     }
     

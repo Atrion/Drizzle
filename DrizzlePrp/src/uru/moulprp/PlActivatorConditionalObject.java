@@ -45,7 +45,7 @@ public class PlActivatorConditionalObject extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(pickingdetectors);
+        c.writeArray2(pickingdetectors);
     }
     
 }

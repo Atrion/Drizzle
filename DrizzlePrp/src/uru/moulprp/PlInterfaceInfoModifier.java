@@ -46,7 +46,7 @@ public class PlInterfaceInfoModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(logicmodifiers);
+        c.writeArray2(logicmodifiers);
     }
     
 }

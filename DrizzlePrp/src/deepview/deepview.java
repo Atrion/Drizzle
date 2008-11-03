@@ -41,6 +41,7 @@ import uru.moulprp.prputils;
 import shared.Bytes;
 import uru.moulprp.Urustring;
 import uru.moulprp.*;
+import shared.*;
 
 public class deepview
 {
@@ -324,7 +325,7 @@ public class deepview
             panel.add(new dvTransmatrix((Transmatrix)obj,name,this));
             return;
         }
-        else if(objclass==uru.moulprp.Flt.class)
+        else if(objclass==shared.Flt.class)
         {
             panel.add(new dvFlt((Flt)obj,name,this));
             return;

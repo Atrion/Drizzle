@@ -18,6 +18,9 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Quat;
+import shared.Flt;
 import uru.Bytestream;
 import uru.Bytedeque;
 import shared.m;
@@ -342,7 +345,7 @@ public class PrpController extends uruobj
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeArray(keys);
+            c.writeArray2(keys);
         }
     }
     public static class hsPoint3Key extends uruobj
@@ -395,7 +398,7 @@ public class PrpController extends uruobj
         public void compile(Bytedeque c)
         {
             c.writeInt(count);
-            c.writeArray(keys);
+            c.writeArray2(keys);
         }
     }
     public static class plPoint3Controller extends uruobj
@@ -471,7 +474,7 @@ public class PrpController extends uruobj
         {
             c.writeInt(count);
             
-            c.writeArray(keys);
+            c.writeArray2(keys);
         }
     }
     public static class plScalarController extends uruobj
@@ -764,7 +767,7 @@ public class PrpController extends uruobj
             {
                 c.writeInt(u1);
                 c.writeInt(count);
-                c.writeArray(easecontrollers);
+                c.writeArray2(easecontrollers);
                 c.writeInt(garbage);
             }
             else

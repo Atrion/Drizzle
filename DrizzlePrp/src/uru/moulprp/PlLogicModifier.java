@@ -59,7 +59,7 @@ public class PlLogicModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(conditionalcount);
-        c.writeArray(conditionals);
+        c.writeArray2(conditionals);
         c.writeInt(u1);
     }
     

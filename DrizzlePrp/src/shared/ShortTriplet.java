@@ -16,8 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
+package shared;
 
+import uru.moulprp.*;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
@@ -28,9 +29,9 @@ import uru.context; import shared.readexception;
  */
 public class ShortTriplet extends uruobj
 {
-    short p;
-    short q;
-    short r;
+    public short p;
+    public short q;
+    public short r;
 
     public ShortTriplet(context c)
     {
@@ -38,7 +39,15 @@ public class ShortTriplet extends uruobj
         q = c.readShort();
         r = c.readShort();
     }
-    
+    private ShortTriplet(){}
+    public static ShortTriplet createFromShorts(short p, short q, short r)
+    {
+        ShortTriplet result = new ShortTriplet();
+        result.p = p;
+        result.q = q;
+        result.r = r;
+        return result;
+    }
     public void compile(Bytedeque data)
     {
         data.writeShort(p);

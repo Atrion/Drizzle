@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -53,7 +54,7 @@ public class x00A4ExcludeRegionModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(safepoints);
+        c.writeArray2(safepoints);
         c.writeByte(seek);
         seektime.compile(c);
     }

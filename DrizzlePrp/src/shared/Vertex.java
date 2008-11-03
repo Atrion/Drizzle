@@ -16,8 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
+package shared;
 
+import uru.moulprp.*;
+import shared.Flt;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
@@ -27,11 +29,18 @@ import shared.readexception;
  *
  * @author user
  */
-public strictfp class Vertex extends uruobj
+public strictfp class Vertex extends uruobj implements ICompilable
 {
-    Flt x;
-    Flt y;
-    Flt z;
+    public Flt x;
+    public Flt y;
+    public Flt z;
+    
+    public Vertex(IBytestream c)
+    {
+        x = new Flt(c);
+        y = new Flt(c);
+        z = new Flt(c);
+    }
     
     public Vertex(context c) throws readexception
     {
@@ -62,7 +71,11 @@ public strictfp class Vertex extends uruobj
         result.z = Flt.createFromJavaFloat(z);
         return result;
     }
-    public void compile(Bytedeque data)
+    public static Vertex createFromFlts(Flt x, Flt y, Flt z)
+    {
+        return new Vertex(x,y,z);
+    }
+    public void compile(IBytedeque data)
     {
         x.compile(data);
         y.compile(data);
@@ -119,9 +132,9 @@ public strictfp class Vertex extends uruobj
     }
     public String toString()
     {
-        return x.toString()
-                +":"+y.toString()
-                +":"+z.toString();
+        //return x.toString()               +":"+y.toString()                +":"+z.toString();
+        String s = "  ";
+        return "("+x.toString()+s+y.toString()+s+z.toString()+")";
     }
 
 }

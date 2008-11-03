@@ -46,7 +46,7 @@ public class PlSoftVolumeUnion extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
     }
     
 }

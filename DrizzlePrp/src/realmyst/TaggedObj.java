@@ -23,20 +23,34 @@ import shared.*;
 public class TaggedObj
 {
     Typeid type;
-    X5c3e0f00 x1;
+    //X5c3e0f00 x1;
+    Object val;
     
     public TaggedObj(IBytestream c)
     {
         type = Typeid.read(c);
-        
+        val = readwithtype(type,c);
+
+    }
+
+    public static Object readwithtype(Typeid type, IBytestream c)
+    {
         switch(type)
         {
-            case x5c3e0f00:
-                x1 = new X5c3e0f00(c);
-                break;
+            //case occref:
+            //    x1 = new X5c3e0f00(c);
+            //    break;
+            case ref:
+                return new Count9.Ref1(c);
+            case ref2:
+                return new Count9.Ref2(c);
+            case occref:
+                return new Count10.occref.suboccref(c);
+            case count9ref:
+                return new Count9.Subref2(c);
             default:
                 m.err("Unhandled type in TaggedObj.");
-                break;
+                return null;
         }
     }
 }

@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -163,14 +164,14 @@ public class PlDrawableSpans extends uruobj
         data.writeInt(zbias);
         data.writeInt(blendflags);
         data.writeInt(matcount);
-        data.writeArray(materials);
+        data.writeArray2(materials);
         data.writeInt(subsetcount);
-        data.writeArray(subsets);
+        data.writeArray2(subsets);
         data.writeInt(unused);
         data.writeInt(listcount);
         data.writeInts(unused2);
         //data.writeBytes(unused3);
-        data.writeArray(unused3);
+        data.writeArray2(unused3);
         if(subsetcount>0)
         {
             //data.writeArray(xboundingBoxes);
@@ -180,14 +181,14 @@ public class PlDrawableSpans extends uruobj
         }
         lightinfos.compile(data);
         data.writeInt(matrixsetcount);
-        data.writeArray(localToWorlds);
-        data.writeArray(worldToLocals);
-        data.writeArray(localToBones);
-        data.writeArray(boneToLocals);
+        data.writeArray2(localToWorlds);
+        data.writeArray2(worldToLocals);
+        data.writeArray2(localToBones);
+        data.writeArray2(boneToLocals);
         data.writeInt(subsetgroupcount);
-        data.writeArray(subsetgroups);
+        data.writeArray2(subsetgroups);
         data.writeInt(meshcount);
-        data.writeArray(meshes);
+        data.writeArray2(meshes);
         //TODO: remove next line, it's a hack.
         //embeddedtype = Typeid.nil;
         embeddedtype.compile(data);

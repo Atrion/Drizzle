@@ -47,7 +47,7 @@ public class e
     {
         for(int i=0; i<options.length; i++)
         {
-            if(a==options[i]) return;
+            if(a.equals(options[i])) return;
         }
         m.warn("ensure: element is not in set.");
     }

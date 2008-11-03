@@ -29,6 +29,8 @@ public abstract class IBytestream
     abstract public int getFilelength();
     abstract public int getBytesRemaining();
     
+    public String sourceName = "";
+    
     public <T> Vector<T> readVector( Class<T> objclass, int size)
     {
         Vector<T> result = new Vector<T>();
@@ -56,17 +58,17 @@ public abstract class IBytestream
         }
         catch(java.lang.NoSuchMethodException e)
         {
-            throw new uncaughtexception("SerialBytestream: java gunk: unable to create new instance.");
+            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.InstantiationException e)
         {
-            throw new uncaughtexception("SerialBytestream: java gunk: unable to create new instance.");
+            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.IllegalAccessException e)
         {
-            throw new uncaughtexception("SerialBytestream: java gunk: unable to create new instance.");
+            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.reflect.InvocationTargetException e)
@@ -80,7 +82,7 @@ public abstract class IBytestream
             }
             else
             {
-                throw new uncaughtexception("Bytestream: java gunk: unable to create new instance.");
+                throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
                 //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
             }
         }

@@ -42,20 +42,24 @@ public class Sceneobject
         }
         if((u1 & 0x200)!=0)
         {
+            //ref thing?
             int dummy=0;
         }
         if((u1 & 0x1000)!=0)
         {
+            //ref thing?
             //offset 56 is set
             int dummy=0;
         }
         if((u1 & 0x400)!=0)
         {
+            //int then array of ref things
             //offset 60 is set
             int count = c.readInt();
         }
         if((u1 & 0x10)!=0)
         {
+            //xform state, a matrix?  the standard header(short,short,int) followed by 16 floats.
             int dummy=0;
             
         }
@@ -66,7 +70,7 @@ public class Sceneobject
         }
         if((u1 & 0x100)!=0)
         {
-            
+            //int, then array of whatever sub_5459d0 reads (it inherits from the main object, it just isn't named)
             int dummy=0;
         }
     }

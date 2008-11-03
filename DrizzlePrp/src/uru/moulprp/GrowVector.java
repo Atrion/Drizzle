@@ -91,7 +91,7 @@ public class GrowVector<T extends uruobj> extends uruobj
             data.writeInt(count);
             if(count > 0)
             {
-                data.writeArray(elements);
+                data.writeArray2(elements);
             }
         }
     }

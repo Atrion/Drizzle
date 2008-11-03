@@ -18,6 +18,7 @@
 
 package realmyst;
 
+import shared.Ntstring;
 import shared.e;
 import shared.b;
 import java.util.Vector;

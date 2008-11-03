@@ -18,6 +18,10 @@
 
 package uru.moulprp;
 
+import shared.ShortTriplet;
+import shared.Vertex;
+import shared.Quat;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -859,7 +863,7 @@ public class PlHKPhysical extends uruobj
         {
             parent.compile(c);
             c.writeInt(facecount);
-            c.writeArray(faces);
+            c.writeArray2(faces);
         }
         public void transformVertices(Transmatrix m)
         {

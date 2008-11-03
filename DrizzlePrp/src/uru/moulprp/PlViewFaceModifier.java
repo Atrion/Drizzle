@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;

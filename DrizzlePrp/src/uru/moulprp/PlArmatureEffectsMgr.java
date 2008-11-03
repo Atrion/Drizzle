@@ -43,7 +43,7 @@ public class PlArmatureEffectsMgr extends uruobj
     public void compile(Bytedeque c)
     {
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
     }
     
 }

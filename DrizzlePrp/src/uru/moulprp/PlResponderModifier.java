@@ -54,7 +54,7 @@ public class PlResponderModifier extends uruobj
     {
         parent.compile(c);
         c.writeByte(count);
-        c.writeArray(messages);
+        c.writeArray2(messages);
         c.writeByte(state);
         c.writeByte(enabled);
         c.writeByte(flags);

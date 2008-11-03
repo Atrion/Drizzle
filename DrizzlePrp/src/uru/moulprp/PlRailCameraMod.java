@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -74,7 +75,7 @@ public class PlRailCameraMod extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         c.writeInt(u2);
         if(((u2)&0x60000)!=0)
         {

@@ -90,7 +90,7 @@ public class PlAGMasterMod extends uruobj
         parent.compile(c);
         u2.compile(c);
         c.writeInt(count);
-        c.writeArray(ATCAnim);
+        c.writeArray2(ATCAnim);
         //skip the last part, which is moul-only.
     }
 }

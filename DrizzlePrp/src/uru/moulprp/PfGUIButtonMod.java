@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -77,10 +79,10 @@ public class PfGUIButtonMod extends uruobj
     {
         parent.compile(c);
         c.writeInt(refcount);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         str.compile(c);
         c.writeInt(refcount2);
-        c.writeArray(refs2);
+        c.writeArray2(refs2);
         str2.compile(c);
 
         //these next 2 lines are justified by the fact that they are usually 0, and I couldn't see a relation between them and the new flags.
@@ -121,7 +123,7 @@ public class PfGUIButtonMod extends uruobj
             ref.compile(c);
             c.writeBytes(bs1);
             c.writeInt(refcount);
-            c.writeArray(refs);
+            c.writeArray2(refs);
             c.writeInt(u1);
             ref2.compile(c);
             c.writeInt(u2);
@@ -207,7 +209,7 @@ public class PfGUIButtonMod extends uruobj
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeArray(refs);
+            c.writeArray2(refs);
             str.compile(c);
             v1.compile(c);
             v2.compile(c);

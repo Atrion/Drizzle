@@ -23,7 +23,7 @@ import java.io.File;
 import uru.moulprp.PrpRootObject;
 import uru.moulprp.prputils;
 import uru.moulprp.Uruobjectref;
-import uru.moulprp.Flt;
+import shared.Flt;
 import uru.moulprp.Rgba;
 import shared.State.AllStates;
 import uru.moulprp.Urustring;

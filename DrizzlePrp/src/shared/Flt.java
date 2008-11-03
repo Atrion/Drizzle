@@ -16,21 +16,33 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
+package shared;
 
+import uru.moulprp.*;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
 import shared.m;
 
 //just a Float, but I shouldn't use that name, since java uses it.
-strictfp public class Flt extends uruobj
+strictfp public class Flt extends uruobj implements ICompilable
 {
     int rawdata;
     
-    public Flt(context c)
+    
+    public Flt(context c) //legacy, deprecated.
     {
         rawdata = c.in.readInt();
+        if(this.approxequals((float)190.0352, (float)0.01))
+        {
+            int dummy=0;
+        }
+    }
+    
+    public Flt(IBytestream c)
+    {
+        //rawdata = c.in.readInt();
+        rawdata = c.readInt();
         if(this.approxequals((float)190.0352, (float)0.01))
         {
             int dummy=0;
@@ -86,7 +98,11 @@ strictfp public class Flt extends uruobj
     {
         this.rawdata = Float.floatToRawIntBits((float)f);
     }*/
-    public void compile(Bytedeque deque)
+    public int toRawdata()
+    {
+        return this.rawdata;
+    }
+    public void compile(IBytedeque deque)
     {
         deque.writeInt(rawdata);
     }

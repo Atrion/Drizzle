@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -71,7 +72,7 @@ public class PlLineFollowMod extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         c.writeInt(flags);
         if((flags&0x060000)!=0)
         {

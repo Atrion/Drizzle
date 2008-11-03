@@ -44,6 +44,14 @@ public class m
         public boolean showErrorMessages = true;
         public boolean showConsoleMessages = true;
         public boolean showStatusMessages = true;
+        public boolean writeToFile = false;
+        public String filename;
+        
+        public stateclass()
+        {
+            this.filename = FileUtils.GetInitialWorkingDirectory()+"/Drizzle.output.txt";
+        }
+        
         public stateclass clone() //used for shallow clone, if you want.
         {
             stateclass result = new stateclass();
@@ -52,6 +60,8 @@ public class m
             result.showErrorMessages = this.showErrorMessages;
             result.showStatusMessages = this.showStatusMessages;
             result.showWarningMessages = this.showWarningMessages;
+            result.writeToFile = this.writeToFile;
+            result.filename = this.filename;
             return result;
         }
     }
@@ -147,6 +157,11 @@ public class m
             
         }
         
+        if(state.curstate.writeToFile)
+        {
+            FileUtils.AppendText(state.curstate.filename, s+"\n");
+        }
+
         String[] trapmessages = {"compile not implemented"};
         for(int i=0;i<trapmessages.length;i++)
         {

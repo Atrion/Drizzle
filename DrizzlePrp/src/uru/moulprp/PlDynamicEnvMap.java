@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -63,7 +65,7 @@ public class PlDynamicEnvMap extends uruobj
         c.writeArray(u3);
         c.writeByte(u4);
         c.writeInt(refcount);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         //skip this next block, since it's moul-only.
         /*if(c.readversion==6)
         {

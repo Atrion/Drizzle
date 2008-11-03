@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -104,7 +105,7 @@ public class PlATCAnim extends uruobj
         u12.compile(c);
         u13.compile(c);
         c.writeInt(count1);
-        c.writeArray(u14);
+        c.writeArray2(u14);
         c.writeInt(count2);
         for(int i=0;i<count2;i++)
         {

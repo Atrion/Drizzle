@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -103,7 +104,7 @@ public class PlLimitedDirLightInfo extends uruobj
             softvolume.compile(c);
             scenenode.compile(c);
             c.writeInt(count);
-            c.writeArray(visRegion);
+            c.writeArray2(visRegion);
         }
     }
 }

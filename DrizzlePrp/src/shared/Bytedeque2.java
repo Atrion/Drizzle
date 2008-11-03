@@ -30,7 +30,7 @@ import uru.moulprp.Uruobjectdesc;
  *
  * @author user
  */
-public class Bytedeque2
+public class Bytedeque2 extends IBytedeque
 {
     ArrayDeque<byte[]> deque = new ArrayDeque<byte[]>();
     private int curpos = 0;
@@ -208,5 +208,10 @@ public class Bytedeque2
     public Bytes getBytes()
     {
         return new Bytes(getAllBytes());
+    }
+    public IBytedeque Fork()
+    {
+        Bytedeque2 result = new Bytedeque2();
+        return result;
     }
 }

@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import shared.m;
 import shared.readexception;
@@ -578,7 +580,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeArray(callbacks);
+            c.writeArray2(callbacks);
         }
         
         public static class PlOneShotCallback extends uruobj
@@ -828,7 +830,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parent.compile(c);
             c.writeInt(count);
-            c.writeArray(callbacks);
+            c.writeArray2(callbacks);
         }
     }
     public static class PlSoundMsg extends uruobj
@@ -926,7 +928,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             parentobj.compile(c);
             c.writeInt(refcount);
-            c.writeArray(refs);
+            c.writeArray2(refs);
             c.writeInt(u1);
             c.writeInt(u2);
             c.writeInt(flags);

@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -71,9 +73,9 @@ public class PlDynaDecalMgr extends uruobj
         ref1.compile(c);
         ref2.compile(c);
         c.writeInt(count1);
-        c.writeArray(refs1);
+        c.writeArray2(refs1);
         c.writeInt(count2);
-        c.writeArray(refs2);
+        c.writeArray2(refs2);
         c.writeInt(u1);
         c.writeInt(u2);
         c.writeInt(u3);
@@ -81,7 +83,7 @@ public class PlDynaDecalMgr extends uruobj
         u4.compile(c);
         u5.compile(c);
         c.writeInt(count3);
-        c.writeArray(refs3);
+        c.writeArray2(refs3);
     }
     
 }

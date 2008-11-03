@@ -21,6 +21,18 @@ public class Sdb
     
     public Sdb(IBytestream c)
     {
+        String filename=
+                //"113499986.vdb"
+                //"14341445.vdb"
+                "45043.vdb"
+                ;
+        if(c.sourceName.toLowerCase().endsWith(filename.toLowerCase()))
+        {
+            int dummy=0;
+        }
+        
+        boolean ignore = true;
+        
         tag = c.readInt();
         if(tag==0x02000000)
         {
@@ -46,32 +58,106 @@ public class Sdb
             
             //if(true)return;
             
-            //hsObjectGroup
+            //hsObjectGroup (sub_46c140)
             int tag2 = c.readInt(); //should actually be a reverse int.
             if(tag2!=0x9469DF4E)
             {
-                throw new uncaughtexception("Unhandled tag.");
+                ignore = false;
+                throw new ignore("Unhandled tag.");
             }
             ReverseInt two = new ReverseInt(c); e.ensure(two.convertToInt()==2);
             int six = c.readInt();  e.ensure(six==6);
             int u8 = c.readInt(); //v6
             if(u8!=0)
             {
-                throw new uncaughtexception("Unhandled.");
+                ignore = false;
+                throw new ignore("Unhandled.");
             }
             int count = c.readInt(); //v65
             Bstr[] morestrs = c.readArray(Bstr.class, count);
             int count2 = c.readInt(); //v69
             if(count2!=0)
             {
-                throw new uncaughtexception("Unhandled.");
+                ignore = false;
+                throw new ignore("Unhandled.");
             }
             int count3 = c.readInt(); //v72
             if(count3!=0)
             {
-                throw new uncaughtexception("Unhandled.");
+                ignore = false;
+                throw new ignore("Unhandled.");
             }
-            else
+
+            //new try:
+            int hasThing = c.readInt();
+            if(hasThing!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int count4 = c.readInt(); //v78
+            if(count4!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int u10 = c.readInt(); //stored at offset 148
+            int u11 = c.readInt(); //v15
+            if(u11!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int count5 = c.readInt(); //v84
+            if(count5!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int count6 = c.readInt(); //v86
+            if(count6!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int count7 = c.readInt(); //v91
+            if(count7!=0)
+            {
+                ignore = false;
+                throw new ignore("Unhandled.");
+            }
+            int count8 = c.readInt(); //v96
+            if(count8!=0)
+            {
+                ignore = false;
+                throw new ignore("unhandled.");
+            }
+            int count9 = c.readInt(); //v101
+            if(count9!=0)
+            {
+                ignore = false;
+                if(ignore) throw new ignore("unhandled.");
+                Count9[] c9s = c.readArray(Count9.class, count9);
+            }
+            int count10 = c.readInt(); //v107
+            if(count10!=0)
+            {
+                //m.err("unhandled.");
+                //ignore = false;
+                if(ignore) throw new ignore("unhandled.");
+                Count10[] u1s = c.readArray(Count10.class, count10);
+            }
+            int count11 = c.readInt(); //result
+            if(count11!=0)
+            {
+                if(ignore) throw new ignore("unhandled.");
+                m.msg("count11:"+c.sourceName);
+                //throw new uncaughtexception("unhandled.");
+                Count11[] c11s = c.readArray(Count11.class, count11);
+            }
+            
+            //old try:
+            /*else
             {
                 int hasThing = c.readInt();
                 if(hasThing!=0)
@@ -130,15 +216,17 @@ public class Sdb
                                         if(count10!=0)
                                         {
                                             //m.err("unhandled.");
-                                            if(true) throw new uncaughtexception("unhandled.");
-                                            U1[] u1s = c.readArray(U1.class, count10);
+                                            //if(true) throw new uncaughtexception("unhandled.");
+                                            Count10[] u1s = c.readArray(Count10.class, count10);
                                         }
                                         else
                                         {
                                             int count11 = c.readInt(); //result
                                             if(count11!=0)
                                             {
-                                                throw new uncaughtexception("unhandled.");
+                                                m.msg("count11:"+c.sourceName);
+                                                //throw new uncaughtexception("unhandled.");
+                                                Count11[] c11s = c.readArray(Count11.class, count11);
                                             }
                                         }
                                     }
@@ -148,7 +236,7 @@ public class Sdb
                     }
                     
                 }
-            }
+            }*/
             
             //Sceneobject so = new Sceneobject(c);
             

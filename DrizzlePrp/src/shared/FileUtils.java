@@ -36,9 +36,23 @@ import java.nio.channels.FileChannel;
 public class FileUtils {
     
     //only properly handles files less than 4GB.
+    
+    private static String initialWorkingDirectory; //you may have to call some function in FileUtils on startup for this to be correct.
+    
+    static
+    {
+        initialWorkingDirectory = GetPresentWorkingDirectory();
+    }
+    
+    public static String GetInitialWorkingDirectory()
+    {
+        return initialWorkingDirectory;
+    }
+    
     public static String GetPresentWorkingDirectory()
     {
-        return new File(".").getPath();
+        //return new File(".").getPath();
+        return new File(".").getAbsolutePath();
     }
     public static void DeleteFile(String filename)
     {

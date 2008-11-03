@@ -91,7 +91,7 @@ public class x00A2Pythonfilemod extends uruobj
         {
             listings[i].compile(deque);
         }*/
-        deque.writeVector(listings);
+        deque.writeVector2(listings);
     }
     public void addListing(Pythonlisting listing)
     {

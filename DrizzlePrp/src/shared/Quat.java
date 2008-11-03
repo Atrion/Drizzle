@@ -16,8 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */ 
 
-package uru.moulprp;
+package shared;
 
+import uru.moulprp.*;
+import shared.Flt;
 import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
@@ -29,12 +31,19 @@ import shared.m;
  */
 public class Quat extends uruobj
 {
-    Flt w;
-    Flt x;
-    Flt y;
-    Flt z;
+    public Flt w;
+    public Flt x;
+    public Flt y;
+    public Flt z;
 
-    public Quat(context c)
+    public Quat(IBytestream c)
+    {
+        w = new Flt(c);
+        x = new Flt(c);
+        y = new Flt(c);
+        z = new Flt(c);
+    }
+    public Quat(context c) //deprecated
     {
         //These looked different, but changing it messed up the angle of the door in EderDelin.
         //m.msg("scrambling quat.");

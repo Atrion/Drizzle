@@ -574,6 +574,7 @@ public class Gui extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jButton103 = new javax.swing.JButton();
         jButton104 = new javax.swing.JButton();
+        jButton106 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -1014,7 +1015,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(textfieldState5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton53)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         tabsState2.addTab("Crowthistle", jPanel14);
@@ -1370,7 +1371,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(82, Short.MAX_VALUE))
+                    .addContainerGap(106, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -1532,7 +1533,7 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel23Layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addComponent(jButton99)))
-                        .addContainerGap(47, Short.MAX_VALUE))
+                        .addContainerGap(71, Short.MAX_VALUE))
                 );
 
                 tabsState2.addTab("tab8", jPanel23);
@@ -1550,7 +1551,7 @@ public class Gui extends javax.swing.JFrame {
                     jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                 );
 
@@ -2433,6 +2434,15 @@ public class Gui extends javax.swing.JFrame {
                 });
                 jPanel10.add(jButton104);
                 jButton104.setBounds(260, 120, 44, 36);
+
+                jButton106.setText("mdb test");
+                jButton106.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton106ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton106);
+                jButton106.setBounds(330, 120, 72, 36);
 
                 tabsState3.addTab("realMyst", jPanel10);
 
@@ -3913,6 +3923,7 @@ private void jButton103ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton102ActionPerformed
     String filename = this.textfieldState25.getText();
+    m.state.curstate.writeToFile = true;
     File f = new File(filename);
     shared.IBytestream bs = shared.SerialBytestream.createFromFilename(filename);
     realmyst.Hsm hsm;
@@ -3947,6 +3958,10 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     {
         m.msg("It's just a text file.");
     }
+    else if(filename.toLowerCase().endsWith(".beh"))
+    {
+        m.err("Haven't implemented .beh parsing.");
+    }
     //realmyst.Idx idx = new realmyst.Idx(bs);
     //realmyst.SceneObject so = new realmyst.SceneObject(bs);
     //realmyst.Sdb mdb = new realmyst.Sdb(bs);
@@ -3955,6 +3970,7 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton104ActionPerformed
     String outfol = this.textfieldState24.getText();
+    m.state.curstate.writeToFile = true;
     
     File f = new File(outfol+"/sdb");
     for(File child: f.listFiles())
@@ -3979,7 +3995,7 @@ private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 }
                 int dummy=0;
             }
-            catch(Exception e)
+            catch(shared.ignore e)
             {
                 m.warn("Error so skipping file.");
             }
@@ -4019,6 +4035,43 @@ private void jButton105ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     String search = this.textfieldState28.getText();
     checker.nettimer.timer(address, timer2, search);
 }//GEN-LAST:event_jButton105ActionPerformed
+
+private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton106ActionPerformed
+    String outfol = this.textfieldState24.getText();
+    m.state.curstate.writeToFile = true;
+    
+    File f = new File(outfol+"/mdb");
+    for(File child: f.listFiles())
+    {
+        if(child.getName().toLowerCase().endsWith(".vdb"))
+        {
+            try
+            {
+                int fs = (int)child.length();
+                shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+                realmyst.Mdb mdb = new realmyst.Mdb(bs);
+                int offset = bs.getAbsoluteOffset();
+                int bytesleft = bs.getBytesRemaining();
+
+                //if (mdb.filesizeMinusHeader!=fs-offset)
+                //{
+                //    int dummy=0;
+                //}
+                if(bytesleft!=0)
+                {
+                    int dummy=0;
+                }
+                int dummy=0;
+            }
+            catch(shared.ignore e)
+            {
+                m.warn("Error so skipping file.");
+            }
+        }
+    }
+    
+
+}//GEN-LAST:event_jButton106ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4088,6 +4141,7 @@ private void jButton105ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton103;
     private javax.swing.JButton jButton104;
     private javax.swing.JButton jButton105;
+    private javax.swing.JButton jButton106;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;

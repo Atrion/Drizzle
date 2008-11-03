@@ -50,6 +50,6 @@ public class x00AESittingModifier extends uruobj
         parent.compile(data);
         data.writeByte(u1);
         data.writeInt(count);
-        data.writeArray(references);
+        data.writeArray2(references);
     }
 }

@@ -22,12 +22,13 @@ import uru.Bytedeque;
 import uru.Bytestream;
 import shared.m;
 import shared.mystobj;
+import shared.ICompilable;
 
 /**
  *
  * @author user
  */
-abstract public class uruobj extends mystobj implements compilable
+abstract public class uruobj extends mystobj implements compilable//, ICompilable
 {
     //public uruobj()
     //{

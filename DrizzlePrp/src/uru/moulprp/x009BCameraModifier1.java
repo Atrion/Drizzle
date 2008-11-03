@@ -18,6 +18,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -95,15 +96,15 @@ public class x009BCameraModifier1 extends uruobj
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        c.writeArray(messageQueue);
-        c.writeArray(messageQueueSenders);
+        c.writeArray2(messageQueue);
+        c.writeArray2(messageQueueSenders);
         
         c.writeInt(count3);
         /*if(count3!=0)
         {
             m.err("plCameraModifier1: I can't actually handle any messages, yet.");
         }*/
-        c.writeArray(FOVInstructions);
+        c.writeArray2(FOVInstructions);
         
         c.writeByte(animated);
         c.writeByte(startAnimOnPush);

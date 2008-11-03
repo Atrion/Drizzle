@@ -5,6 +5,7 @@
 
 package automation;
 
+import shared.Flt;
 import uru.moulprp.*;
 import shared.m;
 import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
@@ -224,8 +225,10 @@ public class myst5Fixes
             PlRandomSoundMod rsm = prp.findObject("cSfxRndThunder", Typeid.plRandomSoundMod).castTo();
             rsm.parent.state = 0; //turn it on
             rsm.parent.mode = 3; //must disable the kOneCmd
+            //rsm.parent.minDelay = Flt.createFromJavaFloat(4); //just picked a number.
+            //rsm.parent.maxDelay = Flt.createFromJavaFloat(30); //just picked a number.
             rsm.parent.minDelay = Flt.createFromJavaFloat(4); //just picked a number.
-            rsm.parent.maxDelay = Flt.createFromJavaFloat(30); //just picked a number.
+            rsm.parent.maxDelay = Flt.createFromJavaFloat(20); //just picked a number.
             
             //PlRandomSoundMod rs2 = prp.findObject("cSfxRandomCreaks", Typeid.plRandomSoundMod).castTo();
             //rs2.parent.state = 0;

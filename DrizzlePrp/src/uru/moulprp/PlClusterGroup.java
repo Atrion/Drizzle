@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -130,7 +132,7 @@ public class PlClusterGroup extends uruobj
         int C = b.Int16ToInt32(fNumTris);
         int X = this.CalcStride(fFormat);
         //c.writeBytes(fData);
-        c.writeArray(fData2);
+        c.writeArray2(fData2);
         //c.writeBytes(fIndices);
         c.writeShorts(fIndices);
 

@@ -47,7 +47,7 @@ public class PlAnimEventModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         emb.compile(c);
     }
     

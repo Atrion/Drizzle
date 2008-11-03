@@ -5,6 +5,7 @@
 
 package uru.moulprp;
 
+import shared.Flt;
 import shared.m;
 import uru.moulprp.uruobj;
 import shared.readexception;

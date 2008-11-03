@@ -41,7 +41,7 @@ public class Bytedeque extends shared.Bytedeque2
     {
         object.compile(this);
     }
-    public <T extends mystobj> void writeArray(T[] vector)
+    public <T extends mystobj> void writeArray2(T[] vector)
     {
         int length = vector.length;
         for(int i=0;i<length;i++)
@@ -49,7 +49,7 @@ public class Bytedeque extends shared.Bytedeque2
             vector[i].compile(this);
         }
     }
-    public <T extends mystobj> void writeVector(Vector<T> vector)
+    public <T extends mystobj> void writeVector2(Vector<T> vector)
     {
         //int length = vector.length;
         int length = vector.size();

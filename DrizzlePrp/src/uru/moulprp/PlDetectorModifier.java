@@ -50,7 +50,7 @@ public class PlDetectorModifier extends uruobj
     {
         parent.compile(c);
         c.writeInt(count);
-        c.writeArray(refs);
+        c.writeArray2(refs);
         ref2.compile(c);
         ref3.compile(c);
     }

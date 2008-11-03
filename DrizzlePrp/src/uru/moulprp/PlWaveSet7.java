@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -69,9 +71,9 @@ public class PlWaveSet7 extends uruobj
         u1.compile(c);
         sub1.compile(c);
         c.writeInt(refcount1);
-        c.writeArray(refs1);
+        c.writeArray2(refs1);
         c.writeInt(refcount2);
-        c.writeArray(refs2);
+        c.writeArray2(refs2);
         ref3.compile(c);
         
         if(parent.count!=0)

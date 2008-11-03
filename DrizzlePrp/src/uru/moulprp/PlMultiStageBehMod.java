@@ -58,9 +58,9 @@ public class PlMultiStageBehMod extends uruobj
         c.writeByte(u2);
         c.writeByte(u3);
         c.writeInt(count1);
-        c.writeArray(animStages);
+        c.writeArray2(animStages);
         c.writeInt(count2);
-        c.writeArray(refs);
+        c.writeArray2(refs);
     }
     
     public static class plAnimStage extends uruobj

@@ -18,6 +18,8 @@
 
 package uru.moulprp;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -109,10 +111,10 @@ public class PlOccluder extends uruobj
         
         f1.compile(c);
         c.writeShort(counta);
-        c.writeArray(blocks);
+        c.writeArray2(blocks);
         scenenode.compile(c);
         c.writeShort(countd);
-        c.writeArray(visRegion);
+        c.writeArray2(visRegion);
     }
     
     public static class plCullPoly extends uruobj//was SubOccluder
