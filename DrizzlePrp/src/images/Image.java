@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package uru.moulprp;
+package images;
 
 import shared.Bytes;
 import shared.e;
@@ -13,6 +13,7 @@ import shared.b;
 import uru.Bytedeque;
 import shared.readexception;
 import shared.IBytestream;
+import shared.IBytedeque;
 
 /**
  *
@@ -22,23 +23,23 @@ public class Image
 {
     public static class Dxt
     {
-        Level[] levels;
-        int numLevels;
-        int texwidth;
-        int texheight;
-        byte texelsize;
+        public Level[] levels;
+        public int numLevels;
+        public int texwidth;
+        public int texheight;
+        public byte texelsize;
         
         public static class Level
         {
-            Texel[][] texels;
+            public Texel[][] texels;
             
-            int numTexelsWide;
-            int numTexelsHigh;
-            int width;
-            int height;
+            public int numTexelsWide;
+            public int numTexelsHigh;
+            public int width;
+            public int height;
             
             //int[] extraPixels;
-            int[][] extraPixels;
+            public int[][] extraPixels;
             
             public Level(IBytestream data, int width, int height, int texelsize) throws readexception
             {
@@ -127,7 +128,7 @@ public class Image
                 }
             }
             
-            public void compile(Bytedeque c)
+            public void compile(IBytedeque c)
             {
                 if(texels==null)
                 {
@@ -256,7 +257,7 @@ public class Image
                 }
             }
             
-            public void compile(Bytedeque c)
+            public void compile(IBytedeque c)
             {
                 c.writeBytes(rawdata);
             }
@@ -323,7 +324,7 @@ public class Image
             }
         }
         
-        public void compile(Bytedeque c)
+        public void compile(IBytedeque c)
         {
             for(int curLevel=0;curLevel<numLevels;curLevel++)
             {

@@ -33,4 +33,19 @@ public abstract class IBytedeque
             vector.get(i).compile(this);
         }
     }
+    public void writeInts(int[] ints)
+    {
+        for(int i=0;i<ints.length;i++)
+        {
+            writeInt(ints[i]);
+        }
+    }
+    public void writeMultiDimensionInts(int[][] data)
+    {
+        for(int i=0;i<data.length;i++)
+        {
+            this.writeInts(data[i]);
+        }
+    }
+    
 }

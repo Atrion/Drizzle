@@ -12,6 +12,27 @@ import java.util.Vector;
 
 public class realmyst
 {
+    public static void saveDdsFiles(Vector<Hsm> hsms, String outfolder)
+    {
+        for(Hsm hsm: hsms)
+        {
+            int compressionType = hsm.getCompressionType();
+            if(compressionType==0)
+            {
+                IBytedeque out = new Bytedeque2();
+                images.dds.createFromUncompressed(out, hsm.xagrb, hsm.widthMaybe, hsm.heightMaybe);
+                byte[] outdata = out.getAllBytes();
+                FileUtils.WriteFile(outfolder+"/"+hsm.name+".dds", outdata);
+            }
+            else if(compressionType==1 || compressionType==5)
+            {
+                IBytedeque out = new Bytedeque2();
+                images.dds.createFromDxt(out, hsm.dxt);
+                byte[] outdata = out.getAllBytes();
+                FileUtils.WriteFile(outfolder+"/"+hsm.name+".dds", outdata);
+            }
+        }
+    }
     public static void save3dsFile(Vector<Mdb> mdbs)
     {
         Primary main = Primary.createNull();

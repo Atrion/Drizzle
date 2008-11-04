@@ -3957,7 +3957,7 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     realmyst.Shp shp;
     if(filename.toLowerCase().endsWith(".hsm"))
     {
-        hsm = new realmyst.Hsm(bs);
+        hsm = new realmyst.Hsm(bs,f.getName());
     }
     else if(filename.toLowerCase().endsWith(".idx"))
     {
@@ -4136,7 +4136,7 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             {
                 int fs = (int)child.length();
                 shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
-                realmyst.Hsm hsm = new realmyst.Hsm(bs);
+                realmyst.Hsm hsm = new realmyst.Hsm(bs,child.getName());
                 int offset = bs.getAbsoluteOffset();
                 int bytesleft = bs.getBytesRemaining();
 
@@ -4158,7 +4158,7 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 //    mdbs.add(mdb);
                 //}
                 
-                //hsms.add(hsm);
+                hsms.add(hsm);
                 
                 int dummy=0;
             }
@@ -4169,6 +4169,7 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
     }
     //automation.realmyst.save3dsFile(mdbs);
+    automation.realmyst.saveDdsFiles(hsms,"c:/hsmout");
 
 }//GEN-LAST:event_jButton108ActionPerformed
     

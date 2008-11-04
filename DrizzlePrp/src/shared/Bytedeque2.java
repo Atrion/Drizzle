@@ -82,11 +82,11 @@ public class Bytedeque2 extends IBytedeque
             this.writeBytes(data[i]);
         }
     }
-    public void writeMultiDimensionInts(int[][] data)
+    public void writeMultiDimensionInts2(int[][] data)
     {
         for(int i=0;i<data.length;i++)
         {
-            this.writeInts(data[i]);
+            this.writeInts2(data[i]);
         }
     }
     /*public <T extends mystobj> void writeObj(T object)
@@ -103,7 +103,7 @@ public class Bytedeque2 extends IBytedeque
         }
     }*/
     
-    public void writeInts(int[] ints)
+    public void writeInts2(int[] ints)
     {
         for(int i=0;i<ints.length;i++)
         {

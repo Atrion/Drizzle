@@ -9,22 +9,35 @@ import shared.*;
 
 public class Hsm
 {
-    int u1;
-    int flagsMaybe; //flags
-    int widthMaybe; //width or maybe height
-    int heightMaybe; //height or maybe width
-    byte b5;
-    int u6;
-    int numLevels; //num levels?
-    int u8;
-    int bytesPerBlock; //bytes per 4x4 DXT block
-    int dxtType; //DXT type 1=DXT1, 5=DXT5
+    public String name="(unnamed)";
     
-    uru.moulprp.Image.Dxt dxt;
-    byte[][] xagrb;
+    public int u1;
+    public int flagsMaybe; //flags
+    public int widthMaybe; //width or maybe height
+    public int heightMaybe; //height or maybe width
+    public byte b5;
+    public int u6;
+    public int numLevels; //num levels?
+    public int u8;
+    public int bytesPerBlock; //bytes per 4x4 DXT block
+    public int dxtType; //DXT type 1=DXT1, 5=DXT5
     
-    public Hsm(IBytestream c)
+    public images.Image.Dxt dxt;
+    public byte[][] xagrb;
+    
+    public int getCompressionType()
     {
+        if((u6&0x20000000)!=0)
+        {
+            return 0;
+        }
+        return dxtType;
+    }
+    
+    public Hsm(IBytestream c, String name)
+    {
+        this.name = name;
+        
         u1 = c.readInt(); e.ensure(u1,1);
         flagsMaybe = c.readInt(); e.ensure(flagsMaybe,48,49,176,117,53,145,50,113,241,17,52,114,112,177,80,54,242,81,144,213,245); //145
         widthMaybe = c.readInt();
@@ -49,6 +62,11 @@ public class Hsm
                 e.printStackTrace();
                 throw new uncaughtexception("Error in Dxt parsing.");
             }
+            
+            //IBytedeque out = new Bytedeque2();
+            //images.dds.createFromUncompressed(out, xagrb, widthMaybe, heightMaybe);
+            //byte[] outdata = out.getAllBytes();
+            //FileUtils.WriteFile("c:/testimage.dds", outdata);
         }
         else
         {
@@ -58,7 +76,7 @@ public class Hsm
             if(dxtType==1)
             {
                 try{
-                    dxt = new uru.moulprp.Image.Dxt(c, numLevels, widthMaybe, heightMaybe, (byte)bytesPerBlock);
+                    dxt = new images.Image.Dxt(c, numLevels, widthMaybe, heightMaybe, (byte)bytesPerBlock);
                 }catch(Exception e){
                     e.printStackTrace();
                     throw new uncaughtexception("Error in Dxt parsing.");
@@ -67,7 +85,7 @@ public class Hsm
             else if(dxtType==5)
             {
                 try{
-                    dxt = new uru.moulprp.Image.Dxt(c, numLevels, widthMaybe, heightMaybe, (byte)bytesPerBlock);
+                    dxt = new images.Image.Dxt(c, numLevels, widthMaybe, heightMaybe, (byte)bytesPerBlock);
                 }catch(Exception e){
                     e.printStackTrace();
                     throw new uncaughtexception("Error in Dxt parsing.");
