@@ -576,6 +576,7 @@ public class Gui extends javax.swing.JFrame {
         jButton103 = new javax.swing.JButton();
         jButton104 = new javax.swing.JButton();
         jButton106 = new javax.swing.JButton();
+        jButton108 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -2440,14 +2441,14 @@ public class Gui extends javax.swing.JFrame {
                 jPanel10.add(jButton103);
                 jButton103.setBounds(440, 200, 57, 36);
 
-                jButton104.setText("test");
+                jButton104.setText("sdb test");
                 jButton104.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         jButton104ActionPerformed(evt);
                     }
                 });
                 jPanel10.add(jButton104);
-                jButton104.setBounds(260, 120, 44, 36);
+                jButton104.setBounds(224, 120, 80, 36);
 
                 jButton106.setText("mdb test");
                 jButton106.addActionListener(new java.awt.event.ActionListener() {
@@ -2457,6 +2458,15 @@ public class Gui extends javax.swing.JFrame {
                 });
                 jPanel10.add(jButton106);
                 jButton106.setBounds(330, 120, 72, 36);
+
+                jButton108.setText("hsm test");
+                jButton108.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton108ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton108);
+                jButton108.setBounds(410, 120, 72, 36);
 
                 tabsState3.addTab("realMyst", jPanel10);
 
@@ -4106,6 +4116,61 @@ private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton107ActionPerformed
     shared.State.AllStates.pullandsave(settingsfile);
 }//GEN-LAST:event_jButton107ActionPerformed
+
+private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton108ActionPerformed
+    String outfol = this.textfieldState24.getText();
+    //m.state.curstate.writeToFile = true;
+    
+    File f = new File(outfol+"/scn/maps");
+    //realmyst.rmcontext.get().curnum=0;
+    Vector<realmyst.Hsm> hsms = new Vector<realmyst.Hsm>();
+    int count = 0;
+    for(File child: f.listFiles())
+    {
+        if(child.getName().toLowerCase().endsWith(".hsm"))
+        {
+            //realmyst.rmcontext.get().curnum++;
+            count++;
+            //if(count>400) break;
+            try
+            {
+                int fs = (int)child.length();
+                shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+                realmyst.Hsm hsm = new realmyst.Hsm(bs);
+                int offset = bs.getAbsoluteOffset();
+                int bytesleft = bs.getBytesRemaining();
+
+                //if (mdb.filesizeMinusHeader!=fs-offset)
+                //{
+                //    int dummy=0;
+                //}
+                if(bytesleft!=0)
+                {
+                    int dummy=0;
+                }
+                
+                //String oname = hsm.name.toString().toLowerCase();
+                //int ind = oname.indexOf("..");
+                //if(ind==-1) m.msg("objectname has no ..");
+                //else m.msg("objectname: "+oname.substring(0, ind));
+                //if(mdb.name.toString().toLowerCase().startsWith("myst.."))
+                //{
+                //    mdbs.add(mdb);
+                //}
+                
+                //hsms.add(hsm);
+                
+                int dummy=0;
+            }
+            catch(shared.ignore e)
+            {
+                m.warn("Error so skipping file.");
+            }
+        }
+    }
+    //automation.realmyst.save3dsFile(mdbs);
+
+}//GEN-LAST:event_jButton108ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4177,6 +4242,7 @@ private void jButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton105;
     private javax.swing.JButton jButton106;
     private javax.swing.JButton jButton107;
+    private javax.swing.JButton jButton108;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
