@@ -26,7 +26,7 @@ import shared.mystobj;
 public class rmcontext extends SerialBytestream
 {
     //IBytestream in;
-    
+    public int curnum;
     /*public rmcontext(IBytestream in2)
     {
         this.in = in2;

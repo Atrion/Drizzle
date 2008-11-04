@@ -379,6 +379,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
+        jButton107 = new javax.swing.JButton();
         jPanel27 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
@@ -654,13 +655,24 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        jButton107.setText("Save settings");
+        jButton107.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton107ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton107))
+                    .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
@@ -668,7 +680,9 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton61)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton107)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1015,7 +1029,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(textfieldState5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton53)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         tabsState2.addTab("Crowthistle", jPanel14);
@@ -1371,7 +1385,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(106, Short.MAX_VALUE))
+                    .addContainerGap(82, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -1533,7 +1547,7 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel23Layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addComponent(jButton99)))
-                        .addContainerGap(71, Short.MAX_VALUE))
+                        .addContainerGap(47, Short.MAX_VALUE))
                 );
 
                 tabsState2.addTab("tab8", jPanel23);
@@ -1551,7 +1565,7 @@ public class Gui extends javax.swing.JFrame {
                     jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addContainerGap())
                 );
 
@@ -3944,7 +3958,7 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if(f.getParentFile().getName().toLowerCase().equals("sdb"))
             sdb = new realmyst.Sdb(bs);
         else if(f.getParentFile().getName().toLowerCase().equals("mdb"))
-            mdb = new realmyst.Mdb(bs);
+            mdb = new realmyst.Mdb(bs,"none");
     }
     else if(filename.toLowerCase().endsWith(".shp"))
     {
@@ -4002,7 +4016,7 @@ private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
     }
     
-    File f2 = new File(outfol+"/mdb");
+    /*File f2 = new File(outfol+"/mdb");
     for(File child: f2.listFiles())
     {
         if(child.getName().toLowerCase().endsWith(".vdb"))
@@ -4023,7 +4037,7 @@ private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
             int dummy=0;
         }
-    }
+    }*/
     
 }//GEN-LAST:event_jButton104ActionPerformed
 
@@ -4041,15 +4055,21 @@ private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     m.state.curstate.writeToFile = true;
     
     File f = new File(outfol+"/mdb");
+    realmyst.rmcontext.get().curnum=0;
+    Vector<realmyst.Mdb> mdbs = new Vector<realmyst.Mdb>();
+    int count = 0;
     for(File child: f.listFiles())
     {
         if(child.getName().toLowerCase().endsWith(".vdb"))
         {
+            realmyst.rmcontext.get().curnum++;
+            count++;
+            //if(count>400) break;
             try
             {
                 int fs = (int)child.length();
                 shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
-                realmyst.Mdb mdb = new realmyst.Mdb(bs);
+                realmyst.Mdb mdb = new realmyst.Mdb(bs,"102445243.vdb");
                 int offset = bs.getAbsoluteOffset();
                 int bytesleft = bs.getBytesRemaining();
 
@@ -4061,6 +4081,16 @@ private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 {
                     int dummy=0;
                 }
+                
+                String oname = mdb.name.toString().toLowerCase();
+                int ind = oname.indexOf("..");
+                if(ind==-1) m.msg("objectname has no ..");
+                else m.msg("objectname: "+oname.substring(0, ind));
+                if(mdb.name.toString().toLowerCase().startsWith("myst.."))
+                {
+                    mdbs.add(mdb);
+                }
+                
                 int dummy=0;
             }
             catch(shared.ignore e)
@@ -4069,9 +4099,13 @@ private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
         }
     }
-    
+    automation.realmyst.save3dsFile(mdbs);
 
 }//GEN-LAST:event_jButton106ActionPerformed
+
+private void jButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton107ActionPerformed
+    shared.State.AllStates.pullandsave(settingsfile);
+}//GEN-LAST:event_jButton107ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4142,6 +4176,7 @@ private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton104;
     private javax.swing.JButton jButton105;
     private javax.swing.JButton jButton106;
+    private javax.swing.JButton jButton107;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
