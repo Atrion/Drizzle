@@ -47,7 +47,7 @@ public class Count11
             if(c.getAbsoluteOffset()!=endpos)
             {
                 m.msg("reading extra int and flt");
-                int u6 = c.readInt(); e.ensure(u6,4);
+                int u6 = c.readInt(); e.ensure(u6,4,10);
                 Flt f1 = new Flt(c); //0.5
                 int dummy=0;
             }

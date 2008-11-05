@@ -23,7 +23,7 @@ import shared.*;
 public class Count10
 {
     //int tag;
-    Typeid type;
+    public Typeid type;
     int size;
     int sub1;
     //Bstr xsubs;
@@ -169,12 +169,13 @@ public class Count10
             int u3 = c.readInt(); //?
             int u4 = c.readInt(); e.ensure(u4,0,1,4,6,7,5,37837212);
             int count = c.readInt(); //e.ensure(u5,2);
-            //suboccref[] subs = c.readArray(suboccref.class, count);
-            Object[] subs = new Object[count];
-            for(int i=0;i<count;i++)
-            {
-                subs[i] = TaggedObj.readwithtype(type, c);
-            }
+            suboccref[] subs = c.readArray(suboccref.class, count);
+            //Object[] subs = new Object[count];
+            //for(int i=0;i<count;i++)
+            //{
+            //    subs[i] = TaggedObj.readwithtype(type, c);
+            //}
+            
             /*int u6 = c.readInt(); e.ensure(u6,0);
             int u7 = c.readInt(); e.ensure(u7,1);
             int u8 = c.readInt(); e.ensure(u8,0);

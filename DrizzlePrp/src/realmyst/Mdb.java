@@ -34,10 +34,14 @@ public class Mdb
     IntsIndex ii;
     IntsFullIndex ifi;
     public wha[] whas;
+    public Vertex[] trips;
     
     
     static Primary main;
-    
+    public Mdb(IBytestream c)
+    {
+        this(c,"none");
+    }
     public Mdb(IBytestream c, String fntrap)
     {
         int curfilenum = realmyst.rmcontext.get().curnum;
@@ -115,7 +119,7 @@ public class Mdb
             }
 
             int u21 = c.readInt(); //e.ensure(u21,0);
-            Vertex[] trips = c.readArray(Vertex.class, u21); //uvw maybe?
+            trips = c.readArray(Vertex.class, u21); //uvw maybe?
         }
         
         if(u6==1) //u7 and u8 are also 1 in this case.

@@ -7,7 +7,7 @@ package export3ds;
 
 import shared.*;
 
-public class AAA_Template
+public class AAA_Template extends tdsobj
 {
     
     
@@ -17,6 +17,13 @@ public class AAA_Template
     {
         AAA_Template result = new AAA_Template();
         return result;
+    }
+    
+    public Typeid type(){throw new uncaughtexception("implement this.");}
+
+    public void innercompile(IBytedeque c)
+    {
+        throw new uncaughtexception("implement this.");
     }
     
 }

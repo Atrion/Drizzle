@@ -20,37 +20,17 @@ package realmyst;
 
 import shared.*;
 
-public class TaggedObj
+public class CountAUndone
 {
     Typeid type;
-    //X5c3e0f00 x1;
-    Object val;
+    int size;
     
-    public TaggedObj(IBytestream c)
+    public CountAUndone(IBytestream c)
     {
-        type = Typeid.read(c);
-        val = readwithtype(type,c);
-
-    }
-
-    public static Object readwithtype(Typeid type, IBytestream c)
-    {
-        switch(type)
-        {
-            //case occref:
-            //    x1 = new X5c3e0f00(c);
-            //    break;
-            //case ref:
-            //    return new Count9.Ref1(c);
-            //case ref2:
-            //    return new Count9.Ref2(c);
-            case occref:
-                return new Count10.occref.suboccref(c);
-            case count9ref:
-                return new Count9.Subref2(c);
-            default:
-                m.err("Unhandled type in TaggedObj.");
-                return null;
-        }
+        type = Typeid.read(c); e.ensure(type==Typeid.hasthing);
+        size = c.readInt();
+        
+        //skip the rest.
+        c.readBytes(size-8);
     }
 }

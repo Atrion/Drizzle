@@ -17,9 +17,17 @@ public enum Typeid
     count11,
     count9,
     count9ref,
-    ref,
-    ref2,
+    //ref,
+    //ref2,
     mdb,
+    count2,
+    count3,
+    count4,
+    count5,
+    count6,
+    count7,
+    count8,
+    hasthing,
     ;
     public static pair[] pairs = {
         p(0x9469DF4E, sdbstart),
@@ -28,9 +36,17 @@ public enum Typeid
         p(0x41DE0279, count11),
         p(0x3A5B6799, count9),
         p(0x000f3e59, count9ref),
-        p(0x000003e9, ref),
-        p(0x000003ea, ref2),
+        //p(0x000003e9, ref),
+        //p(0x000003ea, ref2), //used in count9
         p(0x529A6D54, mdb),
+        p(0x77bd62c4, count2),
+        p(0x7440708d, count3),
+        p(0x0ced663e, count6),
+        p(0x1b9575cf, count8),
+        p(0x656d2f93, count5),
+        p(0x75e35755, count7),
+        p(0x3e9b13da, hasthing),
+        p(0x1b570365, count4),
     };
     
     

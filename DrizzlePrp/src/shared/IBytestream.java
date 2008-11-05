@@ -31,6 +31,10 @@ public abstract class IBytestream
     
     public String sourceName = "";
     
+    public IBytestream Fork()
+    {
+        return this.Fork(this.getAbsoluteOffset());
+    }
     public <T> Vector<T> readVector( Class<T> objclass, int size)
     {
         Vector<T> result = new Vector<T>();
@@ -82,6 +86,7 @@ public abstract class IBytestream
             }
             else
             {
+                e2.printStackTrace();
                 throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
                 //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
             }

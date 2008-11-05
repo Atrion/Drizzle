@@ -38,6 +38,9 @@ public class realmyst
         Primary main = Primary.createNull();
         main.meshdata.mat = Material.create("defaultmat");
         
+        //add texture filename...
+        main.meshdata.mat.texturemap = TextureMap.create("active.hsm.dds");
+        
         for(Mdb mdb: mdbs)
         {
             try
@@ -68,9 +71,12 @@ public class realmyst
             verts[i] = Vertex.createFromFlts(x, y, z);
         }*/
         
-        if(mdb.fs==null) throw new ignore("Skipping NamedObj because it has no fs.");
-        if(mdb.bunch==null) throw new ignore("Skipping NamedObj because it has no bunch.");
-        if(mdb.whas==null) throw new ignore("Skipping NamedObj because it has no whas.");
+        String ignorereason = "";
+        if(mdb.fs==null) ignorereason += "Skipping NamedObj because it has no fs. ";
+        if(mdb.bunch==null) ignorereason += "Skipping NamedObj because it has no bunch. ";
+        if(mdb.whas==null) ignorereason += "Skipping NamedObj because it has no whas. ";
+        if(mdb.trips==null) ignorereason += "NamedObj has no trips.";
+        if(!ignorereason.equals("")) throw new ignore(ignorereason);
         
         Vertex[] verts = new Vertex[mdb.fs.length];
         for(int i=0;i<mdb.fs.length;i++)
@@ -93,6 +99,14 @@ public class realmyst
         }
 
         String objname = mdb.name.toString();
+        
+        FltPair[] uvcoords = new FltPair[mdb.trips.length];
+        for(int i=0;i<mdb.trips.length;i++)
+        {
+            Flt u = mdb.trips[i].x;
+            Flt v = mdb.trips[i].y;
+            uvcoords[i] = FltPair.createFromFlts(u, v);
+        }
 
         //if(main==null)
         //{
@@ -103,7 +117,28 @@ public class realmyst
         newobj.namedTriangleObject = NamedTriangleObject.createNull();
         newobj.namedTriangleObject.points = PointArray.create(verts);
         newobj.namedTriangleObject.faces = FaceArray.create(faces, "defaultmat");
+        //if(uvcoords.length!=0) newobj.namedTriangleObject.uvcoords = UvVerts.create(uvcoords);
         //main.meshdata.objs.add(newobj);
+        
+        for(ShortTriplet face: faces)
+        {
+            if(face.p >= verts.length || face.q>= verts.length || face.r>=verts.length)
+            {
+                int dummy=0;
+            }
+        }
+        if(uvcoords.length!=0)
+        {
+            if(uvcoords.length!=verts.length)
+            {
+                int dummy=0;
+            }
+            else
+            {
+                if(uvcoords.length!=0) newobj.namedTriangleObject.uvcoords = UvVerts.create(uvcoords);
+                
+            }
+        }
 
         //IBytedeque out = new Bytedeque2();
         //main.compile(out);

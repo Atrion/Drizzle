@@ -12,6 +12,8 @@ public class NamedTriangleObject extends tdsobj
     public PointArray points;
     public FaceArray faces;
     
+    public UvVerts uvcoords;
+    
     private NamedTriangleObject(){}
     
     public static NamedTriangleObject createNull()
@@ -24,5 +26,6 @@ public class NamedTriangleObject extends tdsobj
     {
         points.compile(c);
         faces.compile(c);
+        if(uvcoords!=null) uvcoords.compile(c);
     }
 }

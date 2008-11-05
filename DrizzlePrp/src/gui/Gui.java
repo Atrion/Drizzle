@@ -577,6 +577,7 @@ public class Gui extends javax.swing.JFrame {
         jButton104 = new javax.swing.JButton();
         jButton106 = new javax.swing.JButton();
         jButton108 = new javax.swing.JButton();
+        jButton109 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -2468,6 +2469,15 @@ public class Gui extends javax.swing.JFrame {
                 jPanel10.add(jButton108);
                 jButton108.setBounds(410, 120, 72, 36);
 
+                jButton109.setText("string search");
+                jButton109.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton109ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton109);
+                jButton109.setBounds(680, 60, 96, 36);
+
                 tabsState3.addTab("realMyst", jPanel10);
 
                 jButton50.setText("jButton50");
@@ -4172,6 +4182,62 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     automation.realmyst.saveDdsFiles(hsms,"c:/hsmout");
 
 }//GEN-LAST:event_jButton108ActionPerformed
+
+private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton109ActionPerformed
+    String folder = "G:/prps/realmysttest2/sdb";
+    String[] searchstrs = {
+        //6910138.vdb
+        //"channelwood",
+        //"ch_bookroom",
+        //"channel_temple",
+        //"windmill",
+        //"ch_sirrus01",
+        //"ch_waterhut01",
+        //"ch_cylinder_f",
+        //"ch_achenar01",
+        
+        //85660192.vdb
+        //"me_achenar02",
+        //"me_achenar01",
+        //"me_pass02",
+        //"mech_indoor",
+        //"me_bookroom",
+        //"mech_outdoor",
+        //"me_conpane",
+        
+        "se_stair04",
+        "selenitic",
+        "se_stair03",
+        "se_stair02",
+        
+        //"cabin",
+        //"treegate",
+        //"rocket",
+        //"fireplace",
+        
+        ////"stoneship01",
+        ////"sn_island_laboratory",
+        //"snowage",
+        //"aurora",
+        
+        //"sship_aku_room",
+        //"ss_akk04",
+        //"ss_deep_sea",
+        //"compus_room",
+        //"sship_tunnel",
+        //"lighthouse",
+    };
+    Vector<File> files = filesearcher.search.getallfiles(folder, false);
+    for(File f: files)
+    {
+        boolean allfound = filesearcher.search.searchForStrings(f, searchstrs);
+        if(allfound)
+        {
+            String filename = f.getName();
+            int dummy=0;
+        }
+    }
+}//GEN-LAST:event_jButton109ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4244,6 +4310,7 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton106;
     private javax.swing.JButton jButton107;
     private javax.swing.JButton jButton108;
+    private javax.swing.JButton jButton109;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;

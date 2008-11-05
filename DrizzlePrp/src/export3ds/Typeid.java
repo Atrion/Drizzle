@@ -25,6 +25,9 @@ public enum Typeid
     pointarray,
     facearray,
     meshmatgroup,
+    texturemap,
+    texturefilename,
+    uvcoords,
     ;
     public static pair[] pairs = {
         p((short)0xffff, unknown),
@@ -42,6 +45,9 @@ public enum Typeid
         p((short)0x4110, pointarray),
         p((short)0x4120, facearray),
         p((short)0x4130, meshmatgroup),
+        p((short)0x4140, uvcoords),
+        p((short)0xa200, texturemap),
+        p((short)0xa300, texturefilename),
     };
     
     public static void verify()
