@@ -1,6 +1,15 @@
 Welcome to Drizzle!
 
 
+To convert Myst 5 Ages the simple way:
+--------------------------------------
+1) Go to the Simplicity tab, then the MystV tab.
+2) Select the folder where you installed Myst 5. (By default, it's "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
+3) Select the folder where you installed PathOfTheShell/CompleteChronicles. (By default it's "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
+4) Click the "Start..." button.
+5) In the PathOfTheShell/CompleteChronicles folder, run SoundDecompress.exe. (SoundDecompress.exe may crash if you haven't run Uru at least once.)
+
+
 To use DeepView:
 --------------------------
 1) Enter the input filename in the first box.  Use a * to include all prps files of an Age.  E.g.: "C:\Pots\dat\Negilahn*"

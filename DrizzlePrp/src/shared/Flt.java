@@ -102,6 +102,10 @@ strictfp public class Flt extends uruobj implements ICompilable
     {
         return this.rawdata;
     }
+    public void compile(Bytedeque c)
+    {
+        c.writeInt(rawdata);
+    }
     public void compile(IBytedeque deque)
     {
         deque.writeInt(rawdata);

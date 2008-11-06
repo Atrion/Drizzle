@@ -81,6 +81,12 @@ public strictfp class Vertex extends uruobj implements ICompilable
         y.compile(data);
         z.compile(data);
     }
+    public void compile(Bytedeque data)
+    {
+        x.compile(data);
+        y.compile(data);
+        z.compile(data);
+    }
     public float dot(Vertex v2)
     {
         float result = this.x.toJavaFloat()*v2.x.toJavaFloat() + this.y.toJavaFloat()*v2.y.toJavaFloat() + this.z.toJavaFloat()*v2.z.toJavaFloat();
