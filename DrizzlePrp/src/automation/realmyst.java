@@ -9,9 +9,220 @@ import shared.*;
 import realmyst.*;
 import export3ds.*;
 import java.util.Vector;
+import java.io.File;
 
 public class realmyst
 {
+    public static Vector<Mdb> filterMdbsByRoom(Vector<Mdb> mdbs, String[] rooms)
+    {
+        Vector<Mdb> result = new Vector();
+        for(Mdb mdb: mdbs)
+        {
+            String objname = mdb.name.toString();
+            //String oname = mdb.name.toString().toLowerCase();
+            int ind = objname.indexOf("..");
+            if(ind==-1)
+            {
+                m.msg("objectname has no .. : "+objname);
+                break;
+            }
+            
+            String curroom = objname.substring(0, ind);
+            m.msg("objectname: "+curroom);
+            for(String room: rooms)
+            {
+                if(room.equals(curroom))
+                {
+                    result.add(mdb);
+                }
+            }
+            //if(mdb.name.toString().toLowerCase().startsWith("myst.."))
+            //{
+            //    mdbs.add(mdb);
+            //}
+        }
+        return result;
+    }
+    public static Vector<Hsm> realAllHsms(String folder)
+    {
+        File f = new File(folder+"/scn/maps");
+        //realmyst.rmcontext.get().curnum=0;
+        Vector<Hsm> hsms = new Vector<Hsm>();
+        int count = 0;
+        for(File child: f.listFiles())
+        {
+            if(child.getName().toLowerCase().endsWith(".hsm"))
+            {
+                //realmyst.rmcontext.get().curnum++;
+                count++;
+                //if(count>400) break;
+                try
+                {
+                    int fs = (int)child.length();
+                    shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+                    Hsm hsm = new Hsm(bs,child.getName());
+                    int offset = bs.getAbsoluteOffset();
+                    int bytesleft = bs.getBytesRemaining();
+
+                    //if (mdb.filesizeMinusHeader!=fs-offset)
+                    //{
+                    //    int dummy=0;
+                    //}
+                    if(bytesleft!=0)
+                    {
+                        int dummy=0;
+                    }
+
+                    //String oname = hsm.name.toString().toLowerCase();
+                    //int ind = oname.indexOf("..");
+                    //if(ind==-1) m.msg("objectname has no ..");
+                    //else m.msg("objectname: "+oname.substring(0, ind));
+                    //if(mdb.name.toString().toLowerCase().startsWith("myst.."))
+                    //{
+                    //    mdbs.add(mdb);
+                    //}
+
+                    hsms.add(hsm);
+
+                    int dummy=0;
+                }
+                catch(shared.ignore e)
+                {
+                    m.warn("Error so skipping file.");
+                }
+            }
+        }
+        return hsms;
+    }
+    public static Vector<Mdb> readAllMdbs(String folder)
+    {
+        File f = new File(folder+"/mdb");
+        rmcontext.get().curnum=0;
+        Vector<Mdb> mdbs = new Vector<Mdb>();
+        int count = 0;
+        for(File child: f.listFiles())
+        {
+            if(child.getName().toLowerCase().endsWith(".vdb"))
+            {
+                rmcontext.get().curnum++;
+                count++;
+                //if(count>400) break;
+                try
+                {
+                    int fs = (int)child.length();
+                    shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+                    Mdb mdb = new Mdb(bs,"102445243.vdb");
+                    int offset = bs.getAbsoluteOffset();
+                    int bytesleft = bs.getBytesRemaining();
+
+                    //if (mdb.filesizeMinusHeader!=fs-offset)
+                    //{
+                    //    int dummy=0;
+                    //}
+                    if(bytesleft!=0)
+                    {
+                        int dummy=0;
+                    }
+
+                    //String oname = mdb.name.toString().toLowerCase();
+                    //int ind = oname.indexOf("..");
+                    //if(ind==-1) m.msg("objectname has no ..");
+                    //else m.msg("objectname: "+oname.substring(0, ind));
+                    //if(mdb.name.toString().toLowerCase().startsWith("myst.."))
+                    //{
+                    mdbs.add(mdb);
+                    //}
+
+                    int dummy=0;
+                }
+                catch(shared.ignore e)
+                {
+                    m.warn("Error so skipping file.");
+                }
+            }
+        }
+        return mdbs;
+    }
+    public static Vector<Sdb> readAllSdbs(String folder)
+    {
+        File f = new File(folder+"/sdb");
+        Vector<Sdb> sdbs = new Vector();
+        for(File child: f.listFiles())
+        {
+            if(child.getName().toLowerCase().endsWith(".vdb"))
+            {
+                try
+                {
+                    int fs = (int)child.length();
+                    shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
+                    Sdb sdb = new Sdb(bs);
+                    int offset = bs.getAbsoluteOffset();
+                    int bytesleft = bs.getBytesRemaining();
+
+                    if (sdb.filesizeMinusHeader!=fs-offset)
+                    {
+                        int dummy=0;
+                    }
+                    if(bytesleft!=0)
+                    {
+                        int dummy=0;
+                    }
+                    int dummy=0;
+
+                    sdbs.add(sdb);
+                }
+                catch(shared.ignore e)
+                {
+                    m.warn("Error so skipping file.");
+                }
+            }
+        }
+        return sdbs;
+    }
+
+    public static String[] findRoomInfo(Vector<Sdb> sdbs, String agecode)
+    {
+        //Valid agecodes are: Channel, Dni, Mech, Rime, Sel, Stone, Myst
+        String soughtObject;
+        if(agecode.equals("Myst"))
+            soughtObject = "HoldingPen_Channel";
+        else if(agecode.equals("Channel")||agecode.equals("Channel")||agecode.equals("Channel")||agecode.equals("Channel")||agecode.equals("Channel")||agecode.equals("Channel")||agecode.equals("Channel"))
+            soughtObject = "HoldingPen_"+agecode+"ToMyst";
+        else throw new uncaughtexception("realMyst Agename wasn't known, it was probably a typo.:"+agecode);
+        
+        for(Sdb sdb: sdbs)
+        {
+            String objname = sdb.name.toString();
+            if(objname.startsWith("HoldingPen_"))
+            {
+                String room = sdb.strs[0].toString();
+                if(room.equals("global"))
+                {
+                    if(objname.equals(soughtObject))
+                    {
+                        Vector<String> list2500=new Vector();
+                        Vector<String> list2501=new Vector();
+                        for(Count10.occref occ: sdb.count10s[0].occrefs1)
+                        {
+                            if(occ.u3==2500) list2500.add(occ.subs[0].xstr.toString());
+                            if(occ.u3==2501) list2501.add(occ.subs[0].xstr.toString());
+                        }
+                        //String list1 = sdb.count10s[0].occrefs1[2].subs[0].xstr.toString();
+                        //String list2 = sdb.count10s[0].occrefs1[3].subs[0].xstr.toString();
+                        
+                        String[] result = list2501.get(0).split(",");
+                        return result;
+                    }                    
+                    
+                    int dummy=0;
+                }
+                int dummy=0;
+            }
+            int dummy=0;
+        }
+        return null;
+    }
+    
     public static void saveDdsFiles(Vector<Hsm> hsms, String outfolder)
     {
         for(Hsm hsm: hsms)

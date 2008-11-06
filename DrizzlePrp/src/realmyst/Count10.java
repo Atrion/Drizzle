@@ -24,13 +24,28 @@ public class Count10
 {
     //int tag;
     public Typeid type;
-    int size;
-    int sub1;
+    public int size;
+    public int u1;
+    public Bstr s1;
+    public byte b1;
+    public int u2;
+    public int u3;
+    public int u4;
+    public int u5;
+    public Bstr s2;
+    public int count1;
+    public occref[] occrefs1;
+    public int count2;
+    public occref[] occrefs2;
+    public int count3Maybe;
+    public int count4;
+    public StringAndByte[] stringAndBytes;
+    //int sub1;
     //Bstr xsubs;
-    Flagsen xsubs;
-    int sub2;
+    //Flagsen xsubs;
+    //int sub2;
     //Flagsen[] subs2;
-    TaggedObj[] subs2;
+    //TaggedObj[] subs2;
     
     public Count10(IBytestream c)
     {
@@ -40,25 +55,25 @@ public class Count10
         type = Typeid.read(c); e.ensure(type==Typeid.count10);
         size = c.readInt(); //size of this object (including type).
         
-        int u1 = c.readInt(); e.ensure(u1,1);
-        Bstr s1 = new Bstr(c);
-        byte b1 = c.readByte(); e.ensure((int)b1,16);
-        int u2 = c.readInt(); e.ensure(u2,0);
-        int u3 = c.readInt(); e.ensure(u3,0);
-        int u4 = c.readInt(); e.ensure(u4,4);
-        int u5 = c.readInt(); e.ensure(u5,0,256,8,1);
-        Bstr s2 = new Bstr(c);
+        u1 = c.readInt(); e.ensure(u1,1);
+        s1 = new Bstr(c);
+        b1 = c.readByte(); e.ensure((int)b1,16);
+        u2 = c.readInt(); e.ensure(u2,0);
+        u3 = c.readInt(); e.ensure(u3,0);
+        u4 = c.readInt(); e.ensure(u4,4);
+        u5 = c.readInt(); e.ensure(u5,0,256,8,1);
+        s2 = new Bstr(c);
         
-        int count1 = c.readInt();
-        c.readArray(occref.class, count1);
+        count1 = c.readInt();
+        occrefs1 = c.readArray(occref.class, count1);
 
-        int count2 = c.readInt();
-        c.readArray(occref.class, count2);
+        count2 = c.readInt();
+        occrefs2 = c.readArray(occref.class, count2);
         
-        int count3Maybe = c.readInt(); e.ensure(count3Maybe==0);
+        count3Maybe = c.readInt(); e.ensure(count3Maybe==0);
         
-        int count4 = c.readInt();
-        c.readArray(stringAndByte.class, count4);
+        count4 = c.readInt();
+        stringAndBytes = c.readArray(StringAndByte.class, count4);
         
         /*sub1 = c.readInt();
         if(sub1!=0)
@@ -80,47 +95,56 @@ public class Count10
         }*/
         
     }
-    public static class stringAndByte
-    {
-        public stringAndByte(IBytestream c)
-        {
-            //sub_45A950, I think
-            
-            Bstr str = new Bstr(c);
-            byte b = c.readByte(); //this is used in the switch.
-            int dummy=0;
-        }
-    }
     public static class occref
     {
+        public Typeid type;
+        public int u1;
+        public int u2;
+        public int u3;
+        public int u4;
+        public int count;
+        public suboccref[] subs;
+        
         public static class suboccref
         {
+            public int u6;
+            public int u7;
+            public int u8;
+            public int u9;
+            public int u10;
+            
+            public int xint;
+            public Flt xfloat;
+            public Bstr xstr;
+            public Vertex xvertex;
+            //public Quat xquat;
+            
             public suboccref(IBytestream c)
             {
                 //sub_5070E0??? (called only by sub_508420)
                 
-                int u6 = c.readInt(); e.ensure(u6,0);
-                int u7 = c.readInt(); e.ensure(u7,1);
-                int u8 = c.readInt(); e.ensure(u8,0,37842956); //only saw 27842956 once
-                int u9 = c.readInt(); e.ensure(u9,1,2,3,4,5,6);
-                m.msg("u9="+Integer.toString(u9));
+                u6 = c.readInt(); e.ensure(u6,0);
+                u7 = c.readInt(); e.ensure(u7,1);
+                u8 = c.readInt(); e.ensure(u8,0,37842956); //only saw 27842956 once
+                u9 = c.readInt(); e.ensure(u9,1,2,3,4,5,6);
+                //m.msg("u9="+Integer.toString(u9));
+                u10 = c.readInt();
                 if(u9==5)
                 {
-                    //this is presumably a vertex or quaternion.
-                    int u10 = c.readInt();
+                    //this is presumably a vertex or quaternion. Possibly a RGBA.
                     Flt x = new Flt(c);
                     Flt y = new Flt(c);
                     Flt z = new Flt(c);
                     int uc1 = c.readInt(); //seems to be 0, so probably a Flt, making this a quaternion.
-                    if(uc1!=0)
-                    {
-                        int dummy=0;
-                    }
+                    //if(uc1!=0)
+                    //{
+                    //    int dummy=0;
+                    //}
+                    //xquat = new Quat(c);
                     int dummy=0;
                 }
                 else if(u9==6)
                 {
-                    int u10 = c.readInt();
                     int count = c.readInt();
                     Bstr[] sb1 = c.readArray(Bstr.class, count);
                     int dummy=0;
@@ -128,13 +152,13 @@ public class Count10
                 else if(u9==4)
                 {
                     //vertex?
-                    int u10 = c.readInt();
                     //int ua1 = c.readInt();
                     //int ua2 = c.readInt();
                     //int ua3 = c.readInt();
-                    Flt ua1 = new Flt(c);
-                    Flt ua2 = new Flt(c);
-                    Flt ua3 = new Flt(c);
+                    //Flt ua1 = new Flt(c);
+                    //Flt ua2 = new Flt(c);
+                    //Flt ua3 = new Flt(c);
+                    xvertex = new Vertex(c);
                     //if(!ua1.approxequals(0))
                     //{
                     //    int dummy=0;
@@ -142,19 +166,17 @@ public class Count10
                 }
                 else if(u9==3)
                 {
-                    int u10 = c.readInt(); //e.ensure(u10,1,0,16);
-                    Bstr s1 = new Bstr(c);
+                    //int u10 = c.readInt(); //e.ensure(u10,1,0,16);
+                    xstr = new Bstr(c);
                     int dummy=0;
                 }
                 else if(u9==1)
                 {
-                    int u10 = c.readInt();
-                    int u11 = c.readInt();
+                    xint = c.readInt();
                 }
                 else if(u9==2)
                 {
-                    int u10 = c.readInt();
-                    Flt f1 = new Flt(c);
+                    xfloat = new Flt(c);
                 }
             
             }
@@ -163,13 +185,13 @@ public class Count10
         {
             //sub_508420?
             
-            Typeid type = Typeid.read(c); //e.ensure(type==Typeid.occref);
-            int u1 = c.readInt(); e.ensure(u1,0);
-            int u2 = c.readInt(); e.ensure(u2,1);
-            int u3 = c.readInt(); //?
-            int u4 = c.readInt(); e.ensure(u4,0,1,4,6,7,5,37837212);
-            int count = c.readInt(); //e.ensure(u5,2);
-            suboccref[] subs = c.readArray(suboccref.class, count);
+            type = Typeid.read(c); //e.ensure(type==Typeid.occref);
+            u1 = c.readInt(); e.ensure(u1,0);
+            u2 = c.readInt(); e.ensure(u2,1);
+            u3 = c.readInt(); //?
+            u4 = c.readInt(); e.ensure(u4,0,1,4,6,7,5,37837212);
+            count = c.readInt(); //e.ensure(u5,2);
+            subs = c.readArray(suboccref.class, count);
             //Object[] subs = new Object[count];
             //for(int i=0;i<count;i++)
             //{

@@ -19,7 +19,9 @@ public class Sdb
     public int strCount; //number of Bstrs that follow
     public Bstr[] strs;
     
-    public Count10[] count10s    ;
+    public Count2[] count2s;
+    public Count3Undone[] count3s;
+    public Count10[] count10s;
     
     public Sdb(IBytestream c)
     {
@@ -105,14 +107,14 @@ public class Sdb
         {
             //ignore = false;
             //throw new ignore("Unhandled count2.");
-            Count2Undone[] count2s = c.readArray(Count2Undone.class, count2);
+            count2s = c.readArray(Count2.class, count2);
         }
         int count3 = c.readInt(); //v72
         if(count3!=0)
         {
             //ignore = false;
             //throw new ignore("Unhandled count3.");
-            Count3Undone[] count3s = c.readArray(Count3Undone.class, count3);
+            count3s = c.readArray(Count3Undone.class, count3);
         }
 
         //new try:

@@ -578,6 +578,7 @@ public class Gui extends javax.swing.JFrame {
         jButton106 = new javax.swing.JButton();
         jButton108 = new javax.swing.JButton();
         jButton109 = new javax.swing.JButton();
+        jButton110 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -2478,6 +2479,15 @@ public class Gui extends javax.swing.JFrame {
                 jPanel10.add(jButton109);
                 jButton109.setBounds(680, 60, 96, 36);
 
+                jButton110.setText("full test");
+                jButton110.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton110ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton110);
+                jButton110.setBounds(380, 160, 63, 36);
+
                 tabsState3.addTab("realMyst", jPanel10);
 
                 jButton50.setText("jButton50");
@@ -3976,7 +3986,18 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     else if(filename.toLowerCase().endsWith(".vdb"))
     {
         if(f.getParentFile().getName().toLowerCase().equals("sdb"))
+        {
             sdb = new realmyst.Sdb(bs);
+            for(int i=0;i<sdb.count2s.length;i++)
+            {
+                realmyst.Count2 c2 = sdb.count2s[i];
+                String curtex = c2.sb2.str.toString();
+                if(curtex.equals("GBdock.hsm"))
+                {
+                    int dummy=0;
+                }
+            }
+        }
         else if(f.getParentFile().getName().toLowerCase().equals("mdb"))
             mdb = new realmyst.Mdb(bs,"none");
     }
@@ -4004,37 +4025,13 @@ private void jButton102ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton104ActionPerformed
     String outfol = this.textfieldState24.getText();
+    m.state.push();
     m.state.curstate.writeToFile = true;
     
-    File f = new File(outfol+"/sdb");
-    for(File child: f.listFiles())
-    {
-        if(child.getName().toLowerCase().endsWith(".vdb"))
-        {
-            try
-            {
-                int fs = (int)child.length();
-                shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
-                realmyst.Sdb mdb = new realmyst.Sdb(bs);
-                int offset = bs.getAbsoluteOffset();
-                int bytesleft = bs.getBytesRemaining();
-
-                if (mdb.filesizeMinusHeader!=fs-offset)
-                {
-                    int dummy=0;
-                }
-                if(bytesleft!=0)
-                {
-                    int dummy=0;
-                }
-                int dummy=0;
-            }
-            catch(shared.ignore e)
-            {
-                m.warn("Error so skipping file.");
-            }
-        }
-    }
+    Vector<realmyst.Sdb> sdbs = automation.realmyst.readAllSdbs(outfol);
+    String[] rooms = automation.realmyst.findRoomInfo(sdbs,"Myst");
+    
+    m.state.pop();
     
     /*File f2 = new File(outfol+"/mdb");
     for(File child: f2.listFiles())
@@ -4072,55 +4069,13 @@ private void jButton105ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jButton106ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton106ActionPerformed
     String outfol = this.textfieldState24.getText();
+    m.state.push();
     m.state.curstate.writeToFile = true;
     
-    File f = new File(outfol+"/mdb");
-    realmyst.rmcontext.get().curnum=0;
-    Vector<realmyst.Mdb> mdbs = new Vector<realmyst.Mdb>();
-    int count = 0;
-    for(File child: f.listFiles())
-    {
-        if(child.getName().toLowerCase().endsWith(".vdb"))
-        {
-            realmyst.rmcontext.get().curnum++;
-            count++;
-            //if(count>400) break;
-            try
-            {
-                int fs = (int)child.length();
-                shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
-                realmyst.Mdb mdb = new realmyst.Mdb(bs,"102445243.vdb");
-                int offset = bs.getAbsoluteOffset();
-                int bytesleft = bs.getBytesRemaining();
-
-                //if (mdb.filesizeMinusHeader!=fs-offset)
-                //{
-                //    int dummy=0;
-                //}
-                if(bytesleft!=0)
-                {
-                    int dummy=0;
-                }
-                
-                String oname = mdb.name.toString().toLowerCase();
-                int ind = oname.indexOf("..");
-                if(ind==-1) m.msg("objectname has no ..");
-                else m.msg("objectname: "+oname.substring(0, ind));
-                if(mdb.name.toString().toLowerCase().startsWith("myst.."))
-                {
-                    mdbs.add(mdb);
-                }
-                
-                int dummy=0;
-            }
-            catch(shared.ignore e)
-            {
-                m.warn("Error so skipping file.");
-            }
-        }
-    }
+    Vector<realmyst.Mdb> mdbs = automation.realmyst.readAllMdbs(outfol);
     automation.realmyst.save3dsFile(mdbs);
 
+    m.state.pop();
 }//GEN-LAST:event_jButton106ActionPerformed
 
 private void jButton107ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton107ActionPerformed
@@ -4131,53 +4086,7 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     String outfol = this.textfieldState24.getText();
     //m.state.curstate.writeToFile = true;
     
-    File f = new File(outfol+"/scn/maps");
-    //realmyst.rmcontext.get().curnum=0;
-    Vector<realmyst.Hsm> hsms = new Vector<realmyst.Hsm>();
-    int count = 0;
-    for(File child: f.listFiles())
-    {
-        if(child.getName().toLowerCase().endsWith(".hsm"))
-        {
-            //realmyst.rmcontext.get().curnum++;
-            count++;
-            //if(count>400) break;
-            try
-            {
-                int fs = (int)child.length();
-                shared.IBytestream bs = shared.SerialBytestream.createFromFile(child);
-                realmyst.Hsm hsm = new realmyst.Hsm(bs,child.getName());
-                int offset = bs.getAbsoluteOffset();
-                int bytesleft = bs.getBytesRemaining();
-
-                //if (mdb.filesizeMinusHeader!=fs-offset)
-                //{
-                //    int dummy=0;
-                //}
-                if(bytesleft!=0)
-                {
-                    int dummy=0;
-                }
-                
-                //String oname = hsm.name.toString().toLowerCase();
-                //int ind = oname.indexOf("..");
-                //if(ind==-1) m.msg("objectname has no ..");
-                //else m.msg("objectname: "+oname.substring(0, ind));
-                //if(mdb.name.toString().toLowerCase().startsWith("myst.."))
-                //{
-                //    mdbs.add(mdb);
-                //}
-                
-                hsms.add(hsm);
-                
-                int dummy=0;
-            }
-            catch(shared.ignore e)
-            {
-                m.warn("Error so skipping file.");
-            }
-        }
-    }
+    Vector<realmyst.Hsm> hsms = automation.realmyst.realAllHsms(outfol);
     //automation.realmyst.save3dsFile(mdbs);
     automation.realmyst.saveDdsFiles(hsms,"c:/hsmout");
 
@@ -4205,10 +4114,10 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         //"mech_outdoor",
         //"me_conpane",
         
-        "se_stair04",
-        "selenitic",
-        "se_stair03",
-        "se_stair02",
+        //"se_stair04",
+        //"selenitic",
+        //"se_stair03",
+        //"se_stair02",
         
         //"cabin",
         //"treegate",
@@ -4226,6 +4135,8 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         //"compus_room",
         //"sship_tunnel",
         //"lighthouse",
+        
+        "myst..base_mountain"
     };
     Vector<File> files = filesearcher.search.getallfiles(folder, false);
     for(File f: files)
@@ -4234,10 +4145,26 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if(allfound)
         {
             String filename = f.getName();
+            m.msg("String found in file:"+filename);
             int dummy=0;
         }
     }
 }//GEN-LAST:event_jButton109ActionPerformed
+
+private void jButton110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton110ActionPerformed
+
+    String outfol = this.textfieldState24.getText();
+    
+    Vector<realmyst.Sdb> sdbs = automation.realmyst.readAllSdbs(outfol);
+    String[] mystrooms = automation.realmyst.findRoomInfo(sdbs,"Myst");
+    
+    Vector<realmyst.Mdb> mdbs = automation.realmyst.readAllMdbs(outfol);
+    Vector<realmyst.Mdb> mystmdbs = automation.realmyst.filterMdbsByRoom(mdbs, mystrooms);
+    
+    automation.realmyst.save3dsFile(mystmdbs);
+
+    
+}//GEN-LAST:event_jButton110ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4312,6 +4239,7 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton108;
     private javax.swing.JButton jButton109;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton110;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;

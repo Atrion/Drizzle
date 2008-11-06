@@ -31,7 +31,7 @@ public class Count11
         type = Typeid.read(c); e.ensure(type==Typeid.count11);
         int u1 = c.readInt(); //total length of this object.
         int endpos = startpos+u1;
-        m.msg("u1(binary)="+Integer.toBinaryString(u1));
+        //m.msg("u1(binary)="+Integer.toBinaryString(u1));
         int u2 = c.readInt(); e.ensure(u2,0,1); //1
         int u3 = c.readInt(); e.ensure(u3,-1);
         int u4 = c.readInt(); e.ensure(u4,0,1,2); //1,2
@@ -44,13 +44,25 @@ public class Count11
             int u5 = c.readInt(); e.ensure(u5,0,1);
             //if(u5==1)
             //if((u1&32)!=0)
-            if(c.getAbsoluteOffset()!=endpos)
+            //if(c.getAbsoluteOffset()!=endpos)
+            if(u4==1)
             {
-                m.msg("reading extra int and flt");
+                //if(u4!=1)
+                //{
+                //    int dummy=0;
+                //}
+                //m.msg("reading extra int and flt");
                 int u6 = c.readInt(); e.ensure(u6,4,10);
                 Flt f1 = new Flt(c); //0.5
                 int dummy=0;
             }
+            //else
+            //{
+                //if(u4==1)
+                //{
+                //    int dummy=0;
+                //}
+            //}
         }
         else if(u2==1)
         {
