@@ -248,6 +248,11 @@ public enum Typeid implements compilable
     pfGUIRadioGroupCtrl,
     pfGUIPopUpMenu,
     
+    //GreatTreePub
+    plMaintainersMarkerModifier,
+    //Kirel
+    plDistOpacityMod,
+    
     plLeafController,
     nil,
     unknown;
@@ -464,6 +469,8 @@ public enum Typeid implements compilable
         tri( 0x0BB, -2, -2, pfGUIRadioGroupCtrl),
         tri( 0x119, -2, -2, pfGUIPopUpMenu),
         
+        tri( 0x10D, 0x10D, -2, plMaintainersMarkerModifier),
+        tri( 0x131, 0x131, -2, plDistOpacityMod),
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };

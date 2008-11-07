@@ -31,7 +31,7 @@ import shared.readexception;
 //import java.util.Vector;
 
 
-public class ODEPhysical extends uruobj
+public class PlODEPhysical extends uruobj
 {
     PlSynchedObject parent;
     int type;
@@ -68,7 +68,7 @@ public class ODEPhysical extends uruobj
     
     public PlHKPhysical.HKPhysical convertee;
     
-    public ODEPhysical(context c) throws readexception
+    public PlODEPhysical(context c) throws readexception
     {
         parent = new PlSynchedObject(c);
         type = c.readInt();

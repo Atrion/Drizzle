@@ -448,7 +448,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="textfieldState3" pref="433" max="32767" attributes="0"/>
+                                          <Component id="textfieldState3" pref="437" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
@@ -1304,6 +1304,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="checkboxState22" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState19" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState18" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1333,7 +1334,9 @@
                               <Component id="checkboxState19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState20" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="82" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkboxState22" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="48" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1383,6 +1386,12 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Do automated work on Myst5(PythonFileMods, etc)"/>
                         <Property name="name" type="java.lang.String" value="automateMystV" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="shared.State.CheckboxState" name="checkboxState22">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Use xyzw for PlPXPhysical orientation."/>
+                        <Property name="name" type="java.lang.String" value="plpxphysicalQuatChange" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>

@@ -67,4 +67,21 @@ OnClimbingWallEvent
 OnClimbingWallInit
 OnClimbingBlockerEvent
 
+Kirel cone problem info:
+------------------------
+moul
+mass=8
+rc=1
+el=0
+pos= ~ 426,-802,9
+orient = 0,0,0,1
 
+pots
+pos= ~ 426,-802,9
+orient= 1,0,0,0
+mass=15
+rc=1
+el=0
+
+Changing the quat around didn't seem to fix it.
+Perhaps it's a difference between havok and physx, and the cones were changed to cut down on network traffic.

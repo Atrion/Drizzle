@@ -76,6 +76,7 @@ public class Gui extends javax.swing.JFrame {
                 "Cleft_District_YeeshaVisionBlocked.prp",
                 "Personal_District_psnlMYSTII.prp",
                 "AhnySphere01_District_Sphere01.prp",
+                "Neighborhood02_District_krelKirel.prp",
             };
             public int getSize() {
                 return strings.length;
@@ -123,6 +124,8 @@ public class Gui extends javax.swing.JFrame {
                 "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
                 "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
                 "Personal.age","Personal.fni","Personal.sum","Personal_District_BuiltIn.prp","Personal_District_psnlMYSTII.prp","Personal_District_Textures.prp",
+                "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
+                "Neighborhood02.age","Neighborhood02.fni","Neighborhood02.sum","Neighborhood02_District_BuiltIn.prp","Neighborhood02_District_GuildInfo-Cartographers.prp","Neighborhood02_District_GuildInfo-Greeters.prp","Neighborhood02_District_GuildInfo-Maintainers.prp","Neighborhood02_District_GuildInfo-Messengers.prp","Neighborhood02_District_GuildInfo-Writers.prp","Neighborhood02_District_krelClassRm.prp","Neighborhood02_District_krelCommonRm.prp","Neighborhood02_District_krelKirel.prp","Neighborhood02_District_krelPrivateRm.prp","Neighborhood02_District_Textures.prp",
             };
             public int getSize() {
                 return strings.length;
@@ -472,6 +475,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState18 = new shared.State.CheckboxState();
         checkboxState19 = new shared.State.CheckboxState();
         checkboxState20 = new shared.State.CheckboxState();
+        checkboxState22 = new shared.State.CheckboxState();
         jPanel23 = new javax.swing.JPanel();
         jButton90 = new javax.swing.JButton();
         textfieldState18 = new shared.State.TextfieldState();
@@ -1355,6 +1359,9 @@ public class Gui extends javax.swing.JFrame {
             checkboxState20.setText("Do automated work on Myst5(PythonFileMods, etc)");
             checkboxState20.setName("automateMystV"); // NOI18N
 
+            checkboxState22.setText("Use xyzw for PlPXPhysical orientation.");
+            checkboxState22.setName("plpxphysicalQuatChange"); // NOI18N
+
             javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
             jPanel20.setLayout(jPanel20Layout);
             jPanel20Layout.setHorizontalGroup(
@@ -1362,6 +1369,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel20Layout.createSequentialGroup()
                     .addGap(114, 114, 114)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1388,7 +1396,9 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(82, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(48, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -4222,6 +4232,7 @@ private void jButton110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.CheckboxState checkboxState2;
     private shared.State.CheckboxState checkboxState20;
     private shared.State.CheckboxState checkboxState21;
+    private shared.State.CheckboxState checkboxState22;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;

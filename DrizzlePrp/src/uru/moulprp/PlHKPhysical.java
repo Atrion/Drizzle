@@ -45,7 +45,7 @@ public class PlHKPhysical extends uruobj
     public PXPhysical physx;
     
     //plODEPHysical
-    public ODEPhysical ode;
+    public PlODEPhysical ode;
     
     public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
     {
@@ -249,6 +249,31 @@ public class PlHKPhysical extends uruobj
             pots.zzzgroup0 = 0x4;
 
         }
+        else if(( u14==0x0 && u15==0x0 && LOSDB==0x1 && group0==0x4 )
+              ||( u14==0x0 && u15==0x0 && LOSDB==0x5 && group0==0x4 ))
+        {
+            //seen in GreatTreePub, works, e.g. clock that moves up when you approach it from the other side.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x1020000;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            pots.zzzgroup0 = 0x4;
+        }
+        else if( u14==0x6 && u15==0x0 && LOSDB==0x4 && group0==0x120 )
+        {
+            //seen in Kirel
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x0;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x4;
+            pots.zzzgroup0 = 0x104;
+        }
         else
         {
             if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
@@ -319,7 +344,7 @@ public class PlHKPhysical extends uruobj
         else if(c.readversion==4)
         {
             _version = 4;
-            ode = new ODEPhysical(c);
+            ode = new PlODEPhysical(c);
         }
         else if(c.readversion==3)
         {
@@ -372,7 +397,7 @@ public class PlHKPhysical extends uruobj
 
         public PXPhysical(context c) throws readexception
         {
-            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("swimdetectregion"))
+            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("kirelorange"))
             {
                 int dummy=0;
             }
@@ -409,7 +434,17 @@ public class PlHKPhysical extends uruobj
             //if(soundgroup.hasRef!=0)
             //    dummy=0;
             position = new Vertex(c); //position?
-            orientation = new Quat(c); //orientation?
+            
+            if(shared.State.AllStates.getStateAsBoolean("plpxphysicalQuatChange"))
+            {
+                orientation = Quat.readXYZW(c.in);
+                m.warn("Using new Quat form in PlPXPhysical, if you have problems with physics, try reverting it.");
+            }
+            else
+            {
+                orientation = new Quat(c); //orientation?
+            }
+            
             group = new HsBitVector(c); //{0} //like u4?
             /*if(group.count!=1)
                 dummy=0;
@@ -638,6 +673,10 @@ public class PlHKPhysical extends uruobj
         
         public HKPhysical(context c) throws readexception
         {
+            if(c.curRootObject.objectname.toString().toLowerCase().startsWith("kirelorange"))
+            {
+                int dummy=0;
+            }            
             parent = new PlSynchedObject(c);
             position = new Vertex(c);
             orientation = new Quat(c);

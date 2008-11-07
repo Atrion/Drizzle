@@ -666,6 +666,9 @@ public class mystAutomation
                             type.plDynaRippleMgr,
                             type.plLayerSDLAnimation,
                             
+                            type.plMaintainersMarkerModifier,
+                            type.plDistOpacityMod,
+                            
                         };
                         namestartswith = new String[]{
                             /*"linkinpoint",
@@ -826,6 +829,9 @@ public class mystAutomation
         Typeid.plLayerSDLAnimation,
         
         Typeid.pfGUIDragBarCtrl,
+        
+        Typeid.plMaintainersMarkerModifier,
+        Typeid.plDistOpacityMod,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1000,6 +1006,9 @@ public class mystAutomation
                         type.pfGUIDialogMod,
                         type.plPostEffectMod,
                         type.pfGUIDragBarCtrl,
+                        
+                        type.plMaintainersMarkerModifier,
+                        type.plDistOpacityMod,
                 };
                 String[] namestarts={
                 };
@@ -1017,6 +1026,7 @@ public class mystAutomation
         prefices.put("EderTsogal", 97);
         prefices.put("Neighborhood02",86);
         prefices.put("Personal",85);
+        prefices.put("GreatTreePub",84);
         
         HashMap<String, String> agenames = new HashMap<String, String>();
         agenames.put("Kveer", "KveerMOUL");

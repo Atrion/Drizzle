@@ -43,6 +43,16 @@ public class Quat extends uruobj
         y = new Flt(c);
         z = new Flt(c);
     }
+    private Quat(){}
+    public static Quat readXYZW(IBytestream c)
+    {
+        Quat result = new Quat();
+        result.x = new Flt(c);
+        result.y = new Flt(c);
+        result.z = new Flt(c);
+        result.w = new Flt(c);
+        return result;
+    }
     public Quat(context c) //deprecated
     {
         //These looked different, but changing it messed up the angle of the door in EderDelin.

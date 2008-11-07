@@ -331,6 +331,10 @@ public class PrpObject extends uruobj
                 return new PlLayerSDLAnimation(c);
             case pfGUIDragBarCtrl:
                 return new PfGUIButtonMod.PfGUIDragBarCtrl(c);
+            case plMaintainersMarkerModifier:
+                return new PlMaintainersMarkerModifier(c);
+            case plDistOpacityMod:
+                return new PlDistOpacityMod(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
