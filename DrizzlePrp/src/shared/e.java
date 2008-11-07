@@ -34,7 +34,20 @@ public class e
             m.warn("ensure: condition not met.");
         }
     }
-    
+    public static void allowflags(int var, int... allowedflags)
+    {
+        int allflags = 0;
+        for(int flag: allowedflags)
+        {
+            allflags |= flag;
+        }
+        
+        int result = var & (~allflags);
+        if(result!=0)
+        {
+            m.warn("Flag not in list of allowed flags. These are the disallowed flags: "+Integer.toBinaryString(result));
+        }
+    }
     /*public static void ensure(short a, int ... options)
     {
         for(int i=0; i<options.length; i++)

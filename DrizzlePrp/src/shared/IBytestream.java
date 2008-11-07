@@ -84,6 +84,10 @@ public abstract class IBytestream
                 e2.printStackTrace();
                 throw new uncaughtexception("Encountered readexception.");
             }
+            else if(e2 instanceof ignore)
+            {
+                throw (ignore)e2;
+            }
             else
             {
                 e2.printStackTrace();

@@ -4033,6 +4033,11 @@ private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     m.state.pop();
     
+    m.msg("Subcount3s handled: "+Integer.toString(realmyst.Count3Undone.subcount3.numhandled));
+    m.msg("Subcount3s ignored: "+Integer.toString(realmyst.Count3Undone.subcount3.numignored));
+    m.msg("Count3s handled: "+Integer.toString(realmyst.Count3Undone.numhandled));
+    m.msg("Count3s ignored: "+Integer.toString(realmyst.Count3Undone.numignored));
+    
     /*File f2 = new File(outfol+"/mdb");
     for(File child: f2.listFiles())
     {
