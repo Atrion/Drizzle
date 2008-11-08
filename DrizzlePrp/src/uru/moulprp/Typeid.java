@@ -252,6 +252,11 @@ public enum Typeid implements compilable
     plMaintainersMarkerModifier,
     //Kirel
     plDistOpacityMod,
+    //GlobalClothing
+    plMorphSequence,
+    plMorphDataSet,
+    plClothingItem,
+    plSharedMesh,
     
     plLeafController,
     nil,
@@ -447,7 +452,7 @@ public enum Typeid implements compilable
         tri( -2, -2, 0x01B, plCrossfade), //not in pots
         tri( -2, -2, 0x20D, plCrossfadeMsg), //not in pots
         tri( -2, -2, 0x021, plWindBoneMod), //not in pots
-        tri( 0x08E, -2, 0x07C, plLayerLinkAnimation),
+        tri( 0x08E, 0x08E, 0x07C, plLayerLinkAnimation),
         tri( 0x08F, -2, 0x07D, plArmatureMod),
         tri( -2, -2, 0x200, plAvBrainPirahna), //not in pots
         tri( 0x494, -2, -2, plAvBrainQuab),
@@ -471,6 +476,10 @@ public enum Typeid implements compilable
         
         tri( 0x10D, 0x10D, -2, plMaintainersMarkerModifier),
         tri( 0x131, 0x131, -2, plDistOpacityMod),
+        tri( 0x108, 0x108, -2, plMorphSequence),
+        tri( 0x10F, 0x10F, -2, plMorphDataSet),
+        tri( 0x0B5, 0x0B5, -2, plClothingItem),
+        tri( 0x0CC, 0x0CC, -2, plSharedMesh),
                 
         tri( 0x8000, 0x8000, 0x8000, nil ),
     };

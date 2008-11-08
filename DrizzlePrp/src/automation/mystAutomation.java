@@ -668,6 +668,12 @@ public class mystAutomation
                             
                             type.plMaintainersMarkerModifier,
                             type.plDistOpacityMod,
+                            type.plMorphSequence,
+                            type.plMorphDataSet,
+                            type.plClothingItem,
+                            type.plSharedMesh,
+                            type.plLayerLinkAnimation,
+                            
                             
                         };
                         namestartswith = new String[]{
@@ -832,6 +838,10 @@ public class mystAutomation
         
         Typeid.plMaintainersMarkerModifier,
         Typeid.plDistOpacityMod,
+        Typeid.plMorphSequence,
+        Typeid.plMorphDataSet,
+        Typeid.plClothingItem,
+        Typeid.plSharedMesh,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1009,6 +1019,10 @@ public class mystAutomation
                         
                         type.plMaintainersMarkerModifier,
                         type.plDistOpacityMod,
+                        type.plMorphSequence,
+                        type.plMorphDataSet,
+                        type.plClothingItem,
+                        type.plSharedMesh,
                 };
                 String[] namestarts={
                 };

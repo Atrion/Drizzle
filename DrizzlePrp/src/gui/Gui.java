@@ -125,7 +125,7 @@ public class Gui extends javax.swing.JFrame {
                 "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
                 "Personal.age","Personal.fni","Personal.sum","Personal_District_BuiltIn.prp","Personal_District_psnlMYSTII.prp","Personal_District_Textures.prp",
                 "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
-                "Neighborhood02.age","Neighborhood02.fni","Neighborhood02.sum","Neighborhood02_District_BuiltIn.prp","Neighborhood02_District_GuildInfo-Cartographers.prp","Neighborhood02_District_GuildInfo-Greeters.prp","Neighborhood02_District_GuildInfo-Maintainers.prp","Neighborhood02_District_GuildInfo-Messengers.prp","Neighborhood02_District_GuildInfo-Writers.prp","Neighborhood02_District_krelClassRm.prp","Neighborhood02_District_krelCommonRm.prp","Neighborhood02_District_krelKirel.prp","Neighborhood02_District_krelPrivateRm.prp","Neighborhood02_District_Textures.prp",
+                "GlobalClothing.age","GlobalClothing.sum","GlobalClothing_District_Female01.prp","GlobalClothing_District_Female02.prp","GlobalClothing_District_Female04.prp","GlobalClothing_District_Female.prp","GlobalClothing_District_Male01.prp","GlobalClothing_District_Male02.prp","GlobalClothing_District_Male04.prp","GlobalClothing_District_Male.prp"
             };
             public int getSize() {
                 return strings.length;

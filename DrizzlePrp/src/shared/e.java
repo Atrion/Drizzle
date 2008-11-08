@@ -118,7 +118,7 @@ public class e
         {
             if(string[i] < ' ' || string[i] > '~') //is it not a printable char?
             {
-                if(string[i]!=0x09) //tab
+                if(string[i]!=0x09&&string[i]!=0x0d&&string[i]!=0x0a) //tab
                 {
                     return false;
                 }

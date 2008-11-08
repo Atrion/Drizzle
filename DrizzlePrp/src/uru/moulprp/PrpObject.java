@@ -335,6 +335,15 @@ public class PrpObject extends uruobj
                 return new PlMaintainersMarkerModifier(c);
             case plDistOpacityMod:
                 return new PlDistOpacityMod(c);
+            case plMorphSequence:
+                return new PlMorphSequence(c);
+            case plMorphDataSet:
+                return new PlMorphDataSet(c);
+            case plClothingItem:
+                return new PlClothingItem(c);
+            case plSharedMesh:
+                return new PlSharedMesh(c);
+
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
