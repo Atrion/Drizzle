@@ -1978,7 +1978,7 @@ public class mystAutomation
             }
             
             //add any pages that are authored.
-            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
                 //for(Pair<String,Integer> curauthprp: authored.get(agename))
                 for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
@@ -2036,7 +2036,7 @@ public class mystAutomation
         {
             String agename = getAgenameFromFilename(filename);
             
-            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
                 for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
                 {
