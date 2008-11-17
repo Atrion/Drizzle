@@ -2030,6 +2030,30 @@ public class mystAutomation
         }
         
         
+        //Handle .(others) files...
+        Vector<String> otherfiles = filterFilenamesByExtension(files, ".(others)");
+        for(String filename: otherfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+            {
+                for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
+                {
+                    String pagename = curauthprp.left;
+                    int pagenum = curauthprp.right;
+
+                    String outfilename = replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
+                    String outfile = outfolder + "/dat/" + outfilename;
+
+                    Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
+                    bytes.saveAsFile(outfile);
+                }
+            }
+            
+        }
+        
+        
         //Handle .prp files...
         Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
         for(String filename: prpfiles)
@@ -2045,14 +2069,14 @@ public class mystAutomation
                 Bytes bytes = shared.GetResource.getResourceAsBytes("/files/myst5/"+outfilename);
                 bytes.saveAsFile(outfile);
             }
-            else if(shared.GetResource.hasResource("files/authored/"+outfilename))
-            {
-                if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
-                {
-                    Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
-                    bytes.saveAsFile(outfile);
-                }
-            }
+            //else if(shared.GetResource.hasResource("files/authored/"+outfilename))
+            //{
+            //    if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+            //    {
+            //        Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
+            //        bytes.saveAsFile(outfile);
+            //    }
+            //}
             else
             {
                 Bytes prpdata = Bytes.createFromFile(infile);

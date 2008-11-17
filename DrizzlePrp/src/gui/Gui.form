@@ -361,6 +361,17 @@
                         </Constraint>
                       </Constraints>
                     </Component>
+                    <Component class="shared.State.CheckboxState" name="checkboxState23">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Include new content (i.e. footstep sounds)."/>
+                        <Property name="name" type="java.lang.String" value="includeAuthoredMaterial" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="170" width="280" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel35">
@@ -1304,7 +1315,6 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState22" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState19" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1337,9 +1347,7 @@
                               <Component id="checkboxState20" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState22" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="14" max="32767" attributes="0"/>
+                              <EmptySpace pref="48" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1395,12 +1403,6 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Use xyzw for PlPXPhysical orientation."/>
                         <Property name="name" type="java.lang.String" value="plpxphysicalQuatChange" noResource="true"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Included original authored material(Currently just on MystMystV)"/>
-                        <Property name="name" type="java.lang.String" value="includeAuthoredMaterial" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>

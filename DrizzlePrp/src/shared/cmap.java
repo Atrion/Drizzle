@@ -23,7 +23,7 @@ public class cmap<S,T>
         //leftval = s;
         //child = new ChainedHashMap;
     }
-    public Pair<S,T>[] getAllElements()
+    public ArrayList<Pair<S,T>> getAllElements()
     {
         ArrayList<Pair<S,T>> result = new ArrayList();
         for(Entry<S,T> e: map.entrySet())
@@ -32,7 +32,8 @@ public class cmap<S,T>
             T t = e.getValue();
             result.add(new Pair(s,t));
         }
-        return (Pair<S,T>[])result.toArray();
+        //return (Pair<S,T>[])result.toArray();
+        return result;
     }
     public T get(S key)
     {

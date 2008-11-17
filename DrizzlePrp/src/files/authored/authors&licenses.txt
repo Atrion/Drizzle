@@ -1,3 +1,13 @@
+licenses:
 Race's files are available under the GPLv3, or at your option, any later version.
+
+authors:
 Direbo_District_Additions.prp: Race
 MystMystV_District_Addition.prp: Race
+DescentMystV_District_FootRgns.prp: Race
+
+readme:
+To add or update a file:
+  add it to the files.authored package.
+  in mystAutomation.java, add an entry to the "authored" object:  authored.put("Descent","FootRgns",97);  will add the page FootRgns with pagenum 97(as given in the .age file).
+  test
