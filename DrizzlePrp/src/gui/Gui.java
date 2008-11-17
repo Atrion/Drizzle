@@ -476,6 +476,7 @@ public class Gui extends javax.swing.JFrame {
         checkboxState19 = new shared.State.CheckboxState();
         checkboxState20 = new shared.State.CheckboxState();
         checkboxState22 = new shared.State.CheckboxState();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel23 = new javax.swing.JPanel();
         jButton90 = new javax.swing.JButton();
         textfieldState18 = new shared.State.TextfieldState();
@@ -1362,6 +1363,9 @@ public class Gui extends javax.swing.JFrame {
             checkboxState22.setText("Use xyzw for PlPXPhysical orientation.");
             checkboxState22.setName("plpxphysicalQuatChange"); // NOI18N
 
+            jCheckBox1.setText("Included original authored material(Currently just on MystMystV)");
+            jCheckBox1.setName("includeAuthoredMaterial"); // NOI18N
+
             javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
             jPanel20.setLayout(jPanel20Layout);
             jPanel20Layout.setHorizontalGroup(
@@ -1369,6 +1373,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel20Layout.createSequentialGroup()
                     .addGap(114, 114, 114)
                     .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jCheckBox1)
                         .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(checkboxState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1398,7 +1403,9 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(checkboxState20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(48, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jCheckBox1)
+                    .addContainerGap(14, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Settings", jPanel20);
@@ -4352,6 +4359,7 @@ private void jButton110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton97;
     private javax.swing.JButton jButton98;
     private javax.swing.JButton jButton99;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;

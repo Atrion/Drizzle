@@ -6,6 +6,8 @@
 package shared;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map.Entry;
 
 //Used to be ChainedHashMap.
 
@@ -20,6 +22,17 @@ public class cmap<S,T>
         map = new HashMap<S,T>();
         //leftval = s;
         //child = new ChainedHashMap;
+    }
+    public Pair<S,T>[] getAllElements()
+    {
+        ArrayList<Pair<S,T>> result = new ArrayList();
+        for(Entry<S,T> e: map.entrySet())
+        {
+            S s = e.getKey();
+            T t = e.getValue();
+            result.add(new Pair(s,t));
+        }
+        return (Pair<S,T>[])result.toArray();
     }
     public T get(S key)
     {

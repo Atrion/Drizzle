@@ -1,0 +1,3 @@
+Race's files are available under the GPLv3, or at your option, any later version.
+Direbo_District_Additions.prp: Race
+MystMystV_District_Addition.prp: Race

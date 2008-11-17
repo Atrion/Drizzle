@@ -41,3 +41,11 @@ To convert just the Releeshan part of Kveer(Myst 5):
 3b) Leave the "Page=dusttest,90" line alone.
 
 
+Project Info:
+-------------
+SVN: https://alcugs.almlys.org/svn/drizzle/
+Sourceforge: http://sourceforge.net/projects/drizzle/
+Authors(not a complete list):
+  H'astin: flymode
+  Race: Myst5 footstep regions
+  Dustin(aka ddb174): conversion

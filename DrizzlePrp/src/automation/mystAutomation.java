@@ -1893,6 +1893,11 @@ public class mystAutomation
         agenames.put("Kveer", "KveerMystV");
         agenames.put("Myst", "MystMystV");
         
+        cmap<String,cmap<String,Integer>> authored = new cmap();
+        authored.put("Myst","Additions",89);
+        authored.put("Direbo","Additions",98);
+        authored.put("Descent","FootRgns",97);
+
         Typeid[] readable = mystAutomation.moulReadable;
         
         //create folders...
@@ -1972,6 +1977,34 @@ public class mystAutomation
                 decryptedData = agefile.saveToBytes();
             }
             
+            //add any pages that are authored.
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+            {
+                //for(Pair<String,Integer> curauthprp: authored.get(agename))
+                for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
+                {
+                    String pagename = curauthprp.left;
+                    int pagenum = curauthprp.right;
+
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    agefile.appendLine("Page="+pagename+","+Integer.toString(pagenum));
+                    decryptedData = agefile.saveToBytes();
+                }
+                
+                /*if(agename.equals("Myst"))
+                {
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    agefile.appendLine("Page=Additions,89");
+                    decryptedData = agefile.saveToBytes();
+                }
+                if(agename.equals("Direbo"))
+                {
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    agefile.appendLine("Page=Additions,98");
+                    decryptedData = agefile.saveToBytes();
+                }*/
+            }
+            
             //Remove all the KveerMystV pages except kverReleeshan and dusttest from the .age file.
             if(makeMinimalReleeshan)
             {
@@ -2011,6 +2044,14 @@ public class mystAutomation
             {
                 Bytes bytes = shared.GetResource.getResourceAsBytes("/files/myst5/"+outfilename);
                 bytes.saveAsFile(outfile);
+            }
+            else if(shared.GetResource.hasResource("files/authored/"+outfilename))
+            {
+                if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial"))
+                {
+                    Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
+                    bytes.saveAsFile(outfile);
+                }
             }
             else
             {
