@@ -24,10 +24,15 @@ public class search
     }
     public static boolean searchForString(File f, String searchstr)
     {
+        return (searchForStringPos(f,searchstr)!=-1);
+    }
+    public static int searchForStringPos(File f, String searchstr)
+    {
         byte[] data = FileUtils.ReadFile(f);
         String filedata = b.BytesToString(data);
         int index = filedata.indexOf(searchstr);
-        return (index!=-1);
+        //return (index!=-1);
+        return index;
     }
     public static Vector<File> getallfiles(String folder, boolean recurse)
     {

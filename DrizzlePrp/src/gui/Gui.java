@@ -584,6 +584,8 @@ public class Gui extends javax.swing.JFrame {
         jButton108 = new javax.swing.JButton();
         jButton109 = new javax.swing.JButton();
         jButton110 = new javax.swing.JButton();
+        textfieldState29 = new shared.State.TextfieldState();
+        textfieldState30 = new shared.State.TextfieldState();
         jPanel12 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
@@ -2504,6 +2506,16 @@ public class Gui extends javax.swing.JFrame {
                 jPanel10.add(jButton110);
                 jButton110.setBounds(380, 160, 63, 36);
 
+                textfieldState29.setText("textfieldState29");
+                textfieldState29.setName("searchString"); // NOI18N
+                jPanel10.add(textfieldState29);
+                textfieldState29.setBounds(650, 40, 130, 20);
+
+                textfieldState30.setText("textfieldState30");
+                textfieldState30.setName("searchPath"); // NOI18N
+                jPanel10.add(textfieldState30);
+                textfieldState30.setBounds(650, 10, 87, 20);
+
                 tabsState3.addTab("realMyst", jPanel10);
 
                 jButton50.setText("jButton50");
@@ -4107,14 +4119,17 @@ private void jButton108ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     String outfol = this.textfieldState24.getText();
     //m.state.curstate.writeToFile = true;
     
-    Vector<realmyst.Hsm> hsms = automation.realmyst.realAllHsms(outfol);
+    Vector<realmyst.Hsm> hsms = automation.realmyst.readAllHsms(outfol);
     //automation.realmyst.save3dsFile(mdbs);
     automation.realmyst.saveDdsFiles(hsms,"c:/hsmout");
 
 }//GEN-LAST:event_jButton108ActionPerformed
 
 private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton109ActionPerformed
-    String folder = "G:/prps/realmysttest2/sdb";
+    //String folder = "G:/prps/realmysttest2/sdb";
+    String sep = ";";
+    String folder = this.textfieldState30.getText();
+    String searchstr = this.textfieldState29.getText();
     String[] searchstrs = {
         //6910138.vdb
         //"channelwood",
@@ -4159,15 +4174,30 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         
         "myst..base_mountain"
     };
+    searchstrs = searchstr.split(sep);
+    //String[] searchstrs2 = new String[]{this.textfieldState29.getText()};
     Vector<File> files = filesearcher.search.getallfiles(folder, false);
     for(File f: files)
     {
-        boolean allfound = filesearcher.search.searchForStrings(f, searchstrs);
-        if(allfound)
+        //boolean allfound = filesearcher.search.searchForStrings(f, searchstrs);
+        //if(allfound)
+        if(searchstrs.length<2)
         {
-            String filename = f.getName();
-            m.msg("String found in file:"+filename);
-            int dummy=0;
+            int pos = filesearcher.search.searchForStringPos(f, searchstr);
+            if(pos!=-1)
+            {
+                String filename = f.getName();
+                m.msg("String found in file:"+filename+"  at pos 0x"+Integer.toHexString(pos));
+                int dummy=0;
+            }
+        }
+        else
+        {
+            boolean allfound = filesearcher.search.searchForStrings(f, searchstrs);
+            if(allfound)
+            {
+                m.msg("Strings all found in file:"+f.getName());
+            }
         }
     }
 }//GEN-LAST:event_jButton109ActionPerformed
@@ -4177,13 +4207,13 @@ private void jButton110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     String outfol = this.textfieldState24.getText();
     
     Vector<realmyst.Sdb> sdbs = automation.realmyst.readAllSdbs(outfol);
-    String[] mystrooms = automation.realmyst.findRoomInfo(sdbs,"Myst");
     
     Vector<realmyst.Mdb> mdbs = automation.realmyst.readAllMdbs(outfol);
-    Vector<realmyst.Mdb> mystmdbs = automation.realmyst.filterMdbsByRoom(mdbs, mystrooms);
-    
-    automation.realmyst.save3dsFile(mystmdbs);
+    //String[] mystrooms = automation.realmyst.findRoomInfo(sdbs,"Myst");
+    //Vector<realmyst.Mdb> mystmdbs = automation.realmyst.filterMdbsByRoom(mdbs, mystrooms);
+    //automation.realmyst.save3dsFile(mystmdbs);
 
+    automation.realmyst.testrun2(sdbs,mdbs);
     
 }//GEN-LAST:event_jButton110ActionPerformed
     
@@ -4477,7 +4507,9 @@ private void jButton110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState26;
     private shared.State.TextfieldState textfieldState27;
     private shared.State.TextfieldState textfieldState28;
+    private shared.State.TextfieldState textfieldState29;
     private shared.State.TextfieldState textfieldState3;
+    private shared.State.TextfieldState textfieldState30;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState6;

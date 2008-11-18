@@ -26,11 +26,18 @@ public class Count3Undone
     Typeid type;
     int size;
     
-    int possibility;
+    public int possibility;
+    public int[] possibilities;
     
+    public StringAndByte sb2;
+    public StringAndByte[] sb3a;
+    public int u7;
+    public int u5;
+    public subcount3[] subs;
     public static int numhandled=0;
     public static int numignored=0;
     
+    //material, I think.
     //sub_409d40, I think, because it reads a sub_40cb70 (4x4 matrix).
     public Count3Undone(IBytestream c)
     {
@@ -59,7 +66,7 @@ public class Count3Undone
         
         int u1 = c.readInt();  e.ensure(u1,1);
         
-        StringAndByte sb2 = new StringAndByte(c);
+        sb2 = new StringAndByte(c);
         //int bytecount = c.readInt();
         //if(bytecount>256) return;
         //c.readBytes(bytecount);
@@ -75,14 +82,21 @@ public class Count3Undone
         //    StringAndByte sb3a = new StringAndByte(c);
         //    int dummy=0;
         //}
-        StringAndByte[] sb3a = c.readArray(StringAndByte.class, u3);
+        sb3a = c.readArray(StringAndByte.class, u3);
         int u4 = c.readInt(); e.ensure(u4,3);
-        int u5 = c.readInt(); e.ensure(u5,0,1);
+        u5 = c.readInt(); e.ensure(u5,0,1);
         int u6 = c.readInt(); e.ensure(u6,655,645,557,649,521,533,544,512,644,556,535,513,520,549,133,524,23,6,525,516,517,29,7,15,5,37,21,13,12,45,9,4,36,1,0,33,8,141);//e.ensure(u6,5,8,4,13,37,12,36,21,9,1,33); //13
-        int u7 = c.readInt(); e.ensure(u7,1,2,3,4,5,6);
+        u7 = c.readInt(); e.ensure(u7,1,2,3,4,5,6);
+        IBytestream c2 = c.Fork();
+        {
+            int curpos = c2.getAbsoluteOffset();
+            byte[] rawdata2 = c2.readBytes(size-(curpos-startpos)-(4*u7));
+            possibilities = c2.readInts(u7);
+        }
+        
         try{
             numignored++;
-            subcount3[] subs = c.readArray(subcount3.class, u7);
+            subs = c.readArray(subcount3.class, u7);
             numignored--;
             numhandled++;
         }catch(ignore e){
@@ -208,8 +222,21 @@ public class Count3Undone
     
     public static class subcount3
     {
-        int esiPlus120;
+        public int esiPlus120;
         int ending;
+        public Flt u14;
+        public Flt u15;
+        public Flt f200;
+        public Flt f203;
+        public Flt f16;
+        public Flt f17;
+        public Flt f18;
+        public Flt f19;
+        public Flt f20;
+        public Flt f21;
+        public Flt f22;
+        public Flt f23;
+        public Matrix m400;
         
         public static int numignored = 0;
         public static int numhandled = 0;
@@ -240,11 +267,11 @@ public class Count3Undone
             int u13 = c.readInt(); e.ensure(u13,0,4,128,256,32,132);//e.ensure(u13,0,4); //sometimes a float.
             //m.msg("count3: u8b="+Integer.toString(u8b)+" u9="+Integer.toString(u9));
             //if(true)return;
-            Flt u14 = new Flt(c);
-            Flt u15 = new Flt(c);
+            u14 = new Flt(c);
+            u15 = new Flt(c);
             if((u12&0x20)!=0)
             {
-                Flt f200 = new Flt(c);
+                f200 = new Flt(c);
                 int dummy=0;
             }
             if((esiPlus120&0x100)!=0)
@@ -257,19 +284,19 @@ public class Count3Undone
             }
             if((esiPlus120&0x4000)!=0)
             {
-                Flt f203 = new Flt(c);
+                f203 = new Flt(c);
                 int dummy=0;
             }
-            Flt u16 = new Flt(c);
-            Flt u17 = new Flt(c);
-            Flt u18 = new Flt(c);
-            Flt f19 = new Flt(c); //often the previous ones are all 0.0 and this is 1.0
-            Flt f20 = new Flt(c);
-            Flt f21 = new Flt(c);
-            Flt f22 = new Flt(c);
-            Flt f23 = new Flt(c);
+            f16 = new Flt(c);
+            f17 = new Flt(c);
+            f18 = new Flt(c);
+            f19 = new Flt(c); //often the previous ones are all 0.0 and this is 1.0
+            f20 = new Flt(c);
+            f21 = new Flt(c);
+            f22 = new Flt(c);
+            f23 = new Flt(c);
 
-            Matrix m400=null;
+            //Matrix m400=null;
             if((esiPlus120&0x10)!=0)
             {
                 m400 = new Matrix(c);

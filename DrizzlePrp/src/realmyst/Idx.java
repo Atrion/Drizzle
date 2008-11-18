@@ -45,6 +45,17 @@ public class Idx
         SaveGroupIndex = new IdxBlock(c);
         RoomIndex = new IdxBlock(c);
         NamedGroupIndex = new IdxBlock(c);
+        int saveGroupCount = 0;
+        for(IdxEntry entry: SaveGroupIndex.entries)
+        {
+            saveGroupCount += entry.indexcount;
+        }
+        int roomCount = 0;
+        for(IdxEntry entry: RoomIndex.entries)
+        {
+            roomCount += entry.indexcount;
+        }
+        int dummy=0;
         //idxblocks = c.readArray(IdxBlock.class, blockcount);
         //c.toString();
         //u1 = c.readInt(); //0x03000000 = 00 00 00 03
@@ -93,6 +104,11 @@ public class Idx
             name = new Bstr(c);
             indexcount = c.readInt();
             indexes = c.readInts(indexcount);
+        }
+        
+        public String toString()
+        {
+            return name.toString();
         }
     }
 }

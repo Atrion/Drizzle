@@ -30,9 +30,10 @@ public class Count2
     public int u3;
     public Bstr s4;
     public byte b5;
-    public Bstr s6;
+    public Bstr textureFilename;
     public int u7;
     
+    //texture
     public Count2(IBytestream c) //has hsm filename.
     {
         type = Typeid.read(c);
@@ -46,7 +47,7 @@ public class Count2
         //StringAndByte sb4 = new StringAndByte(c);
         s4 = new Bstr(c);
         b5 = c.readByte(); e.ensure((int)b5,0);
-        s6 = new Bstr(c);
+        textureFilename = new Bstr(c);
         u7 = c.readInt(); //e.ensure(u7,0x800000,0x18800000,0x10800000,0x10900000,0x20800000,0x900000);
         int dummy=0;
     }

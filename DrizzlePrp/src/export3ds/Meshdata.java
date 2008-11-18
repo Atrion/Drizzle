@@ -10,9 +10,10 @@ import java.util.Vector;
 
 public class Meshdata extends tdsobj
 {
-    public Material mat;
+    //public Material mat;
+    public Vector<Material> mats = new Vector();
     //public NamedObj obj;
-    public Vector<NamedObj> objs = new Vector<NamedObj>();
+    public Vector<NamedObj> objs = new Vector();
     
     private Meshdata(){}
     
@@ -24,7 +25,8 @@ public class Meshdata extends tdsobj
     public Typeid type(){return Typeid.meshdata;}
     public void innercompile(IBytedeque c)
     {
-        mat.compile(c);
+        //mat.compile(c);
+        c.writeVector(mats);
         //obj.compile(c);
         c.writeVector(objs);
     }

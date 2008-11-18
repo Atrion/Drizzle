@@ -142,11 +142,26 @@ strictfp public class Flt extends uruobj implements ICompilable
         float result = f1+f;
         return Flt.createFromJavaFloat(result);
     }
+    public void addModify(Flt f)
+    {
+        addModify(f.toJavaFloat());
+    }
     public void addModify(float f)
     {
         float f1 = this.toJavaFloat();
         float result = f1+f;
         this.assign(result);
+    }
+    public void multModify(float f)
+    {
+        float f1 = this.toJavaFloat();
+        this.assign(f1*f);
+    }
+    public void multModify(Flt f)
+    {
+        float f1 = this.toJavaFloat();
+        float f2 = f.toJavaFloat();
+        this.assign(f1*f2);
     }
     public Flt sub(Flt f)
     {

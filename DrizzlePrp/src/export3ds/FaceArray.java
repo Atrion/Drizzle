@@ -6,15 +6,22 @@
 package export3ds;
 
 import shared.*;
+import java.util.Vector;
 
 public class FaceArray extends tdsobj
 {
     public short facecount;
     public tdsface[] faces;
-    public MeshMatGroup mat;
+    //public MeshMatGroup mat;
+    public Vector<MeshMatGroup> mats = new Vector<MeshMatGroup>();
     
     private FaceArray(){}
     
+    public static FaceArray createNull()
+    {
+        FaceArray result = new FaceArray();
+        return result;
+    }
     public static FaceArray create(ShortTriplet[] faces, String matname)
     {
         FaceArray result = new FaceArray();
@@ -33,7 +40,7 @@ public class FaceArray extends tdsobj
         {
             facesToApplyTo[i] = (short)i;
         }
-        result.mat = MeshMatGroup.create(matname, facesToApplyTo);
+        result.mats.add(MeshMatGroup.create(matname, facesToApplyTo));
         return result;
     }
     public Typeid type(){return Typeid.facearray;}
@@ -41,7 +48,8 @@ public class FaceArray extends tdsobj
     {
         c.writeShort(facecount);
         c.writeArray(faces);
-        mat.compile(c);
+        //mat.compile(c);
+        c.writeVector(mats);
     }
     
     public static class tdsface implements ICompilable

@@ -16,6 +16,7 @@ public class Material extends tdsobj
     
     public TextureMap texturemap;
     
+    
     private Material(){}
     
     public static Material create(String name)

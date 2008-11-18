@@ -30,14 +30,18 @@ public class Mdb
     int u10;
     public Sixlet start;
     public Sixlet[] bunch;
+    public Quat[] quats;
     public Face[] fs;    
-    IntsIndex ii;
-    IntsFullIndex ifi;
+    public IntsIndex ii;
+    public IntsFullIndex ifi;
     public wha[] whas;
     public Vertex[] trips;
+    public Face[] fs2;
+    public int[] extra;
     
     
     static Primary main;
+    public String sourceName;
     public Mdb(IBytestream c)
     {
         this(c,"none");
@@ -45,6 +49,7 @@ public class Mdb
     public Mdb(IBytestream c, String fntrap)
     {
         int curfilenum = realmyst.rmcontext.get().curnum;
+        sourceName = c.sourceName;
         
         //tag = c.readInt();
         type = Typeid.read(c);
@@ -55,11 +60,13 @@ public class Mdb
         //mdb
         filesize = c.readInt(); //filesize (including header)
         u2 = c.readInt(); e.ensure(u2,1);//=1?
-        name = new Bstr(c);
+        name = new Bstr(c,true);
         String trap = 
                 //"aurora..sn_TOWER_observe_roof01"
                 //"aurora..switchtube"
-                "aurora..boltref03"
+                //"aurora..boltref03"
+                //"myst..portfloor"
+                "myst..portstairstep"
                 ;
         if(name.toString().toLowerCase().startsWith(trap.toLowerCase()))
         {
@@ -112,7 +119,7 @@ public class Mdb
 
             int s2 = c.readInt(); //4
             bunch = c.readArray(Sixlet.class, s2); //vertex and vertex normal (vertex normal is average of face normals of adjacent faces.)
-            Quat[] quats = null; //I think this is actually a RGBA colour.
+            quats = null; //I think this is actually a RGBA colour.
             if(s1!=2)
             {
                 quats = c.readArray(Quat.class, s2);
@@ -195,7 +202,7 @@ public class Mdb
         
         
         
-        Face[] fs2=null;
+        //Face[] fs2=null;
         //if(u7!=267)
         if(u7==1||u7==11||u7==9)
         {
@@ -217,11 +224,13 @@ public class Mdb
         //int u32 = c.readInt(); //59 53 53
         //int u33 = c.readInt(); //5  5  5
         
+        
+        //maps faces to material indexes, use IntsFullIndex.
         //IntsIndex:
         int u26 = c.readInt();
         //int[] extra = c.readInts(u26-1); //n-1 extra ints.
         //int u32 = c.readInt();
-        int[] extra = c.readInts(u26);
+        extra = c.readInts(u26);
 
         //if(u7!=267)
         //{
@@ -245,7 +254,7 @@ public class Mdb
     }
     public static class IntsFullIndex
     {
-        int[] values;
+        public int[] values;
         
         public IntsFullIndex(IBytestream c, IntsIndex index, int count)
         {
@@ -271,8 +280,8 @@ public class Mdb
     }
     public static class IntsIndex
     {
-        int count;
-        int[] indices;
+        public int count;
+        public int[] indices;
         
         public IntsIndex(IBytestream c)
         {
@@ -411,6 +420,11 @@ public class Mdb
             {
                 int dummy=0;
             }
+        }
+        
+        public String toString()
+        {
+            return "f12="+f12.toString();
         }
     }
     public static class Sixlet

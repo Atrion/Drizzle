@@ -2970,6 +2970,28 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="shared.State.TextfieldState" name="textfieldState29">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="textfieldState29"/>
+                <Property name="name" type="java.lang.String" value="searchString" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="650" y="40" width="130" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="shared.State.TextfieldState" name="textfieldState30">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="textfieldState30"/>
+                <Property name="name" type="java.lang.String" value="searchPath" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="650" y="10" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel12">

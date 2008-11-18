@@ -32,6 +32,20 @@ public class Bstr
     int strlen;
     byte[] string;
     
+    public Bstr(IBytestream c, boolean lastByteShouldBeNulled)
+    {
+        strlen = c.readInt();
+        string = new byte[strlen];
+        for(int i=0;i<strlen;i++)
+        {
+            string[i] = c.readByte();
+        }
+        
+        if(lastByteShouldBeNulled)
+        {
+            string[strlen-1] = 0;
+        }
+    }
     public Bstr(IBytestream c)
     {
         strlen = c.readInt();

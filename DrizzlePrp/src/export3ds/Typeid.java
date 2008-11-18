@@ -28,6 +28,10 @@ public enum Typeid
     texturemap,
     texturefilename,
     uvcoords,
+    uoffset,
+    voffset,
+    uscale,
+    vscale,
     ;
     public static pair[] pairs = {
         p((short)0xffff, unknown),
@@ -48,6 +52,10 @@ public enum Typeid
         p((short)0x4140, uvcoords),
         p((short)0xa200, texturemap),
         p((short)0xa300, texturefilename),
+        p((short)0xa358, uoffset),
+        p((short)0xa35a, voffset),
+        p((short)0xa356, uscale),
+        p((short)0xa354, vscale),
     };
     
     public static void verify()

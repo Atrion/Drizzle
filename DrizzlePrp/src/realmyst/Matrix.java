@@ -22,7 +22,7 @@ import shared.*;
 
 public class Matrix
 {
-    Flt[][] values = new Flt[4][4];
+    public Flt[][] values = new Flt[4][4];
     
     public Matrix(IBytestream c)
     {

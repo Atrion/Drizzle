@@ -23,8 +23,11 @@ public class Sdb
     public Count3Undone[] count3s;
     public Count10[] count10s;
     
+    public String sourceName;
+    
     public Sdb(IBytestream c)
     {
+        sourceName = c.sourceName;
         String filename = new java.io.File(c.sourceName).getName();
         String trapfilename=
                 //"113499986.vdb"
