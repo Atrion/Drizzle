@@ -42,6 +42,11 @@ public class Urustring extends uruobj
     
     private Urustring(){}
     
+    public void shallowCopyFrom(Urustring s2)
+    {
+        this.unencryptedString = s2.unencryptedString;
+    }
+    
     public Urustring(context c)
     {
         if(c.readversion==6 || c.readversion==3)

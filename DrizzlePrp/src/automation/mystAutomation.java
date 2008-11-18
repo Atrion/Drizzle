@@ -1897,6 +1897,8 @@ public class mystAutomation
         authored.put("Myst","Additions",89);
         authored.put("Direbo","Additions",98);
         authored.put("Descent","FootRgns",97);
+        authored.put("Tahgira","FootRgns",97);
+        authored.put("Todelmer","FootRgns",92);
 
         Typeid[] readable = mystAutomation.moulReadable;
         

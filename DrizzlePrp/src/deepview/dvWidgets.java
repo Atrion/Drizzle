@@ -13,6 +13,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
+import javax.swing.JTextField;
 import shared.m;
 
 public class dvWidgets
@@ -40,6 +41,13 @@ public class dvWidgets
     public static JButton jbutton(String text)
     {
         JButton result = new JButton();
+        result.setText(text);
+        return result;
+    }
+    
+    public static JTextField jtextfield(String text)
+    {
+        JTextField result = new JTextField();
         result.setText(text);
         return result;
     }

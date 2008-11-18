@@ -17,31 +17,58 @@ import javax.swing.JComboBox;
 import uru.moulprp.PrpRootObject;
 import uru.moulprp.prpfile;
 import uru.moulprp.Urustring;
+import javax.swing.JTextField;
 
 public class dvUrustring extends dvPanel
 {
     Urustring urustring;
     String name;
     deepview parent;
-    //boolean changeable;
+    boolean changeable;
     prpfile prp;
     PrpRootObject rootobj;
+    JTextField jtextfield;
     
-    public dvUrustring(Urustring urustring, String name, deepview parent)
+    public dvUrustring(Urustring urustring, String name, deepview parent, boolean changeable)
     {
         this.urustring = urustring;
         this.name = name;
         this.parent = parent;
-        //this.changeable = changeable;
+        this.changeable = changeable;
         
         prp = parent.curprp;
         rootobj = parent.curobj;
+        
+        
+        
         reload();
+    }
+    private void handleclick()
+    {
+        this.urustring.shallowCopyFrom(Urustring.createFromString(jtextfield.getText()));
+        m.msg("Changed value.  Press save to commit.");
+        rootobj.markAsChanged(); //set it to save the changed version, rather than the raw bytes.
+        this.reload();
     }
     private void reload()
     {
         this.removeAll();
-        this.add(dvWidgets.jlabel("Urustring name:"+name+" value:"+urustring.toString()));
+        //this.add(dvWidgets.jlabel("Urustring name:"+name+" value:"+urustring.toString()));
+        this.add(dvWidgets.jlabel("Urustring name:"+name+" "));
+        jtextfield = dvWidgets.jtextfield(urustring.toString());
+        this.add(jtextfield);
+
+        if(changeable)
+        {
+            JButton button = dvWidgets.jbutton("change");
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    handleclick();
+                }
+            });
+            this.add(button);
+        }
+        
         
         this.revalidate();
     }

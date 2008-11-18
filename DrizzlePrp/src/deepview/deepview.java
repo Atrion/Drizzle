@@ -312,7 +312,7 @@ public class deepview
         }
         else if(objclass==uru.moulprp.Urustring.class)
         {
-            panel.add(new dvUrustring((Urustring)obj,name,this));
+            panel.add(new dvUrustring((Urustring)obj,name,this,true));
             return;
         }
         else if(objclass==uru.moulprp.Wpstr.class)
