@@ -56,7 +56,7 @@ public class x001CSimulationInterface extends uruobj
             props = new HsBitVector(c); //always empty in both pots and moul.
             u2 = c.readInt(); //always zero in both pots and moul.
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             //these are always zero in moul and pots, so we are justified in doing this.
             props = HsBitVector.createDefault();

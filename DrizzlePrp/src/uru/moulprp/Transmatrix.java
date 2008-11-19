@@ -41,7 +41,7 @@ public strictfp class Transmatrix extends uruobj
     
     public Transmatrix(context c)
     {
-        if(c.readversion==6)
+        if(c.readversion==6||c.readversion==7)
         {
             isnotIdentity = c.in.readByte();
             if(isnotIdentity!=0)

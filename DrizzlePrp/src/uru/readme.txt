@@ -41,6 +41,7 @@ versions are:
 4 crowthistle (plasma=2.05)
 5 myst 5 (plasma=2.10)
 6 myst online (episode 9.853 release) (python=2.3.3, I think)
+7 hexisle
 
 to keep in mind:
 plSynchedObject is seeing some low flags not mentioned on Cobbs, but they don't seem to affect anything.

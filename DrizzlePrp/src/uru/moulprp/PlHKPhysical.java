@@ -341,7 +341,7 @@ public class PlHKPhysical extends uruobj
             _version = 6;
             physx = new PXPhysical(c);
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             _version = 4;
             ode = new PlODEPhysical(c);

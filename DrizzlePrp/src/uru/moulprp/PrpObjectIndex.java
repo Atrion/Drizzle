@@ -63,7 +63,7 @@ public class PrpObjectIndex extends uruobj
         public ObjectindexObjecttype(context c)
         {
             //type = data.readShort();
-            if(c.readversion==6||c.readversion==4)
+            if(c.readversion==6||c.readversion==4||c.readversion==7)
             {
                 type = Typeid.ReadEvenIfUnknown(c);
                 datasize = c.in.readInt(); //relative offset to next objecttype.

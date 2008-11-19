@@ -5,9 +5,17 @@ authors:
 Direbo_District_Additions.prp: Race
 MystMystV_District_Addition.prp: Race
 DescentMystV_District_FootRgns.prp: Race
+(OldDelmeNoMusic)MystMystV_District_Additions.prp: Race
+Tahgira_District_FootRgns.prp: Race
+Todelmer_DIstrict_FootRgns.prp: Race
 
 readme:
 To add or update a file:
   add it to the files.authored package.
   in mystAutomation.java, add an entry to the "authored" object:  authored.put("Descent","FootRgns",97);  will add the page FootRgns with pagenum 97(as given in the .age file).
   test
+To modify the .ogg file reference since pyprp breaks them sometimes:
+  read the file with deepview
+  open the PlSoundBuffer object
+  change the .ogg filename to the correct one
+  click the change button, then the save button.

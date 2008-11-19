@@ -102,7 +102,15 @@ public class PlDrawableSpans extends uruobj
                 int breakdummy = 0;
             }
         }
-        unused = data.readInt(); e.ensure(unused==0);
+        if(c.readversion==7)
+        {
+            //I don't think hex isle has the next field.
+            unused = 0;
+        }
+        else
+        {
+            unused = data.readInt(); e.ensure(unused==0);
+        }
         listcount = data.readInt(); e.ensure(listcount==subsetcount);//so far so good.
         unused2 = data.readInts(listcount);
         //unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
@@ -110,6 +118,13 @@ public class PlDrawableSpans extends uruobj
         for(int i=0;i<subsetcount;i++)
         {
             unused3[i] = new Uruobjectref(c);
+        }
+        
+        if(c.readversion==7)
+        {
+            //2 uruobjectref vectors here, but apparently they don't get called.
+            //c.readInt();
+            //c.readInt();
         }
         
         if(subsetcount>0)
@@ -136,10 +151,10 @@ public class PlDrawableSpans extends uruobj
         worldToLocals = c.readArray(Transmatrix.class,matrixsetcount);
         localToBones = c.readArray(Transmatrix.class,matrixsetcount);
         boneToLocals = c.readArray(Transmatrix.class,matrixsetcount);
-        subsetgroupcount = data.readInt();
-        subsetgroups = c.readArray(SubsetGroup.class,subsetgroupcount);
+        subsetgroupcount = data.readInt(); //hexisle line 346
+        subsetgroups = c.readArray(SubsetGroup.class,subsetgroupcount); //fDIIndices, hexisle starts at line 386
         meshcount = data.readInt(); //so far so good.
-        meshes = c.readArray(Mesh.class,meshcount);
+        meshes = c.readArray(Mesh.class,meshcount); //plGBufferGroups
         embeddedtype = Typeid.Read(c);
         switch(embeddedtype)
         {
@@ -237,7 +252,7 @@ public class PlDrawableSpans extends uruobj
         public SpanSubset(context c) throws readexception
         {
             Bytestream data = c.in;
-            visible = data.readInt(); e.ensureflags(visible,1);
+            visible = data.readInt(); e.ensureflags(visible,1,0); //is sometimes 0 in hex isle.
             materialindex = data.readInt();
             if(materialindex==0 || materialindex==3)
             {
@@ -248,7 +263,7 @@ public class PlDrawableSpans extends uruobj
             }
             localToWorld = c.readObj(Transmatrix.class);
             worldToLocal = c.readObj(Transmatrix.class);
-            lightingflags = data.readInt();
+            lightingflags = data.readInt(); //props
             localBounds = c.readObj(BoundingBox.class);
             worldBounds = c.readObj(BoundingBox.class);
             blendflag = data.readInt();
@@ -262,15 +277,26 @@ public class PlDrawableSpans extends uruobj
             {
                 xu6 = c.readObj(Flt.class);
             }
-            meshindex = data.readInt();
-            unused1 = data.readInt();
-            unused2 = data.readInt();
-            vertexstart1 = data.readInt();
-            vertexstart2 = data.readInt();
-            vertexcount = data.readInt();
-            surfaceindex = data.readInt();
-            indexstart = data.readInt();
-            indexcount = data.readInt();
+            meshindex = data.readInt(); //groupIdx
+            unused1 = data.readInt(); //vBufferIdx
+            unused2 = data.readInt(); //cellIdx
+            vertexstart1 = data.readInt(); //cellOffset
+            vertexstart2 = data.readInt(); //vStartIdx
+            vertexcount = data.readInt(); //vLength
+            if(c.readversion==7)
+            {
+                //hex isle doesn't have the next two fields.
+            }
+            else
+            {
+                surfaceindex = data.readInt(); //bufferIdx
+                indexstart = data.readInt(); //startIdx
+            }
+            indexcount = data.readInt(); //iLength
+            if((lightingflags&0x4)!=0)
+            {
+                int dummy=0;
+            }
         }
         
         public void compile(Bytedeque data)
@@ -428,28 +454,88 @@ public class PlDrawableSpans extends uruobj
         public Mesh(context c)
         {
             Bytestream data = c.in;
-            fformat = data.readByte();
-            size = data.readInt();
-            //restofmesh = data.readBytes(size); //should this be size*4 ?
-            vertexstoragecount = data.readInt();
-            submeshes = new SubMesh[vertexstoragecount];
-            for(int i=0;i<vertexstoragecount;i++)
+            if(c.readversion==7)
             {
-                submeshes[i] = new SubMesh(c,fformat);
+                //sub_5059A0
+                int hi1 = c.readInt(); //76
+                byte hi2 = c.readByte(); //0 //this+4+6
+                byte hi3 = c.readByte(); e.ensure(hi3==1);//1 //v3+11, used in an if statement.
+                byte hi4 = c.readByte(); //0
+                byte hi5 = c.readByte(); //0
+                int hi6 = c.readInt(); //864 //v4+4
+                byte hi7 = c.readByte(); //0
+                byte hi6a = (byte)(hi6&0xFF);
+                byte hi6b = (byte)((hi6>>>8)&0xFF);
+                int v7 = b.ByteToInt32(((hi3&0x2)!=0)?hi6b:hi6a);
+                //hex isle doesn't look like it has the size field.  It's ignored by pots, so we'll just stick 0 in it.
+                size = 0;
+                vertexstoragecount = data.readInt();
+                SubMeshAlt[] submeshalt = new SubMeshAlt[vertexstoragecount];
+                for(int i=0;i<vertexstoragecount;i++)
+                {
+                    submeshalt[i] = new SubMeshAlt(c,fformat,v7,hi6,hi2,hi1);
+                }
+                //TODO rest of this, but it seems to work perfectly up to this point.
+                surfacecount = data.readInt();
+                surfaces = new Shortvector[surfacecount];
+                for(int i=0;i<surfacecount;i++)
+                {
+                    //surfaces[i] = new Shortvector(data);
+                    int surf1 = c.readInt();
+                    byte surf2 = c.readByte();
+                    byte[] surf3 = c.readBytes(surf1);
+                    int dummy=0;
+                }
+                int dummy=0;
             }
-            //TODO rest of this, but it seems to work perfectly up to this point.
-            surfacecount = data.readInt();
-            surfaces = new Shortvector[surfacecount];
-            for(int i=0;i<surfacecount;i++)
+            else
             {
-                surfaces[i] = new Shortvector(data);
+                fformat = data.readByte();
+                size = data.readInt();
+                
+                //restofmesh = data.readBytes(size); //should this be size*4 ?
+                vertexstoragecount = data.readInt();
+                submeshes = new SubMesh[vertexstoragecount];
+                for(int i=0;i<vertexstoragecount;i++)
+                {
+                    submeshes[i] = new SubMesh(c,fformat);
+                }
+                //TODO rest of this, but it seems to work perfectly up to this point.
+                surfacecount = data.readInt();
+                surfaces = new Shortvector[surfacecount];
+                for(int i=0;i<surfacecount;i++)
+                {
+                    surfaces[i] = new Shortvector(data);
+                }
+                u1 = data.readInt();
+                u2 = data.readInt();
+                u3 = data.readInt();
+                lastindex = data.readInt();
             }
-            u1 = data.readInt();
-            u2 = data.readInt();
-            u3 = data.readInt();
-            lastindex = data.readInt();
         }
-        
+        public static class SubMeshAlt
+        {
+            public SubMeshAlt(context c, byte fformat, int v7, int v17, byte hi2orig, int hi1orig)
+            {
+                int hi1 = c.readInt(); //768, size in bytes?
+                byte hi2 = c.readByte(); //0
+                m.warn("TODO: make this check if the short is in range.");
+                
+                int v16 = hi1 / v7; e.ensure(hi1 % v7 == 0);
+                int count = HexislePlDrawableSpans.getvertexcount(hi1orig, hi2orig);
+                //int count = v16;
+                
+                //hi1 is the size in bytes?
+                //v16 is the count of GetVertexDataSize calls.
+                //v7 is the stride?
+                
+                context c2 = c.Fork();
+                //int dataSize = SubMesh.GetVertexDataSize(count, fformat, c2);
+                int dataSize = HexislePlDrawableSpans.GetVertexDataSize(count, fformat, c2, v17, hi2orig, hi1orig);
+                byte[] rawdata = c.in.readBytes(dataSize);
+                int rawdataversion = c.readversion;
+            }
+        }
         public void compile(Bytedeque data)
         {
             data.writeByte(fformat);
@@ -485,7 +571,17 @@ public class PlDrawableSpans extends uruobj
             {
                 if((fformat&0x80)!=0)
                 {
-                    count = c.in.readShort(); //number of vertexes.
+                    if(c.readversion==7)
+                    {
+                        int hi1 = c.readInt();
+                        byte hi2 = c.readByte();
+                        m.warn("TODO: make this check if the short is in range.");
+                        count = (short)hi1;
+                    }
+                    else
+                    {
+                        count = c.in.readShort(); //number of vertexes.
+                    }
                     
                     //vertices = new SubMeshVertex[count];
                     //for(int i=0;i<count;i++)
@@ -559,7 +655,7 @@ public class PlDrawableSpans extends uruobj
                                 b1 = c.in.readByte();
                                 if(c.compile && c.writeversion==6) c.out.writeByte(b1);
                             }
-                            else if(c.readversion==3||c.readversion==4)
+                            else if(c.readversion==3||c.readversion==4||c.readversion==7)
                             {
                                 //do nothing
                             }
@@ -595,7 +691,7 @@ public class PlDrawableSpans extends uruobj
                                     m.msg("unknown byte.");
                                 }
                             }
-                            else if(c.readversion==3||c.readversion==4)
+                            else if(c.readversion==3||c.readversion==4||c.readversion==7)
                             {
                                 count--;
                                 short out9 = c.in.readShort();
@@ -726,7 +822,7 @@ public class PlDrawableSpans extends uruobj
                             c.out.writeShort((short)(b.ByteToInt32(out4)*257));
                         }
                     }
-                    else if(c.readversion==3||c.readversion==4)
+                    else if(c.readversion==3||c.readversion==4||c.readversion==7)
                     {
                         short out2 = c.in.readShort();
                         short out3 = c.in.readShort();

@@ -72,7 +72,7 @@ public class Pageid extends uruobj
             if((fixme & 0xFFFF0000)==0xFFFF0000) prefix = -((fixme & 0x0000FF00)>>>8);
             else prefix = (fixme & 0xFFFFFF00)>>>8;
         }
-        else if(c.readversion==4) // Crowthwistle
+        else if(c.readversion==4||c.readversion==7) // Crowthwistle
         {
             //int fixme = Bytes.Int16ToInt32(c.readShort());
             //fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);

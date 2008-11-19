@@ -43,7 +43,7 @@ public class PlLogicModifier extends uruobj
         conditionalcount = c.readInt();
         conditionals = c.readArray(Uruobjectref.class, conditionalcount);
         u1 = c.readInt();
-        if(c.readversion==4)
+        if(c.readversion==4||c.readversion==7)
         {
             xref = new Uruobjectref(c); //e.g. KeepClickLinkLaki(plPickingDetector)
         }

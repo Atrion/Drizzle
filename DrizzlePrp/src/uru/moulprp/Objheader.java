@@ -43,7 +43,7 @@ public class Objheader extends uruobj
         {
             u1 = c.in.readByte();
         }
-        else if(c.readversion==3||c.readversion==4)
+        else if(c.readversion==3||c.readversion==4||c.readversion==7)
         {
             //do nothing.
         }

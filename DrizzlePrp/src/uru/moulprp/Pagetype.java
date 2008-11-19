@@ -34,7 +34,7 @@ public class Pagetype extends uruobj
         {
             pagetype = c.readShort();
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             pagetype = Bytes.ByteToInt16(c.readByte());
         }

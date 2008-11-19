@@ -622,7 +622,7 @@ public abstract class PrpMessage extends PrpTaggedObject
             {
                 id = c.readInt();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 byte idb = c.readByte();
                 id = b.ByteToInt32(idb); //is this correct?
@@ -906,7 +906,7 @@ public abstract class PrpMessage extends PrpTaggedObject
                 u2 = c.readInt();
                 flags = c.readInt();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 //if(refcount!=0)
                 //{

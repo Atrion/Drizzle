@@ -89,7 +89,7 @@ public class PlSynchedObject extends uruobj
                 //m.err("plsynchedobject: haven't implemented this yet.");
             }
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             //if neither of bits 2 nor 3 are set...
             //I'm assuming that I should be assigning to the first set.  The 2nd set is hardly (possibly never) used.

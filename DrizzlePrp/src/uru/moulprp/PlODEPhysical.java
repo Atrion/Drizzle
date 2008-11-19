@@ -122,8 +122,17 @@ public class PlODEPhysical extends uruobj
         u9 = c.readInt();
         u10 = c.readInt();
         u11 = c.readInt();
-        u12 = c.readInt(); //flags
+        if(c.readversion==4)
+        {
+            u12 = c.readInt(); //flags
+        }
         u13 = c.readShort(); //LOSDB
+        
+        if(c.readversion==7)
+        {
+            //int xu14 = c.readInt();
+            //int xu15 = c.readInt();
+        }
         
         sceneobject = new Uruobjectref(c); //plSceneObject
         scenenode = new Uruobjectref(c); //plSceneNode

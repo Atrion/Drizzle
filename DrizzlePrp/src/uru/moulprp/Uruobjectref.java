@@ -43,7 +43,7 @@ public class Uruobjectref extends uruobj
                 xdesc = new Uruobjectdesc(c);
             }
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             xdesc = new Uruobjectdesc(c);
             //try to tell if this is a valid reference...

@@ -62,7 +62,7 @@ public class PrpHeader extends uruobj
         //if(version==5) c.readversion = 3;
         //else if (version==6) c.readversion = 6;
         
-        if(version==6) //moul, myst5, crowthistle
+        if(version==6||version==9) //moul, myst5, crowthistle; version9=hexisle
         {
             //version = data.readInt(); e.ensure(version,6); //version 6 for MOUL and possibly MystV.
             version2 = data.readShort();
@@ -86,7 +86,14 @@ public class PrpHeader extends uruobj
             }
             else
             {
-                c.readversion = 4; //crowthistle (this may be indistinguishable from Myst5)
+                if(version==6)
+                {
+                    c.readversion = 4; //crowthistle (this may be indistinguishable from Myst5)
+                }
+                else
+                {
+                    c.readversion = 7; //hexisle
+                }
                 
                 //let's just ignore this stuff; I think it is replaced by the object index anyway, so it isn't even used.
                 for(int i=0;i<version2;i++)

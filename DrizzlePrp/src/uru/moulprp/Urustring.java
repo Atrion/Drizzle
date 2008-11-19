@@ -84,7 +84,7 @@ public class Urustring extends uruobj
                 }
             }
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             byte[] key = { 109, 121, 115, 116, 110, 101, 114, 100 }; //ascii for "mystnerd"
             short len = c.readShort();

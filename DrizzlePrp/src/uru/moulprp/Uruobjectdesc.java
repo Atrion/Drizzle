@@ -68,10 +68,14 @@ public class Uruobjectdesc extends uruobj
             objecttype = Typeid.Read(c);
             objectname = new Urustring(c);
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
-            xm5unknown = c.readShort(); //only in crowthistle?
+            xm5unknown = c.readShort(); //only in crowthistle?(actually a part of the Pageid.)
             pagetype = new Pagetype(c);
+            if(flag==0x02)
+            {
+                int dummy=0;
+            }
             objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
             objectname = new Urustring(c);
