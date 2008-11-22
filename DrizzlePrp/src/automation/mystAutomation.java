@@ -1674,6 +1674,12 @@ public class mystAutomation
             "MountainScene_tw_w3.prp",
             "MountainScene_Vista.prp",
         };
+        
+        Vector<String> files = new Vector();
+        files.add("MarshScene.(others)");
+        
+        cmap<String,cmap<String,Integer>> authored = new cmap();
+        authored.put("MarshScene","FootRgns",93);
 
         //create folders...
         FileUtils.CreateFolder(outfolder+"/dat/");
@@ -1709,6 +1715,20 @@ public class mystAutomation
                 decryptedData = agefile.saveToBytes();
             }
             
+            //add any pages that are authored.
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
+            {
+                for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
+                {
+                    String pagename = curauthprp.left;
+                    int pagenum = curauthprp.right;
+
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    agefile.appendLine("Page="+pagename+","+Integer.toString(pagenum));
+                    decryptedData = agefile.saveToBytes();
+                }
+            }
+            
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
         }
@@ -1742,6 +1762,28 @@ public class mystAutomation
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
+        }
+        
+        //Handle .(others) files...
+        Vector<String> otherfiles = filterFilenamesByExtension(files, ".(others)");
+        for(String filename: otherfiles)
+        {
+            String agename = getAgenameFromFilename(filename);
+            
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
+            {
+                for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
+                {
+                    String pagename = curauthprp.left;
+                    int pagenum = curauthprp.right;
+
+                    String outfilename = replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
+                    String outfile = outfolder + "/dat/" + outfilename;
+
+                    Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
+                    bytes.saveAsFile(outfile);
+                }
+            }
         }
         
         //create .sum files...

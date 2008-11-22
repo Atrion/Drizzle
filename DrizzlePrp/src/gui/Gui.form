@@ -1315,6 +1315,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                                      <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Component id="checkboxState22" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState19" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1347,7 +1351,9 @@
                               <Component id="checkboxState20" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState22" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="72" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1403,6 +1409,11 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Use xyzw for PlPXPhysical orientation."/>
                         <Property name="name" type="java.lang.String" value="plpxphysicalQuatChange" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel30">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Include new content (this checkbox is on the Simplicity-&gt;MystV tab)"/>
                       </Properties>
                     </Component>
                   </SubComponents>
