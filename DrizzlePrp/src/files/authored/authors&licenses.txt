@@ -3,11 +3,11 @@ Race's files are available under the GPLv3, or at your option, any later version
 
 authors:
 Direbo_District_Additions.prp: Race
-MystMystV_District_Addition.prp: Race
+MystMystV_District_Addition.prp: Race (change mystMusic.ogg to mystAmbMusic.ogg)
 DescentMystV_District_FootRgns.prp: Race
 (OldDelmeNoMusic)MystMystV_District_Additions.prp: Race
 Tahgira_District_FootRgns.prp: Race
-Todelmer_DIstrict_FootRgns.prp: Race
+Todelmer_DIstrict_FootRgns.prp: Race (change tdlmMusic.ogg to tdlmAmbMusic01_loop.ogg)
 
 readme:
 To add or update a file:
