@@ -1149,7 +1149,7 @@ public class mystAutomation
 
             prpfile prp = prpfile.createFromContext(c, readable);
             
-            processPrp(prp,agename,agenames,outfolder);
+            processPrp(prp,agename,agenames,outfolder,infolder);
             
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -1169,7 +1169,7 @@ public class mystAutomation
         //All done!
         m.msg("Done Moul work!");
     }
-    public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder)
+    public static void processPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder)
     {
         String newagename = agenames.get(agename);
         String finalname = newagename;
@@ -1178,6 +1178,7 @@ public class mystAutomation
         if(shared.State.AllStates.getStateAsBoolean("automateMystV"))
         {
             myst5Fixes.fixClickables(finalname, prp);
+            myst5Fixes.fixBinks(finalname, prp, infolder);
             //fix direbo links.
             PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
             for(PrpRootObject obj: objs)
@@ -1758,7 +1759,7 @@ public class mystAutomation
             
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.crowReadable);
 
-            processPrp(prp,agename,agenames,outfolder);
+            processPrp(prp,agename,agenames,outfolder,crowthistlefolder);
 
             Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             prpoutputbytes.saveAsFile(outfile);
@@ -2145,7 +2146,7 @@ public class mystAutomation
 
                 prpfile prp = prpfile.createFromContext(c, readable);
             
-                processPrp(prp,agename,agenames,outfolder);
+                processPrp(prp,agename,agenames,outfolder,infolder);
 
                 Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
                 prpoutputbytes.saveAsFile(outfile);

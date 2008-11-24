@@ -30,12 +30,12 @@ import shared.readexception;
 
 public class PlLayerBink extends uruobj
 {
-    PlLayerAVI parent;
+    public PlLayerAVI parent;
     //int u1;
     
     public PlLayerBink(context c) throws readexception
     {
-        if(c.readversion!=4) throw new readexception("PlLayerBink currently can only read from myst5");
+        if(c.readversion!=4) m.warn("PlLayerBink currently can only read from myst5");
         //although the class is present in Pots, it isn't actually present in any prp files.
         parent = new PlLayerAVI(c);
         
@@ -51,10 +51,10 @@ public class PlLayerBink extends uruobj
     
     public static class PlLayerAVI extends uruobj
     {
-        PlLayerAnimation parent;
+        public PlLayerAnimation parent;
         //int u1;
         //byte[] bs1;
-        Bstr filename;
+        public Bstr filename;
         Uruobjectref uref1;
         Uruobjectref uref2;
         int u2;

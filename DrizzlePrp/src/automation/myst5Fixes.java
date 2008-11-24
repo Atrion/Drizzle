@@ -11,6 +11,7 @@ import shared.m;
 import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
 import java.io.File;
 import java.util.Vector;
+import shared.*;
 
 public class myst5Fixes
 {
@@ -84,6 +85,46 @@ public class myst5Fixes
         m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!");
         m.status("Conversion completed!");
     }
+    
+    public static void fixBinks(String finalname, prpfile prp, String infolder)
+    {
+        String agename = finalname.toLowerCase();
+        String pagename = prp.header.pagename.toString().toLowerCase();
+        
+        for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plLayerBink))
+        {
+            PlLayerBink binkobj = obj.castTo();
+            if((binkobj.parent.parent.tc.flags&0x2)!=0) //if loop
+            {
+                //Set loop length based on bink video length.
+                //These changes require you to delte the Age's sav file.
+                String pathtobinkfile = infolder+"/"+binkobj.parent.filename.toString();
+                IBytestream binkc = SerialBytestream.createFromFilename(pathtobinkfile);
+                bink.binkfile binkfile = new bink.binkfile(binkc);
+                float length = binkfile.getLengthInSeconds();
+                m.msg("Modifying bink: "+pathtobinkfile+" length="+Float.toString(length));
+                binkobj.parent.parent.tc.flags &= ~0x1; //turn off the "stopped" flag.
+                //binkobj.parent.parent.tc.flags |= 0x20; //turn on the easingIn flag.
+                //binkobj.parent.parent.tc.flags = 0x22; //can this be removed?
+                //binkobj.parent.parent.tc.flags |= 0x88;
+                //binkobj.parent.parent.tc.loopEnd = Flt.createFromJavaFloat(length-1.0f);
+                binkobj.parent.parent.tc.loopEnd = Flt.createFromJavaFloat(length);
+                //binkobj.parent.parent.tc.end = Flt.createFromJavaFloat(length);
+            }
+            /*String filename = bink.parent.filename.toString().toLowerCase();
+            if(
+                filename.equals("direbo.bik")||
+                filename.equals("reststop1.bik")||
+                filename.equals("reststop2.bik")||
+                filename.equals("reststop3.bik")||
+                filename.equals("reststop4.bik")
+                )
+            {
+                bink.parent.parent.tc.loopEnd = Flt.createFromJavaFloat(30.0f);
+            }*/
+        }
+    }
+
     public static void fixClickables(String finalname, prpfile prp)
     {
         //restore limited clickables

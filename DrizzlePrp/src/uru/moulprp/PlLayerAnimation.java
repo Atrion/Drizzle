@@ -34,8 +34,8 @@ import shared.b;
 public class PlLayerAnimation extends uruobj
 {
     //Objheader xheader;
-    plLayerAnimationBase parent;
-    plAnimTimeConvert tc;
+    public plLayerAnimationBase parent;
+    public plAnimTimeConvert tc;
     
     
     public PlLayerAnimation(context c) throws readexception
@@ -52,12 +52,12 @@ public class PlLayerAnimation extends uruobj
     }
     public static class plAnimTimeConvert extends uruobj
     {
-        int u1;
-        Flt starttime;
-        Flt endtime;
-        Flt u2;
-        Flt u3;
-        Flt u4;
+        public int flags; //was u1
+        public Flt begin; //was starttime
+        public Flt end; //was endtime
+        public Flt loopEnd; //was u2
+        public Flt loopBegin; //was u3
+        public Flt speed; //was u4
         PrpTaggedObject curvecontroller1;
         PrpTaggedObject curvecontroller2;
         PrpTaggedObject curvecontroller3;
@@ -74,12 +74,12 @@ public class PlLayerAnimation extends uruobj
 
         public plAnimTimeConvert(context c) throws readexception
         {
-            u1 = c.in.readInt();
-            starttime = new Flt(c);
-            endtime = new Flt(c);
-            u2 = new Flt(c);
-            u3 = new Flt(c);
-            u4 = new Flt(c);
+            flags = c.in.readInt();
+            begin = new Flt(c);
+            end = new Flt(c);
+            loopEnd = new Flt(c);
+            loopBegin = new Flt(c);
+            speed = new Flt(c);
             curvecontroller1 = new PrpTaggedObject(c);
             curvecontroller2 = new PrpTaggedObject(c);
             curvecontroller3 = new PrpTaggedObject(c);
@@ -104,12 +104,12 @@ public class PlLayerAnimation extends uruobj
         
         public void compile(Bytedeque c)
         {
-            c.writeInt(u1);
-            starttime.compile(c);
-            endtime.compile(c);
-            u2.compile(c);
-            u3.compile(c);
-            u4.compile(c);
+            c.writeInt(flags);
+            begin.compile(c);
+            end.compile(c);
+            loopEnd.compile(c);
+            loopBegin.compile(c);
+            speed.compile(c);
             curvecontroller1.compile(c);
             curvecontroller2.compile(c);
             curvecontroller3.compile(c);

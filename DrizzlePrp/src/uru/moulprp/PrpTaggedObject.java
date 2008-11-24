@@ -93,7 +93,7 @@ public class PrpTaggedObject extends uruobj
     }
     public String toString()
     {
-        return "type:"+type.toString()+" info:"+prpobject.toString();
+        return "type:"+type.toString()+" info:"+(prpobject==null?"(null)":prpobject.toString());
     }
     
     
