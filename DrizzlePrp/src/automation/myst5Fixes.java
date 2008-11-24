@@ -102,6 +102,7 @@ public class myst5Fixes
                 IBytestream binkc = SerialBytestream.createFromFilename(pathtobinkfile);
                 bink.binkfile binkfile = new bink.binkfile(binkc);
                 float length = binkfile.getLengthInSeconds();
+                length = length*59.0f/60.0f; //Cyan's timing seems to be off by this much.
                 m.msg("Modifying bink: "+pathtobinkfile+" length="+Float.toString(length));
                 binkobj.parent.parent.tc.flags &= ~0x1; //turn off the "stopped" flag.
                 //binkobj.parent.parent.tc.flags |= 0x20; //turn on the easingIn flag.
