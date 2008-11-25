@@ -82,7 +82,7 @@ public class Pageid extends uruobj
             suffix = (rawdata & 0x000000FF);
             
         }
-        e.ensure(suffix>=0 && suffix<=255);
+        e.ensure(suffix>=0 && suffix<=512); //was suffix<=255 but Moul GlobalAnimations has ones above 255
         e.ensure(prefix>=-255 && prefix<=8388607);
         //else rawdata = 0;
         //prefix = rawdata >> 16;

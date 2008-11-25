@@ -37,7 +37,7 @@ import shared.cmap;
  */
 public class context extends shared.BaseContext
 {
-    public int readversion;
+    public int readversion; //3==pots,6==moul,7==hexisle,5==myst5,4==crowthistle(crowthistle&myst5 are the same)
     public int writeversion;
     public boolean compile;
     public Bytestream in;

@@ -343,7 +343,10 @@ public class PrpObject extends uruobj
                 return new PlClothingItem(c);
             case plSharedMesh:
                 return new PlSharedMesh(c);
-
+            case plMatrixConstant:
+                return new PlMatrixConstant(c);
+            case plEmoteAnim:
+                return new PlEmoteAnim(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());

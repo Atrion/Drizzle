@@ -674,6 +674,8 @@ public class mystAutomation
                             type.plSharedMesh,
                             type.plLayerLinkAnimation,
                             
+                            type.plEmoteAnim,
+                            
                             
                         };
                         namestartswith = new String[]{
@@ -842,6 +844,8 @@ public class mystAutomation
         Typeid.plMorphDataSet,
         Typeid.plClothingItem,
         Typeid.plSharedMesh,
+        
+        Typeid.plEmoteAnim,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1023,6 +1027,8 @@ public class mystAutomation
                         type.plMorphDataSet,
                         type.plClothingItem,
                         type.plSharedMesh,
+                        
+                        type.plEmoteAnim,
                 };
                 String[] namestarts={
                 };
