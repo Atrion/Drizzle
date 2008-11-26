@@ -1053,104 +1053,107 @@ public class mystAutomation
         agenames.put("Neighborhood02", "KirelMOUL");
         agenames.put("Personal", "PersonalMOUL");
         
-        //these map from filename to oldsuffix to newsuffix
+        //these map from filename to oldpagenum to newpagenum
         //HashMap<String, HashMap<Integer,Integer>> suffices = new HashMap();
         //suffices.put("GUI_District_YeeshaPageGUI.prp", new Pair(50,86));
         //suffices.put("GUI_District_jalakControlPanel.prp", new Pair(68,90));
-        cmap<String,cmap<Integer,Integer>> suffices = new cmap();
-        suffices.put( "GUI", 50, 86);
-        suffices.put( "GUI", 68, 90);
+        cmap<String,cmap<Integer,Integer>> pagenums = new cmap();
+        //suffices.put( "GUI", 50, 86); //YeeshaPageGUI
+        //suffices.put( "GUI", 68, 90); //jalakControlPanel
+        pagenums.put( "GUI", 49, 85); //YeeshaPageGUI
+        pagenums.put( "GUI", 67, 89); //jalakControlPanel
+        //add 1 to all these global ones.
         //There is an extra male animation: MaleTreadWater than has no female counterpart.  Just a mistake?
-        suffices.put( "GlobalAnimations", 291, 300); //FemaleAmazed
-        suffices.put( "GlobalAnimations", 292, 301); //
-        suffices.put( "GlobalAnimations", 326, 302); //FemaleAskQuestion
-        suffices.put( "GlobalAnimations", 325, 303); //
-        suffices.put( "GlobalAnimations",  77, 304); //FemaleBeckonBig
-        suffices.put( "GlobalAnimations", 144, 305); //
-        suffices.put( "GlobalAnimations", 145, 306); //FemaleBeckonSmall
-        suffices.put( "GlobalAnimations", 146, 307); //
-        suffices.put( "GlobalAnimations", 197, 308); //FemaleBookAccept
-        suffices.put( "GlobalAnimations", 202, 309); //
-        suffices.put( "GlobalAnimations", 198, 310); //FemaleBookAcceptIdle
-        suffices.put( "GlobalAnimations", 203, 311); //
-        suffices.put( "GlobalAnimations", 194, 312); //FemaleBookOffer
-        suffices.put( "GlobalAnimations", 199, 313); //
-        suffices.put( "GlobalAnimations", 196, 314); //FemaleBookOfferFinish
-        suffices.put( "GlobalAnimations", 201, 315); //
-        suffices.put( "GlobalAnimations", 195, 316); //FemaleBookOfferIdle
-        suffices.put( "GlobalAnimations", 200, 317); //
-        suffices.put( "GlobalAnimations", 293, 318); //FemaleBow
-        suffices.put( "GlobalAnimations", 294, 319); //
-        suffices.put( "GlobalAnimations", 258, 320); //FemaleCallMe
-        suffices.put( "GlobalAnimations", 259, 321); //
-        suffices.put( "GlobalAnimations", 260, 322); //FemaleCower
-        suffices.put( "GlobalAnimations", 261, 323); //
-        suffices.put( "GlobalAnimations", 295, 324); //FemaleCrazy
-        suffices.put( "GlobalAnimations", 309, 325); //
-        suffices.put( "GlobalAnimations", 280, 326); //FemaleCringe
-        suffices.put( "GlobalAnimations", 285, 327); //
-        suffices.put( "GlobalAnimations", 296, 328); //FemaleCrossArms
-        suffices.put( "GlobalAnimations", 310, 329); //
-        suffices.put( "GlobalAnimations", 297, 330); //FemaleDoh
-        suffices.put( "GlobalAnimations", 311, 331); //
-        suffices.put( "GlobalAnimations", 298, 332); //FemaleFlinch
-        suffices.put( "GlobalAnimations", 312, 333); //
-        suffices.put( "GlobalAnimations", 141, 334); //FemaleGlobalScopeGrab, like FemaleScopeGrab in pots
-        suffices.put( "GlobalAnimations",  70, 335); //
-        suffices.put( "GlobalAnimations", 142, 336); //FemaleGlobalScopeHold, like FemaleScopeHold in pots
-        suffices.put( "GlobalAnimations",  71, 337); //
-        suffices.put( "GlobalAnimations", 143, 338); //FemaleGlobalScopeRelease, like FemaleScopeRelease in pots
-        suffices.put( "GlobalAnimations",  72, 339); //
-        suffices.put( "GlobalAnimations", 262, 340); //FemaleGroan
-        suffices.put( "GlobalAnimations", 263, 341); //
-        suffices.put( "GlobalAnimations", 344, 342); //FemaleKITap
-        suffices.put( "GlobalAnimations", 343, 343); //
-        suffices.put( "GlobalAnimations", 282, 344); //FemaleKneel
-        suffices.put( "GlobalAnimations", 313, 345); //
-        suffices.put( "GlobalAnimations",  43, 346); //FemaleLeanLeft
-        suffices.put( "GlobalAnimations",  16, 347); //
-        suffices.put( "GlobalAnimations",  44, 348); //FemaleLeanRight
-        suffices.put( "GlobalAnimations",  17, 349); //
-        suffices.put( "GlobalAnimations", 299, 350); //FemaleLookAround
-        suffices.put( "GlobalAnimations", 314, 351); //
-        suffices.put( "GlobalAnimations", 264, 352); //FemaleOkay
-        suffices.put( "GlobalAnimations", 265, 353); //
-        suffices.put( "GlobalAnimations", 266, 354); //FemaleOverHere
-        suffices.put( "GlobalAnimations", 267, 355); //
-        suffices.put( "GlobalAnimations", 300, 356); //FemalePeer
-        suffices.put( "GlobalAnimations", 315, 357); //
-        suffices.put( "GlobalAnimations", 301, 358); //FemaleSalute
-        suffices.put( "GlobalAnimations", 316, 359); //
-        suffices.put( "GlobalAnimations", 302, 360); //FemaleScratchHead
-        suffices.put( "GlobalAnimations", 317, 361); //
-        suffices.put( "GlobalAnimations", 303, 362); //FemaleShakeFist
-        suffices.put( "GlobalAnimations", 318, 363); //
-        suffices.put( "GlobalAnimations", 304, 364); //FemaleShoo
-        suffices.put( "GlobalAnimations", 319, 365); //
-        suffices.put( "GlobalAnimations", 305, 366); //FemaleSlouchSad
-        suffices.put( "GlobalAnimations", 320, 367); //
-        suffices.put( "GlobalAnimations", 268, 368); //FemaleStop
-        suffices.put( "GlobalAnimations", 269, 369); //
-        suffices.put( "GlobalAnimations", 270, 370); //FemaleTalkHand
-        suffices.put( "GlobalAnimations", 321, 371); //
-        suffices.put( "GlobalAnimations", 272, 372); //FemaleTapFoot
-        suffices.put( "GlobalAnimations", 273, 373); //
-        suffices.put( "GlobalAnimations", 306, 374); //FemaleTaunt
-        suffices.put( "GlobalAnimations", 322, 375); //
-        suffices.put( "GlobalAnimations", 275, 376); //FemaleThumbsDown
-        suffices.put( "GlobalAnimations", 277, 377); //
-        suffices.put( "GlobalAnimations", 283, 378); //FemaleThumbsDown2
-        suffices.put( "GlobalAnimations", 286, 379); //
-        suffices.put( "GlobalAnimations", 274, 380); //FemaleThumbsUp
-        suffices.put( "GlobalAnimations", 276, 381); //
-        suffices.put( "GlobalAnimations", 284, 382); //FemaleThumbsUp2
-        suffices.put( "GlobalAnimations", 287, 383); //
-        suffices.put( "GlobalAnimations", 278, 384); //FemaleWallSlide
-        suffices.put( "GlobalAnimations", 279, 385); //
-        suffices.put( "GlobalAnimations", 307, 386); //FemaleWaveLow
-        suffices.put( "GlobalAnimations", 323, 387); //
-        suffices.put( "GlobalAnimations", 308, 388); //FemaleWinded
-        suffices.put( "GlobalAnimations", 324, 389); //
+        pagenums.put( "GlobalAnimations", 291, 300); //FemaleAmazed
+        pagenums.put( "GlobalAnimations", 292, 301); //
+        pagenums.put( "GlobalAnimations", 326, 302); //FemaleAskQuestion
+        pagenums.put( "GlobalAnimations", 325, 303); //
+        pagenums.put( "GlobalAnimations",  77, 304); //FemaleBeckonBig
+        pagenums.put( "GlobalAnimations", 144, 305); //
+        pagenums.put( "GlobalAnimations", 145, 306); //FemaleBeckonSmall
+        pagenums.put( "GlobalAnimations", 146, 307); //
+        pagenums.put( "GlobalAnimations", 197, 308); //FemaleBookAccept
+        pagenums.put( "GlobalAnimations", 202, 309); //
+        pagenums.put( "GlobalAnimations", 198, 310); //FemaleBookAcceptIdle
+        pagenums.put( "GlobalAnimations", 203, 311); //
+        pagenums.put( "GlobalAnimations", 194, 312); //FemaleBookOffer
+        pagenums.put( "GlobalAnimations", 199, 313); //
+        pagenums.put( "GlobalAnimations", 196, 314); //FemaleBookOfferFinish
+        pagenums.put( "GlobalAnimations", 201, 315); //
+        pagenums.put( "GlobalAnimations", 195, 316); //FemaleBookOfferIdle
+        pagenums.put( "GlobalAnimations", 200, 317); //
+        pagenums.put( "GlobalAnimations", 293, 318); //FemaleBow
+        pagenums.put( "GlobalAnimations", 294, 319); //
+        pagenums.put( "GlobalAnimations", 258, 320); //FemaleCallMe
+        pagenums.put( "GlobalAnimations", 259, 321); //
+        pagenums.put( "GlobalAnimations", 260, 322); //FemaleCower
+        pagenums.put( "GlobalAnimations", 261, 323); //
+        pagenums.put( "GlobalAnimations", 295, 324); //FemaleCrazy
+        pagenums.put( "GlobalAnimations", 309, 325); //
+        pagenums.put( "GlobalAnimations", 280, 326); //FemaleCringe
+        pagenums.put( "GlobalAnimations", 285, 327); //
+        pagenums.put( "GlobalAnimations", 296, 328); //FemaleCrossArms
+        pagenums.put( "GlobalAnimations", 310, 329); //
+        pagenums.put( "GlobalAnimations", 297, 330); //FemaleDoh
+        pagenums.put( "GlobalAnimations", 311, 331); //
+        pagenums.put( "GlobalAnimations", 298, 332); //FemaleFlinch
+        pagenums.put( "GlobalAnimations", 312, 333); //
+        pagenums.put( "GlobalAnimations", 141, 334); //FemaleGlobalScopeGrab, like FemaleScopeGrab in pots
+        pagenums.put( "GlobalAnimations",  70, 335); //
+        pagenums.put( "GlobalAnimations", 142, 336); //FemaleGlobalScopeHold, like FemaleScopeHold in pots
+        pagenums.put( "GlobalAnimations",  71, 337); //
+        pagenums.put( "GlobalAnimations", 143, 338); //FemaleGlobalScopeRelease, like FemaleScopeRelease in pots
+        pagenums.put( "GlobalAnimations",  72, 339); //
+        pagenums.put( "GlobalAnimations", 262, 340); //FemaleGroan
+        pagenums.put( "GlobalAnimations", 263, 341); //
+        pagenums.put( "GlobalAnimations", 344, 342); //FemaleKITap
+        pagenums.put( "GlobalAnimations", 343, 343); //
+        pagenums.put( "GlobalAnimations", 282, 344); //FemaleKneel
+        pagenums.put( "GlobalAnimations", 313, 345); //
+        pagenums.put( "GlobalAnimations",  43, 346); //FemaleLeanLeft
+        pagenums.put( "GlobalAnimations",  16, 347); //
+        pagenums.put( "GlobalAnimations",  44, 348); //FemaleLeanRight
+        pagenums.put( "GlobalAnimations",  17, 349); //
+        pagenums.put( "GlobalAnimations", 299, 350); //FemaleLookAround
+        pagenums.put( "GlobalAnimations", 314, 351); //
+        pagenums.put( "GlobalAnimations", 264, 352); //FemaleOkay
+        pagenums.put( "GlobalAnimations", 265, 353); //
+        pagenums.put( "GlobalAnimations", 266, 354); //FemaleOverHere
+        pagenums.put( "GlobalAnimations", 267, 355); //
+        pagenums.put( "GlobalAnimations", 300, 356); //FemalePeer
+        pagenums.put( "GlobalAnimations", 315, 357); //
+        pagenums.put( "GlobalAnimations", 301, 358); //FemaleSalute
+        pagenums.put( "GlobalAnimations", 316, 359); //
+        pagenums.put( "GlobalAnimations", 302, 360); //FemaleScratchHead
+        pagenums.put( "GlobalAnimations", 317, 361); //
+        pagenums.put( "GlobalAnimations", 303, 362); //FemaleShakeFist
+        pagenums.put( "GlobalAnimations", 318, 363); //
+        pagenums.put( "GlobalAnimations", 304, 364); //FemaleShoo
+        pagenums.put( "GlobalAnimations", 319, 365); //
+        pagenums.put( "GlobalAnimations", 305, 366); //FemaleSlouchSad
+        pagenums.put( "GlobalAnimations", 320, 367); //
+        pagenums.put( "GlobalAnimations", 268, 368); //FemaleStop
+        pagenums.put( "GlobalAnimations", 269, 369); //
+        pagenums.put( "GlobalAnimations", 270, 370); //FemaleTalkHand
+        pagenums.put( "GlobalAnimations", 321, 371); //
+        pagenums.put( "GlobalAnimations", 272, 372); //FemaleTapFoot
+        pagenums.put( "GlobalAnimations", 273, 373); //
+        pagenums.put( "GlobalAnimations", 306, 374); //FemaleTaunt
+        pagenums.put( "GlobalAnimations", 322, 375); //
+        pagenums.put( "GlobalAnimations", 275, 376); //FemaleThumbsDown
+        pagenums.put( "GlobalAnimations", 277, 377); //
+        pagenums.put( "GlobalAnimations", 283, 378); //FemaleThumbsDown2
+        pagenums.put( "GlobalAnimations", 286, 379); //
+        pagenums.put( "GlobalAnimations", 274, 380); //FemaleThumbsUp
+        pagenums.put( "GlobalAnimations", 276, 381); //
+        pagenums.put( "GlobalAnimations", 284, 382); //FemaleThumbsUp2
+        pagenums.put( "GlobalAnimations", 287, 383); //
+        pagenums.put( "GlobalAnimations", 278, 384); //FemaleWallSlide
+        pagenums.put( "GlobalAnimations", 279, 385); //
+        pagenums.put( "GlobalAnimations", 307, 386); //FemaleWaveLow
+        pagenums.put( "GlobalAnimations", 323, 387); //
+        pagenums.put( "GlobalAnimations", 308, 388); //FemaleWinded
+        pagenums.put( "GlobalAnimations", 324, 389); //
         //include kg*
         
         Typeid[] readable = mystAutomation.moulReadable;
@@ -1231,10 +1234,10 @@ public class mystAutomation
             }
             
             //modify sequence suffix if Age is in list.
-            cmap<Integer,Integer> suffix = suffices.get(agename);
+            cmap<Integer,Integer> suffix = pagenums.get(agename);
             if(suffix!=null)
             {
-                c.sequenceSuffixMap = suffix;
+                c.pagenumMap = suffix;
             }
             
             //modify agename if Age is in list.

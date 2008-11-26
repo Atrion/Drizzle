@@ -54,7 +54,7 @@ public class context extends shared.BaseContext
     //overrides...
     public Integer sequencePrefix;
     //public Integer sequenceSuffix;
-    public cmap<Integer,Integer> sequenceSuffixMap;
+    public cmap<Integer,Integer> pagenumMap;
     public String ageName;
     
     //whether to just read the PrpRootObject as raw data.
@@ -127,7 +127,7 @@ public class context extends shared.BaseContext
         result.curRootObjectSize = curRootObjectSize;
         result.sequencePrefix = sequencePrefix;
         //result.sequenceSuffix = sequenceSuffix;
-        result.sequenceSuffixMap = sequenceSuffixMap;
+        result.pagenumMap = pagenumMap;
         
         result.isRaw = isRaw;
         

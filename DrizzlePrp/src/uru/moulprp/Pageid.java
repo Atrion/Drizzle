@@ -31,6 +31,8 @@ import shared.e;
  * @author user
  */
 //this is a class I made myself, to encapsulate changing page ids.
+
+//In pots GlobalAvatars, the pages wrap around so that MaleFall,6 has the same Pageid as MalePelletBookLeft,262
 public class Pageid extends uruobj
 {
     public int prefix;
@@ -104,13 +106,19 @@ public class Pageid extends uruobj
         }
         
         //change suffix
-        if(c.sequenceSuffixMap!=null)
+        if(c.pagenumMap!=null)
         {
-            Integer newsuffix = c.sequenceSuffixMap.get(suffix);
-            if(newsuffix!=null)
+            //Integer newsuffix = c.sequenceSuffixMap.get(suffix);
+            Integer newpagenum = c.pagenumMap.get(this.getPageNumber());
+            if(newpagenum!=null)
             {
-                if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing sequence suffix "+Integer.toString(suffix)+" with "+Integer.toString(newsuffix));
-                suffix = newsuffix;
+                if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing sequence suffix "+Integer.toString(suffix)+" with "+Integer.toString(newpagenum));
+                //suffix = newsuffix;
+                this.setPagenum(newpagenum);
+            }
+            else
+            {
+                int dummy=0;
             }
         }
     }
@@ -129,13 +137,30 @@ public class Pageid extends uruobj
     }
     public void setPagenum(int pagenum)
     {
-        if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower
-        suffix = pagenum+33;
+        if(prefix<0)
+        {
+            suffix = pagenum+1;
+        }
+        else
+        {
+            if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower
+            suffix = pagenum+33;
+        }
     }
     public int getPageNumber()
     {
-        if(suffix<33) m.err("Unhandled pageid suffix: investigate now!");
-        return suffix - 33;
+        if(prefix<0)
+        {
+            return suffix - 1;
+        }
+        else
+        {
+            if(suffix<33)
+            {
+                m.err("Unhandled pageid suffix: investigate now!");
+            }
+            return suffix - 33;
+        }
     }
     //public int getRawData()
     //{
@@ -143,6 +168,12 @@ public class Pageid extends uruobj
     //}
     public void compile(Bytedeque deque)
     {
+        if(suffix>255 || suffix < 0)
+        {
+            //this can validly happen, see note at top of this page.
+            m.warn("Suffix is out of range to be written.  May be a loop-around suffix.");
+        }
+        
         //int rawdata = getRawData();
         // convert it to TPOTS format
         if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing "+toString());
