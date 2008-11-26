@@ -2043,6 +2043,7 @@ public class mystAutomation
         authored.put("Descent","FootRgns",97);
         authored.put("Tahgira","FootRgns",97);
         authored.put("Todelmer","FootRgns",92);
+        authored.put("Kveer","FootRgns",97); //Releeshan
 
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -2115,6 +2116,26 @@ public class mystAutomation
                 decryptedData = agefile.saveToBytes();
             }
             
+            //Remove all the KveerMystV pages except kverReleeshan and dusttest from the .age file.
+            if(makeMinimalReleeshan)
+            {
+                if(agename.equals("Kveer"))
+                {
+                    textfile agefile = textfile.createFromBytes(decryptedData);
+                    for(textfile.textline line: agefile.getLines())
+                    {
+                        String l = line.getString();
+                        if(l.startsWith("Page="))
+                        {
+                            line.setString("#"+l); //comment it out.
+                        }
+                    }
+                    agefile.appendLine("Page=kverReleeshan,22"); //remove the ,1 from the end so that it loads.
+                    //agefile.appendLine("Page=dusttest,90"); //leave it alone.
+                    decryptedData = agefile.saveToBytes();
+                }
+            }
+            
             //add dusttest page, dynamically loaded.
             if(agename.equals("Descent") || agename.equals("Todelmer") || agename.equals("Tahgira") || agename.equals("Siralehn") || agename.equals("Laki") || agename.equals("Kveer"))
             {
@@ -2151,25 +2172,6 @@ public class mystAutomation
                 }*/
             }
             
-            //Remove all the KveerMystV pages except kverReleeshan and dusttest from the .age file.
-            if(makeMinimalReleeshan)
-            {
-                if(agename.equals("Kveer"))
-                {
-                    textfile agefile = textfile.createFromBytes(decryptedData);
-                    for(textfile.textline line: agefile.getLines())
-                    {
-                        String l = line.getString();
-                        if(l.startsWith("Page="))
-                        {
-                            line.setString("#"+l); //comment it out.
-                        }
-                    }
-                    agefile.appendLine("Page=kverReleeshan,22"); //remove the ,1 from the end so that it loads.
-                    agefile.appendLine("Page=dusttest,90"); //leave it alone.
-                    decryptedData = agefile.saveToBytes();
-                }
-            }
             
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
