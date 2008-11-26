@@ -258,9 +258,10 @@ public enum Typeid implements compilable
     plClothingItem,
     plSharedMesh,
     
-    //globalaaimations
+    //globalaaimations,city
     plMatrixConstant,
     plEmoteAnim,
+    pfGUIDraggableMod,
     
     plLeafController,
     nil,
@@ -487,6 +488,7 @@ public enum Typeid implements compilable
         
         tri( 0x32C, 0x331, -2, -2, plMatrixConstant),
         tri( 0x109, 0x109, -2, -2, plEmoteAnim),
+        tri( 0x0A5, 0x0A5, -2, -2, pfGUIDraggableMod),
                 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };

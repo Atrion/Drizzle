@@ -364,5 +364,15 @@ public class fileLists
 "GlobalAnimations_District_MaleWaveLow.prp",
 "GlobalAnimations_District_MaleWinded.prp",
 //"GlobalAnimations_District_MaleYawn.prp",
+                
+"city_District_bahroFlyers_arch.prp",
+"city_District_bahroFlyers_city1.prp",
+"city_District_bahroFlyers_city2.prp",
+"city_District_bahroFlyers_city3.prp",
+"city_District_bahroFlyers_city4.prp",
+"city_District_bahroFlyers_city5.prp",
+"city_District_bahroFlyers_city6.prp",
+"city_District_islmPodMapGUI.prp",
+                
     };
 }

@@ -675,7 +675,7 @@ public class mystAutomation
                             type.plLayerLinkAnimation,
                             
                             type.plEmoteAnim,
-                            
+                            type.pfGUIDraggableMod,
                             
                         };
                         namestartswith = new String[]{
@@ -846,6 +846,7 @@ public class mystAutomation
         Typeid.plSharedMesh,
         
         Typeid.plEmoteAnim,
+        Typeid.pfGUIDraggableMod,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1029,6 +1030,7 @@ public class mystAutomation
                         type.plSharedMesh,
                         
                         type.plEmoteAnim,
+                        type.pfGUIDraggableMod,
                 };
                 String[] namestarts={
                 };

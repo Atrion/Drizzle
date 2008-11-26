@@ -347,6 +347,8 @@ public class PrpObject extends uruobj
                 return new PlMatrixConstant(c);
             case plEmoteAnim:
                 return new PlEmoteAnim(c);
+            case pfGUIDraggableMod:
+                return new PfGUIDraggableMod(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
