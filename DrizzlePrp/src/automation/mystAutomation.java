@@ -858,36 +858,8 @@ public class mystAutomation
         Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
         FileUtils.WriteFile(outfile, wdysData);
     }
-    public static String getAgenameFromFilename(String filename)
-    {
-        int pos = filename.lastIndexOf("/");
-        if(pos != -1)
-        {
-            filename = filename.substring(pos+1);
-        }
-        
-        pos = filename.lastIndexOf("\\");
-        if(pos != -1)
-        {
-            filename = filename.substring(pos+1);
-        }
-        
-        pos = filename.lastIndexOf(".");
-        if(pos != -1)
-        {
-            filename = filename.substring(0, pos);
-        }
-        
-        pos = filename.indexOf("_");
-        if(pos != -1)
-        {
-            filename = filename.substring(0,pos);
-        }
-        
-        return filename;
-    }
     
-    public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files)
+    public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files, boolean isSimplicity)
     {
         class compileDecider implements uru.moulprp.prputils.Compiler.Decider
         {
@@ -1162,14 +1134,29 @@ public class mystAutomation
         
         //create folders...
         FileUtils.CreateFolder(outfolder+"/dat/");
+        //FileUtils.CreateFolder(outfolder+"/SDL/");
+        
+        /*//Handle .sdl files...
+        Vector<String> sdlfiles = common.filterFilenamesByExtension(files, ".sdl");
+        for(String filename: sdlfiles)
+        {
+            String agename = common.getAgenameFromFilename(filename);
+            String infile = infolder + "/SDL/" + filename;
+            String outfile = outfolder + "/SDL/" + common.replaceAgenameIfApplicable(filename, agenames);
+            
+            byte[] encryptedData = FileUtils.ReadFile(infile);
+            byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
+            byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }*/
         
         //Handle .fni files...
-        Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
+        Vector<String> fnifiles = common.filterFilenamesByExtension(files, ".fni");
         for(String filename: fnifiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);
             
             byte[] encryptedData = FileUtils.ReadFile(infile);
             byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
@@ -1177,14 +1164,23 @@ public class mystAutomation
             FileUtils.WriteFile(outfile, wdysData);
         }
         
+        //Handle .ogg files...
+        Vector<String> oggfiles = common.filterFilenamesByExtension(files, ".ogg");
+        for(String filename: oggfiles)
+        {
+            String infile = infolder + "/sfx/" + filename;
+            String outfile = outfolder + "/sfx/" + filename;
+            
+            FileUtils.CopyFile(infile, outfile, true);
+        }
         
         //Handle .age files...
-        Vector<String> agefiles = filterFilenamesByExtension(files, ".age");
+        Vector<String> agefiles = common.filterFilenamesByExtension(files, ".age");
         for(String filename: agefiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);
             
             if(agename.toLowerCase().equals("personal")) m.warn("Relto may corrupt your savegame, be sure to back up your /sav folder!");
             
@@ -1216,12 +1212,25 @@ public class mystAutomation
         
         
         //Handle .prp files...
-        Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
+        Vector<String> prpfiles = common.filterFilenamesByExtension(files, ".prp");
         for(String filename: prpfiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);//.replace("_", "_District_");
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);//.replace("_", "_District_");
+            
+            shared.State.AllStates.push();
+            if(isSimplicity)
+            {
+                if(agename.equals("Dereno"))
+                {
+                    shared.State.AllStates.setState("removeDynamicCamMap", false);
+                }
+                else if(agename.equals("EderDelin")||agename.equals("EderTsogal"))
+                {
+                    shared.State.AllStates.setState("translateSmartseeks", true);
+                }
+            }
             
             Bytes prpdata = Bytes.createFromFile(infile);
             Bytestream bytestream = Bytestream.createFromBytes(prpdata);
@@ -1255,16 +1264,19 @@ public class mystAutomation
             
             Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             prpoutputbytes.saveAsFile(outfile);
+            
+            shared.State.AllStates.pop();
+            
         }
         
         
         //Handle .sum files...
-        Vector<String> sumfiles = filterFilenamesByExtension(files, ".sum");
+        Vector<String> sumfiles = common.filterFilenamesByExtension(files, ".sum");
         for(String filename: sumfiles)
         {
-            String agename = getAgenameFromFilename(filename);
-            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", replaceAgenameIfApplicable(agename, agenames));
-            FileUtils.WriteFile(outfolder+"/dat/"+replaceAgenameIfApplicable(filename, agenames), sum1);
+            String agename = common.getAgenameFromFilename(filename);
+            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, agenames), sum1);
         }
         
         
@@ -1804,7 +1816,7 @@ public class mystAutomation
         {
             String infile = crowthistlefolder + "/dat/" + filename;
             String outfile = outfolder + "/dat/" + filename;
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -1843,7 +1855,7 @@ public class mystAutomation
             
             String infile = crowthistlefolder + "/dat/" + filename;
             String outfile = outfolder + "/dat/" + filename.replaceFirst("_", "_District_");
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             
             Bytes prpdata = Bytes.createFromFile(infile);
             Bytestream bytestream = Bytestream.createFromBytes(prpdata);
@@ -1868,10 +1880,10 @@ public class mystAutomation
         }
         
         //Handle .(others) files...
-        Vector<String> otherfiles = filterFilenamesByExtension(files, ".(others)");
+        Vector<String> otherfiles = common.filterFilenamesByExtension(files, ".(others)");
         for(String filename: otherfiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             
             if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
@@ -1880,7 +1892,7 @@ public class mystAutomation
                     String pagename = curauthprp.left;
                     int pagenum = curauthprp.right;
 
-                    String outfilename = replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
+                    String outfilename = common.replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
                     String outfile = outfolder + "/dat/" + outfilename;
 
                     Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
@@ -2053,7 +2065,7 @@ public class mystAutomation
         FileUtils.CreateFolder(outfolder+"/dat/");
         
         //Handle .bik files...
-        Vector<String> bikfiles = filterFilenamesByExtension(files, ".bik");
+        Vector<String> bikfiles = common.filterFilenamesByExtension(files, ".bik");
         for(String filename: bikfiles)
         {
             String infile = infolder + "/avi/" + filename;
@@ -2063,7 +2075,7 @@ public class mystAutomation
         }
         
         //Handle .ogg files...
-        Vector<String> oggfiles = filterFilenamesByExtension(files, ".ogg");
+        Vector<String> oggfiles = common.filterFilenamesByExtension(files, ".ogg");
         for(String filename: oggfiles)
         {
             String infile = infolder + "/sfx/" + filename;
@@ -2073,12 +2085,12 @@ public class mystAutomation
         }
         
         //Handle .fni files...
-        Vector<String> fnifiles = filterFilenamesByExtension(files, ".fni");
+        Vector<String> fnifiles = common.filterFilenamesByExtension(files, ".fni");
         for(String filename: fnifiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -2099,12 +2111,12 @@ public class mystAutomation
         
         
         //Handle .age files...
-        Vector<String> agefiles = filterFilenamesByExtension(files, ".age");
+        Vector<String> agefiles = common.filterFilenamesByExtension(files, ".age");
         for(String filename: agefiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + replaceAgenameIfApplicable(filename, agenames);
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -2181,10 +2193,10 @@ public class mystAutomation
         
         
         //Handle .(others) files...
-        Vector<String> otherfiles = filterFilenamesByExtension(files, ".(others)");
+        Vector<String> otherfiles = common.filterFilenamesByExtension(files, ".(others)");
         for(String filename: otherfiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             
             if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
@@ -2193,7 +2205,7 @@ public class mystAutomation
                     String pagename = curauthprp.left;
                     int pagenum = curauthprp.right;
 
-                    String outfilename = replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
+                    String outfilename = common.replaceAgenameIfApplicable(agename, agenames)+"_District_"+pagename+".prp";
                     String outfile = outfolder + "/dat/" + outfilename;
 
                     Bytes bytes = shared.GetResource.getResourceAsBytes("/files/authored/"+outfilename);
@@ -2205,13 +2217,13 @@ public class mystAutomation
         
         
         //Handle .prp files...
-        Vector<String> prpfiles = filterFilenamesByExtension(files, ".prp");
+        Vector<String> prpfiles = common.filterFilenamesByExtension(files, ".prp");
         for(String filename: prpfiles)
         {
            
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
-            String outfilename = replaceAgenameIfApplicable(filename, agenames).replaceFirst("_", "_District_");
+            String outfilename = common.replaceAgenameIfApplicable(filename, agenames).replaceFirst("_", "_District_");
             String outfile = outfolder + "/dat/" + outfilename;
             
             if(shared.GetResource.hasResource("/files/myst5/"+outfilename))
@@ -2259,21 +2271,21 @@ public class mystAutomation
         
         
         //Handle .sum files...
-        Vector<String> sumfiles = filterFilenamesByExtension(files, ".sum");
+        Vector<String> sumfiles = common.filterFilenamesByExtension(files, ".sum");
         for(String filename: sumfiles)
         {
-            String agename = getAgenameFromFilename(filename);
-            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", replaceAgenameIfApplicable(agename, agenames));
-            FileUtils.WriteFile(outfolder+"/dat/"+replaceAgenameIfApplicable(filename, agenames), sum1);
+            String agename = common.getAgenameFromFilename(filename);
+            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, agenames), sum1);
         }
         
         //Handle .sdl files...
-        /*Vector<String> sdlfiles = filterFilenamesByExtension(files, ".sdl");
+        /*Vector<String> sdlfiles = common.filterFilenamesByExtension(files, ".sdl");
         for(String filename: sdlfiles)
         {
-            String agename = getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/sdl/" + filename;
-            String outfile = outfolder + "/sdl/" + replaceAgenameIfApplicable(filename, agenames);
+            String outfile = outfolder + "/sdl/" + common.replaceAgenameIfApplicable(filename, agenames);
             
             Bytes encryptedData = FileUtils.ReadFileAsBytes(infile);
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
@@ -2289,26 +2301,7 @@ public class mystAutomation
         m.msg("Done MystV work!");
     }
     
-    public static String replaceAgenameIfApplicable(String filename, HashMap<String, String>agenames)
-    {
-        String agename = getAgenameFromFilename(filename);
-        String newagename = agenames.get(agename);
-        if(newagename!=null)
-        {
-            return newagename+filename.substring(agename.length());
-        }
-        else
-        {
-            return filename;
-        }
-    }
     
-    public static Vector<String> filterFilenamesByExtension(Vector<String> files, String extension)
-    {
-        Vector<String> result = new Vector<String>();
-        for(String file: files) if(file.endsWith(extension)) result.add(file);
-        return result;
-    }
     public static void readPotsPrps(String infolder, Vector<String> files)
     {
         for(String file: files)

@@ -52,25 +52,60 @@ public class fileLists
         "direbo.bik","restStop1.bik","restStop2.bik","restStop3.bik","restStop4.bik","direboWithAlpha.bik","mystWithAlpha.bik",
     };
     
-    public static String[] moulSupportedList = {
-                "Dereno.age","Dereno.fni","Dereno.sum","Dereno_District_DrnoExterior.prp","Dereno_District_DrnoPod.prp","Dereno_District_Textures.prp","Dereno_District_BuiltIn.prp",
-                "EderDelin.age","EderDelin.fni","EderDelin.sum","EderDelin_District_garden.prp","EderDelin_District_BuiltIn.prp","EderDelin_District_Textures.prp",
-                "EderTsogal.age","EderTsogal.fni","EderTsogal.sum","EderTsogal_District_tsoGarden.prp","EderTsogal_District_Textures.prp","EderTsogal_District_BuiltIn.prp",
-                "GuildPub-Cartographers.age","GuildPub-Cartographers.fni","GuildPub-Cartographers.sum","GuildPub-Cartographers_District_Pub.prp","GuildPub-Cartographers_District_Textures.prp","GuildPub-Cartographers_District_BuiltIn.prp",
-                "GuildPub-Greeters.age","GuildPub-Greeters.fni","GuildPub-Greeters.sum","GuildPub-Greeters_District_Pub.prp","GuildPub-Greeters_District_Textures.prp","GuildPub-Greeters_District_BuiltIn.prp",
-                "GuildPub-Maintainers.age","GuildPub-Maintainers.fni","GuildPub-Maintainers.sum","GuildPub-Maintainers_District_Pub.prp","GuildPub-Maintainers_District_Textures.prp","GuildPub-Maintainers_District_BuiltIn.prp",
-                "GuildPub-Messengers.age","GuildPub-Messengers.fni","GuildPub-Messengers.sum","GuildPub-Messengers_District_Pub.prp","GuildPub-Messengers_District_Textures.prp","GuildPub-Messengers_District_BuiltIn.prp",
-                "GuildPub-Writers.age","GuildPub-Writers.fni","GuildPub-Writers.sum","GuildPub-Writers_District_Pub.prp","GuildPub-Writers_District_Textures.prp","GuildPub-Writers_District_BuiltIn.prp",
-                "Jalak.age","Jalak.fni","Jalak.sum","Jalak_District_jlakArena.prp","Jalak_District_Textures.prp","Jalak_District_BuiltIn.prp",
-                "LiveBahroCaves.age","LiveBahroCaves.fni","LiveBahroCaves.sum","LiveBahroCaves_District_MINKcave.prp","LiveBahroCaves_District_POTScave.prp","LiveBahroCaves_District_PODcave.prp","LiveBahroCaves_District_BlueSpiralCave.prp","LiveBahroCaves_District_TheSpecialPage.prp","LiveBahroCaves_District_Textures.prp","LiveBahroCaves_District_BuiltIn.prp",
-                "Minkata.age","Minkata.fni","Minkata.sum","Minkata_District_minkExteriorDay.prp","Minkata_District_minkNightLinkSounds.prp","Minkata_District_minkExteriorNight.prp","Minkata_District_minkExcludeRegions.prp","Minkata_District_minkDistCraterPhysicals.prp","Minkata_District_minkDayLinkSounds.prp","Minkata_District_minkCameras.prp","Minkata_District_Textures.prp","Minkata_District_BuiltIn.prp",
-                "Negilahn.age","Negilahn.fni","Negilahn.sum","Negilahn_District_Jungle.prp","Negilahn_District_MuseumPod.prp","Negilahn_District_Textures.prp","Negilahn_District_BuiltIn.prp",
-                "Neighborhood02.age", "Neighborhood02.fni", "Neighborhood02.sum", "Neighborhood02_District_BuiltIn.prp", "Neighborhood02_District_GuildInfo-Cartographers.prp", "Neighborhood02_District_GuildInfo-Greeters.prp", "Neighborhood02_District_GuildInfo-Maintainers.prp", "Neighborhood02_District_GuildInfo-Messengers.prp", "Neighborhood02_District_GuildInfo-Writers.prp", "Neighborhood02_District_krelClassRm.prp", "Neighborhood02_District_krelCommonRm.prp", "Neighborhood02_District_krelKirel.prp", "Neighborhood02_District_krelPrivateRm.prp", "Neighborhood02_District_Textures.prp",
-                "Payiferen.age","Payiferen.fni","Payiferen.sum","Payiferen_District_Pod.prp","Payiferen_District_Textures.prp","Payiferen_District_BuiltIn.prp",
-                "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
-                "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
+    public static Vector<String> moulSimplicityList()
+    {
+        Vector<String> result = uru.generics.convertArrayToVector(moulSimplicityList2);
+        result.addAll(uru.generics.convertArrayToVector(moulSfxList));
+        return result;
+    }
+    public static Vector<String> moulSupportedList()
+    {
+        Vector<String> result = uru.generics.convertArrayToVector(moulSimplicityList2);
+        result.addAll(uru.generics.convertArrayToVector(moulSupportedList2));
+        return result;
+    }
+    
+    private static String[] moulSfxList = {
+        "dln_Air_Loop.ogg","dln_GeeseFlyBy.ogg","dln_GeeseRandom.ogg","dln_RandBird-A01.ogg","dln_RandBird-A02.ogg","dln_RandBird-A03.ogg","dln_RandBird-B01.ogg","dln_RandBird-B02.ogg","dln_RandBird-B03.ogg","dln_RandBird-B04.ogg","dln_RandBird-C01.ogg","dln_RandBird-C02.ogg","dln_RandBird-C03.ogg","dln_RandBird01.ogg","dln_RandBird02.ogg","dln_RandBird03.ogg","dln_RandBird04.ogg","dln_RandBird05.ogg","dln_RandBird06.ogg",
+        "drnIceCave_Loop.ogg","drnIceHarps_loop.ogg","drnRandomIce01.ogg","drnRandomIce02.ogg","drnRandomIce03.ogg","drnRandomIce04.ogg","drnRandomIce05.ogg","drnRandomIce06.ogg","drnRandomIce07.ogg","drnRandomIce08.ogg","drnUnderwaterCreature01.ogg","drnUnderwaterCreature02.ogg","drnUnderwaterCreature03.ogg","drnUnderwaterCreature04.ogg",
+        "Eder_Delin_Amb01_Loop.ogg","Eder_Delin_Amb02_Loop.ogg",
+        "gpubAmbience.ogg",
+        "jlakForceField_Off.ogg","jlakForceField_On.ogg","jlakGridForce01.ogg","jlakGridForce02.ogg","jlakGridForce03.ogg","jlakGridForce04.ogg","jlakObjectCreation01.ogg","jlakObjectCreation02.ogg","jlakObjectCreation03.ogg","jlakObjectCreation04.ogg","jlakPillarDown01a.ogg","jlakPillarUp01a.ogg","jlakPillar_Loop.ogg","jlakPillar_Start.ogg","jlakPillar_Stop.ogg","jlakWidgetImpact01.ogg","jlakWidgetImpact02.ogg","jlakWidgetImpact03.ogg","jlakWidgetImpact04.ogg","jlakWidgetImpact05.ogg",
+        "minkBadlands-CaveMusic.ogg","minkBadlands-Reprise.ogg","minkBadlandsMiddle.ogg","minkCenterCircleMx.ogg","minkConstellations.ogg","minkFlagFlap01_loop.ogg","minkFlagFlap02_loop.ogg","minkFlagFlap03_loop.ogg","minkSymbolBuild01.ogg","minkSymbolBuild02.ogg","minkSymbolBuild03.ogg","minkSymbolBuild04.ogg","minkSymbolBuild05.ogg","mink_Wind_CaveDay_Loop.ogg","mink_Wind_Day_Loop.ogg","mink_Wind_Night_Loop.ogg",
+        "nglnAnimal04SpeakerCall.ogg","nglnBaseAmb.ogg","nglnBirdFlyBy_Rand01.ogg","nglnBirdFlyBy_Rand02.ogg","nglnBirdFlyBy_Rand03.ogg","nglnBirdFlyBy_Rand04.ogg","nglnBirdFlyBy_Rand05.ogg","nglnBirdFlyBy_Rand06.ogg","nglnBirdFlyBy_Rand07.ogg","nglnGorillaRand01.ogg","nglnGorillaRand02.ogg","nglnGorillaRand03.ogg","nglnGorillaRand04.ogg","nglnGorillaRand05.ogg","nglnGorillaSpeakercall.ogg","nglnMonkeyRand01.ogg","nglnMonkeyRand02.ogg","nglnMonkeyRand03.ogg","nglnMonkeyRand04.ogg","nglnMonkeyRand05.ogg","nglnMonkeyRand06.ogg","nglnMonkeySpeakercall.ogg","nglnMonkey_Alarmed.ogg","nglnMonkey_Chirp.ogg","nglnUrwin-Enter.ogg","nglnUrwin-WalkAway.ogg","nglnUrwinAnimScreech01.ogg","nglnUrwinRandVx01.ogg","nglnUrwinSpeakerCall.ogg","nglnUrwinWalk_Loop.ogg","nglnUrwin_Idle-to-Walk.ogg","nglnUrwin_Walk-to-Idle.ogg",
+        "payiAmbWind01_loop.ogg","payiCreatureButton01.ogg","payiCreatureButton02.ogg","payiCreatureButton03.ogg","payiCreatureButton04.ogg","payiSandscritCreatureVx.ogg","payiSandscritEat_to_WalkSniff.ogg","payiSandscritIdle_to_Walk.ogg","payiSandscritWalkSniff_loop.ogg","payiSandscritWalkSniff_to_Eat.ogg","payiSandscritWalkSniff_to_Idle.ogg","payiSandscritWalk_loop01.ogg","payiSandscritWalk_loop02.ogg","payiSandscritWalk_to_Idle.ogg","payiSandscritWalk_to_WalkSniff.ogg","payiWindowWind_loop01.ogg","payiWindowWind_loop02.ogg",
+        "tetsoAmb01_loop.ogg","tetsoAmb02_loop.ogg","tetsoCreatureButton01.ogg","tetsoCreatureButton02.ogg","tetsoCreatureButton03.ogg","tetsoCreatureButton04.ogg","tetsoLightOff.ogg","tetsoLightOn.ogg","tetsoRand01Grp01.ogg","tetsoRand01Grp02.ogg","tetsoRand02Grp01.ogg","tetsoRand02Grp02.ogg","tetsoRand03Grp01.ogg","tetsoRand03Grp02.ogg","tetsoRand04Grp01.ogg","tetsoRand04Grp02.ogg","tetsoRand05Grp01.ogg","tetsoRand05Grp02.ogg","tetsoRand06Grp01.ogg","tetsoRand06Grp02.ogg","tetsoRand07Grp01.ogg","tetsoRand07Grp02.ogg","tetsoRand08Grp01.ogg","tetsoRand09Grp01.ogg","tetsoRand10Grp01.ogg","tetsoRand11Grp01.ogg","tetsoWaterDrip01.ogg","tetsoWaterDrip02.ogg","tetsoWaterDrip03.ogg",
+        "tso_AmbBirds_Loop.ogg","tso_AmbCicadas02_Loop.ogg","tso_AmbCicadas_Loop.ogg","tso_AmbGrass_Loop.ogg","tso_AmbWind_Loop.ogg","tso_WaterLap_Loop.ogg",
+        "xBahroSymbolGlowLoop.ogg","xBahroSymbolGlowStart.ogg",
+        "xBS-BahroRing_Dissolve.ogg","xBS-Correct.ogg","xBS-ReverseTimerLoop--TEMP.ogg","xBS-SpiralClothes.ogg","xBS-SpiralDoorClose.ogg","xBS-SpiralDoorOpen.ogg","xBS-SpiralTimerGlow.ogg","xBS-TimerEnd.ogg","xBS-TimerLoop.ogg","xBS-TimerReverse.ogg","xBS-TimerStart.ogg",
+        "xFountain_Loop.ogg",
+        "xPod-GiantSwitch_Down.ogg","xPod-GiantSwitch_Up.ogg","xPod-PushButton.ogg","xPod-PushButtonBroke.ogg","xPod_PowerDown.ogg","xPod_PowerUp.ogg",
+        "xSparky_Flare.ogg","xSparky_Loop.ogg",
+        "KVeerMusic.ogg","kverAmb_Loop.ogg","kverSeasonFinaleMx.ogg",
+        //GreatTreePub doesn't have any that aren't already in Pots.
+    };
+    private static String[] moulSimplicityList2 = {
+            "Dereno.age","Dereno.fni","Dereno.sum","Dereno_District_DrnoExterior.prp","Dereno_District_DrnoPod.prp","Dereno_District_Textures.prp","Dereno_District_BuiltIn.prp",
+            "EderDelin.age","EderDelin.fni","EderDelin.sum","EderDelin_District_garden.prp","EderDelin_District_BuiltIn.prp","EderDelin_District_Textures.prp",
+            "EderTsogal.age","EderTsogal.fni","EderTsogal.sum","EderTsogal_District_tsoGarden.prp","EderTsogal_District_Textures.prp","EderTsogal_District_BuiltIn.prp",
+            "GuildPub-Cartographers.age","GuildPub-Cartographers.fni","GuildPub-Cartographers.sum","GuildPub-Cartographers_District_Pub.prp","GuildPub-Cartographers_District_Textures.prp","GuildPub-Cartographers_District_BuiltIn.prp",
+            "GuildPub-Greeters.age","GuildPub-Greeters.fni","GuildPub-Greeters.sum","GuildPub-Greeters_District_Pub.prp","GuildPub-Greeters_District_Textures.prp","GuildPub-Greeters_District_BuiltIn.prp",
+            "GuildPub-Maintainers.age","GuildPub-Maintainers.fni","GuildPub-Maintainers.sum","GuildPub-Maintainers_District_Pub.prp","GuildPub-Maintainers_District_Textures.prp","GuildPub-Maintainers_District_BuiltIn.prp",
+            "GuildPub-Messengers.age","GuildPub-Messengers.fni","GuildPub-Messengers.sum","GuildPub-Messengers_District_Pub.prp","GuildPub-Messengers_District_Textures.prp","GuildPub-Messengers_District_BuiltIn.prp",
+            "GuildPub-Writers.age","GuildPub-Writers.fni","GuildPub-Writers.sum","GuildPub-Writers_District_Pub.prp","GuildPub-Writers_District_Textures.prp","GuildPub-Writers_District_BuiltIn.prp",
+            "Jalak.age","Jalak.fni","Jalak.sum","Jalak_District_jlakArena.prp","Jalak_District_Textures.prp","Jalak_District_BuiltIn.prp",
+            "LiveBahroCaves.age","LiveBahroCaves.fni","LiveBahroCaves.sum","LiveBahroCaves_District_MINKcave.prp","LiveBahroCaves_District_POTScave.prp","LiveBahroCaves_District_PODcave.prp","LiveBahroCaves_District_BlueSpiralCave.prp","LiveBahroCaves_District_TheSpecialPage.prp","LiveBahroCaves_District_Textures.prp","LiveBahroCaves_District_BuiltIn.prp",
+            "Minkata.age","Minkata.fni","Minkata.sum","Minkata_District_minkExteriorDay.prp","Minkata_District_minkNightLinkSounds.prp","Minkata_District_minkExteriorNight.prp","Minkata_District_minkExcludeRegions.prp","Minkata_District_minkDistCraterPhysicals.prp","Minkata_District_minkDayLinkSounds.prp","Minkata_District_minkCameras.prp","Minkata_District_Textures.prp","Minkata_District_BuiltIn.prp",
+            "Negilahn.age","Negilahn.fni","Negilahn.sum","Negilahn_District_Jungle.prp","Negilahn_District_MuseumPod.prp","Negilahn_District_Textures.prp","Negilahn_District_BuiltIn.prp",
+            "Neighborhood02.age", "Neighborhood02.fni", "Neighborhood02.sum", "Neighborhood02_District_BuiltIn.prp", "Neighborhood02_District_GuildInfo-Cartographers.prp", "Neighborhood02_District_GuildInfo-Greeters.prp", "Neighborhood02_District_GuildInfo-Maintainers.prp", "Neighborhood02_District_GuildInfo-Messengers.prp", "Neighborhood02_District_GuildInfo-Writers.prp", "Neighborhood02_District_krelClassRm.prp", "Neighborhood02_District_krelCommonRm.prp", "Neighborhood02_District_krelKirel.prp", "Neighborhood02_District_krelPrivateRm.prp", "Neighborhood02_District_Textures.prp",
+            "Payiferen.age","Payiferen.fni","Payiferen.sum","Payiferen_District_Pod.prp","Payiferen_District_Textures.prp","Payiferen_District_BuiltIn.prp",
+            "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
+            "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
+            "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
+    };
+    
+    public static String[] moulSupportedList2 = {
                 "Personal.age","Personal.fni","Personal.sum","Personal_District_BuiltIn.prp","Personal_District_psnlMYSTII.prp","Personal_District_Textures.prp",
-                "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
                 "GlobalClothing.age","GlobalClothing.sum","GlobalClothing_District_Female01.prp","GlobalClothing_District_Female02.prp","GlobalClothing_District_Female04.prp","GlobalClothing_District_Female.prp","GlobalClothing_District_Male01.prp","GlobalClothing_District_Male02.prp","GlobalClothing_District_Male04.prp","GlobalClothing_District_Male.prp",
 
 //"GlobalAnimations.age",

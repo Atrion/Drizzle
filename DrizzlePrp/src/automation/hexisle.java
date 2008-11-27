@@ -154,7 +154,7 @@ public class hexisle
         //handle prps...
         for(String filename: prpfiles)
         {
-            String agename = mystAutomation.getAgenameFromFilename(filename);
+            String agename = common.getAgenameFromFilename(filename);
             String infile = infolder + "/dat/" + filename;
             String outfilename = filename.replaceFirst("_", "_District_");
             String outfile = outfolder + "/dat/" + outfilename;
