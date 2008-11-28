@@ -119,6 +119,7 @@ public class PrpHeader extends uruobj
             //version = data.readInt(); e.ensure(version,5);
             version2 = data.readShort();
             pageid = new Pageid(c);
+            m.msg("Pageid:"+pageid.toString());
             //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16); //16 was garden_district_itinerantbugcloud
             pagetype = new Pagetype(c);
             agename = new Urustring(c);

@@ -139,11 +139,22 @@ public class Pageid extends uruobj
     {
         if(prefix<0)
         {
+            if(pagenum>511)
+            {
+                throw new shared.uncaughtexception("Unhandled pagenum in setPagenum; investigate now!");
+            }
+            if(pagenum>254)
+            {
+                prefix--; //observed in Pots GlobalAnimations.age.  MaleClap and FemalePelletBookRight only differ in prefix, because their page numbers differ by 256. 
+            }
             suffix = pagenum+1;
         }
         else
         {
-            if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower
+            if(pagenum>222 || pagenum<-2)
+            {
+                throw new shared.uncaughtexception("Unhandled pagenum: investigate now!"); //could be lower
+            }
             suffix = pagenum+33;
         }
     }

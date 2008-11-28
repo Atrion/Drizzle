@@ -35,9 +35,9 @@ public class PlAGAnim extends uruobj
 {
     //Objheader xheader;
     PlSynchedObject parent;
-    Urustring name;
-    Flt starttime; //float
-    Flt stoptime; //float
+    public Urustring name;
+    public Flt starttime; //float
+    public Flt stoptime; //float
     public int effectcount;
     //effect[] effects;
     public PrpTaggedObject[] effects;

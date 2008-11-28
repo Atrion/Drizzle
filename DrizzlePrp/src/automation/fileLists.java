@@ -399,6 +399,10 @@ public class fileLists
 "GlobalAnimations_District_MaleWaveLow.prp",
 "GlobalAnimations_District_MaleWinded.prp",
 //"GlobalAnimations_District_MaleYawn.prp",
+
+"GlobalAnimations_District_FemaleDance.prp",
+"GlobalAnimations_District_MaleDance.prp",
+                
                 
 "city_District_bahroFlyers_arch.prp",
 "city_District_bahroFlyers_city1.prp",

@@ -30,10 +30,10 @@ import shared.*;
 
 public class PlEmoteAnim extends uruobj
 {
-    PlATCAnim parent;
-    Flt f1;
-    Flt f2;
-    byte b3;
+    public PlATCAnim parent;
+    public Flt f1;
+    public Flt f2;
+    public byte b3;
     
     public PlEmoteAnim(context c) throws readexception
     {
