@@ -52,7 +52,7 @@ public class PrpObject extends uruobj
             case plAudioInterface:
                 return new x0011AudioInterface(c);
             case plWinAudio:
-                return new x0014WinAudio(c);
+                return new PlWinAudible(c);
             case plCoordinateInterface:
                 return new x0015CoordinateInterface(c);
             case plDrawInterface:
@@ -349,6 +349,16 @@ public class PrpObject extends uruobj
                 return new PlEmoteAnim(c);
             case pfGUIDraggableMod:
                 return new PfGUIDraggableMod(c);
+            case pl2WayWinAudible:
+                return new Pl2WayWinAudible(c);
+            case plArmatureLODMod:
+                return new PlArmatureLODMod(c);
+            case plAvBrainHuman:
+                return new PlAvBrainHuman(c);
+            case plClothingOutfit:
+                return new PlClothingOutfit(c);
+            case plClothingBase:
+                return new PlClothingBase(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());

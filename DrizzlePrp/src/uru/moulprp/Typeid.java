@@ -258,10 +258,15 @@ public enum Typeid implements compilable
     plClothingItem,
     plSharedMesh,
     
-    //globalaaimations,city
+    //globalaaimations,city, customavatars
     plMatrixConstant,
     plEmoteAnim,
     pfGUIDraggableMod,
+    pl2WayWinAudible,
+    plArmatureLODMod,
+    plAvBrainHuman,
+    plClothingOutfit,
+    plClothingBase,
     
     plLeafController,
     nil,
@@ -461,7 +466,7 @@ public enum Typeid implements compilable
         tri( 0x08F, -2, 0x07D, -2, plArmatureMod),
         tri( -2, -2, 0x200, -2, plAvBrainPirahna), //not in pots
         tri( 0x494, -2, -2, -2, plAvBrainQuab),
-        tri( 0x0CD, -2, 0x0AE, -2, plArmatureEffectsMgr),
+        tri( 0x0CD, 0x0CD, 0x0AE, -2, plArmatureEffectsMgr),
         tri( 0x0FE, -2, 0x0D7, -2, plFilterCoordInterface),
         
         tri( 0x135, -2, 0x101, -2, plParticleFollowSystemEffect),
@@ -489,6 +494,11 @@ public enum Typeid implements compilable
         tri( 0x32C, 0x331, -2, -2, plMatrixConstant),
         tri( 0x109, 0x109, -2, -2, plEmoteAnim),
         tri( 0x0A5, 0x0A5, -2, -2, pfGUIDraggableMod),
+        tri( 0x053, 0x053, -2, -2, pl2WayWinAudible),
+        tri( 0x095, 0x095, -2, -2, plArmatureLODMod),
+        tri( 0x357, 0x35C, -2, -2, plAvBrainHuman),
+        tri( 0x0B6, 0x0B6, -2, -2, plClothingOutfit),
+        tri( 0x0B7, 0x0B7, -2, -2, plClothingBase),
                 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };

@@ -676,6 +676,11 @@ public class mystAutomation
                             
                             type.plEmoteAnim,
                             type.pfGUIDraggableMod,
+                            type.pl2WayWinAudible,
+                            type.plArmatureLODMod,
+                            type.plClothingOutfit,
+                            type.plClothingBase,
+                            type.plArmatureEffectsMgr,
                             
                         };
                         namestartswith = new String[]{
@@ -847,6 +852,10 @@ public class mystAutomation
         
         Typeid.plEmoteAnim,
         Typeid.pfGUIDraggableMod,
+        Typeid.pl2WayWinAudible,
+        Typeid.plArmatureLODMod,
+        Typeid.plClothingOutfit,
+        Typeid.plClothingBase,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1003,13 +1012,19 @@ public class mystAutomation
                         
                         type.plEmoteAnim,
                         type.pfGUIDraggableMod,
+                        type.pl2WayWinAudible,
+                        type.plArmatureLODMod,
+                        type.plClothingOutfit,
+                        type.plClothingBase,
+                        type.plArmatureEffectsMgr,
+                        type.plLayerLinkAnimation,
                 };
                 String[] namestarts={
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
                 
-                m.msg("Skipping type: "+type.toString());
+                m.msg("Skipping type(1): "+type.toString());
                 return false;
             }
         }
@@ -1767,7 +1782,7 @@ public class mystAutomation
                     if(type==typeequals[i]) return true;
                 }
                 
-                m.msg("Skipping type: "+type.toString());
+                m.msg("Skipping type(2): "+type.toString());
                 return false;
             }
             
@@ -2063,7 +2078,7 @@ public class mystAutomation
                     }) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
                 }
                 
-                m.msg("Skipping type: "+type.toString());
+                m.msg("Skipping type(3): "+type.toString());
                 return false;
             }
         }

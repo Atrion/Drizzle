@@ -91,18 +91,68 @@ public class PlArmatureMod extends uruobj
             f1 = new Flt(c);
             f2 = new Flt(c);
         }
+        else if(c.readversion==6)
+        {
+            parent = new PlAGMasterMod(c);
+            //c.readInt();
+            ref = new Uruobjectref(c);
+            s1 = new Urustring(c);
+            count = c.readInt();
+            objects = c.readArray(PrpTaggedObject.class, count);
+            b1 = c.readByte();
+            if(b1!=0)
+            {
+                xref2 = new Uruobjectref(c);
+            }
+            u1 = c.readInt();
+            b2 = c.readByte();
+            if(b2!=0)
+            {
+                xref3 = new Uruobjectref(c);
+            }
+            //v1 = new Vertex(c);
+            //v2 = new Vertex(c);
+            v1 = Vertex.createFromFloats(0, 0, 0);
+            v2 = Vertex.createFromFloats(0, 0, 0);
+            m.warn("Using identity vectors in PlArmatureMod.");
+            f1 = new Flt(c);
+            f2 = new Flt(c);
+            Urustring s1 = new Urustring(c);
+            Urustring s2 = new Urustring(c);
+            Urustring s3 = new Urustring(c);
+            int dummy=0;
+        }
     }
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented."+this.toString());
-        m.warn("not tested with pots."+this.toString());
+        parent.compile(c);
+        ref.compile(c);
+        s1.compile(c);
+        c.writeInt(count);
+        c.writeArray2(objects);
+        c.writeByte(b1);
+        if(b1!=0)
+        {
+            xref2.compile(c);
+        }
+        c.writeInt(u1);
+        c.writeByte(b2);
+        if(b2!=0)
+        {
+            xref3.compile(c);
+        }
+        v1.compile(c);
+        v2.compile(c);
+        f1.compile(c);
+        f2.compile(c);
     }
     
     public static class PlArmatureModBase extends uruobj
     {
         PlAGMasterMod parent;
         int count1;
+        subPlArmatureModBase[] subs;
           //uruobjectref
           //int count
           //uruobjectref[count]
@@ -115,7 +165,7 @@ public class PlArmatureMod extends uruobj
         {
             parent = new PlAGMasterMod(c);
             count1 = c.readInt();
-            c.readArray(subPlArmatureModBase.class, count1);
+            subs = c.readArray(subPlArmatureModBase.class, count1);
             count2 = c.readInt();
                 //Urustring str = new Urustring(c);
             objects = c.readArray(PrpTaggedObject.class, count2);

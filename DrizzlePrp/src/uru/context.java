@@ -294,7 +294,11 @@ public class context extends shared.BaseContext
     public String toString()
     {
         String result = "";
-        if(in != null) result += in.toString();
+        if(in != null)
+        {
+            result += "(bytes left: "+Integer.toString(this.curRootObjectEnd-in.getAbsoluteOffset())+")";
+            result += in.toString();
+        }
         if(this.curRootObject!=null) result+=" \n"+curRootObject.toString();
         //return "(no info)";
         

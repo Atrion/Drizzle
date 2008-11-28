@@ -24,43 +24,42 @@ import uru.Bytedeque;
 import shared.e;
 import shared.m;
 import shared.b;
+import shared.readexception;
 //import java.util.Vector;
 
-/**
- *
- * @author user
- */
-public class x0014WinAudio extends uruobj
+
+public class PlClothingOutfit extends uruobj
 {
-    //Objheader xheader;
-    x0012Audible parent; //this is empty; do we need it?
-    int count;
-    Uruobjectref[] objectrefs;
-    Uruobjectref scenenode;
+    PlSynchedObject parent;
+    byte b1;
+    Uruobjectref ref2;
+    Uruobjectref xref3;
+    Uruobjectref xref4;
     
-    public x0014WinAudio(context c) throws readexception //,boolean hasHeader)
+    public PlClothingOutfit(context c) throws readexception
     {
-        Bytestream data = c.in;
-        //if(hasHeader) xheader = new Objheader(c);
-        
-        parent = new x0012Audible(c);//,false);
-        count = data.readInt();
-        objectrefs = new Uruobjectref[count];
-        for(int i=0;i<count;i++)
+        parent = new PlSynchedObject(c);
+        b1 = c.readByte();
+        ref2 = new Uruobjectref(c);
+        if(b1!=2)
         {
-            objectrefs[i] = new Uruobjectref(c);
+            m.warn("Untested case in PlClothingOutfit.");
+            xref3 = new Uruobjectref(c);
+            xref4 = new Uruobjectref(c);
         }
-        scenenode = new Uruobjectref(c);
         
     }
+    
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeInt(count);
-        for(int i=0;i<count;i++)
+        c.writeByte(b1);
+        ref2.compile(c);
+        if(b1!=2)
         {
-            objectrefs[i].compile(c);
+            xref3.compile(c);
+            xref4.compile(c);
         }
-        scenenode.compile(c);
     }
+    
 }
