@@ -359,6 +359,8 @@ public class PrpObject extends uruobj
                 return new PlClothingOutfit(c);
             case plClothingBase:
                 return new PlClothingBase(c);
+            case plAliasModifier:
+                return new PlAliasModifier(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());

@@ -28,38 +28,32 @@ import shared.readexception;
 //import java.util.Vector;
 
 
-public class PlClothingOutfit extends uruobj
+public class PlAliasModifier extends uruobj
 {
-    PlSynchedObject parent;
-    byte b1;
-    Uruobjectref ref2;
-    Uruobjectref xref3;
-    Uruobjectref xref4;
+    PlSingleModifier parent;
+    Bstr str;
     
-    public PlClothingOutfit(context c) throws readexception
+    public PlAliasModifier(context c) throws readexception
     {
-        parent = new PlSynchedObject(c);
-        b1 = c.readByte();
-        ref2 = new Uruobjectref(c);
-        if(b1!=2)
+        parent = new PlSingleModifier(c);
+        str = new Bstr(c);
+        if(c.readversion==6)
         {
-            //m.warn("Untested case in PlClothingOutfit.");
-            xref3 = new Uruobjectref(c);
-            xref4 = new Uruobjectref(c);
+            m.warn("Untested PlAliasModifier.");
         }
-        
     }
-    
+    private PlAliasModifier(){}
+    public static PlAliasModifier createFromName(String name)
+    {
+        PlAliasModifier result = new PlAliasModifier();
+        result.parent = PlSingleModifier.createDefault();
+        result.str = Bstr.createFromString(name);
+        return result;
+    }
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeByte(b1);
-        ref2.compile(c);
-        if(b1!=2)
-        {
-            xref3.compile(c);
-            xref4.compile(c);
-        }
+        str.compile(c);
     }
     
 }

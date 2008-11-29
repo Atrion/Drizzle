@@ -681,6 +681,7 @@ public class mystAutomation
                             type.plClothingOutfit,
                             type.plClothingBase,
                             type.plArmatureEffectsMgr,
+                            type.plAliasModifier,
                             
                         };
                         namestartswith = new String[]{
@@ -856,6 +857,7 @@ public class mystAutomation
         Typeid.plArmatureLODMod,
         Typeid.plClothingOutfit,
         Typeid.plClothingBase,
+        Typeid.plAliasModifier,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1018,6 +1020,7 @@ public class mystAutomation
                         type.plClothingBase,
                         type.plArmatureEffectsMgr,
                         type.plLayerLinkAnimation,
+                        type.plAliasModifier,
                 };
                 String[] namestarts={
                 };
@@ -1146,7 +1149,28 @@ public class mystAutomation
         pagenums.put( "GlobalAnimations", 324, 489); //
         pagenums.put( "GlobalAnimations",  32, 490); //FemaleDance
         pagenums.put( "GlobalAnimations",   5, 491); //MaleDance
-        //include kg*
+        //include kg* for Bahro
+        pagenums.put( "GlobalAnimations", 367, 379); //kgFall
+        pagenums.put( "GlobalAnimations", 364, 380); //kgIdle
+        pagenums.put( "GlobalAnimations", 350, 381); //kgKiBegin
+        pagenums.put( "GlobalAnimations", 351, 382); //kgKiEnd
+        pagenums.put( "GlobalAnimations", 352, 383); //kgKiGlance
+        pagenums.put( "GlobalAnimations", 353, 384); //kgKiTap
+        pagenums.put( "GlobalAnimations", 354, 385); //kgKiUse
+        pagenums.put( "GlobalAnimations", 366, 386); //kgRun
+        pagenums.put( "GlobalAnimations", 368, 387); //kgRunningJump
+        pagenums.put( "GlobalAnimations", 377, 388); //kgSitDownGround
+        pagenums.put( "GlobalAnimations", 378, 389); //kgSitIdleGround
+        pagenums.put( "GlobalAnimations", 379, 390); //kgSitStandGround
+        pagenums.put( "GlobalAnimations", 369, 391); //kgStandingJump
+        pagenums.put( "GlobalAnimations", 371, 392); //kgStepLeft
+        pagenums.put( "GlobalAnimations", 372, 393); //kgStepRight
+        pagenums.put( "GlobalAnimations", 373, 394); //kgTurnLeft
+        pagenums.put( "GlobalAnimations", 374, 395); //kgTurnRight
+        pagenums.put( "GlobalAnimations", 365, 396); //kgWalk
+        pagenums.put( "GlobalAnimations", 375, 397); //kgWalkBack
+        pagenums.put( "GlobalAnimations", 370, 398); //kgWalkingJump
+        pagenums.put( "GlobalAnimations", 376, 399); //kgWave
 
         cmap<String,cmap<String,String>> pagenames = new cmap();
         pagenames.put("GlobalAnimations", "FemaleDance", "FemaleDanceMOUL");
@@ -1423,7 +1447,21 @@ public class mystAutomation
                 erf.ode.convertee.mass = Flt.one();
             }
         }
-        
+        if(true) //attempt to fix bahro avatar
+        {
+            if(finalname.toLowerCase().equals("customavatars"))
+            {
+                if(prp.header.pagename.toString().equals("Bahro1"))
+                {
+                    PlAliasModifier alias = PlAliasModifier.createFromName("Bahro1");
+                    Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
+                    PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
+                    prp.extraobjects.add(aliasroot);
+                    prp.mergeExtras();
+                }
+                
+            }
+        }
         if(true) //attempt to rename animation in GlobalAnimations
         {
             if(finalname.toLowerCase().equals("globalanimations"))

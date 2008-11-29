@@ -60,7 +60,22 @@ public class deepview
     {
         desktop = desktop2;
     }
-    
+    public void reportStrings()
+    {
+        Vector<Urustring> urustrings = shared.FindAllDescendants.FindAllDescendantsByClass(Urustring.class, prps);
+        Vector<Bstr> bstrings = shared.FindAllDescendants.FindAllDescendantsByClass(Bstr.class, prps);
+        Vector<Wpstr> wpstrings = shared.FindAllDescendants.FindAllDescendantsByClass(Wpstr.class, prps);
+        for(Urustring s: urustrings) m.msg(s.toString());
+        for(Bstr s: bstrings) m.msg(s.toString());
+        for(Wpstr s: wpstrings) m.msg(s.toString());
+    }
+    public void reportRefs()
+    {
+        for(Uruobjectref ref: allrefs)
+        {
+            m.msg(ref.toString());
+        }
+    }
     public prpfile addPrp(String filename)
     {
         //allreflinks.reflinks.clear();

@@ -267,6 +267,7 @@ public enum Typeid implements compilable
     plAvBrainHuman,
     plClothingOutfit,
     plClothingBase,
+    plAliasModifier,
     
     plLeafController,
     nil,
@@ -499,6 +500,7 @@ public enum Typeid implements compilable
         tri( 0x357, 0x35C, -2, -2, plAvBrainHuman),
         tri( 0x0B6, 0x0B6, -2, -2, plClothingOutfit),
         tri( 0x0B7, 0x0B7, -2, -2, plClothingBase),
+        tri( 0x02A, -2, -2, -2, plAliasModifier),
                 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };
