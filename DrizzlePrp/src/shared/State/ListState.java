@@ -24,6 +24,7 @@ public class ListState extends javax.swing.JList implements IState
     
     public void initialise()
     {
+        _default = (int[])this.getValue();
         //is this correct?
         this.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {

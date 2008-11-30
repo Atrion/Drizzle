@@ -21,6 +21,7 @@ public class ComboboxState extends javax.swing.JComboBox implements IState
     
     public void initialise()
     {
+        _default = this.getSelectedItem();
         //is this correct?
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {

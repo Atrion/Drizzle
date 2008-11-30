@@ -24,6 +24,7 @@ public class TextfieldState extends javax.swing.JTextField implements IState
     
     public void initialise()
     {
+        _default = (String)this.getValue();
         //is this correct?
         /*this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {

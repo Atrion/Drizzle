@@ -22,6 +22,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
     }
     public void initialise()
     {
+        _default = (Integer)this.getValue();
         for(AbstractButton curbutton: this.buttons)
         {
             curbutton.addActionListener(new java.awt.event.ActionListener() {

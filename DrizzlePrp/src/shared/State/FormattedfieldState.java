@@ -23,6 +23,7 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
 
     public void initialise()
     {
+        _default = (String)this.getValue();
         //is this correct?
         this.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 

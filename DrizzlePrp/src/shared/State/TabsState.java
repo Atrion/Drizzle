@@ -22,6 +22,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
     }
     public void initialise()
     {
+        _default = (Integer)this.getValue();
         this.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 change();

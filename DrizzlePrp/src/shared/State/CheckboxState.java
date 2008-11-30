@@ -38,6 +38,7 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
     
     public void initialise()
     {
+        _default = (Boolean)this.getValue();
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 change();

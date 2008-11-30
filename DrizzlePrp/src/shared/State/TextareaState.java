@@ -23,6 +23,7 @@ public class TextareaState extends javax.swing.JTextArea implements IState
     
     public void initialise()
     {
+        _default = (String)this.getValue();
         //is this correct?
         this.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
