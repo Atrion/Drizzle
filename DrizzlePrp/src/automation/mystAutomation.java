@@ -1235,6 +1235,20 @@ public class mystAutomation
             FileUtils.WriteFile(outfile, wdysData);
         }
         
+        //Handle .csv files...
+        Vector<String> csvfiles = common.filterFilenamesByExtension(files, ".csv");
+        for(String filename: csvfiles)
+        {
+            String agename = common.getAgenameFromFilename(filename);
+            String infile = infolder + "/dat/" + filename;
+            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, agenames);
+            
+            byte[] encryptedData = FileUtils.ReadFile(infile);
+            byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
+            byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+            FileUtils.WriteFile(outfile, wdysData);
+        }
+        
         //Handle .ogg files...
         Vector<String> oggfiles = common.filterFilenamesByExtension(files, ".ogg");
         for(String filename: oggfiles)

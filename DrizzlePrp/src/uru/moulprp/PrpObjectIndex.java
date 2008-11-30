@@ -91,7 +91,10 @@ public class PrpObjectIndex extends uruobj
             m.msg("compile not implemented");
 
         }
-
+        public String toString()
+        {
+            return "ObjectIndexObjectType: "+type.toString();
+        }
     }
     
     public static class ObjectindexObjecttypeObjectdesc extends uruobj
@@ -114,6 +117,9 @@ public class PrpObjectIndex extends uruobj
             //desc.saveAsUruobj(deque);
             m.msg("compile not implemented");
         }
-
+        public String toString()
+        {
+            return "Objectindexdesc:"+desc.toString();
+        }
     }
 }

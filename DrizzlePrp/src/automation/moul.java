@@ -99,12 +99,14 @@ public class moul
         }
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
         {
+            //GUI_District_BkBookImages:  Pots -2:55(type4) Moul -2:57(type4) Shard -2:55(type4
             x0006Layer layer = prp.findObject("Map #6995", Typeid.plLayer).castTo();
             //String texturefilename = infolder+"/dat/"+agename+"_District_Textures.prp";
-            String texturefilename = infolder+"/dat/GUI_District_BkBookImages.prp";
-            prpfile textureprp = prpfile.readHeaderAndIndexFromFile(texturefilename);
+            //String texturefilename = infolder+"/dat/GUI_District_BkBookImages.prp";
+            //prpfile textureprp = prpfile.readHeaderAndIndexFromFile(texturefilename);
             //Uruobjectdesc mipmap = textureprp.findDescInIndex("xlinkpanelmystisland*1#0.hsm", Typeid.plMipMap);
-            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", textureprp);
+            //Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", textureprp);
+            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
             //layer.texture = mipmap.toRef();
             layer.texture = mmref;
         }

@@ -650,6 +650,10 @@ public class Gui extends javax.swing.JFrame {
         jButton85 = new javax.swing.JButton();
         jButton117 = new javax.swing.JButton();
         jButton118 = new javax.swing.JButton();
+        jPanel39 = new javax.swing.JPanel();
+        jButton124 = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        textfieldState38 = new shared.State.TextfieldState();
 
         buttongroupState1.setName("awe");
 
@@ -3202,6 +3206,28 @@ public class Gui extends javax.swing.JFrame {
 
                     tabsState3.addTab("DeepView", jPanel33);
 
+                    jPanel39.setLayout(null);
+
+                    jButton124.setText("Get Latest List");
+                    jButton124.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton124ActionPerformed(evt);
+                        }
+                    });
+                    jPanel39.add(jButton124);
+                    jButton124.setBounds(300, 30, 120, 36);
+
+                    jLabel35.setText("Server:");
+                    jPanel39.add(jLabel35);
+                    jLabel35.setBounds(20, 40, 38, 16);
+
+                    textfieldState38.setText("textfieldState38");
+                    textfieldState38.setName("uamServer"); // NOI18N
+                    jPanel39.add(textfieldState38);
+                    textfieldState38.setBounds(80, 40, 200, 20);
+
+                    tabsState3.addTab("UAM", jPanel39);
+
                     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                     getContentPane().setLayout(layout);
                     layout.setHorizontalGroup(
@@ -4553,6 +4579,10 @@ private void jButton122ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton123ActionPerformed
     GuiUtils.getUserSelectedFolder(this.textfieldState37);
 }//GEN-LAST:event_jButton123ActionPerformed
+
+private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton124ActionPerformed
+    uam.Uam.GetAgeList(this.textfieldState38.getText());
+}//GEN-LAST:event_jButton124ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4644,6 +4674,7 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton121;
     private javax.swing.JButton jButton122;
     private javax.swing.JButton jButton123;
+    private javax.swing.JButton jButton124;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
@@ -4769,6 +4800,7 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4807,6 +4839,7 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -4875,6 +4908,7 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState35;
     private shared.State.TextfieldState textfieldState36;
     private shared.State.TextfieldState textfieldState37;
+    private shared.State.TextfieldState textfieldState38;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState6;
