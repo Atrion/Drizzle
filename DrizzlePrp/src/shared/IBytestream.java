@@ -10,24 +10,33 @@ import java.util.Vector;
 //public abstract interface IBytestream
 public abstract class IBytestream
 {
+    abstract public byte readByte();
+    abstract public byte[] readBytes(int num);
+    abstract public int readInt();
+    //abstract public int[] readInts(int num);
+    abstract public short readShort();
+    abstract public int getAbsoluteOffset();
+    abstract public int getFilelength();
+    abstract public int getBytesRemaining();
+    abstract public IBytestream Fork(long offset);
+    public int[] readInts(int num)
+    {
+        int[] result = new int[num];
+        for(int i=0;i<num;i++)
+        {
+            result[i] = readInt();
+        }
+        return result;
+    }
     /*public static IBytestream createFromFilename(String filename)
     {
         return createFromFilenameOffset(filename,0);
     }
     public abstract static IBytestream createFromFilenameOffset(String filename, int offset);*/
-    abstract public IBytestream Fork(long offset);
-    abstract public byte readByte();
-    abstract public byte[] readBytes(int num);
-    abstract public int readInt();
-    abstract public int[] readInts(int num);
-    abstract public short readShort();
     //public String toString();
     //abstract public <T> Vector<T> readVector( Class<T> objclass, int size);
     //abstract public <T> T readObj(Class<T> objclass);
     //abstract public <T> T[] readArray( Class<T> objclass, int size);
-    abstract public int getAbsoluteOffset();
-    abstract public int getFilelength();
-    abstract public int getBytesRemaining();
     
     public String sourceName = "";
     

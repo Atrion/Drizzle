@@ -45,7 +45,7 @@ public class x00A2Pythonfilemod extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlMultiModifier(c);//,false);
         pyfile = new Urustring(c);
-        if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod: file="+pyfile.toString());
+        if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod: file="+pyfile.toString()+"  name="+c.curRootObject.toString());
         refcount = data.readInt();
         pythonrefs = new Uruobjectref[refcount];
         for(int i=0;i<refcount;i++)
@@ -61,6 +61,14 @@ public class x00A2Pythonfilemod extends uruobj
         listings = c.readVector(Pythonlisting.class, listcount);
     }
     private x00A2Pythonfilemod(){}
+    public Pythonlisting getListingByIndex(int index)
+    {
+        for(Pythonlisting listing: listings)
+        {
+            if(listing.index==index) return listing;
+        }
+        return null;
+    }
     public static x00A2Pythonfilemod createEmpty()
     {
         return new x00A2Pythonfilemod();

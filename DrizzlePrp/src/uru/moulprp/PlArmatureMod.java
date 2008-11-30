@@ -88,6 +88,7 @@ public class PlArmatureMod extends uruobj
             }
             v1 = new Vertex(c);
             v2 = new Vertex(c);
+            m.msg("v1="+v1.toString()+"  v2="+v2.toString());
             f1 = new Flt(c);
             f2 = new Flt(c);
         }
@@ -114,12 +115,14 @@ public class PlArmatureMod extends uruobj
             //v2 = new Vertex(c);
             v1 = Vertex.createFromFloats(0, 0, 0);
             v2 = Vertex.createFromFloats(0, 0, 0);
+            //v1 = Vertex.createFromFloats(0, 0, 2);
+            //v2 = Vertex.createFromFloats(0, 0, 4);
             m.warn("Using identity vectors in PlArmatureMod.");
             f1 = new Flt(c);
             f2 = new Flt(c);
-            Urustring s1 = new Urustring(c);
-            Urustring s2 = new Urustring(c);
-            Urustring s3 = new Urustring(c);
+            Urustring s1 = new Urustring(c); //kg
+            Urustring s2 = new Urustring(c); //CustomAvatars
+            Urustring s3 = new Urustring(c); //Audio
             int dummy=0;
         }
     }

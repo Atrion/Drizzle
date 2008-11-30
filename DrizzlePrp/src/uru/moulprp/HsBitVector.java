@@ -23,6 +23,7 @@ import uru.Bytedeque;
 import uru.context;
 import shared.readexception;
 import shared.m;
+import shared.*;
 
 /**
  *
@@ -30,13 +31,18 @@ import shared.m;
  */
 public class HsBitVector extends uruobj
 {
-    int count;
+    public int count;
     int[] values;
 
     public HsBitVector(context c)
     {
         count = c.readInt();
         values = c.in.readInts(count);
+    }
+    public HsBitVector(IBytestream c)
+    {
+        count = c.readInt();
+        values = c.readInts(count);
     }
     public HsBitVector(int... newvalues)
     {
@@ -83,6 +89,20 @@ public class HsBitVector extends uruobj
         }
     }
     
+    public boolean flag(int flag)
+    {
+        //offset 12 is pointer to HsBitVector elements
+        //offset 16 is the HsBitVector length
+        int pos = flag >>> 5;
+        if(pos<this.count) //if we don't have that many bits, return false.
+        {
+            int val = this.get(pos);
+            boolean bit = ((1 << (flag&0x1F)) & val)!=0;
+            return bit;
+        }
+        return false;
+    }
+
     public String toString()
     {
         String result = "";

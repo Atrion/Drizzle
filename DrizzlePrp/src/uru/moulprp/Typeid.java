@@ -268,6 +268,7 @@ public enum Typeid implements compilable
     plClothingOutfit,
     plClothingBase,
     plAliasModifier,
+    plPrintShape,
     
     plLeafController,
     nil,
@@ -501,6 +502,7 @@ public enum Typeid implements compilable
         tri( 0x0B6, 0x0B6, -2, -2, plClothingOutfit),
         tri( 0x0B7, 0x0B7, -2, -2, plClothingBase),
         tri( 0x02A, -2, -2, -2, plAliasModifier),
+        tri( 0x0EC, 0x0EC, -2, -2, plPrintShape),
                 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };

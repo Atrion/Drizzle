@@ -23,6 +23,7 @@ import uru.Bytestream;
 import uru.Bytedeque;
 import uru.context; import shared.readexception;
 import shared.b;
+import shared.*;
 
 /**
  *
@@ -30,10 +31,19 @@ import shared.b;
  */
 public class Bstr extends uruobj
 {
-    int strlen;
-    byte[] string;
+    public int strlen;
+    public byte[] string;
     
     public Bstr(context c)
+    {
+        strlen = c.readInt();
+        string = new byte[strlen];
+        for(int i=0;i<strlen;i++)
+        {
+            string[i] = c.readByte();
+        }
+    }
+    public Bstr(IBytestream c)
     {
         strlen = c.readInt();
         string = new byte[strlen];

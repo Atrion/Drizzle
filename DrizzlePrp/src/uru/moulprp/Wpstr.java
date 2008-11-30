@@ -22,6 +22,7 @@ import uru.Bytestream;
 import shared.b;
 import uru.Bytedeque;
 import uru.context;
+import shared.*;
 
 /**
  *
@@ -33,6 +34,11 @@ public class Wpstr extends uruobj
     byte[] string;
     
     public Wpstr(context data)
+    {
+        strlen = data.readShort();
+        string = data.readBytes(b.Int16ToInt32(strlen));
+    }
+    public Wpstr(IBytestream data)
     {
         strlen = data.readShort();
         string = data.readBytes(b.Int16ToInt32(strlen));

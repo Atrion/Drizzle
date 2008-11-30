@@ -46,6 +46,38 @@ public class prpfile
     {
         extraobjects = new Vector<PrpRootObject>();
     }
+    public Uruobjectdesc findDescInIndex(String name, Typeid type)
+    {
+        for(PrpObjectIndex.ObjectindexObjecttype oiot: objectindex.types)
+        {
+            if(oiot.type==type)
+            {
+                for(PrpObjectIndex.ObjectindexObjecttypeObjectdesc oiotod: oiot.descs)
+                {
+                    m.msg(oiotod.desc.toString());
+                    if(oiotod.desc.objectname.toString().equals(name))
+                    {
+                        return oiotod.desc;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    public static prpfile readHeaderAndIndexFromFile(String filename)
+    {
+        prpfile result = new prpfile();
+        //read file
+        byte[] filedata = shared.FileUtils.ReadFile(filename);
+        File f = new File(filename);
+        context c = context.createFromBytestream(new Bytestream(filedata));
+        c.curFile = filename;
+        result.header = new PrpHeader(c);
+        result.objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,result.header.offsetToObjectIndex)));
+        result.filename = filename;
+        
+        return result;
+    }
     public void removeObject(Typeid type, String name)
     {
         for(PrpRootObject obj: objects)

@@ -12,6 +12,8 @@ import java.util.HashMap;
 import uru.moulprp.Typeid;
 import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Pageid;
+import uru.moulprp.prpfile;
+import uru.moulprp.*;
 
 public class moul
 {
@@ -83,6 +85,38 @@ public class moul
         m.state.pop();
         m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!");
         m.status("Conversion completed!");
+    }
+    
+    public static void proccessPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder)
+    {
+        String pagename = prp.header.pagename.toString();
+        
+        if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
+        {
+            x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookMyst", Typeid.plPythonFileMod).castTo();
+            pfm.getListingByIndex(4).xString = Bstr.createFromString("MystMystV");
+            int dummy=0;
+        }
+        if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
+        {
+            x0006Layer layer = prp.findObject("Map #6995", Typeid.plLayer).castTo();
+            //String texturefilename = infolder+"/dat/"+agename+"_District_Textures.prp";
+            String texturefilename = infolder+"/dat/GUI_District_BkBookImages.prp";
+            prpfile textureprp = prpfile.readHeaderAndIndexFromFile(texturefilename);
+            //Uruobjectdesc mipmap = textureprp.findDescInIndex("xlinkpanelmystisland*1#0.hsm", Typeid.plMipMap);
+            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", textureprp);
+            //layer.texture = mipmap.toRef();
+            layer.texture = mmref;
+        }
+        if(agename.equals("EderDelin") && pagename.equals("garden"))
+        {
+            x00A2Pythonfilemod pfm = prp.findObject("cPythYeeshaPage15_0", Typeid.plPythonFileMod).castTo();
+            pfm.getListingByIndex(2).xInteger = 18;
+            pfm = prp.findObject("cPythYeeshaPage15_1", Typeid.plPythonFileMod).castTo();
+            pfm.getListingByIndex(2).xInteger = 18;
+            pfm = prp.findObject("cPythYeeshaPage15_2", Typeid.plPythonFileMod).castTo();
+            pfm.getListingByIndex(2).xInteger = 18;
+        }
     }
     
     /*public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files)

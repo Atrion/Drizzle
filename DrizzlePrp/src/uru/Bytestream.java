@@ -245,7 +245,7 @@ public class Bytestream extends IBytestream
         }
         return result;
     }
-    public int[] readInts(int num)
+    /*public int[] readInts(int num)
     {
         int[] result = new int[num];
         for(int i=0;i<num;i++)
@@ -253,7 +253,7 @@ public class Bytestream extends IBytestream
             result[i] = readInt();
         }
         return result;
-    }
+    }*/
     
     public void skipBytes(int numToSkip)
     {

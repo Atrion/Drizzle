@@ -682,6 +682,7 @@ public class mystAutomation
                             type.plClothingBase,
                             type.plArmatureEffectsMgr,
                             type.plAliasModifier,
+                            type.plPrintShape,
                             
                         };
                         namestartswith = new String[]{
@@ -858,6 +859,7 @@ public class mystAutomation
         Typeid.plClothingOutfit,
         Typeid.plClothingBase,
         Typeid.plAliasModifier,
+        Typeid.plPrintShape,
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -1021,6 +1023,7 @@ public class mystAutomation
                         type.plArmatureEffectsMgr,
                         type.plLayerLinkAnimation,
                         type.plAliasModifier,
+                        type.plPrintShape,
                 };
                 String[] namestarts={
                 };
@@ -1175,6 +1178,28 @@ public class mystAutomation
         cmap<String,cmap<String,String>> pagenames = new cmap();
         pagenames.put("GlobalAnimations", "FemaleDance", "FemaleDanceMOUL");
         pagenames.put("GlobalAnimations", "MaleDance", "MaleDanceMOUL");
+        //pagenames.put("CustomAvatars", "Bahro1", "kg");
+        /*pagenames.put("GlobalAnimations", "kgFall", "BahroFall");
+        pagenames.put("GlobalAnimations", "kgIdle", "BahroIdle");
+        pagenames.put("GlobalAnimations", "kgKiBegin", "BahroKiBegin");
+        pagenames.put("GlobalAnimations", "kgKiEnd", "BahroKiEnd");
+        pagenames.put("GlobalAnimations", "kgKiGlance", "BahroKiGlance");
+        pagenames.put("GlobalAnimations", "kgKiTap", "BahroKiTap");
+        pagenames.put("GlobalAnimations", "kgKiUse", "BahroKiUse");
+        pagenames.put("GlobalAnimations", "kgRun", "BahroRun");
+        pagenames.put("GlobalAnimations", "kgRunningJump", "BahroRunningJump");
+        pagenames.put("GlobalAnimations", "kgSitDownGround", "BahroSitDownGround");
+        pagenames.put("GlobalAnimations", "kgSitIdleGround", "BahroSitIdleGround");
+        pagenames.put("GlobalAnimations", "kgSitStandGround", "BahroSitStandGround");
+        pagenames.put("GlobalAnimations", "kgStandingJump", "BahroStandingJump");
+        pagenames.put("GlobalAnimations", "kgStepLeft", "BahroStepLeft");
+        pagenames.put("GlobalAnimations", "kgStepRight", "BahroStepRight");
+        pagenames.put("GlobalAnimations", "kgTurnLeft", "BahroTurnLeft");
+        pagenames.put("GlobalAnimations", "kgTurnRight", "BahroTurnRight");
+        pagenames.put("GlobalAnimations", "kgWalk", "BahroWalk");
+        pagenames.put("GlobalAnimations", "kgWalkBack", "BahroWalkBack");
+        pagenames.put("GlobalAnimations", "kgWalkingJump", "BahroWalkingJump");
+        pagenames.put("GlobalAnimations", "kgWave", "BahroWave");*/
         
         Typeid[] readable = mystAutomation.moulReadable;
         
@@ -1307,6 +1332,7 @@ public class mystAutomation
             prpfile prp = prpfile.createFromContext(c, readable);
             
             processPrp(prp,agename,agenames,outfolder,infolder);
+            automation.moul.proccessPrp(prp,agename,agenames,outfolder,infolder);
             
             //Change pagename, if applicable.
             String oldpagename = prp.header.pagename.toString();
@@ -1453,7 +1479,9 @@ public class mystAutomation
             {
                 if(prp.header.pagename.toString().equals("Bahro1"))
                 {
-                    PlAliasModifier alias = PlAliasModifier.createFromName("Bahro1");
+                    String newname = "Bahro1";
+                    //String newname = "kg";
+                    PlAliasModifier alias = PlAliasModifier.createFromName(newname);
                     Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
                     PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
                     prp.extraobjects.add(aliasroot);

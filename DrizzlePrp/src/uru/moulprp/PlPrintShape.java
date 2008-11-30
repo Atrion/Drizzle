@@ -28,21 +28,28 @@ import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
-
-public class AAA_template extends uruobj
+public class PlPrintShape extends uruobj
 {
+    PlObjInterface parent;
+    Flt f1;
+    Flt f2;
+    Flt f3;
     
-    
-    public AAA_template(context c) throws readexception
+    public PlPrintShape(context c) throws readexception
     {
-        
+        parent = new PlObjInterface(c);
+        f1 = new Flt(c);
+        f2 = new Flt(c);
+        f3 = new Flt(c);
         
     }
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented."+this.toString());
-        m.warn("not tested with pots."+this.toString());
+        parent.compile(c);
+        f1.compile(c);
+        f2.compile(c);
+        f3.compile(c);
     }
     
 }
