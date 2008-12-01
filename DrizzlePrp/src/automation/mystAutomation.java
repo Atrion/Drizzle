@@ -1487,23 +1487,6 @@ public class mystAutomation
                 erf.ode.convertee.mass = Flt.one();
             }
         }
-        if(true) //attempt to fix bahro avatar
-        {
-            if(finalname.toLowerCase().equals("customavatars"))
-            {
-                if(prp.header.pagename.toString().equals("Bahro1"))
-                {
-                    String newname = "Bahro1";
-                    //String newname = "kg";
-                    PlAliasModifier alias = PlAliasModifier.createFromName(newname);
-                    Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
-                    PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
-                    prp.extraobjects.add(aliasroot);
-                    prp.mergeExtras();
-                }
-                
-            }
-        }
         if(true) //attempt to rename animation in GlobalAnimations
         {
             if(finalname.toLowerCase().equals("globalanimations"))

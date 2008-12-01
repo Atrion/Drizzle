@@ -91,6 +91,17 @@ public class moul
     {
         String pagename = prp.header.pagename.toString();
         
+        if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
+        {
+            //String newname = "Bahro1";
+            //String newname = "kg";
+            String newname = "Blake";
+            PlAliasModifier alias = PlAliasModifier.createFromName(newname);
+            Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
+            PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
+            prp.extraobjects.add(aliasroot);
+            prp.mergeExtras();
+        }
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
         {
             x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookMyst", Typeid.plPythonFileMod).castTo();

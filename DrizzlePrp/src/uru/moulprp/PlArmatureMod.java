@@ -117,6 +117,8 @@ public class PlArmatureMod extends uruobj
             v2 = Vertex.createFromFloats(0, 0, 0);
             //v1 = Vertex.createFromFloats(0, 0, 2);
             //v2 = Vertex.createFromFloats(0, 0, 4);
+            //v1 = Vertex.createFromFlts(Flt.createFromData(0x0), Flt.createFromData(0xb3bbc0ac), Flt.createFromData(0x40000262));
+            //v2 = Vertex.createFromFlts(Flt.createFromData(0x0), Flt.createFromData(0xb43a3090), Flt.createFromData(0x407de32c));
             m.warn("Using identity vectors in PlArmatureMod.");
             f1 = new Flt(c);
             f2 = new Flt(c);

@@ -654,6 +654,9 @@ public class Gui extends javax.swing.JFrame {
         jButton124 = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
         textfieldState38 = new shared.State.TextfieldState();
+        textfieldState39 = new shared.State.TextfieldState();
+        jButton125 = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
 
         buttongroupState1.setName("awe");
 
@@ -3215,52 +3218,70 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
                     jPanel39.add(jButton124);
-                    jButton124.setBounds(300, 30, 120, 36);
+                    jButton124.setBounds(300, 110, 120, 36);
 
                     jLabel35.setText("Server:");
                     jPanel39.add(jLabel35);
-                    jLabel35.setBounds(20, 40, 38, 16);
+                    jLabel35.setBounds(20, 120, 38, 16);
 
                     textfieldState38.setText("textfieldState38");
                     textfieldState38.setName("uamServer"); // NOI18N
                     jPanel39.add(textfieldState38);
-                    textfieldState38.setBounds(80, 40, 200, 20);
+                    textfieldState38.setBounds(80, 120, 200, 20);
 
-                    tabsState3.addTab("UAM", jPanel39);
+                    textfieldState39.setText("C:\\Program Files\\");
+                        textfieldState39.setName("uamRoot"); // NOI18N
+                        jPanel39.add(textfieldState39);
+                        textfieldState39.setBounds(80, 180, 190, 20);
 
-                    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                    getContentPane().setLayout(layout);
-                    layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(27, Short.MAX_VALUE))
-                    );
-                    layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(450, 450, 450)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        jButton125.setText("Select...");
+                        jButton125.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jButton125ActionPerformed(evt);
+                            }
+                        });
+                        jPanel39.add(jButton125);
+                        jButton125.setBounds(290, 190, 67, 36);
+
+                        jLabel36.setText("This is not intended for use yet; don't use it!");
+                        jPanel39.add(jLabel36);
+                        jLabel36.setBounds(50, 40, 280, 16);
+
+                        tabsState3.addTab("UAM", jPanel39);
+
+                        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                        getContentPane().setLayout(layout);
+                        layout.setHorizontalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(25, Short.MAX_VALUE))
-                    );
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(27, Short.MAX_VALUE))
+                        );
+                        layout.setVerticalGroup(
+                            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(450, 450, 450)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(25, Short.MAX_VALUE))
+                        );
 
-                    pack();
-                }// </editor-fold>//GEN-END:initComponents
+                        pack();
+                    }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         m.msg("hi");
@@ -4583,6 +4604,10 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton124ActionPerformed
     uam.Uam.GetAgeList(this.textfieldState38.getText());
 }//GEN-LAST:event_jButton124ActionPerformed
+
+private void jButton125ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton125ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState39);
+}//GEN-LAST:event_jButton125ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4675,6 +4700,7 @@ private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton122;
     private javax.swing.JButton jButton123;
     private javax.swing.JButton jButton124;
+    private javax.swing.JButton jButton125;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
@@ -4801,6 +4827,7 @@ private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4909,6 +4936,7 @@ private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState36;
     private shared.State.TextfieldState textfieldState37;
     private shared.State.TextfieldState textfieldState38;
+    private shared.State.TextfieldState textfieldState39;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState6;
