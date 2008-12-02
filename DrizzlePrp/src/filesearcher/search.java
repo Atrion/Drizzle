@@ -34,6 +34,19 @@ public class search
         //return (index!=-1);
         return index;
     }
+    public static Vector<File> getAllFilesWithExtension(String folder, boolean recurse, String extension)
+    {
+        Vector<File> allfiles = getallfiles(folder,recurse);
+        Vector<File> result = new Vector();
+        for(File f: allfiles)
+        {
+            if(f.getName().endsWith(extension))
+            {
+                result.add(f);
+            }
+        }
+        return result;
+    }
     public static Vector<File> getallfiles(String folder, boolean recurse)
     {
         File dir = new File(folder);

@@ -16,6 +16,9 @@ import java.net.SocketTimeoutException;
 import shared.m;
 import java.lang.InterruptedException;
 import java.net.SocketException;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 
 public class ThreadDownloader extends Thread
 {
@@ -26,6 +29,58 @@ public class ThreadDownloader extends Thread
     boolean doPause = false;
     GuiModal window;
     
+    public static void downloadAsFile(String url, String filename)
+    {
+        FileOutputStream out;
+        try
+        {
+            out = new FileOutputStream(filename);
+        }
+        catch(FileNotFoundException e)
+        {
+            throw new DownloadErrorException("Error opening file for saving: "+e.getMessage());
+        }
+                
+        ThreadDownloader td = new ThreadDownloader(url, out);
+        td.start();
+        td.joinEvenIfInterrupted();
+        
+        try{
+            out.close();
+        }catch(IOException e){
+            m.err("Unable to close FileOutputStream.");
+        }
+    }
+    public static byte[] downloadAsBytes(String url)
+    {
+        ByteArrayOutputStream baout = new ByteArrayOutputStream();
+                
+        ThreadDownloader td = new ThreadDownloader(url, baout);
+        td.start();
+        td.joinEvenIfInterrupted();
+        
+        byte[] result = baout.toByteArray();
+        try{
+            baout.close();
+        }catch(IOException e){
+            m.err("Unable to close ByteArrayOutputStream.");
+        }
+        return result;
+    }
+    
+    public void joinEvenIfInterrupted()
+    {
+        boolean joined = false;
+        while(!joined)
+        {
+            try
+            {
+                this.join();
+                joined = true;
+            }
+            catch(InterruptedException e){}
+        }
+    }
     public void cancel()
     {
         synchronized(this)

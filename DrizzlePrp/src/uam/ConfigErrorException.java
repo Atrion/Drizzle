@@ -7,10 +7,11 @@ package uam;
 
 import shared.m;
 
-public class DownloadErrorException extends DownloadAndProcessException
+public class ConfigErrorException extends RuntimeException
 {
-    public DownloadErrorException(String msg)
+    public ConfigErrorException(String msg)
     {
         super(msg);
+        m.err(msg);
     }
 }

@@ -209,7 +209,7 @@ public class AllStates //implements java.io.Serializable
             }
             else
             {
-                shared.m.msg("Settings file doesn't exist yet.");
+                shared.m.msg("Settings file doesn't exist yet; creating it.");
                 pullInStates(); //get the current (default) states from widgets.
             }
             return false;

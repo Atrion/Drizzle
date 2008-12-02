@@ -11,6 +11,7 @@ import java.io.File;
 
 public class ArchiveExtractCallback implements IArchiveExtractCallback // , ICryptoGetTextPassword,
 {
+    public static String root = "";
     
     class OutputStream extends java.io.OutputStream {
         java.io.RandomAccessFile file;
@@ -122,7 +123,7 @@ public class ArchiveExtractCallback implements IArchiveExtractCallback // , ICry
         outStream[0] = null;
         
         SevenZipEntry item = _archiveHandler.getEntry(index);
-        _filePath = item.getName();
+        _filePath = root + item.getName();
         
         File file = new File(_filePath);
         
