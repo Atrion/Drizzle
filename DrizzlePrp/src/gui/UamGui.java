@@ -5,6 +5,7 @@
 
 package gui;
 
+import java.awt.Component;
 import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.event.ListDataListener;
@@ -51,6 +52,19 @@ public class UamGui
                     public void valueChanged(ListSelectionEvent e) {
                         String age = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
                         GetVersionListGui(age);
+                    }
+                });
+                agelist.setCellRenderer(new javax.swing.ListCellRenderer() {
+                    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                        //throw new UnsupportedOperationException("Not supported yet.");
+                        javax.swing.JLabel label = new javax.swing.JLabel("hi");
+                        //label.getGraphics().setColor(java.awt.Color.RED);
+                        //label.getGraphics().fillRect(0, 0, label, index)
+                        label.setOpaque(true); //allows us to set the background.
+                        label.setForeground(java.awt.Color.BLUE);
+                        label.setBackground(java.awt.Color.GREEN);
+                        label.setBorder(javax.swing.border.LineBorder.createBlackLineBorder());
+                        return label;
                     }
                 });
                 if(agelist.getModel().getSize()>0) agelist.setSelectedIndex(0);

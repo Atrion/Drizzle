@@ -30,22 +30,29 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
                     change();
                 }
             });
+            common.addSpecialMenu(this, curbutton);
         }
+        //common.addSpecialMenu(this);
     }
     public void setValue(Object obj)
     {
-        Enumeration<AbstractButton> buttons = this.getElements();
+        Enumeration<AbstractButton> buttonses = this.getElements();
         int i = 0;
-        while(buttons.hasMoreElements())
+        while(buttonses.hasMoreElements())
         {
-            AbstractButton button = buttons.nextElement();
+            AbstractButton button = buttonses.nextElement();
             if(i==(Integer)obj)
             {
                 button.setSelected(true);
                 return;
             }
+            /*else
+            {
+                button.setSelected(false);
+            }*/
             i++;
         }
+        this.clearSelection(); //otherwise set no selection.
     }
 
     public Object getValue()

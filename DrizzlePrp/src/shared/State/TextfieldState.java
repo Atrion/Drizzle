@@ -1,6 +1,10 @@
 package shared.State;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.event.DocumentEvent;
+//import shared.m;
 
 
 
@@ -46,6 +50,7 @@ public class TextfieldState extends javax.swing.JTextField implements IState
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
  
     public void setValue(Object obj)

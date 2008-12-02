@@ -40,6 +40,7 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
 
     public void setValue(Object obj)

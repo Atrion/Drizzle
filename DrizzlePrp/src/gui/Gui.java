@@ -365,7 +365,6 @@ public class Gui extends javax.swing.JFrame {
     private void initComponents() {
 
         filedirButtonGroup = new javax.swing.ButtonGroup();
-        buttongroupState1 = new shared.State.ButtongroupState();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
@@ -396,6 +395,14 @@ public class Gui extends javax.swing.JFrame {
         jButton114 = new javax.swing.JButton();
         jButton115 = new javax.swing.JButton();
         jButton116 = new javax.swing.JButton();
+        jPanel40 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        textfieldState40 = new shared.State.TextfieldState();
+        textfieldState41 = new shared.State.TextfieldState();
+        jLabel42 = new javax.swing.JLabel();
+        jButton130 = new javax.swing.JButton();
+        jButton131 = new javax.swing.JButton();
+        jButton132 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -677,8 +684,6 @@ public class Gui extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jButton129 = new javax.swing.JButton();
 
-        buttongroupState1.setName("awe");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drizzle");
         setBounds(new java.awt.Rectangle(0, 0, 600, 600));
@@ -919,6 +924,81 @@ public class Gui extends javax.swing.JFrame {
         );
 
         tabsState1.addTab("Moul", jPanel35);
+
+        jLabel41.setText("Crowthistle folder:");
+
+        textfieldState40.setText("Click the select button to pick a folder.");
+        textfieldState40.setName("crowSimpleIn"); // NOI18N
+
+        textfieldState41.setText("Click the select button to pick a folder.");
+        textfieldState41.setName("crowSimpleOut"); // NOI18N
+
+        jLabel42.setText("Pots folder:");
+
+        jButton130.setText("Start...");
+        jButton130.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton130ActionPerformed(evt);
+            }
+        });
+
+        jButton131.setText("select...");
+        jButton131.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton131ActionPerformed(evt);
+            }
+        });
+
+        jButton132.setText("select...");
+        jButton132.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton132ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
+        jPanel40.setLayout(jPanel40Layout);
+        jPanel40Layout.setHorizontalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel40Layout.createSequentialGroup()
+                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel41)
+                            .addComponent(jLabel42))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textfieldState41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textfieldState40, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel40Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton130)))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton132)
+                    .addComponent(jButton131))
+                .addContainerGap(233, Short.MAX_VALUE))
+        );
+        jPanel40Layout.setVerticalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41)
+                    .addComponent(textfieldState40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton131))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(textfieldState41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton132))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton130)
+                .addContainerGap(173, Short.MAX_VALUE))
+        );
+
+        tabsState1.addTab("Crowthistle", jPanel40);
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
@@ -3255,7 +3335,7 @@ public class Gui extends javax.swing.JFrame {
                     jPanel39.add(jLabel35);
                     jLabel35.setBounds(20, 120, 38, 16);
 
-                    textfieldState38.setText("textfieldState38");
+                    textfieldState38.setText("http://ddb174.bplaced.net/uam/ages/");
                     textfieldState38.setName("uamServer"); // NOI18N
                     jPanel39.add(textfieldState38);
                     textfieldState38.setBounds(80, 120, 200, 20);
@@ -3289,7 +3369,7 @@ public class Gui extends javax.swing.JFrame {
                             }
                         });
                         jPanel39.add(jButton126);
-                        jButton126.setBounds(350, 50, 150, 36);
+                        jButton126.setBounds(530, 50, 150, 36);
 
                         jScrollPane6.setViewportView(jList1);
 
@@ -4716,6 +4796,18 @@ private void jButton128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton129ActionPerformed
     gui.UamGui.PerformDeletion();
 }//GEN-LAST:event_jButton129ActionPerformed
+
+private void jButton130ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton130ActionPerformed
+    automation.crowthistle.convertCrowthistle(this.textfieldState40.getText(),this.textfieldState41.getText());
+}//GEN-LAST:event_jButton130ActionPerformed
+
+private void jButton131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton131ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState40);
+}//GEN-LAST:event_jButton131ActionPerformed
+
+private void jButton132ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton132ActionPerformed
+    GuiUtils.getUserSelectedFolder(this.textfieldState41);
+}//GEN-LAST:event_jButton132ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -4753,7 +4845,6 @@ private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private shared.State.ButtongroupState buttongroupState1;
     private shared.State.CheckboxState checkboxState1;
     private shared.State.CheckboxState checkboxState10;
     private shared.State.CheckboxState checkboxState11;
@@ -4814,6 +4905,9 @@ private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton128;
     private javax.swing.JButton jButton129;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton130;
+    private javax.swing.JButton jButton131;
+    private javax.swing.JButton jButton132;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
@@ -4945,6 +5039,8 @@ private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4987,6 +5083,7 @@ private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -5060,6 +5157,8 @@ private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState38;
     private shared.State.TextfieldState textfieldState39;
     private shared.State.TextfieldState textfieldState4;
+    private shared.State.TextfieldState textfieldState40;
+    private shared.State.TextfieldState textfieldState41;
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState6;
     private shared.State.TextfieldState textfieldState7;

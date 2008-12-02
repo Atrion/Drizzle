@@ -1,6 +1,8 @@
 package shared.State;
 
 import javax.swing.event.DocumentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
 
 
 
@@ -39,6 +41,7 @@ public class TextareaState extends javax.swing.JTextArea implements IState
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
   
     public void setValue(Object obj)

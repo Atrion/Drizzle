@@ -32,4 +32,26 @@ public class detectinstallation
         
         return true;
     }
+    public static boolean isFolderCrowthistle(String folder)
+    {
+        File folderfile = new File(folder);
+        if(!folderfile.exists())
+        {
+            m.err("The Crowthistle folder you selected doesn't exist.");
+            return false;
+        }
+        if(!folderfile.isDirectory())
+        {
+            m.err("The Crowthistle folder you selected must be a folder, not a file.");
+            return false;
+        }
+        File exe = new File(folder+"/CT.exe");
+        if(!exe.exists())
+        {
+            m.err("The Crowthistle folder you selected doesn't seem to contain Crowthistle.  Please select the folder that contains CT.exe");
+            return false;
+        }
+        
+        return true;
+    }
 }

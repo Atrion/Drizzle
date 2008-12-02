@@ -71,26 +71,33 @@ public class ThreadDownloadAndProcess extends Thread
 
             //download file.
             ThreadDownloader.downloadAsFile(mir, outputfile);
+            InvisibleModal modal = InvisibleModal.createAndShow();
 
             //check integrity.
+            m.status("Checking integrity...");
             byte[] hash = shared.CryptHashes.GetWhirlpool(outputfile);
             String hashstr = b.BytesToHexString(hash);
             boolean isgood = whirlpool.equals(hashstr);
             if(!isgood)
             {
                 m.err("Bad file integrity. The Age downloaded wasn't what was expected, perhaps because the version on the server is corrupted.");
+                FileUtils.DeleteFile(outputfile);
                 return;
             }
-            m.msg("File integrity is good!");
+            m.status("File integrity is good!");
             
             //extract.
             shared.sevenzip.extract(outputfile, potsfolder);
             
+            m.status("Age installed!");
+            
+            modal.hideInvisibleModal();
         }
         else if(job==Jobs.downloadConfig)
         {
             String file = server+"/uam.status.txt";
             byte[] result = ThreadDownloader.downloadAsBytes(file);
+            InvisibleModal modal = InvisibleModal.createAndShow();
             
             //parse config file.
             ByteArrayInputStream in = new ByteArrayInputStream(result);
@@ -98,6 +105,8 @@ public class ThreadDownloadAndProcess extends Thread
         
             //callback
             callback.callback(ageList);
+            
+            modal.hideInvisibleModal();
         }
         
     }

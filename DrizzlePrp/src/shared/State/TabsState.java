@@ -28,6 +28,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
                 change();
             }
         });
+        //common.addSpecialMenu(this); //doesn't really matter for Tabs.
     }
     public void setValue(Object obj)
     {

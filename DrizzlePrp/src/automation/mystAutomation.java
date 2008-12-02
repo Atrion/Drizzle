@@ -1959,6 +1959,16 @@ public class mystAutomation
             FileUtils.WriteFile(outfile, wdysData);
         }
         
+        //Handle .ogg files...
+        Vector<String> oggfiles = automation.fileLists.crowSfxList();
+        for(String filename: oggfiles)
+        {
+            String infile = crowthistlefolder + "/sfx/" + filename;
+            String outfile = outfolder + "/sfx/" + filename;
+            
+            FileUtils.CopyFile(infile, outfile, true);
+        }
+        
         //convert .prp files...
         for(String filename: prpfiles)
         {

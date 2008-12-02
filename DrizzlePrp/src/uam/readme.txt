@@ -5,6 +5,7 @@ The status file minimal structure looks like this:
         <filename>Dustin2</filename>
         <version>
             <num>4</num>
+            <whirlpool>45ac2eExampleHashCode25ff2</whirlpool>
             <mirror>
                 <url>http://example.com/uruages/Dustin2.7z</url>
             </mirror>

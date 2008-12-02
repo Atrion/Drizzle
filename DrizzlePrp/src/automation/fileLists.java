@@ -64,7 +64,15 @@ public class fileLists
         result.addAll(uru.generics.convertArrayToVector(moulSupportedList2));
         return result;
     }
-    
+    public static Vector<String> crowSfxList()
+    {
+        Vector<String> result = uru.generics.convertArrayToVector(crowSfxList2);
+        return result;
+    }
+    private static String[] crowSfxList2 = {
+        "mntnAir_loop.ogg","mntnAmbientMx.ogg","mntnBird01a.ogg","mntnBird01b.ogg","mntnBird02a.ogg","mntnBird02b.ogg","mntnBird02c.ogg","mntnBird03a.ogg","mntnBird04a.ogg","mntnBird04b.ogg","mntnBird05a.ogg","mntnBird05b.ogg","mntnBird06a.ogg","mntnBird06b.ogg","mntnBird07a.ogg","mntnBird07b.ogg","mntnFountain_loop.ogg","mntnWaterfall_loop.ogg","mntnWind_Loop01.ogg",
+        "mrshAmb01.ogg","mrshAmb02.ogg","mrshAmb03.ogg","mrshAmb04.ogg","mrshAmbientMx.ogg","mrshBirdAmb.ogg","mrshRandomCricket01.ogg","mrshRandomCricket02.ogg","mrshRandomCricket03.ogg","mrshRandomCritter01.ogg","mrshRandomCritter02.ogg","mrshRandomCritter03.ogg","mrshRandomCritter04a.ogg","mrshRandomCritter04b.ogg","mrshRandomCritter04c.ogg","mrshRandomCritter04d.ogg","mrshRandomCritter04e.ogg","mrshRandomCritter04f.ogg","mrshRandomCritter04g.ogg","mrshRandomCritter05.ogg","mrshRandomCritter06a.ogg","mrshRandomCritter06b.ogg","mrshRandomCritter06c.ogg","mrshRandomCritter06d.ogg","mrshRandomCritter07a.ogg","mrshRandomCritter07b.ogg","mrshRandomCritter07c.ogg","mrshRandomCritter07d.ogg","mrshRandomCritter08.ogg","mrshRandomCritter09a.ogg","mrshRandomCritter09b.ogg","mrshRandomCritter10.ogg","mrshRandomCritter11a.ogg","mrshRandomCritter11b.ogg","mrshRandomCritter12a.ogg","mrshRandomCritter12b.ogg","mrshRandomCritter13.ogg","mrshRandomCritter14.ogg","mrshRandomCritter15.ogg","mrshRandomCritter16.ogg","mrshRandomCritter17.ogg","mrshRandomCritter18.ogg","mrshRandomFrogs01.ogg","mrshRandomFrogs02.ogg","mrshRandomFrogs03.ogg","mrshRandomFrogs04.ogg","mrshRandomFrogs05.ogg","mrshRandomFrogs06.ogg","mrshRandomFrogs07.ogg","mrshRandomFrogs08.ogg",
+    };
     private static String[] moulSfxList = {
         "dln_Air_Loop.ogg","dln_GeeseFlyBy.ogg","dln_GeeseRandom.ogg","dln_RandBird-A01.ogg","dln_RandBird-A02.ogg","dln_RandBird-A03.ogg","dln_RandBird-B01.ogg","dln_RandBird-B02.ogg","dln_RandBird-B03.ogg","dln_RandBird-B04.ogg","dln_RandBird-C01.ogg","dln_RandBird-C02.ogg","dln_RandBird-C03.ogg","dln_RandBird01.ogg","dln_RandBird02.ogg","dln_RandBird03.ogg","dln_RandBird04.ogg","dln_RandBird05.ogg","dln_RandBird06.ogg",
         "drnIceCave_Loop.ogg","drnIceHarps_loop.ogg","drnRandomIce01.ogg","drnRandomIce02.ogg","drnRandomIce03.ogg","drnRandomIce04.ogg","drnRandomIce05.ogg","drnRandomIce06.ogg","drnRandomIce07.ogg","drnRandomIce08.ogg","drnUnderwaterCreature01.ogg","drnUnderwaterCreature02.ogg","drnUnderwaterCreature03.ogg","drnUnderwaterCreature04.ogg",

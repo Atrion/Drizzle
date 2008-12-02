@@ -152,13 +152,15 @@ public class AllStates //implements java.io.Serializable
     public static boolean loadandpush(String filename)
     {
         boolean result = load(filename);
-        if(result) pushOutStates();
         
         //hack
         for(IState state: refs)
         {
             state.initialise();
         }
+
+        if(result) pushOutStates();
+        
 
         return result;
     }
@@ -234,7 +236,7 @@ public class AllStates //implements java.io.Serializable
             states.put(name, val);
         }
     }
-    public static void pushOutStates()
+    private static void pushOutStates()
     {
         /*for(pair p: states)
         {
@@ -264,6 +266,8 @@ public class AllStates //implements java.io.Serializable
                 }
                 else
                 {
+                    //Do nothing, because this function is only called from loadAndPush() which hasn't set the default yet, but will.
+                    //Alternatively, we could have loadAndPush() set the defaults before calling this; in which case this will just reassign the defaults.
                     state.setValue(state.getDefault());
                 }
             }

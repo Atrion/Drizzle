@@ -44,6 +44,7 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
     
     public void setValue(Object obj)

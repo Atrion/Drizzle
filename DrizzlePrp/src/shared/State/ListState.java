@@ -31,6 +31,7 @@ public class ListState extends javax.swing.JList implements IState
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
 
     public void setValue(Object obj)

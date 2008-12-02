@@ -28,6 +28,7 @@ public class ComboboxState extends javax.swing.JComboBox implements IState
                 change();
             }
         });
+        common.addSpecialMenu(this);
     }
     
     public void setValue(Object obj)
