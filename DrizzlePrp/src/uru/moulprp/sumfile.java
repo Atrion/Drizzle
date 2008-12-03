@@ -103,7 +103,12 @@ public class sumfile
             u2 = c.readInt();
         }
     }
-    
+    public static void regenerateSumfile(String potsfolder, String agename)
+    {
+        Bytes bytes = createSumfile(potsfolder+"/dat/", agename);
+        String outfile = potsfolder+"/dat/"+agename+".sum";
+        shared.FileUtils.WriteFile(outfile, bytes);
+    }
     public static Bytes createSumfile(String infolder, String agename)
     {
         File datdir = new File(infolder);

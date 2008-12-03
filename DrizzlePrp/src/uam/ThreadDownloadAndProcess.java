@@ -19,7 +19,7 @@ public class ThreadDownloadAndProcess extends Thread
     String whirlpool;
     
     String server;
-    gui.Gui gui;
+    gui.Gui guiform;
     shared.delegate callback;
     
     public static enum Jobs
@@ -67,11 +67,12 @@ public class ThreadDownloadAndProcess extends Thread
             //prepare output file.
             String outputfolder = potsfolder+Uam.ageArchivesFolder;
             FileUtils.CreateFolder(outputfolder);
-            String outputfile = outputfolder+age+"-"+ver+".7z";
+            String outputfile = outputfolder+age+uam.Uam.versionSep+ver+".7z";
 
             //download file.
             ThreadDownloader.downloadAsFile(mir, outputfile);
             InvisibleModal modal = InvisibleModal.createAndShow();
+            try{
 
             //check integrity.
             m.status("Checking integrity...");
@@ -89,15 +90,22 @@ public class ThreadDownloadAndProcess extends Thread
             //extract.
             shared.sevenzip.extract(outputfile, potsfolder);
             
+            //callback
+            //callback.callback(null);
+            gui.UamGui.RefreshInfo(potsfolder);
+            
             m.status("Age installed!");
             
+            }finally{
             modal.hideInvisibleModal();
+            }
         }
         else if(job==Jobs.downloadConfig)
         {
             String file = server+"/uam.status.txt";
             byte[] result = ThreadDownloader.downloadAsBytes(file);
             InvisibleModal modal = InvisibleModal.createAndShow();
+            try{
             
             //parse config file.
             ByteArrayInputStream in = new ByteArrayInputStream(result);
@@ -105,8 +113,10 @@ public class ThreadDownloadAndProcess extends Thread
         
             //callback
             callback.callback(ageList);
-            
+
+            }finally{
             modal.hideInvisibleModal();
+            }
         }
         
     }

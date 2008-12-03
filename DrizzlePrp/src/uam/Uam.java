@@ -13,13 +13,23 @@ import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.util.Vector;
 import shared.*;
+import java.util.HashMap;
 
 
 public class Uam
 {
     public static UamConfig ageList;
+    public static HashMap<String,InstallStatus> ageInstallStatus;
     public static final String ageArchivesFolder = "/agearchives/";
     public static final String versionSep = "-";
+    
+    public static enum InstallStatus
+    {
+        notInstalled,
+        latestVersionInCache,
+        nonLatestVersionInCache,
+        notInCache,
+    }
     
     public static void DownloadAge7Zip(String age,String ver,String mir,String potsfolder)
     {

@@ -13,7 +13,7 @@ package uam;
 public class InvisibleModal extends javax.swing.JDialog {
     
     public InvisibleModalThread thread;
-    public static final boolean enabled = false;
+    public static final boolean enabled = true;
     
     public static InvisibleModal create()
     {

@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 import shared.m;
+import java.util.HashMap;
 
 public class UamConfig
 {
@@ -35,13 +36,20 @@ public class UamConfig
     XPath xpath;
     boolean doValidate = false;
     
+    UamConfigObject uco = null;
+    Vector<String> allAgeNames = null;
+    
     public String getWhirlpool(String agename, String version)
     {
         return this.getString("/uam/age[filename='"+agename+"']/version[num='"+version+"']/whirlpool");
     }
     public Vector<String> getAllAgeNames()
     {
-        return this.getStrings("/uam/age/filename");
+        if(allAgeNames==null)
+        {
+            allAgeNames = this.getStrings("/uam/age/filename");
+        }
+        return allAgeNames;
     }
     public Vector<String> getAllVersionsOfAge(String agename)
     {
@@ -170,6 +178,33 @@ public class UamConfig
         {
             //warning.
             m.warn(exception.getMessage());
+        }
+    }
+
+    public UamConfigObject getConfigObject()
+    {
+        //cache it.
+        if(uco==null)
+        {
+            uco = new UamConfigObject(this);
+        }
+        return uco;
+    }
+    
+    public static class UamConfigObject
+    {
+        public HashMap<String,Vector<String>> ageversions;
+        
+        private UamConfigObject(UamConfig source)
+        {
+            //TODO: make this more efficient:
+            
+            ageversions = new HashMap();
+            for(String agename: source.getAllAgeNames())
+            {
+                Vector<String> versions = source.getAllVersionsOfAge(agename);
+                ageversions.put(agename, versions);
+            }
         }
     }
 }

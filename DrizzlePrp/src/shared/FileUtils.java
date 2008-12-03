@@ -54,6 +54,11 @@ public class FileUtils {
         //return new File(".").getPath();
         return new File(".").getAbsolutePath();
     }
+    public static boolean Exists(String filename)
+    {
+        File file = new File(filename);
+        return file.exists();
+    }
     public static void DeleteFile(String filename)
     {
         File file = new File(filename);
