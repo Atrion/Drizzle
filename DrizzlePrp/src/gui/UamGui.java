@@ -53,16 +53,16 @@ public class UamGui
                         label.setForeground(Color.green);
                         break;
                     case nonLatestVersionInCache:
-                        label.setForeground(new Color(0x00aa00));
+                        label.setForeground(Color.yellow);//new Color(0x00aa00));
                         break;
                     case notInCache:
-                        label.setForeground(Color.gray);
+                        label.setForeground(Color.black);
                         break;
                     default:
-                        //label.setForeground(Color.BLUE);
+                        label.setForeground(Color.black);
                         break;
                 }
-                label.setBackground(Color.gray);
+                //label.setBackground(Color.lightGray);
                 if(isSelected) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 //else label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
                 //if(cellHasFocus) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
@@ -113,6 +113,9 @@ public class UamGui
                 installedAges.add(agename);
             }
         }*/
+        
+        String welcomeMessage = Uam.ageList.getWelcomeMessage();
+        m.msg(welcomeMessage);
         
         Vector<String> availableAges = Uam.ageList.getAllAgeNames();
         
@@ -186,7 +189,7 @@ public class UamGui
     }
     public static void GetAgeListGui(String server, String potsfolder)
     {
-        m.msg("Updating Age list...");
+        //m.msg("Updating Age list...");
         if(!automation.detectinstallation.isFolderPots(potsfolder))
         {
             return;
@@ -359,6 +362,13 @@ public class UamGui
         if(age==null || ver==null || mir==null)
         {
             m.msg("You must select an Age, Version, and Mirror.");
+            return;
+        }
+        
+        String archiveType = uam.Uam.ageList.getArchiveType(age, ver);
+        if(!archiveType.equals("7z"))
+        {
+            m.err("This version is in a archive type not currently supported: "+archiveType);
             return;
         }
         

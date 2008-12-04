@@ -6,7 +6,7 @@ import SevenZipCommon.BoolVector;
 import SevenZipCommon.IntVector;
 import SevenZipCommon.LongVector;
 
-class ArchiveDatabase {
+public class ArchiveDatabase {
     public LongVector PackSizes = new LongVector();
     public BoolVector PackCRCsDefined = new BoolVector();
     public IntVector PackCRCs = new IntVector();

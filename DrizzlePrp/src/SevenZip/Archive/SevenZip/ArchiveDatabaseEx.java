@@ -5,12 +5,12 @@ import SevenZipCommon.IntVector;
 import SevenZipCommon.LongVector;
 
 public class ArchiveDatabaseEx extends ArchiveDatabase {
-    InArchiveInfo ArchiveInfo = new InArchiveInfo();
-    LongVector PackStreamStartPositions = new LongVector();
-    IntVector FolderStartPackStreamIndex = new IntVector();
+    public InArchiveInfo ArchiveInfo = new InArchiveInfo();
+    public LongVector PackStreamStartPositions = new LongVector();
+    public IntVector FolderStartPackStreamIndex = new IntVector();
    
-    IntVector FolderStartFileIndex = new IntVector();
-    IntVector FileIndexToFolderIndexMap = new IntVector();
+    public IntVector FolderStartFileIndex = new IntVector();
+    public IntVector FileIndexToFolderIndexMap = new IntVector();
     
     void Clear() {
         super.Clear();

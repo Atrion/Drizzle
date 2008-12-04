@@ -41,7 +41,7 @@ public class UamConfig
     
     public String getWhirlpool(String agename, String version)
     {
-        return this.getString("/uam/age[filename='"+agename+"']/version[num='"+version+"']/whirlpool");
+        return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
     }
     public Vector<String> getAllAgeNames()
     {
@@ -51,13 +51,21 @@ public class UamConfig
         }
         return allAgeNames;
     }
+    public String getArchiveType(String agename, String version)
+    {
+        return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/archive");
+    }
+    public String getWelcomeMessage()
+    {
+        return this.getString("/uam/welcome");
+    }
     public Vector<String> getAllVersionsOfAge(String agename)
     {
-        return this.getStrings("/uam/age[filename='"+agename+"']/version/num");
+        return this.getStrings("/uam/age[filename='"+agename+"']/version/name");
     }
     public Vector<String> getAllUrlsOfAgeVersion(String agename, String version)
     {
-        return this.getStrings("/uam/age[filename='"+agename+"']/version[num='"+version+"']/mirror/url");
+        return this.getStrings("/uam/age[filename='"+agename+"']/version[name='"+version+"']/mirror/url");
     }
     public UamConfig(InputStream in)
     {

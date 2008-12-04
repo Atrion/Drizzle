@@ -2,7 +2,7 @@ package SevenZip.Archive.SevenZip;
 
 import SevenZipCommon.LongVector;
 
-class InArchiveInfo
+public class InArchiveInfo
 {
     public byte ArchiveVersion_Major;
     public byte ArchiveVersion_Minor;

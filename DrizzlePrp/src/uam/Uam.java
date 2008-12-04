@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Vector;
 import shared.*;
 import java.util.HashMap;
+import java.io.File;
 
 
 public class Uam
@@ -21,7 +22,7 @@ public class Uam
     public static UamConfig ageList;
     public static HashMap<String,InstallStatus> ageInstallStatus;
     public static final String ageArchivesFolder = "/agearchives/";
-    public static final String versionSep = "-";
+    public static final String versionSep = "--";
     
     public static enum InstallStatus
     {
@@ -30,7 +31,33 @@ public class Uam
         nonLatestVersionInCache,
         notInCache,
     }
-    
+  public static void generateStatusFile(String folderWith7zs)
+    {
+        StringBuilder result = new StringBuilder();
+        for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, ".7z"))
+        {
+            String filename = f.getName();
+            int ind = filename.indexOf("--");
+            String agename = filename.substring(0,ind);
+            String version = filename.substring(ind+2,filename.length()-4);
+            byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
+            String hashstr = b.BytesToHexString(hash);
+            String mirurl = "http://dustin.homeunix.net:88/uam/ages/"+filename;
+            result.append("<age>\n");
+            result.append("    <filename>"+agename+"</filename>\n");
+            result.append("    <version>\n");
+            result.append("        <num>"+version+"</num>\n");
+            result.append("        <whirlpool>"+hashstr+"</whirlpool>\n");
+            result.append("        <mirror>\n");
+            result.append("            <url>"+mirurl+"</url>\n");
+            result.append("        </mirror>\n");
+            result.append("    </version>\n");
+            result.append("</age>\n");
+            result.append("\n");
+        }
+        String finalresult = result.toString();
+        m.msg(finalresult);
+    }
     public static void DownloadAge7Zip(String age,String ver,String mir,String potsfolder)
     {
         //ensure pots folder.

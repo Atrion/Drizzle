@@ -2,7 +2,7 @@ package SevenZip.Archive.SevenZip;
 
 import SevenZipCommon.ByteBuffer;
 
-class AltCoderInfo {
+public class AltCoderInfo {
     public MethodID MethodID;
     public ByteBuffer Properties;
     

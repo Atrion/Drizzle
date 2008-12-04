@@ -14,7 +14,7 @@ import SevenZipCommon.BoolVector;
 import SevenZipCommon.IntVector;
 import SevenZipCommon.LongVector;
 
-class InArchive extends Header {
+public class InArchive extends Header {
     
     // CNum
     static public final int kNumMax = 0x7FFFFFFF;
@@ -321,7 +321,7 @@ class InArchive extends Header {
         }
     }
     
-    int Open(
+    public int Open(
             IInStream stream,  // IInStream *stream
             long searchHeaderSizeLimit // const UInt64 *searchHeaderSizeLimit
             ) throws IOException {
@@ -763,7 +763,7 @@ class InArchive extends Header {
         return HRESULT.S_OK;
     }
     
-    int ReadDatabase(ArchiveDatabaseEx database) throws IOException {
+    public int ReadDatabase(ArchiveDatabaseEx database) throws IOException {
         database.Clear();
         database.ArchiveInfo.StartPosition = _arhiveBeginStreamPosition;
         

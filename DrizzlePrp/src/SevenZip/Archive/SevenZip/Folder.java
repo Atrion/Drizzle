@@ -8,13 +8,13 @@ import SevenZipCommon.LongVector;
 
 import SevenZip.Archive.Common.BindPair;
 
-class Folder {
+public class Folder {
     public RecordVector<CoderInfo> Coders = new RecordVector<CoderInfo>();
-    RecordVector<BindPair> BindPairs = new RecordVector<BindPair>();
-    IntVector PackStreams = new IntVector();
-    LongVector UnPackSizes = new LongVector();
-    int UnPackCRC;
-    boolean UnPackCRCDefined;
+    public RecordVector<BindPair> BindPairs = new RecordVector<BindPair>();
+    public IntVector PackStreams = new IntVector();
+    public LongVector UnPackSizes = new LongVector();
+    public int UnPackCRC;
+    public boolean UnPackCRCDefined;
     Folder() {
         UnPackCRCDefined = false;
     }

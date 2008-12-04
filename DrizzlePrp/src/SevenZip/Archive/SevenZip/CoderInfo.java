@@ -2,7 +2,7 @@ package SevenZip.Archive.SevenZip;
 
 import SevenZipCommon.ObjectVector;
 
-class CoderInfo {
+public class CoderInfo {
     
     int NumInStreams;
     int NumOutStreams;

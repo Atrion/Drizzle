@@ -24,7 +24,7 @@ import SevenZipCommon.LockedSequentialInStreamImp;
 import SevenZipCommon.LimitedSequentialInStream;
 import SevenZipCommon.ByteBuffer;
 
-class Decoder {
+public class Decoder {
     
     boolean _bindInfoExPrevIsDefined;
     BindInfoEx _bindInfoExPrev;
@@ -106,7 +106,7 @@ class Decoder {
         return true;
     }
     
-    int Decode(SevenZip.IInStream inStream,
+    public int Decode(SevenZip.IInStream inStream,
             long startPos,
             LongVector packSizes, int packSizesOffset, // const UInt64 *packSizes,
             Folder folderInfo,

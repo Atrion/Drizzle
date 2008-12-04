@@ -1,7 +1,7 @@
 package SevenZip.Archive.SevenZip;
 import SevenZipCommon.RecordVector;
 
-class MethodID {
+public class MethodID {
     
     static public final MethodID k_LZMA      = new MethodID(0x3, 0x1, 0x1);
     static public final MethodID k_PPMD      = new MethodID(0x3, 0x4, 0x1);
