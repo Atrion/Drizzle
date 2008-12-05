@@ -34,7 +34,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
         }
         //common.addSpecialMenu(this);
     }
-    public void setValue(Object obj)
+    public void putValue(Object obj)
     {
         Enumeration<AbstractButton> buttonses = this.getElements();
         int i = 0;
@@ -81,10 +81,10 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
     {
         _name = newname;
     }
-    public void setDefault(Object obj)
-    {
-        this._default = (Integer)obj;
-    }
+    //public void setDefault(Object obj)
+    //{
+    //    this._default = (Integer)obj;
+    //}
     public Object getDefault()
     {
         if(_default==null) return getValue();

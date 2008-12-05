@@ -45,6 +45,7 @@ public class m
         public boolean showConsoleMessages = true;
         public boolean showStatusMessages = true;
         public boolean writeToFile = false;
+        public boolean scrollOutput = true;
         public String filename;
         
         public stateclass()
@@ -61,6 +62,7 @@ public class m
             result.showStatusMessages = this.showStatusMessages;
             result.showWarningMessages = this.showWarningMessages;
             result.writeToFile = this.writeToFile;
+            result.scrollOutput = this.scrollOutput;
             result.filename = this.filename;
             return result;
         }
@@ -146,7 +148,15 @@ public class m
         }
         else if(_outputTextArea!=null)
         {
+            //javax.swing.JScrollPane a;
+            //javax.swing.JTextArea b;
             _outputTextArea.append(s+"\n");
+            if(state.curstate.scrollOutput)
+            {
+                //set the view position to the height, plus a little extra.
+                int h = _outputTextArea.getHeight();
+                _outputTextArea.scrollRectToVisible(new java.awt.Rectangle(0, h+40, 0, 0));
+            }
         }
         else
         {

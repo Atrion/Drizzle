@@ -21,6 +21,7 @@ import javax.swing.ActionMap;
 import java.io.File;
 import java.awt.TrayIcon;
 import java.awt.SystemTray;
+import javax.swing.JOptionPane;
 
 public class GuiUtils
 {
@@ -77,6 +78,11 @@ public class GuiUtils
         }
     }
     
+    public static void getStringFromUser(JTextComponent field, String message, String title)
+    {
+        String result = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+        if(result!=null) field.setText(result);
+    }
     public static void getUserSelectedFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();

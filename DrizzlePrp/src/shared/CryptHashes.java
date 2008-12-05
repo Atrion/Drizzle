@@ -40,9 +40,10 @@ public class CryptHashes {
     }
     public static byte[] GetWhirlpool(String filename)
     {
+        FileInputStream in=null;
         try
         {
-            FileInputStream in = new FileInputStream(filename);
+            in = new FileInputStream(filename);
             byte[] result = GetWhirlpool(in);
             in.close();
             return result;
@@ -50,6 +51,14 @@ public class CryptHashes {
         catch(Exception e)
         {
             throw new shared.uncaughtexception("Problem opening/closing input file for Whirlpool hash.");
+        }
+        finally
+        {
+            try
+            {
+                if(in!=null) in.close();
+            }
+            catch(Exception e){}
         }
     }
     public static byte[] GetWhirlpool(InputStream in) //this is the regular Whirlpool, not it's variations.

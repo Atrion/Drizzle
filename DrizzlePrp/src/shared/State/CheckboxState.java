@@ -47,7 +47,7 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
         common.addSpecialMenu(this);
     }
     
-    public void setValue(Object obj)
+    public void putValue(Object obj)
     {
         //Object obj = AllStates.getState(this.getActionCommand());
         //if(obj!=null) this.setSelected((Boolean)obj);
@@ -62,11 +62,11 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
     {
         return this.getName();
     }
-    public void setDefault(Object obj)
+    /*public void setDefault(Object obj)
     {
         this._default = (Boolean)obj;
         //this.setValue(obj);
-    }
+    }*/
     public Object getDefault()
     {
         if(_default==null) return getValue();

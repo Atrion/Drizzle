@@ -44,7 +44,7 @@ public class TextareaState extends javax.swing.JTextArea implements IState
         common.addSpecialMenu(this);
     }
   
-    public void setValue(Object obj)
+    public void putValue(Object obj)
     {
         this.setText((String)obj);
     }
@@ -58,10 +58,10 @@ public class TextareaState extends javax.swing.JTextArea implements IState
     {
         return this.getName();
     }
-    public void setDefault(Object obj)
-    {
-        this._default = (String)obj;
-    }
+    //public void setDefault(Object obj)
+    //{
+    //    this._default = (String)obj;
+    //}
     public Object getDefault()
     {
         if(_default==null) return getValue();

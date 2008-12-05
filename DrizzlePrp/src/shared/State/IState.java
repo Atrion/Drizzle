@@ -11,9 +11,9 @@ package shared.State;
  */
 public interface IState
 {
-    void setDefault(Object obj);
+    //void setDefault(Object obj);
     Object getDefault();
-    void setValue(Object obj);
+    void putValue(Object obj);
     Object getValue();
     String getStateName();
     void initialise();

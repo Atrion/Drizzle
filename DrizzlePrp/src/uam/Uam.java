@@ -23,6 +23,7 @@ public class Uam
     public static HashMap<String,InstallStatus> ageInstallStatus;
     public static final String ageArchivesFolder = "/agearchives/";
     public static final String versionSep = "--";
+    public static final String statusFilename = "uam.status.txt";
     
     public static enum InstallStatus
     {
@@ -31,47 +32,46 @@ public class Uam
         nonLatestVersionInCache,
         notInCache,
     }
-  public static void generateStatusFile(String folderWith7zs)
+    public static void launchUru()
     {
-        StringBuilder result = new StringBuilder();
-        for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, ".7z"))
+        String potsfolder = getPotsFolder()+"/";
+        if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
+        String[] command = new String[]{
+            potsfolder+"UruSetup.exe",
+        };
+        try
         {
-            String filename = f.getName();
-            int ind = filename.indexOf("--");
-            String agename = filename.substring(0,ind);
-            String version = filename.substring(ind+2,filename.length()-4);
-            byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
-            String hashstr = b.BytesToHexString(hash);
-            String mirurl = "http://dustin.homeunix.net:88/uam/ages/"+filename;
-            result.append("<age>\n");
-            result.append("    <filename>"+agename+"</filename>\n");
-            result.append("    <version>\n");
-            result.append("        <num>"+version+"</num>\n");
-            result.append("        <whirlpool>"+hashstr+"</whirlpool>\n");
-            result.append("        <mirror>\n");
-            result.append("            <url>"+mirurl+"</url>\n");
-            result.append("        </mirror>\n");
-            result.append("    </version>\n");
-            result.append("</age>\n");
-            result.append("\n");
+            java.lang.Process p = Runtime.getRuntime().exec(command, null, new File(potsfolder));
+            //Process proc = Runtime.getRuntime().exec(command);
+            m.status("Uru launched!");
         }
-        String finalresult = result.toString();
-        m.msg(finalresult);
+        catch(java.io.IOException e)
+        {
+            m.err("Unable to launch Uru.");
+        }
+
+                
+    }
+    public static String getPotsFolder()
+    {
+        return shared.State.AllStates.getStateAsString("uamRoot");
     }
     public static void DownloadAge7Zip(String age,String ver,String mir,String potsfolder)
     {
-        //ensure pots folder.
-        if(!automation.detectinstallation.isFolderPots(potsfolder))
-        {
-            return;
-        }
+        //ensure pots folder. We don't need this here.
+        //if(!automation.detectinstallation.isFolderPots(potsfolder))
+        //{
+        //    //return false;
+        //    return;
+        //}
         
         //get hash
         String whirlpool = ageList.getWhirlpool(age, ver);
         
         //start work in another thread.
-        ThreadDownloadAndProcess.engage(age,ver,mir,potsfolder,whirlpool);
+        ThreadDownloadAndProcess.downloadAge(age,ver,mir,potsfolder,whirlpool);
         
+        //return true;
     }
     public static void listAvailableAges()
     {

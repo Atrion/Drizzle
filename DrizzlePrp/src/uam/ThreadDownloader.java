@@ -27,29 +27,35 @@ public class ThreadDownloader extends Thread
     //AtomicBoolean doCancel;
     boolean doCancel = false;
     boolean doPause = false;
+    boolean wasSuccessful = false;
     GuiModal window;
     
-    public static void downloadAsFile(String url, String filename)
+    public static boolean downloadAsFile(String url, String filename)
     {
-        FileOutputStream out;
+        FileOutputStream out = null;
         try
         {
             out = new FileOutputStream(filename);
+            ThreadDownloader td = new ThreadDownloader(url, out);
+            td.start();
+            td.joinEvenIfInterrupted();
+            return td.wasSuccessful;
         }
         catch(FileNotFoundException e)
         {
-            throw new DownloadErrorException("Error opening file for saving: "+e.getMessage());
+            //throw new DownloadErrorException("Error opening file for saving: "+e.getMessage());
+            m.err("Error opening file for saving: "+e.getMessage());
+            return false;
         }
-                
-        ThreadDownloader td = new ThreadDownloader(url, out);
-        td.start();
-        td.joinEvenIfInterrupted();
+        finally      
+        {        
+            try{
+                if(out!=null) out.close();
+            }catch(IOException e){
+                m.err("Unable to close FileOutputStream.");
+            }
+        }
         
-        try{
-            out.close();
-        }catch(IOException e){
-            m.err("Unable to close FileOutputStream.");
-        }
     }
     public static byte[] downloadAsBytes(String url)
     {
@@ -65,7 +71,8 @@ public class ThreadDownloader extends Thread
         }catch(IOException e){
             m.err("Unable to close ByteArrayOutputStream.");
         }
-        return result;
+        if(td.wasSuccessful) return result;
+        else return null;
     }
     
     public void joinEvenIfInterrupted()
@@ -86,6 +93,24 @@ public class ThreadDownloader extends Thread
         synchronized(this)
         {
             doCancel = true;
+            if(doPause) unpause();
+            //this.interrupt();
+            //this.stop();
+            //this.window.setVisible(false);
+        }
+    }
+    public void unsafecancel()
+    {
+        synchronized(this)
+        {
+            doCancel = true;
+            //if(doPause) unpause();
+            //try{
+            //    this.wait(1000);
+            //}catch(InterruptedException e){}
+            this.stop();
+            this.window.setVisible(false);
+            m.warn("You shouldn't use 'Unsafe Cancel' if at all possible.");
         }
     }
     public void pause()
@@ -105,6 +130,7 @@ public class ThreadDownloader extends Thread
     }
     public ThreadDownloader(String urlstr, OutputStream out)
     {
+       this.setName("ThreadDownloader:"+this.getName());
         this.urlstr = urlstr;
         this.out = out;
         //doCancel = new AtomicBoolean();
@@ -122,6 +148,10 @@ public class ThreadDownloader extends Thread
     {
         //download.
         window.showButDontBlock();
+        window.finishedShowingMonitor.waitCorrectly();
+        //try{
+        //window.finishedShowingMonitor.wait(1000);
+        //}catch(Exception e){}
         
         int sConnectTimeout = 10;
         int sReadTimeout = 10;
@@ -133,11 +163,16 @@ public class ThreadDownloader extends Thread
             int contentlength;
             try
             {
+                urlstr = urlstr.replace(" ", "%20");
                 url = new URL(urlstr);
             }
             catch(MalformedURLException e)
             {
                 throw new DownloadErrorException("The server address is invalid.");
+            }
+            if(!url.getProtocol().equals("http") && !url.getProtocol().equals("ftp"))
+            {
+                throw new DownloadErrorException("The server has an unhandled protocol; it should be either http or ftp.");
             }
             URLConnection conn;
             InputStream in;
@@ -158,6 +193,16 @@ public class ThreadDownloader extends Thread
                 {
                     throw new DownloadErrorException("Unable to open connection.");
                     //choose another server?
+                }
+                else if(e instanceof java.io.FileNotFoundException)
+                {
+                    //happens when you try to download a file that doesn't exist.
+                    throw new DownloadErrorException("The server doesn't have the expected file, check the address.");
+                }
+                else if(e instanceof java.net.UnknownHostException)
+                {
+                    //happens when you have a server that doesn't respond.
+                    throw new DownloadErrorException("The server is either not running, or the name of the server is wrong, or your network connection is down.");
                 }
                 else
                 {
@@ -242,7 +287,8 @@ public class ThreadDownloader extends Thread
             {
                 throw new DownloadErrorException("Unable to close connection.");
             }
-
+            
+            wasSuccessful = read==-1; //did we finish the normal way?
 
             /*for(int i=0;i<40;i++)
             {
@@ -266,6 +312,7 @@ public class ThreadDownloader extends Thread
         catch(DownloadErrorException e)
         {
             //do nothing, but return?
+            wasSuccessful = false;
         }
         
         window.setVisible(false);

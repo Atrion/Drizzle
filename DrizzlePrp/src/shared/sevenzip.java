@@ -92,7 +92,7 @@ public class sevenzip
             m.err("Error during 7zip deletion.");
         }
     }
-    public static void extract(String filename, String outputfolder)
+    public static boolean extract(String filename, String outputfolder)
     {
         try
         {
@@ -107,6 +107,7 @@ public class sevenzip
             if(result!=0)
             {
                 m.err("Problem opening/reading 7z file.");
+                return false;
             }
             
             ModifiedArchiveExtractCallback callback = new ModifiedArchiveExtractCallback(root);
@@ -119,12 +120,14 @@ public class sevenzip
             {
                 //error
                 m.err("Error during extraction.");
+                return false;
             }
             long numerrors = callback.NumErrors;
             if(numerrors!=0)
             {
                 //errors during extraction.
                 m.err("Errors during extraction: "+Long.toString(numerrors));
+                return false;
             }
             
             //this block goes through all the entries.
@@ -142,7 +145,9 @@ public class sevenzip
         catch(Exception e)
         {
             m.err("Error during 7zip extraction.");
+            return false;
         }
+        return true;
     }
     
     /*public static void extract2(String filename, String outputfolder)

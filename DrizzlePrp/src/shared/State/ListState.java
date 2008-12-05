@@ -34,7 +34,7 @@ public class ListState extends javax.swing.JList implements IState
         common.addSpecialMenu(this);
     }
 
-    public void setValue(Object obj)
+    public void putValue(Object obj)
     {
         this.setSelectedIndices((int[])obj);
     }
@@ -65,10 +65,10 @@ public class ListState extends javax.swing.JList implements IState
         for(Object obj: objs) list.add((String)obj);
         return list;
     }
-    public void setDefault(Object obj)
-    {
-        this._default = (int[])obj;
-    }
+    //public void setDefault(Object obj)
+    //{
+    //    this._default = (int[])obj;
+    //}
     public Object getDefault()
     {
         if(_default==null) return getValue();

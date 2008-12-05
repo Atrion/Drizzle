@@ -7,6 +7,7 @@ package uam;
 
 import shared.*;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 
 public class ThreadDownloadAndProcess extends Thread
 {
@@ -21,6 +22,9 @@ public class ThreadDownloadAndProcess extends Thread
     String server;
     gui.Gui guiform;
     shared.delegate callback;
+    boolean doDownload;
+    
+    boolean wasSuccessful = false;
     
     public static enum Jobs
     {
@@ -29,7 +33,7 @@ public class ThreadDownloadAndProcess extends Thread
         downloadAge7z,
     }
     
-    public static void downloadConfig(String server, shared.delegate callback)
+    public static void downloadConfig(String server, String potsfolder, shared.delegate callback)
     {
         ThreadDownloadAndProcess thread = new ThreadDownloadAndProcess();
         thread.job = Jobs.downloadConfig;
@@ -37,9 +41,12 @@ public class ThreadDownloadAndProcess extends Thread
         //thread.gui = gui;
         //thread.potsfolder = potsfolder;
         thread.callback = callback;
+        thread.potsfolder = potsfolder;
+        thread.doDownload = true;
         thread.start();
+        //m.msg("downloadconfig done.");
     }
-    public static void engage(String age,String ver,String mir,String potsfolder,String whirlpool)
+    public static void downloadAge(String age,String ver,String mir,String potsfolder,String whirlpool)
     {
         ThreadDownloadAndProcess thread = new ThreadDownloadAndProcess();
         thread.job = Jobs.downloadAge7z;
@@ -48,6 +55,18 @@ public class ThreadDownloadAndProcess extends Thread
         thread.mir = mir;
         thread.potsfolder = potsfolder;
         thread.whirlpool = whirlpool;
+        thread.doDownload = true;
+        thread.start();
+    }
+    public static void extractAge(String age,String ver,String potsfolder,String whirlpool)
+    {
+        ThreadDownloadAndProcess thread = new ThreadDownloadAndProcess();
+        thread.job = Jobs.downloadAge7z;
+        thread.age = age;
+        thread.ver = ver;
+        thread.potsfolder = potsfolder;
+        thread.whirlpool = whirlpool;
+        thread.doDownload = false;
         thread.start();
     }
     
@@ -61,6 +80,7 @@ public class ThreadDownloadAndProcess extends Thread
         if(job==Jobs.none)
         {
             //do nothing.
+            wasSuccessful = true;
         }
         else if(job==Jobs.downloadAge7z)
         {
@@ -70,7 +90,24 @@ public class ThreadDownloadAndProcess extends Thread
             String outputfile = outputfolder+age+uam.Uam.versionSep+ver+".7z";
 
             //download file.
-            ThreadDownloader.downloadAsFile(mir, outputfile);
+            if(doDownload)
+            {
+                String tempoutputfile = outputfile;//+".part";
+                if(!ThreadDownloader.downloadAsFile(mir, tempoutputfile))
+                {
+                    //failed
+                    FileUtils.DeleteFile(tempoutputfile);
+                    wasSuccessful = false;
+                    return;
+                }
+                else
+                {
+                    //success
+                    //File f = new File(tempoutputfile);
+                    // f.
+                }
+            }
+            
             InvisibleModal modal = InvisibleModal.createAndShow();
             try{
 
@@ -83,18 +120,25 @@ public class ThreadDownloadAndProcess extends Thread
             {
                 m.err("Bad file integrity. The Age downloaded wasn't what was expected, perhaps because the version on the server is corrupted.");
                 FileUtils.DeleteFile(outputfile);
+                wasSuccessful = false;
                 return;
             }
             m.status("File integrity is good!");
             
             //extract.
-            shared.sevenzip.extract(outputfile, potsfolder);
+            if(!shared.sevenzip.extract(outputfile, potsfolder))
+            {
+                wasSuccessful = false;
+                return;
+            }
             
             //callback
             //callback.callback(null);
+            m.status("Age installed!");
+
             gui.UamGui.RefreshInfo(potsfolder);
             
-            m.status("Age installed!");
+            wasSuccessful = true;
             
             }finally{
             modal.hideInvisibleModal();
@@ -102,18 +146,29 @@ public class ThreadDownloadAndProcess extends Thread
         }
         else if(job==Jobs.downloadConfig)
         {
-            String file = server+"/uam.status.txt";
+            String file = server+"/"+Uam.statusFilename;//"uam.status.txt";
             byte[] result = ThreadDownloader.downloadAsBytes(file);
+            if(result==null)
+            {
+                //failed
+                wasSuccessful = false;
+                return;
+            }
+            
+            if(potsfolder!=null)
+            {
+                FileUtils.WriteFile(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename, result);
+            }
+            
             InvisibleModal modal = InvisibleModal.createAndShow();
             try{
             
-            //parse config file.
-            ByteArrayInputStream in = new ByteArrayInputStream(result);
-            UamConfig ageList = new UamConfig(in);
         
             //callback
-            callback.callback(ageList);
+            callback.callback(result);//(ageList);
 
+            wasSuccessful = true;
+            
             }finally{
             modal.hideInvisibleModal();
             }

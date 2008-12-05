@@ -262,13 +262,13 @@ public class AllStates //implements java.io.Serializable
                 Object value = states.get(name);
                 if(value!=null)
                 {
-                    state.setValue(value);
+                    state.putValue(value);
                 }
                 else
                 {
                     //Do nothing, because this function is only called from loadAndPush() which hasn't set the default yet, but will.
                     //Alternatively, we could have loadAndPush() set the defaults before calling this; in which case this will just reassign the defaults.
-                    state.setValue(state.getDefault());
+                    state.putValue(state.getDefault());
                 }
             }
         }
@@ -277,7 +277,7 @@ public class AllStates //implements java.io.Serializable
     {
         for(IState state: refs)
         {
-            state.setValue(state.getDefault());
+            state.putValue(state.getDefault());
         }
     }
     public static void resetSettings(String filename)

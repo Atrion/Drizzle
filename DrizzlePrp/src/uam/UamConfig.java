@@ -28,6 +28,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 import shared.m;
 import java.util.HashMap;
+import java.io.File;
 
 public class UamConfig
 {
@@ -42,6 +43,10 @@ public class UamConfig
     public String getWhirlpool(String agename, String version)
     {
         return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
+    }
+    public String getDeletable(String agename)
+    {
+        return this.getString("/uam/age[filename='"+agename+"']/deletable");
     }
     public Vector<String> getAllAgeNames()
     {
@@ -131,8 +136,16 @@ public class UamConfig
     String getString(String xpathquery)
     {
         Node queryresult = findNode(xpathquery);
-        String result = queryresult.getTextContent();
-        return result;
+        if(queryresult==null)
+        {
+            m.err("Unable to find property in xml list: "+xpathquery);
+            return "";
+        }
+        else
+        {
+            String result = queryresult.getTextContent();
+            return result;
+        }
     }
     Node findNode(String xpathquery)
     {
@@ -215,4 +228,6 @@ public class UamConfig
             }
         }
     }
+    
+    
 }

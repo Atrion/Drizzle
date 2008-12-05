@@ -17,6 +17,11 @@ import shared.FileUtils;
 import uam.Uam.InstallStatus;
 import uam.Uam;
 import java.awt.Color;
+import javax.swing.JButton;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import shared.b;
 
 public class UamGui
 {
@@ -24,6 +29,8 @@ public class UamGui
     public static JList verlist;
     public static JList mirlist;
     public static gui.Gui gui;
+    public static JButton downloadbutton;
+    public static JButton deletebutton;
     
     final static boolean updateWhileAdjusting = true;
     
@@ -47,13 +54,17 @@ public class UamGui
                 switch(status)
                 {
                     case notInstalled:
-                        label.setForeground(Color.orange);
+                        //label.setForeground(Color.red);
+                        label.setForeground(new Color(0x550000));
                         break;
                     case latestVersionInCache:
-                        label.setForeground(Color.green);
+                        //label.setForeground(Color.green);
+                        label.setForeground(new Color(0x005500));
                         break;
                     case nonLatestVersionInCache:
-                        label.setForeground(Color.yellow);//new Color(0x00aa00));
+                        //label.setForeground(Color.yellow);//new Color(0x00aa00));
+                        //label.setForeground(Color.orange);
+                        label.setForeground(new Color(0x555500));
                         break;
                     case notInCache:
                         label.setForeground(Color.black);
@@ -62,7 +73,7 @@ public class UamGui
                         label.setForeground(Color.black);
                         break;
                 }
-                //label.setBackground(Color.lightGray);
+                //label.setBackground(Color.white);
                 if(isSelected) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 //else label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
                 //if(cellHasFocus) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
@@ -172,7 +183,7 @@ public class UamGui
         //list Ages...
         final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
         GetLocalInfo(potsfolder2);
-
+        Object selection = agelist.getSelectedValue();
         agelist.setModel(new javax.swing.ListModel() {
             public int getSize() {
                 return ages.size();
@@ -185,7 +196,37 @@ public class UamGui
         });
         verlist.setModel(new javax.swing.DefaultListModel());
         mirlist.setModel(new javax.swing.DefaultListModel());
-        if(agelist.getModel().getSize()>0) agelist.setSelectedIndex(0);
+        
+        //try to re-select the item that was selected before.
+        if(selection==null)
+        {
+            if(agelist.getModel().getSize()>0) agelist.setSelectedIndex(0);
+        }
+        else
+        {
+            agelist.setSelectedValue(selection, true); //doesn't die even if selection is no longer there.
+        }
+    }
+    public static void GetAgeListGuiOffline(String potsfolder)
+    {
+        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        {
+            return;
+        }
+        
+        FileInputStream in;
+        try
+        {
+            in = new FileInputStream(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename);
+        }
+        catch(FileNotFoundException e)
+        {
+            m.err("Couldn't find cached list.");
+            return;
+        }
+        uam.UamConfig ageList = new uam.UamConfig(in);
+        uam.Uam.ageList = ageList;
+        RefreshInfo(potsfolder);
     }
     public static void GetAgeListGui(String server, String potsfolder)
     {
@@ -199,12 +240,17 @@ public class UamGui
         
         //final Vector<String> ages = uam.Uam.GetAgeList(server,gui,new shared.delegate() {
         //uam.Uam.GetAgeList(server,gui,new shared.delegate() {
-        uam.ThreadDownloadAndProcess.downloadConfig(server, new shared.delegate(){
+        uam.ThreadDownloadAndProcess.downloadConfig(server, potsfolder, new shared.delegate(){
             public void callback(Object arg) {
+                //parse config file.
+                byte[] result = (byte[])arg;
+                ByteArrayInputStream in = new ByteArrayInputStream(result);
+                uam.UamConfig ageList = new uam.UamConfig(in);
                 //list Ages...
                 //return ageList.getAllAgeNames();
-                uam.UamConfig config = (uam.UamConfig)arg;
-                uam.Uam.ageList = config;
+                //uam.UamConfig config = (uam.UamConfig)arg;
+                //uam.Uam.ageList = config;
+                uam.Uam.ageList = ageList;
                 
                 RefreshInfo(potsfolder2);
                 
@@ -268,12 +314,20 @@ public class UamGui
             }
             
         });
-        
+        //m.msg("getgu done.");
     }
     public static void GetVersionListGui(String age)
     {
         //m.msg("updating version list.");
         final String age2 = age;
+        if(age!=null)
+        {
+            deletebutton.setEnabled(true);
+        }
+        else
+        {
+            deletebutton.setEnabled(false);
+        }
         final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
         verlist.setModel(new javax.swing.ListModel() {
             public int getSize() {
@@ -320,67 +374,142 @@ public class UamGui
     }
     public static void OnMirrorSelected(String age, String ver, String mir)
     {
+        if(mir!=null)
+        {
+            downloadbutton.setEnabled(true);
+        }
+        else
+        {
+            downloadbutton.setEnabled(false);
+        }
         //do nothing
     }
-    public static void PerformDeletion()
+    public static void PerformDeletionAction()
+    {
+        String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
+        if(PerformDeletion(potsfolder))
+        {
+            //refresh
+            RefreshInfo(potsfolder);
+        }
+        
+    }
+    public static boolean PerformDeletion(String potsfolder)
     {
         //m.msg("Deletions aren't supported yet.");
         //if(true)return;
         
         //ensure pots folder.
-        String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
         if(!automation.detectinstallation.isFolderPots(potsfolder))
         {
-            return;
+            return false;
         }
+        
         String age = (String)agelist.getSelectedValue();
         if(age==null)
         {
             m.msg("You must select an Age.");
-            return;
+            return false;
         }
         
-        //for each .7z file from that Age, delete its entries in Pots.
-        Vector<File> files = filesearcher.search.getAllFilesWithExtension(potsfolder+uam.Uam.ageArchivesFolder, false, ".7z");
-        for(File f: files)
+        String deletable = Uam.ageList.getDeletable(age);
+        if(deletable.equals("true"))
         {
-            if(f.getName().startsWith(age+uam.Uam.versionSep))
+            //for each .7z file from that Age, delete its entries in Pots.
+            Vector<File> files = filesearcher.search.getAllFilesWithExtension(potsfolder+uam.Uam.ageArchivesFolder, false, ".7z");
+            for(File f: files)
             {
-                shared.sevenzip.delete(f.getAbsolutePath(), potsfolder);
+                if(f.getName().startsWith(age+uam.Uam.versionSep))
+                {
+                    shared.sevenzip.delete(f.getAbsolutePath(), potsfolder);
+                }
             }
         }
+        else
+        {
+            m.msg("This Age is listed as not being safely deletable; performing upgrade only.");
+        }
         
-        //refresh
-        RefreshInfo(potsfolder);
+        
+        return true;
         
     }
-    public static void PerformDownload()
+    public static boolean PerformDownload()
     {
+        String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
+        
+        //ensure pots folder.
+        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        {
+            return false;
+        }
+
         String age = (String)agelist.getSelectedValue();
         String ver = (String)verlist.getSelectedValue();
         String mir = (String)mirlist.getSelectedValue();
         if(age==null || ver==null || mir==null)
         {
             m.msg("You must select an Age, Version, and Mirror.");
-            return;
+            return false;
         }
         
         String archiveType = uam.Uam.ageList.getArchiveType(age, ver);
         if(!archiveType.equals("7z"))
         {
             m.err("This version is in a archive type not currently supported: "+archiveType);
-            return;
+            return false;
         }
         
+
         m.msg("Cleaning up any previous version...");
-        PerformDeletion();
+        if(!PerformDeletion(potsfolder)) return false;
         
-        m.msg("Attempting to download Age: "+age+", Version: "+ver+", Mirror: "+mir);
-        
-        String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
-        uam.Uam.DownloadAge7Zip(age,ver,mir,potsfolder);
+        m.status("Checking to see if we already have this version in the cache...");
+        if(FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+Uam.versionSep+ver+".7z"))
+        {
+            m.status("Using cached version of Age: "+age+", Version: "+ver+" ...");
+            
+            String whirlpool = Uam.ageList.getWhirlpool(age, ver);
+            uam.ThreadDownloadAndProcess.extractAge(age, ver, potsfolder, whirlpool);
+
+            
+            
+            /*//prepare output file.
+            String outputfolder = potsfolder+Uam.ageArchivesFolder;
+            FileUtils.CreateFolder(outputfolder);
+            String outputfile = outputfolder+age+uam.Uam.versionSep+ver+".7z";
+
+
+            //check integrity.
+            m.status("Checking integrity...");
+            byte[] hash = shared.CryptHashes.GetWhirlpool(outputfile);
+            String hashstr = b.BytesToHexString(hash);
+            boolean isgood = whirlpool.equals(hashstr);
+            if(!isgood)
+            {
+                m.err("Bad file integrity. The Age downloaded wasn't what was expected, perhaps because the version on the server is corrupted.");
+                FileUtils.DeleteFile(outputfile);
+                return false;
+            }
+            m.status("File integrity is good!");
+            
+            //extract.
+            shared.sevenzip.extract(outputfile, potsfolder);
+            
+            //callback
+            //callback.callback(null);
+            m.status("Age installed!");
+
+            RefreshInfo(potsfolder);*/
+        }
+        else
+        {
+            m.msg("Attempting to download Age: "+age+", Version: "+ver+", Mirror: "+mir);
+            uam.Uam.DownloadAge7Zip(age,ver,mir,potsfolder);
+        }
 
         //refresh
         //RefreshInfo(potsfolder);
+        return true;
     }
 }

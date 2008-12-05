@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package uam;
+/*package uam;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -140,4 +140,4 @@ public class Downloader
         }
         
     }
-}
+}*/
