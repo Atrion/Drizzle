@@ -113,7 +113,8 @@ public class ThreadDownloadAndProcess extends Thread
 
             //check integrity.
             m.status("Checking integrity...");
-            byte[] hash = shared.CryptHashes.GetWhirlpool(outputfile);
+            //byte[] hash = shared.CryptHashes.GetWhirlpool(outputfile);
+            byte[] hash = shared.CryptHashes.GetHash(outputfile, shared.CryptHashes.Hashtype.sha1);
             String hashstr = b.BytesToHexString(hash);
             boolean isgood = whirlpool.equals(hashstr);
             if(!isgood)

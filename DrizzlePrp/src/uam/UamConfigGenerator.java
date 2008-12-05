@@ -89,7 +89,8 @@ public class UamConfigGenerator
             String agename = filenameToAgename(name);
             String versionstr = filename.substring(ind+sep.length(),filename.length()-suffix.length());
             versionstr = filenameToVersionname(name,versionstr);
-            byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
+            //byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
+            byte[] hash = shared.CryptHashes.GetHash(f.getAbsolutePath(), shared.CryptHashes.Hashtype.sha1);
             String hashstr = b.BytesToHexString(hash);
             //String server = "http://dustin.homeunix.net:88/uam/ages/";
             String server = "http://www.the-ancient-city.de/uru-ages/";
@@ -98,7 +99,8 @@ public class UamConfigGenerator
             UamConfigData.Age age = data.getAgeOrCreate(agename);
             age.deletable = "true";
             UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr);
-            version.whirlpool = hashstr;
+            //version.whirlpool = hashstr;
+            version.sha1 = hashstr;
             version.archive = "7z";
             UamConfigData.Age.Version.Mirror mirror = version.getMirrorOrCreate(mirurl);
             
@@ -134,10 +136,10 @@ public class UamConfigGenerator
         void generateXml(StringBuilder s)
         {
             s.append("<uam>\n");
-            for(String comment: comments) s.append("    <!-- "+comment+" -->\n");
-            s.append("    <welcome>"+welcome+"</welcome>\n");
+            for(String comment: comments) s.append("\t<!-- "+comment+" -->\n");
+            s.append("\t<welcome>"+welcome+"</welcome>\n");
             for(Age age: ages) age.generateXml(s);
-            s.append("    <aequalsatransposeequalsainverse />\n");
+            s.append("\t<aequalsatransposeequalsainverse />\n");
             s.append("</uam>\n");
         }
         
@@ -161,11 +163,11 @@ public class UamConfigGenerator
             
             void generateXml(StringBuilder s)
             {
-                s.append("    <age>\n");
-                s.append("        <filename>"+filename+"</filename>\n");
-                s.append("        <deletable>"+deletable+"</deletable>\n");
+                s.append("\t<age>\n");
+                s.append("\t\t<filename>"+filename+"</filename>\n");
+                s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 for(Version version: versions) version.generateXml(s);
-                s.append("    </age>\n");
+                s.append("\t</age>\n");
                 //s.append("\n");
             }
             public Version getVersionOrCreate(String name)
@@ -184,17 +186,19 @@ public class UamConfigGenerator
             {
                 String name = "";
                 String archive = "";
-                String whirlpool = "";
+                //String whirlpool = "";
+                String sha1 = "";
                 Vector<Mirror> mirrors = new Vector();
                 
                 void generateXml(StringBuilder s)
                 {
-                    s.append("        <version>\n");
-                    s.append("            <name>"+name+"</name>\n");
-                    s.append("            <archive>"+archive+"</archive>\n");
-                    s.append("            <whirlpool>"+whirlpool+"</whirlpool>\n");
+                    s.append("\t\t<version>\n");
+                    s.append("\t\t\t<name>"+name+"</name>\n");
+                    s.append("\t\t\t<archive>"+archive+"</archive>\n");
+                    //s.append("            <whirlpool>"+whirlpool+"</whirlpool>\n");
+                    s.append("\t\t\t<sha1>"+sha1+"</sha1>\n");
                     for(Mirror mirror: mirrors) mirror.generateXml(s);
-                    s.append("        </version>\n");
+                    s.append("\t\t</version>\n");
                 }
                 public Mirror getMirrorOrCreate(String url)
                 {
@@ -212,9 +216,9 @@ public class UamConfigGenerator
                     String url = "";
                     void generateXml(StringBuilder s)
                     {
-                        s.append("            <mirror>\n");
-                        s.append("                <url>"+url+"</url>\n");
-                        s.append("            </mirror>\n");
+                        s.append("\t\t\t<mirror>\n");
+                        s.append("\t\t\t\t<url>"+url+"</url>\n");
+                        s.append("\t\t\t</mirror>\n");
                     }
                 }
             }

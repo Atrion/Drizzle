@@ -40,9 +40,13 @@ public class UamConfig
     UamConfigObject uco = null;
     Vector<String> allAgeNames = null;
     
-    public String getWhirlpool(String agename, String version)
+    /*public String getWhirlpool(String agename, String version)
     {
         return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
+    }*/
+    public String getSha1(String agename, String version)
+    {
+        return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/sha1");
     }
     public String getDeletable(String agename)
     {

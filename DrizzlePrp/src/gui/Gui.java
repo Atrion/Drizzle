@@ -580,6 +580,7 @@ public class Gui extends javax.swing.JFrame {
         jButton88 = new javax.swing.JButton();
         jButton89 = new javax.swing.JButton();
         jButton128 = new javax.swing.JButton();
+        jButton138 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jButton23 = new javax.swing.JButton();
@@ -2474,6 +2475,13 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
 
+                    jButton138.setText("Caclulate Sha1");
+                    jButton138.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton138ActionPerformed(evt);
+                        }
+                    });
+
                     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
                     jPanel3.setLayout(jPanel3Layout);
                     jPanel3Layout.setHorizontalGroup(
@@ -2492,7 +2500,8 @@ public class Gui extends javax.swing.JFrame {
                                                 .addComponent(jButton4)
                                                 .addComponent(jButton8)
                                                 .addComponent(jButton11)
-                                                .addComponent(jButton47))
+                                                .addComponent(jButton47)
+                                                .addComponent(jButton138))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -2543,7 +2552,9 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jButton47)
                                 .addComponent(jButton128))
-                            .addContainerGap(78, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton138)
+                            .addContainerGap(36, Short.MAX_VALUE))
                     );
 
                     tabsState3.addTab("Encryption", jPanel3);
@@ -2767,18 +2778,16 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel41Layout.createSequentialGroup()
                             .addGap(20, 20, 20)
                             .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton126, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton133)
                                 .addGroup(jPanel41Layout.createSequentialGroup()
-                                    .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton126, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton133)
-                                        .addGroup(jPanel41Layout.createSequentialGroup()
-                                            .addComponent(jLabel44)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jButton134)))
-                                    .addContainerGap(12, Short.MAX_VALUE))
-                                .addComponent(jButton137)))
+                                    .addComponent(jLabel44)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton134))
+                                .addComponent(jButton137))
+                            .addContainerGap(12, Short.MAX_VALUE))
                     );
                     jPanel41Layout.setVerticalGroup(
                         jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4984,6 +4993,14 @@ private void jButton136ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton137ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton137ActionPerformed
     gui.UamGui.GetAgeListGuiOffline(this.textfieldState39.getText());
 }//GEN-LAST:event_jButton137ActionPerformed
+
+private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton138ActionPerformed
+        byte[] filecontents = FileUtils.ReadFile(textfieldState15.getText());
+        java.io.ByteArrayInputStream in = new java.io.ByteArrayInputStream(filecontents);
+        byte[] hash = shared.CryptHashes.GetHash(in, shared.CryptHashes.Hashtype.sha1);
+        String hashstr = b.BytesToHexString(hash);
+        m.msg("Sha1: "+hashstr);
+}//GEN-LAST:event_jButton138ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5090,6 +5107,7 @@ private void jButton137ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton135;
     private javax.swing.JButton jButton136;
     private javax.swing.JButton jButton137;
+    private javax.swing.JButton jButton138;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;

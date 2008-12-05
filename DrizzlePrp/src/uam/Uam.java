@@ -66,10 +66,11 @@ public class Uam
         //}
         
         //get hash
-        String whirlpool = ageList.getWhirlpool(age, ver);
+        //String hash = ageList.getWhirlpool(age, ver);
+        String hash = ageList.getSha1(age, ver);
         
         //start work in another thread.
-        ThreadDownloadAndProcess.downloadAge(age,ver,mir,potsfolder,whirlpool);
+        ThreadDownloadAndProcess.downloadAge(age,ver,mir,potsfolder,hash);
         
         //return true;
     }

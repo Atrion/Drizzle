@@ -469,8 +469,9 @@ public class UamGui
         {
             m.status("Using cached version of Age: "+age+", Version: "+ver+" ...");
             
-            String whirlpool = Uam.ageList.getWhirlpool(age, ver);
-            uam.ThreadDownloadAndProcess.extractAge(age, ver, potsfolder, whirlpool);
+            //String hash = Uam.ageList.getWhirlpool(age, ver);
+            String hash = Uam.ageList.getSha1(age, ver);
+            uam.ThreadDownloadAndProcess.extractAge(age, ver, potsfolder, hash);
 
             
             
