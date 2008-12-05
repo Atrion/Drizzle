@@ -158,6 +158,7 @@ public class ThreadDownloadAndProcess extends Thread
             
             if(potsfolder!=null)
             {
+                FileUtils.CreateFolder(potsfolder+uam.Uam.ageArchivesFolder);
                 FileUtils.WriteFile(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename, result);
             }
             

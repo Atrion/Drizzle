@@ -33,6 +33,7 @@ public class UamGui
     public static JButton deletebutton;
     
     final static boolean updateWhileAdjusting = true;
+
     
     public static void init()
     {

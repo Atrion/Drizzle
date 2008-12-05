@@ -57,6 +57,11 @@ public class search
     static void _getallfiles(Vector<File> result, File dir, boolean recurse)
     {
         File[] children = dir.listFiles();
+        if(children==null)
+        {
+            int dummy=0;
+            return;
+        }
         for(File child: children)
         {
             if(child.isDirectory())
