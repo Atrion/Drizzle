@@ -430,6 +430,11 @@ public class Gui extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jButton136 = new javax.swing.JButton();
         jButton135 = new javax.swing.JButton();
+        jPanel43 = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -1168,6 +1173,31 @@ public class Gui extends javax.swing.JFrame {
             });
             jPanel39.add(jButton135);
             jButton135.setBounds(720, 200, 110, 36);
+
+            jPanel43.setBorder(javax.swing.BorderFactory.createTitledBorder("Legend"));
+            jPanel43.setLayout(null);
+
+            jLabel46.setForeground(new java.awt.Color(0, 85, 0));
+            jLabel46.setText("You have the latest version.");
+            jPanel43.add(jLabel46);
+            jLabel46.setBounds(10, 20, 160, 16);
+
+            jLabel47.setForeground(new java.awt.Color(85, 85, 0));
+            jLabel47.setText("You have a version, but not the latest.");
+            jPanel43.add(jLabel47);
+            jLabel47.setBounds(10, 40, 210, 16);
+
+            jLabel48.setForeground(new java.awt.Color(85, 0, 0));
+            jLabel48.setText("You don't have this Age installed.");
+            jPanel43.add(jLabel48);
+            jLabel48.setBounds(10, 60, 190, 16);
+
+            jLabel49.setText("You have this Age, but it's version is unknown.");
+            jPanel43.add(jLabel49);
+            jLabel49.setBounds(10, 80, 250, 16);
+
+            jPanel39.add(jPanel43);
+            jPanel43.setBounds(430, 140, 290, 120);
 
             tabsState3.addTab("UAM", jPanel39);
 
@@ -5269,6 +5299,10 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -5314,6 +5348,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
+    private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;

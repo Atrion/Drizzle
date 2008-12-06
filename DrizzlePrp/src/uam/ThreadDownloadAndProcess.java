@@ -158,8 +158,15 @@ public class ThreadDownloadAndProcess extends Thread
             
             if(potsfolder!=null)
             {
-                FileUtils.CreateFolder(potsfolder+uam.Uam.ageArchivesFolder);
-                FileUtils.WriteFile(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename, result);
+                if(new File(potsfolder+uam.Uam.ageArchivesFolder).getUsableSpace()>result.length+1000000)
+                {
+                    FileUtils.CreateFolder(potsfolder+uam.Uam.ageArchivesFolder);
+                    FileUtils.WriteFile(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename, result);
+                }
+                else
+                {
+                    m.err("There isn't enough free space to save the Age list to disk.");
+                }
             }
             
             InvisibleModal modal = InvisibleModal.createAndShow();

@@ -19,6 +19,7 @@ import java.net.SocketException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.File;
 
 public class ThreadDownloader extends Thread
 {
@@ -28,6 +29,7 @@ public class ThreadDownloader extends Thread
     boolean doCancel = false;
     boolean doPause = false;
     boolean wasSuccessful = false;
+    long freespace = -1;
     GuiModal window;
     
     public static boolean downloadAsFile(String url, String filename)
@@ -35,8 +37,10 @@ public class ThreadDownloader extends Thread
         FileOutputStream out = null;
         try
         {
+            File f = new File(filename);
             out = new FileOutputStream(filename);
             ThreadDownloader td = new ThreadDownloader(url, out);
+            td.freespace = f.getUsableSpace();
             td.start();
             td.joinEvenIfInterrupted();
             return td.wasSuccessful;
@@ -185,7 +189,17 @@ public class ThreadDownloader extends Thread
                 conn.setAllowUserInteraction(false); //otherwise it might popup a password question.
                 in = conn.getInputStream();
                 contentlength = conn.getContentLength();
-                if(contentlength==-1) m.msg("Server doesn't support progress status.");
+                if(contentlength==-1)
+                {
+                    m.msg("Server doesn't support progress status.");
+                }
+                else if(this.freespace!=-1)
+                {
+                    if(contentlength+10000000>this.freespace) //give 10MB slack.
+                    {
+                        throw new DownloadErrorException("There doesn't appear to be enough disk space to download this.");
+                    }
+                }
             }
             catch(IOException e)
             {
@@ -271,6 +285,10 @@ public class ThreadDownloader extends Thread
                     {
                         //can be "Connection reset". e.g. if the network card is pulled out :P
                         throw new DownloadErrorException("Connection reset; possible problem with network connection or server.");
+                    }
+                    else if(e instanceof IOException && e.getMessage().equals("There is not enough space on the disk"))
+                    {
+                        throw new DownloadErrorException("Not enough free disk space.  Free some up, then try again.");
                     }
                     else
                     {

@@ -54,6 +54,7 @@ public class CryptHashes {
             in = new FileInputStream(filename);
             byte[] result = GetHash(in, type);
             in.close();
+            in = null;
             return result;
         }
         catch(Exception e)
