@@ -35,7 +35,7 @@ public class UamGui
     final static boolean updateWhileAdjusting = true;
 
     
-    public static void init()
+    public static void init() //called by swing thread
     {
         agelist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
 

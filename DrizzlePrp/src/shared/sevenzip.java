@@ -23,6 +23,7 @@ import SevenZip.HRESULT;
 //7zip needs to do random file access.
 //And you need to implement IInStream, which MyRandomAccessFile does for actual files.
 //I could easily create a similar one for Byte Arrays if we want to keep this in memory.
+//I also modified SevenZip.Archive.SevenZip.Handler by commenting out the exception catcher, so I can catch them instead.
 public class sevenzip
 {
     public static void delete(String filename, String outputfolder)
@@ -92,6 +93,17 @@ public class sevenzip
             m.err("Error during 7zip deletion.");
         }
     }
+    public static long getTotalSize(IInArchive archive)
+    {
+        long result = 0;
+        int numentries = archive.size();
+        for(int i=0;i<numentries;i++)
+        {
+            long entrysize = archive.getEntry(i).getSize();
+            result += entrysize;
+        }
+        return result;
+    }
     public static boolean extract(String filename, String outputfolder)
     {
         try
@@ -110,11 +122,25 @@ public class sevenzip
                 return false;
             }
             
+            try
+            {
+                long bytesneeded = getTotalSize(archive) + 10000000; //give 10MB extra space to be safe.
+                File outputfile = new File(root);
+                long bytesavailable = outputfile.getUsableSpace();
+                if(bytesneeded>bytesavailable)
+                {
+                    m.err("It doesn't appear that there is enough free space available.");
+                    return false;
+                }
+            }
+            catch(Exception e){} //if there's a exception, just plow ahead.
+            
             ModifiedArchiveExtractCallback callback = new ModifiedArchiveExtractCallback(root);
             callback.Init(archive);
             
             //the -1 says extract all files, so we don't need the 1st argument.
             //the NExtract_NAskMode_kExtract means we want to extract the files.
+            //exceptions are caught and printed inside of this Extract call.
             int result2 = archive.Extract(null, -1, IInArchive.NExtract_NAskMode_kExtract, callback);
             if(result2!=0)
             {
@@ -144,6 +170,13 @@ public class sevenzip
         }
         catch(Exception e)
         {
+            if(e instanceof IOException && e.getMessage().equals("There is not enough space on the disk"))
+            {
+                m.err("Not enough disk space to finish extracting.  You shouldn't link to this Age until this is resolved.  Deleting extracted files...");
+                delete(filename, outputfolder);
+                m.err("Not enough disk space.  Free up some space, then try again.");
+                return false;
+            }
             m.err("Error during 7zip extraction.");
             return false;
         }

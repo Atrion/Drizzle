@@ -150,13 +150,25 @@ public class m
         {
             //javax.swing.JScrollPane a;
             //javax.swing.JTextArea b;
-            _outputTextArea.append(s+"\n");
+            final String s2 = s;
+            javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+                public void run() {
+                    _outputTextArea.append(s2+"\n");
+                    if(state.curstate.scrollOutput)
+                    {
+                        //set the view position to the height, plus a little extra.
+                        int h = _outputTextArea.getHeight();
+                        _outputTextArea.scrollRectToVisible(new java.awt.Rectangle(0, h+40, 0, 0));
+                    }
+                }
+            });
+            /*_outputTextArea.append(s+"\n");
             if(state.curstate.scrollOutput)
             {
                 //set the view position to the height, plus a little extra.
                 int h = _outputTextArea.getHeight();
                 _outputTextArea.scrollRectToVisible(new java.awt.Rectangle(0, h+40, 0, 0));
-            }
+            }*/
         }
         else
         {

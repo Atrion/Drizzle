@@ -233,7 +233,9 @@ public class Handler implements SevenZip.Archive.IInArchive {
     #endif
      */
             
-            try {
+            //Dustin
+            //try {
+            //end Dustin
                 result = decoder.Decode(
                         // #ifdef _7Z_VOL
                         // volume.Stream,
@@ -271,13 +273,15 @@ public class Handler implements SevenZip.Archive.IInArchive {
                     if (result != HRESULT.S_OK) return result;
                     continue;
                 }
-            } catch(Exception e) {
-                System.out.println("IOException : " + e);
-                e.printStackTrace();
-                result = folderOutStream.FlushCorrupted(IInArchive.NExtract_NOperationResult_kDataError);
-                if (result != HRESULT.S_OK) return result;
-                continue;
-            }
+            //Dustin
+            //} catch(Exception e) {
+            //    System.out.println("IOException : " + e);
+            //    e.printStackTrace();
+            //    result = folderOutStream.FlushCorrupted(IInArchive.NExtract_NOperationResult_kDataError);
+            //    if (result != HRESULT.S_OK) return result;
+            //    continue;
+            //}
+            //end Dustin
         }
         return HRESULT.S_OK;
     }

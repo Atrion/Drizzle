@@ -608,6 +608,7 @@ public class Gui extends javax.swing.JFrame {
         jButton134 = new javax.swing.JButton();
         jButton126 = new javax.swing.JButton();
         jButton137 = new javax.swing.JButton();
+        jButton139 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -2771,6 +2772,13 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
 
+                    jButton139.setText("jButton139");
+                    jButton139.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton139ActionPerformed(evt);
+                        }
+                    });
+
                     javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
                     jPanel41.setLayout(jPanel41Layout);
                     jPanel41Layout.setHorizontalGroup(
@@ -2780,13 +2788,17 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton126, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton133)
-                                .addGroup(jPanel41Layout.createSequentialGroup()
-                                    .addComponent(jLabel44)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButton134))
-                                .addComponent(jButton137))
+                                .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel41Layout.createSequentialGroup()
+                                        .addComponent(jButton137)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton139))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel41Layout.createSequentialGroup()
+                                        .addComponent(jLabel44)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton134))))
                             .addContainerGap(12, Short.MAX_VALUE))
                     );
                     jPanel41Layout.setVerticalGroup(
@@ -2797,12 +2809,17 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton134)
                                 .addComponent(jLabel44))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton133)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton137)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton126)
+                            .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel41Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton133)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton137)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton126))
+                                .addGroup(jPanel41Layout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addComponent(jButton139)))
                             .addContainerGap())
                     );
 
@@ -5001,6 +5018,13 @@ private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         String hashstr = b.BytesToHexString(hash);
         m.msg("Sha1: "+hashstr);
 }//GEN-LAST:event_jButton138ActionPerformed
+
+private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton139ActionPerformed
+    for(int i=0;i<1000;i++)
+    {
+        m.msg(Integer.toString(i));
+    }
+}//GEN-LAST:event_jButton139ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5108,6 +5132,7 @@ private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton136;
     private javax.swing.JButton jButton137;
     private javax.swing.JButton jButton138;
+    private javax.swing.JButton jButton139;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
