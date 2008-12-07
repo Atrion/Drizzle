@@ -457,23 +457,27 @@ public class PlDrawableSpans extends uruobj
             if(c.readversion==7)
             {
                 //sub_5059A0
-                int hi1 = c.readInt(); //76
-                byte hi2 = c.readByte(); //0 //this+4+6
-                byte hi3 = c.readByte(); e.ensure(hi3==1);//1 //v3+11, used in an if statement.
-                byte hi4 = c.readByte(); //0
-                byte hi5 = c.readByte(); //0
-                int hi6 = c.readInt(); //864 //v4+4
-                byte hi7 = c.readByte(); //0
-                byte hi6a = (byte)(hi6&0xFF);
-                byte hi6b = (byte)((hi6>>>8)&0xFF);
-                int v7 = b.ByteToInt32(((hi3&0x2)!=0)?hi6b:hi6a);
+                int mesh1 = c.readInt(); //76
+                byte mesh2 = c.readByte(); //0 //this+4+6
+                byte mesh3 = c.readByte(); e.ensure(mesh3==1);//1 //v3+11, used in an if statement.
+                byte mesh4 = c.readByte(); //0
+                byte mesh5 = c.readByte(); //0
+                int mesh6 = c.readInt(); //864 //v4+4
+                byte mesh7 = c.readByte(); //0
+                byte hi6a = (byte)(mesh6&0xFF);
+                byte hi6b = (byte)((mesh6>>>8)&0xFF);
+                int v7 = b.ByteToInt32(((mesh3&0x2)!=0)?hi6b:hi6a);
                 //hex isle doesn't look like it has the size field.  It's ignored by pots, so we'll just stick 0 in it.
                 size = 0;
                 vertexstoragecount = data.readInt();
+                
+                int count = HexislePlDrawableSpans.getvertexcount(mesh1, mesh2);
+                
                 SubMeshAlt[] submeshalt = new SubMeshAlt[vertexstoragecount];
                 for(int i=0;i<vertexstoragecount;i++)
                 {
-                    submeshalt[i] = new SubMeshAlt(c,fformat,v7,hi6,hi2,hi1);
+                    submeshalt[i] = new SubMeshAlt(c,fformat,v7,mesh6,mesh2,mesh1,count);
+                    //submeshalt[i] = new SubMeshAlt(c,hi1,);
                 }
                 //TODO rest of this, but it seems to work perfectly up to this point.
                 surfacecount = data.readInt();
@@ -481,7 +485,7 @@ public class PlDrawableSpans extends uruobj
                 for(int i=0;i<surfacecount;i++)
                 {
                     //surfaces[i] = new Shortvector(data);
-                    int surf1 = c.readInt();
+                    int surf1 = c.readInt(); //3 times the number of vertices?
                     byte surf2 = c.readByte();
                     byte[] surf3 = c.readBytes(surf1);
                     int dummy=0;
@@ -515,23 +519,31 @@ public class PlDrawableSpans extends uruobj
         }
         public static class SubMeshAlt
         {
-            public SubMeshAlt(context c, byte fformat, int v7, int v17, byte hi2orig, int hi1orig)
+            public SubMeshAlt(context c, byte fformat, int v7, int v17, byte mesh2, int mesh1, int count)
             {
-                int hi1 = c.readInt(); //768, size in bytes?
-                byte hi2 = c.readByte(); //0
+                int submesh1 = c.readInt(); //768, size in bytes?
+                byte submesh2 = c.readByte(); //0
                 m.warn("TODO: make this check if the short is in range.");
                 
-                int v16 = hi1 / v7; e.ensure(hi1 % v7 == 0);
-                int count = HexislePlDrawableSpans.getvertexcount(hi1orig, hi2orig);
+                int v16 = submesh1 / v7; //e.ensure(hi1 % v7 == 0);
+                int shouldbe0a = submesh1 % v7;
                 //int count = v16;
+                int finalcount = submesh1 / count;
+                int shouldbe0b = submesh1 % count;
                 
                 //hi1 is the size in bytes?
                 //v16 is the count of GetVertexDataSize calls.
                 //v7 is the stride?
                 
+                //c.readBytes(submesh1);
+                //if(true)return;
+                
                 context c2 = c.Fork();
                 //int dataSize = SubMesh.GetVertexDataSize(count, fformat, c2);
-                int dataSize = HexislePlDrawableSpans.GetVertexDataSize(count, fformat, c2, v17, hi2orig, hi1orig);
+                //int dataSize = HexislePlDrawableSpans.GetVertexDataSize(count, fformat, c2, v17, hi2orig, hi1orig);
+                m.warn("Using count, but this doesn't seem to be correct.");
+                int dataSize = HexislePlDrawableSpans.GetVertexDataSize(count, fformat, c2, v17, mesh2, mesh1);
+                //int dataSize = HexislePlDrawableSpans.GetVertexDataSize();
                 byte[] rawdata = c.in.readBytes(dataSize);
                 int rawdataversion = c.readversion;
             }

@@ -76,7 +76,11 @@ public class HexislePlDrawableSpans extends uruobj
     }
     
     //parse and get size. Used for both creation and compilation.
-    static public int GetVertexDataSize(int count, byte fformat2, context c, int a5, byte hi2orig, int hi1orig)
+    static boolean flag(int flags, int pos)
+    {
+        return ((flags & (0x1 << pos))!=0);
+    }
+    static public int GetVertexDataSize(int count, byte fformat2, context c, int a5, byte mesh2, int mesh1)
     {
 
         class rundata
@@ -155,6 +159,7 @@ public class HexislePlDrawableSpans extends uruobj
             }
             public void pollAsColour(int A, int B, int C, context c)
             {
+                //sub_50e270
                 if(count==0)
                 {
                     short out5 = c.in.readShort();
@@ -193,23 +198,21 @@ public class HexislePlDrawableSpans extends uruobj
             }
         }
 
-        e.ensure(hi1orig==76);
+        //e.ensure(hi1orig==76);
         
         byte v5 = (byte)((a5>>>8)&0xFF);
         if((a5&0x2000000)!=0)
         {
             v5 = (byte)(a5&0xFF);
         }
-        int v7 = b.ByteToInt32(hi2orig);
-        if(v7>0)
-        {
-            int unhandled = 0;
-        }
-        int a4 = hi1orig;
+        int v7 = b.ByteToInt32(mesh2);
+        int flags = mesh1;
+        //int a4 = mesh1;
+        //if(v7)
         
         int start = c.in.getAbsoluteOffset();
         int fformat = b.ByteToInt32(fformat2);
-        fformat = a4;
+        fformat = flags;
         int A = (fformat & 0x40) >>> 6;
         int B = (fformat & 0x30) >>> 4;
         int C = (fformat & 0x0F) >>> 0;
@@ -241,6 +244,82 @@ public class HexislePlDrawableSpans extends uruobj
         {
             int possofar = c.in.getAbsoluteOffset() - start;
 
+            
+            if(v7!=0)
+            {
+                //not tested.
+                byte[] b1 = c.readBytes(v7);
+                if(flag(flags,1))
+                {
+                    byte[] b2 = c.readBytes(v7);
+                    int dummy=0;
+                }
+                int unhandled = 0;
+            }
+            if(flag(flags,2))
+            {
+                short xval = x.pollAsElement(A, B, C, c);
+                short yval = y.pollAsElement(A, B, C, c);
+                short zval = z.pollAsElement(A, B, C, c);
+                //not implemented yet.
+                int dummy=0;
+            }
+            if(flag(flags,3))
+            {
+                //these are decompressed to floats.
+                byte b1 = c.readByte();
+                byte b2 = c.readByte();
+                byte b3 = c.readByte();
+                int dummy=0;
+                //not implemented yet.
+            }
+            if(flag(flags,4))
+            {
+                int dummy=0;
+                //not implemented yet.
+            }
+            if(flag(flags,5))
+            {
+                int dummy=0;
+                //not implemented yet.
+            }
+            if(flag(flags,6))
+            {
+                blue.pollAsColour(A, B, C, c);
+                green.pollAsColour(A, B, C, c);
+                red.pollAsColour(A, B, C, c);
+                alpha.pollAsColour(A, B, C, c);
+                int dummy=0;
+                //not implemented yet.
+            }
+            if(flag(flags,7))
+            {
+                int dummy=0;
+                //not implemented yet.
+            }
+            
+            int result2 = sub5042d0(flags);
+            
+            for(int j=0;j<result2;j++)
+            {
+                int wha = sub504300(flags, j);
+                for(int k=0;k<wha;k++)
+                {
+                    short s1 = c.readShort(); //encoded float
+                    int dummy=0;
+                }
+                if(wha==1 || wha==3)
+                {
+                    //decompress byte to float?
+                    int dummy2=0;
+                }
+                //unhandled
+                int dummy=0;
+            }
+            
+            if(true)continue;
+            
+            
             //get vertex.
             short xval = x.pollAsElement(A, B, C, c);
             short yval = y.pollAsElement(A, B, C, c);
@@ -311,7 +390,7 @@ public class HexislePlDrawableSpans extends uruobj
 
             if(true)continue;
             //this is slightly wrong I think...
-            int result = sub5042d0(a4);
+            int result = sub5042d0(flags);
             for(int j=0;j<result;j++)
             {
                 //reads some number of shorts
@@ -333,7 +412,19 @@ public class HexislePlDrawableSpans extends uruobj
         int stop = c.in.getAbsoluteOffset();
         return stop-start; //return the size we processed.
     }
-
+    public static int sub504300(int val, int val2)
+    {
+        int shift = val2+8;
+        int othershift = 15-val2;
+        if((val&(1<<shift))!=0)
+        {
+            return ((val >> 2 * (othershift)) & 3) + 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
     public static int sub5042d0(int val)
     {
         //actually does a table lookup, but the table just has 8 ints and they run from 0x8 to 0xF.

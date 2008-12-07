@@ -9,6 +9,7 @@ import java.io.File;
 import shared.m;
 import shared.b;
 import java.util.Vector;
+import java.util.ArrayDeque;
 
 public class UamConfigGenerator
 {
@@ -75,6 +76,14 @@ public class UamConfigGenerator
         data.comments.add("The name of the file on the server isn't used; it's just renamed anyway.");
         data.comments.add("The aequalsatransposeequalsainverse tag is just used to mark the end, so we know we got the whole file.");
         data.welcome = "Welcome to the UruAgeManager sub-project of Drizzle!";
+        UamConfig config;
+        try{
+            config = new UamConfig(new java.io.FileInputStream(folderWith7zs+"/"+uam.Uam.statusFilename));
+        }catch(Exception e){
+            m.err("Error reading config file.");
+            return;
+        }
+        data.loadFromUamConfig(config);
         for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, suffix))
         {
             String filename = f.getName();
@@ -97,8 +106,8 @@ public class UamConfigGenerator
             String mirurl = server+filename;
             
             UamConfigData.Age age = data.getAgeOrCreate(agename);
-            age.deletable = "true";
-            UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr);
+            //age.deletable = "true";
+            UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr,true);
             //version.whirlpool = hashstr;
             version.sha1 = hashstr;
             version.archive = "7z";
@@ -125,6 +134,26 @@ public class UamConfigGenerator
         Vector<String> comments = new Vector();
         String welcome = "";
         Vector<Age> ages = new Vector();
+        
+        public void loadFromUamConfig(UamConfig config)
+        {
+            welcome = config.getWelcomeMessage();
+            for(String agename: config.getAllAgeNames())
+            {
+                Age age = this.getAgeOrCreate(agename);
+                age.deletable = config.getDeletable(agename);
+                for(String version: config.getAllVersionsOfAge(agename))
+                {
+                    Age.Version ver = age.getVersionOrCreate(version,false);
+                    ver.archive = config.getArchiveType(agename, version);
+                    ver.sha1 = config.getSha1(agename, version);
+                    for(String mirurl: config.getAllUrlsOfAgeVersion(agename, version))
+                    {
+                        Age.Version.Mirror mir = ver.getMirrorOrCreate(mirurl);
+                    }
+                }
+            }
+        }
         
         public String generateXml()
         {
@@ -158,8 +187,8 @@ public class UamConfigGenerator
         public static class Age
         {
             String filename = "";
-            String deletable = "";
-            Vector<Version> versions = new Vector();
+            String deletable = "true";
+            ArrayDeque<Version> versions = new ArrayDeque();
             
             void generateXml(StringBuilder s)
             {
@@ -170,7 +199,7 @@ public class UamConfigGenerator
                 s.append("\t</age>\n");
                 //s.append("\n");
             }
-            public Version getVersionOrCreate(String name)
+            public Version getVersionOrCreate(String name, boolean prepend)
             {
                 for(Version version: versions)
                 {
@@ -178,7 +207,8 @@ public class UamConfigGenerator
                 }
                 Version version = new Version();
                 version.name = name;
-                versions.add(version);
+                if(prepend) versions.addFirst(version);
+                else versions.addLast(version);
                 return version;
             }
             
