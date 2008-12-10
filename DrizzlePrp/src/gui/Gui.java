@@ -614,6 +614,7 @@ public class Gui extends javax.swing.JFrame {
         jButton126 = new javax.swing.JButton();
         jButton137 = new javax.swing.JButton();
         jButton139 = new javax.swing.JButton();
+        textfieldState43 = new shared.State.TextfieldState();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -2853,13 +2854,22 @@ public class Gui extends javax.swing.JFrame {
                             .addContainerGap())
                     );
 
+                    textfieldState43.setText("defaulttest");
+                    textfieldState43.setName("wha"); // NOI18N
+
                     javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
                     jPanel6.setLayout(jPanel6Layout);
                     jPanel6Layout.setHorizontalGroup(
                         jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textfieldState43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(63, 63, 63)))
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(36, 36, 36)
@@ -2875,7 +2885,9 @@ public class Gui extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(49, 49, 49)
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(textfieldState43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(32, 32, 32)
                                     .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5427,6 +5439,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState40;
     private shared.State.TextfieldState textfieldState41;
     private shared.State.TextfieldState textfieldState42;
+    private shared.State.TextfieldState textfieldState43;
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState6;
     private shared.State.TextfieldState textfieldState7;

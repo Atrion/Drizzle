@@ -829,9 +829,41 @@ public class PlDrawableSpans extends uruobj
                         byte out4 = c.in.readByte(); //nz
                         if(c.compile)
                         {
-                            c.out.writeShort((short)(b.ByteToInt32(out2)*257)); //the *257 expands it to 2 bytes. i.e. 0->0, 255->65535.
-                            c.out.writeShort((short)(b.ByteToInt32(out3)*257));
-                            c.out.writeShort((short)(b.ByteToInt32(out4)*257));
+                            //c.out.writeShort((short)(b.ByteToInt32(out2)*257)); //the *257 expands it to 2 bytes. i.e. 0->0, 255->65535.
+                            //c.out.writeShort((short)(b.ByteToInt32(out3)*257));
+                            //c.out.writeShort((short)(b.ByteToInt32(out4)*257));
+                            int out2i = b.ByteToInt32(out2);
+                            int fin2 = out2i*257-32768;
+                            if(fin2<-32768 || fin2>32767)
+                            {
+                                int dummy=0;
+                            }
+                            short sfin2 = (short)fin2;
+                            c.out.writeShort(sfin2);
+                            
+                            int out3i = b.ByteToInt32(out3);
+                            int fin3 = out3i*257-32768;
+                            if(fin3<-32768 || fin3>32767)
+                            {
+                                int dummy=0;
+                            }
+                            short sfin3 = (short)fin3;
+                            c.out.writeShort(sfin3);
+
+                            int out4i = b.ByteToInt32(out4);
+                            int fin4 = out4i*257-32768;
+                            if(fin4<-32768 || fin4>32767)
+                            {
+                                int dummy=0;
+                            }
+                            short sfin4 = (short)fin4;
+                            c.out.writeShort(sfin4);
+                            //float fout2 = (((float)out2)/128f)-1f;
+                            //short sout2 = (short)(fout2*100f);
+                            //float fout3 = (((float)out3)/128f)-1f;
+                            //short sout3 = (short)(fout3*100f);
+                            //float fout4 = (((float)out4)/128f)-1f;
+                            //short sout4 = (short)(fout4*100f);
                         }
                     }
                     else if(c.readversion==3||c.readversion==4||c.readversion==7)
