@@ -33,6 +33,7 @@ public class UamGui
     public static JButton downloadbutton;
     public static JButton deletebutton;
     public static JLabel AgeLabel;
+    public static shared.State.ButtongroupState startup;
     
     final static boolean updateWhileAdjusting = true;
 
@@ -103,6 +104,35 @@ public class UamGui
             }
         });
         
+        //load list if called for...
+        shared.State.AllStates.addCallbackAfterInit(new shared.delegate() {
+            public void callback(Object arg) {
+                int startuptype = shared.State.AllStates.getStateAsInt("uamStartup");
+                switch(startuptype)
+                {
+                    case 0:
+                        //m.msg("0");
+                        break;
+                    case 1:
+                        //m.msg("1");
+                        String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
+                        //m.msg(potsfolder);
+                        GetAgeListGuiOffline(potsfolder);
+                        break;
+                    case 2:
+                        //m.msg("2");
+                        String uamserver = shared.State.AllStates.getStateAsString("uamServer");
+                        //m.msg(uamserver);
+                        String potsfolder2 = shared.State.AllStates.getStateAsString("uamRoot");
+                        //m.msg(potsfolder2);
+                        GetAgeListGui(uamserver, potsfolder2);
+                        break;
+                    default:
+                        m.err("Unhandled UAM startup type.");
+                        break;
+                }
+            }
+        });
     }
     
     public static void GetLocalInfo(String potsfolder)

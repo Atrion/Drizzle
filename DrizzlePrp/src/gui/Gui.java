@@ -72,6 +72,7 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.deletebutton = this.jButton129;
         gui.UamGui.downloadbutton = this.jButton127;
         gui.UamGui.AgeLabel = this.AgeInfoLabel;
+        gui.UamGui.startup = this.uamStartupButtongroup;
         gui.UamGui.init();
         
         GuiUtils.SetKeymaps();
@@ -1112,7 +1113,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton127);
-        jButton127.setBounds(460, 260, 80, 36);
+        jButton127.setBounds(460, 250, 80, 36);
 
         jButton129.setText("Delete");
         jButton129.setEnabled(false);
@@ -1217,17 +1218,17 @@ public class Gui extends javax.swing.JFrame {
             jRadioButton5.setSelected(true);
             jRadioButton5.setText("Do not load Age list at startup.");
             jPanel44.add(jRadioButton5);
-            jRadioButton5.setBounds(10, 20, 250, 28);
+            jRadioButton5.setBounds(10, 30, 250, 20);
 
             uamStartupButtongroup.add(jRadioButton6);
             jRadioButton6.setText("Load last saved Age list at startup.");
             jPanel44.add(jRadioButton6);
-            jRadioButton6.setBounds(10, 38, 240, 30);
+            jRadioButton6.setBounds(10, 50, 240, 20);
 
             uamStartupButtongroup.add(jRadioButton7);
             jRadioButton7.setText("Download most recent Age list at startup.");
             jPanel44.add(jRadioButton7);
-            jRadioButton7.setBounds(10, 60, 250, 28);
+            jRadioButton7.setBounds(10, 70, 250, 20);
 
             jPanel39.add(jPanel44);
             jPanel44.setBounds(540, 30, 290, 100);

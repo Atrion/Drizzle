@@ -71,6 +71,12 @@ public class AllStates //implements java.io.Serializable
     //    allStates.add(this);
     //}
     
+    static Vector<shared.delegate> afterInitCallbacks = new Vector();
+    public static void addCallbackAfterInit(shared.delegate d)
+    {
+        afterInitCallbacks.add(d);
+    }
+    
     public static void register(IState ref)
     {
         //states.add(new pair(null,ref,null));
@@ -161,6 +167,10 @@ public class AllStates //implements java.io.Serializable
 
         if(result) pushOutStates();
         
+        for(shared.delegate d: afterInitCallbacks)
+        {
+            d.callback(null);
+        }
 
         return result;
     }
