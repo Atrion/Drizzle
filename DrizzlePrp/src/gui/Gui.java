@@ -71,6 +71,7 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.mirlist = this.jList3;
         gui.UamGui.deletebutton = this.jButton129;
         gui.UamGui.downloadbutton = this.jButton127;
+        gui.UamGui.AgeLabel = this.AgeInfoLabel;
         gui.UamGui.init();
         
         GuiUtils.SetKeymaps();
@@ -368,6 +369,7 @@ public class Gui extends javax.swing.JFrame {
     private void initComponents() {
 
         filedirButtonGroup = new javax.swing.ButtonGroup();
+        uamStartupButtongroup = new shared.State.ButtongroupState();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
@@ -417,11 +419,11 @@ public class Gui extends javax.swing.JFrame {
         jList2 = new javax.swing.JList();
         jScrollPane12 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList();
-        jButton127 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
+        jButton127 = new javax.swing.JButton();
         jButton129 = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
         jPanel42 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         textfieldState38 = new shared.State.TextfieldState();
@@ -435,6 +437,12 @@ public class Gui extends javax.swing.JFrame {
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
+        jPanel44 = new javax.swing.JPanel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jLabel50 = new javax.swing.JLabel();
+        AgeInfoLabel = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -709,6 +717,8 @@ public class Gui extends javax.swing.JFrame {
         jTextArea5 = new javax.swing.JTextArea();
         imagePanel2 = new shared.ImagePanel();
 
+        uamStartupButtongroup.setName("uamStartup");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drizzle");
         setBounds(new java.awt.Rectangle(0, 0, 600, 600));
@@ -754,7 +764,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(checkboxState24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton107, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1051,7 +1061,7 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel32Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(tabsState1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         tabsState3.addTab("Simplicity", jPanel32);
@@ -1065,7 +1075,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton124);
-        jButton124.setBounds(10, 140, 120, 36);
+        jButton124.setBounds(70, 140, 120, 36);
 
         jLabel36.setText("This is in beta; please report bugs and suggestions!  Help can be found under the \"Help\" tab.");
         jPanel39.add(jLabel36);
@@ -1074,17 +1084,25 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jList1);
 
         jPanel39.add(jScrollPane6);
-        jScrollPane6.setBounds(30, 210, 100, 160);
+        jScrollPane6.setBounds(30, 180, 160, 220);
 
         jScrollPane7.setViewportView(jList2);
 
         jPanel39.add(jScrollPane7);
-        jScrollPane7.setBounds(150, 210, 250, 70);
+        jScrollPane7.setBounds(210, 200, 250, 120);
 
         jScrollPane12.setViewportView(jList3);
 
         jPanel39.add(jScrollPane12);
-        jScrollPane12.setBounds(150, 320, 250, 50);
+        jScrollPane12.setBounds(210, 350, 250, 50);
+
+        jLabel38.setText("Ages:");
+        jPanel39.add(jLabel38);
+        jLabel38.setBounds(30, 150, 31, 16);
+
+        jLabel39.setText("Versions:");
+        jPanel39.add(jLabel39);
+        jLabel39.setBounds(210, 180, 60, 16);
 
         jButton127.setText("Download");
         jButton127.setEnabled(false);
@@ -1094,19 +1112,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton127);
-        jButton127.setBounds(520, 260, 80, 36);
-
-        jLabel38.setText("Ages:");
-        jPanel39.add(jLabel38);
-        jLabel38.setBounds(30, 180, 31, 16);
-
-        jLabel39.setText("Versions:");
-        jPanel39.add(jLabel39);
-        jLabel39.setBounds(150, 180, 60, 16);
-
-        jLabel40.setText("Mirrors:");
-        jPanel39.add(jLabel40);
-        jLabel40.setBounds(150, 290, 41, 16);
+        jButton127.setBounds(460, 260, 80, 36);
 
         jButton129.setText("Delete");
         jButton129.setEnabled(false);
@@ -1116,7 +1122,11 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton129);
-        jButton129.setBounds(540, 300, 60, 36);
+        jButton129.setBounds(460, 280, 80, 36);
+
+        jLabel40.setText("Mirrors:");
+        jPanel39.add(jLabel40);
+        jLabel40.setBounds(210, 330, 41, 16);
 
         jPanel42.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Settings"));
         jPanel42.setLayout(null);
@@ -1134,7 +1144,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel42.add(textfieldState38);
-        textfieldState38.setBounds(90, 30, 250, 20);
+        textfieldState38.setBounds(90, 30, 280, 20);
 
         jButton125.setText("Select...");
         jButton125.addActionListener(new java.awt.event.ActionListener() {
@@ -1143,12 +1153,12 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel42.add(jButton125);
-        jButton125.setBounds(390, 50, 67, 36);
+        jButton125.setBounds(430, 50, 67, 36);
 
         textfieldState39.setText("C:\\Program Files\\Ubi Soft\\Cyan Worlds\\");
             textfieldState39.setName("uamRoot"); // NOI18N
             jPanel42.add(textfieldState39);
-            textfieldState39.setBounds(90, 60, 300, 20);
+            textfieldState39.setBounds(90, 60, 330, 20);
 
             jLabel37.setText("Pots folder:");
             jPanel42.add(jLabel37);
@@ -1161,10 +1171,10 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel42.add(jButton136);
-            jButton136.setBounds(350, 20, 120, 36);
+            jButton136.setBounds(380, 20, 120, 36);
 
             jPanel39.add(jPanel42);
-            jPanel42.setBounds(10, 30, 720, 100);
+            jPanel42.setBounds(10, 30, 510, 100);
 
             jButton135.setText("Launch Uru");
             jButton135.addActionListener(new java.awt.event.ActionListener() {
@@ -1173,32 +1183,62 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel39.add(jButton135);
-            jButton135.setBounds(720, 200, 110, 36);
+            jButton135.setBounds(720, 290, 110, 36);
 
             jPanel43.setBorder(javax.swing.BorderFactory.createTitledBorder("Legend"));
             jPanel43.setLayout(null);
 
-            jLabel46.setForeground(new java.awt.Color(0, 85, 0));
+            jLabel46.setForeground(new java.awt.Color(0, 119, 0));
             jLabel46.setText("You have the latest version.");
             jPanel43.add(jLabel46);
             jLabel46.setBounds(10, 20, 160, 16);
 
-            jLabel47.setForeground(new java.awt.Color(85, 85, 0));
+            jLabel47.setForeground(new java.awt.Color(119, 119, 0));
             jLabel47.setText("You have a version, but not the latest.");
             jPanel43.add(jLabel47);
             jLabel47.setBounds(10, 40, 210, 16);
 
-            jLabel48.setForeground(new java.awt.Color(85, 0, 0));
+            jLabel48.setForeground(new java.awt.Color(119, 0, 0));
             jLabel48.setText("You don't have this Age installed.");
             jPanel43.add(jLabel48);
             jLabel48.setBounds(10, 60, 190, 16);
 
-            jLabel49.setText("You have this Age, but it's version is unknown.");
+            jLabel49.setText("You have this Age, but its version is unknown.");
             jPanel43.add(jLabel49);
-            jLabel49.setBounds(10, 80, 250, 16);
+            jLabel49.setBounds(10, 80, 248, 16);
 
             jPanel39.add(jPanel43);
-            jPanel43.setBounds(430, 140, 290, 120);
+            jPanel43.setBounds(540, 140, 290, 110);
+
+            jPanel44.setBorder(javax.swing.BorderFactory.createTitledBorder("Automatically download list?"));
+            jPanel44.setLayout(null);
+
+            uamStartupButtongroup.add(jRadioButton5);
+            jRadioButton5.setSelected(true);
+            jRadioButton5.setText("Do not load Age list at startup.");
+            jPanel44.add(jRadioButton5);
+            jRadioButton5.setBounds(10, 20, 250, 28);
+
+            uamStartupButtongroup.add(jRadioButton6);
+            jRadioButton6.setText("Load last saved Age list at startup.");
+            jPanel44.add(jRadioButton6);
+            jRadioButton6.setBounds(10, 38, 240, 30);
+
+            uamStartupButtongroup.add(jRadioButton7);
+            jRadioButton7.setText("Download most recent Age list at startup.");
+            jPanel44.add(jRadioButton7);
+            jRadioButton7.setBounds(10, 60, 250, 28);
+
+            jPanel39.add(jPanel44);
+            jPanel44.setBounds(540, 30, 290, 100);
+
+            jLabel50.setText("Info:");
+            jPanel39.add(jLabel50);
+            jLabel50.setBounds(30, 410, 23, 16);
+
+            AgeInfoLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
+            jPanel39.add(AgeInfoLabel);
+            AgeInfoLabel.setBounds(60, 410, 760, 16);
 
             tabsState3.addTab("UAM", jPanel39);
 
@@ -1407,7 +1447,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(textfieldState5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton53)
-                    .addContainerGap(242, Short.MAX_VALUE))
+                    .addContainerGap(272, Short.MAX_VALUE))
             );
 
             tabsState2.addTab("Crowthistle", jPanel14);
@@ -1776,7 +1816,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30)
-                        .addContainerGap(26, Short.MAX_VALUE))
+                        .addContainerGap(56, Short.MAX_VALUE))
                 );
 
                 tabsState2.addTab("Settings", jPanel20);
@@ -1938,7 +1978,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addGroup(jPanel23Layout.createSequentialGroup()
                                     .addGap(116, 116, 116)
                                     .addComponent(jButton99)))
-                            .addContainerGap(47, Short.MAX_VALUE))
+                            .addContainerGap(77, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("tab8", jPanel23);
@@ -2013,7 +2053,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jButton113))
                             .addGap(32, 32, 32)
                             .addComponent(jButton111)
-                            .addContainerGap(163, Short.MAX_VALUE))
+                            .addContainerGap(193, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("HexIsle", jPanel37);
@@ -2120,7 +2160,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jLabel34)
                                 .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton123))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                             .addComponent(jButton122)
                             .addGap(62, 62, 62))
                     );
@@ -2140,7 +2180,7 @@ public class Gui extends javax.swing.JFrame {
                         jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel13Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                             .addContainerGap())
                     );
 
@@ -2586,7 +2626,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jButton128))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton138)
-                            .addContainerGap(36, Short.MAX_VALUE))
+                            .addContainerGap(66, Short.MAX_VALUE))
                     );
 
                     tabsState3.addTab("Encryption", jPanel3);
@@ -2893,7 +2933,7 @@ public class Gui extends javax.swing.JFrame {
                                     .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButton49)))
-                            .addContainerGap(123, Short.MAX_VALUE))
+                            .addContainerGap(153, Short.MAX_VALUE))
                     );
 
                     tabsState3.addTab("tab4", jPanel6);
@@ -3081,7 +3121,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addGroup(jPanel7Layout.createSequentialGroup()
                                             .addGap(47, 47, 47)
                                             .addComponent(jButton43)))))
-                            .addContainerGap(47, Short.MAX_VALUE))
+                            .addContainerGap(77, Short.MAX_VALUE))
                     );
 
                     tabsState3.addTab("GameHelp", jPanel7);
@@ -3238,7 +3278,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(jPanel12Layout.createSequentialGroup()
                             .addGap(42, 42, 42)
                             .addComponent(jButton50)
-                            .addContainerGap(334, Short.MAX_VALUE))
+                            .addContainerGap(364, Short.MAX_VALUE))
                     );
 
                     tabsState3.addTab("Riven", jPanel12);
@@ -3578,7 +3618,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(textfieldState14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(jPanel33Layout.createSequentialGroup()
-                                        .addContainerGap(39, Short.MAX_VALUE)
+                                        .addContainerGap(54, Short.MAX_VALUE)
                                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jButton84)
                                             .addComponent(jButton85))
@@ -3589,7 +3629,7 @@ public class Gui extends javax.swing.JFrame {
                                         .addComponent(jButton117)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton118))
-                                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
                                 .addContainerGap())
                         );
 
@@ -3631,7 +3671,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(imagePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(27, Short.MAX_VALUE))
+                                .addContainerGap(57, Short.MAX_VALUE))
                         );
 
                         tabsState3.addTab("Help", jPanel25);
@@ -3642,14 +3682,16 @@ public class Gui extends javax.swing.JFrame {
                             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(13, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addContainerGap(12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())))
                         );
                         layout.setVerticalGroup(
                             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3658,12 +3700,12 @@ public class Gui extends javax.swing.JFrame {
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(21, Short.MAX_VALUE))
+                                        .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(18, Short.MAX_VALUE))
                         );
 
                         pack();
@@ -5104,6 +5146,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AgeInfoLabel;
     private shared.State.CheckboxState checkboxState1;
     private shared.State.CheckboxState checkboxState10;
     private shared.State.CheckboxState checkboxState11;
@@ -5316,6 +5359,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -5361,6 +5405,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
     private javax.swing.JPanel jPanel43;
+    private javax.swing.JPanel jPanel44;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -5370,6 +5415,9 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -5445,6 +5493,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
+    private shared.State.ButtongroupState uamStartupButtongroup;
     // End of variables declaration//GEN-END:variables
     
 }

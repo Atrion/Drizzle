@@ -44,6 +44,10 @@ public class UamConfig
     {
         return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
     }*/
+    public String getAgeInfo(String agename)
+    {
+        return this.getString("/uam/age[filename='"+agename+"']/info");
+    }
     public String getSha1(String agename, String version)
     {
         return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/sha1");

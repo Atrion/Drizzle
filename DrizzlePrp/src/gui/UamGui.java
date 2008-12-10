@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import shared.b;
+import javax.swing.JLabel;
 
 public class UamGui
 {
@@ -31,6 +32,7 @@ public class UamGui
     public static gui.Gui gui;
     public static JButton downloadbutton;
     public static JButton deletebutton;
+    public static JLabel AgeLabel;
     
     final static boolean updateWhileAdjusting = true;
 
@@ -56,16 +58,16 @@ public class UamGui
                 {
                     case notInstalled:
                         //label.setForeground(Color.red);
-                        label.setForeground(new Color(0x550000));
+                        label.setForeground(new Color(0x770000));
                         break;
                     case latestVersionInCache:
                         //label.setForeground(Color.green);
-                        label.setForeground(new Color(0x005500));
+                        label.setForeground(new Color(0x007700));
                         break;
                     case nonLatestVersionInCache:
                         //label.setForeground(Color.yellow);//new Color(0x00aa00));
                         //label.setForeground(Color.orange);
-                        label.setForeground(new Color(0x555500));
+                        label.setForeground(new Color(0x777700));
                         break;
                     case notInCache:
                         label.setForeground(Color.black);
@@ -324,10 +326,13 @@ public class UamGui
         if(age!=null)
         {
             deletebutton.setEnabled(true);
+            String info = uam.Uam.ageList.getAgeInfo(age);
+            AgeLabel.setText(info);
         }
         else
         {
             deletebutton.setEnabled(false);
+            AgeLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
         }
         final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
         verlist.setModel(new javax.swing.ListModel() {

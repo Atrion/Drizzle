@@ -142,6 +142,7 @@ public class UamConfigGenerator
             {
                 Age age = this.getAgeOrCreate(agename);
                 age.deletable = config.getDeletable(agename);
+                age.info = config.getAgeInfo(agename);
                 for(String version: config.getAllVersionsOfAge(agename))
                 {
                     Age.Version ver = age.getVersionOrCreate(version,false);
@@ -188,6 +189,7 @@ public class UamConfigGenerator
         {
             String filename = "";
             String deletable = "true";
+            String info = "";
             ArrayDeque<Version> versions = new ArrayDeque();
             
             void generateXml(StringBuilder s)
@@ -195,6 +197,7 @@ public class UamConfigGenerator
                 s.append("\t<age>\n");
                 s.append("\t\t<filename>"+filename+"</filename>\n");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
+                s.append("\t\t<info>"+info+"</info>\n");
                 for(Version version: versions) version.generateXml(s);
                 s.append("\t</age>\n");
                 //s.append("\n");
