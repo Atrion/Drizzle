@@ -43,9 +43,11 @@ public class UamGui
         String agename;
         InstallStatus status;
         static java.awt.Image check = shared.GetResource.getResourceAsImage("/gui/check.png");
-        static java.awt.Image ex = shared.GetResource.getResourceAsImage("/gui/ex.png");
+        //static java.awt.Image ex = shared.GetResource.getResourceAsImage("/gui/ex.png");
         static java.awt.Image up = shared.GetResource.getResourceAsImage("/gui/up.png");
         static java.awt.Image unknown = shared.GetResource.getResourceAsImage("/gui/unknown.png");
+        //static java.awt.Image dash = shared.GetResource.getResourceAsImage("/gui/dash.png");
+        static java.awt.Image dashred = shared.GetResource.getResourceAsImage("/gui/dashred.png");
         java.awt.Image img;
         
         public AgeListItem(String agename, InstallStatus status)
@@ -61,8 +63,15 @@ public class UamGui
             {
                 case notInstalled:
                     //label.setForeground(Color.red);
+
+                    //this.setForeground(new Color(0x770000));
+                    //img = ex;
+
+                    //this.setForeground(new Color(0xd45600));
+                    //img = dash;
+
                     this.setForeground(new Color(0x770000));
-                    img = ex;
+                    img = dashred;
                     break;
                 case latestVersionInCache:
                     //label.setForeground(Color.green);
