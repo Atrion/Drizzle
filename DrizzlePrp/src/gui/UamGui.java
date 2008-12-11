@@ -37,7 +37,69 @@ public class UamGui
     
     final static boolean updateWhileAdjusting = true;
 
-    
+    public static class AgeListItem extends javax.swing.JPanel
+    {
+        //JLabel label;
+        String agename;
+        InstallStatus status;
+        static java.awt.Image check = shared.GetResource.getResourceAsImage("/gui/check.png");
+        static java.awt.Image ex = shared.GetResource.getResourceAsImage("/gui/ex.png");
+        static java.awt.Image up = shared.GetResource.getResourceAsImage("/gui/up.png");
+        static java.awt.Image unknown = shared.GetResource.getResourceAsImage("/gui/unknown.png");
+        java.awt.Image img;
+        
+        public AgeListItem(String agename, InstallStatus status)
+        {
+            this.agename = agename;
+            this.status = status;
+            this.setOpaque(true);
+            this.setPreferredSize(new java.awt.Dimension(0, 16));
+            //label = new JLabel("hi");
+            //this.add(label);
+            //this.getGraphics().drawString(agename, 0, 0);
+            switch(status)
+            {
+                case notInstalled:
+                    //label.setForeground(Color.red);
+                    this.setForeground(new Color(0x770000));
+                    img = ex;
+                    break;
+                case latestVersionInCache:
+                    //label.setForeground(Color.green);
+                    this.setForeground(new Color(0x007700));
+                    img = check;
+                    break;
+                case nonLatestVersionInCache:
+                    //label.setForeground(Color.yellow);//new Color(0x00aa00));
+                    //label.setForeground(Color.orange);
+                    this.setForeground(new Color(0x777700));
+                    img = up;
+                    break;
+                case notInCache:
+                    this.setForeground(Color.black);
+                    img = unknown;
+                    break;
+                default:
+                    this.setForeground(Color.black);
+                    img = unknown;
+                    break;
+            }
+        }
+        /*@Override public void repaint()
+        {
+            java.awt.Graphics g = this.getGraphics();
+            g.drawString("hi", 0, 0);
+        }*/
+        @Override public void paintComponent(java.awt.Graphics g)
+        {
+            super.paintComponent(g);
+            this.setForeground(Color.BLUE);
+            this.setBackground(Color.GREEN);
+            int h = this.getHeight();
+            g.drawString(agename, 20, h-3);
+            if(img!=null) g.drawImage(img, 0, 0, null);
+        }
+    }
     public static void init() //called by swing thread
     {
         agelist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -53,7 +115,10 @@ public class UamGui
                 String agename = (String)value;
                 InstallStatus status = Uam.ageInstallStatus.get(agename);
 
-                javax.swing.JLabel label = new javax.swing.JLabel(agename);
+                AgeListItem ali = new AgeListItem(agename, status);
+                if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                return ali;
+                /*javax.swing.JLabel label = new javax.swing.JLabel(agename);
                 label.setOpaque(true); //allows us to set the background.
                 switch(status)
                 {
@@ -81,7 +146,8 @@ public class UamGui
                 if(isSelected) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 //else label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
                 //if(cellHasFocus) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
-                return label;
+                return label;*/
+
             }
         });
         verlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
