@@ -123,7 +123,8 @@ public class fileLists
                 "GlobalClothing.age","GlobalClothing.sum","GlobalClothing_District_Female01.prp","GlobalClothing_District_Female02.prp","GlobalClothing_District_Female04.prp","GlobalClothing_District_Female.prp","GlobalClothing_District_Male01.prp","GlobalClothing_District_Male02.prp","GlobalClothing_District_Male04.prp","GlobalClothing_District_Male.prp",
 
 //"GlobalAnimations.age",
-                
+
+/*
 //"GlobalAnimations_District_FemaleAFKEnter.prp",
 //"GlobalAnimations_District_FemaleAFKExit.prp",
 //"GlobalAnimations_District_FemaleAFKIdle.prp",
@@ -416,6 +417,7 @@ public class fileLists
 
 "GlobalAnimations_District_FemaleDance.prp",
 "GlobalAnimations_District_MaleDance.prp", //arms disappear
+*/
                 
 "GlobalAnimations_District_kgFall.prp",
 "GlobalAnimations_District_kgIdle.prp",
