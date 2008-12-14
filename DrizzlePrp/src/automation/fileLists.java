@@ -113,6 +113,9 @@ public class fileLists
             "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
             "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
             "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
+            "GlobalAnimations_District_FemaleAmazed.prp","GlobalAnimations_District_FemaleAskQuestion.prp","GlobalAnimations_District_FemaleBeckonBig.prp","GlobalAnimations_District_FemaleBeckonSmall.prp","GlobalAnimations_District_FemaleBow.prp","GlobalAnimations_District_FemaleCallMe.prp","GlobalAnimations_District_FemaleCower.prp","GlobalAnimations_District_FemaleCrazy.prp","GlobalAnimations_District_FemaleCringe.prp","GlobalAnimations_District_FemaleCrossArms.prp","GlobalAnimations_District_FemaleDoh.prp","GlobalAnimations_District_FemaleFlinch.prp","GlobalAnimations_District_FemaleGroan.prp","GlobalAnimations_District_FemaleKneel.prp","GlobalAnimations_District_FemaleLeanLeft.prp","GlobalAnimations_District_FemaleLeanRight.prp","GlobalAnimations_District_FemaleLookAround.prp","GlobalAnimations_District_FemaleOkay.prp", /*eyes go funny*/"GlobalAnimations_District_FemaleOverHere.prp","GlobalAnimations_District_FemalePeer.prp","GlobalAnimations_District_FemaleSalute.prp","GlobalAnimations_District_FemaleScratchHead.prp","GlobalAnimations_District_FemaleShakeFist.prp","GlobalAnimations_District_FemaleShoo.prp","GlobalAnimations_District_FemaleSlouchSad.prp","GlobalAnimations_District_FemaleStop.prp","GlobalAnimations_District_FemaleTalkHand.prp","GlobalAnimations_District_FemaleTapFoot.prp","GlobalAnimations_District_FemaleTaunt.prp","GlobalAnimations_District_FemaleThumbsDown.prp","GlobalAnimations_District_FemaleThumbsDown2.prp","GlobalAnimations_District_FemaleThumbsUp.prp","GlobalAnimations_District_FemaleThumbsUp2.prp","GlobalAnimations_District_FemaleWaveLow.prp","GlobalAnimations_District_FemaleWinded.prp",
+            "GlobalAnimations_District_MaleAmazed.prp","GlobalAnimations_District_MaleAskQuestion.prp", /*arm doesn't go up correctly.*/"GlobalAnimations_District_MaleBeckonBig.prp","GlobalAnimations_District_MaleBeckonSmall.prp","GlobalAnimations_District_MaleBow.prp","GlobalAnimations_District_MaleCallMe.prp","GlobalAnimations_District_MaleCower.prp", /*eyes go funny*/"GlobalAnimations_District_MaleCrazy.prp", /*face goes funny*/"GlobalAnimations_District_MaleCringe.prp","GlobalAnimations_District_MaleCrossArms.prp", /*arms disappear*/"GlobalAnimations_District_MaleDoh.prp", /*face goes funny*/"GlobalAnimations_District_MaleFlinch.prp", /*face goes funny*/"GlobalAnimations_District_MaleGroan.prp","GlobalAnimations_District_MaleKneel.prp","GlobalAnimations_District_MaleLeanLeft.prp","GlobalAnimations_District_MaleLeanRight.prp","GlobalAnimations_District_MaleLookAround.prp","GlobalAnimations_District_MaleOkay.prp","GlobalAnimations_District_MaleOverHere.prp","GlobalAnimations_District_MalePeer.prp","GlobalAnimations_District_MaleSalute.prp","GlobalAnimations_District_MaleScratchHead.prp","GlobalAnimations_District_MaleShakeFist.prp","GlobalAnimations_District_MaleShoo.prp","GlobalAnimations_District_MaleSlouchSad.prp","GlobalAnimations_District_MaleStop.prp","GlobalAnimations_District_MaleTalkHand.prp","GlobalAnimations_District_MaleTapFoot.prp","GlobalAnimations_District_MaleTaunt.prp","GlobalAnimations_District_MaleThumbsDown.prp","GlobalAnimations_District_MaleThumbsDown2.prp","GlobalAnimations_District_MaleThumbsUp.prp","GlobalAnimations_District_MaleThumbsUp2.prp","GlobalAnimations_District_MaleWaveLow.prp","GlobalAnimations_District_MaleWinded.prp",
+            "GlobalAnimations_District_FemaleDance.prp","GlobalAnimations_District_MaleDance.prp", /*arms disappear*/
     };
     
     public static String[] moulSupportedList2 = {
@@ -133,11 +136,11 @@ public class fileLists
 //"GlobalAnimations_District_FemaleBlindsLeverUp.prp",
 //"GlobalAnimations_District_FemaleBlndFrntLeverDown.prp",
 //"GlobalAnimations_District_FemaleBlndFrntLeverUp.prp",
-"GlobalAnimations_District_FemaleBookAccept.prp",
-"GlobalAnimations_District_FemaleBookAcceptIdle.prp",
-"GlobalAnimations_District_FemaleBookOffer.prp",
-"GlobalAnimations_District_FemaleBookOfferFinish.prp",
-"GlobalAnimations_District_FemaleBookOfferIdle.prp",
+"GlobalAnimations_District_FemaleBookAccept.prp", //arms disappear
+"GlobalAnimations_District_FemaleBookAcceptIdle.prp", //avatar disappear
+"GlobalAnimations_District_FemaleBookOffer.prp", //arms disappear
+"GlobalAnimations_District_FemaleBookOfferFinish.prp", //arms disappear
+"GlobalAnimations_District_FemaleBookOfferIdle.prp", //avatar disappear
 "GlobalAnimations_District_FemaleBow.prp",
 //"GlobalAnimations_District_FemaleButtonTouch.prp",
 "GlobalAnimations_District_FemaleCallMe.prp",
@@ -158,9 +161,9 @@ public class fileLists
 "GlobalAnimations_District_FemaleFlinch.prp",
 //"GlobalAnimations_District_FemaleFloorLeverA.prp",
 //"GlobalAnimations_District_FemaleFloorLeverAUp.prp",
-"GlobalAnimations_District_FemaleGlobalScopeGrab.prp",
-"GlobalAnimations_District_FemaleGlobalScopeHold.prp",
-"GlobalAnimations_District_FemaleGlobalScopeRelease.prp",
+"GlobalAnimations_District_FemaleGlobalScopeGrab.prp", //not an emote
+"GlobalAnimations_District_FemaleGlobalScopeHold.prp", //not an emote
+"GlobalAnimations_District_FemaleGlobalScopeRelease.prp", //not an emote
 "GlobalAnimations_District_FemaleGroan.prp",
 //"GlobalAnimations_District_FemaleGroundImpact.prp",
 //"GlobalAnimations_District_FemaleIdle.prp",
@@ -169,7 +172,7 @@ public class fileLists
 //"GlobalAnimations_District_FemaleKiBegin.prp",
 //"GlobalAnimations_District_FemaleKiEnd.prp",
 //"GlobalAnimations_District_FemaleKiGlance.prp",
-"GlobalAnimations_District_FemaleKITap.prp",
+"GlobalAnimations_District_FemaleKITap.prp", //might not be an emote?
 //"GlobalAnimations_District_FemaleKiUse.prp",
 "GlobalAnimations_District_FemaleKneel.prp",
 //"GlobalAnimations_District_FemaleLadderDown.prp",
@@ -183,7 +186,7 @@ public class fileLists
 "GlobalAnimations_District_FemaleLeanRight.prp",
 //"GlobalAnimations_District_FemaleLinkOut.prp",
 "GlobalAnimations_District_FemaleLookAround.prp",
-"GlobalAnimations_District_FemaleOkay.prp",
+"GlobalAnimations_District_FemaleOkay.prp", //eyes go funny
 "GlobalAnimations_District_FemaleOverHere.prp",
 "GlobalAnimations_District_FemalePeer.prp",
 //"GlobalAnimations_District_FemalePelletBookLeft.prp",
@@ -249,7 +252,7 @@ public class fileLists
 //"GlobalAnimations_District_FemaleWalk.prp",
 //"GlobalAnimations_District_FemaleWalkBack.prp",
 //"GlobalAnimations_District_FemaleWalkingJump.prp",
-"GlobalAnimations_District_FemaleWallSlide.prp",
+"GlobalAnimations_District_FemaleWallSlide.prp", //not an emote (Gahreesen?)
 //"GlobalAnimations_District_FemaleWave.prp",
 "GlobalAnimations_District_FemaleWaveLow.prp",
 "GlobalAnimations_District_FemaleWinded.prp",
@@ -282,41 +285,41 @@ public class fileLists
 //"GlobalAnimations_District_MaleAFKIdle.prp",
 //"GlobalAnimations_District_MaleAgree.prp",
 "GlobalAnimations_District_MaleAmazed.prp",
-"GlobalAnimations_District_MaleAskQuestion.prp",
+"GlobalAnimations_District_MaleAskQuestion.prp", //arm doesn't go up correctly.
 "GlobalAnimations_District_MaleBeckonBig.prp",
 "GlobalAnimations_District_MaleBeckonSmall.prp",
 //"GlobalAnimations_District_MaleBlindsLeverDown.prp",
 //"GlobalAnimations_District_MaleBlindsLeverUp.prp",
 //"GlobalAnimations_District_MaleBlndFrntLeverDown.prp",
 //"GlobalAnimations_District_MaleBlndFrntLeverUp.prp",
-"GlobalAnimations_District_MaleBookAccept.prp",
-"GlobalAnimations_District_MaleBookAcceptIdle.prp",
-"GlobalAnimations_District_MaleBookOffer.prp",
-"GlobalAnimations_District_MaleBookOfferFinish.prp",
-"GlobalAnimations_District_MaleBookOfferIdle.prp",
+"GlobalAnimations_District_MaleBookAccept.prp", //not an emote
+"GlobalAnimations_District_MaleBookAcceptIdle.prp", //not an emote
+"GlobalAnimations_District_MaleBookOffer.prp", //not an emote
+"GlobalAnimations_District_MaleBookOfferFinish.prp", //not an emote
+"GlobalAnimations_District_MaleBookOfferIdle.prp", //avatar disappears
 "GlobalAnimations_District_MaleBow.prp",
 //"GlobalAnimations_District_MaleButtonTouch.prp",
 "GlobalAnimations_District_MaleCallMe.prp",
 //"GlobalAnimations_District_MaleCheer.prp",
 //"GlobalAnimations_District_MaleClap.prp",
-"GlobalAnimations_District_MaleCower.prp",
-"GlobalAnimations_District_MaleCrazy.prp",
+"GlobalAnimations_District_MaleCower.prp", //eyes go funny
+"GlobalAnimations_District_MaleCrazy.prp", //face goes funny
 "GlobalAnimations_District_MaleCringe.prp",
-"GlobalAnimations_District_MaleCrossArms.prp",
+"GlobalAnimations_District_MaleCrossArms.prp", //arms disappear
 //"GlobalAnimations_District_MaleCry.prp",
 //"GlobalAnimations_District_MaleDance.prp",
-"GlobalAnimations_District_MaleDoh.prp",
+"GlobalAnimations_District_MaleDoh.prp", //face goes funny
 //"GlobalAnimations_District_MaleDoorButtonTouch.prp",
 //"GlobalAnimations_District_MaleFall.prp",
 //"GlobalAnimations_District_MaleFall2.prp",
 //"GlobalAnimations_District_MaleFallingLinkOut.prp",
 //"GlobalAnimations_District_MaleFishBookLinkOut.prp",
-"GlobalAnimations_District_MaleFlinch.prp",
+"GlobalAnimations_District_MaleFlinch.prp", //face goes funny
 //"GlobalAnimations_District_MaleFloorLeverA.prp",
 //"GlobalAnimations_District_MaleFloorLeverAUp.prp",
-"GlobalAnimations_District_MaleGlobalScopeGrab.prp",
-"GlobalAnimations_District_MaleGlobalScopeHold.prp",
-"GlobalAnimations_District_MaleGlobalScopeRelease.prp",
+"GlobalAnimations_District_MaleGlobalScopeGrab.prp", //not an emote
+"GlobalAnimations_District_MaleGlobalScopeHold.prp", //not an emote
+"GlobalAnimations_District_MaleGlobalScopeRelease.prp", //not an emote
 "GlobalAnimations_District_MaleGroan.prp",
 //"GlobalAnimations_District_MaleGroundImpact.prp",
 //"GlobalAnimations_District_MaleIdle.prp",
@@ -325,7 +328,7 @@ public class fileLists
 //"GlobalAnimations_District_MaleKiBegin.prp",
 //"GlobalAnimations_District_MaleKiEnd.prp",
 //"GlobalAnimations_District_MaleKiGlance.prp",
-"GlobalAnimations_District_MaleKITap.prp",
+"GlobalAnimations_District_MaleKITap.prp", //not an emote?
 //"GlobalAnimations_District_MaleKiUse.prp",
 "GlobalAnimations_District_MaleKneel.prp",
 //"GlobalAnimations_District_MaleLadderDown.prp",
@@ -404,7 +407,7 @@ public class fileLists
 //"GlobalAnimations_District_MaleWalk.prp",
 //"GlobalAnimations_District_MaleWalkBack.prp",
 //"GlobalAnimations_District_MaleWalkingJump.prp",
-"GlobalAnimations_District_MaleWallSlide.prp",
+"GlobalAnimations_District_MaleWallSlide.prp", //not an emote
 //"GlobalAnimations_District_MaleWarpHack.prp",
 //"GlobalAnimations_District_MaleWave.prp",
 "GlobalAnimations_District_MaleWaveLow.prp",
@@ -412,7 +415,7 @@ public class fileLists
 //"GlobalAnimations_District_MaleYawn.prp",
 
 "GlobalAnimations_District_FemaleDance.prp",
-"GlobalAnimations_District_MaleDance.prp",
+"GlobalAnimations_District_MaleDance.prp", //arms disappear
                 
 "GlobalAnimations_District_kgFall.prp",
 "GlobalAnimations_District_kgIdle.prp",

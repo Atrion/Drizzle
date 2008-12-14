@@ -50,6 +50,19 @@ public class Main extends javax.swing.JFrame {
         {
             public void run()
             {
+                try{
+                    String version = System.getProperty("java.version");
+                    System.out.println("Using JRE version: "+version);
+                    /*String[] verparts = version.split(".");
+                    String verstr = verparts[0]+"."+verparts[1];
+                    float jreversion = Float.parseFloat(verstr);
+                    float minver = 1.6f;
+                    if(jreversion<minver)
+                    {
+                        System.out.println("Your JRE version is too old.");
+                    }*/
+                    //System.out.println("Written with JRE version 1.6.0");
+                }catch(Exception e){}
                 gui = new Gui();
                 //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
                 //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
