@@ -108,6 +108,12 @@ public class UamConfigGenerator
             
             UamConfigData.Age age = data.getAgeOrCreate(agename);
             //age.deletable = "true";
+            //if we haven't already created this age, add the default name.
+            if(age.propername.equals(""))
+            {
+                age.propername = age.filename;
+            }
+            
             UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr,true);
             
             //If we haven't already created this version, add the default mirror.
@@ -197,12 +203,14 @@ public class UamConfigGenerator
             String filename = "";
             String deletable = "true";
             String info = "";
+            String propername = "";
             ArrayDeque<Version> versions = new ArrayDeque();
             
             void generateXml(StringBuilder s)
             {
                 s.append("\t<age>\n");
                 s.append("\t\t<filename>"+filename+"</filename>\n");
+                s.append("\t\t<name>"+propername+"</name>");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
                 for(Version version: versions) version.generateXml(s);

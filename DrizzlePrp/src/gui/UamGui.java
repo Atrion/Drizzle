@@ -125,7 +125,10 @@ public class UamGui
                 //InstallStatus status = Uam.ageInstallStatus.get(agename).installationStatus;
                 InstallStatus status = Uam.installInfo.ages.get(agename).installationStatus;
 
-                AgeListItem ali = new AgeListItem(agename, status);
+                //AgeListItem ali = new AgeListItem(agename, status);
+                String properagename = Uam.ageList.getAgeProperName(agename);
+                //properagename = properagename + " ("+agename+")"; //adds the filename in parentheses.
+                AgeListItem ali = new AgeListItem(properagename, status);
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 return ali;
                 /*javax.swing.JLabel label = new javax.swing.JLabel(agename);
