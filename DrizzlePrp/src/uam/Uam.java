@@ -20,11 +20,38 @@ import java.io.File;
 public class Uam
 {
     public static UamConfig ageList;
-    public static HashMap<String,InstallStatus> ageInstallStatus;
+    //public static HashMap<String,InstallStatus> ageInstallStatus;
+    public static InstallInfo installInfo;
     public static final String ageArchivesFolder = "/agearchives/";
     public static final String versionSep = "--";
     public static final String statusFilename = "uam.status.txt";
     
+    public static class InstallInfo
+    {
+        public HashMap<String, AgeInstallInfo> ages = new HashMap();
+        
+        public AgeInstallInfo getOrCreateAge(String age)
+        {
+            AgeInstallInfo result = ages.get(age);
+            if(result==null)
+            {
+                result = new AgeInstallInfo();
+                ages.put(age, result);
+            }
+            return result;
+        }
+    }
+    public static class AgeInstallInfo
+    {
+        public InstallStatus installationStatus = InstallStatus.notInstalled;
+        public HashMap<String, InstallStatus> versions = new HashMap();
+        
+        /*public AgeInstallInfo(InstallStatus installationStatus)
+        {
+            this.installationStatus = installationStatus;
+        }*/
+        
+    }
     public static enum InstallStatus
     {
         notInstalled,

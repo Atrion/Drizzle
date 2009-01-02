@@ -291,10 +291,10 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation and a lot of pain!
     public static class PlLinkToAgeMsg extends uruobj
     {
-        PlMessage parent;
-        byte u1;
-        PlAgeLinkStruct ageLinkStruct;
-        Urustring ustr;
+        public PlMessage parent;
+        public byte u1;
+        public PlAgeLinkStruct ageLinkStruct;
+        public Urustring ustr;
         
         HsBitVector xbv;
         Wpstr xs1;
@@ -358,8 +358,8 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public static class PlAgeLinkStruct extends uruobj
         {
-            short flags;
-            PlAgeInfoStruct xageinfo;
+            public short flags;
+            public PlAgeInfoStruct xageinfo;
             byte xu1;
             Wpstr xu2;
             Wpstr xu3;
@@ -484,14 +484,14 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public static class PlAgeInfoStruct extends uruobj
         {
-            byte flags;
-            Wpstr xu1;
-            Wpstr xu2;
-            byte[] xu3;
-            Wpstr xu4;
-            int xu5;
-            Wpstr xu6;
-            int xu7;
+            public byte flags;
+            public Wpstr xu1;
+            public Wpstr xu2;
+            public byte[] xu3;
+            public Wpstr xu4;
+            public int xu5;
+            public Wpstr xu6;
+            public int xu7;
             
             public PlAgeInfoStruct(context c)
             {

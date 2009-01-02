@@ -43,6 +43,16 @@ public class Wpstr extends uruobj
         strlen = data.readShort();
         string = data.readBytes(b.Int16ToInt32(strlen));
     }
+    private Wpstr(){}
+    public static Wpstr create(String s)
+    {
+        byte[] str = b.StringToBytes(s);
+        Wpstr result = new Wpstr();
+        if(str.length > 65535) throw new shared.uncaughtexception("String size too large for Wpstr.");
+        result.strlen = (short)str.length;
+        result.string = str;
+        return result;
+    }
     
     public String toString()
     {

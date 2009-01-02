@@ -49,6 +49,7 @@ public class UamConfigGenerator
         else if(filename.equals("Zephyr Cove day")) return "Zephyr_Cove";
         else if(filename.equals("Zephyr Cove night")) return "Zephyr_Cove";
         else if(filename.equals("SuitUp")) return "suitup";
+        else if(filename.equals("The Writers Niche")) return "WNiche";
         //else if(filename.equals("")) return "";
         //else if(filename.equals("")) return "";
         //else if(filename.equals("")) return "";
@@ -87,7 +88,7 @@ public class UamConfigGenerator
         for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, suffix))
         {
             String filename = f.getName();
-            m.msg("Handling "+filename);
+            //m.msg("Handling "+filename);
             int ind = filename.indexOf(sep);
             if(ind==-1)
             {
@@ -108,10 +109,16 @@ public class UamConfigGenerator
             UamConfigData.Age age = data.getAgeOrCreate(agename);
             //age.deletable = "true";
             UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr,true);
+            
+            //If we haven't already created this version, add the default mirror.
+            if(version.sha1.equals(""))
+            {
+                UamConfigData.Age.Version.Mirror mirror = version.getMirrorOrCreate(mirurl);
+            }
+            
             //version.whirlpool = hashstr;
             version.sha1 = hashstr;
             version.archive = "7z";
-            UamConfigData.Age.Version.Mirror mirror = version.getMirrorOrCreate(mirurl);
             
             /*result.append("<age>\n");
             result.append("    <filename>"+agename+"</filename>\n");

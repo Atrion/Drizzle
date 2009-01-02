@@ -31,8 +31,8 @@ public class PlSingleModifier extends uruobj
 {
     //Objheader xheader;
     
-    x001EModifier parent;
-    HsBitVector flagvector;
+    public x001EModifier parent;
+    public HsBitVector flagvector;
     //int u1;
     //int flag;
     

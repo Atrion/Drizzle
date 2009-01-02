@@ -122,7 +122,8 @@ public class UamGui
         agelist.setCellRenderer(new javax.swing.ListCellRenderer() {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 String agename = (String)value;
-                InstallStatus status = Uam.ageInstallStatus.get(agename);
+                //InstallStatus status = Uam.ageInstallStatus.get(agename).installationStatus;
+                InstallStatus status = Uam.installInfo.ages.get(agename).installationStatus;
 
                 AgeListItem ali = new AgeListItem(agename, status);
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
@@ -157,6 +158,19 @@ public class UamGui
                 //if(cellHasFocus) label.setBorder(javax.swing.BorderFactory.createLineBorder(Color.pink));
                 return label;*/
 
+            }
+        });
+        verlist.setCellRenderer(new javax.swing.ListCellRenderer() {
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                //Agename is really version here.
+                Object o = agelist.getSelectedValue();
+                String agename = (String)o;
+                String version = (String)value;
+                InstallStatus status = Uam.installInfo.ages.get(agename).versions.get(version);
+
+                AgeListItem ali = new AgeListItem(version, status);
+                if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                return ali;
             }
         });
         verlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -239,10 +253,11 @@ public class UamGui
         Vector<String> availableAges = Uam.ageList.getAllAgeNames();
         
         HashMap<String,Vector<String>> ageversions = Uam.ageList.getConfigObject().ageversions;
-        Uam.ageInstallStatus = new HashMap();
+        //Uam.ageInstallStatus = new HashMap();
+        Uam.installInfo = new Uam.InstallInfo();
         
         
-        for(String age: availableAges)
+        /*for(String age: availableAges)
         {
             if(FileUtils.Exists(potsfolder+"/dat/"+age+".age"))
             {
@@ -283,7 +298,66 @@ public class UamGui
             {
                 Uam.ageInstallStatus.put(age, InstallStatus.notInstalled);
             }
-        }
+        }*/
+        
+        //find cached versions.
+        for(String age: availableAges)
+        {
+            boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
+            boolean isInCache = false;
+            boolean haslatest = false;
+            
+            Uam.AgeInstallInfo ageinfo = Uam.installInfo.getOrCreateAge(age);
+            
+            Vector<String> versions = ageversions.get(age);
+            if(versions!=null)
+            {
+                for(int i=0;i<versions.size();i++)
+                {
+                    String version = versions.get(i);
+                    boolean hasversion = FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+uam.Uam.versionSep+version+".7z");
+                    ageinfo.versions.put(version, hasversion?InstallStatus.latestVersionInCache:InstallStatus.notInstalled);
+                    if(hasversion)
+                    {
+                        isInCache = true;
+                        if(i==0) haslatest = true;
+                    }
+                }
+            }
+            else
+            {
+                m.warn("Age has no available versions.");
+            }
+            
+            //assign age installation info.
+            if(hasagefile)
+            {
+                if(isInCache)
+                {
+                    if(haslatest)
+                    {
+                        //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
+                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
+                    }
+                    else
+                    {
+                        //Uam.ageInstallStatus.put(age, InstallStatus.nonLatestVersionInCache);
+                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
+                    }
+                }
+                else
+                {
+                    //Uam.ageInstallStatus.put(age, InstallStatus.notInCache);
+                    Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInCache;
+                }
+            }
+            else
+            {
+                //Uam.ageInstallStatus.put(age, InstallStatus.notInstalled);
+                Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInstalled;
+            }
+            
+         }
         
     }
     public static void RefreshInfo(String potsfolder2)

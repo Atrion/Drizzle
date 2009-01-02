@@ -32,12 +32,12 @@ public class PlResponderModifier extends uruobj
 {
     //Objheader xheader;
     
-    PlSingleModifier parent;
-    byte count;
-    PlResponderState[] messages;
-    byte state;
-    byte enabled;
-    byte flags;
+    public PlSingleModifier parent;
+    public byte count;
+    public PlResponderState[] messages;
+    public byte state;
+    public byte enabled;
+    public byte flags;
     
     public PlResponderModifier(context c) throws readexception
     {
@@ -62,12 +62,12 @@ public class PlResponderModifier extends uruobj
     
     public static class PlResponderState extends uruobj
     {
-        byte numCallbacks;
-        byte switchToState;
-        byte count;
-        PlResponderCmd[] commands;
-        byte count2;
-        byte[][] u1;
+        public byte numCallbacks;
+        public byte switchToState;
+        public byte count;
+        public PlResponderCmd[] commands;
+        public byte count2;
+        public byte[][] u1;
         
         public PlResponderState(context c) throws readexception
         {
@@ -111,8 +111,8 @@ public class PlResponderModifier extends uruobj
     
     public static class PlResponderCmd extends uruobj
     {
-        PrpTaggedObject message;
-        byte waitOn;
+        public PrpTaggedObject message;
+        public byte waitOn;
         
         public PlResponderCmd(context c) throws readexception
         {

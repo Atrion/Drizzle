@@ -104,8 +104,15 @@ public class moul
         }
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
         {
+            //change pythonfilemod from Myst to MystMystV.
             x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookMyst", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(4).xString = Bstr.createFromString("MystMystV");
+            
+            //change respondermodifier from Myst to MystMystV.
+            PlResponderModifier rm = prp.findObject("cRespLinkOutMyst", Typeid.plResponderModifier).castTo();
+            PrpMessage.PlLinkToAgeMsg ltam = rm.messages[0].commands[1].message.castTo();
+            ltam.ageLinkStruct.xageinfo.xu1 = Wpstr.create("MystMystV");
+            ltam.ageLinkStruct.xageinfo.xu2 = Wpstr.create("MystMystV");
             int dummy=0;
         }
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
