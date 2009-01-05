@@ -30,7 +30,7 @@ import shared.m;
 import java.util.HashMap;
 import java.io.File;
 
-public class UamConfig
+/*public class UamConfig
 {
     Document doc;
     //Element root;
@@ -40,10 +40,10 @@ public class UamConfig
     UamConfigObject uco = null;
     Vector<String> allAgeNames = null;
     
-    /*public String getWhirlpool(String agename, String version)
-    {
-        return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
-    }*/
+    //public String getWhirlpool(String agename, String version)
+    //{
+    //    return this.getString("/uam/age[filename='"+agename+"']/version[name='"+version+"']/whirlpool");
+    //}
     public String getAgeInfo(String agename)
     {
         return this.getString("/uam/age[filename='"+agename+"']/info");
@@ -242,4 +242,4 @@ public class UamConfig
     }
     
     
-}
+}*/

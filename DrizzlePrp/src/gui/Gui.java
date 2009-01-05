@@ -444,6 +444,7 @@ public class Gui extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jLabel50 = new javax.swing.JLabel();
         AgeInfoLabel = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -1076,16 +1077,17 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton124);
-        jButton124.setBounds(70, 140, 120, 36);
+        jButton124.setBounds(70, 150, 120, 36);
 
-        jLabel36.setText("This is in beta; please report bugs and suggestions!  Help can be found under the \"Help\" tab.");
+        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel36.setText("(Help can be found under the \"Help\" tab.)");
         jPanel39.add(jLabel36);
-        jLabel36.setBounds(10, 10, 530, 16);
+        jLabel36.setBounds(160, 10, 290, 16);
 
         jScrollPane6.setViewportView(jList1);
 
         jPanel39.add(jScrollPane6);
-        jScrollPane6.setBounds(30, 180, 160, 220);
+        jScrollPane6.setBounds(30, 190, 160, 210);
 
         jScrollPane7.setViewportView(jList2);
 
@@ -1099,7 +1101,7 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel38.setText("Ages:");
         jPanel39.add(jLabel38);
-        jLabel38.setBounds(30, 150, 31, 16);
+        jLabel38.setBounds(30, 160, 31, 16);
 
         jLabel39.setText("Versions:");
         jPanel39.add(jLabel39);
@@ -1113,7 +1115,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton127);
-        jButton127.setBounds(460, 250, 80, 36);
+        jButton127.setBounds(460, 260, 80, 36);
 
         jButton129.setText("Delete");
         jButton129.setEnabled(false);
@@ -1123,7 +1125,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel39.add(jButton129);
-        jButton129.setBounds(460, 280, 80, 36);
+        jButton129.setBounds(460, 290, 80, 36);
 
         jLabel40.setText("Mirrors:");
         jPanel39.add(jLabel40);
@@ -1175,7 +1177,7 @@ public class Gui extends javax.swing.JFrame {
             jButton136.setBounds(380, 20, 120, 36);
 
             jPanel39.add(jPanel42);
-            jPanel42.setBounds(10, 30, 510, 100);
+            jPanel42.setBounds(10, 40, 510, 100);
 
             jButton135.setText("Launch Uru");
             jButton135.addActionListener(new java.awt.event.ActionListener() {
@@ -1209,7 +1211,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel49.setBounds(10, 80, 248, 16);
 
             jPanel39.add(jPanel43);
-            jPanel43.setBounds(540, 140, 290, 110);
+            jPanel43.setBounds(540, 150, 290, 110);
 
             jPanel44.setBorder(javax.swing.BorderFactory.createTitledBorder("Automatically download list?"));
             jPanel44.setLayout(null);
@@ -1231,7 +1233,7 @@ public class Gui extends javax.swing.JFrame {
             jRadioButton7.setBounds(10, 70, 250, 20);
 
             jPanel39.add(jPanel44);
-            jPanel44.setBounds(540, 30, 290, 100);
+            jPanel44.setBounds(540, 40, 290, 100);
 
             jLabel50.setText("Info:");
             jPanel39.add(jLabel50);
@@ -1240,6 +1242,11 @@ public class Gui extends javax.swing.JFrame {
             AgeInfoLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
             jPanel39.add(AgeInfoLabel);
             AgeInfoLabel.setBounds(60, 410, 760, 16);
+
+            jLabel51.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+            jLabel51.setText("Uru Age Manager!");
+            jPanel39.add(jLabel51);
+            jLabel51.setBounds(20, 10, 140, 16);
 
             tabsState3.addTab("UAM", jPanel39);
 
@@ -3757,6 +3764,31 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String path = "G:\\prps\\moul\\dat";
+        //String strtofind = "femaleamazed";
+        String strtofind = "blowkiss";
+        for(java.io.File f: new java.io.File(path).listFiles())
+        {
+            if(f.isFile())
+            {
+                //m.msg(f.getName());
+                byte[] data = shared.FileUtils.ReadFile(f);
+                for(int i=0;i<data.length;i++)
+                {
+                    //data[i] = b.not(data[i]);
+                }
+                String data2 = b.BytesToString(data);
+                String data3 = data2.toLowerCase();
+                int ind = data3.indexOf(strtofind);
+                if(ind!=-1)
+                {
+                    m.msg("found str at pos: "+Integer.toString(ind));
+                    m.msg("in file: "+f.getName());
+                }
+            }
+        }
+        if(true)return;
+    
         //tests
         File file = new File(this.getSelectedFilename());
         byte[] filecontents = FileUtils.ReadFile(file.getAbsoluteFile());
@@ -5077,7 +5109,8 @@ private void jButton134ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton134ActionPerformed
 
 private void jButton133ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton133ActionPerformed
-    uam.UamConfigGenerator.generateStatusFile(this.textfieldState42.getText());
+    //uam.UamConfigGenerator.generateStatusFile(this.textfieldState42.getText());
+    uam.UamConfigNew.generateStatusFile(this.textfieldState42.getText());
 }//GEN-LAST:event_jButton133ActionPerformed
 
 private void textfieldState38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState38ActionPerformed
@@ -5361,6 +5394,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

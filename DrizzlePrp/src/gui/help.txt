@@ -1,15 +1,6 @@
 Welcome to Drizzle!
 
 
-To convert Myst 5 Ages the simple way:
---------------------------------------
-1) Go to the Simplicity tab, then the MystV tab.
-2) Select the folder where you installed Myst 5. (By default, it's "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
-3) Select the folder where you installed PathOfTheShell/CompleteChronicles. (By default it's "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
-4) Click the "Start..." button.
-5) In the PathOfTheShell/CompleteChronicles folder, run SoundDecompress.exe. (SoundDecompress.exe may crash if you haven't run Uru at least once.)
-
-
 To use UAM (UruAgeManager):
 ---------------------------
 1) Set the "Pots folder" to wherever you installed PathOfTheShell or CompleteChronicles. (By default it's "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
@@ -17,6 +8,15 @@ To use UAM (UruAgeManager):
 3) Select the Age you want, and the latest version and mirror will be chosen for you.
 4) Click "Download" to download and install the Age!
 5) Optional: you can also delete Ages, but you shouldn't ever need to.
+
+
+To convert Myst 5 Ages the simple way:
+--------------------------------------
+1) Go to the Simplicity tab, then the MystV tab.
+2) Select the folder where you installed Myst 5. (By default, it's "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
+3) Select the folder where you installed PathOfTheShell/CompleteChronicles. (By default it's "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
+4) Click the "Start..." button.
+5) In the PathOfTheShell/CompleteChronicles folder, run SoundDecompress.exe. (SoundDecompress.exe may crash if you haven't run Uru at least once.)
 
 
 To use DeepView:
@@ -54,7 +54,8 @@ Project Info:
 -------------
 SVN: https://alcugs.almlys.org/svn/drizzle/
 Sourceforge: http://sourceforge.net/projects/drizzle/
-Authors(not a complete list):
+Contributers(not a complete list):
+  Old Wolle: Age collection and mirroring
   H'astin: flymode
   Race: Myst5 footstep regions
   Dustin(aka ddb174): conversion

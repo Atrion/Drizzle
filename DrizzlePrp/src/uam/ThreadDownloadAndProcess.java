@@ -137,7 +137,12 @@ public class ThreadDownloadAndProcess extends Thread
             //callback.callback(null);
             m.status("Age installed!");
 
-            gui.UamGui.RefreshInfo(potsfolder);
+            javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+                    public void run() {
+                        gui.UamGui.RefreshInfo(potsfolder);
+                    }
+                });
+            //gui.UamGui.RefreshInfo(potsfolder);
             
             wasSuccessful = true;
             

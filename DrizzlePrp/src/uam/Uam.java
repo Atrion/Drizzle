@@ -19,7 +19,7 @@ import java.io.File;
 
 public class Uam
 {
-    public static UamConfig ageList;
+    public static UamConfigNew ageList;
     //public static HashMap<String,InstallStatus> ageInstallStatus;
     public static InstallInfo installInfo;
     public static final String ageArchivesFolder = "/agearchives/";
@@ -108,7 +108,7 @@ public class Uam
             m.msg("You have to get the list of available Ages first.");
             return;
         }
-        for(String s: ageList.getAllAgeNames())
+        /*for(String s: ageList.getAllAgeNames())
         {
             m.msg("Age: "+s);
             for(String ver: ageList.getAllVersionsOfAge(s))
@@ -117,6 +117,18 @@ public class Uam
                 for(String mirror: ageList.getAllUrlsOfAgeVersion(s, ver))
                 {
                     m.msg("    Mir: "+mirror);
+                }
+            }
+        }*/
+        for(UamConfigNew.UamConfigData.Age age: ageList.data.ages)
+        {
+            m.msg("Age: "+age.filename);
+            for(UamConfigNew.UamConfigData.Age.Version ver: age.versions)
+            {
+                m.msg("  Ver: "+ver.name);
+                for(UamConfigNew.UamConfigData.Age.Version.Mirror mir: ver.mirrors)
+                {
+                    m.msg("    Mir: "+mir.url);
                 }
             }
         }

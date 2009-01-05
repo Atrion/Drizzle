@@ -11,7 +11,7 @@ import shared.b;
 import java.util.Vector;
 import java.util.ArrayDeque;
 
-public class UamConfigGenerator
+/*public class UamConfigGenerator
 {
     
     private static String filenameToAgename(String filename)
@@ -126,17 +126,17 @@ public class UamConfigGenerator
             version.sha1 = hashstr;
             version.archive = "7z";
             
-            /*result.append("<age>\n");
-            result.append("    <filename>"+agename+"</filename>\n");
-            result.append("    <version>\n");
-            result.append("        <num>"+versionstr+"</num>\n");
-            result.append("        <whirlpool>"+hashstr+"</whirlpool>\n");
-            result.append("        <mirror>\n");
-            result.append("            <url>"+mirurl+"</url>\n");
-            result.append("        </mirror>\n");
-            result.append("    </version>\n");
-            result.append("</age>\n");
-            result.append("\n");*/
+            //result.append("<age>\n");
+            //result.append("    <filename>"+agename+"</filename>\n");
+            //result.append("    <version>\n");
+            //result.append("        <num>"+versionstr+"</num>\n");
+            //result.append("        <whirlpool>"+hashstr+"</whirlpool>\n");
+            //result.append("        <mirror>\n");
+            //result.append("            <url>"+mirurl+"</url>\n");
+            //result.append("        </mirror>\n");
+            //result.append("    </version>\n");
+            //result.append("</age>\n");
+            //result.append("\n");
         }
         //String finalresult = result.toString();
         String finalresult = data.generateXml();
@@ -156,6 +156,7 @@ public class UamConfigGenerator
                 Age age = this.getAgeOrCreate(agename);
                 age.deletable = config.getDeletable(agename);
                 age.info = config.getAgeInfo(agename);
+                age.propername = config.getAgeProperName(agename);
                 for(String version: config.getAllVersionsOfAge(agename))
                 {
                     Age.Version ver = age.getVersionOrCreate(version,false);
@@ -210,7 +211,7 @@ public class UamConfigGenerator
             {
                 s.append("\t<age>\n");
                 s.append("\t\t<filename>"+filename+"</filename>\n");
-                s.append("\t\t<name>"+propername+"</name>");
+                s.append("\t\t<name>"+propername+"</name>\n");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
                 for(Version version: versions) version.generateXml(s);
@@ -272,4 +273,4 @@ public class UamConfigGenerator
             }
         }
     }
-}
+}*/

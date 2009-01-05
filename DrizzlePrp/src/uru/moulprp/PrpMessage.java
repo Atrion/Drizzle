@@ -485,13 +485,13 @@ public abstract class PrpMessage extends PrpTaggedObject
         public static class PlAgeInfoStruct extends uruobj
         {
             public byte flags;
-            public Wpstr xu1;
-            public Wpstr xu2;
-            public byte[] xu3;
-            public Wpstr xu4;
-            public int xu5;
-            public Wpstr xu6;
-            public int xu7;
+            public Wpstr ageFilename;
+            public Wpstr ageInstanceName;
+            public byte[] ageInstanceGuid;
+            public Wpstr ageUserDefinedName;
+            public int ageSequenceNumber;
+            public Wpstr ageDescription;
+            public int ageLanguage;
             
             public PlAgeInfoStruct(context c)
             {
@@ -499,31 +499,31 @@ public abstract class PrpMessage extends PrpTaggedObject
                 int test = b.ByteToInt32(flags);
                 if((test&0x01)!=0)
                 {
-                    xu1 = new Wpstr(c);
+                    ageFilename = new Wpstr(c);
                 }
                 if((test&0x02)!=0)
                 {
-                    xu2 = new Wpstr(c);
+                    ageInstanceName = new Wpstr(c);
                 }
                 if((test&0x04)!=0)
                 {
-                    xu3 = c.readBytes(16);
+                    ageInstanceGuid = c.readBytes(16);
                 }
                 if((test&0x08)!=0)
                 {
-                    xu4 = new Wpstr(c);
+                    ageUserDefinedName = new Wpstr(c);
                 }
                 if((test&0x10)!=0)
                 {
-                    xu5 = c.readInt();
+                    ageSequenceNumber = c.readInt();
                 }
                 if((test&0x20)!=0)
                 {
-                    xu6 = new Wpstr(c);
+                    ageDescription = new Wpstr(c);
                 }
                 if((test&0x40)!=0)
                 {
-                    xu7 = c.readInt();
+                    ageLanguage = c.readInt();
                 }
             }
             
@@ -533,31 +533,31 @@ public abstract class PrpMessage extends PrpTaggedObject
                 int test = b.ByteToInt32(flags);
                 if((test&0x01)!=0)
                 {
-                    xu1.compile(c);
+                    ageFilename.compile(c);
                 }
                 if((test&0x02)!=0)
                 {
-                    xu2.compile(c);
+                    ageInstanceName.compile(c);
                 }
                 if((test&0x04)!=0)
                 {
-                    c.writeBytes(xu3);
+                    c.writeBytes(ageInstanceGuid);
                 }
                 if((test&0x08)!=0)
                 {
-                    xu4.compile(c);
+                    ageUserDefinedName.compile(c);
                 }
                 if((test&0x10)!=0)
                 {
-                    c.writeInt(xu5);
+                    c.writeInt(ageSequenceNumber);
                 }
                 if((test&0x20)!=0)
                 {
-                    xu6.compile(c);
+                    ageDescription.compile(c);
                 }
                 if((test&0x40)!=0)
                 {
-                    c.writeInt(xu7);
+                    c.writeInt(ageLanguage);
                 }
             }
         }

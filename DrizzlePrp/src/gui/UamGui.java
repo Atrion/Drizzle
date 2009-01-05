@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import shared.b;
 import javax.swing.JLabel;
+import uam.UamConfigNew;
+import java.util.ArrayDeque;
 
 public class UamGui
 {
@@ -253,9 +255,9 @@ public class UamGui
         String welcomeMessage = Uam.ageList.getWelcomeMessage();
         m.msg(welcomeMessage);
         
-        Vector<String> availableAges = Uam.ageList.getAllAgeNames();
+        //Vector<String> availableAges = Uam.ageList.getAllAgeNames();
         
-        HashMap<String,Vector<String>> ageversions = Uam.ageList.getConfigObject().ageversions;
+        //HashMap<String,Vector<String>> ageversions = Uam.ageList.getConfigObject().ageversions;
         //Uam.ageInstallStatus = new HashMap();
         Uam.installInfo = new Uam.InstallInfo();
         
@@ -304,33 +306,40 @@ public class UamGui
         }*/
         
         //find cached versions.
-        for(String age: availableAges)
+        //for(String age: availableAges)
+        for(UamConfigNew.UamConfigData.Age ageobj: Uam.ageList.data.ages)
         {
+            String age = ageobj.filename;
             boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
             boolean isInCache = false;
             boolean haslatest = false;
             
             Uam.AgeInstallInfo ageinfo = Uam.installInfo.getOrCreateAge(age);
             
-            Vector<String> versions = ageversions.get(age);
-            if(versions!=null)
-            {
-                for(int i=0;i<versions.size();i++)
+            //Vector<String> versions = ageversions.get(age);
+            //if(versions!=null)
+            //{
+                //for(int i=0;i<versions.size();i++)
+                boolean first = true;
+                for(UamConfigNew.UamConfigData.Age.Version verobj: ageobj.versions)
                 {
-                    String version = versions.get(i);
+                    //String version = versions.get(i);
+                    String version = verobj.name;
                     boolean hasversion = FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+uam.Uam.versionSep+version+".7z");
                     ageinfo.versions.put(version, hasversion?InstallStatus.latestVersionInCache:InstallStatus.notInstalled);
                     if(hasversion)
                     {
                         isInCache = true;
-                        if(i==0) haslatest = true;
+                        //if(i==0) haslatest = true;
+                        if(first) haslatest = true;
                     }
+                    first = false;
                 }
-            }
-            else
-            {
-                m.warn("Age has no available versions.");
-            }
+            //}
+            //else
+            //{
+            //    m.warn("Age has no available versions.");
+            //}
             
             //assign age installation info.
             if(hasagefile)
@@ -366,7 +375,8 @@ public class UamGui
     public static void RefreshInfo(String potsfolder2)
     {
         //list Ages...
-        final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
+        //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
+        final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
         GetLocalInfo(potsfolder2);
         Object selection = agelist.getSelectedValue();
         agelist.setModel(new javax.swing.ListModel() {
@@ -374,7 +384,8 @@ public class UamGui
                 return ages.size();
             }
             public Object getElementAt(int index) {
-                return ages.get(index);
+                //return ages.get(index);
+                return ages.get(index).filename;
             }
             public void addListDataListener(ListDataListener l) {}
             public void removeListDataListener(ListDataListener l) {}
@@ -409,7 +420,7 @@ public class UamGui
             m.err("Couldn't find cached list.");
             return;
         }
-        uam.UamConfig ageList = new uam.UamConfig(in);
+        uam.UamConfigNew ageList = new uam.UamConfigNew(in);
         uam.Uam.ageList = ageList;
         RefreshInfo(potsfolder);
     }
@@ -430,7 +441,8 @@ public class UamGui
                 //parse config file.
                 byte[] result = (byte[])arg;
                 ByteArrayInputStream in = new ByteArrayInputStream(result);
-                uam.UamConfig ageList = new uam.UamConfig(in);
+                //uam.UamConfigNew wha = new uam.UamConfigNew(in);
+                uam.UamConfigNew ageList = new uam.UamConfigNew(in);
                 //list Ages...
                 //return ageList.getAllAgeNames();
                 //uam.UamConfig config = (uam.UamConfig)arg;
@@ -516,13 +528,16 @@ public class UamGui
             deletebutton.setEnabled(false);
             AgeLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
         }
-        final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
+        //final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
+        //final Vector<UamConfigNew.UamConfigData.Age.Version> vers = Uam.ageList.data.getAge(age).versions;
+        final Vector<UamConfigNew.UamConfigData.Age.Version> vers = Uam.ageList.getAllVersions(age);
         verlist.setModel(new javax.swing.ListModel() {
             public int getSize() {
                 return vers.size();
             }
             public Object getElementAt(int index) {
-                return vers.get(index);
+                //return vers.get(index);
+                return vers.get(index).name;
             }
             public void addListDataListener(ListDataListener l) {}
             public void removeListDataListener(ListDataListener l) {}
@@ -541,13 +556,15 @@ public class UamGui
         //m.msg("updating mirror list.");
         final String age2 = age;
         final String ver2 = ver;
-        final Vector<String> mirs = uam.Uam.ageList.getAllUrlsOfAgeVersion(age, ver);
+        //final Vector<String> mirs = uam.Uam.ageList.getAllUrlsOfAgeVersion(age, ver);
+        final Vector<UamConfigNew.UamConfigData.Age.Version.Mirror> mirs = Uam.ageList.getAllMirrors(age, ver);
         mirlist.setModel(new javax.swing.ListModel() {
             public int getSize() {
                 return mirs.size();
             }
             public Object getElementAt(int index) {
-                return mirs.get(index);
+                //return mirs.get(index);
+                return mirs.get(index).url;
             }
             public void addListDataListener(ListDataListener l) {}
             public void removeListDataListener(ListDataListener l) {}
