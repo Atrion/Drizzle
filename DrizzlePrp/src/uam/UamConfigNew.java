@@ -253,8 +253,6 @@ public class UamConfigNew
             String versionstr = filename.substring(ind+sep.length(),filename.length()-suffix.length());
             versionstr = filenameToVersionname(name,versionstr);
             //byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
-            byte[] hash = shared.CryptHashes.GetHash(f.getAbsolutePath(), shared.CryptHashes.Hashtype.sha1);
-            String hashstr = b.BytesToHexString(hash);
             //String server = "http://dustin.homeunix.net:88/uam/ages/";
             String server = "http://www.the-ancient-city.de/uru-ages/";
             String mirurl = server+filename;
@@ -273,6 +271,10 @@ public class UamConfigNew
             {
                 version.name = versionstr;
                 version.archive = "7z";
+                
+                //calculate hash:
+                byte[] hash = shared.CryptHashes.GetHash(f.getAbsolutePath(), shared.CryptHashes.Hashtype.sha1);
+                String hashstr = b.BytesToHexString(hash);
                 version.sha1 = hashstr;
                 
                 //add mirror:
