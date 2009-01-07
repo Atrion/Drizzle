@@ -28,13 +28,14 @@ public class sevenzip
 {
     public static void delete(String filename, String outputfolder)
     {
+        MyRandomAccessFile istream = null;
         try
         {
             //part of the hack to set outputfolder:
             String root = outputfolder+"/";
             
             //use this for files on disk.
-            MyRandomAccessFile istream = new MyRandomAccessFile(filename,"r");
+            istream = new MyRandomAccessFile(filename,"r");
 
             IInArchive archive = new Handler();
             int result = archive.Open(istream);
@@ -92,6 +93,14 @@ public class sevenzip
         {
             m.err("Error during 7zip deletion.");
         }
+        finally
+        {
+            try
+            {
+                if(istream!=null) istream.close();
+            }
+            catch(Exception e){}
+        }
     }
     public static long getTotalSize(IInArchive archive)
     {
@@ -106,13 +115,14 @@ public class sevenzip
     }
     public static boolean extract(String filename, String outputfolder)
     {
+        MyRandomAccessFile istream = null;
         try
         {
             //part of the hack to set outputfolder:
             String root = outputfolder+"/";
             
             //use this for files on disk.
-            MyRandomAccessFile istream = new MyRandomAccessFile(filename,"r");
+            istream = new MyRandomAccessFile(filename,"r");
 
             IInArchive archive = new Handler();
             int result = archive.Open(istream);
@@ -124,10 +134,12 @@ public class sevenzip
             
             try
             {
-                long bytesneeded = getTotalSize(archive) + 10000000; //give 10MB extra space to be safe.
-                File outputfile = new File(root);
-                long bytesavailable = outputfile.getUsableSpace();
-                if(bytesneeded>bytesavailable)
+                //long bytesneeded = getTotalSize(archive) + 10000000; //give 10MB extra space to be safe.
+                //File outputfile = new File(root);
+                //long bytesavailable = outputfile.getUsableSpace();
+                //if(bytesneeded>bytesavailable)
+                long bytesneeded = getTotalSize(archive);
+                if(!FileUtils.HasFreeSpace(root, bytesneeded))
                 {
                     m.err("It doesn't appear that there is enough free space available.");
                     return false;
@@ -179,6 +191,14 @@ public class sevenzip
             }
             m.err("Error during 7zip extraction.");
             return false;
+        }
+        finally
+        {
+            try
+            {
+                if(istream!=null) istream.close();
+            }
+            catch(Exception e){}
         }
         return true;
     }

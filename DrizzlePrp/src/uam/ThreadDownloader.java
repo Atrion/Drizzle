@@ -29,7 +29,8 @@ public class ThreadDownloader extends Thread
     boolean doCancel = false;
     boolean doPause = false;
     boolean wasSuccessful = false;
-    long freespace = -1;
+    //long freespace = -1;
+    String outputfilename = null;
     GuiModal window;
     
     public static boolean downloadAsFile(String url, String filename)
@@ -40,7 +41,10 @@ public class ThreadDownloader extends Thread
             File f = new File(filename);
             out = new FileOutputStream(filename);
             ThreadDownloader td = new ThreadDownloader(url, out);
-            td.freespace = f.getUsableSpace();
+            //td.freespace = f.getUsableSpace();
+            //td.outputfilename = filename;
+            td.outputfilename = new File(filename).getParent();
+            shared.FileUtils.CreateFolder(td.outputfilename);
             td.start();
             td.joinEvenIfInterrupted();
             return td.wasSuccessful;
@@ -193,9 +197,11 @@ public class ThreadDownloader extends Thread
                 {
                     m.msg("Server doesn't support progress status.");
                 }
-                else if(this.freespace!=-1)
+                //else if(this.freespace!=-1)
+                else if(this.outputfilename!=null)
                 {
-                    if(contentlength+10000000>this.freespace) //give 10MB slack.
+                    //if(contentlength+10000000>this.freespace) //give 10MB slack.
+                    if(!shared.FileUtils.HasFreeSpace(outputfilename, contentlength))
                     {
                         throw new DownloadErrorException("There doesn't appear to be enough disk space to download this.");
                     }

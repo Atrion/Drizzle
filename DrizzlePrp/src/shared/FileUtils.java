@@ -38,10 +38,23 @@ public class FileUtils {
     //only properly handles files less than 4GB.
     
     private static String initialWorkingDirectory; //you may have to call some function in FileUtils on startup for this to be correct.
+    private static final long freespaceMargin = 10000000;
     
     static
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
+    }
+    
+    public static boolean HasFreeSpace(String filename, long minimum)
+    {
+        return HasFreeSpace(new File(filename), minimum);
+    }
+    
+    public static boolean HasFreeSpace(File file, long minimum)
+    {
+        long usablespace = file.getUsableSpace();
+        boolean result = usablespace > minimum + freespaceMargin;
+        return result;
     }
     
     public static String GetInitialWorkingDirectory()

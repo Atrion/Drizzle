@@ -114,6 +114,7 @@ public class ThreadDownloadAndProcess extends Thread
             //check integrity.
             m.status("Checking integrity...");
             //byte[] hash = shared.CryptHashes.GetWhirlpool(outputfile);
+              //FileUtils.DeleteFile(outputfile);
             byte[] hash = shared.CryptHashes.GetHash(outputfile, shared.CryptHashes.Hashtype.sha1);
             String hashstr = b.BytesToHexString(hash);
             boolean isgood = whirlpool.equals(hashstr);
@@ -163,9 +164,10 @@ public class ThreadDownloadAndProcess extends Thread
             
             if(potsfolder!=null)
             {
-                if(new File(potsfolder+uam.Uam.ageArchivesFolder).getUsableSpace()>result.length+1000000)
+                FileUtils.CreateFolder(potsfolder+uam.Uam.ageArchivesFolder);
+                //if(new File(potsfolder+uam.Uam.ageArchivesFolder).getUsableSpace()>result.length+1000000)
+                if(FileUtils.HasFreeSpace(potsfolder+uam.Uam.ageArchivesFolder, result.length))
                 {
-                    FileUtils.CreateFolder(potsfolder+uam.Uam.ageArchivesFolder);
                     FileUtils.WriteFile(potsfolder+uam.Uam.ageArchivesFolder+uam.Uam.statusFilename, result);
                 }
                 else
