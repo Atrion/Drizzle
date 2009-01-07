@@ -61,7 +61,8 @@ public class Uam
     }
     public static void launchUru()
     {
-        String potsfolder = getPotsFolder()+"/";
+        shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");
+        /*String potsfolder = getPotsFolder()+"/";
         if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
         String[] command = new String[]{
             potsfolder+"UruSetup.exe",
@@ -75,9 +76,12 @@ public class Uam
         catch(java.io.IOException e)
         {
             m.err("Unable to launch Uru.");
-        }
+        }*/
 
-                
+    }
+    public static void launchSoundDecompress()
+    {
+        shared.Exec.LaunchProgram(getPotsFolder()+"/"+"SoundDecompress.exe", "SoundDecompress");
     }
     public static String getPotsFolder()
     {

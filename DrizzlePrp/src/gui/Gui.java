@@ -445,6 +445,7 @@ public class Gui extends javax.swing.JFrame {
         jLabel50 = new javax.swing.JLabel();
         AgeInfoLabel = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
+        jButton140 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -1079,7 +1080,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel39.add(jButton124);
         jButton124.setBounds(70, 150, 120, 36);
 
-        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12));
         jLabel36.setText("(Help can be found under the \"Help\" tab.)");
         jPanel39.add(jLabel36);
         jLabel36.setBounds(160, 10, 290, 16);
@@ -1186,7 +1187,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel39.add(jButton135);
-            jButton135.setBounds(720, 290, 110, 36);
+            jButton135.setBounds(690, 290, 140, 36);
 
             jPanel43.setBorder(javax.swing.BorderFactory.createTitledBorder("Legend"));
             jPanel43.setLayout(null);
@@ -1243,10 +1244,19 @@ public class Gui extends javax.swing.JFrame {
             jPanel39.add(AgeInfoLabel);
             AgeInfoLabel.setBounds(60, 410, 760, 16);
 
-            jLabel51.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+            jLabel51.setFont(new java.awt.Font("Dialog", 3, 12));
             jLabel51.setText("Uru Age Manager!");
             jPanel39.add(jLabel51);
             jLabel51.setBounds(20, 10, 140, 16);
+
+            jButton140.setText("SoundDecompress");
+            jButton140.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton140ActionPerformed(evt);
+                }
+            });
+            jPanel39.add(jButton140);
+            jButton140.setBounds(690, 320, 140, 36);
 
             tabsState3.addTab("UAM", jPanel39);
 
@@ -5143,6 +5153,10 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         m.msg(Integer.toString(i));
     }
 }//GEN-LAST:event_jButton139ActionPerformed
+
+private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton140ActionPerformed
+    uam.Uam.launchSoundDecompress();
+}//GEN-LAST:event_jButton140ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5253,6 +5267,7 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton138;
     private javax.swing.JButton jButton139;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton140;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
