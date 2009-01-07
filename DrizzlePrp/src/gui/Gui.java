@@ -1088,17 +1088,17 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jList1);
 
         jPanel39.add(jScrollPane6);
-        jScrollPane6.setBounds(30, 190, 160, 210);
+        jScrollPane6.setBounds(30, 190, 180, 210);
 
         jScrollPane7.setViewportView(jList2);
 
         jPanel39.add(jScrollPane7);
-        jScrollPane7.setBounds(210, 200, 250, 120);
+        jScrollPane7.setBounds(220, 200, 240, 120);
 
         jScrollPane12.setViewportView(jList3);
 
         jPanel39.add(jScrollPane12);
-        jScrollPane12.setBounds(210, 350, 250, 50);
+        jScrollPane12.setBounds(220, 350, 240, 50);
 
         jLabel38.setText("Ages:");
         jPanel39.add(jLabel38);
@@ -1106,7 +1106,7 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel39.setText("Versions:");
         jPanel39.add(jLabel39);
-        jLabel39.setBounds(210, 180, 60, 16);
+        jLabel39.setBounds(220, 180, 60, 16);
 
         jButton127.setText("Download");
         jButton127.setEnabled(false);
@@ -1130,7 +1130,7 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel40.setText("Mirrors:");
         jPanel39.add(jLabel40);
-        jLabel40.setBounds(210, 330, 41, 16);
+        jLabel40.setBounds(220, 330, 41, 16);
 
         jPanel42.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Settings"));
         jPanel42.setLayout(null);

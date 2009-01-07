@@ -95,6 +95,16 @@ public class UamGui
                     img = unknown;
                     break;
             }
+            
+            /*int h = this.getHeight();
+            String str = agename;
+            int offset = 20;
+            
+            int w = this.getFontMetrics(this.getFont()).stringWidth(str) + offset;
+            this.setSize(w,h);
+            this.setMinimumSize(new java.awt.Dimension(w, h));*/
+            
+            
         }
         /*@Override public void repaint()
         {
@@ -104,12 +114,31 @@ public class UamGui
         @Override public void paintComponent(java.awt.Graphics g)
         {
             super.paintComponent(g);
-            this.setForeground(Color.BLUE);
-            this.setBackground(Color.GREEN);
+            //this.setForeground(Color.BLUE);
+            //this.setBackground(Color.GREEN);
             int h = this.getHeight();
-            g.drawString(agename, 20, h-3);
+            String str = agename;
+            int offset = 20;
+            
+            //int w = g.getFontMetrics().stringWidth(str) + offset;
+            //this.setSize(w,h);
+            //this.setMinimumSize(new java.awt.Dimension(w, h));
+            
+            g.drawString(str, offset, h-3);
             if(img!=null) g.drawImage(img, 0, 0, null);
+            //javax.swing.JList a;
+            
         }
+        /*@Override public java.awt.Dimension getSize()
+        {
+            int h = this.getHeight();
+            String str = agename;
+            int offset = 20;
+            
+            int w = 300;
+            return new java.awt.Dimension(h,w);
+            this.
+        }*/
     }
     public static void init() //called by swing thread
     {
