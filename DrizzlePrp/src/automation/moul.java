@@ -83,8 +83,8 @@ public class moul
         
         shared.State.AllStates.pop();
         m.state.pop();
-        //m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!");
-        m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
+        m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
+        //m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
         m.status("Conversion completed!");
     }
     

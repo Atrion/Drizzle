@@ -394,6 +394,7 @@ public class Gui extends javax.swing.JFrame {
         jButton97 = new javax.swing.JButton();
         jButton98 = new javax.swing.JButton();
         checkboxState23 = new shared.State.CheckboxState();
+        jButton140 = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -402,6 +403,7 @@ public class Gui extends javax.swing.JFrame {
         jButton114 = new javax.swing.JButton();
         jButton115 = new javax.swing.JButton();
         jButton116 = new javax.swing.JButton();
+        jButton141 = new javax.swing.JButton();
         jPanel40 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         textfieldState40 = new shared.State.TextfieldState();
@@ -411,6 +413,7 @@ public class Gui extends javax.swing.JFrame {
         jButton131 = new javax.swing.JButton();
         jButton132 = new javax.swing.JButton();
         jLabel43 = new javax.swing.JLabel();
+        jButton142 = new javax.swing.JButton();
         jPanel39 = new javax.swing.JPanel();
         jButton124 = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
@@ -445,7 +448,6 @@ public class Gui extends javax.swing.JFrame {
         jLabel50 = new javax.swing.JLabel();
         AgeInfoLabel = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
-        jButton140 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
@@ -893,6 +895,15 @@ public class Gui extends javax.swing.JFrame {
         jPanel34.add(checkboxState23);
         checkboxState23.setBounds(110, 170, 280, 28);
 
+        jButton140.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
+        jButton140.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton140ActionPerformed(evt);
+            }
+        });
+        jPanel34.add(jButton140);
+        jButton140.setBounds(340, 300, 440, 36);
+
         tabsState1.addTab("MystV", jPanel34);
 
         jLabel31.setText("Moul folder:");
@@ -926,14 +937,26 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        jButton141.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
+        jButton141.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton141ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
         jPanel35.setLayout(jPanel35Layout);
         jPanel35Layout.setHorizontalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
+                .addContainerGap(344, Short.MAX_VALUE)
+                .addComponent(jButton141, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel35Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton114)
                     .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
                         .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel32))
@@ -944,10 +967,7 @@ public class Gui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton115)
-                            .addComponent(jButton116)))
-                    .addGroup(jPanel35Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jButton114)))
+                            .addComponent(jButton116))))
                 .addContainerGap(302, Short.MAX_VALUE))
         );
         jPanel35Layout.setVerticalGroup(
@@ -965,7 +985,8 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton116))
                 .addGap(18, 18, 18)
                 .addComponent(jButton114)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jButton141))
         );
 
         tabsState1.addTab("Moul", jPanel35);
@@ -1003,6 +1024,13 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel43.setText("To include new content (i.e. footsteps), check the box in Simplicity->MystV.");
 
+        jButton142.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
+        jButton142.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton142ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
         jPanel40Layout.setHorizontalGroup(
@@ -1010,23 +1038,25 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel40Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton130)
+                    .addComponent(jLabel43)
                     .addGroup(jPanel40Layout.createSequentialGroup()
                         .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel41)
                             .addComponent(jLabel42))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textfieldState41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textfieldState40, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel43)))
-                    .addGroup(jPanel40Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton130)))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton132)
-                    .addComponent(jButton131))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(textfieldState40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textfieldState41, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton132)
+                            .addComponent(jButton131))))
+                .addContainerGap(213, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel40Layout.createSequentialGroup()
+                .addContainerGap(344, Short.MAX_VALUE)
+                .addComponent(jButton142, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1043,9 +1073,11 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton132))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton130)
-                .addGap(69, 69, 69)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel43)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(jButton142)
+                .addContainerGap())
         );
 
         tabsState1.addTab("Crowthistle", jPanel40);
@@ -1187,7 +1219,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel39.add(jButton135);
-            jButton135.setBounds(690, 290, 140, 36);
+            jButton135.setBounds(690, 380, 140, 36);
 
             jPanel43.setBorder(javax.swing.BorderFactory.createTitledBorder("Legend"));
             jPanel43.setLayout(null);
@@ -1248,15 +1280,6 @@ public class Gui extends javax.swing.JFrame {
             jLabel51.setText("Uru Age Manager!");
             jPanel39.add(jLabel51);
             jLabel51.setBounds(20, 10, 140, 16);
-
-            jButton140.setText("SoundDecompress");
-            jButton140.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton140ActionPerformed(evt);
-                }
-            });
-            jPanel39.add(jButton140);
-            jButton140.setBounds(690, 320, 140, 36);
 
             tabsState3.addTab("UAM", jPanel39);
 
@@ -5155,8 +5178,16 @@ private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton139ActionPerformed
 
 private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton140ActionPerformed
-    uam.Uam.launchSoundDecompress();
+    shared.Exec.LaunchProgram(this.textfieldState23.getText()+"/"+"SoundDecompress.exe", "SoundDecompress");
 }//GEN-LAST:event_jButton140ActionPerformed
+
+private void jButton141ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton141ActionPerformed
+    shared.Exec.LaunchProgram(this.textfieldState34.getText()+"/"+"SoundDecompress.exe", "SoundDecompress");
+}//GEN-LAST:event_jButton141ActionPerformed
+
+private void jButton142ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton142ActionPerformed
+    shared.Exec.LaunchProgram(this.textfieldState41.getText()+"/"+"SoundDecompress.exe", "SoundDecompress");
+}//GEN-LAST:event_jButton142ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5268,6 +5299,8 @@ private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton139;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton140;
+    private javax.swing.JButton jButton141;
+    private javax.swing.JButton jButton142;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
