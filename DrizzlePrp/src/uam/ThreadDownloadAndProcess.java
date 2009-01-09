@@ -123,6 +123,7 @@ public class ThreadDownloadAndProcess extends Thread
                 m.err("Bad file integrity. The Age downloaded wasn't what was expected, perhaps because the version on the server is corrupted.");
                 FileUtils.DeleteFile(outputfile);
                 wasSuccessful = false;
+                modal.hideInvisibleModal();
                 return;
             }
             m.status("File integrity is good!");

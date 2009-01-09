@@ -239,6 +239,7 @@
     </Container>
     <Container class="shared.State.TabsState" name="tabsState3">
       <Properties>
+        <Property name="selectedIndex" type="int" value="1"/>
         <Property name="name" type="java.lang.String" value="mainTabs" noResource="true"/>
       </Properties>
 

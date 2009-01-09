@@ -3717,6 +3717,8 @@ public class Gui extends javax.swing.JFrame {
 
                         tabsState3.addTab("Help", jPanel25);
 
+                        tabsState3.setSelectedIndex(1);
+
                         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                         getContentPane().setLayout(layout);
                         layout.setHorizontalGroup(
