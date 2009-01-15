@@ -1942,7 +1942,7 @@ public class mystAutomation
             }
             
             //add any pages that are authored.
-            /*if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
                 for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
                 {
@@ -1953,7 +1953,7 @@ public class mystAutomation
                     agefile.appendLine("Page="+pagename+","+Integer.toString(pagenum));
                     decryptedData = agefile.saveToBytes();
                 }
-            }*/
+            }
             
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
@@ -2280,7 +2280,7 @@ public class mystAutomation
             }
             
             //add any pages that are authored.
-            /*if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
+            if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
                 //for(Pair<String,Integer> curauthprp: authored.get(agename))
                 for(Pair<String,Integer> curauthprp: authored.get(agename).getAllElements())
@@ -2305,7 +2305,7 @@ public class mystAutomation
                 //    agefile.appendLine("Page=Additions,98");
                 //    decryptedData = agefile.saveToBytes();
                 //}
-            }*/
+            }
             
             
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);

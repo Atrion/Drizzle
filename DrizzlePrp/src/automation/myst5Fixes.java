@@ -32,7 +32,8 @@ public class myst5Fixes
         shared.State.AllStates.setState("translateSmartseeks", false);
         shared.State.AllStates.setState("removeLadders", true);
         shared.State.AllStates.setState("automateMystV", true);
-        shared.State.AllStates.setState("includeAuthoredMaterial", shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial")); //this line doesn't really do anything, just there to remind you.
+        //shared.State.AllStates.setState("includeAuthoredMaterial", shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial")); //this line doesn't really do anything, just there to remind you.
+        shared.State.AllStates.setState("includeAuthoredMaterial", false);
         
         //verify folders
         m.status("Checking the folders you gave...");
