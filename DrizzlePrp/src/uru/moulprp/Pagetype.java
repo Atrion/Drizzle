@@ -72,4 +72,11 @@ public class Pagetype extends uruobj
         if(this.pagetype!=o2.pagetype) return false;
         return true;
     }
+    
+    public Pagetype deepClone()
+    {
+        Pagetype result = new Pagetype();
+        result.pagetype = pagetype;
+        return result;
+    }
 }

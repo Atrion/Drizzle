@@ -1034,7 +1034,9 @@ public class mystAutomation
                 return false;
             }
         }
-
+        
+        HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
+        
         HashMap<String, Integer> prefices = new HashMap<String, Integer>();
         prefices.put("Payiferen", 99);
         prefices.put("Kveer", 98);
@@ -1346,7 +1348,7 @@ public class mystAutomation
             prpfile prp = prpfile.createFromContext(c, readable);
             
             processPrp(prp,agename,agenames,outfolder,infolder);
-            automation.moul.proccessPrp(prp,agename,agenames,outfolder,infolder);
+            automation.moul.proccessPrp(prp,agename,agenames,outfolder,infolder, refReassigns);
             
             //Change pagename, if applicable.
             String oldpagename = prp.header.pagename.toString();

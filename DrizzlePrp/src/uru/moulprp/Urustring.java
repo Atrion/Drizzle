@@ -134,5 +134,17 @@ public class Urustring extends uruobj
         if(!(o instanceof Urustring)) return false;
         return o.toString().equals(this.toString());
     }
+    
+    public int hashCode()
+    {
+        return this.toString().hashCode();
+    }
+    
+    public Urustring deepClone()
+    {
+        Urustring result = new Urustring();
+        result.unencryptedString = b.CopyBytes(unencryptedString);
+        return result;
+    }
 }
 

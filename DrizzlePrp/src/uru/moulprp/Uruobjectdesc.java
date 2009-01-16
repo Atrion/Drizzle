@@ -34,7 +34,7 @@ public class Uruobjectdesc extends uruobj
     //int pageid;
     public Pageid pageid;
     //short pagetype;
-    Pagetype pagetype;
+    public Pagetype pagetype;
     byte xu1;
     //short objecttype;
     public Typeid objecttype;
@@ -158,5 +158,29 @@ public class Uruobjectdesc extends uruobj
         if(!this.pageid.equals(o.pageid)) return false;
         if(!this.pagetype.equals(o.pagetype)) return false;
         return true;
+    }
+    public int hashCode()
+    {
+        int a = this.objectname.hashCode();
+        int b = this.pageid.hashCode();
+        int c = this.objecttype.hashCode();
+        return this.objectname.hashCode() + this.pageid.hashCode() + this.objecttype.hashCode();
+    }
+    public Uruobjectdesc deepClone()
+    {
+        Uruobjectdesc result = new Uruobjectdesc();
+        this.copyInto(result);
+        return result;
+    }
+    public void copyInto(Uruobjectdesc result)
+    {
+        result.flag = flag;
+        result.objectname = objectname.deepClone();
+        result.objectnumber = objectnumber;
+        result.objecttype = objecttype;
+        result.pageid = pageid.deepClone();
+        result.pagetype = pagetype.deepClone();
+        result.xm5unknown = xm5unknown;
+        result.xu1 = xu1;
     }
 }

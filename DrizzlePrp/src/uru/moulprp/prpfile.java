@@ -46,6 +46,11 @@ public class prpfile
     {
         extraobjects = new Vector<PrpRootObject>();
     }
+    public void addObject(PrpRootObject obj)
+    {
+        extraobjects.add(obj);
+        this.mergeExtras();
+    }
     public Uruobjectdesc findDescInIndex(String name, Typeid type)
     {
         for(PrpObjectIndex.ObjectindexObjecttype oiot: objectindex.types)

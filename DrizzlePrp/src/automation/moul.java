@@ -89,10 +89,32 @@ public class moul
         m.status("Conversion completed!");
     }
     
-    public static void proccessPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder)
+    //static HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns;
+    public static void proccessPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {
         String pagename = prp.header.pagename.toString();
-        
+        if(agename.equals("city") && pagename.equals("bahroFlyers_arch"))
+        {
+            //if(refReassigns==null) throw new shared.uncaughtexception("You must convert bahroFlyers_city1 before bahroFlyers_arch in the same run.");
+            //prpdistiller.distiller.updateTextureRefs(prp, refReassigns);
+
+            //prpfile destprp = prp;
+            prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
+            //refReassigns = new HashMap();
+            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+            
+        }
+        if(agename.equals("city") && pagename.equals("bahroFlyers_city1"))
+        {
+            //if(refReassigns==null) throw new shared.uncaughtexception("You must convert bahroFlyers_arch before bahroFlyers_city1 in the same run.");
+            //prpdistiller.distiller.updateTextureRefs(prp, refReassigns);
+            
+            //prpfile destprp = prp;
+            prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
+            //refReassigns = new HashMap();
+            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+            
+        }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {
             //String newname = "Bahro1";

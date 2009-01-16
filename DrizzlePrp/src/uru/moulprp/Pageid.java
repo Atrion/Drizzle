@@ -39,7 +39,7 @@ public class Pageid extends uruobj
     public int suffix;
     
     //context ctx;
-    Integer xOverridePrefix;
+    //Integer xOverridePrefix;
     
     public Pageid(context c)
     {
@@ -91,10 +91,12 @@ public class Pageid extends uruobj
         //suffix = rawdata << 16 >> 16;
          
         //ctx = c;
-        xOverridePrefix = c.sequencePrefix;
-        if(/*ctx.sequencePrefix*/xOverridePrefix!=null)
+        //xOverridePrefix = c.sequencePrefix;
+        //if(/*ctx.sequencePrefix*/xOverridePrefix!=null)
+        if(c.sequencePrefix!=null)
         {
-            prefix = /*ctx.sequencePrefix*/xOverridePrefix;
+            //prefix = /*ctx.sequencePrefix*/xOverridePrefix;
+            prefix = c.sequencePrefix;
             if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence prefix 0x"+Integer.toHexString(prefix));
             // I have no clue why, but this seems to be necessary
             // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
@@ -208,6 +210,17 @@ public class Pageid extends uruobj
         if(this.prefix!=o2.prefix) return false;
         if(this.suffix!=o2.suffix) return false;
         return true;
+    }
+    public int hashCode()
+    {
+        return this.prefix + this.suffix;
+    }
+    public Pageid deepClone()
+    {
+        Pageid result = new Pageid();
+        result.prefix = prefix;
+        result.suffix = suffix;
+        return result;
     }
 
 }

@@ -393,7 +393,6 @@ public class Gui extends javax.swing.JFrame {
         jButton96 = new javax.swing.JButton();
         jButton97 = new javax.swing.JButton();
         jButton98 = new javax.swing.JButton();
-        checkboxState23 = new shared.State.CheckboxState();
         jButton140 = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -412,7 +411,6 @@ public class Gui extends javax.swing.JFrame {
         jButton130 = new javax.swing.JButton();
         jButton131 = new javax.swing.JButton();
         jButton132 = new javax.swing.JButton();
-        jLabel43 = new javax.swing.JLabel();
         jButton142 = new javax.swing.JButton();
         jPanel39 = new javax.swing.JPanel();
         jButton124 = new javax.swing.JButton();
@@ -464,6 +462,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState3 = new shared.State.TextfieldState();
         jLabel10 = new javax.swing.JLabel();
         jButton78 = new javax.swing.JButton();
+        checkboxState23 = new shared.State.CheckboxState();
         jPanel14 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -472,6 +471,7 @@ public class Gui extends javax.swing.JFrame {
         jButton52 = new javax.swing.JButton();
         textfieldState4 = new shared.State.TextfieldState();
         textfieldState5 = new shared.State.TextfieldState();
+        jLabel43 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jButton79 = new javax.swing.JButton();
         checkboxState2 = new shared.State.CheckboxState();
@@ -890,11 +890,6 @@ public class Gui extends javax.swing.JFrame {
         jPanel34.add(jButton98);
         jButton98.setBounds(480, 60, 80, 36);
 
-        checkboxState23.setText("Include new content (i.e. footstep sounds).");
-        checkboxState23.setName("includeAuthoredMaterial"); // NOI18N
-        jPanel34.add(checkboxState23);
-        checkboxState23.setBounds(110, 170, 280, 28);
-
         jButton140.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
         jButton140.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1022,8 +1017,6 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        jLabel43.setText("To include new content (i.e. footsteps), check the box in Simplicity->MystV.");
-
         jButton142.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
         jButton142.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1039,7 +1032,6 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton130)
-                    .addComponent(jLabel43)
                     .addGroup(jPanel40Layout.createSequentialGroup()
                         .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel41)
@@ -1073,9 +1065,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton132))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton130)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel43)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jButton142)
                 .addContainerGap())
         );
@@ -1342,6 +1332,9 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
+            checkboxState23.setText("Include new content (i.e. footstep sounds).");
+            checkboxState23.setName("includeAuthoredMaterial"); // NOI18N
+
             javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
             jPanel15.setLayout(jPanel15Layout);
             jPanel15Layout.setHorizontalGroup(
@@ -1380,6 +1373,10 @@ public class Gui extends javax.swing.JFrame {
                     .addGap(62, 62, 62)
                     .addComponent(jLabel10)
                     .addContainerGap(673, Short.MAX_VALUE))
+                .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGap(42, 42, 42)
+                    .addComponent(checkboxState23, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(504, Short.MAX_VALUE))
             );
             jPanel15Layout.setVerticalGroup(
                 jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1415,7 +1412,9 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(textfieldState3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addComponent(jLabel10)))
-                    .addGap(92, 92, 92))
+                    .addGap(18, 18, 18)
+                    .addComponent(checkboxState23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(69, 69, 69))
             );
 
             tabsState2.addTab("MystV", jPanel15);
@@ -1451,26 +1450,33 @@ public class Gui extends javax.swing.JFrame {
             textfieldState5.setText("C:\\Documents and Settings\\user\\Desktop\\output");
             textfieldState5.setName("crowouttext"); // NOI18N
 
+            jLabel43.setText("To include new content (i.e. footsteps), check the box in Simplicity->MystV.");
+
             javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
             jPanel14.setLayout(jPanel14Layout);
             jPanel14Layout.setHorizontalGroup(
                 jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel14Layout.createSequentialGroup()
+                            .addContainerGap()
                             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textfieldState5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textfieldState4, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton51)
-                                .addComponent(jButton52)))
-                        .addComponent(jButton53))
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(textfieldState5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(textfieldState4, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton51)
+                                        .addComponent(jButton52)))
+                                .addComponent(jButton53)))
+                        .addGroup(jPanel14Layout.createSequentialGroup()
+                            .addGap(48, 48, 48)
+                            .addComponent(jLabel43)))
                     .addContainerGap(227, Short.MAX_VALUE))
             );
             jPanel14Layout.setVerticalGroup(
@@ -1488,7 +1494,9 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(textfieldState5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton53)
-                    .addContainerGap(272, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                    .addComponent(jLabel43)
+                    .addGap(34, 34, 34))
             );
 
             tabsState2.addTab("Crowthistle", jPanel14);
@@ -1857,7 +1865,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30)
-                        .addContainerGap(56, Short.MAX_VALUE))
+                        .addContainerGap(73, Short.MAX_VALUE))
                 );
 
                 tabsState2.addTab("Settings", jPanel20);
@@ -2019,7 +2027,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addGroup(jPanel23Layout.createSequentialGroup()
                                     .addGap(116, 116, 116)
                                     .addComponent(jButton99)))
-                            .addContainerGap(77, Short.MAX_VALUE))
+                            .addContainerGap(94, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("tab8", jPanel23);
@@ -2094,7 +2102,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jButton113))
                             .addGap(32, 32, 32)
                             .addComponent(jButton111)
-                            .addContainerGap(193, Short.MAX_VALUE))
+                            .addContainerGap(210, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("HexIsle", jPanel37);
@@ -2201,7 +2209,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jLabel34)
                                 .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton123))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                             .addComponent(jButton122)
                             .addGap(62, 62, 62))
                     );
@@ -2221,7 +2229,7 @@ public class Gui extends javax.swing.JFrame {
                         jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel13Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap())
                     );
 
