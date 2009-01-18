@@ -63,6 +63,10 @@ public class UamGui
             //this.getGraphics().drawString(agename, 0, 0);
             switch(status)
             {
+                case noVersionsExist:
+                    this.setForeground(new Color(0x0000AA));
+                    img = null;
+                    break;
                 case notInstalled:
                     //label.setForeground(Color.red);
 
@@ -342,6 +346,7 @@ public class UamGui
             boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
             boolean isInCache = false;
             boolean haslatest = false;
+            boolean someversionexists = false;
             
             Uam.AgeInstallInfo ageinfo = Uam.installInfo.getOrCreateAge(age);
             
@@ -352,6 +357,7 @@ public class UamGui
                 boolean first = true;
                 for(UamConfigNew.UamConfigData.Age.Version verobj: ageobj.versions)
                 {
+                    someversionexists = true;
                     //String version = versions.get(i);
                     String version = verobj.name;
                     boolean hasversion = FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+uam.Uam.versionSep+version+".7z");
@@ -371,33 +377,39 @@ public class UamGui
             //}
             
             //assign age installation info.
-            if(hasagefile)
+            if(someversionexists)
             {
-                if(isInCache)
+                if(hasagefile)
                 {
-                    if(haslatest)
+                    if(isInCache)
                     {
-                        //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
-                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
+                        if(haslatest)
+                        {
+                            //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
+                            Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
+                        }
+                        else
+                        {
+                            //Uam.ageInstallStatus.put(age, InstallStatus.nonLatestVersionInCache);
+                            Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
+                        }
                     }
                     else
                     {
-                        //Uam.ageInstallStatus.put(age, InstallStatus.nonLatestVersionInCache);
-                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
+                        //Uam.ageInstallStatus.put(age, InstallStatus.notInCache);
+                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInCache;
                     }
                 }
                 else
                 {
-                    //Uam.ageInstallStatus.put(age, InstallStatus.notInCache);
-                    Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInCache;
+                    //Uam.ageInstallStatus.put(age, InstallStatus.notInstalled);
+                    Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInstalled;
                 }
             }
             else
             {
-                //Uam.ageInstallStatus.put(age, InstallStatus.notInstalled);
-                Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInstalled;
+                Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
             }
-            
          }
         
     }

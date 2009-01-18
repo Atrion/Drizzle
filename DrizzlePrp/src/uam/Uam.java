@@ -54,6 +54,7 @@ public class Uam
     }
     public static enum InstallStatus
     {
+        noVersionsExist,
         notInstalled,
         latestVersionInCache,
         nonLatestVersionInCache,
