@@ -72,6 +72,26 @@ public class FileUtils {
         File file = new File(filename);
         return file.exists();
     }
+    public static void DeleteFile2(String absoluteFilename)
+    {
+        File f = new File(absoluteFilename);
+
+        if(!f.isDirectory())
+        {
+            //String name = entry.getName();
+            //String fullfilename = outputfolder+"/"+name;
+            if(f.exists() && f.isFile())
+            {
+                m.msg("Deleting "+absoluteFilename);
+                boolean success = f.delete();
+                if(!success)
+                {
+                    m.warn("Unable to delete file: "+absoluteFilename);
+                }
+            }
+        }
+        
+    }
     public static void DeleteFile(String filename)
     {
         File file = new File(filename);

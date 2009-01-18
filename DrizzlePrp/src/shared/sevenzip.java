@@ -72,7 +72,7 @@ public class sevenzip
                 {
                     String name = entry.getName();
                     String fullfilename = outputfolder+"/"+name;
-                    File f = new File(fullfilename);
+                    /*File f = new File(fullfilename);
                     if(f.exists() && f.isFile())
                     {
                         m.msg("Deleting "+fullfilename);
@@ -81,7 +81,8 @@ public class sevenzip
                         {
                             m.warn("Unable to delete file: "+name);
                         }
-                    }
+                    }*/
+                    FileUtils.DeleteFile2(fullfilename);
                 }
             }
             

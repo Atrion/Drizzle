@@ -141,6 +141,10 @@ public class UamConfigNew
             }
         }
     }
+    public Vector<String> getDels(String agename)
+    {
+        return data.getAge(agename).dels;
+    }
     public String getArchiveType(String agename, String version)
     {
         return data.getAge(agename).getVersion(version).archive;
@@ -372,6 +376,7 @@ public class UamConfigNew
             public String propername = null;
             public int minver = 0;
             //public ArrayDeque<Version> versions = new ArrayDeque();
+            public Vector<String> dels = new Vector();
             public Vector<Version> versions = new Vector();
             
             public Age(){}
@@ -391,6 +396,7 @@ public class UamConfigNew
                             else if(tag.equals("name")) propername = e.getTextContent();
                             else if(tag.equals("minver")) minver = Integer.parseInt(e.getTextContent());
                             else if(tag.equals("version")) versions.add(new Version(e));
+                            else if(tag.equals("del")) dels.add(e.getTextContent());
                             break;
                     }
                 }
@@ -414,6 +420,7 @@ public class UamConfigNew
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
                 if(minver!=0) s.append("\t\t<minver>"+Integer.toString(minver)+"</minver>\n");
+                for(String del: dels) s.append("\t\t<del>"+del+"</del>\n");
                 for(Version version: versions) version.generateXml(s);
                 s.append("\t</"+tag+">\n");
                 //s.append("\n");

@@ -671,6 +671,13 @@ public class UamGui
             return false;
         }
         
+        //delete special files.
+        for(String del: Uam.ageList.getDels(age))
+        {
+            String absfilename = potsfolder+"/"+del;
+            FileUtils.DeleteFile2(absfilename);
+        }
+        
         String deletable = Uam.ageList.getDeletable(age);
         if(deletable.equals("true"))
         {
