@@ -39,6 +39,8 @@ public class ThreadDownloader extends Thread
         try
         {
             File f = new File(filename);
+            String folder = f.getParent();
+            shared.FileUtils.CreateFolder(folder);
             out = new FileOutputStream(filename);
             ThreadDownloader td = new ThreadDownloader(url, out);
             //td.freespace = f.getUsableSpace();
