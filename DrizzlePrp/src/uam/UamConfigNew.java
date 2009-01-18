@@ -319,6 +319,7 @@ public class UamConfigNew
                         String tag = e.getTagName();
                         if(tag.equals("welcome")) welcome = e.getTextContent();
                         else if(tag.equals("age")) ages.add(new Age(e));
+                        else if(tag.equals("age2")) ages.add(new Age(e));
                         else if(tag.equals("aequalsatransposeequalsainverse")) aequalsatransposeequalsainverse = true;
                         break;
                 }
@@ -369,6 +370,7 @@ public class UamConfigNew
             public String deletable = null;
             public String info = null;
             public String propername = null;
+            public int minver = 0;
             //public ArrayDeque<Version> versions = new ArrayDeque();
             public Vector<Version> versions = new Vector();
             
@@ -387,21 +389,33 @@ public class UamConfigNew
                             else if(tag.equals("deletable")) deletable = e.getTextContent();
                             else if(tag.equals("info")) info = e.getTextContent();
                             else if(tag.equals("name")) propername = e.getTextContent();
+                            else if(tag.equals("minver")) minver = Integer.parseInt(e.getTextContent());
                             else if(tag.equals("version")) versions.add(new Version(e));
                             break;
+                    }
+                }
+                
+                if(minver>Uam.version)
+                {
+                    info = "(You need a newer version of Drizzle to install this Age.) " + info;
+                    for(Version v: versions)
+                    {
+                        v.mirrors.clear();
                     }
                 }
             }
             
             void generateXml(StringBuilder s)
             {
-                s.append("\t<age>\n");
+                String tag = (minver<16)?"age":"age2";
+                s.append("\t<"+tag+">\n");
                 s.append("\t\t<filename>"+filename+"</filename>\n");
                 s.append("\t\t<name>"+propername+"</name>\n");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
+                if(minver!=0) s.append("\t\t<minver>"+Integer.toString(minver)+"</minver>\n");
                 for(Version version: versions) version.generateXml(s);
-                s.append("\t</age>\n");
+                s.append("\t</"+tag+">\n");
                 //s.append("\n");
             }
             public Version getVersion(String name)

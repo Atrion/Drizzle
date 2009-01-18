@@ -25,6 +25,7 @@ public class Uam
     public static final String ageArchivesFolder = "/agearchives/";
     public static final String versionSep = "--";
     public static final String statusFilename = "uam.status.txt";
+    public static final int version = 16;
     
     public static class InstallInfo
     {

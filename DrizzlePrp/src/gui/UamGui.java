@@ -264,6 +264,8 @@ public class UamGui
     
     public static void GetLocalInfo(String potsfolder)
     {
+        //boolean versionTooLowForSomeAges = false;
+        
         //This function gets info about installed Ages.
         //We care about these facts: which (if any) version of an Age is deployed?
         //In practise, we'll gather this: is any version of an Age installed, and if so we'll assume it's the most recent one in the cache(if any).
@@ -342,6 +344,13 @@ public class UamGui
         //for(String age: availableAges)
         for(UamConfigNew.UamConfigData.Age ageobj: Uam.ageList.data.ages)
         {
+            /*if(ageobj.minver>Uam.version)
+            {
+                //this age can't be handled.
+                versionTooLowForSomeAges = true;
+                continue;
+            }*/
+
             String age = ageobj.filename;
             boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
             boolean isInCache = false;
@@ -410,8 +419,12 @@ public class UamGui
             {
                 Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
             }
-         }
+        }
         
+        /*if(versionTooLowForSomeAges)
+        {
+            m.warn("There are some Ages that you need a newer version of Drizzle for. (They won't be listed.) Sorry for the inconvenience!");
+        }*/
     }
     public static void RefreshInfo(String potsfolder2)
     {
