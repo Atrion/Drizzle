@@ -359,7 +359,7 @@ public class sevenzip
             switch (askExtractMode) {
                 case IInArchive.NExtract_NAskMode_kExtract:
                     //PrintString("Extracting  "+_filePath);
-                    m.msg("Extracting "+_filePath);
+                    m.msgsafe("Extracting "+_filePath);
                     break;
                 case IInArchive.NExtract_NAskMode_kTest:
                     PrintString("Testing     ");

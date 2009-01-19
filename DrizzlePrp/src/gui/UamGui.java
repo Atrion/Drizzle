@@ -353,6 +353,11 @@ public class UamGui
 
             String age = ageobj.filename;
             
+            /*if(age.equals("offlineki"))
+            {
+                int dum=0;
+            }*/
+            
             //boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
             boolean hasagefile = FileUtils.Exists(potsfolder+"/"+ageobj.getMainfile());
             boolean isInCache = false;
@@ -423,6 +428,8 @@ public class UamGui
             }
         }
         
+        //Uam.AgeInstallInfo a = Uam.installInfo.getAge("offlineki");
+        //int a2 = 0;
         /*if(versionTooLowForSomeAges)
         {
             m.warn("There are some Ages that you need a newer version of Drizzle for. (They won't be listed.) Sorry for the inconvenience!");

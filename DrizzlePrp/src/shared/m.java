@@ -194,6 +194,15 @@ public class m
         }
     }
     
+    public static void msgsafe(String s)
+    {
+        final String s2 = s;
+        javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+            public void run() {
+                msg(s2);
+            }
+        });
+    }
     public static void msg(String s)
     {
         //Main.message(s);

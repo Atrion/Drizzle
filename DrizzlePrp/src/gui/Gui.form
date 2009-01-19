@@ -670,11 +670,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="2"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="(Help can be found under the &quot;Help&quot; tab.)"/>
+                <Property name="text" type="java.lang.String" value="( Help can be found under the &quot;Help&quot; tab, or detailed help and troubleshooting can be found at http://alcugs.almlys.org/Drizzle  )"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="160" y="10" width="290" height="-1"/>
+                  <AbsoluteConstraints x="140" y="10" width="710" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

@@ -74,6 +74,7 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.AgeLabel = this.AgeInfoLabel;
         gui.UamGui.startup = this.uamStartupButtongroup;
         gui.UamGui.init();
+        this.setTitle("Drizzle "+Integer.toString(Version.version));
         
         GuiUtils.SetKeymaps();
         
@@ -1102,10 +1103,10 @@ public class Gui extends javax.swing.JFrame {
         jPanel39.add(jButton124);
         jButton124.setBounds(70, 150, 120, 36);
 
-        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12));
-        jLabel36.setText("(Help can be found under the \"Help\" tab.)");
+        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel36.setText("( Help can be found under the \"Help\" tab, or detailed help and troubleshooting can be found at http://alcugs.almlys.org/Drizzle  )");
         jPanel39.add(jLabel36);
-        jLabel36.setBounds(160, 10, 290, 16);
+        jLabel36.setBounds(140, 10, 710, 16);
 
         jScrollPane6.setViewportView(jList1);
 
