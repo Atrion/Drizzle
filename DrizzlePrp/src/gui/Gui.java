@@ -1494,7 +1494,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(textfieldState5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton53)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                     .addComponent(jLabel43)
                     .addGap(34, 34, 34))
             );
@@ -1865,7 +1865,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(checkboxState22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30)
-                        .addContainerGap(73, Short.MAX_VALUE))
+                        .addContainerGap(56, Short.MAX_VALUE))
                 );
 
                 tabsState2.addTab("Settings", jPanel20);
@@ -2027,7 +2027,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addGroup(jPanel23Layout.createSequentialGroup()
                                     .addGap(116, 116, 116)
                                     .addComponent(jButton99)))
-                            .addContainerGap(94, Short.MAX_VALUE))
+                            .addContainerGap(77, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("tab8", jPanel23);
@@ -2102,7 +2102,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jButton113))
                             .addGap(32, 32, 32)
                             .addComponent(jButton111)
-                            .addContainerGap(210, Short.MAX_VALUE))
+                            .addContainerGap(193, Short.MAX_VALUE))
                     );
 
                     tabsState2.addTab("HexIsle", jPanel37);
@@ -2209,7 +2209,7 @@ public class Gui extends javax.swing.JFrame {
                                 .addComponent(jLabel34)
                                 .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton123))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                             .addComponent(jButton122)
                             .addGap(62, 62, 62))
                     );
@@ -2229,7 +2229,7 @@ public class Gui extends javax.swing.JFrame {
                         jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel13Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tabsState2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                             .addContainerGap())
                     );
 
@@ -3724,8 +3724,6 @@ public class Gui extends javax.swing.JFrame {
                         );
 
                         tabsState3.addTab("Help", jPanel25);
-
-                        tabsState3.setSelectedIndex(1);
 
                         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                         getContentPane().setLayout(layout);

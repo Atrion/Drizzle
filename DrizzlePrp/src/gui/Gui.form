@@ -239,7 +239,6 @@
     </Container>
     <Container class="shared.State.TabsState" name="tabsState3">
       <Properties>
-        <Property name="selectedIndex" type="int" value="1"/>
         <Property name="name" type="java.lang.String" value="mainTabs" noResource="true"/>
       </Properties>
 
@@ -1092,7 +1091,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tabsState2" max="32767" attributes="0"/>
+                      <Component id="tabsState2" pref="430" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1384,7 +1383,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton53" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="239" max="32767" attributes="0"/>
+                              <EmptySpace pref="222" max="32767" attributes="0"/>
                               <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
@@ -2050,7 +2049,7 @@
                               <Component id="checkboxState22" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="73" max="32767" attributes="0"/>
+                              <EmptySpace pref="56" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2242,7 +2241,7 @@
                                       <Component id="jButton99" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="94" max="32767" attributes="0"/>
+                              <EmptySpace pref="77" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2407,7 +2406,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jButton111" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="210" max="32767" attributes="0"/>
+                              <EmptySpace pref="193" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2535,7 +2534,7 @@
                                   <Component id="textfieldState37" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton123" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="31" max="32767" attributes="0"/>
+                              <EmptySpace pref="14" max="32767" attributes="0"/>
                               <Component id="jButton122" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           </Group>

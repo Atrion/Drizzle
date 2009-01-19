@@ -62,6 +62,10 @@ public class Main extends javax.swing.JFrame {
                         System.out.println("Your JRE version is too old.");
                     }*/
                     //System.out.println("Written with JRE version 1.6.0");
+                    
+                    //get jar name:
+                    //String source = Gui.class.getProtectionDomain().getCodeSource().getLocation().toString();
+                    //shared.m.msg(source);
                 }catch(Exception e){}
                 gui = new Gui();
                 //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");

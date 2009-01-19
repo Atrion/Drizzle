@@ -352,7 +352,9 @@ public class UamGui
             }*/
 
             String age = ageobj.filename;
-            boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
+            
+            //boolean hasagefile = FileUtils.Exists(potsfolder+"/dat/"+age+".age");
+            boolean hasagefile = FileUtils.Exists(potsfolder+"/"+ageobj.getMainfile());
             boolean isInCache = false;
             boolean haslatest = false;
             boolean someversionexists = false;
@@ -569,11 +571,13 @@ public class UamGui
     }
     public static void GetVersionListGui(String age)
     {
+
         //m.msg("updating version list.");
         final String age2 = age;
         if(age!=null)
         {
-            deletebutton.setEnabled(true);
+            boolean deletable = Uam.ageList.getDeletable(age) && Uam.installInfo.getAge(age).installationStatus.isInstalled();
+            deletebutton.setEnabled(deletable);
             String info = uam.Uam.ageList.getAgeInfo(age);
             AgeLabel.setText(info);
         }
@@ -604,6 +608,7 @@ public class UamGui
             }
         });*/
         if(verlist.getModel().getSize()>0) verlist.setSelectedIndex(0);
+        
     }
     public static void GetMirrorListGui(String age, String ver)
     {
@@ -678,8 +683,9 @@ public class UamGui
             FileUtils.DeleteFile2(absfilename);
         }
         
-        String deletable = Uam.ageList.getDeletable(age);
-        if(deletable.equals("true"))
+        //String deletable = Uam.ageList.getDeletable(age);
+        //if(deletable.equals("true"))
+        if(Uam.ageList.getDeletable(age))
         {
             //for each .7z file from that Age, delete its entries in Pots.
             Vector<File> files = filesearcher.search.getAllFilesWithExtension(potsfolder+uam.Uam.ageArchivesFolder, false, ".7z");

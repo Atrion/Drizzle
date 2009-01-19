@@ -25,7 +25,7 @@ public class Uam
     public static final String ageArchivesFolder = "/agearchives/";
     public static final String versionSep = "--";
     public static final String statusFilename = "uam.status.txt";
-    public static final int version = 16;
+    //public static final int version = 16;
     
     public static class InstallInfo
     {
@@ -40,6 +40,11 @@ public class Uam
                 ages.put(age, result);
             }
             return result;
+        }
+        
+        public AgeInstallInfo getAge(String age)
+        {
+            return ages.get(age);
         }
     }
     public static class AgeInstallInfo
@@ -60,6 +65,12 @@ public class Uam
         latestVersionInCache,
         nonLatestVersionInCache,
         notInCache,
+        ;
+        
+        public boolean isInstalled()
+        {
+            return !(this==notInstalled || this==noVersionsExist);
+        }
     }
     public static void launchUru()
     {

@@ -149,9 +149,10 @@ public class UamConfigNew
     {
         return data.getAge(agename).getVersion(version).archive;
     }
-    public String getDeletable(String agename)
+    public boolean getDeletable(String agename)
     {
-        return data.getAge(agename).deletable;
+        String result = data.getAge(agename).deletable;
+        return result.equals("true");
     }
     public String getAgeInfo(String agename)
     {
@@ -371,6 +372,7 @@ public class UamConfigNew
         public static class Age
         {
             public String filename = null;
+            private String mainfile = null;
             public String deletable = null;
             public String info = null;
             public String propername = null;
@@ -396,12 +398,13 @@ public class UamConfigNew
                             else if(tag.equals("name")) propername = e.getTextContent();
                             else if(tag.equals("minver")) minver = Integer.parseInt(e.getTextContent());
                             else if(tag.equals("version")) versions.add(new Version(e));
+                            else if(tag.equals("mainfile")) mainfile = e.getTextContent();
                             else if(tag.equals("del")) dels.add(e.getTextContent());
                             break;
                     }
                 }
                 
-                if(minver>Uam.version)
+                if(minver>gui.Version.version)
                 {
                     info = "(You need a newer version of Drizzle to install this Age.) " + info;
                     for(Version v: versions)
@@ -416,6 +419,7 @@ public class UamConfigNew
                 String tag = (minver<16)?"age":"age2";
                 s.append("\t<"+tag+">\n");
                 s.append("\t\t<filename>"+filename+"</filename>\n");
+                if(mainfile!=null) s.append("\t\t<mainfile>"+mainfile+"</mainfile>\n");
                 s.append("\t\t<name>"+propername+"</name>\n");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
@@ -424,6 +428,12 @@ public class UamConfigNew
                 for(Version version: versions) version.generateXml(s);
                 s.append("\t</"+tag+">\n");
                 //s.append("\n");
+            }
+            public String getMainfile()
+            {
+                String result = mainfile;
+                if(result==null) result = "dat/"+filename+".age";
+                return result;
             }
             public Version getVersion(String name)
             {
