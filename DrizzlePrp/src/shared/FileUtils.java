@@ -80,9 +80,9 @@ public class FileUtils {
         {
             //String name = entry.getName();
             //String fullfilename = outputfolder+"/"+name;
+            m.msg("Deleting "+absoluteFilename);
             if(f.exists() && f.isFile())
             {
-                m.msg("Deleting "+absoluteFilename);
                 boolean success = f.delete();
                 if(!success)
                 {
