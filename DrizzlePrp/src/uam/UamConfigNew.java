@@ -288,6 +288,9 @@ public class UamConfigNew
             }
         }
         
+        //sort by minver and proper name:
+        //config.data.sort();
+        
         String finalresult = config.data.generateXml();
         m.msg(finalresult);
     }
@@ -367,6 +370,18 @@ public class UamConfigNew
                 ages.add(age);
             }
             return age;
+        }
+        
+        public void sort()
+        {
+            java.util.Collections.sort(ages, new java.util.Comparator() {
+                public int compare(Object o1, Object o2) {
+                    Age a1 = (Age)o1;
+                    Age a2 = (Age)o2;
+                    if(a1.minver>=16 && a2.minver<16) return -1;
+                    return a1.propername.compareTo(a2.propername);
+                }
+            });
         }
         
         public static class Age

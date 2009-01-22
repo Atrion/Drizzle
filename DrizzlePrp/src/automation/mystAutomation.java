@@ -1372,7 +1372,8 @@ public class mystAutomation
         for(String filename: sumfiles)
         {
             String agename = common.getAgenameFromFilename(filename);
-            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
             FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, agenames), sum1);
         }
         
@@ -2025,9 +2026,11 @@ public class mystAutomation
         }
         
         //create .sum files...
-        Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MarshScene");
+        //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MarshScene");
+        Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
         FileUtils.WriteFile(outfolder+"/dat/MarshScene.sum", sum1);
-        Bytes sum2 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MountainScene");
+        //Bytes sum2 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MountainScene");
+        Bytes sum2 = uru.moulprp.sumfile.createEmptySumfile();
         FileUtils.WriteFile(outfolder+"/dat/MountainScene.sum", sum2);
         
         
@@ -2398,7 +2401,8 @@ public class mystAutomation
         for(String filename: sumfiles)
         {
             String agename = common.getAgenameFromFilename(filename);
-            Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
+            Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
             FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, agenames), sum1);
         }
         

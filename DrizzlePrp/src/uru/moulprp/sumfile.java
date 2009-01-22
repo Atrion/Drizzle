@@ -109,6 +109,27 @@ public class sumfile
         String outfile = potsfolder+"/dat/"+agename+".sum";
         shared.FileUtils.WriteFile(outfile, bytes);
     }
+    
+    public static Bytes createEmptySumfile(/*String infolder, String agename*/)
+    {
+        
+        //count the files.
+        //Vector<String> files = new Vector<String>();
+        
+        //int count = files.size();
+        int count = 0;
+        
+        Bytedeque c = new Bytedeque();
+        c.writeInt(count);
+        c.writeInt(0);
+        
+        byte[] result = c.getAllBytes();
+        result = uru.UruCrypt.EncryptWhatdoyousee(result);
+        
+        //shared.FileUtils.WriteFile(outfolder+agename+".sum", result);
+        return new Bytes(result);
+    }
+    
     public static Bytes createSumfile(String infolder, String agename)
     {
         File datdir = new File(infolder);

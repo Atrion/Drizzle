@@ -141,6 +141,17 @@ public class PrpHeader extends uruobj
         //process the object index, which is *not* a part of this struct.
         //objectindex = new PrpObjectIndex(new Bytestream(data,offsetToObjectIndex));
         
+        /*if(c==null) m.err("c is null");
+        if(c.curFile==null)
+        {
+            m.err("c.curFile is null");
+            c.curFile = "testfilename";
+        }
+        //if(c.readversion==null) m.err("c.readversion is null");
+        if(agename==null) m.err("agename is null");
+        if(pagename==null) m.err("pagename is null");
+        if(pageid==null) m.err("pageid is null");*/
+        
         if(shared.State.AllStates.getStateAsBoolean("reportPrp")) m.msg("PrpFile: name="+c.curFile+" readversion="+Integer.toString(c.readversion)+" agename="+agename+" pagename="+pagename+" pageid="+pageid.toString());
         
         //override the agename

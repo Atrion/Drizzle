@@ -11,5 +11,5 @@ package gui;
  */
 public class Version
 {
-    public static final int version = 16;
+    public static final int version = 17;
 }
