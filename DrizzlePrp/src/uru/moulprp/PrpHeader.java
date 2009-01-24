@@ -133,6 +133,10 @@ public class PrpHeader extends uruobj
             offsetToFirstObject = data.readInt();
             offsetToObjectIndex = data.readInt();
         }
+        else if(version==0x5400)
+        {
+            throw new shared.uncaughtexception("This appears to be a copy of Myst5 with TryMedia DRM on it (probably downloaded from IGN's Direct2Drive service.)  You need a regular copy of Myst5, sorry.");
+        }
         else
         {
             //throw new readexception("prpheader: Unknown version.");
@@ -148,7 +152,17 @@ public class PrpHeader extends uruobj
             c.curFile = "testfilename";
         }
         //if(c.readversion==null) m.err("c.readversion is null");
-        if(agename==null) m.err("agename is null");
+        if(agename==null)
+        {
+            m.err("agename is null");
+            m.err("curfile="+c.curFile);
+            m.err("version="+Short.toString(version));
+            if(c.in.sourceName!=null)m.err("sourcename="+c.in.sourceName);
+            try{m.err("absoluteoffset="+Integer.toString(c.in.getAbsoluteOffset()));}catch(Exception e){}
+            try{m.err("bytesremaining="+Integer.toString(c.in.getBytesRemaining()));}catch(Exception e){}
+            try{m.err("filelength="+Integer.toString(c.in.getFilelength()));}catch(Exception e){}
+            try{m.err("bytesprocessed="+Integer.toString(c.in.getNumBytesProcessed()));}catch(Exception e){}
+        }
         if(pagename==null) m.err("pagename is null");
         if(pageid==null) m.err("pageid is null");*/
         

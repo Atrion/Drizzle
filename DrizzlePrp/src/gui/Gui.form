@@ -1162,11 +1162,6 @@
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="673" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="checkboxState23" min="-2" pref="280" max="-2" attributes="0"/>
-                              <EmptySpace pref="504" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -1213,9 +1208,7 @@
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="checkboxState23" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1313,12 +1306,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton78ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="shared.State.CheckboxState" name="checkboxState23">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Include new content (i.e. footstep sounds)."/>
-                        <Property name="name" type="java.lang.String" value="includeAuthoredMaterial" noResource="true"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel14">
@@ -1334,33 +1321,25 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="textfieldState5" max="32767" attributes="1"/>
-                                                  <Component id="textfieldState4" alignment="0" pref="416" max="32767" attributes="1"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jButton51" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButton52" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="jButton53" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="textfieldState5" max="32767" attributes="1"/>
+                                          <Component id="textfieldState4" alignment="0" pref="416" max="32767" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jButton51" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton52" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                      <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jButton53" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="227" max="32767" attributes="0"/>
                           </Group>
@@ -1383,9 +1362,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton53" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="222" max="32767" attributes="0"/>
-                              <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace pref="272" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1435,11 +1412,6 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="C:\Documents and Settings\user\Desktop\output"/>
                         <Property name="name" type="java.lang.String" value="crowouttext" noResource="true"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel43">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="To include new content (i.e. footsteps), check the box in Simplicity-&gt;MystV."/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -2011,10 +1983,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="21" pref="21" max="21" attributes="0"/>
-                                      <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="checkboxState23" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
                                   <Component id="checkboxState22" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState20" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkboxState19" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -2048,8 +2017,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkboxState22" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <Component id="checkboxState23" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="44" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2107,9 +2076,10 @@
                         <Property name="name" type="java.lang.String" value="plpxphysicalQuatChange" noResource="true"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel30">
+                    <Component class="shared.State.CheckboxState" name="checkboxState23">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Include new content (this checkbox is on the Simplicity-&gt;MystV tab)"/>
+                        <Property name="text" type="java.lang.String" value="Include new content (currently does nothing)."/>
+                        <Property name="name" type="java.lang.String" value="includeAuthoredMaterial" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
