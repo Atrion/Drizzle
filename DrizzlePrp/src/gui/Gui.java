@@ -3996,9 +3996,9 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        m.err("This method of recompiling Moul is deprecated, and probably doesn't work right.");
-        byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
-        prputils.Compiler.RecompilePrp(filecontents, new automation.mystAutomation.moulDecider());
+        m.err("This method of recompiling Moul is deprecated, and has been commented out.");
+        //byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        //prputils.Compiler.RecompilePrp(filecontents, new automation.mystAutomation.moulDecider());
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed

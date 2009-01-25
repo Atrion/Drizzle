@@ -40,7 +40,7 @@ import shared.cmap;
 
 public class mystAutomation
 {
-    public static class moulDecider implements Decider
+    /*public static class moulDecider implements Decider
     {
         public boolean isObjectToBeIncluded(Uruobjectdesc desc)
         {
@@ -686,30 +686,30 @@ public class mystAutomation
                             
                         };
                         namestartswith = new String[]{
-                            /*"linkinpoint",
-                            "startpoint",
-                            "cratercentral",
-                            "tower",
-                            "outer",
-                            "centertotem",
-                            "ground", //ground
-                            "criticalcave", //crater around caves
-                            "soccer",
+                            //"linkinpoint",
+                            //"startpoint",
+                            //"cratercentral",
+                            //"tower",
+                            //"outer",
+                            //"centertotem",
+                            //"ground", //ground
+                            //"criticalcave", //crater around caves
+                            //"soccer",
                             
-                            "crespring",
-                            "csfxresp",
-                            "respdisablejc",
-                            "respdrnowedge",
-                            "respjconeshot",
-                            "resplinkout",
-                            "RespNglnWedge",
-                            "RespPayiWedge",
-                            "RespSolutionSymbols",
-                            "RespTetsWedge",
-                            "RespWedges", //pod problem.
+                            //"crespring",
+                            //"csfxresp",
+                            //"respdisablejc",
+                            //"respdrnowedge",
+                            //"respjconeshot",
+                            //"resplinkout",
+                            //"RespNglnWedge",
+                            //"RespPayiWedge",
+                            //"RespSolutionSymbols",
+                            //"RespTetsWedge",
+                            //"RespWedges", //pod problem.
                             
-                            "cRespExcludeRgn", //minkata problem.
-                            "cRespSfxLinkIn",*/
+                            //"cRespExcludeRgn", //minkata problem.
+                            //"cRespSfxLinkIn",
                         };
                         break;
 
@@ -730,7 +730,7 @@ public class mystAutomation
                 
                 return useObject;
         }
-    }
+    }*/
     
     public static Typeid[] moulReadable={
         Typeid.plSceneNode,
@@ -860,6 +860,16 @@ public class mystAutomation
         Typeid.plClothingBase,
         Typeid.plAliasModifier,
         Typeid.plPrintShape,
+        
+        Typeid.plObjectInVolumeAndFacingDetector,
+        Typeid.plNPCSpawnMod,
+        Typeid.plDynaRippleVSMgr,
+        Typeid.plSwimDetector,
+        Typeid.plSwimRegionInterface,
+        Typeid.plSwimCircularCurrentRegion,
+        Typeid.plSwimStraightCurrentRegion,
+        Typeid.plVolumeSensorConditionalObjectNoArbitration,
+        
     };
     
     public static Typeid[] crowReadable = moulReadable;
@@ -900,7 +910,7 @@ public class mystAutomation
                     int dummy=0;
                 }
 
-                Typeid[] typeequals = new Typeid[]{
+                /*Typeid[] typeequals = new Typeid[]{
                         type.plSceneObject,
 
                         type.plCoordinateInterface,
@@ -1024,7 +1034,9 @@ public class mystAutomation
                         type.plLayerLinkAnimation,
                         type.plAliasModifier,
                         type.plPrintShape,
-                };
+                };*/
+                Typeid[] typeequals = mystAutomation.moulReadable;
+                        
                 String[] namestarts={
                 };
                 for(Typeid curtype: typeequals) if(curtype==type) return true;

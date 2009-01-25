@@ -270,6 +270,10 @@ public enum Typeid implements compilable
     plAliasModifier,
     plPrintShape,
     
+    //ahnonay
+    plSwimMsg,
+    plVolumeSensorConditionalObjectNoArbitration,
+    
     plLeafController,
     nil,
     unknown;
@@ -362,28 +366,28 @@ public enum Typeid implements compilable
         tri( 0x0D5, 0x0D5, 0x0B5, -2, plPointShadowMaster ), //3rd code from myst5
         tri( 0x0D6, 0x0D6, 0x0B6, -2, plDirectShadowMaster ),
         tri( 0x0E5, 0x0E5, -2, -2, plEAXListenerMod ),
-        tri( 0x0E7, -2, -2, -2, plObjectInVolumeAndFacingDetector),
+        tri( 0x0E7, 0x0E7, -2, -2, plObjectInVolumeAndFacingDetector),
         tri( 0x0E8, 0x0E8, -2, -2, plDynaFootMgr ),
         tri( 0x0ED, 0x0ED, -2, -2, plDynaPuddleMgr ),
         tri( 0x0F1, 0x0F1, 0x0CD, -2, plATCAnim ),
         tri( 0x0F2, 0x0F2, -2, -2, plAgeGlobalAnim ),
-        tri( 0x0F5, -2, -2, -2, plNPCSpawnMod),
+        tri( 0x0F5, 0x0F5, -2, -2, plNPCSpawnMod),
         tri( 0x0FB, 0x0FB, 0x0D4, -2, plWaveSet7 ), //3rd code from myst5
         tri( 0x0FC, 0x0FC, -2, -2, plPanicLinkRegion ),
         tri( 0x0FF, 0x0FF, 0x0D8, -2, plStereizer ),
         tri( 0x106, 0x106, 0x0DA, -2, plDynamicEnvMap ),
-        tri( 0x10A, -2, -2, -2, plDynaRippleVSMgr),
+        tri( 0x10A, 0x10A, -2, -2, plDynaRippleVSMgr),
         tri( 0x116, 0x116, 0x0E9, -2, plVisRegion ),
         tri( 0x11E, 0x11E, -2, -2, plRelevanceRegion ), //used for .csv files
         tri( 0x122, 0x122, 0x0F1, -2, plImageLibMod ),
         tri( 0x123, 0x123, 0x0F2, -2, plParticleFlockEffect ), //3rd code from myst5
         tri( 0x127, 0x127, -2, -2, plPhysicalSndGroup ),
         tri( 0x12B, 0x12B, -2, -2, plClusterGroup ),
-        tri( 0x12E, -2, -2, -2, plSwimDetector),
+        tri( 0x12E, 0x12E, -2, -2, plSwimDetector),
         tri( 0x12F, 0x12F, -2, -2, plFadeOpacityMod ),
-        tri( 0x133, -2, -2, -2, plSwimRegionInterface),
-        tri( 0x134, -2, -2, -2, plSwimCircularCurrentRegion),
-        tri( 0x136, -2, -2, -2, plSwimStraightCurrentRegion),
+        tri( 0x133, 0x133, -2, -2, plSwimRegionInterface),
+        tri( 0x134, 0x134, -2, -2, plSwimCircularCurrentRegion),
+        tri( 0x136, 0x136, -2, -2, plSwimStraightCurrentRegion),
 
         
         tri( 0x203, 0x203, -2, -2, plRefMsg ),
@@ -447,7 +451,7 @@ public enum Typeid implements compilable
         
         tri( -2, -2, 0x100, -2, plDirectMusicSound), //not in pots, but apparently plDirectMusicStream is.
         tri( -2, -2, 0x113, -2, plNodeRegionModifier), //not in pots
-        tri( 0x39F, -2, 0x2D0, -2, plSoundVolumeApplicator),
+        tri( 0x39F, 0x3A4, 0x2D0, -2, plSoundVolumeApplicator),
         tri( 0x45B, -2, 0x2EC, -2, plSimSuppressMsg),
         tri( 0x07A, 0x07A, 0x06B, -2, plPostEffectMod),
         tri( 0x07D, -2, 0x06E, -2, plAxisAnimModifier),
@@ -471,7 +475,7 @@ public enum Typeid implements compilable
         tri( 0x0CD, 0x0CD, 0x0AE, -2, plArmatureEffectsMgr),
         tri( 0x0FE, -2, 0x0D7, -2, plFilterCoordInterface),
         
-        tri( 0x135, -2, 0x101, -2, plParticleFollowSystemEffect),
+        tri( 0x135, 0x135, 0x101, -2, plParticleFollowSystemEffect),
         tri( 0x00A, 0x00A, 0x00A, -2, plParticleCollisionEffectBeat),
         tri( 0x00B, 0x00B, 0x00B, -2, plParticleFadeVolumeEffect),
         
@@ -504,6 +508,9 @@ public enum Typeid implements compilable
         tri( 0x02A, -2, -2, -2, plAliasModifier),
         tri( 0x0EC, 0x0EC, -2, -2, plPrintShape),
                 
+        tri( 0x456, 0x456, -2, -2, plSwimMsg),
+        tri( -2, 0x13B, -2, -2, plVolumeSensorConditionalObjectNoArbitration), //not in pots
+        
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };
     

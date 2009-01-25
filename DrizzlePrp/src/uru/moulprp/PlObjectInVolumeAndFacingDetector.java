@@ -26,47 +26,43 @@ import shared.m;
 import shared.b;
 import shared.readexception;
 //import java.util.Vector;
+import shared.*;
 
 
-public class PlVolumeSensorConditionalObject extends uruobj
+public class PlObjectInVolumeAndFacingDetector extends uruobj
 {
-    PlConditionalObject parent;
-    int u3;
-    int direction; //according to cobbs, 1=enter, 2=leave
-    byte u4;
+    PlCollisionDetector parent;
+    Flt f1;
+    byte b2;
     
-    public PlVolumeSensorConditionalObject(context c) throws readexception
+    public PlObjectInVolumeAndFacingDetector(context c) throws readexception
     {
-        parent = new PlConditionalObject(c);
-        u3 = c.readInt();
-        direction = c.readInt();
-        u4 = c.readByte();
-        
+        parent = new PlCollisionDetector(c);
+        f1 = new Flt(c);
+        b2 = c.readByte();
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeInt(u3);
-        c.writeInt(direction);
-        c.writeByte(u4);
+        f1.compile(c);
+        c.writeByte(b2);
     }
     
-    public static class PlVolumeSensorConditionalObjectNoArbitration extends uruobj
+    public static class PlCollisionDetector extends uruobj
     {
-        PlVolumeSensorConditionalObject parent;
+        PlDetectorModifier parent;
+        byte b1;
         
-        public PlVolumeSensorConditionalObjectNoArbitration(context c) throws readexception
+        public PlCollisionDetector(context c) throws readexception
         {
-            parent = new PlVolumeSensorConditionalObject(c);
-            throw new shared.readexception("Can read PlVolumeSensorConditionalObjectNoArbitration okay, but ignoring.");
+            parent = new PlDetectorModifier(c);
+            b1 = c.readByte();
         }
         public void compile(Bytedeque c)
         {
-            //Perhaps we should convert these objects into PlVolumeSensorConditionalObject.
-            //parent.compile(c);
-            throw new shared.uncaughtexception("Shouldn't get here.");
-            
+            parent.compile(c);
+            c.writeByte(b1);
         }
     }
 }

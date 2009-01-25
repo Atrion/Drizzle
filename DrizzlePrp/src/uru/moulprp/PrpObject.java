@@ -363,6 +363,24 @@ public class PrpObject extends uruobj
                 return new PlAliasModifier(c);
             case plPrintShape:
                 return new PlPrintShape(c);
+            case plObjectInVolumeAndFacingDetector:
+                return new PlObjectInVolumeAndFacingDetector(c);
+            case plNPCSpawnMod:
+                return new PlNPCSpawnMod(c);
+            case plDynaRippleVSMgr:
+                return new PlDynaRippleVSMgr(c);
+            case plSwimDetector:
+                return new PlSwimDetector(c);
+            case plSwimMsg:
+                return new PlSwimDetector.PlSwimMsg(c);
+            case plSwimRegionInterface:
+                return new PlSwimRegionInterface(c);
+            case plSwimCircularCurrentRegion:
+                return new PlSwimRegionInterface.PlSwimCircularCurrentRegion(c);
+            case plSwimStraightCurrentRegion:
+                return new PlSwimRegionInterface.PlSwimStraightCurrentRegion(c);
+            case plVolumeSensorConditionalObjectNoArbitration:
+                return new PlVolumeSensorConditionalObject.PlVolumeSensorConditionalObjectNoArbitration(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
