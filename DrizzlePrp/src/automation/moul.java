@@ -161,6 +161,12 @@ public class moul
             pfm = prp.findObject("cPythYeeshaPage15_2", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(2).xInteger = 18;
         }
+        if(agename.equals("Ahnonay") && pagename.equals("EngineerHut"))
+        {
+            //just disable these objects, so user's can't click them.
+            prp.removeObject(Typeid.plHKPhysical, "SaveClothClkRegion");
+            prp.removeObject(Typeid.plHKPhysical, "BahroRockBook");
+        }
     }
     
     /*public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files)

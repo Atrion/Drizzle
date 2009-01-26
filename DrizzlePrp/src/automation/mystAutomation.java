@@ -744,13 +744,19 @@ public class mystAutomation
         Typeid.plAudioInterface,
         Typeid.plWinAudio,
         Typeid.plCoordinateInterface,
-        Typeid.plDrawInterface,
         Typeid.plSpawnModifier,
-        Typeid.plDrawableSpans,
         Typeid.plDirectionalLightInfo,
         Typeid.plOmniLightInfo,
-        Typeid.plPythonFileMod,
+        Typeid.plDrawInterface,
+        Typeid.plDrawableSpans,
+        Typeid.plAGModifier,
+        Typeid.plLayerAnimation,
+        Typeid.plATCAnim,
+        Typeid.plAGMasterMod,
+        Typeid.plShadowCaster,
         Typeid.plPointShadowMaster,
+        Typeid.plDirectShadowMaster,
+        Typeid.plPythonFileMod,
         Typeid.plSimulationInterface,
         Typeid.plViewFaceModifier,
         Typeid.plSittingModifier,
@@ -767,13 +773,10 @@ public class mystAutomation
         Typeid.plCameraBrain1_Fixed,
         Typeid.plCameraBrain1_Circle,
         Typeid.plCameraModifier1,
-        Typeid.plAGModifier,
         Typeid.plOccluder,
         Typeid.plDynamicTextMap,
         Typeid.plParticleCollisionEffectBounce,
         Typeid.plSpotLightInfo,
-        Typeid.plShadowCaster,
-        Typeid.plDirectShadowMaster,
         Typeid.plRelevanceRegion,
         Typeid.plSoftVolumeSimple,
         Typeid.plResponderModifier,
@@ -794,15 +797,12 @@ public class mystAutomation
         Typeid.plDynaFootMgr,
         Typeid.plPickingDetector,
         Typeid.plCameraRegionDetector,
-        Typeid.plHKPhysical,
+        Typeid.plHKPhysical, //crashes ahnonay
         Typeid.plSoftVolumeIntersect,
         Typeid.plEAXListenerMod,
         Typeid.plPhysicalSndGroup,
         Typeid.plSeekPointMod,
         Typeid.plRailCameraMod,
-        Typeid.plLayerAnimation,
-        Typeid.plATCAnim,
-        Typeid.plAGMasterMod,
         Typeid.plPanicLinkRegion,
         Typeid.plLineFollowMod,
         Typeid.plMsgForwarder,
@@ -905,6 +905,8 @@ public class mystAutomation
                 if(pageid.prefix==0x22 && pageid.suffix==0x24 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
                 if(pageid.prefix==0x2A && pageid.suffix==0x25 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
 
+                if(pageid.prefix==83 && pageid.suffix==42 && type==type.plHKPhysical && name.equals("ChairFallProxy")) return false; //Ahnonay: this physical crashes it on link in.
+                
                 if(name.toLowerCase().equals("envmap02"))
                 {
                     int dummy=0;
@@ -1057,11 +1059,13 @@ public class mystAutomation
         prefices.put("Personal",85);
         prefices.put("GreatTreePub",84);
         //prefices.put("GlobalAnimations", 789);
+        prefices.put("Ahnonay",83);
         
         HashMap<String, String> agenames = new HashMap<String, String>();
         agenames.put("Kveer", "KveerMOUL");
         agenames.put("Neighborhood02", "KirelMOUL");
         agenames.put("Personal", "PersonalMOUL");
+        agenames.put("Ahnonay", "AhnonayMOUL");
         
         //these map from filename to oldpagenum to newpagenum
         //HashMap<String, HashMap<Integer,Integer>> suffices = new HashMap();
@@ -1302,6 +1306,17 @@ public class mystAutomation
                 agefile.appendLine("Page=minkDusttestDay,11");
                 agefile.appendLine("Page=minkDusttestNight,12");
                 agefile.appendLine("Page=minkDusttest,10");
+                decryptedData = agefile.saveToByteArray();
+            }
+            
+            //modify Ahnona's Age file.
+            if(agename.toLowerCase().equals("ahnonay"))
+            {
+                textfile agefile = textfile.createFromBytes(decryptedData);
+                agefile.removeVariables("Page");
+                agefile.appendLine("Page=EngineerHut,11");
+                agefile.appendLine("Page=Vortex,9");
+                agefile.appendLine("Page=YeeshaSketchBahro,16");
                 decryptedData = agefile.saveToByteArray();
             }
             

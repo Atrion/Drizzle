@@ -21,11 +21,25 @@ package uru.moulprp;
 import shared.Bytes;
 import shared.m;
 import uru.Bytedeque;
+import java.util.Vector;
 
 public class textfile
 {
     //Bytes text;
     protected Bytes[] lines;
+    public void removeVariables(String varname)
+    {
+        Vector<Bytes> result = new Vector();
+        Bytes start = new Bytes(varname+"=");
+        for(int i=0;i<lines.length;i++)
+        {
+            if(!lines[i].startsWith(start))
+            {
+                result.add(lines[i]);
+            }
+        }
+        lines = shared.generic.convertVectorToArray(result, Bytes.class);
+    }
     public static class textline
     {
         Bytes line;
@@ -34,7 +48,6 @@ public class textfile
         {
             line = lines[index];
         }
-        
         public String getString()
         {
             return line.toString();
