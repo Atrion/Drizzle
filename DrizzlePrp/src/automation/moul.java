@@ -166,6 +166,19 @@ public class moul
             //just disable these objects, so user's can't click them.
             prp.removeObject(Typeid.plHKPhysical, "SaveClothClkRegion");
             prp.removeObject(Typeid.plHKPhysical, "BahroRockBook");
+            
+            //set new python files:
+            uru.moulprp.x00A2Pythonfilemod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
+            pfm1.pyfile = Urustring.createFromString("ahnyKadishDoorMOUL");
+            uru.moulprp.x00A2Pythonfilemod pfm2 = prp.findObject("cPythHutInside", Typeid.plPythonFileMod).castTo();
+            pfm2.pyfile = Urustring.createFromString("ahnyKadishHutMOUL");
+            uru.moulprp.x00A2Pythonfilemod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
+            pfm3.pyfile = Urustring.createFromString("ahnySaveClothMOUL");
+        }
+        if(agename.equals("Ahnonay") && pagename.equals("Vortex"))
+        {
+            uru.moulprp.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
+            pfm.pyfile = Urustring.createFromString("ahnyVogondolaRideV2MOUL.py");
         }
     }
     
