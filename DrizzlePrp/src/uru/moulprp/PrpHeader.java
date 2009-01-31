@@ -135,7 +135,7 @@ public class PrpHeader extends uruobj
         }
         else if(version==0x5400)
         {
-            throw new shared.uncaughtexception("This appears to be a copy of Myst5 with TryMedia DRM on it (probably downloaded from IGN's Direct2Drive service.)  You need a regular copy of Myst5, sorry.");
+            throw new shared.cancelexception("This appears to be a copy of Myst5 with TryMedia DRM on it (probably downloaded from IGN's Direct2Drive service.)  You need a regular copy of Myst5, sorry.");
         }
         else
         {

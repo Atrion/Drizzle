@@ -77,8 +77,11 @@ public class myst5Fixes
         Vector<String> oggfiles = uru.generics.convertArrayToVector(automation.fileLists.mystvOggsNotInPotsNorMoulofflineMinusSpeeches);
         files.addAll(oggfiles);
 
-        automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files, true);
-        
+        try{
+            automation.mystAutomation.convertMyst5ToPots(myst5folder, potsfolder, files, true);
+        }catch(shared.cancelexception e){
+            m.warn("Conversion cancelled.");
+        }
         
         
         shared.State.AllStates.pop();
