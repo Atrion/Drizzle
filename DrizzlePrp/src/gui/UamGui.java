@@ -340,6 +340,8 @@ public class UamGui
             }
         }*/
         
+        Uam.installInfo.fullyUpToDate = true; //may be set to false below
+        
         //find cached versions.
         //for(String age: availableAges)
         for(UamConfigNew.UamConfigData.Age ageobj: Uam.ageList.data.ages)
@@ -393,6 +395,7 @@ public class UamGui
             //}
             
             //assign age installation info.
+            boolean ageIsFullyUpToDate = false;
             if(someversionexists)
             {
                 if(hasagefile)
@@ -403,6 +406,7 @@ public class UamGui
                         {
                             //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
                             Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
+                            ageIsFullyUpToDate = true;
                         }
                         else
                         {
@@ -425,6 +429,12 @@ public class UamGui
             else
             {
                 Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
+                ageIsFullyUpToDate = true;
+            }
+                
+            if(!ageIsFullyUpToDate)
+            {
+                Uam.installInfo.fullyUpToDate = false;
             }
         }
         
@@ -486,6 +496,8 @@ public class UamGui
         uam.UamConfigNew ageList = new uam.UamConfigNew(in);
         uam.Uam.ageList = ageList;
         RefreshInfo(potsfolder);
+        if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
+        
     }
     public static void GetAgeListGui(String server, String potsfolder)
     {
@@ -513,6 +525,7 @@ public class UamGui
                 uam.Uam.ageList = ageList;
                 
                 RefreshInfo(potsfolder2);
+                if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
                 
                 /*final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
                 GetLocalInfo(potsfolder2);

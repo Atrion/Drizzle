@@ -30,6 +30,7 @@ public class Uam
     public static class InstallInfo
     {
         public HashMap<String, AgeInstallInfo> ages = new HashMap();
+        public boolean fullyUpToDate;
         
         public AgeInstallInfo getOrCreateAge(String age)
         {
