@@ -340,7 +340,9 @@ public class UamGui
             }
         }*/
         
-        Uam.installInfo.fullyUpToDate = true; //may be set to false below
+        //Uam.installInfo.fullyUpToDate = true; //may be set to false below
+        int numAgesNotInstalled = 0;
+        int numAgesNeedUpdate = 0;
         
         //find cached versions.
         //for(String age: availableAges)
@@ -395,7 +397,7 @@ public class UamGui
             //}
             
             //assign age installation info.
-            boolean ageIsFullyUpToDate = false;
+            //boolean ageIsFullyUpToDate = false;
             if(someversionexists)
             {
                 if(hasagefile)
@@ -406,12 +408,13 @@ public class UamGui
                         {
                             //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
                             Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
-                            ageIsFullyUpToDate = true;
+                            //ageIsFullyUpToDate = true;
                         }
                         else
                         {
                             //Uam.ageInstallStatus.put(age, InstallStatus.nonLatestVersionInCache);
                             Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
+                            //numAgesNeedUpdate++;
                         }
                     }
                     else
@@ -429,13 +432,15 @@ public class UamGui
             else
             {
                 Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
-                ageIsFullyUpToDate = true;
+                //ageIsFullyUpToDate = true;
             }
-                
-            if(!ageIsFullyUpToDate)
+            
+            //Uam.installInfo.countStats();
+            
+            /*if(!ageIsFullyUpToDate)
             {
                 Uam.installInfo.fullyUpToDate = false;
-            }
+            }*/
         }
         
         //Uam.AgeInstallInfo a = Uam.installInfo.getAge("offlineki");
@@ -496,8 +501,8 @@ public class UamGui
         uam.UamConfigNew ageList = new uam.UamConfigNew(in);
         uam.Uam.ageList = ageList;
         RefreshInfo(potsfolder);
-        if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
-        
+        //if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
+        uam.Uam.installInfo.printStatsMessage();
     }
     public static void GetAgeListGui(String server, String potsfolder)
     {
@@ -525,7 +530,8 @@ public class UamGui
                 uam.Uam.ageList = ageList;
                 
                 RefreshInfo(potsfolder2);
-                if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
+                //if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
+                uam.Uam.installInfo.printStatsMessage();
                 
                 /*final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
                 GetLocalInfo(potsfolder2);

@@ -30,6 +30,9 @@ public class Uam
     public static class InstallInfo
     {
         public HashMap<String, AgeInstallInfo> ages = new HashMap();
+        public int numNotInstalled;
+        public int numUnknown;
+        public int numUpdatable;
         public boolean fullyUpToDate;
         
         public AgeInstallInfo getOrCreateAge(String age)
@@ -46,6 +49,55 @@ public class Uam
         public AgeInstallInfo getAge(String age)
         {
             return ages.get(age);
+        }
+        
+        public void countStats()
+        {
+            this.numNotInstalled = 0;
+            this.numUnknown = 0;
+            this.numUpdatable = 0;
+            for(AgeInstallInfo ageinfo: ages.values())
+            {
+                switch(ageinfo.installationStatus)
+                {
+                    case latestVersionInCache:
+                        break;
+                    case noVersionsExist:
+                        break;
+                    case nonLatestVersionInCache:
+                        this.numUpdatable++;
+                        break;
+                    case notInCache:
+                        this.numUnknown++;
+                        break;
+                    case notInstalled:
+                        this.numNotInstalled++;
+                        break;
+                    default:
+                        m.err("Unhandled installation type.");
+                        break;
+                }
+            }
+            this.fullyUpToDate = (this.numUnknown==0 && this.numNotInstalled==0 && this.numUpdatable==0);
+        }
+        
+        public void printStatsMessage()
+        {
+            this.countStats();
+            String result;
+            if(this.fullyUpToDate)
+            {
+                result = "You have everything installed!";
+            }
+            else
+            {
+                StringBuilder result2 = new StringBuilder();
+                if(this.numNotInstalled!=0) result2.append("Ages not installed: "+Integer.toString(this.numNotInstalled)+"    ");
+                if(this.numUpdatable!=0) result2.append("Ages updatable: "+Integer.toString(this.numUpdatable)+"    ");
+                if(this.numUnknown!=0) result2.append("Ages with unknown installation status: "+Integer.toString(this.numUnknown)+"    ");
+                result = result2.toString();
+            }
+            m.msg(result);
         }
     }
     public static class AgeInstallInfo
