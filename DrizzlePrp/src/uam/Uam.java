@@ -97,7 +97,7 @@ public class Uam
                 if(this.numUnknown!=0) result2.append("Ages with unknown installation status: "+Integer.toString(this.numUnknown)+"    ");
                 result = result2.toString();
             }
-            m.msg(result);
+            m.msgsafe(result);
         }
     }
     public static class AgeInstallInfo

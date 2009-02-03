@@ -180,6 +180,23 @@ public class moul
             uru.moulprp.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
             pfm.pyfile = Urustring.createFromString("ahnyVogondolaRideV2MOUL.py");
         }
+        if(agename.equals("GreatTreePub") && pagename.equals("Pub"))
+        {
+            //change pythonfilemod from AhnonayCathedral to AhnonayMOUL.
+            x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookAhnonay", Typeid.plPythonFileMod).castTo();
+            pfm.getListingByIndex(4).xString = Bstr.createFromString("AhnonayMOUL");
+            
+            //change respondermodifier from AhnonayCathedral to AhnonayMOUL.
+            PlResponderModifier rm = prp.findObject("cRespLinkOutAhnonay", Typeid.plResponderModifier).castTo();
+            PrpMessage.PlLinkToAgeMsg ltam = rm.messages[0].commands[1].message.castTo();
+            ltam.ageLinkStruct.xageinfo.ageFilename = Wpstr.create("AhnonayMOUL");
+
+            //change Ahnonay image.
+            x0006Layer layer = prp.findObject("Map #69950", Typeid.plLayer).castTo();
+            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelahnonayvortex*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+            layer.texture = mmref;
+        
+        }
     }
     
     /*public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files)

@@ -480,6 +480,8 @@ public class UamGui
         {
             agelist.setSelectedValue(selection, true); //doesn't die even if selection is no longer there.
         }
+        
+        uam.Uam.installInfo.printStatsMessage();
     }
     public static void GetAgeListGuiOffline(String potsfolder)
     {
@@ -502,7 +504,7 @@ public class UamGui
         uam.Uam.ageList = ageList;
         RefreshInfo(potsfolder);
         //if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
-        uam.Uam.installInfo.printStatsMessage();
+        //uam.Uam.installInfo.printStatsMessage();
     }
     public static void GetAgeListGui(String server, String potsfolder)
     {
@@ -531,7 +533,7 @@ public class UamGui
                 
                 RefreshInfo(potsfolder2);
                 //if(!uam.Uam.installInfo.fullyUpToDate) m.msg("There are Ages available to be installed/upgraded.");
-                uam.Uam.installInfo.printStatsMessage();
+                //uam.Uam.installInfo.printStatsMessage();
                 
                 /*final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
                 GetLocalInfo(potsfolder2);
