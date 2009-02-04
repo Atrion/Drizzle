@@ -174,11 +174,19 @@ public class moul
             pfm2.pyfile = Urustring.createFromString("ahnyKadishHutMOUL");
             uru.moulprp.x00A2Pythonfilemod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
             pfm3.pyfile = Urustring.createFromString("ahnySaveClothMOUL");
+
+            //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
+            uru.moulprp.x00A2Pythonfilemod pfm4 = prp.findObject("cPythPOTSsymbol", Typeid.plPythonFileMod).castTo();
+            pfm4.getListingByIndex(10).xBoolean = 0;
         }
         if(agename.equals("Ahnonay") && pagename.equals("Vortex"))
         {
             uru.moulprp.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
             pfm.pyfile = Urustring.createFromString("ahnyVogondolaRideV2MOUL.py");
+            
+            //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
+            uru.moulprp.x00A2Pythonfilemod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
+            pfm2.getListingByIndex(7).xBoolean = 0;
         }
         if(agename.equals("GreatTreePub") && pagename.equals("Pub"))
         {
