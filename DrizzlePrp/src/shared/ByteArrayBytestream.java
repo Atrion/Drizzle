@@ -14,8 +14,9 @@ import shared.*;
 
 public class ByteArrayBytestream extends IBytestream
 {
-    byte[] data;
+    public byte[] data;
     int pos;
+    
     
     private ByteArrayBytestream(){}
     public static ByteArrayBytestream createFromByteArray(byte[] data)

@@ -325,7 +325,7 @@ public class PlHKPhysical extends uruobj
         String filenameStart = "";
         String filenameEnd = "";
         //String objt = "swimsurface";
-        String objt = "swimdetect";
+        String objt = "bahrodoorproxy";
         if(c.curFile.toLowerCase().startsWith(filenameStart.toLowerCase()))
         {
             if(c.curFile.toLowerCase().endsWith(filenameEnd.toLowerCase()))

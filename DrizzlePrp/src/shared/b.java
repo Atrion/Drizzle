@@ -398,6 +398,49 @@ public class b
         }
         return result;
     }
+    
+    //must have an even number of chars. Not begin with 0x.
+    public static int CharToNibble(char c)
+    {
+        if(c>='a' && c<='f')
+        {
+            return c-'a'+10;
+        }
+        else if(c>='A' && c<='F')
+        {
+            return c='A'+10;
+        }
+        else if(c>='0' && c<='9')
+        {
+            return c-'0';
+        }
+        else
+        {
+            throw new shared.uncaughtexception("Invalid char in charToNibble.");
+        }
+    }
+    public static byte[] HexStringToBytes(String hexstr)
+    {
+        String msg2 = hexstr.replaceAll(" ", "");//.toLowerCase();
+        char[] msg = msg2.toCharArray();
+        //byte[] msg = b.StringToBytes(hexstr);
+        int hexcount = msg.length/2;
+        byte[] data = new byte[hexcount];
+        for(int i=0;i<hexcount;i++)
+        {
+            char b1 = msg[i*2+0];
+            char b2 = msg[i*2+1];
+            int val1 = CharToNibble(b1);
+            int val2 = CharToNibble(b2);
+            byte result = (byte)(val1<<4 | val2);
+            //String hexbyte = hexstr.substring(i*2, i*2+2);
+            //byte result = Byte.parseByte(hexbyte, 16);
+            //data[i] = result;
+            data[i] = result;
+        }
+        return data;
+    }
+    
     public static byte[] StringToNullTerminatedBytes(String str)
     {
         int length = str.length();

@@ -641,33 +641,35 @@ public class UruCrypt {
         b.loadInt32IntoBytes(v0,output,outputpos);
         b.loadInt32IntoBytes(v1,output,outputpos+4*(1));
     }
-    public static byte[] EncryptUruMessage(byte[] string, int offset)
+    public static void EncryptUruMessageInPlace(byte[] string)//, int offset)
     {
         byte[] result = new byte[string.length];
         
         for(int i=0;i<string.length;i++)
         {
-            int k = (i + offset) % 8;
+            int k = (i /*+ offset*/) % 8;
             int j = b.ByteToInt32(string[i]) << k;
             int l = b.ByteToInt32(string[i]) >>> (8 - k);
-            result[i] = (byte)(j | l);
+            //result[i] = (byte)(j | l);
+            string[i] = (byte)(j | l);
         }
         
-        return result;
+        //return result;
     }
-    public static byte[] DecryptUruMessage(byte[] string, int offset)
+    public static void DecryptUruMessageInPlace(byte[] string)//, int offset)
     {
         byte[] result = new byte[string.length];
         
         for(int i=0;i<string.length;i++)
         {
-            int k = (i + offset) % 8;
+            int k = (i /*+ offset*/) % 8;
             int j = b.ByteToInt32(string[i]) >>> k;
             int l = b.ByteToInt32(string[i]) << (8 - k);
-            result[i] = (byte)(j | l);
+            //result[i] = (byte)(j | l);
+            string[i] = (byte)(j | l);
         }
         
-        return result;
+        //return result;
     }
     
     //allows for sizes under 2^12, but perhaps it should be 2^8.
