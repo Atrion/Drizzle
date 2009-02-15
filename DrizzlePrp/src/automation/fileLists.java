@@ -460,4 +460,98 @@ public class fileLists
 "city_District_islmPodMapGUI.prp",
                 
     };
+    
+    public static String[] crowMusic = {
+        "mntnAmbientMx.ogg",
+        "mrshAmbientMx.ogg",
+    };
+    
+    public static String[] myst5Music = {
+        //GameIntro.bik has music.
+        "dsntElevatorMusic.ogg",
+        "dsntRestAreaMusic_Loop.ogg",
+        "KverRandMusic01.ogg", "KverRandMusic02.ogg", "KverRandMusic03.ogg", "kverRandMusic04.ogg", "kverRandMusic05.ogg",
+        "lakiArea-RevealMusic.ogg",
+        "lakiRandMusic01.ogg", "lakiRandMusic02.ogg", "lakiRandMusic03.ogg", "lakiRandMusic04.ogg", "lakiRandMusic05.ogg", "lakiRandMusic06.ogg", "lakiRandMusic07.ogg", "lakiRandMusic08.ogg", "lakiRandMusic09.ogg",
+        "lakiWindmill-PuzzleMusic_Loop.ogg",
+        "mystAmbMusic.ogg",
+        "srlnMainMusic_Loop.ogg",
+        "srlnRandMusic01.ogg", "srlnRandMusic02.ogg", "srlnRandMusic03.ogg", "srlnRandMusic04.ogg", "srlnRandMusic05.ogg", "srlnRandMusic06.ogg", "srlnRandMusic07.ogg", "srlnRandMusic08.ogg", "srlnRandMusic09.ogg", "srlnRandMusic10.ogg", "srlnRandMusic11.ogg", "srlnRandMusic12.ogg", "srlnRandMusic13.ogg", "srlnRandMusic14.ogg", "srlnRandMusic15.ogg",
+        "tdlmAmbMusic01_loop.ogg",
+        "xBubbleMusic.ogg",
+        "dsntEsher-Intro_Mx.ogg",
+        "dsntYeesha-Imager01Mx.ogg",
+        "dsntYeesha-Imager02Mx.ogg",
+        "dsntYeesha-Imager03Mx.ogg",
+        "kverConc03MxPart01.ogg",
+        "kverConc03MxPart02.ogg",
+        "kverYeesha-IntroMx.ogg",
+        "kverYeeshaConc02Mx.ogg",
+        "lakiEsher-Arena_Mx.ogg",
+        "lakiEsher-Keep_Mx.ogg",
+        "lakiEsher-Villa_Mx.ogg",
+        "mystEsher-Conc01Mx.ogg",
+        "mystEsher-Conc02Mx.ogg",
+        "tdlmEsher-TodelmerP1_Mx.ogg",
+        "thgrIceFildsMx_loop.ogg",
+    };
+    
+    public static String[] potsMusic = {
+        //AtrusIntro.bik has some music.
+        "ahnyCathedralMusic.ogg",
+        "dsntRestAreaMusic_Loop.ogg",
+        "ercaHarvesterMusic.ogg",
+        "grsnExteriorMusic.ogg",
+        "grsnRandTCMusic01.ogg",
+        "grsnRandTCMusic02.ogg",
+        "grsnRandTCMusic03.ogg",
+        "grsnTrainingWallMusic01.ogg",
+        "islmCavernMusic_Loop.ogg",
+        "islmLibraryInteriorMusic.ogg",
+        "islmLibraryMusic_Loop.ogg",
+        "islmPalaceMusic_Loop.ogg",
+        "kdshMoonRoomMusic_Loop.ogg",
+        "kdshX2VaultMusic.ogg",
+        "KverRandMusic01.ogg","KverRandMusic02.ogg","KverRandMusic03.ogg","KverRandMusic04.ogg","KverRandMusic05.ogg",
+        "KveerYeeshMusic.ogg",
+        "mystLibraryMusic_loop.ogg",
+        "psnlMusicPlayer.ogg",
+        "tldnBaronCityMusic_Loop.ogg",
+        "tldnUpperShroomMusic_Loop.ogg",
+        "tmnaBahro_EndMusic.ogg",
+        "tmnaYeesha_FinalMusic01.ogg",
+        "tmnaYeesha_FinalMusic02.ogg",
+        "clftBookRoomMusic_Loop.ogg",
+        "clftOpenMusic.ogg",
+        "clftYeesha_IntroMusic.ogg",
+        "grsnInteriorMusic_Loop.ogg",
+        "grsnTCBridgeMusic.ogg",
+        "islmGalleryMusic_Loop.ogg",
+        "tldnSlaveOfficeMusic_Loop.ogg",
+        //don't have "music" in filename:
+        "tldnSporeMe_Loop.ogg",
+        "kdshPillarSolution_Loop.ogg",
+        "ahnySphere03-Amb01_Loop.ogg",
+        "ErcaMusSeg01-0.ogg",
+        "ercaMusSeg02-1.ogg",
+        "ErcaMusSeg03-2.ogg",
+        "nb01PrivateRoom_Loop.ogg",
+        "clftZandiRadio_Loop.ogg",
+        //"tmnaCreditsMusic.ogg", //In ABM, but expansion packs delete it.  Full Peter Gabriel song.
+    };
+    
+    public static String[] moulMusicNotInPotsOrDifferent = {
+        //URULiveIntro.bik has some music.
+        "minkBadlands-CaveMusic.ogg",
+        "gpubAmbience.ogg",
+        //"KVeerMusic.ogg" //same as kveerYeeshaMusic.ogg from Pots.
+        "kverSeasonFinaleMx.ogg",
+        "minkBadlands-Reprise.ogg",
+        "minkBadlands-Middle.ogg",
+        "minkCenterCircleMx.ogg",
+        "minkConstellations.ogg",
+        "psnlMusicPlayer.ogg", //different than Pots.
+        "psnlGalleryMusic.ogg", //like islmGalleryMusic.ogg, but more tinny, like from a device.
+        "tmnaCreditsMusic.ogg", //the file in ABM, but missing from Pots.
+    };
 }
