@@ -117,7 +117,7 @@ public class Node //implements NodeTypes.ImageType
         }
         
      
-        this.printData();
+        //this.printData();
         
     }
 
