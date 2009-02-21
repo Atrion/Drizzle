@@ -51,13 +51,15 @@ public class UamGui
         //static java.awt.Image dash = shared.GetResource.getResourceAsImage("/gui/dash.png");
         static java.awt.Image dashred = shared.GetResource.getResourceAsImage("/gui/dashred.png");
         java.awt.Image img;
+        public boolean showicon = true;
+        int width;
         
         public AgeListItem(String agename, InstallStatus status)
         {
             this.agename = agename;
             this.status = status;
             this.setOpaque(true);
-            this.setPreferredSize(new java.awt.Dimension(0, 16));
+            //this.setPreferredSize(new java.awt.Dimension(0, 16));
             //label = new JLabel("hi");
             //this.add(label);
             //this.getGraphics().drawString(agename, 0, 0);
@@ -108,7 +110,6 @@ public class UamGui
             this.setSize(w,h);
             this.setMinimumSize(new java.awt.Dimension(w, h));*/
             
-            
         }
         /*@Override public void repaint()
         {
@@ -122,14 +123,14 @@ public class UamGui
             //this.setBackground(Color.GREEN);
             int h = this.getHeight();
             String str = agename;
-            int offset = 20;
+            int offset = showicon?20:3;
             
             //int w = g.getFontMetrics().stringWidth(str) + offset;
             //this.setSize(w,h);
             //this.setMinimumSize(new java.awt.Dimension(w, h));
             
             g.drawString(str, offset, h-3);
-            if(img!=null) g.drawImage(img, 0, 0, null);
+            if(showicon && img!=null) g.drawImage(img, 0, 0, null);
             //javax.swing.JList a;
             
         }
@@ -143,6 +144,15 @@ public class UamGui
             return new java.awt.Dimension(h,w);
             this.
         }*/
+        
+        public java.awt.Dimension getPreferredSize()
+        {
+            int w = showicon?20:3 + this.getGraphics().getFontMetrics().stringWidth(agename) + 3;
+            int h = 16;
+            java.awt.Dimension result = new java.awt.Dimension(w,h);
+            //m.msg("gps:"+agename);
+            return result;
+        }
     }
     public static void init() //called by swing thread
     {
@@ -228,6 +238,20 @@ public class UamGui
                 String mir = (String)mirlist.getSelectedValue();
                 //String mir = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
                 OnMirrorSelected(age2,ver2,mir);
+            }
+        });
+        mirlist.setCellRenderer(new javax.swing.ListCellRenderer() {
+            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                //Agename is really version here.
+                //Object o = agelist.getSelectedValue();
+                //String agename = (String)o;
+                String version = (String)value;
+                InstallStatus status = InstallStatus.notInCache;
+
+                AgeListItem ali = new AgeListItem(version, status);
+                ali.showicon = false;
+                if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                return ali;
             }
         });
         

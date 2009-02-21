@@ -1114,11 +1114,13 @@ public class Gui extends javax.swing.JFrame {
         jPanel39.add(jScrollPane6);
         jScrollPane6.setBounds(30, 190, 180, 210);
 
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane7.setViewportView(jList2);
 
         jPanel39.add(jScrollPane7);
         jScrollPane7.setBounds(220, 200, 240, 120);
 
+        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane12.setViewportView(jList3);
 
         jPanel39.add(jScrollPane12);
