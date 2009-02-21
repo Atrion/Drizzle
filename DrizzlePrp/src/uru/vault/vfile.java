@@ -45,7 +45,7 @@ public class vfile
         int bytesleft = c.getBytesRemaining();
         if(bytesleft!=0)
         {
-            int dummy=0;
+            m.err("Node has unexpected length.");
         }
         
         return result;

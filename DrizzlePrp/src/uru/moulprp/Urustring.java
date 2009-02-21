@@ -24,6 +24,7 @@ import shared.m;
 import shared.e;
 import shared.b;
 import uru.Bytedeque;
+import shared.IBytestream;
 
 /**
  *
@@ -46,14 +47,14 @@ public class Urustring extends uruobj
     {
         this.unencryptedString = s2.unencryptedString;
     }
-    
-    public Urustring(context c)
+    public Urustring(IBytestream c, int readversion)
     {
-        if(c.readversion==6 || c.readversion==3)
+        //Urustring res = new Urustring();
+        if(readversion==6 || readversion==3)
         {
-            Bytestream data = c.in;
-            short lengthbytes = data.readShort();
-            if ((lengthbytes & 0xF000)==0) data.skipBytes(2); //skip 2 bytes, if first half-byte is set. These bytes are apparently irrelevant, anyway.
+            //Bytestream data = c.in;
+            short lengthbytes = c.readShort();
+            if ((lengthbytes & 0xF000)==0) c.readShort();//data.skipBytes(2); //skip 2 bytes, if first half-byte is set. These bytes are apparently irrelevant, anyway.
             int actuallength = lengthbytes & 0xFFF;
             if((lengthbytes & 0xF000)!=0xF000)
             {
@@ -65,26 +66,34 @@ public class Urustring extends uruobj
             }
             unencryptedString = new byte[actuallength];
             //if((actuallength > 0) && (urustring[startpos]>0x7F))
-            if((actuallength > 0) && ((data.peekByte() & 0x80) != 0))
+            //if((actuallength > 0) && ((c.data.peekByte() & 0x80) != 0))
+            //{
+            if(actuallength > 0) //make sure we've got at least 1 byte.
             {
-                //encrypted...
-                for (int i = 0; i<actuallength; i++)
+                byte b0 = c.readByte();
+                if((b0 & 0x80)!=0)
                 {
-                    unencryptedString[i] = (byte)~data.readByte();
+                    //encrypted...
+                    unencryptedString[0] = (byte)~b0;
+                    for (int i = 1; i<actuallength; i++)
+                    {
+                        unencryptedString[i] = (byte)~c.readByte();
+                    }
                 }
-             }
-            else
-            {
-                //unencrypted...
-                //if(actuallength==0) m.msg("string is empty."); //not a problem.
-                if(actuallength!=0) m.msg("urustring is not encrypted.");
-                for (int i = 0; i<actuallength; i++)
+                else
                 {
-                    unencryptedString[i] = data.readByte();
+                    //unencrypted...
+                    //if(actuallength==0) m.msg("string is empty."); //not a problem.
+                    if(actuallength!=0) m.msg("urustring is not encrypted.");
+                    unencryptedString[0] = b0;
+                    for (int i = 1; i<actuallength; i++)
+                    {
+                        unencryptedString[i] = c.readByte();
+                    }
                 }
             }
         }
-        else if(c.readversion==4||c.readversion==7)
+        else if(readversion==4||readversion==7)
         {
             byte[] key = { 109, 121, 115, 116, 110, 101, 114, 100 }; //ascii for "mystnerd"
             short len = c.readShort();
@@ -96,6 +105,12 @@ public class Urustring extends uruobj
             unencryptedString = result;
         }
         e.ensureString(unencryptedString); //make sure its a text string.
+        
+        //return res;
+    }
+    public Urustring(context c)
+    {
+        this(c.in,c.readversion);
     }
     public void compile(Bytedeque deque)
     {

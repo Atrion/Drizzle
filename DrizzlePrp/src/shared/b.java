@@ -27,6 +27,16 @@ import java.util.Vector;
  */
 public class b
 {
+    public static byte[] substr(byte[] data, int offset, int length)
+    {
+        byte[] result = new byte[length];
+        for(int i=0;i<length;i++)
+        {
+            result[i] = data[offset+i];
+        }
+        return result;
+    }
+    
     public static boolean isEqual(byte[] bs1, byte[] bs2)
     {
         if(bs1.length!=bs2.length) return false;

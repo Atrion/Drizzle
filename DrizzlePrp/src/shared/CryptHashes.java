@@ -46,6 +46,12 @@ public class CryptHashes {
         d.doFinal(result, 0); //get the result.
         return result;
     }
+    public static byte[] GetHash(byte[] inputData, Hashtype type)
+    {
+        java.io.ByteArrayInputStream in = new java.io.ByteArrayInputStream(inputData);
+        byte[] result = GetHash(in, type);
+        return result;
+    }
     public static byte[] GetHash(String filename, Hashtype type)
     {
         FileInputStream in=null;

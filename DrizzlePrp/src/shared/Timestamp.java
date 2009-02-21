@@ -24,7 +24,7 @@ public class Timestamp
         c.writeInt(item1);
         c.writeInt(item2);
     }
-    public String toString()
+    public long toLong()
     {
         //long l = ((long)item1)<<32 | ((long)item2);
         //long l2 = ((long)item2)<<32 | ((long)item1);
@@ -32,6 +32,11 @@ public class Timestamp
         //long l2 = item2;
         l1 *= 1000;
         //l2 *= 1000; //we have to multiple by 1000 since java wants milliseconds.
+        return l1;
+    }
+    public String toString()
+    {
+        long l1 = this.toLong();
         java.util.Date d1 = new java.util.Date(l1);
         //java.util.Date d2= new java.util.Date(l2);
         return d1.toString();//+"::"+d2.toString();

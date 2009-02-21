@@ -9,7 +9,7 @@ package uru.vault;
  *
  * @author user
  */
-public class NodeTypes
+/*public class NodeTypes
 {
     
     public static interface ImageType
@@ -19,4 +19,4 @@ public class NodeTypes
         public byte[] getImageData();
     }
 
-}
+}*/
