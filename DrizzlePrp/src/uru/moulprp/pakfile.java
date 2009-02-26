@@ -23,6 +23,7 @@ import shared.FileUtils;
 import shared.m;
 import shared.b;
 import java.io.File;
+import shared.IBytestream;
 
 /**
  *
@@ -31,9 +32,9 @@ import java.io.File;
 //untested and incomplete.
 public class pakfile
 {
-    int objectcount;
-    IndexEntry[] indices;
-    PythonObject[] objects;
+    public int objectcount;
+    public IndexEntry[] indices;
+    public PythonObject[] objects;
     
     public void packPakFile(String inputFolder)
     {
@@ -82,29 +83,37 @@ public class pakfile
         }
     }
     
-    public pakfile(context c)
+    public pakfile(File f, int readversion, boolean readPythonObjects)
     {
+        byte[] data = shared.FileUtils.ReadFile(f);
+        data = uru.UruCrypt.DecryptWhatdoyousee(data);
+        IBytestream c = shared.ByteArrayBytestream.createFromByteArray(data);
         objectcount = c.readInt();
         indices = new IndexEntry[objectcount];
         for(int i=0;i<objectcount;i++)
         {
-            indices[i] = new IndexEntry(c);
+            indices[i] = new IndexEntry(c, readversion);
         }
-        objects = new PythonObject[objectcount];
-        for(int i=0;i<objectcount;i++)
+        if(readPythonObjects)
         {
-            objects[i] = new PythonObject(c);
+            objects = new PythonObject[objectcount];
+            for(int i=0;i<objectcount;i++)
+            {
+                int offset = indices[i].offset;
+                IBytestream c2 = c.Fork(offset);
+                objects[i] = new PythonObject(c2, readversion);
+            }
         }
     }
     
     public static class IndexEntry
     {
-        Urustring objectname;
-        int offset;
+        public Urustring objectname;
+        public int offset;
         
-        public IndexEntry(context c)
+        public IndexEntry(IBytestream c, int readversion)
         {
-            objectname = new Urustring(c);
+            objectname = new Urustring(c, readversion);
             offset = c.readInt();
         }
         
@@ -116,9 +125,11 @@ public class pakfile
         int objectsize;
         byte[] rawCompiledPythonObjectData;
         
-        public PythonObject(context c)
+        public PythonObject(IBytestream c, int readversion)
         {
             objectsize = c.readInt();
+            //account for bug in some Python utils:
+            if(objectsize+c.getAbsoluteOffset()>c.getFilelength()) objectsize-=4;
             rawCompiledPythonObjectData = c.readBytes(objectsize);
         }
         

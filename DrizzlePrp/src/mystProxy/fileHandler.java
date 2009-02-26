@@ -128,6 +128,7 @@ public class fileHandler
                         //found the part.
                         curbase = f;
                         found = true;
+                        break;
                         //if(f.isFile()) return f;
                         //else break;
                     }

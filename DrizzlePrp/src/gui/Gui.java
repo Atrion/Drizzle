@@ -2877,7 +2877,7 @@ public class Gui extends javax.swing.JFrame {
                         }
                     });
 
-                    jButton139.setText("jButton139");
+                    jButton139.setText("Find dup. python");
                     jButton139.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                             jButton139ActionPerformed(evt);
@@ -5204,10 +5204,31 @@ private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton138ActionPerformed
 
 private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton139ActionPerformed
-    for(int i=0;i<1000;i++)
+    String potsfolder = this.textfieldState39.getText();
+    if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
+    java.util.HashMap<String, String> pyfiles = new java.util.HashMap();
+    Vector<File> files = shared.FileUtils.FindAllFiles(potsfolder+"/Python/", ".pak", false);
+    for(File f: files)
     {
-        m.msg(Integer.toString(i));
+        //m.msg(f.getName());
+        uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f, 3, true);
+        for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
+        {
+            String pyname = ind.objectname.toString();
+            String paklist = pyfiles.get(pyname);
+            if(paklist==null) pyfiles.put(pyname, f.getName());
+            else pyfiles.put(pyname, paklist+","+f.getName());
+        }
     }
+    for(String pyfile: pyfiles.keySet())
+    {
+        String paklist = pyfiles.get(pyfile);
+        if(paklist.contains(","))
+        {
+            m.msg(pyfile+":"+paklist);
+        }
+    }
+    m.msg("Done checking for python file duplicates.");
 }//GEN-LAST:event_jButton139ActionPerformed
 
 private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton140ActionPerformed

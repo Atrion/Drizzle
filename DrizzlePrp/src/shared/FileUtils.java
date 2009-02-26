@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
+import java.util.Vector;
 
 import java.nio.channels.FileChannel;
 
@@ -43,6 +44,34 @@ public class FileUtils {
     static
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
+    }
+    
+    public static Vector<File> FindAllFiles(String folder, String ext, boolean recurse)
+    {
+        Vector<File> result = new Vector();
+        FindAllFiles(result,folder,ext,recurse);
+        return result;
+    }
+    public static void FindAllFiles(Vector<File> result, String folder, String ext, boolean recurse)
+    {
+        File fold = new File(folder);
+        for(File f: fold.listFiles())
+        {
+            if(f.isDirectory())
+            {
+                if(recurse)
+                {
+                    FindAllFiles(result,f.getAbsolutePath(),ext,recurse);
+                }
+            }
+            else if(f.isFile())
+            {
+                if(ext==null || f.getName().endsWith(ext))
+                {
+                    result.add(f);
+                }
+            }
+        }
     }
     
     public static boolean HasFreeSpace(String filename, long minimum)

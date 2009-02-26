@@ -70,7 +70,7 @@ public class ByteArrayBytestream extends IBytestream
     {
         ByteArrayBytestream result = new ByteArrayBytestream();
         result.data = data;
-        result.pos = pos;
+        result.pos = (int)offset;
         return result;
     }
     

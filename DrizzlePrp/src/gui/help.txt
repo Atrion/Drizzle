@@ -7,6 +7,7 @@ To use UAM (UruAgeManager):
 2) Click the "Get Latest Ages" button to get a list of Ages you can download.
 3) Select the Age you want, and the latest version and mirror will be chosen for you.
 4) Click "Download" to download and install the Age!
+5) Make sure one of the Ages you install is "Offline-KI" since that is what lets you link to other Ages.
 5) Optional: you can also delete Ages, but you shouldn't ever need to.
 
 
@@ -39,15 +40,6 @@ To run the proxy server:
 6) Set the proxy in your browser to 127.0.0.1:8012 (In firefox 3, go to Tools->Options->Advanced->Network->Connection Settings.  Select "Manual proxy configuration" and check "uses this proxy server for all protocols".  Set "Http proxy" to "127.0.0.1" and "Port" to "8012".)
 7) Optional: install an add-on like QuickProxy to firefox, so you can quickly switch between proxy mode and not.
 8) Go to http://index.net to start browsing.
-
-
-To convert just the Releeshan part of Kveer(Myst 5):
-----------------------------------------------------
-1) Go to the Automation->MystV tab and select these files: Kveer.age, Kveer.fni, Kveer.sum, Kveer_kverReleeshan.prp, Kveer_Textures.prp, Kveer_dusttest.prp.
-2) Convert them.
-3) Edit KveerMystV.age and comment out or remove all the "Page=" lines except:
-3a) Change the "Page=kverReleeshan,22,1" line to "Page=kverReleeshan,22"
-3b) Leave the "Page=dusttest,90" line alone.
 
 
 Project Info:
