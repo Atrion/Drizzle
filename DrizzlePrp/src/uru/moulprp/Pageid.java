@@ -170,7 +170,7 @@ public class Pageid extends uruobj
         {
             if(suffix<33)
             {
-                m.err("Unhandled pageid suffix: investigate now!");
+                m.warn("Unhandled pageid suffix: investigate now!");
             }
             return suffix - 33;
         }
@@ -200,6 +200,10 @@ public class Pageid extends uruobj
     {
         //return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
         return Integer.toString(prefix) + ":" + Integer.toString(suffix);
+    }
+    public String toString2()
+    {
+        return "Prefix="+Integer.toString(prefix) + ", Suffix=" + Integer.toString(suffix)+", Pagenum="+Integer.toString(this.getPageNumber());
     }
 
     public boolean equals(Object o)

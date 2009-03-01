@@ -31,9 +31,9 @@ import java.util.Vector;
 
 public class sumfile
 {
-    int filecount;
+    public int filecount;
     int u1; //always 0?
-    sumfileFileinfo[] files;
+    public sumfileFileinfo[] files;
     
     /*public static byte[] createSumfile(String... files)
     {
@@ -70,7 +70,18 @@ public class sumfile
         return c.getAllBytes();
     }*/
     
-    public sumfile(byte[] filedata, boolean isencrypted) throws readexception
+    public static sumfile readFromFile(File f, int readversion)
+    {
+        sumfile result = null;
+        try{
+            result = new sumfile(shared.FileUtils.ReadFile(f),true,readversion);
+        }catch(shared.readexception e){
+            m.err("Error reading sumfile:"+f.getName());
+        }
+        return result;
+    }
+    
+    public sumfile(byte[] filedata, boolean isencrypted, int readversion) throws readexception
     {
         if(isencrypted)
         {
@@ -78,6 +89,7 @@ public class sumfile
         }
         
         context c = new context(new Bytestream(filedata));
+        c.readversion = readversion;
         
         filecount = c.readInt();
         u1 = c.readInt();
@@ -86,9 +98,9 @@ public class sumfile
     
     public static class sumfileFileinfo extends uruobj
     {
-        Urustring filename;
-        byte[] md5;
-        int timestamp;
+        public Urustring filename;
+        public byte[] md5;
+        public int timestamp;
         int u2; //always 0?
         
         //private sumfileFileinfo()

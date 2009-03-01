@@ -33,7 +33,7 @@ public class x0029SoundBuffer extends uruobj
     
     int flags;
     int datalength; //the length of the uncompressed file.
-    Urustring oggfile;
+    public Urustring oggfile;
     short channels;
     plWAVHeader wavHeader;
     byte[] xinternaldata;

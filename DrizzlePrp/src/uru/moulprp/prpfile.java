@@ -159,13 +159,17 @@ public class prpfile
     
     public static prpfile createFromFile(String filename, boolean readRaw)
     {
-        //read file
-        byte[] filedata = shared.FileUtils.ReadFile(filename);
         File f = new File(filename);
+        return createFromFile(f,readRaw);
+    }
+    public static prpfile createFromFile(File f, boolean readRaw)
+    {
+        //read file
+        byte[] filedata = shared.FileUtils.ReadFile(f);
         context c = context.createFromBytestream(new Bytestream(filedata));
-        c.curFile = filename;
+        c.curFile = f.getAbsolutePath();
         prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c,readRaw); //read raw
-        prp.filename = filename;
+        prp.filename = f.getAbsolutePath();
         
         return prp;
     }

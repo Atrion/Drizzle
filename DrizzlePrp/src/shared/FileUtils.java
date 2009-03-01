@@ -210,7 +210,11 @@ public class FileUtils {
         }
         
     }
-    
+    static public void WriteFile(String filename, byte[] content, boolean createdirs)
+    {
+        File file = new File(filename);
+        WriteFile(file,content,createdirs);
+    }
     static public void WriteFile(String filename, byte[] content)
     {
         File file = new File(filename);
@@ -222,6 +226,19 @@ public class FileUtils {
     }
     static public void WriteFile(File filename, byte[] content)
     {
+        WriteFile(filename,content,false);
+    }
+    static public void WriteFile(File filename, byte[] content, boolean createdirs)
+    {
+        if(createdirs)
+        {
+            boolean success = filename.getParentFile().mkdirs();
+            if(!success)
+            {
+                //not a problem.
+                //m.err("Unable to create parent dirs: "+filename.getAbsolutePath());
+            }
+        }
         try
         {
             FileOutputStream writer = new FileOutputStream(filename);
