@@ -130,6 +130,8 @@ public class Node //implements NodeTypes.ImageType
             nodetype.TextNoteNode,
             nodetype.SDLNode,
             nodetype.MarkerNode,
+            nodetype.MarkerListNode,
+            nodetype.FolderNode,
         };
         for(nodetype nt: skips) if(nt==type) return;
         
@@ -211,6 +213,20 @@ public class Node //implements NodeTypes.ImageType
                 m.msg("  markertext:"+xu28.toString());
                 m.msg("  blob1(id):"+Integer.toString(blob1));
                 //agename, creator, and blob1 together seem to identify which game this belongs to.
+                break;
+            case FolderNode:
+                m.msg("FolderNode:");
+                m.msg("  Folder type: "+Integer.toString((xu12)));
+                /*if(xu20!=null && !xu20.toString().equals(""))
+                {
+                    m.msg(xu20.toString());
+                }*/
+                break;
+            case ChronicleNode:
+                m.msg("ChronicleNode:");
+                m.msg("  Agename: "+age_name.toString());
+                m.msg("  Varname: "+xu20.toString());
+                m.msg("  Varvalue: "+xu28.toString());
                 break;
         }
     }
