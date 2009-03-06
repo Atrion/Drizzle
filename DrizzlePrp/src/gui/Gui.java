@@ -135,8 +135,9 @@ public class Gui extends javax.swing.JFrame {
         m.redirectStdOut();
 
         //check memory...
-        if(Runtime.getRuntime().maxMemory()<256000000) m.warn("You should run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
-        
+        if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle"+Integer.toString(gui.Version.version)+".jar and ran DrizzlePrp.jar.  You should run Drizzle"+Integer.toString(gui.Version.version)+".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
+        if(Main.javaversion2<1.6) m.warn("Your version of java seems to be older than 1.6; some things might not work.");
+        if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://alcugs.almlys.org/Drizzle for details.");
         //try{
         //java.net.URL url = this.getClass().getResource("Image2.png");
         //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");

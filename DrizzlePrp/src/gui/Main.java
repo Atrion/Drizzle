@@ -28,6 +28,12 @@ public class Main extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     static Gui gui;
+    static String javaversion = "";
+    static double javaversion2 = 0.0;
+    static String os = "";
+    static String osversion = "";
+    static double osversion2 = 0.0;
+    static long maxmemory = 0;
     
     public static void main(String[] args)
     {
@@ -51,8 +57,10 @@ public class Main extends javax.swing.JFrame {
             public void run()
             {
                 try{
-                    String version = System.getProperty("java.version");
-                    System.out.println("Using JRE version: "+version);
+                    //javaversion = System.getProperty("java.version");
+                    javaversion = System.getProperty("java.specification.version");
+                    System.out.println("Using JRE version: "+javaversion);
+                    javaversion2 = Double.parseDouble(javaversion);
                     /*String[] verparts = version.split(".");
                     String verstr = verparts[0]+"."+verparts[1];
                     float jreversion = Float.parseFloat(verstr);
@@ -66,6 +74,16 @@ public class Main extends javax.swing.JFrame {
                     //get jar name:
                     //String source = Gui.class.getProtectionDomain().getCodeSource().getLocation().toString();
                     //shared.m.msg(source);
+                }catch(Exception e){}
+                try{
+                    maxmemory = Runtime.getRuntime().maxMemory();
+                }catch(Exception e){}
+                try{
+                    os = System.getProperty("os.name");
+                }catch(Exception e){}
+                try{
+                    osversion = System.getProperty("os.version");
+                    osversion2 = Double.parseDouble(osversion);
                 }catch(Exception e){}
                 gui = new Gui();
                 //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
