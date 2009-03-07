@@ -153,24 +153,9 @@ public class Uam
     {
         return shared.State.AllStates.getStateAsString("uamRoot");
     }
-    public static void DownloadAge7Zip(String age,String ver,String mir,String potsfolder)
+    /*public static void DownloadAge7Zip(String age,String ver,String mir,String potsfolder)
     {
-        //ensure pots folder. We don't need this here.
-        //if(!automation.detectinstallation.isFolderPots(potsfolder))
-        //{
-        //    //return false;
-        //    return;
-        //}
-        
-        //get hash
-        //String hash = ageList.getWhirlpool(age, ver);
-        String hash = ageList.getSha1(age, ver);
-        
-        //start work in another thread.
-        ThreadDownloadAndProcess.downloadAge(age,ver,mir,potsfolder,hash);
-        
-        //return true;
-    }
+    }*/
     public static void listAvailableAges()
     {
         if(ageList==null)

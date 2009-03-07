@@ -156,12 +156,17 @@ public class UamGui
     }
     public static void init() //called by swing thread
     {
+        //agelist.set
         agelist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
                 String age = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
                 GetVersionListGui(age);
+            }
+            public String toString()
+            {
+                return "test";
             }
         });
         agelist.setCellRenderer(new javax.swing.ListCellRenderer() {
@@ -712,6 +717,11 @@ public class UamGui
     }
     public static boolean PerformDeletion(String potsfolder)
     {
+        String age = (String)agelist.getSelectedValue();
+        return PerformDeletion(potsfolder, age);
+    }
+    public static boolean PerformDeletion(String potsfolder, String age)
+    {
         //m.msg("Deletions aren't supported yet.");
         //if(true)return;
         
@@ -721,7 +731,7 @@ public class UamGui
             return false;
         }
         
-        String age = (String)agelist.getSelectedValue();
+        //String age = (String)agelist.getSelectedValue();
         if(age==null)
         {
             m.msg("You must select an Age.");
@@ -761,6 +771,39 @@ public class UamGui
     public static boolean PerformDownload()
     {
         String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
+        Object[] ages = agelist.getSelectedValues();
+        if(ages.length>1)
+        //if(false)
+        {
+            boolean success = true;
+            for(Object age2: ages)
+            {
+                String age = (String)age2;
+                UamConfigNew.UamConfigData.Age a = uam.Uam.ageList.data.getAge(age);
+                if(a.versions.size()==0) continue; //skip Ages without versions.
+                UamConfigNew.UamConfigData.Age.Version ver2 = a.versions.get(0);
+                String ver = ver2.name;
+                if(ver2.mirrors.size()==0) continue; //skip Ages without mirrors for the most recent version.
+                String mir = ver2.mirrors.get(0).url;
+                boolean result = PerformDownload(potsfolder, age, ver, mir);
+                //try{
+                //Thread.sleep(20000);
+                //}catch(Exception e){}
+                if(!result) success = false;
+            }
+            return success;
+        }
+        else
+        {
+            String age = (String)agelist.getSelectedValue();
+            String ver = (String)verlist.getSelectedValue();
+            String mir = (String)mirlist.getSelectedValue();
+            return PerformDownload(potsfolder, age, ver, mir);
+        }
+    }
+    public static boolean PerformDownload(String potsfolder, String age, String ver, String mir)
+    {
+        //String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
         
         //ensure pots folder.
         if(!automation.detectinstallation.isFolderPots(potsfolder))
@@ -768,9 +811,9 @@ public class UamGui
             return false;
         }
 
-        String age = (String)agelist.getSelectedValue();
-        String ver = (String)verlist.getSelectedValue();
-        String mir = (String)mirlist.getSelectedValue();
+        //String age = (String)agelist.getSelectedValue();
+        //String ver = (String)verlist.getSelectedValue();
+        //String mir = (String)mirlist.getSelectedValue();
         if(age==null || ver==null || mir==null)
         {
             m.msg("You must select an Age, Version, and Mirror.");
@@ -786,7 +829,7 @@ public class UamGui
         
 
         m.msg("Cleaning up any previous version...");
-        if(!PerformDeletion(potsfolder)) return false;
+        if(!PerformDeletion(potsfolder, age)) return false;
         
         m.status("Checking to see if we already have this version in the cache...");
         if(FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+Uam.versionSep+ver+".7z"))
@@ -830,7 +873,23 @@ public class UamGui
         else
         {
             m.msg("Attempting to download Age: "+age+", Version: "+ver+", Mirror: "+mir);
-            uam.Uam.DownloadAge7Zip(age,ver,mir,potsfolder);
+            //uam.Uam.DownloadAge7Zip(age,ver,mir,potsfolder);
+
+            //ensure pots folder. We don't need this here.
+            //if(!automation.detectinstallation.isFolderPots(potsfolder))
+            //{
+            //    //return false;
+            //    return;
+            //}
+
+            //get hash
+            //String hash = ageList.getWhirlpool(age, ver);
+            String hash = uam.Uam.ageList.getSha1(age, ver);
+
+            //start work in another thread.
+            uam.ThreadDownloadAndProcess.downloadAge(age,ver,mir,potsfolder,hash);
+
+            //return true;
         }
 
         //refresh
