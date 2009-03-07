@@ -344,6 +344,8 @@ public class UamConfigNew
         
         void generateXml(StringBuilder s)
         {
+            s.append("<?xml version='1.0' encoding='ISO-8859-1'?>\n");
+            s.append("<?xml-stylesheet type='text/xsl' href='uam.status.xsl'?>\n");
             s.append("<uam>\n");
             for(String comment: comments) s.append("\t<!--"+comment+"-->\n");
             s.append("\t<welcome>"+welcome+"</welcome>\n");
