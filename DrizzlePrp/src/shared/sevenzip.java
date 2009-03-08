@@ -404,7 +404,7 @@ public class sevenzip
                 if (_extractMode && _processedFileInfo.AttributesAreDefined)
                     NFile::NDirectory::MySetFileAttributes(_diskFilePath, _processedFileInfo.Attributes);
                  */
-            PrintNewLine();
+            //PrintNewLine();
             return HRESULT.S_OK;
         }
 
