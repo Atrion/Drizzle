@@ -22,70 +22,110 @@ public class vaultAutomation
         result = result.replace("'", "&apos;");
         return result;
     }
+    private static void saveFile(String outfolder, StringBuilder xml)
+    {
+        String xmls = xml.toString();
+        byte[] data = b.StringToBytes(xmls);
+        String sha1 = b.BytesToHexString(shared.CryptHashes.GetHash(data, shared.CryptHashes.Hashtype.sha1));
+        String filename = sha1+".mem.xml";
+        FileUtils.WriteFile(outfolder+"/"+filename, data);
+    }
     public static void saveImages(String infolder, String outfolder)
     {
-        Nodes nodes = readFolder(infolder);
+        //detect vault type:
+        String vaultDotDat = infolder+"/vault.dat";
+        Nodes nodes;
+        if(FileUtils.Exists(vaultDotDat))
+        {
+            nodes = Nodes.createFromNodeVector(uru.vault.vaultdatfile.createFromFilename(vaultDotDat).nodes);
+        }
+        else
+        {
+            nodes = readFolder(infolder);
+        }
+
         nodes.sortByCreationDate();
 
         StringBuilder xml = new StringBuilder();
         xml.append("<?xml version='1.0' encoding='ISO-8859-1'?>");
         xml.append("<?xml-stylesheet type='text/xsl' href='memories.xsl'?>");
         xml.append("<memories>");
+
+        java.util.HashSet<Long> dates = new java.util.HashSet();
         
         for(Node n: nodes.nodes)
         {
+            Timestamp ts = n.age_time;
+
             if(n.type==nodetype.ImageNode)
             {
                 byte[] data = n.ImageNode_GetImageData();
                 String sha1 = b.BytesToHexString(shared.CryptHashes.GetHash(data, shared.CryptHashes.Hashtype.sha1));
                 String filename = sha1+".jpg";
                 FileUtils.WriteFile(outfolder+"/"+filename, data);
-                xml.append("<imagenode>");
-                xml.append("<creationtime>"+xmlize(n.crt_time.toString())+"</creationtime>");
-                xml.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
-                xml.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
-                xml.append("<caption>"+xmlize(n.ImageNode_GetCaption())+"</caption>");
-                xml.append("<imagesha1>"+sha1+"</imagesha1>");
-                xml.append("</imagenode>");
+
+                StringBuilder xml2 = new StringBuilder();
+                xml2.append("<imagenode>");
+                xml2.append("<creationtime>"+xmlize(n.crt_time.toLongString())+"</creationtime>");
+                xml2.append("<agetime>"+xmlize(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+xmlize(n.mod_time.toLongString())+"</modtime>");
+                xml2.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
+                xml2.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
+                xml2.append("<caption>"+xmlize(n.ImageNode_GetCaption())+"</caption>");
+                xml2.append("<imagesha1>"+sha1+"</imagesha1>");
+                xml2.append("</imagenode>");
+                saveFile(outfolder, xml2);
             }
             else if(n.type==nodetype.TextNoteNode)
             {
-                xml.append("<textnotenode>");
-                xml.append("<creationtime>"+xmlize(n.crt_time.toString())+"</creationtime>");
-                xml.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
-                xml.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
-                xml.append("<title>"+xmlize(n.TextNoteNode_GetTitle())+"</title>");
-                xml.append("<text>"+xmlize(n.TextNoteNode_GetText())+"</text>");
-                xml.append("</textnotenode>");
-                
+                StringBuilder xml2 = new StringBuilder();
+                xml2.append("<textnotenode>");
+                xml2.append("<creationtime>"+xmlize(n.crt_time.toLongString())+"</creationtime>");
+                xml2.append("<agetime>"+xmlize(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+xmlize(n.mod_time.toLongString())+"</modtime>");
+                xml2.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
+                xml2.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
+                xml2.append("<title>"+xmlize(n.TextNoteNode_GetTitle())+"</title>");
+                xml2.append("<text>"+xmlize(n.TextNoteNode_GetText())+"</text>");
+                xml2.append("</textnotenode>");
+                saveFile(outfolder, xml2);
             }
             else if(n.type==nodetype.MarkerListNode)
             {
-                xml.append("<markerlistnode>");
-                xml.append("<creationtime>"+xmlize(n.crt_time.toString())+"</creationtime>");
-                xml.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
-                xml.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
-                xml.append("<gamename>"+xmlize(n.xu20.toString())+"</gamename>");
+                StringBuilder xml2 = new StringBuilder();
+                xml2.append("<markerlistnode>");
+                xml2.append("<creationtime>"+xmlize(n.crt_time.toLongString())+"</creationtime>");
+                xml2.append("<agetime>"+xmlize(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+xmlize(n.mod_time.toLongString())+"</modtime>");
+                xml2.append("<owner>"+xmlize(nodes.getAvatarName(n.owner))+"</owner>");
+                xml2.append("<agename>"+xmlize(n.ImageNode_GetAgeName())+"</agename>");
+                xml2.append("<gamename>"+xmlize(n.xu20.toString())+"</gamename>");
                 for(Node mn: nodes.getMarkers(n.owner, n.age_name.toString(), n.blob1))
                 {
-                    xml.append("<marker>");
+                    xml2.append("<marker>");
                     Flt f16 = Flt.createFromData(mn.xu16);
                     Flt f17 = Flt.createFromData(mn.xu17);
                     Flt f18 = Flt.createFromData(mn.xu18);
-                    xml.append("<text>"+mn.xu28.toString()+"</text>");
-                    xml.append("<x>"+f16.toString()+"</x>");
-                    xml.append("<y>"+f16.toString()+"</y>");
-                    xml.append("<z>"+f16.toString()+"</z>");
-                    xml.append("</marker>");
+                    xml2.append("<text>"+mn.xu28.toString()+"</text>");
+                    xml2.append("<x>"+f16.toString()+"</x>");
+                    xml2.append("<y>"+f16.toString()+"</y>");
+                    xml2.append("<z>"+f16.toString()+"</z>");
+                    xml2.append("</marker>");
                 }
-                xml.append("</markerlistnode>");
+                xml2.append("</markerlistnode>");
+                saveFile(outfolder, xml2);
             }
+        }
+
+        for(File f: FileUtils.FindAllFiles(outfolder, ".mem.xml", false))
+        {
+            xml.append(b.BytesToString(FileUtils.ReadFile(f)));
         }
         
         xml.append("</memories>");
         FileUtils.WriteFile(outfolder+"/memories.xml", b.StringToBytes(xml.toString()));
         FileUtils.WriteFile(outfolder+"/memories.xsl", shared.GetResource.getResourceAsBytes("/files/memories.xsl"));
-        
+        FileUtils.WriteFile(outfolder+"/jquery.js", shared.GetResource.getResourceAsBytes("/files/jquery-1.3.2.min.js"));
         m.status("Finished creating Memories files!");
     }
     

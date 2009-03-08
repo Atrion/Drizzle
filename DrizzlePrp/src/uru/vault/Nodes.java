@@ -20,7 +20,14 @@ public class Nodes
     {
         nodes.add(n);
     }
-    
+
+    public static Nodes createFromNodeVector(Vector<Node> nodes)
+    {
+        Nodes result = new Nodes();
+        result.nodes = nodes;
+        return result;
+    }
+
     public Vector<Node> findNodesOfType(nodetype type)
     {
         Vector<Node> result = new Vector();

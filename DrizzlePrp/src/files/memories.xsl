@@ -13,12 +13,28 @@
 			margin: 16px 4px 16px 4px;
 		}
 	</style>
+    <script type='text/javascript' src='jquery.js'></script>
+    <script type='text/javascript'>
+        $(document).ready(function()
+        {
+            $(".modtime").each(function(i){
+                num = $(this).text()
+                num = parseInt(num)
+                date = new Date()
+                date.setTime(num)
+                $(this).text(date.toString())
+            })
+        })
+    </script>
 </head>
 <body>
 Hello!
 <xsl:for-each select="memories/*">
+    <xsl:sort select="modtime"/>
 	<div>
-		<b><xsl:value-of select="creationtime"/></b><br/>
+		<!--<b><xsl:value-of select="creationtime"/></b><br/>-->
+		<!--<b><xsl:value-of select="agetime"/></b><br/>-->
+		<b><span class="modtime"><xsl:value-of select="modtime"/></span></b><br/>
 		<xsl:value-of select="owner"/>, <xsl:value-of select="agename"/><br/>
 		<xsl:choose>
 			<xsl:when test="name(.)='imagenode'">

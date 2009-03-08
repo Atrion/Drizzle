@@ -11,6 +11,8 @@ import java.util.Vector;
 
 public class vaultdatfile
 {
+    public Vector<Node> nodes;
+
     private vaultdatfile(){}
     
     public static vaultdatfile createFromFilename(String filename)
@@ -30,11 +32,11 @@ public class vaultdatfile
         int u7 = c.readInt(); //index of last node
         int u8 = c.readInt(); //number of nodes
         
-        Vector<Node> nodes = new Vector();
+        result.nodes = new Vector();
         for(int curnode=0;curnode<u8;curnode++)
         {
             Node node = new Node(c);
-            nodes.add(node);
+            result.nodes.add(node);
         }
         
         int bytesleft = c.getBytesRemaining();

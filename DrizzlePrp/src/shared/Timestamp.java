@@ -41,4 +41,8 @@ public class Timestamp
         //java.util.Date d2= new java.util.Date(l2);
         return d1.toString();//+"::"+d2.toString();
     }
+    public String toLongString()
+    {
+        return Long.toString(this.toLong());
+    }
 }
