@@ -1,5 +1,7 @@
 Welcome to Drizzle!
 
+Up-to-date and more detailed help is available at http://alcugs.almlys.org/Drizzle
+
 
 To use UAM (UruAgeManager):
 ---------------------------
@@ -11,13 +13,22 @@ To use UAM (UruAgeManager):
 5) Optional: you can also delete Ages, but you shouldn't ever need to.
 
 
-To convert Myst 5 Ages the simple way:
+To convert Myst5/Moul/Crowthistle Ages the simple way:
 --------------------------------------
 1) Go to the Simplicity tab, then the MystV tab.
 2) Select the folder where you installed Myst 5. (By default, it's "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
 3) Select the folder where you installed PathOfTheShell/CompleteChronicles. (By default it's "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
 4) Click the "Start..." button.
 5) In the PathOfTheShell/CompleteChronicles folder, run SoundDecompress.exe. (SoundDecompress.exe may crash if you haven't run Uru at least once.)
+
+
+Memories:
+--------------------------
+1) The infolder is set differently depending on whether you're using Pots or Alcugs:
+  a) Pots: The infolder should be set to the folder with vault.dat.  This is in Uru's folder, then 'sav', then the avatar's folder(which is named using the hex version of the avatar's name), then 'current'.
+  b) Alcugs: The infolder should be set to the folder with a bunch of .s files.  This is in Uru's folder, then 'vnode_cache', then the avatar's folder(which is named using the hex version of the avatar's name).
+2) The outfolder is set to where you want the files saved.  (If you choose one where you've done this before, they will be merged together.)
+3) Click the "Start" button.
 
 
 To use DeepView:

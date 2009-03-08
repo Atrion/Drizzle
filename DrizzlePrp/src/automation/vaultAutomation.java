@@ -41,7 +41,30 @@ public class vaultAutomation
         }
         else
         {
-            nodes = readFolder(infolder);
+            if(FileUtils.FindAllFiles(infolder, ".s", false).size()!=0)
+            {
+                nodes = readFolder(infolder);
+            }
+            else
+            {
+                m.err("The input folder must have either 'vault.dat' or some number of '.s' files.");
+                return;
+            }
+        }
+
+        File of = new File(outfolder);
+        if(!of.exists())
+        {
+            m.err("You must select an output folder that already exists.");
+            return;
+        }
+        else
+        {
+            if(!of.isDirectory())
+            {
+                m.err("You must select an Output folder.");
+                return;
+            }
         }
 
         nodes.sortByCreationDate();

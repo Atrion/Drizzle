@@ -32,7 +32,15 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
     }
     public void putValue(Object obj)
     {
-        this.setSelectedIndex((Integer)obj);
+        int i = (Integer)obj;
+        if(i>=this.getTabCount())
+        {
+            this.setSelectedIndex((Integer)getDefault());
+        }
+        else
+        {
+            this.setSelectedIndex((Integer)obj);
+        }
     }
 
     public Object getValue()
