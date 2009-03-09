@@ -273,6 +273,7 @@ public class FileUtils {
     static public void CreateFolder(String filename)
     {
         File f = new File(filename);
-        f.mkdirs();
+        boolean result = f.mkdirs();
+        if(!result) m.warn("Unable to create folder: "+filename);
     }
 }

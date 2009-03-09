@@ -28,6 +28,14 @@ import java.awt.TrayIcon;
 import java.awt.SystemTray;
 import javax.swing.JOptionPane;
 
+import java.awt.Component;
+import javax.swing.JPanel;
+import java.awt.LayoutManager;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+
 public class GuiUtils
 {
     public static final boolean onlyUseASingleJFileChooser = true;
@@ -101,6 +109,8 @@ public class GuiUtils
         public CustomJFileChooser()
         {
             super();
+            this.setPreferredSize(new java.awt.Dimension(700,500));
+
             java.awt.LayoutManager lm = this.getLayout();
             //java.awt.BorderLayout.SOUTH
             //this.add(new javax.swing.JLabel("hi"));
@@ -137,9 +147,94 @@ public class GuiUtils
             //pan.setBounds(0, 0, 100, 100);
             //pan.add(drives);
             this.addImpl(pan, java.awt.BorderLayout.WEST, -1);
+
+            JPanel pan2 = new JPanel();
+            JButton createfolderbutton = new JButton("Create Folder");
+            final CustomJFileChooser ths = this;
+            createfolderbutton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String newfol = GuiUtils.getStringFromUser("Folder Name:", "Create Folder");
+                    if(newfol.equals("")) return;
+                    String fullnew = ths.getCurrentDirectory().getAbsolutePath()+"/"+newfol;
+                    FileUtils.CreateFolder(fullnew);
+                    ths.rescanCurrentDirectory();
+                }
+            });
+            BoxLayout gl2 = new javax.swing.BoxLayout(pan2, BoxLayout.Y_AXIS);
+            pan2.add(Box.createGlue());
+            pan2.add(createfolderbutton);
+            this.addImpl(pan2, java.awt.BorderLayout.EAST, -1);
+
+            /*this.addMouseListener(new javax.swing.event.MouseInputListener() {
+                public void mouseClicked(MouseEvent e) {
+                    if(e.getButton()==MouseEvent.BUTTON3)
+                    {
+                        javax.swing.JPopupMenu popup = new javax.swing.JPopupMenu();
+                        javax.swing.JComponent parent = (javax.swing.JComponent)e.getSource();
+                        javax.swing.JMenuItem mi = new javax.swing.JMenuItem("create folder");
+                        mi.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                String newfol = GuiUtils.getStringFromUser("Folder Name:", "Create Folder");
+                                if(newfol.equals("")) return;
+                                String fullnew = ths.getCurrentDirectory().getAbsolutePath()+"/"+newfol;
+                                FileUtils.CreateFolder(fullnew);
+                                ths.rescanCurrentDirectory();
+                            }
+                        });
+                        java.awt.Point p = e.getPoint();
+                        popup.add(mi);
+                        popup.show(parent, p.x , p.y);
+                    }
+                }
+                public void mousePressed(MouseEvent e) {}
+                public void mouseReleased(MouseEvent e) {}
+                public void mouseEntered(MouseEvent e) {}
+                public void mouseExited(MouseEvent e) {}
+                public void mouseDragged(MouseEvent e) {}
+                public void mouseMoved(MouseEvent e) {}
+            });*/
             //roots = javax.swing.filechooser.FileSystemView.getFileSystemView().getRoots();
             //roots = sun.awt.shell.ShellFolder.
-            int dummy=0;
+            /*javax.swing.JButton createfolderbutton = new javax.swing.JButton("Create Folder");
+            java.awt.LayoutManager lm3 = this.getLayout();
+            java.awt.BorderLayout bl3 = (java.awt.BorderLayout)lm3;
+            java.awt.Component c5 = bl3.getLayoutComponent(java.awt.BorderLayout.SOUTH);
+            javax.swing.JPanel c6 = (javax.swing.JPanel)c5;
+            java.awt.LayoutManager lm6 = c6.getLayout();
+            java.awt.BorderLayout bl6 = (java.awt.BorderLayout)lm6;
+            java.awt.Component c7 = bl6.getLayoutComponent(java.awt.BorderLayout.SOUTH);
+            JPanel jp7 = (JPanel)c7;
+            LayoutManager lm7 = jp7.getLayout();
+            jp7.add(new javax.swing.Box.Filler(new java.awt.Dimension(0,0), new java.awt.Dimension(0,0), new java.awt.Dimension(10000,10000)),javax.swing.BoxLayout.X_AXIS,-1);
+            jp7.add(createfolderbutton,javax.swing.BoxLayout.X_AXIS,-1);
+            for(Component c: jp7.getComponents())
+            {
+                int dummy=0;
+            }
+            //for(Component c: c6.getComponents())
+            //{
+            //    Class cl = c.getClass();
+            //}
+            //c6.add(createfolderbutton, java.awt.BorderLayout.EAST);
+            if(true)return;
+            for(java.awt.Component c: this.getComponents())
+            {
+                if (c instanceof javax.swing.JPanel)
+                {
+                    javax.swing.JPanel c2 = (javax.swing.JPanel)c;
+                    c2.add(createfolderbutton);
+                    java.awt.LayoutManager lm2 = c2.getLayout();
+                    //break;
+                }
+                Class cl = c.getClass();
+                String name = cl.getCanonicalName();
+                String name2=cl.getName();
+                Class cl2 = cl.getSuperclass();
+                int dummy=0;
+            }
+
+            //this.addImpl(createfolderbutton, java.awt.BorderLayout., -1);
+            int dummy=0;*/
         }
 
         public void updateroot(java.io.File dir)
@@ -218,6 +313,12 @@ public class GuiUtils
     {
         String result = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
         if(result!=null) field.setText(result);
+    }
+    public static String getStringFromUser(String message, String title)
+    {
+        String result = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+        if(result==null) result = "";
+        return result;
     }
     public static void getUserSelectedFolder(JTextComponent field)
     {

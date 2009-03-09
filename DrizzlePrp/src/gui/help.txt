@@ -53,6 +53,21 @@ To run the proxy server:
 8) Go to http://index.net to start browsing.
 
 
+Wiki spider:
+------------
+This allows you to spider all the source from a wiki.
+1) Set the Url to the location of the wiki, but not one of the actual pages.  Eg. "http://en.wikipedia.org/wiki/", *not* "http://en.wikipedia.org/wiki/Main_Page".  (Note: don't actually try to spider Wikipedia :P)
+2) Set the outfolder to where you want the files saved.
+3) Click Start!
+
+
+Age reports:
+------------
+This gives some information on an Age or Ages.
+1) Set the folder to the place with all the files you want reported on.
+2) Click Report!
+
+
 Project Info:
 -------------
 SVN: https://alcugs.almlys.org/svn/drizzle/
