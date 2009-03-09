@@ -869,7 +869,7 @@ public class Gui extends javax.swing.JFrame {
         UAMTab.add(jButton124);
         jButton124.setBounds(70, 150, 120, 36);
 
-        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12));
         jLabel36.setText("( Help can be found under the \"Help\" tab, or detailed help and troubleshooting can be found at http://alcugs.almlys.org/Drizzle  )");
         UAMTab.add(jLabel36);
         jLabel36.setBounds(140, 10, 710, 16);
@@ -1273,7 +1273,7 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState1.addTab("Crowthistle", jPanel40);
 
-            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12));
             jLabel53.setText("This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzzle");
 
             javax.swing.GroupLayout SimpTabLayout = new javax.swing.GroupLayout(SimpTab);
@@ -1330,7 +1330,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            jLabel30.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+            jLabel30.setFont(new java.awt.Font("Dialog", 1, 12));
             jLabel30.setText("Memories: this area is for extracting images, notes, etc. from Uru (either offline or online)");
 
             jLabel43.setText("Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle");
@@ -1342,30 +1342,24 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(MemTabLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
                     .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel43)
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(MemTabLayout.createSequentialGroup()
-                            .addComponent(jLabel43)
-                            .addContainerGap())
-                        .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(MemTabLayout.createSequentialGroup()
-                                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                            .addComponent(jLabel33)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton122)
                                 .addGroup(MemTabLayout.createSequentialGroup()
-                                    .addComponent(jLabel33)
+                                    .addComponent(textfieldState36, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton122)
-                                        .addGroup(MemTabLayout.createSequentialGroup()
-                                            .addComponent(textfieldState36, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jButton123)
-                                                .addComponent(jButton121))))
-                                    .addContainerGap(105, Short.MAX_VALUE))
-                                .addGroup(MemTabLayout.createSequentialGroup()
-                                    .addComponent(jLabel34)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jButton123)
+                                        .addComponent(jButton121)))))
+                        .addGroup(MemTabLayout.createSequentialGroup()
+                            .addComponent(jLabel34)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(105, Short.MAX_VALUE))
             );
             MemTabLayout.setVerticalGroup(
                 MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1581,7 +1575,7 @@ public class Gui extends javax.swing.JFrame {
             ProxyTab.add(jButton77);
             jButton77.setBounds(410, 80, 66, 36);
 
-            jLabel52.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+            jLabel52.setFont(new java.awt.Font("Dialog", 1, 12));
             jLabel52.setText("This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle");
             ProxyTab.add(jLabel52);
             jLabel52.setBounds(20, 10, 650, 16);
@@ -2966,7 +2960,7 @@ public class Gui extends javax.swing.JFrame {
                                     .addComponent(jButton82))
                                 .addGap(154, 154, 154))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton118)
                                     .addComponent(jButton117))
@@ -3821,7 +3815,7 @@ public class Gui extends javax.swing.JFrame {
 
                         tabsState2.addTab("HexIsle", jPanel37);
 
-                        tabsState4.addTab("Automation", tabsState2);
+                        tabsState4.addTab("Manual Conversion", tabsState2);
 
                         AdvTab.add(tabsState4);
                         tabsState4.setBounds(10, 10, 830, 420);
