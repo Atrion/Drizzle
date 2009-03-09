@@ -370,7 +370,7 @@ public class prputils
         
     }
 
-    public static void DumpObjects(byte[] data, Typeid typetodump)
+    public static void DumpObjects(byte[] data, Typeid typetodump, String outfolder)
     {
         context c = context.createFromBytestream(new Bytestream(data));
         
@@ -399,14 +399,14 @@ public class prputils
                 {
                     Bytestream bs = new Bytestream(c.in,offset);
                     byte[] bytes = bs.readBytes(size);
-                    shared.FileUtils.WriteFile(_staticsettings.outputdir+desc.toString()+".dat", bytes);
+                    shared.FileUtils.WriteFile(outfolder+"/"+desc.toString()+".dat", bytes);
                 }
                 
             }
         }
     }
 
-    public static void ReportCrossLinks(byte[] data)
+    public static void ReportCrossLinks(byte[] data, String outfolder)
     {
         context c = context.createFromBytestream(new Bytestream(data));
         
@@ -415,18 +415,18 @@ public class prputils
         ProcessAllMoul(c,false, automation.mystAutomation.moulReadable);
         //String report = "Cross-Reference report:\n\n" + _staticsettings.referenceReport.toString() + "\n\nScanned Reference Report:\n\n" + _staticsettings.scannedReferenceReport.toString();
         String report = "howfound;fromname;fromtype;fromnumber;toname;totype;tonumber;topageid\n" + _staticsettings.referenceReport.toString() + _staticsettings.scannedReferenceReport.toString();
-        FileUtils.WriteFile(_staticsettings.outputdir+"crosslinkreport.csv", report.getBytes());
+        FileUtils.WriteFile(outfolder+"/crosslinkreport.csv", report.getBytes());
         
     }
     
     //doesn't quite work right!
-    public static void ReportDeep(byte[] data)
+    public static void ReportDeep(byte[] data, String outfolder)
     {
         context c = context.createFromBytestream(new Bytestream(data));
         //_staticsettings.reportReferences = true;
         //_staticsettings.tryToFindReferencesInUnknownObjects = true;
         prpfile prp = prpprocess.ProcessAllObjects(c, false);
-        uru.reflection.reflectionReportToFile(prp);
+        uru.reflection.reflectionReportToFile(prp, outfolder);
         //String report = "Cross-Reference report:\n\n" + _staticsettings.referenceReport.toString() + "\n\nScanned Reference Report:\n\n" + _staticsettings.scannedReferenceReport.toString();
         //FileUtils.WriteFile(_staticsettings.outputdir+"deepreport.txt", report.getBytes());
         
@@ -448,7 +448,7 @@ public class prputils
             };
         }
                 
-        public static void RecompilePrp(byte[] data, Decider decider)
+        public static void RecompilePrp(byte[] data, Decider decider, String outfolder)
         {
             context c = context.createFromBytestream(new Bytestream(data));
             //c.outputVertices = true; //works but not used.
@@ -460,7 +460,7 @@ public class prputils
             
             Bytes fullbyte = RecompilePrp(prp, decider);
             String filename = prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
-            FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
+            FileUtils.WriteFile(outfolder+"/"+filename, fullbyte);
         }
         
         public static Bytes RecompilePrp(prpfile prp, Decider decider)
@@ -1007,7 +1007,7 @@ public class prputils
                 }
             }
         }
-        FileUtils.WriteFile(_staticsettings.outputdir+"LayerAnimationReport.txt", report.toString().getBytes());
+        //FileUtils.WriteFile(_staticsettings.outputdir+"LayerAnimationReport.txt", report.toString().getBytes());
     }
     public static PrpRootObject[] FindAllObjectsOfType(prpfile prp, Typeid type)
     {

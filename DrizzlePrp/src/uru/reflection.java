@@ -102,11 +102,11 @@ public class reflection
         
     }
 
-    public static void reflectionReportToFile(Object obj)
+    public static void reflectionReportToFile(Object obj, String outfolder)
     {
         String report = reflectionReportXml(obj);
         byte[] report2 = report.getBytes();
-        FileUtils.WriteFile(_staticsettings.outputdir+"reflectionreport.xml", report2);
+        FileUtils.WriteFile(outfolder+"/reflectionreport.xml", report2);
     }
     
     public static String reflectionReportXml(Object obj)

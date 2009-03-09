@@ -38,7 +38,7 @@ public class _staticsettings
     {
         
     }*/
-    public static String outputdir = "c:/documents and settings/user/desktop/output/";
+    //public static String outputdir = "c:/documents and settings/user/desktop/output/";
     
     //set this to a value other than 0x00 to force the compiler to use this sequence prefix in Pageid.
     //todo: replace this with a member in an outputcontext.

@@ -52,7 +52,7 @@ public class pakfile
         }
     }
     
-    public void extractPakFile(boolean prependPYCHeader, int pythonversion)
+    public void extractPakFile(boolean prependPYCHeader, int pythonversion, String outfolder)
     {
         for(int i=0;i<objectcount;i++)
         {
@@ -78,7 +78,8 @@ public class pakfile
                 rawdata = b.appendBytes(header,rawdata);
             }
             
-            String filename = _staticsettings.outputdir+name+".pyc";
+            //String filename = _staticsettings.outputdir+name+".pyc";
+            String filename = outfolder+"/"+name+".pyc";
             FileUtils.WriteFile(filename, rawdata);
         }
     }
