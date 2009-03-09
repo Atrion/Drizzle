@@ -33,7 +33,12 @@ public class ThreadDownloadAndProcess extends Thread
         downloadAge7z,
     }*/
 
-    public static batching.Queue queue = new batching.Queue();
+    private static batching.Queue queue;
+    private static batching.Queue getQueue()
+    {
+        if(queue==null) queue = new batching.Queue();
+        return queue;
+    }
     public static void downloadConfig(String server, String potsfolder, shared.delegate callback)
     {
         /*ThreadDownloadAndProcess thread = new ThreadDownloadAndProcess();
@@ -45,7 +50,7 @@ public class ThreadDownloadAndProcess extends Thread
         thread.start();*/
         final String server2 = server;
         final String potsfolder2 = potsfolder;
-        queue.AddItem(new batching.QueueItem() {
+        getQueue().AddItem(new batching.QueueItem() {
             boolean success;
 
             @Override
@@ -122,7 +127,7 @@ public class ThreadDownloadAndProcess extends Thread
         final String mir2 = mir;
         final String whirlpool2 = whirlpool;
         final boolean doDownload2 = doDownload;
-        queue.AddItem(new batching.QueueItem() {
+        getQueue().AddItem(new batching.QueueItem() {
 
             boolean success;
 

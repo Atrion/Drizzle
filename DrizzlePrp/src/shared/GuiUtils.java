@@ -5,6 +5,11 @@
 
 package shared;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import javax.swing.text.JTextComponent;
 import javax.swing.JFileChooser;
 
@@ -25,7 +30,8 @@ import javax.swing.JOptionPane;
 
 public class GuiUtils
 {
-    public static boolean onlyUseASingleJFileChooser = true;
+    public static final boolean onlyUseASingleJFileChooser = true;
+    //public static final boolean useNativeLAFFileChooser = true;
     private static JFileChooser _fc;
     private static TrayIcon _trayicon;
     
@@ -64,17 +70,147 @@ public class GuiUtils
             e.printStackTrace();
         }
     }
-    
+
+    static class CustomJFileChooser extends javax.swing.JFileChooser
+    {
+        javax.swing.JComboBox drives;// = new javax.swing.JComboBox();
+        static class Root
+        {
+            String display;
+            java.io.File dir;
+
+            public Root(String display, java.io.File dir)
+            {
+                this.display = display;
+                this.dir = dir;
+            }
+            public String toString()
+            {
+                return display;
+            }
+        }
+        /*public void setCurrentDirectory(java.io.File dir)
+        {
+            super.setCurrentDirectory(dir);
+            //if(dir!=null)
+            //{
+            //    m.msg("clear:"+dir.toString());
+                //drives.setSelectedIndex(0);
+            //}
+        }*/
+        public CustomJFileChooser()
+        {
+            super();
+            java.awt.LayoutManager lm = this.getLayout();
+            //java.awt.BorderLayout.SOUTH
+            //this.add(new javax.swing.JLabel("hi"));
+            //this.addimp
+            //this.addImpl(new javax.swing.JLabel("hi"), java.awt.BorderLayout.WEST, -1);
+            java.util.Vector<Root> roots = new java.util.Vector();
+            //roots.add(new Root("",null));
+            roots.add(new Root("Desktop",javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory()));
+            for(java.io.File root: java.io.File.listRoots())
+            {
+                roots.add(new Root(root.toString(),root));
+            }
+
+            /*drives = new javax.swing.JComboBox(roots);
+            drives.addItemListener(new java.awt.event.ItemListener() {
+                public void itemStateChanged(ItemEvent e) {
+                    updateroot();
+                }
+            });*/
+            //drives.setBounds(0, 0, 50, 50);
+            java.awt.GridLayout gl = new java.awt.GridLayout(0, 1);
+            javax.swing.JPanel pan = new javax.swing.JPanel(gl);
+            for(Root r: roots)
+            {
+                javax.swing.JButton jb = new javax.swing.JButton(r.display);
+                final Root r2 = r;
+                jb.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        updateroot(r2.dir);
+                    }
+                });
+                pan.add(jb);
+            }
+            //pan.setBounds(0, 0, 100, 100);
+            //pan.add(drives);
+            this.addImpl(pan, java.awt.BorderLayout.WEST, -1);
+            //roots = javax.swing.filechooser.FileSystemView.getFileSystemView().getRoots();
+            //roots = sun.awt.shell.ShellFolder.
+            int dummy=0;
+        }
+
+        public void updateroot(java.io.File dir)
+        {
+            //java.io.File root = ((Root)drives.getSelectedItem()).dir;
+            //if(root!=null)
+            //{
+                //m.msg("changing root."+dir.toString());
+                this.setCurrentDirectory(dir);
+            //}
+        }
+        /*public void setUI(javax.swing.plaf.ComponentUI ui)
+        {
+            super.setUI(com.sun.java.swing.plaf.windows.WindowsFileChooserUI.createUI(this));
+            //com.sun.java.swing.plaf.motif.MotifFileChooserUI
+            int dummy=0;
+            for(java.awt.Component c: this.getComponents())
+            {
+                javax.swing.SwingUtilities.updateComponentTreeUI(c);
+            }
+        }*/
+    }
+
     private static JFileChooser getJFileChooser()
     {
         if(onlyUseASingleJFileChooser)
         {
-            if(_fc==null) _fc = new JFileChooser();
+            if(_fc==null)
+            {
+                //if(useNativeLAFFileChooser)
+                //{
+                    //try{
+                        //javax.swing.UIManager.put("FileChooser.cancelButtonText", "wha");
+                        //javax.swing.UIManager.put("FileChooser.listViewWindowsStyle", (Boolean)false);
+                        //javax.swing.UIManager.put("FileChooser.usesSingleFilePane", (Boolean)false);
+                        //m.msg("a"+Long.toString(System.currentTimeMillis()));
+                        //javax.swing.LookAndFeel origin = javax.swing.UIManager.getLookAndFeel();
+                        //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                        //m.msg(Long.toString(System.currentTimeMillis()));
+                        //_fc = new JFileChooser();
+                        //_fc = new CustomJFileChooser();
+                        //String abc = javax.swing.UIManager.getSystemLookAndFeelClassName();
+                        //com.sun.java.swing.plaf.windows.WindowsFileChooserUI
+                        //javax.swing.SwingUtilities.updateComponentTreeUI(_fc);
+                        //javax.swing.UIManager.setLookAndFeel(origin);
+                        //m.msg(Long.toString(System.currentTimeMillis()));
+                    //}catch(Exception e){
+                    //    int dummy=0;
+                    //}
+                //}
+                //else
+                //{
+                    _fc = new CustomJFileChooser();
+                //}
+                //m.msg(Long.toString(System.currentTimeMillis()));
+                //javax.swing.UIManager.getUI(_fc).
+                //javax.swing.UIManager.
+                //_fc.putClientProperty("FileChooser.cancelButtonText", "yo");
+                //javax.swing.plaf.FileChooserUI a;a.
+            }
+            /*try{
+                javax.swing.LookAndFeel origin = javax.swing.UIManager.getLookAndFeel();
+                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                javax.swing.SwingUtilities.updateComponentTreeUI(_fc);
+                javax.swing.UIManager.setLookAndFeel(origin);
+            }catch(Exception e){}*/
             return _fc;
         }
         else
         {
-            return new JFileChooser();
+            return new CustomJFileChooser();
         }
     }
     
@@ -86,7 +222,9 @@ public class GuiUtils
     public static void getUserSelectedFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
-        File cwd = new File(field.getText()).getParentFile();
+
+        File f = new File(field.getText());
+        File cwd = f.isDirectory()?f:f.getParentFile();
         fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
@@ -95,11 +233,31 @@ public class GuiUtils
             String file = fc.getSelectedFile().getAbsolutePath();
             field.setText(file);
         }
+        //Main.
+        /*java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null);
+        fd.setMode(java.awt.FileDialog.LOAD);
+        java.awt.
+        File cwd = new File(field.getText()).getParentFile();
+        fd.setDirectory(cwd.getAbsolutePath());
+        //fd.setFilenameFilter(new java.io.FilenameFilter() {
+        //    public boolean accept(File dir, String name) {
+        //        int dummy=0;
+        //        return false;
+        //    }
+        //});
+        fd.setVisible(true);
+        if(fd.getFile()!=null)
+        {
+            String file = fd.getDirectory()+"/"+fd.getFile();
+            m.msg(file);
+        }*/
+
     }
     public static void getUserSelectedFile(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
-        File cwd = new File(field.getText()).getParentFile();
+        File f = new File(field.getText());
+        File cwd = f.isDirectory()?f:f.getParentFile();
         fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
@@ -112,7 +270,8 @@ public class GuiUtils
     public static void getUserSelectedFileWithNoPath(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
-        File cwd = new File(field.getText()).getParentFile();
+        File f = new File(field.getText());
+        File cwd = f.isDirectory()?f:f.getParentFile();
         fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int wasFileChosen = fc.showOpenDialog(null);
@@ -125,7 +284,8 @@ public class GuiUtils
     public static void getUserSelectedFileOrFolder(JTextComponent field)
     {
         JFileChooser fc = getJFileChooser();
-        File cwd = new File(field.getText()).getParentFile();
+        File f = new File(field.getText());
+        File cwd = f.isDirectory()?f:f.getParentFile();
         fc.setCurrentDirectory(cwd);
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         int wasFileChosen = fc.showOpenDialog(null);
