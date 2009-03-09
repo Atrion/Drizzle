@@ -99,6 +99,9 @@ public class ThreadDownloadAndProcess extends Thread
 
                 success = true;
 
+                }catch(Exception e){
+                    //int dummy=0;
+                    e.printStackTrace();
                 }finally{
                 modal.hideInvisibleModal();
                 }

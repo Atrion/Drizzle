@@ -273,7 +273,24 @@ public class FileUtils {
     static public void CreateFolder(String filename)
     {
         File f = new File(filename);
-        boolean result = f.mkdirs();
-        if(!result) m.warn("Unable to create folder: "+filename);
+        if(f.exists())
+        {
+            if(f.isDirectory())
+            {
+                //already created
+            }
+            else
+            {
+                m.warn("Unable to create folder because there is already a file with that name: "+filename);
+            }
+        }
+        else
+        {
+            boolean result = f.mkdirs();
+            if(!result)
+            {
+                m.warn("Unable to create folder: "+filename);
+            }
+        }
     }
 }

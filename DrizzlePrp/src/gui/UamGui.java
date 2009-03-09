@@ -39,10 +39,13 @@ public class UamGui
     
     final static boolean updateWhileAdjusting = true;
 
+    //static Vector<AgeListItem> ages;
+
     public static class AgeListItem extends javax.swing.JPanel
     {
         //JLabel label;
         String agename;
+        String FriendlyAgename;
         InstallStatus status;
         static java.awt.Image check = shared.GetResource.getResourceAsImage("/gui/check.png");
         //static java.awt.Image ex = shared.GetResource.getResourceAsImage("/gui/ex.png");
@@ -53,16 +56,41 @@ public class UamGui
         java.awt.Image img;
         public boolean showicon = true;
         int width;
-        
-        public AgeListItem(String agename, InstallStatus status)
+
+        public String toString()
+        {
+            return FriendlyAgename;
+        }
+
+        public boolean equals(Object o)
+        {
+            if(!(o instanceof AgeListItem)) return false;
+            AgeListItem o2 = (AgeListItem)o;
+            boolean result = FriendlyAgename.equals(o2.FriendlyAgename);
+            return result;
+        }
+        public int hashCode()
+        {
+            return FriendlyAgename.hashCode();
+        }
+
+        public AgeListItem(String friendlyAgename, InstallStatus status, String agename)
         {
             this.agename = agename;
+            this.FriendlyAgename = friendlyAgename;
             this.status = status;
             this.setOpaque(true);
             //this.setPreferredSize(new java.awt.Dimension(0, 16));
             //label = new JLabel("hi");
             //this.add(label);
             //this.getGraphics().drawString(agename, 0, 0);
+            if(status==null)
+            {
+                //int dummy=0;
+                //String s = shared.debug.getStackTrace();
+                m.msg("Minor multithread bug: null: agename="+agename);
+                return;
+            }
             switch(status)
             {
                 case noVersionsExist:
@@ -122,7 +150,7 @@ public class UamGui
             //this.setForeground(Color.BLUE);
             //this.setBackground(Color.GREEN);
             int h = this.getHeight();
-            String str = agename;
+            String str = FriendlyAgename;
             int offset = showicon?20:3;
             
             //int w = g.getFontMetrics().stringWidth(str) + offset;
@@ -147,7 +175,7 @@ public class UamGui
         
         public java.awt.Dimension getPreferredSize()
         {
-            int w = showicon?20:3 + this.getGraphics().getFontMetrics().stringWidth(agename) + 3;
+            int w = showicon?20:3 + this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename) + 3;
             int h = 16;
             java.awt.Dimension result = new java.awt.Dimension(w,h);
             //m.msg("gps:"+agename);
@@ -161,7 +189,12 @@ public class UamGui
 
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
-                String age = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
+                if(((javax.swing.JList)e.getSource()).getSelectedValue()==null)
+                {
+                    //m.msg("null");
+                    ((javax.swing.JList)e.getSource()).setSelectedIndex(0);
+                }
+                String age = ((AgeListItem)((javax.swing.JList)e.getSource()).getSelectedValue()).agename;
                 GetVersionListGui(age);
             }
             public String toString()
@@ -171,16 +204,22 @@ public class UamGui
         });
         agelist.setCellRenderer(new javax.swing.ListCellRenderer() {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                String agename = (String)value;
+                /*String agename = ((AgeListItem)value).agename;
                 //InstallStatus status = Uam.ageInstallStatus.get(agename).installationStatus;
                 InstallStatus status = Uam.installInfo.ages.get(agename).installationStatus;
 
                 //AgeListItem ali = new AgeListItem(agename, status);
                 String properagename = Uam.ageList.getAgeProperName(agename);
                 //properagename = properagename + " ("+agename+")"; //adds the filename in parentheses.
-                AgeListItem ali = new AgeListItem(properagename, status);
+                AgeListItem ali = new AgeListItem(properagename, status, agename);
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                return ali;*/
+
+                AgeListItem ali = (AgeListItem)value;
+                if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                else ali.setBorder(javax.swing.BorderFactory.createEmptyBorder());
                 return ali;
+
                 /*javax.swing.JLabel label = new javax.swing.JLabel(agename);
                 label.setOpaque(true); //allows us to set the background.
                 switch(status)
@@ -217,11 +256,10 @@ public class UamGui
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 //Agename is really version here.
                 Object o = agelist.getSelectedValue();
-                String agename = (String)o;
+                String agename = ((AgeListItem)o).agename;
                 String version = (String)value;
                 InstallStatus status = Uam.installInfo.ages.get(agename).versions.get(version);
-
-                AgeListItem ali = new AgeListItem(version, status);
+                AgeListItem ali = new AgeListItem(version, status, null);
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 return ali;
             }
@@ -229,7 +267,7 @@ public class UamGui
         verlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
-                String age2 = (String)agelist.getSelectedValue();
+                String age2 = ((AgeListItem)agelist.getSelectedValue()).agename;
                 String ver = (String)verlist.getSelectedValue();
                 //String ver = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
                 GetMirrorListGui(age2,ver);
@@ -238,7 +276,7 @@ public class UamGui
         mirlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
-                String age2 = (String)agelist.getSelectedValue();
+                String age2 = ((AgeListItem)agelist.getSelectedValue()).agename;
                 String ver2 = (String)verlist.getSelectedValue();
                 String mir = (String)mirlist.getSelectedValue();
                 //String mir = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
@@ -253,7 +291,7 @@ public class UamGui
                 String version = (String)value;
                 InstallStatus status = InstallStatus.notInCache;
 
-                AgeListItem ali = new AgeListItem(version, status);
+                AgeListItem ali = new AgeListItem(version, status, null);
                 ali.showicon = false;
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 return ali;
@@ -323,7 +361,8 @@ public class UamGui
         
         //HashMap<String,Vector<String>> ageversions = Uam.ageList.getConfigObject().ageversions;
         //Uam.ageInstallStatus = new HashMap();
-        Uam.installInfo = new Uam.InstallInfo();
+        //Uam.installInfo = new Uam.InstallInfo();
+        Uam.InstallInfo ii = new Uam.InstallInfo();
         
         
         /*for(String age: availableAges)
@@ -397,7 +436,7 @@ public class UamGui
             boolean haslatest = false;
             boolean someversionexists = false;
             
-            Uam.AgeInstallInfo ageinfo = Uam.installInfo.getOrCreateAge(age);
+            Uam.AgeInstallInfo ageinfo = ii.getOrCreateAge(age);
             
             //Vector<String> versions = ageversions.get(age);
             //if(versions!=null)
@@ -436,31 +475,31 @@ public class UamGui
                         if(haslatest)
                         {
                             //Uam.ageInstallStatus.put(age, InstallStatus.latestVersionInCache);
-                            Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
+                            ii.getOrCreateAge(age).installationStatus = InstallStatus.latestVersionInCache;
                             //ageIsFullyUpToDate = true;
                         }
                         else
                         {
                             //Uam.ageInstallStatus.put(age, InstallStatus.nonLatestVersionInCache);
-                            Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
+                            ii.getOrCreateAge(age).installationStatus = InstallStatus.nonLatestVersionInCache;
                             //numAgesNeedUpdate++;
                         }
                     }
                     else
                     {
                         //Uam.ageInstallStatus.put(age, InstallStatus.notInCache);
-                        Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInCache;
+                        ii.getOrCreateAge(age).installationStatus = InstallStatus.notInCache;
                     }
                 }
                 else
                 {
                     //Uam.ageInstallStatus.put(age, InstallStatus.notInstalled);
-                    Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.notInstalled;
+                    ii.getOrCreateAge(age).installationStatus = InstallStatus.notInstalled;
                 }
             }
             else
             {
-                Uam.installInfo.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
+                ii.getOrCreateAge(age).installationStatus = InstallStatus.noVersionsExist;
                 //ageIsFullyUpToDate = true;
             }
             
@@ -478,21 +517,30 @@ public class UamGui
         {
             m.warn("There are some Ages that you need a newer version of Drizzle for. (They won't be listed.) Sorry for the inconvenience!");
         }*/
+        Uam.installInfo = ii;
     }
     public static void RefreshInfo(String potsfolder2)
     {
         //list Ages...
         //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
-        final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
         GetLocalInfo(potsfolder2);
+        Vector<AgeListItem> ages = new Vector();
+        for(UamConfigNew.UamConfigData.Age age: Uam.ageList.data.ages)
+        {
+            uam.Uam.InstallStatus is = Uam.installInfo.ages.get(age.filename).installationStatus;
+            ages.add(new AgeListItem(age.propername,is,age.filename));
+        }
+        //final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
+        final Vector<AgeListItem> ages2 = ages;
         Object selection = agelist.getSelectedValue();
         agelist.setModel(new javax.swing.ListModel() {
             public int getSize() {
-                return ages.size();
+                return ages2.size();
             }
             public Object getElementAt(int index) {
                 //return ages.get(index);
-                return ages.get(index).filename;
+                //return ages.get(index).filename;
+                return ages2.get(index);
             }
             public void addListDataListener(ListDataListener l) {}
             public void removeListDataListener(ListDataListener l) {}
@@ -503,10 +551,12 @@ public class UamGui
         //try to re-select the item that was selected before.
         if(selection==null)
         {
+            //m.msg("null2");
             if(agelist.getModel().getSize()>0) agelist.setSelectedIndex(0);
         }
         else
         {
+            //m.msg("reinst");
             agelist.setSelectedValue(selection, true); //doesn't die even if selection is no longer there.
         }
         
@@ -717,7 +767,7 @@ public class UamGui
     }
     public static boolean PerformDeletion(String potsfolder)
     {
-        String age = (String)agelist.getSelectedValue();
+        String age = ((AgeListItem)agelist.getSelectedValue()).agename;
         return PerformDeletion(potsfolder, age);
     }
     public static boolean PerformDeletion(String potsfolder, String age)
@@ -778,7 +828,7 @@ public class UamGui
             boolean success = true;
             for(Object age2: ages)
             {
-                String age = (String)age2;
+                String age = ((AgeListItem)age2).agename;
                 UamConfigNew.UamConfigData.Age a = uam.Uam.ageList.data.getAge(age);
                 if(a.versions.size()==0) continue; //skip Ages without versions.
                 UamConfigNew.UamConfigData.Age.Version ver2 = a.versions.get(0);
@@ -795,7 +845,7 @@ public class UamGui
         }
         else
         {
-            String age = (String)agelist.getSelectedValue();
+            String age = ((AgeListItem)agelist.getSelectedValue()).agename;
             String ver = (String)verlist.getSelectedValue();
             String mir = (String)mirlist.getSelectedValue();
             return PerformDownload(potsfolder, age, ver, mir);
