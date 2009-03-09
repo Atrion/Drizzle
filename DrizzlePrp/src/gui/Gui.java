@@ -62,9 +62,9 @@ public class Gui extends javax.swing.JFrame {
     /** Creates new form Gui */
     public Gui()
     {
+        settingsfile = FileUtils.GetPresentWorkingDirectory()+"drizzlesettings.canbedeleted.dat";
         initComponents();
         
-        deep = new deepview.deepview(jDesktopPane1);
         gui.UamGui.gui = this;
         gui.UamGui.agelist = this.jList1;
         gui.UamGui.verlist = this.jList2;
@@ -78,6 +78,8 @@ public class Gui extends javax.swing.JFrame {
         
         GuiUtils.SetKeymaps();
         
+        deep = new deepview.deepview(jDesktopPane1);
+
         listState4.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {
                 "Dereno_District_DrnoPod.prp",
@@ -164,7 +166,6 @@ public class Gui extends javax.swing.JFrame {
         pots = "D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/doesnotexist/";
         moul = "D:/a/winedrive/drive_c/MystOnline/Program Files/Myst Online/dat/doesnotexist/";
         //out = "D:/a/leftoff/output/";*/
-        settingsfile = FileUtils.GetPresentWorkingDirectory()+"drizzlesettings.canbedeleted.dat";
         //uru.moulprp._staticsettings.outputdir = out;
 
         /*this.jComboBox1.addItem("");
@@ -306,6 +307,7 @@ public class Gui extends javax.swing.JFrame {
         
         //this.loadsettings();
         //dosavesettings = true;
+        shared.State.AllStates.loadandpush(settingsfile);
     }
     public static class Settings implements java.io.Serializable
     {
@@ -4361,7 +4363,7 @@ private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton59ActionPerformed
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    shared.State.AllStates.loadandpush(settingsfile);
+    //shared.State.AllStates.loadandpush(settingsfile);
     
     jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
     
