@@ -41,7 +41,7 @@ public class vaultAutomation
         }
         else
         {
-            if(FileUtils.FindAllFiles(infolder, ".s", false).size()!=0)
+            if(FileUtils.FindAllFiles(infolder, ".v", false).size()!=0)
             {
                 nodes = readFolder(infolder);
             }

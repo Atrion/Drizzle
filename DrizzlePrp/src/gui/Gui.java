@@ -1259,8 +1259,8 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState1.addTab("Crowthistle", jPanel40);
 
-            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12));
-            jLabel53.setText("This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzzle");
+            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+            jLabel53.setText("This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle");
 
             javax.swing.GroupLayout SimpTabLayout = new javax.swing.GroupLayout(SimpTab);
             SimpTab.setLayout(SimpTabLayout);
