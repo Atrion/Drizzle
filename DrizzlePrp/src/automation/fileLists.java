@@ -94,6 +94,7 @@ public class fileLists
         "KVeerMusic.ogg","kverAmb_Loop.ogg","kverSeasonFinaleMx.ogg",
         //GreatTreePub doesn't have any that aren't already in Pots.
         "xBahroFlapping01.ogg","xBahroFlapping02.ogg","xBahroFlapping03.ogg","xBahroFlapping04.ogg","xBahroFlapping05.ogg","xBahroFlapping06.ogg","xBahroFlapping07.ogg","xBahroFlapping08.ogg","xBahroGroupAmb_loop.ogg", //city flying bahro
+        "NB01BahroShout01--Reverb.ogg", // bahro shouters in the city
         "ahnyOutsideHutWater_Loop.ogg","ahnyRigRotation.ogg",
     };
     private static String[] moulSimplicityList2 = {
