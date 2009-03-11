@@ -29,7 +29,7 @@ Memories:
   b) Alcugs: The infolder should be set to the folder with a bunch of .v files.  This is in Uru's folder, then 'vnode_cache', then the avatar's folder(which is named using the hex version of the avatar's name).
 2) The outfolder is set to where you want the files saved.  (If you choose one where you've done this before, they will be merged together.)
 3) Click the "Start" button.
-4) In the output folder will be a file called "memories.xml".  Open it with Internet Explorer or Firefox to view it!  (Tested with IE7 and FF3.)
+4) In the output folder will be a file called "memories.xml".  Open it with Internet Explorer or Firefox to view it!  (Tested with IE7, IE6, FF3, and Opera9.)
 
 
 To use DeepView:

@@ -67,7 +67,8 @@ public class vaultAutomation
             }
         }
 
-        nodes.sortByCreationDate();
+        //nodes.sortByCreationDate();
+        m.status("Getting data...");
 
         StringBuilder xml = new StringBuilder();
         xml.append("<?xml version='1.0' encoding='ISO-8859-1'?>");
@@ -149,6 +150,7 @@ public class vaultAutomation
         FileUtils.WriteFile(outfolder+"/memories.xml", b.StringToBytes(xml.toString()));
         FileUtils.WriteFile(outfolder+"/memories.xsl", shared.GetResource.getResourceAsBytes("/files/memories.xsl"));
         FileUtils.WriteFile(outfolder+"/jquery.js", shared.GetResource.getResourceAsBytes("/files/jquery-1.3.2.min.js"));
+        m.status("In the output folder, there will be a file called 'memories.xml'; open it with your web-browser to view the memories.");
         m.status("Finished creating Memories files!");
     }
     

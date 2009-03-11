@@ -1151,7 +1151,7 @@
           <SubComponents>
             <Component class="shared.State.TextfieldState" name="textfieldState36">
               <Properties>
-                <Property name="text" type="java.lang.String" value="textfieldState36"/>
+                <Property name="text" type="java.lang.String" value="Click the select button to pick a folder."/>
                 <Property name="name" type="java.lang.String" value="vaultInFolder" noResource="true"/>
               </Properties>
             </Component>
@@ -1183,9 +1183,12 @@
             </Component>
             <Component class="shared.State.TextfieldState" name="textfieldState37">
               <Properties>
-                <Property name="text" type="java.lang.String" value="textfieldState37"/>
+                <Property name="text" type="java.lang.String" value="Click the select button to pick a folder."/>
                 <Property name="name" type="java.lang.String" value="vaultOutFolder" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfieldState37ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton123">
               <Properties>

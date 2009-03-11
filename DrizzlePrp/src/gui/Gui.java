@@ -1259,7 +1259,7 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState1.addTab("Crowthistle", jPanel40);
 
-            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12));
             jLabel53.setText("This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle");
 
             javax.swing.GroupLayout SimpTabLayout = new javax.swing.GroupLayout(SimpTab);
@@ -1285,7 +1285,7 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState3.addTab("Conversion(Simplicity)", SimpTab);
 
-            textfieldState36.setText("textfieldState36");
+            textfieldState36.setText("Click the select button to pick a folder.");
             textfieldState36.setName("vaultInFolder"); // NOI18N
 
             jButton121.setText("Select...");
@@ -1306,8 +1306,13 @@ public class Gui extends javax.swing.JFrame {
 
             jLabel34.setText("outfolder:");
 
-            textfieldState37.setText("textfieldState37");
+            textfieldState37.setText("Click the select button to pick a folder.");
             textfieldState37.setName("vaultOutFolder"); // NOI18N
+            textfieldState37.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    textfieldState37ActionPerformed(evt);
+                }
+            });
 
             jButton123.setText("Select...");
             jButton123.addActionListener(new java.awt.event.ActionListener() {
@@ -5071,6 +5076,10 @@ private void jButton147ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     if(!uru.moulprp.Typeid.validateTriplets()) m.err("Triplets not valid!");
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState37ActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_textfieldState37ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
