@@ -66,7 +66,20 @@ public class GetResource
             return null;
         }
     }
-    
+    public static InputStream getResourceAsStream(String path)
+    {
+        try
+        {
+            URL url = GetResource.class.getResource(path);
+            InputStream in = url.openStream();
+            return in;
+        }
+        catch(Exception e)
+        {
+            m.err("Unable to load Stream resource:"+path);
+            return null;
+        }
+    }
     public static File getResourceAsFile(String path, boolean deleteOnExit)
     {
         try

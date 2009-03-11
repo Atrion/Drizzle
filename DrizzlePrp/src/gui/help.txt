@@ -71,6 +71,7 @@ This gives some information on an Age or Ages.
 
 Project Info:
 -------------
+License: GPLv3, or at your option, any later version.
 SVN: https://alcugs.almlys.org/svn/drizzle/
 Sourceforge: http://sourceforge.net/projects/drizzle/
 Contributers(not a complete list):

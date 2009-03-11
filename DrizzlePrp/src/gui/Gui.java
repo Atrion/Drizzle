@@ -855,8 +855,8 @@ public class Gui extends javax.swing.JFrame {
         UAMTab.add(jButton124);
         jButton124.setBounds(70, 150, 120, 36);
 
-        jLabel36.setFont(new java.awt.Font("Dialog", 2, 12));
-        jLabel36.setText("( Help can be found under the \"Help\" tab, or detailed help and troubleshooting can be found at http://alcugs.almlys.org/Drizzle  )");
+        jLabel36.setFont(jLabel36.getFont().deriveFont((jLabel36.getFont().getStyle() | java.awt.Font.ITALIC)));
+        jLabel36.setText("( Help can be found under the \"Help\" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  )");
         UAMTab.add(jLabel36);
         jLabel36.setBounds(140, 10, 710, 16);
 
@@ -879,7 +879,7 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel38.setText("Ages:");
         UAMTab.add(jLabel38);
-        jLabel38.setBounds(30, 160, 31, 16);
+        jLabel38.setBounds(30, 160, 40, 16);
 
         jLabel39.setText("Versions:");
         UAMTab.add(jLabel39);
@@ -907,14 +907,14 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel40.setText("Mirrors:");
         UAMTab.add(jLabel40);
-        jLabel40.setBounds(220, 330, 41, 16);
+        jLabel40.setBounds(220, 330, 70, 16);
 
         jPanel42.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Settings"));
         jPanel42.setLayout(null);
 
         jLabel35.setText("Server:");
         jPanel42.add(jLabel35);
-        jLabel35.setBounds(10, 30, 38, 16);
+        jLabel35.setBounds(10, 30, 70, 16);
 
         textfieldState38.setText("http://www.the-ancient-city.de/uru-ages/");
         textfieldState38.setEnabled(false);
@@ -934,7 +934,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         jPanel42.add(jButton125);
-        jButton125.setBounds(430, 50, 67, 36);
+        jButton125.setBounds(430, 50, 70, 36);
 
         textfieldState39.setText("C:\\Program Files\\Ubi Soft\\Cyan Worlds\\");
             textfieldState39.setName("uamRoot"); // NOI18N
@@ -977,16 +977,16 @@ public class Gui extends javax.swing.JFrame {
             jLabel47.setForeground(new java.awt.Color(119, 119, 0));
             jLabel47.setText("You have a version, but not the latest.");
             jPanel43.add(jLabel47);
-            jLabel47.setBounds(10, 40, 210, 16);
+            jLabel47.setBounds(10, 40, 270, 16);
 
             jLabel48.setForeground(new java.awt.Color(119, 0, 0));
             jLabel48.setText("You don't have this Age installed.");
             jPanel43.add(jLabel48);
-            jLabel48.setBounds(10, 60, 190, 16);
+            jLabel48.setBounds(10, 60, 270, 16);
 
             jLabel49.setText("You have this Age, but its version is unknown.");
             jPanel43.add(jLabel49);
-            jLabel49.setBounds(10, 80, 248, 16);
+            jLabel49.setBounds(10, 80, 270, 16);
 
             UAMTab.add(jPanel43);
             jPanel43.setBounds(540, 150, 290, 110);
@@ -1008,20 +1008,20 @@ public class Gui extends javax.swing.JFrame {
             uamStartupButtongroup.add(jRadioButton7);
             jRadioButton7.setText("Download most recent Age list at startup.");
             jPanel44.add(jRadioButton7);
-            jRadioButton7.setBounds(10, 70, 250, 20);
+            jRadioButton7.setBounds(10, 70, 270, 20);
 
             UAMTab.add(jPanel44);
             jPanel44.setBounds(540, 40, 290, 100);
 
             jLabel50.setText("Info:");
             UAMTab.add(jLabel50);
-            jLabel50.setBounds(30, 410, 23, 16);
+            jLabel50.setBounds(30, 410, 40, 16);
 
             AgeInfoLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
             UAMTab.add(AgeInfoLabel);
-            AgeInfoLabel.setBounds(60, 410, 760, 16);
+            AgeInfoLabel.setBounds(70, 410, 760, 16);
 
-            jLabel51.setFont(new java.awt.Font("Dialog", 3, 12));
+            jLabel51.setFont(jLabel51.getFont().deriveFont((jLabel51.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
             jLabel51.setText("Uru Age Manager!");
             UAMTab.add(jLabel51);
             jLabel51.setBounds(20, 10, 140, 16);
@@ -1259,7 +1259,7 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState1.addTab("Crowthistle", jPanel40);
 
-            jLabel53.setFont(new java.awt.Font("Dialog", 1, 12));
+            jLabel53.setFont(jLabel53.getFont().deriveFont(jLabel53.getFont().getStyle() | java.awt.Font.BOLD));
             jLabel53.setText("This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle");
 
             javax.swing.GroupLayout SimpTabLayout = new javax.swing.GroupLayout(SimpTab);
@@ -1321,7 +1321,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            jLabel30.setFont(new java.awt.Font("Dialog", 1, 12));
+            jLabel30.setFont(jLabel30.getFont().deriveFont(jLabel30.getFont().getStyle() | java.awt.Font.BOLD));
             jLabel30.setText("Memories: this area is for extracting images, notes, etc. from Uru (either offline or online)");
 
             jLabel43.setText("Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle");
@@ -1334,22 +1334,21 @@ public class Gui extends javax.swing.JFrame {
                     .addGap(11, 11, 11)
                     .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel43)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(MemTabLayout.createSequentialGroup()
                             .addComponent(jLabel33)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton122)
                                 .addGroup(MemTabLayout.createSequentialGroup()
-                                    .addComponent(textfieldState36, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(textfieldState37, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(textfieldState36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jButton123)
                                         .addComponent(jButton121)))))
-                        .addGroup(MemTabLayout.createSequentialGroup()
-                            .addComponent(jLabel34)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel34)
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(105, Short.MAX_VALUE))
             );
             MemTabLayout.setVerticalGroup(
@@ -1359,7 +1358,7 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jLabel30)
                     .addGap(18, 18, 18)
                     .addComponent(jLabel43)
-                    .addGap(95, 95, 95)
+                    .addGap(94, 94, 94)
                     .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(textfieldState36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel33)
@@ -1369,7 +1368,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jLabel34)
                         .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton123))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                     .addComponent(jButton122)
                     .addGap(62, 62, 62))
             );
@@ -1519,7 +1518,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             ProxyTab.add(jButton70);
-            jButton70.setBounds(140, 240, 87, 36);
+            jButton70.setBounds(140, 240, 110, 36);
 
             textfieldState9.setText("C:\\Documents and Settings\\user\\Desktop\\web");
             textfieldState9.setName("proxyFolder"); // NOI18N
@@ -1566,10 +1565,10 @@ public class Gui extends javax.swing.JFrame {
             ProxyTab.add(jButton77);
             jButton77.setBounds(410, 80, 66, 36);
 
-            jLabel52.setFont(new java.awt.Font("Dialog", 1, 12));
+            jLabel52.setFont(jLabel52.getFont().deriveFont(jLabel52.getFont().getStyle() | java.awt.Font.BOLD));
             jLabel52.setText("This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle");
             ProxyTab.add(jLabel52);
-            jLabel52.setBounds(20, 10, 650, 16);
+            jLabel52.setBounds(20, 10, 760, 16);
 
             tabsState3.addTab("Proxy", ProxyTab);
 

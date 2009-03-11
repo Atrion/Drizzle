@@ -18,10 +18,9 @@
 
 package gui;
 
-/**
- *
- * @author user
- */
+
+import javax.swing.UIManager;
+
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -48,8 +47,67 @@ public class Main extends javax.swing.JFrame {
             javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
             //javax.swing.JDialog j = new javax.swing.JDialog();
             //j.
+
+            if(true)
+            {
+                //todo: close stream.
+                //java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, shared.GetResource.getResourceAsStream("/files/LiberationSans-Regular.ttf"));
+                //java.awt.Font font2 = font.deriveFont(12.0f);
+                //javax.swing.plaf.FontUIResource f = new javax.swing.plaf.FontUIResource(font2);
+
+                javax.swing.plaf.FontUIResource plain = new javax.swing.plaf.FontUIResource("Lucida Sans",java.awt.Font.PLAIN,12);
+                javax.swing.plaf.FontUIResource fixed = new javax.swing.plaf.FontUIResource("Lucida Sans Typewriter",java.awt.Font.PLAIN,12);
+
+                //Object[] objs = new Object[]{"Lucida",java.awt.Font.PLAIN,12};
+                //javax.swing.UIDefaults.ProxyLazyValue f2 = new javax.swing.UIDefaults.ProxyLazyValue("javax.swing.plaf.FontUIResource",null,objs);
+
+                //java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
+                //while (keys.hasMoreElements())
+                //{
+                //    Object key = keys.nextElement();
+                //    Object value = javax.swing.UIManager.get(key);
+                //    if (value instanceof javax.swing.plaf.FontUIResource)
+                //    {
+                //        javax.swing.UIManager.put (key, f);
+                //    }
+                //}
+
+                UIManager.put("Button.font", plain);
+                UIManager.put("ToggleButton.font", plain);
+                UIManager.put("RadioButton.font", plain);
+                UIManager.put("CheckBox.font", plain);
+                UIManager.put("ColorChooser.font", plain);
+                UIManager.put("ComboBox.font", plain);
+                UIManager.put("Label.font", plain);
+                UIManager.put("MenuBar.font", plain);
+                UIManager.put("MenuItem.font", plain);
+                UIManager.put("RadioButtonMenuItem.font", plain);
+                UIManager.put("CheckBoxMenuItem.font", plain);
+                UIManager.put("Menu.font", plain);
+                UIManager.put("PopupMenu.font", plain);
+                UIManager.put("OptionPane.font", plain);
+                UIManager.put("Panel.font", plain);
+                UIManager.put("ProgressBar.font", plain);
+                UIManager.put("ScrollPane.font", plain);
+                UIManager.put("Viewport.font", plain);
+                UIManager.put("TabbedPane.font", plain);
+                UIManager.put("Table.font", plain);
+                UIManager.put("TableHeader.font", plain);
+                UIManager.put("TitledBorder.font", plain);
+                UIManager.put("ToolBar.font", plain);
+                UIManager.put("ToolTip.font", plain);
+                UIManager.put("Tree.font", plain);
+        		UIManager.put("TextField.font", plain);
+                UIManager.put("PasswordField.font", plain);
+                UIManager.put("TextArea.font", fixed);
+                UIManager.put("TextPane.font", plain);
+                UIManager.put("EditorPane.font", plain);
+
+            }
         }
-        catch(Exception e){}
+        catch(Exception e){
+            int dummy=0;
+        }
 
         //Run the main form.
         java.awt.EventQueue.invokeLater(new Runnable()
