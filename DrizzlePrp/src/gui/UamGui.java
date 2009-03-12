@@ -6,10 +6,12 @@
 package gui;
 
 import java.awt.Component;
+import java.util.Enumeration;
 import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.text.AttributeSet;
 import shared.m;
 import java.io.File;
 import java.util.HashMap;
@@ -25,6 +27,8 @@ import shared.b;
 import javax.swing.JLabel;
 import uam.UamConfigNew;
 import java.util.ArrayDeque;
+import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
 
 public class UamGui
 {
@@ -41,10 +45,34 @@ public class UamGui
 
     //static Vector<AgeListItem> ages;
 
+    public static class AgeListItemInfo
+    {
+        String agename;
+        String FriendlyAgename;
+        uam.Uam.InstallStatus status;
+
+        public AgeListItemInfo(String friendlyAgename, InstallStatus status, String agename)
+        {
+            this.agename = agename;
+            this.status = status;
+            this.FriendlyAgename = friendlyAgename;
+        }
+
+        public String toString()
+        {
+            return FriendlyAgename;
+        }
+
+        public int hashCode()
+        {
+            return FriendlyAgename.hashCode();
+        }
+    }
+
     public static class AgeListItem extends javax.swing.JPanel
     {
         //JLabel label;
-        String agename;
+        String agename2;
         String FriendlyAgename;
         InstallStatus status;
         static java.awt.Image check = shared.GetResource.getResourceAsImage("/gui/check.png");
@@ -76,7 +104,7 @@ public class UamGui
 
         public AgeListItem(String friendlyAgename, InstallStatus status, String agename)
         {
-            this.agename = agename;
+            this.agename2 = agename;
             this.FriendlyAgename = friendlyAgename;
             this.status = status;
             this.setOpaque(true);
@@ -175,7 +203,13 @@ public class UamGui
         
         public java.awt.Dimension getPreferredSize()
         {
-            int w = showicon?20:3 + this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename) + 3;
+            this.setFont(this.getFont().deriveFont(12.0f));
+            int w = (showicon?20:3) + this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename) + 3;
+            //int w = 400;
+            //int w = showicon?20:3;
+            //w+= this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename);
+            //w+= 3;
+            //m.msg(FriendlyAgename+" : "+Integer.toString(w));
             int h = 16;
             java.awt.Dimension result = new java.awt.Dimension(w,h);
             //m.msg("gps:"+agename);
@@ -194,7 +228,7 @@ public class UamGui
                     //m.msg("null");
                     ((javax.swing.JList)e.getSource()).setSelectedIndex(0);
                 }
-                String age = ((AgeListItem)((javax.swing.JList)e.getSource()).getSelectedValue()).agename;
+                String age = ((AgeListItemInfo)((javax.swing.JList)e.getSource()).getSelectedValue()).agename;
                 GetVersionListGui(age);
             }
             public String toString()
@@ -204,7 +238,7 @@ public class UamGui
         });
         agelist.setCellRenderer(new javax.swing.ListCellRenderer() {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                /*String agename = ((AgeListItem)value).agename;
+                String agename = ((AgeListItemInfo)value).agename;
                 //InstallStatus status = Uam.ageInstallStatus.get(agename).installationStatus;
                 InstallStatus status = Uam.installInfo.ages.get(agename).installationStatus;
 
@@ -213,12 +247,12 @@ public class UamGui
                 //properagename = properagename + " ("+agename+")"; //adds the filename in parentheses.
                 AgeListItem ali = new AgeListItem(properagename, status, agename);
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-                return ali;*/
+                return ali;
 
-                AgeListItem ali = (AgeListItem)value;
+                /*AgeListItem ali = (AgeListItem)value;
                 if(isSelected) ali.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
                 else ali.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                return ali;
+                return ali;*/
 
                 /*javax.swing.JLabel label = new javax.swing.JLabel(agename);
                 label.setOpaque(true); //allows us to set the background.
@@ -256,7 +290,7 @@ public class UamGui
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 //Agename is really version here.
                 Object o = agelist.getSelectedValue();
-                String agename = ((AgeListItem)o).agename;
+                String agename = ((AgeListItemInfo)o).agename;
                 String version = (String)value;
                 InstallStatus status = Uam.installInfo.ages.get(agename).versions.get(version);
                 AgeListItem ali = new AgeListItem(version, status, null);
@@ -267,7 +301,7 @@ public class UamGui
         verlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
-                String age2 = ((AgeListItem)agelist.getSelectedValue()).agename;
+                String age2 = ((AgeListItemInfo)agelist.getSelectedValue()).agename;
                 String ver = (String)verlist.getSelectedValue();
                 //String ver = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
                 GetMirrorListGui(age2,ver);
@@ -276,7 +310,7 @@ public class UamGui
         mirlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if(!updateWhileAdjusting && e.getValueIsAdjusting()) return;
-                String age2 = ((AgeListItem)agelist.getSelectedValue()).agename;
+                String age2 = ((AgeListItemInfo)agelist.getSelectedValue()).agename;
                 String ver2 = (String)verlist.getSelectedValue();
                 String mir = (String)mirlist.getSelectedValue();
                 //String mir = (String)((javax.swing.JList)e.getSource()).getSelectedValue();
@@ -524,14 +558,14 @@ public class UamGui
         //list Ages...
         //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
         GetLocalInfo(potsfolder2);
-        Vector<AgeListItem> ages = new Vector();
+        Vector<AgeListItemInfo> ages = new Vector();
         for(UamConfigNew.UamConfigData.Age age: Uam.ageList.data.ages)
         {
             uam.Uam.InstallStatus is = Uam.installInfo.ages.get(age.filename).installationStatus;
-            ages.add(new AgeListItem(age.propername,is,age.filename));
+            ages.add(new AgeListItemInfo(age.propername,is,age.filename));
         }
         //final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
-        final Vector<AgeListItem> ages2 = ages;
+        final Vector<AgeListItemInfo> ages2 = ages;
         Object selection = agelist.getSelectedValue();
         agelist.setModel(new javax.swing.ListModel() {
             public int getSize() {
@@ -686,12 +720,26 @@ public class UamGui
             boolean deletable = Uam.ageList.getDeletable(age) && Uam.installInfo.getAge(age).installationStatus.isInstalled();
             deletebutton.setEnabled(deletable);
             String info = uam.Uam.ageList.getAgeInfo(age);
-            AgeLabel.setText(info);
+            AgeLabel.setText("<html>"+info+"</html>");
+            /*try{
+            javax.swing.text.Document doc = AgeLabel.getDocument();
+            doc.remove(0, doc.getLength());
+            javax.swing.text.SimpleAttributeSet attbs = new javax.swing.text.SimpleAttributeSet();
+            javax.swing.text.StyleConstants.setFontFamily(attbs, "Lucida");
+            doc.insertString(0, info, attbs);
+            String s = doc.getText(0, doc.getLength());
+            String s2 = AgeLabel.getText();
+            int dummy=0;
+            }catch(Exception e){
+                m.err("Unable to set text box.");
+            }*/
+           // AgeLabel.setText("<html><font face='Lucida' size='12'>"+info+"</font></html>");
         }
         else
         {
             deletebutton.setEnabled(false);
-            AgeLabel.setText("(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)");
+            AgeLabel.setText("<html>(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)</html>");
+            //AgeLabel.setText("<html><font face='Lucida' size='12'>(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)</font></html>");
         }
         //final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
         //final Vector<UamConfigNew.UamConfigData.Age.Version> vers = Uam.ageList.data.getAge(age).versions;
@@ -767,7 +815,7 @@ public class UamGui
     }
     public static boolean PerformDeletion(String potsfolder)
     {
-        String age = ((AgeListItem)agelist.getSelectedValue()).agename;
+        String age = ((AgeListItemInfo)agelist.getSelectedValue()).agename;
         return PerformDeletion(potsfolder, age);
     }
     public static boolean PerformDeletion(String potsfolder, String age)
@@ -828,7 +876,7 @@ public class UamGui
             boolean success = true;
             for(Object age2: ages)
             {
-                String age = ((AgeListItem)age2).agename;
+                String age = ((AgeListItemInfo)age2).agename;
                 UamConfigNew.UamConfigData.Age a = uam.Uam.ageList.data.getAge(age);
                 if(a.versions.size()==0) continue; //skip Ages without versions.
                 UamConfigNew.UamConfigData.Age.Version ver2 = a.versions.get(0);
@@ -845,7 +893,7 @@ public class UamGui
         }
         else
         {
-            String age = ((AgeListItem)agelist.getSelectedValue()).agename;
+            String age = ((AgeListItemInfo)agelist.getSelectedValue()).agename;
             String ver = (String)verlist.getSelectedValue();
             String mir = (String)mirlist.getSelectedValue();
             return PerformDownload(potsfolder, age, ver, mir);
