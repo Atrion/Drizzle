@@ -183,7 +183,19 @@ public class textfile
         }
         return false;
     }
-    
+    public String getVariable(String varname)
+    {
+        for(int i=0;i<lines.length;i++)
+        {
+            if(lines[i].startsWith(new Bytes(varname+"=")))
+            {
+                int pos = varname.length()+1;
+                String result = lines[i].substr(pos).toString();
+                return result;
+            }
+        }
+        return null;
+    }
     public void setVariable(String varname, String value)
     {
         Bytes start = new Bytes(varname+"=");

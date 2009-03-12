@@ -66,6 +66,10 @@ public class Bytes
     {
         return create(FileUtils.ReadFile(filename));
     }
+    public static Bytes createFromFile(java.io.File filename)
+    {
+        return create(FileUtils.ReadFile(filename));
+    }
     public static Bytes createFromArray(byte[] array, int offset, int length)
     {
         byte[] result = new byte[length];
@@ -110,7 +114,19 @@ public class Bytes
         int result = a | b | c | d | e | f | g | h;
         return result;
     }
-    
+    public Bytes substr(int start, int length)
+    {
+        byte[] result = new byte[length];
+        for(int i=0;i<length;i++)
+        {
+            result[i] = bytes[start+i];
+        }
+        return new Bytes(result);
+    }
+    public Bytes substr(int start)
+    {
+        return substr(start, this.length()-start);
+    }
     public static byte[] flatten(byte[][] bytes)
     {
         int size=0;

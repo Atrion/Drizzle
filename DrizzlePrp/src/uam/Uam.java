@@ -125,6 +125,83 @@ public class Uam
             return !(this==notInstalled || this==noVersionsExist);
         }
     }
+
+    public static void RunTests(String potsfolder)
+    {
+        if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
+        boolean ignoreKnownOverrides = shared.State.AllStates.getStateAsBoolean("uamig");
+
+        m.msg("Checking for python file duplicates...");
+        java.util.HashMap<String, Vector<String>> pyfiles = new java.util.HashMap();
+        Vector<File> pakfiles = shared.FileUtils.FindAllFiles(potsfolder+"/Python/", ".pak", false);
+        for(File f: pakfiles)
+        {
+            //m.msg(f.getName());
+            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f, 3, true);
+            for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
+            {
+                String pyname = ind.objectname.toString();
+                Vector<String> paklist = pyfiles.get(pyname);
+                if(paklist==null)
+                {
+                    pyfiles.put(pyname, new Vector());
+                    pyfiles.get(pyname).add(f.getName());
+                }
+                else pyfiles.get(pyname).add(f.getName());
+            }
+        }
+        for(String pyfile: pyfiles.keySet())
+        {
+            Vector<String> paklist = pyfiles.get(pyfile);
+            boolean complain = false;
+            if(paklist.size()==2)
+            {
+                if(ignoreKnownOverrides && (paklist.contains("moul.pak")||paklist.contains("offlineki.pak")||paklist.contains("UruLibraryManager.pak")))
+                {
+                    //ignore
+                }
+                else
+                {
+                    complain = true;
+                }
+            }
+            else if(paklist.size()>2)
+            {
+                complain = true;
+            }
+
+            if(complain)
+            {
+                String complaint = "The file "+pyfile+" was found in these files: ";
+                for(String pakfile: paklist)
+                {
+                    complaint += pakfile+", ";
+                }
+                m.msg(complaint);
+            }
+        }
+        m.msg("Done checking for python file duplicates.");
+
+
+        m.msg("Checking for sequence prefix duplicates...");
+        java.util.HashMap<String, String> seqprefs = new java.util.HashMap();
+        Vector<File> agefiles = shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".age", false);
+        for(File f: agefiles)
+        {
+            uru.moulprp.textfile agefile = uru.moulprp.textfile.createFromBytes(uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f)));
+            String seq = agefile.getVariable("SequencePrefix");
+            if(seqprefs.containsKey(seq))
+            {
+                m.msg("Sequence Prefix from "+f.getName()+" already used in "+seqprefs.get(seq));
+            }
+            else
+            {
+                seqprefs.put(seq, f.getName());
+            }
+        }
+        m.msg("Done checking for sequence prefix duplicates.");
+
+    }
     public static void launchUru()
     {
         shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");

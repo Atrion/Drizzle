@@ -498,6 +498,7 @@ public class Gui extends javax.swing.JFrame {
         jButton126 = new javax.swing.JButton();
         jButton137 = new javax.swing.JButton();
         jButton139 = new javax.swing.JButton();
+        checkboxState25 = new shared.State.CheckboxState();
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
         jButton145 = new javax.swing.JButton();
@@ -1575,7 +1576,10 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState3.addTab("Proxy", ProxyTab);
 
+            MiscPanel.setLayout(null);
+
             jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Advanced"));
+            jPanel41.setLayout(null);
 
             jButton133.setText("Generate uam.status.txt");
             jButton133.addActionListener(new java.awt.event.ActionListener() {
@@ -1583,11 +1587,17 @@ public class Gui extends javax.swing.JFrame {
                     jButton133ActionPerformed(evt);
                 }
             });
+            jPanel41.add(jButton133);
+            jButton133.setBounds(10, 60, 154, 36);
 
             textfieldState42.setText("textfieldState42");
             textfieldState42.setName("genFolder"); // NOI18N
+            jPanel41.add(textfieldState42);
+            textfieldState42.setBounds(60, 30, 170, 20);
 
             jLabel44.setText("folder:");
+            jPanel41.add(jLabel44);
+            jLabel44.setBounds(10, 30, 34, 16);
 
             jButton134.setText("Select...");
             jButton134.addActionListener(new java.awt.event.ActionListener() {
@@ -1595,6 +1605,8 @@ public class Gui extends javax.swing.JFrame {
                     jButton134ActionPerformed(evt);
                 }
             });
+            jPanel41.add(jButton134);
+            jButton134.setBounds(240, 20, 67, 36);
 
             jButton126.setText("List Available Ages...");
             jButton126.addActionListener(new java.awt.event.ActionListener() {
@@ -1602,6 +1614,8 @@ public class Gui extends javax.swing.JFrame {
                     jButton126ActionPerformed(evt);
                 }
             });
+            jPanel41.add(jButton126);
+            jButton126.setBounds(130, 170, 136, 36);
 
             jButton137.setText("Get Offline list.");
             jButton137.addActionListener(new java.awt.event.ActionListener() {
@@ -1609,57 +1623,26 @@ public class Gui extends javax.swing.JFrame {
                     jButton137ActionPerformed(evt);
                 }
             });
+            jPanel41.add(jButton137);
+            jButton137.setBounds(20, 170, 103, 36);
 
-            jButton139.setText("Find dup. python");
+            jButton139.setText("Run Tests...");
             jButton139.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton139ActionPerformed(evt);
                 }
             });
+            jPanel41.add(jButton139);
+            jButton139.setBounds(200, 80, 100, 36);
 
-            javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
-            jPanel41.setLayout(jPanel41Layout);
-            jPanel41Layout.setHorizontalGroup(
-                jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel41Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton126, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton133)
-                        .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel41Layout.createSequentialGroup()
-                                .addComponent(jButton137)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton139))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel41Layout.createSequentialGroup()
-                                .addComponent(jLabel44)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton134))))
-                    .addContainerGap(12, Short.MAX_VALUE))
-            );
-            jPanel41Layout.setVerticalGroup(
-                jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel41Layout.createSequentialGroup()
-                    .addGap(7, 7, 7)
-                    .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfieldState42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton134)
-                        .addComponent(jLabel44))
-                    .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel41Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton133)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton137)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton126))
-                        .addGroup(jPanel41Layout.createSequentialGroup()
-                            .addGap(48, 48, 48)
-                            .addComponent(jButton139)))
-                    .addContainerGap())
-            );
+            checkboxState25.setSelected(true);
+            checkboxState25.setText("ignore known overrides");
+            checkboxState25.setName("uamig"); // NOI18N
+            jPanel41.add(checkboxState25);
+            checkboxState25.setBounds(203, 110, 180, 28);
+
+            MiscPanel.add(jPanel41);
+            jPanel41.setBounds(370, 50, 393, 215);
 
             jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
 
@@ -1710,6 +1693,9 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(jButton145)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
+
+            MiscPanel.add(jPanel46);
+            jPanel46.setBounds(30, 310, 496, 118);
 
             jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
 
@@ -1779,31 +1765,8 @@ public class Gui extends javax.swing.JFrame {
                     .addContainerGap(25, Short.MAX_VALUE))
             );
 
-            javax.swing.GroupLayout MiscPanelLayout = new javax.swing.GroupLayout(MiscPanel);
-            MiscPanel.setLayout(MiscPanelLayout);
-            MiscPanelLayout.setHorizontalGroup(
-                MiscPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(MiscPanelLayout.createSequentialGroup()
-                    .addGap(36, 36, 36)
-                    .addGroup(MiscPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(MiscPanelLayout.createSequentialGroup()
-                            .addComponent(jPanel47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(469, 469, 469))
-            );
-            MiscPanelLayout.setVerticalGroup(
-                MiscPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(MiscPanelLayout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addGroup(MiscPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(47, 47, 47)
-                    .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(42, Short.MAX_VALUE))
-            );
+            MiscPanel.add(jPanel47);
+            jPanel47.setBounds(20, 50, 327, 163);
 
             tabsState3.addTab("Misc", MiscPanel);
 
@@ -5013,31 +4976,7 @@ private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton138ActionPerformed
 
 private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton139ActionPerformed
-    String potsfolder = this.textfieldState39.getText();
-    if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
-    java.util.HashMap<String, String> pyfiles = new java.util.HashMap();
-    Vector<File> files = shared.FileUtils.FindAllFiles(potsfolder+"/Python/", ".pak", false);
-    for(File f: files)
-    {
-        //m.msg(f.getName());
-        uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f, 3, true);
-        for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
-        {
-            String pyname = ind.objectname.toString();
-            String paklist = pyfiles.get(pyname);
-            if(paklist==null) pyfiles.put(pyname, f.getName());
-            else pyfiles.put(pyname, paklist+","+f.getName());
-        }
-    }
-    for(String pyfile: pyfiles.keySet())
-    {
-        String paklist = pyfiles.get(pyfile);
-        if(paklist.contains(","))
-        {
-            m.msg(pyfile+":"+paklist);
-        }
-    }
-    m.msg("Done checking for python file duplicates.");
+    uam.Uam.RunTests(this.textfieldState39.getText());
 }//GEN-LAST:event_jButton139ActionPerformed
 
 private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton140ActionPerformed
@@ -5147,6 +5086,7 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private shared.State.CheckboxState checkboxState22;
     private shared.State.CheckboxState checkboxState23;
     private shared.State.CheckboxState checkboxState24;
+    private shared.State.CheckboxState checkboxState25;
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;
