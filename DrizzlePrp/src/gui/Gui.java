@@ -491,14 +491,16 @@ public class Gui extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         MiscPanel = new javax.swing.JPanel();
         jPanel41 = new javax.swing.JPanel();
-        jButton133 = new javax.swing.JButton();
-        textfieldState42 = new shared.State.TextfieldState();
-        jLabel44 = new javax.swing.JLabel();
-        jButton134 = new javax.swing.JButton();
         jButton126 = new javax.swing.JButton();
         jButton137 = new javax.swing.JButton();
-        jButton139 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         checkboxState25 = new shared.State.CheckboxState();
+        jButton139 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jButton134 = new javax.swing.JButton();
+        textfieldState42 = new shared.State.TextfieldState();
+        jButton133 = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
         jButton145 = new javax.swing.JButton();
@@ -1581,33 +1583,6 @@ public class Gui extends javax.swing.JFrame {
             jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Advanced"));
             jPanel41.setLayout(null);
 
-            jButton133.setText("Generate uam.status.txt");
-            jButton133.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton133ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton133);
-            jButton133.setBounds(10, 60, 154, 36);
-
-            textfieldState42.setText("textfieldState42");
-            textfieldState42.setName("genFolder"); // NOI18N
-            jPanel41.add(textfieldState42);
-            textfieldState42.setBounds(60, 30, 170, 20);
-
-            jLabel44.setText("folder:");
-            jPanel41.add(jLabel44);
-            jLabel44.setBounds(10, 30, 34, 16);
-
-            jButton134.setText("Select...");
-            jButton134.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton134ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton134);
-            jButton134.setBounds(240, 20, 67, 36);
-
             jButton126.setText("List Available Ages...");
             jButton126.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1615,7 +1590,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton126);
-            jButton126.setBounds(130, 170, 136, 36);
+            jButton126.setBounds(20, 140, 160, 36);
 
             jButton137.setText("Get Offline list.");
             jButton137.addActionListener(new java.awt.event.ActionListener() {
@@ -1624,7 +1599,13 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton137);
-            jButton137.setBounds(20, 170, 103, 36);
+            jButton137.setBounds(20, 170, 130, 36);
+
+            jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+            checkboxState25.setSelected(true);
+            checkboxState25.setText("ignore known overrides");
+            checkboxState25.setName("uamig"); // NOI18N
 
             jButton139.setText("Run Tests...");
             jButton139.addActionListener(new java.awt.event.ActionListener() {
@@ -1632,17 +1613,67 @@ public class Gui extends javax.swing.JFrame {
                     jButton139ActionPerformed(evt);
                 }
             });
-            jPanel41.add(jButton139);
-            jButton139.setBounds(200, 80, 100, 36);
 
-            checkboxState25.setSelected(true);
-            checkboxState25.setText("ignore known overrides");
-            checkboxState25.setName("uamig"); // NOI18N
-            jPanel41.add(checkboxState25);
-            checkboxState25.setBounds(203, 110, 180, 28);
+            javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+            jPanel6.setLayout(jPanel6Layout);
+            jPanel6Layout.setHorizontalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(checkboxState25, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton139, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+            jPanel6Layout.setVerticalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jButton139)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(checkboxState25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(10, Short.MAX_VALUE))
+            );
+
+            jPanel41.add(jPanel6);
+            jPanel6.setBounds(200, 120, 190, 90);
+
+            jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel7.setLayout(null);
+
+            jButton134.setText("Select...");
+            jButton134.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton134ActionPerformed(evt);
+                }
+            });
+            jPanel7.add(jButton134);
+            jButton134.setBounds(300, 0, 80, 36);
+
+            textfieldState42.setText("textfieldState42");
+            textfieldState42.setName("genFolder"); // NOI18N
+            jPanel7.add(textfieldState42);
+            textfieldState42.setBounds(120, 10, 180, 20);
+
+            jButton133.setText("Generate uam.status.txt");
+            jButton133.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton133ActionPerformed(evt);
+                }
+            });
+            jPanel7.add(jButton133);
+            jButton133.setBounds(10, 30, 180, 36);
+
+            jLabel44.setText("archive folder:");
+            jPanel7.add(jLabel44);
+            jLabel44.setBounds(10, 10, 100, 16);
+
+            jPanel41.add(jPanel7);
+            jPanel7.setBounds(20, 30, 380, 70);
 
             MiscPanel.add(jPanel41);
-            jPanel41.setBounds(370, 50, 393, 215);
+            jPanel41.setBounds(370, 50, 410, 230);
 
             jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
 
@@ -5325,6 +5356,8 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JPanel jPanel48;
     private javax.swing.JPanel jPanel49;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton5;
