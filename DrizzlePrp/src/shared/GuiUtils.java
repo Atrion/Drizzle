@@ -35,6 +35,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.Box;
+import javax.swing.JComponent;
+import javax.swing.UIManager;
 
 public class GuiUtils
 {
@@ -81,7 +83,10 @@ public class GuiUtils
 
     static class CustomJFileChooser extends javax.swing.JFileChooser
     {
-        javax.swing.JComboBox drives;// = new javax.swing.JComboBox();
+
+        //javax.swing.JComboBox drives;// = new javax.swing.JComboBox();
+        JPanel drivePanel;
+
         static class Root
         {
             String display;
@@ -96,6 +101,31 @@ public class GuiUtils
             {
                 return display;
             }
+        }
+        private void addDriveButton(String label, final java.io.File file)
+        {
+            JButton jb = new javax.swing.JButton(label);
+            jb.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    updateroot(file);
+                }
+            });
+            drivePanel.add(jb);
+        }
+        public void rescanCurrentDirectory()
+        {
+            //m.msg("rescan");
+            //java.awt.GridLayout gl = new java.awt.GridLayout(0, 1);
+            drivePanel.removeAll();
+            //drivePanel.setLayout(gl);
+            addDriveButton("Desktop", javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory());
+            for(java.io.File root: java.io.File.listRoots())
+            {
+                addDriveButton(root.toString(), root);
+            }
+            drivePanel.revalidate();
+
+            super.rescanCurrentDirectory();
         }
         /*public void setCurrentDirectory(java.io.File dir)
         {
@@ -116,13 +146,6 @@ public class GuiUtils
             //this.add(new javax.swing.JLabel("hi"));
             //this.addimp
             //this.addImpl(new javax.swing.JLabel("hi"), java.awt.BorderLayout.WEST, -1);
-            java.util.Vector<Root> roots = new java.util.Vector();
-            //roots.add(new Root("",null));
-            roots.add(new Root("Desktop",javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory()));
-            for(java.io.File root: java.io.File.listRoots())
-            {
-                roots.add(new Root(root.toString(),root));
-            }
 
             /*drives = new javax.swing.JComboBox(roots);
             drives.addItemListener(new java.awt.event.ItemListener() {
@@ -132,21 +155,10 @@ public class GuiUtils
             });*/
             //drives.setBounds(0, 0, 50, 50);
             java.awt.GridLayout gl = new java.awt.GridLayout(0, 1);
-            javax.swing.JPanel pan = new javax.swing.JPanel(gl);
-            for(Root r: roots)
-            {
-                javax.swing.JButton jb = new javax.swing.JButton(r.display);
-                final Root r2 = r;
-                jb.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        updateroot(r2.dir);
-                    }
-                });
-                pan.add(jb);
-            }
+            drivePanel = new javax.swing.JPanel(gl);
             //pan.setBounds(0, 0, 100, 100);
             //pan.add(drives);
-            this.addImpl(pan, java.awt.BorderLayout.WEST, -1);
+            this.addImpl(drivePanel, java.awt.BorderLayout.WEST, -1);
 
             JPanel pan2 = new JPanel();
             JButton createfolderbutton = new JButton("Create Folder");
@@ -256,6 +268,101 @@ public class GuiUtils
                 javax.swing.SwingUtilities.updateComponentTreeUI(c);
             }
         }*/
+    }
+
+    public static void setCrossPlatformFonts(boolean tryToUseFixedWidth)
+    {
+        //The regular JRE only comes with the one font, without bold, italics, or fixedwidth.  The JDK JRE has bold, italics, and fixedwidth as well.
+        //If tryToUseFixedWidth is set, it will try to load that fixedwidth font, otherwise it will use the default fixedwidth font.
+        //If tryToUseFixedWidth is not set, it will simply use the same font for things that probably should be fixedwidth, i.e. JTextArea.
+
+        //if dynamically loaded, needs to close stream afterwards.
+        //java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, shared.GetResource.getResourceAsStream("/files/LiberationSans-Regular.ttf"));
+        //java.awt.Font font2 = font.deriveFont(12.0f);
+        //javax.swing.plaf.FontUIResource f = new javax.swing.plaf.FontUIResource(font2);
+
+        //long time = java.util.Calendar.getInstance().getTimeInMillis();
+        //new java.awt.Font
+        javax.swing.plaf.FontUIResource plain = new javax.swing.plaf.FontUIResource("Lucida Sans",java.awt.Font.PLAIN,12);
+
+        javax.swing.plaf.FontUIResource fixed;
+        if(tryToUseFixedWidth)
+        {
+            //Use the Lucida fixedwidth font if possible, else use the default:
+            String fixedstr = "Lucida Sans Typewriter";
+            boolean hasfixed = false;
+            for(String s: java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames())
+            {
+                if(s.equals(fixedstr))
+                {
+                    hasfixed = true;
+                    break;
+                }
+            }
+            if(hasfixed)
+            {
+                //use the Lucida monospace font
+                fixed = new javax.swing.plaf.FontUIResource(fixedstr,java.awt.Font.PLAIN,12);
+            }
+            else
+            {
+                //just use the default monospace font.
+                fixed = new javax.swing.plaf.FontUIResource(java.awt.Font.MONOSPACED,java.awt.Font.PLAIN,12);
+            }
+        }
+        else
+        {
+            fixed = plain;
+        }
+        //com.sun.java.swing.plaf.windows.resources.windows.
+
+        //Object[] objs = new Object[]{"Lucida",java.awt.Font.PLAIN,12};
+        //javax.swing.UIDefaults.ProxyLazyValue f2 = new javax.swing.UIDefaults.ProxyLazyValue("javax.swing.plaf.FontUIResource",null,objs);
+
+        //java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
+        //while (keys.hasMoreElements())
+        //{
+        //    Object key = keys.nextElement();
+        //    Object value = javax.swing.UIManager.get(key);
+        //    if (value instanceof javax.swing.plaf.FontUIResource)
+        //    {
+        //        javax.swing.UIManager.put (key, f);
+        //    }
+        //}
+
+        UIManager.put("Button.font", plain);
+        UIManager.put("ToggleButton.font", plain);
+        UIManager.put("RadioButton.font", plain);
+        UIManager.put("CheckBox.font", plain);
+        UIManager.put("ColorChooser.font", plain);
+        UIManager.put("ComboBox.font", plain);
+        UIManager.put("Label.font", plain);
+        UIManager.put("MenuBar.font", plain);
+        UIManager.put("MenuItem.font", plain);
+        UIManager.put("RadioButtonMenuItem.font", plain);
+        UIManager.put("CheckBoxMenuItem.font", plain);
+        UIManager.put("Menu.font", plain);
+        UIManager.put("PopupMenu.font", plain);
+        UIManager.put("OptionPane.font", plain);
+        UIManager.put("Panel.font", plain);
+        UIManager.put("ProgressBar.font", plain);
+        UIManager.put("ScrollPane.font", plain);
+        UIManager.put("Viewport.font", plain);
+        UIManager.put("TabbedPane.font", plain);
+        UIManager.put("Table.font", plain);
+        UIManager.put("TableHeader.font", plain);
+        UIManager.put("TitledBorder.font", plain);
+        UIManager.put("ToolBar.font", plain);
+        UIManager.put("ToolTip.font", plain);
+        UIManager.put("Tree.font", plain);
+        UIManager.put("TextField.font", plain);
+        UIManager.put("PasswordField.font", plain);
+        UIManager.put("TextArea.font", fixed);
+        UIManager.put("TextPane.font", plain);
+        UIManager.put("EditorPane.font", plain);
+
+        //time = java.util.Calendar.getInstance().getTimeInMillis() - time;
+        //int dummy=0;
     }
 
     private static JFileChooser getJFileChooser()
