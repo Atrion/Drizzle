@@ -126,6 +126,14 @@ public class Uam
         }
     }
 
+    public static String GetRandomAge()
+    {
+        int num = ageList.data.ages.size();
+        int randnum = (new java.util.Random()).nextInt(num);
+        String result = ageList.data.ages.get(randnum).propername;
+        return result;
+    }
+
     public static void RunTests(String potsfolder)
     {
         if(!automation.detectinstallation.isFolderPots(potsfolder)) return;

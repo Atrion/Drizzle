@@ -501,6 +501,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState42 = new shared.State.TextfieldState();
         jButton133 = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
+        jButton15 = new javax.swing.JButton();
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
         jButton145 = new javax.swing.JButton();
@@ -562,6 +563,11 @@ public class Gui extends javax.swing.JFrame {
         textfieldState26 = new shared.State.TextfieldState();
         textfieldState27 = new shared.State.TextfieldState();
         textfieldState28 = new shared.State.TextfieldState();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jLabel51 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -1672,6 +1678,15 @@ public class Gui extends javax.swing.JFrame {
             jPanel41.add(jPanel7);
             jPanel7.setBounds(20, 30, 380, 70);
 
+            jButton15.setText("Name a random Age!");
+            jButton15.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton15ActionPerformed(evt);
+                }
+            });
+            jPanel41.add(jButton15);
+            jButton15.setBounds(20, 110, 160, 36);
+
             MiscPanel.add(jPanel41);
             jPanel41.setBounds(370, 50, 410, 230);
 
@@ -2176,6 +2191,7 @@ public class Gui extends javax.swing.JFrame {
             textfieldState43.setBounds(90, 200, 61, 20);
 
             jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel36.setLayout(null);
 
             jButton105.setText("jButton105");
             jButton105.addActionListener(new java.awt.event.ActionListener() {
@@ -2183,49 +2199,56 @@ public class Gui extends javax.swing.JFrame {
                     jButton105ActionPerformed(evt);
                 }
             });
+            jPanel36.add(jButton105);
+            jButton105.setBounds(10, 130, 120, 36);
 
-            textfieldState26.setText("textfieldState26");
+            textfieldState26.setText("http://example.com/page.html");
             textfieldState26.setName("address"); // NOI18N
+            jPanel36.add(textfieldState26);
+            textfieldState26.setBounds(70, 10, 210, 20);
 
-            textfieldState27.setText("30");
+            textfieldState27.setText("60");
             textfieldState27.setName("updateTime"); // NOI18N
+            jPanel36.add(textfieldState27);
+            textfieldState27.setBounds(70, 40, 70, 20);
 
-            textfieldState28.setText("textfieldState28");
+            textfieldState28.setText("c:\\path\\to\\outfolder");
             textfieldState28.setName("searchnet"); // NOI18N
+            jPanel36.add(textfieldState28);
+            textfieldState28.setBounds(70, 70, 210, 20);
 
-            javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-            jPanel36.setLayout(jPanel36Layout);
-            jPanel36Layout.setHorizontalGroup(
-                jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel36Layout.createSequentialGroup()
-                    .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel36Layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jButton105))
-                        .addGroup(jPanel36Layout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textfieldState28, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textfieldState27, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textfieldState26, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(129, Short.MAX_VALUE))
-            );
-            jPanel36Layout.setVerticalGroup(
-                jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(textfieldState26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(textfieldState27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(textfieldState28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                    .addComponent(jButton105)
-                    .addGap(57, 57, 57))
-            );
+            jLabel1.setText("url:");
+            jPanel36.add(jLabel1);
+            jLabel1.setBounds(10, 10, 50, 16);
+
+            jLabel2.setText("timer(s)");
+            jPanel36.add(jLabel2);
+            jLabel2.setBounds(10, 40, 70, 16);
+
+            jButton16.setText("Start saving");
+            jButton16.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton16ActionPerformed(evt);
+                }
+            });
+            jPanel36.add(jButton16);
+            jButton16.setBounds(10, 100, 120, 36);
+
+            jButton18.setText("Cancel");
+            jButton18.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton18ActionPerformed(evt);
+                }
+            });
+            jPanel36.add(jButton18);
+            jButton18.setBounds(203, 100, 80, 36);
+
+            jLabel51.setText("outfolder");
+            jPanel36.add(jLabel51);
+            jLabel51.setBounds(10, 70, 70, 16);
 
             jPanel49.add(jPanel36);
-            jPanel36.setBounds(350, 10, 299, 246);
+            jPanel36.setBounds(350, 10, 350, 256);
 
             jButton1.setText("Run Code Validation");
             jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -5054,6 +5077,24 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState37ActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_textfieldState37ActionPerformed
+
+private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+    String age = uam.Uam.GetRandomAge();
+    m.msg(age);
+}//GEN-LAST:event_jButton15ActionPerformed
+
+private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+    GuiUtils.showTrayIcon("/gui/Pterosaur2b4-16.png");
+    String address = this.textfieldState26.getText();
+    String timer = this.textfieldState27.getText();
+    double timer2 = Double.parseDouble(timer);
+    String search = this.textfieldState28.getText();
+    checker.nettimer.SavePageAtTime(address,timer2,search,"",".html");
+}//GEN-LAST:event_jButton16ActionPerformed
+
+private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    checker.nettimer.CancelTimers();
+}//GEN-LAST:event_jButton18ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5181,7 +5222,10 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JButton jButton145;
     private javax.swing.JButton jButton146;
     private javax.swing.JButton jButton147;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
@@ -5262,6 +5306,7 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JButton jButton98;
     private javax.swing.JButton jButton99;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -5272,6 +5317,7 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -5306,6 +5352,7 @@ private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;

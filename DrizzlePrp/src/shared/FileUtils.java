@@ -45,7 +45,33 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
-    
+    public static String SanitizeFilename(String filename)
+    {
+        String result = filename;
+        result = result.replace(":", "_");
+        result = result.replace("/", "_");
+        result = result.replace("\\", "_");
+        result = result.replace("*", "_");
+        result = result.replace("?", "_");
+        result = result.replace("\"", "_");
+        result = result.replace("<", "_");
+        result = result.replace(">", "_");
+        result = result.replace("|", "_");
+        return result;
+    }
+    public static String GetNextFilename(String folder, String prefix, String suffix)
+    {
+        final int max = 1000000;
+        for(int i=0;i<max;i++)
+        {
+            String filename = folder+"/"+prefix+Integer.toString(i)+suffix;
+            if(!FileUtils.Exists(filename))
+            {
+                return filename;
+            }
+        }
+        return null;
+    }
     public static Vector<File> FindAllFiles(String folder, String ext, boolean recurse)
     {
         Vector<File> result = new Vector();

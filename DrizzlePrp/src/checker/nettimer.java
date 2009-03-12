@@ -15,9 +15,12 @@ import shared.*;
 import java.lang.Runnable;
 import java.lang.Thread;
 
-public class nettimer {
+public class nettimer
+{
 
-    public static void timer(String address, double interval, String search)
+    private static java.util.Timer timer;
+
+    /*public static void timer(String address, double interval, String search)
     {
         runner r = new runner(interval,address,search);
         r.start();
@@ -81,5 +84,57 @@ public class nettimer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }*/
+
+    public static void timer(final String address, double periodInSecs, final String search)
+    {
+        CancelTimers();
+
+        long period = (long)(periodInSecs*1000);
+        timer = new java.util.Timer(true);
+        timer.schedule(new java.util.TimerTask(){
+            public void run()
+            {
+                m.msg("Checking...");
+                byte[] data = shared.HttpUtils.geturl(address);
+                String result = b.BytesToString(data);
+                if (result.indexOf(search) != -1) {
+                    String msg = "The query '"+search+"' has been found.";
+                    m.msg(msg);
+                    GuiUtils.DisplayTrayMessage("Found", msg);
+                }
+            }
+        }, 0, period);
+
     }
+
+    public static void SavePageAtTime(final String address, double periodInSecs, final String outfolder, final String prefix, final String suffix)
+    {
+        CancelTimers();
+
+        long period = (long)(periodInSecs*1000);
+        timer = new java.util.Timer(true);
+        timer.schedule(new java.util.TimerTask(){
+            public void run()
+            {
+                m.msg("Reading from "+address);
+                byte[] data = shared.HttpUtils.geturl(address);
+                //String outfile = FileUtils.GetNextFilename(outfolder, "save", suffix);
+                String outfile = outfolder+"/"+prefix+FileUtils.SanitizeFilename(shared.DateTimeUtils.GetSortableCurrentDate())+suffix;
+                m.msg("Saving to "+outfile);
+                FileUtils.WriteFile(outfile, data);
+                //GuiUtils.DisplayTrayMessage("File Saved", "The page "+address+" has been saved to "+outfile);
+            }
+        }, 0, period);
+        
+    }
+    public static void CancelTimers()
+    {
+        if(timer!=null)
+        {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
 }

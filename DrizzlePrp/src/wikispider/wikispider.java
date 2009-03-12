@@ -125,31 +125,6 @@ public class wikispider
         return result;
     }
     
-    public static byte[] geturl(String address)
-    {
-        try {
-            //m.msg("Checking...");
-            URL url = new URL(address);
-            Object content = url.getContent();
-            InputStream in = new BufferedInputStream(url.openConnection().getInputStream());
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            while (true) {
-                int read = in.read(buffer);
-                if (read == -1) {
-                    break;
-                }
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            byte[] bytes = out.toByteArray();
-            return bytes;
-        } catch (Exception e) {
-            //e.printStackTrace();
-            m.warn("Unable to download: "+address);
-        }
-        return null;
-    }
     
     public static enum LinkType
     {
@@ -270,7 +245,7 @@ public class wikispider
                         break;
                     case Unknown:
                     case WikiPage:
-                        data = wikispider.geturl(sourceurl);
+                        data = shared.HttpUtils.geturl(sourceurl);
                         if(data==null) return;
                         FileUtils.WriteFile(outputName+".txt", data, true);
                         String text = b.BytesToString(data);
@@ -285,14 +260,14 @@ public class wikispider
                     case Image:
                         //if(true)break;
                         String pageurl=startingUrl + "/index.php?title="+safeinname;
-                        data = wikispider.geturl(pageurl);
+                        data = shared.HttpUtils.geturl(pageurl);
                         if(data==null) return;
                         xml x = new xml(data);
                         //String imgurl = x.getString("//div[@class='fullImageLink']/a/@href");
                         String imgurl = x.getString("//div[@id='file']/a/@href"); //also works.
                         imgurl = startingUrl+"/"+imgurl;
                         //The newer MediaWiki versions also let you use /Special:Filepath/Imagename.jpg  or /Special:Filepath?file=Imagename.jpg
-                        byte[] data2 = wikispider.geturl(imgurl);
+                        byte[] data2 = shared.HttpUtils.geturl(imgurl);
                         if(data==null) return;
                         FileUtils.WriteFile(outputName, data2, true);
                         break;

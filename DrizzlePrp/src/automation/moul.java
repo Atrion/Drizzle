@@ -99,6 +99,11 @@ public class moul
             prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
             prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
         }
+        if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
+        {
+            prpfile textprp = prpfile.createFromFile(infolder + "/dat/Neighborhood_District_Textures.prp", true);
+            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+        }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {
             //String newname = "Bahro1";
