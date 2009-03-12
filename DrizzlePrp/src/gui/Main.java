@@ -55,8 +55,33 @@ public class Main extends javax.swing.JFrame {
                 //java.awt.Font font2 = font.deriveFont(12.0f);
                 //javax.swing.plaf.FontUIResource f = new javax.swing.plaf.FontUIResource(font2);
 
+                //long time = java.util.Calendar.getInstance().getTimeInMillis();
+                //new java.awt.Font
                 javax.swing.plaf.FontUIResource plain = new javax.swing.plaf.FontUIResource("Lucida Sans",java.awt.Font.PLAIN,12);
-                javax.swing.plaf.FontUIResource fixed = new javax.swing.plaf.FontUIResource("Lucida Sans Typewriter",java.awt.Font.PLAIN,12);
+
+                //Use the Lucida fixedwidth font if possible, else use the default:
+                String fixedstr = "Lucida Sans Typewriter";
+                javax.swing.plaf.FontUIResource fixed;
+                boolean hasfixed = false;
+                for(String s: java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames())
+                {
+                    if(s.equals(fixedstr))
+                    {
+                        hasfixed = true;
+                        break;
+                    }
+                }
+                if(hasfixed)
+                {
+                    //use the Lucida monospace font
+                    fixed = new javax.swing.plaf.FontUIResource(fixedstr,java.awt.Font.PLAIN,12);
+                }
+                else
+                {
+                    //just use the default monospace font.
+                    fixed = new javax.swing.plaf.FontUIResource(java.awt.Font.MONOSPACED,java.awt.Font.PLAIN,12);
+                }
+                //com.sun.java.swing.plaf.windows.resources.windows.
 
                 //Object[] objs = new Object[]{"Lucida",java.awt.Font.PLAIN,12};
                 //javax.swing.UIDefaults.ProxyLazyValue f2 = new javax.swing.UIDefaults.ProxyLazyValue("javax.swing.plaf.FontUIResource",null,objs);
@@ -103,6 +128,8 @@ public class Main extends javax.swing.JFrame {
                 UIManager.put("TextPane.font", plain);
                 UIManager.put("EditorPane.font", plain);
 
+                //time = java.util.Calendar.getInstance().getTimeInMillis() - time;
+                //int dummy=0;
             }
         }
         catch(Exception e){

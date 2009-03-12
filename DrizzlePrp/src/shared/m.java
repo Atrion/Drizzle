@@ -69,7 +69,11 @@ public class m
     }
     public static StateStack<stateclass> state = new StateStack<stateclass>(new stateclass(),true,true);
     
-    
+    public static void time()
+    {
+        long time = java.util.Calendar.getInstance().getTimeInMillis();
+        m.msg("time: "+Long.toString(time));
+    }
     public static void redirectStdOut()
     {
         if(justUseConsole==false)
