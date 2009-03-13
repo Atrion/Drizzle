@@ -1193,6 +1193,8 @@ public class mystAutomation
         pagenums.put( "GlobalAnimations", 370, 398); //kgWalkingJump
         pagenums.put( "GlobalAnimations", 376, 399); //kgWave
 
+        pagenums.put( "Neighborhood", 12, 60); //nb01BahroPedestalShout
+
         cmap<String,cmap<String,String>> pagenames = new cmap();
         pagenames.put("GlobalAnimations", "FemaleDance", "FemaleDanceMOUL");
         pagenames.put("GlobalAnimations", "MaleDance", "MaleDanceMOUL");

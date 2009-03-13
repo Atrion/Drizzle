@@ -18,6 +18,7 @@
 
 package relationvis;
 
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
@@ -25,12 +26,14 @@ import java.awt.Color;
 import java.util.Vector;
 import java.util.Random;
 import shared.m;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 /**
  *
  * @author user
  */
-public class visualisation
+public class CrossRefPanel extends javax.swing.JPanel
 {
     Vector<entity> entities;
     Vector<relation> relations;
@@ -38,7 +41,7 @@ public class visualisation
     Graphics2D img;
     boolean movemode = false;
     entity moveentity;
-    Graphics output;
+    //Graphics output;
 
     int width = 950;
     int height = 550;
@@ -49,7 +52,140 @@ public class visualisation
     Color unmarked = Color.BLUE;
     Color background = Color.WHITE;
     Color arrow = Color.GREEN;
-    
+
+    public void initAsCrossLinkReport(String infile)
+    {
+        width = this.getWidth();
+        height = this.getHeight();
+        //output = output2;
+        //initialisation(entities2);
+        entities = new Vector<entity>();
+        relations = new Vector<relation>();
+        rawimg = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+        img = rawimg.createGraphics();
+
+        //boolean registerScannedLinks = true; //whether to bother dealing with refs only found by scanning.
+
+        //boolean includeSceneNodes = false;
+
+        //vis = new visualisation();
+        //java.awt.Dimension dim = new java.awt.Dimension(300,200);
+        //this.jPanel5.setMinimumSize(dim);
+        //java.awt.Dimension dim = this.jPanel5.getSize();
+        //vis = new CrossRefPanel();//this.jPanel5.getGraphics(), dim.width, dim.height);
+        leftborder = 100;
+        boxsize = 6;
+
+
+        uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(infile, false);
+        Vector<uru.moulprp.Uruobjectdesc> refs = shared.FindAllDescendants.FindAllDescendantsByClass(uru.moulprp.Uruobjectdesc.class, prp);
+        //read from input file.
+        //byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
+        //prputils.ReportCrossLinks(filecontents);
+        //byte[] filedata = FileUtils.ReadFile(/*this.out+*/"crosslinkreport.csv");
+        //byte[][] lines = b.splitBytes(filedata, (byte)'\n');
+        //int linecount = lines.length;
+        //int startline = 1; //skip the first line.
+
+        //register all entities
+        for(uru.moulprp.Uruobjectdesc ref: refs)
+        {
+            this.addEntity(ref.toString());
+        }
+        /*this.addEntity(infile);
+        for(int i=startline;i<linecount;i++) {
+            byte[] curline = lines[i];
+            byte[][] fields = b.splitBytes(curline, (byte)';');
+            //int fieldcount = fields.length;
+            if (fields.length > 1) {
+                //String scantype = b.BytesToString(fields[0]);
+                byte[] fromnamebytes = b.appendBytes(fields[1],b.StringToBytes("**"),fields[2]); //append the objectname and objecttype.
+                String fromname = b.BytesToString(fromnamebytes);
+                vis.addEntity(fromname);
+
+                if(registerScannedLinks) {
+                    byte[] tonamebytes = b.appendBytes(fields[4],b.StringToBytes("**"),fields[5]); //append the objectname and objecttype.
+                    String toname = b.BytesToString(tonamebytes);
+                    vis.addEntity(toname);
+                }
+            }
+        }*/
+
+        //register all relations.
+        for(uru.moulprp.Uruobjectdesc ref: refs)
+        {
+            if(ref.rootobj!=null)
+            {
+                this.addRelation(ref.rootobj.toString(), ref.toString());
+            }
+            else
+            {
+                //m.warn("no root object specified.");
+            }
+        }
+        /*for(int i=startline;i<linecount;i++) {
+            byte[] curline = lines[i];
+            byte[][] fields = b.splitBytes(curline, (byte)';');
+            //int fieldcount = fields.length;
+            if(fields.length > 1) {
+                //String scantype = b.BytesToString(fields[0]);
+                byte[] fromnamebytes = b.appendBytes(fields[1],b.StringToBytes("**"),fields[2]); //append the objectname and objecttype.
+                String fromname = b.BytesToString(fromnamebytes);
+                byte[] tonamebytes = b.appendBytes(fields[4],b.StringToBytes("**"),fields[5]); //append the objectname and objecttype.
+                String toname = b.BytesToString(tonamebytes);
+
+                vis.addRelation(fromname,toname);
+            }
+        }*/
+        final CrossRefPanel ths = this;
+        this.addMouseMotionListener(new java.awt.event.MouseMotionListener() {
+            public void mouseDragged(MouseEvent e) {
+            }
+            public void mouseMoved(MouseEvent e) {
+                entity ent = ths.findEntityAtPixel(e.getX(),e.getY());
+                String msg = ent==null?"":ent.name;
+
+                //drawMessage("Name:"+ent.name);
+                //javax.swing.JFrame glass = new javax.swing.JFrame();
+                //glass.getContentPane().add(new javax.swing.JLabel("Hello!"));
+                JPanel gls = (JPanel)javax.swing.SwingUtilities.getRootPane(ths).getGlassPane();
+                int w = gls.getWidth();
+                gls.setLayout(null);
+                gls.setVisible(false);
+                gls.removeAll();
+                JLabel label = new JLabel(msg);
+                java.awt.Point newpos = javax.swing.SwingUtilities.convertPoint(ths, e.getX(), e.getY(), gls);
+                label.setBounds(newpos.x+15, newpos.y-10, 1000, 20);
+                gls.add(label);
+                gls.setVisible(true);
+            }
+        });
+        this.addMouseListener(new java.awt.event.MouseListener() {
+
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            public void mousePressed(MouseEvent e) {
+                ths.handleClick(0, e.getButton(), e.getX(), e.getY());
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                ths.handleClick(1, e.getButton(), e.getX(), e.getY());
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
+        });
+
+        this.assignRandomPositions();
+
+        this.drawAll();
+
+    }
+
     public void deleteMarkedEntities()
     {
         //make list of entities to remove.
@@ -85,6 +221,7 @@ public class visualisation
         {
             relations.remove(deletees2.get(i));
         }
+        this.drawAll();
     }
     
     public void markLinks(boolean doLeftLinks, boolean doRightLinks)
@@ -122,6 +259,8 @@ public class visualisation
             entity curent = entities.get(i);
             curent.ismarked = curent.temp1;
         }
+
+        this.drawAll();
     }
     
     public void markEntitiesThatStartWith(String start)
@@ -135,6 +274,8 @@ public class visualisation
                 entities.get(i).ismarked = true;
             }
         }
+
+        this.drawAll();
     }
     public void markEntitiesThatEndWith(String end)
     {
@@ -147,6 +288,8 @@ public class visualisation
                 entities.get(i).ismarked = true;
             }
         }
+
+        this.drawAll();
     }
     
     public void clearAllMarks()
@@ -156,6 +299,8 @@ public class visualisation
         {
             entities.get(i).ismarked = false;
         }
+        
+        this.drawAll();
     }
     
     public void handleClick(int downOrUp, int mousebutton, int xpos, int ypos)
@@ -238,7 +383,7 @@ public class visualisation
         this.drawRelations();
         this.drawEntities();
         //this.drawToCanvas(output);
-        this.repaint();
+        this.repaintOld();
     }
     
     public entity findEntityAtPixel(int xpos, int ypos)
@@ -391,16 +536,17 @@ public class visualisation
         entities3 = entities2.toArray(entities3);
         initialisation(entities3);
     }*/
-    public visualisation(Graphics output2, int width2, int height2)//entity[] entities2)
+    public CrossRefPanel()//Graphics output2, int width2, int height2)//entity[] entities2)
     {
-        width = width2;
-        height = height2;
-        output = output2;
+        super();
+        //width = width2;
+        //height = height2;
+        //output = output2;
         //initialisation(entities2);
-        entities = new Vector<entity>();
-        relations = new Vector<relation>();
-        rawimg = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
-        img = rawimg.createGraphics();
+        //entities = new Vector<entity>();
+        //relations = new Vector<relation>();
+        //rawimg = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+        //img = rawimg.createGraphics();
         //img.setColor(Color.BLUE);
         //img.drawLine(0, 0, 100, 100);
     }
@@ -421,8 +567,30 @@ public class visualisation
     {
         dest.drawImage(rawimg, xpos, ypos, null);
     }
-    public void repaint()
+    public void repaintOld()
     {
-        this.drawToCanvas(output);
+        //this.drawToCanvas(output);
+        this.getGraphics().drawImage(rawimg, 0, 0, null);
     }
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        //m.msg("repaint");
+        if(rawimg==null)
+        {
+            //super.repaint();
+            //m.msg("repaint1");
+        }
+        else
+        {
+            //m.msg("repaint2");
+            //this.repaintOld();
+            g.drawImage(rawimg, 0, 0, null);
+        }
+    }
+    public void paintBorder(Graphics g)
+    {
+        
+    }
+    //this.
 }
