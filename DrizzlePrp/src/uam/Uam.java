@@ -128,10 +128,17 @@ public class Uam
 
     public static String GetRandomAge()
     {
-        int num = ageList.data.ages.size();
-        int randnum = (new java.util.Random()).nextInt(num);
-        String result = ageList.data.ages.get(randnum).propername;
-        return result;
+        //int num = ageList.data.ages.size();
+        //int randnum = (new java.util.Random()).nextInt(num);
+        //String result = ageList.data.ages.get(randnum).propername;
+        //return result;
+        String[] fanages = new String[ageList.data.ages.size()];
+        for(int i=0;i<ageList.data.ages.size();i++)
+        {
+            fanages[i] = ageList.data.ages.get(i).propername;
+        }
+        String item = shared.RandomUtils.GetRandomItem(automation.ageLists.potsages,automation.ageLists.convertedages, fanages);
+        return item;
     }
 
     public static void RunTests(String potsfolder)
