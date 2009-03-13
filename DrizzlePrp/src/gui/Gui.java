@@ -426,15 +426,6 @@ public class Gui extends javax.swing.JFrame {
         ageInfo3 = new javax.swing.JLabel();
         SimpTab = new javax.swing.JPanel();
         tabsState1 = new shared.State.TabsState();
-        jPanel34 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        textfieldState22 = new shared.State.TextfieldState();
-        jLabel20 = new javax.swing.JLabel();
-        textfieldState23 = new shared.State.TextfieldState();
-        jButton96 = new javax.swing.JButton();
-        jButton97 = new javax.swing.JButton();
-        jButton98 = new javax.swing.JButton();
-        jButton140 = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -444,6 +435,15 @@ public class Gui extends javax.swing.JFrame {
         jButton115 = new javax.swing.JButton();
         jButton116 = new javax.swing.JButton();
         jButton141 = new javax.swing.JButton();
+        jPanel34 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        textfieldState22 = new shared.State.TextfieldState();
+        jLabel20 = new javax.swing.JLabel();
+        textfieldState23 = new shared.State.TextfieldState();
+        jButton96 = new javax.swing.JButton();
+        jButton97 = new javax.swing.JButton();
+        jButton98 = new javax.swing.JButton();
+        jButton140 = new javax.swing.JButton();
         jPanel40 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         textfieldState40 = new shared.State.TextfieldState();
@@ -453,6 +453,12 @@ public class Gui extends javax.swing.JFrame {
         jButton131 = new javax.swing.JButton();
         jButton132 = new javax.swing.JButton();
         jButton142 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel58 = new javax.swing.JLabel();
+        jButton30 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
+        jButton34 = new javax.swing.JButton();
+        jButton36 = new javax.swing.JButton();
         jLabel53 = new javax.swing.JLabel();
         MemTab = new javax.swing.JPanel();
         textfieldState36 = new shared.State.TextfieldState();
@@ -1040,64 +1046,6 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState1.setName("simplicitySubTabs"); // NOI18N
 
-            jPanel34.setLayout(null);
-
-            jLabel19.setText("Myst 5 Folder:");
-            jPanel34.add(jLabel19);
-            jLabel19.setBounds(40, 30, 75, 16);
-
-            textfieldState22.setText("Click the select button to pick a folder.");
-            textfieldState22.setName("simpleMystvIn"); // NOI18N
-            jPanel34.add(textfieldState22);
-            textfieldState22.setBounds(130, 30, 340, 20);
-
-            jLabel20.setText("Pots Folder:");
-            jPanel34.add(jLabel20);
-            jLabel20.setBounds(40, 70, 66, 16);
-
-            textfieldState23.setText("Click the select button to pick a folder.");
-            textfieldState23.setName("simpleMystvOut"); // NOI18N
-            jPanel34.add(textfieldState23);
-            textfieldState23.setBounds(130, 70, 340, 20);
-
-            jButton96.setText("Start...");
-            jButton96.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton96ActionPerformed(evt);
-                }
-            });
-            jPanel34.add(jButton96);
-            jButton96.setBounds(30, 110, 70, 36);
-
-            jButton97.setText("select...");
-            jButton97.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton97ActionPerformed(evt);
-                }
-            });
-            jPanel34.add(jButton97);
-            jButton97.setBounds(480, 20, 80, 36);
-
-            jButton98.setText("select...");
-            jButton98.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton98ActionPerformed(evt);
-                }
-            });
-            jPanel34.add(jButton98);
-            jButton98.setBounds(480, 60, 80, 36);
-
-            jButton140.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
-            jButton140.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton140ActionPerformed(evt);
-                }
-            });
-            jPanel34.add(jButton140);
-            jButton140.setBounds(340, 300, 440, 36);
-
-            tabsState1.addTab("MystV", jPanel34);
-
             jLabel31.setText("Moul folder:");
 
             jLabel32.setText("Pots folder:");
@@ -1182,6 +1130,64 @@ public class Gui extends javax.swing.JFrame {
             );
 
             tabsState1.addTab("Moul", jPanel35);
+
+            jPanel34.setLayout(null);
+
+            jLabel19.setText("Myst 5 Folder:");
+            jPanel34.add(jLabel19);
+            jLabel19.setBounds(40, 30, 75, 16);
+
+            textfieldState22.setText("Click the select button to pick a folder.");
+            textfieldState22.setName("simpleMystvIn"); // NOI18N
+            jPanel34.add(textfieldState22);
+            textfieldState22.setBounds(130, 30, 340, 20);
+
+            jLabel20.setText("Pots Folder:");
+            jPanel34.add(jLabel20);
+            jLabel20.setBounds(40, 70, 66, 16);
+
+            textfieldState23.setText("Click the select button to pick a folder.");
+            textfieldState23.setName("simpleMystvOut"); // NOI18N
+            jPanel34.add(textfieldState23);
+            textfieldState23.setBounds(130, 70, 340, 20);
+
+            jButton96.setText("Start...");
+            jButton96.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton96ActionPerformed(evt);
+                }
+            });
+            jPanel34.add(jButton96);
+            jButton96.setBounds(30, 110, 70, 36);
+
+            jButton97.setText("select...");
+            jButton97.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton97ActionPerformed(evt);
+                }
+            });
+            jPanel34.add(jButton97);
+            jButton97.setBounds(480, 20, 80, 36);
+
+            jButton98.setText("select...");
+            jButton98.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton98ActionPerformed(evt);
+                }
+            });
+            jPanel34.add(jButton98);
+            jButton98.setBounds(480, 60, 80, 36);
+
+            jButton140.setText("SoundDecompress (When conversion is done, it will ask you to run this.)");
+            jButton140.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton140ActionPerformed(evt);
+                }
+            });
+            jPanel34.add(jButton140);
+            jButton140.setBounds(340, 300, 440, 36);
+
+            tabsState1.addTab("MystV", jPanel34);
 
             jLabel41.setText("Crowthistle folder:");
 
@@ -1268,6 +1274,50 @@ public class Gui extends javax.swing.JFrame {
             );
 
             tabsState1.addTab("Crowthistle", jPanel40);
+
+            jPanel5.setLayout(null);
+
+            jLabel58.setText("Fill out the info in the MystV, Moul, and Crowthistle tabs, then click these buttons to put their music in your Relto's musicbox.");
+            jPanel5.add(jLabel58);
+            jLabel58.setBounds(10, 20, 770, 16);
+
+            jButton30.setText("MystV music...");
+            jButton30.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton30ActionPerformed(evt);
+                }
+            });
+            jPanel5.add(jButton30);
+            jButton30.setBounds(20, 60, 150, 36);
+
+            jButton31.setText("Moul music...");
+            jButton31.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton31ActionPerformed(evt);
+                }
+            });
+            jPanel5.add(jButton31);
+            jButton31.setBounds(20, 100, 150, 36);
+
+            jButton34.setText("Crowthistle music...");
+            jButton34.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton34ActionPerformed(evt);
+                }
+            });
+            jPanel5.add(jButton34);
+            jButton34.setBounds(20, 140, 150, 36);
+
+            jButton36.setText("Pots music...");
+            jButton36.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton36ActionPerformed(evt);
+                }
+            });
+            jPanel5.add(jButton36);
+            jButton36.setBounds(20, 180, 150, 36);
+
+            tabsState1.addTab("Music", jPanel5);
 
             jLabel53.setFont(jLabel53.getFont());
             jLabel53.setForeground(new java.awt.Color(0, 102, 102));
@@ -4950,6 +5000,22 @@ private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
     GuiUtils.getUserSelectedFile(this.textfieldState50);
 }//GEN-LAST:event_jButton19ActionPerformed
+
+private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+    automation.myst5Fixes.CopyMusic(this.textfieldState22.getText(),this.textfieldState23.getText());
+}//GEN-LAST:event_jButton30ActionPerformed
+
+private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    automation.moul.CopyMusic(this.textfieldState33.getText(),this.textfieldState34.getText());
+}//GEN-LAST:event_jButton31ActionPerformed
+
+private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+    automation.crowthistle.CopyMusic(this.textfieldState40.getText(),this.textfieldState41.getText());
+}//GEN-LAST:event_jButton34ActionPerformed
+
+private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+    automation.pots.CopyMusic(this.textfieldState34.getText(),this.textfieldState34.getText());
+}//GEN-LAST:event_jButton36ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5095,9 +5161,13 @@ private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
+    private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton35;
+    private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton42;
@@ -5214,6 +5284,7 @@ private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -5258,6 +5329,7 @@ private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel47;
     private javax.swing.JPanel jPanel48;
     private javax.swing.JPanel jPanel49;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;

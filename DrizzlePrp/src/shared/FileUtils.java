@@ -156,7 +156,7 @@ public class FileUtils {
             if(!result) m.err("Unable to delete file: "+filename);
         }
     }
-    public static void CopyFile(String infile, String outfile, boolean overwrite)
+    public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder)
     {
         File in = new File(infile);
         File out = new File(outfile);
@@ -172,6 +172,7 @@ public class FileUtils {
         
         try
         {
+            if(createfolder && !FileUtils.Exists(out.getParent())) FileUtils.CreateFolder(out.getParent());
             inchan = new FileInputStream(in).getChannel();
             outchan = new FileOutputStream(out).getChannel();
             inchan.transferTo(0, inchan.size(), outchan);

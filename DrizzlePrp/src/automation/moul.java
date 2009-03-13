@@ -17,6 +17,24 @@ import uru.moulprp.*;
 
 public class moul
 {
+    public static void CopyMusic(String moulfolder, String potsfolder)
+    {
+        m.status("Checking the folders you gave...");
+        if(!detectinstallation.isFolderMoul(moulfolder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
+
+        for(String filename: automation.fileLists.moulMusicNotInPotsOrDifferent)
+        {
+            String infile = moulfolder + "/sfx/" + filename;
+            String outfile = potsfolder + "/MyMusic/" + (filename.equals("psnlMusicPlayer.ogg")?"psnlMusicPlayerMOUL.ogg":filename);
+
+            FileUtils.CopyFile(infile, outfile, true, true);
+        }
+
+        m.status("Done copying Moul music!");
+
+    }
+
     public static void convertMoul(String myst5folder, String potsfolder)
     {
         m.state.push();
@@ -41,40 +59,8 @@ public class moul
         
         //verify folders
         m.status("Checking the folders you gave...");
-        File myst5file = new File(myst5folder);
-        if(!myst5file.exists())
-        {
-            m.err("The MOUL folder you selected doesn't exist.");
-            return;
-        }
-        if(!myst5file.isDirectory())
-        {
-            m.err("The MOUL folder you selected must be a folder, not a file.");
-            return;
-        }
-        File myst5exe = new File(myst5folder+"/tos.txt");
-        if(!myst5exe.exists())
-        {
-            m.err("The MOUL folder you selected doesn't seem to contain MOUL.  Please select the folder that contains tos.txt");
-            return;
-        }
-        File potsfile = new File(potsfolder);
-        if(!potsfile.exists())
-        {
-            m.err("The PathOfTheShell/CompleteChronicles folder you selected doesn't exist.");
-            return;
-        }
-        if(!potsfile.isDirectory())
-        {
-            m.err("The PathOfTheShell/CompleteChronicles folder you selected must be a folder, not a file.");
-            return;
-        }
-        File potsexe = new File(potsfile+"/UruExplorer.exe");
-        if(!potsexe.exists())
-        {
-            m.err("The Pots folder you selected doesn't seem to contain Pots.  Please select the folder that contains UruExplorer.exe");
-            return;
-        }
+        if(!detectinstallation.isFolderPots(myst5folder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
         
         m.status("Starting conversion...");
         Vector<String> files = fileLists.moulSimplicityList();

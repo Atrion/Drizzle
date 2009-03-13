@@ -8,9 +8,27 @@ package automation;
 import shared.m;
 import java.io.File;
 import java.util.Vector;
+import shared.FileUtils;
 
 public class crowthistle
 {
+    public static void CopyMusic(String crowfolder, String potsfolder)
+    {
+        m.status("Checking the folders you gave...");
+        if(!detectinstallation.isFolderCrowthistle(crowfolder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
+
+        for(String filename: automation.fileLists.crowMusic)
+        {
+            String infile = crowfolder + "/sfx/" + filename;
+            String outfile = potsfolder + "/MyMusic/" + filename;
+
+            FileUtils.CopyFile(infile, outfile, true, true);
+        }
+
+        m.status("Done copying Crowthistle music!");
+    }
+
     public static void convertCrowthistle(String crowfolder, String outfolder)
     {
         m.state.push();
@@ -35,14 +53,8 @@ public class crowthistle
         
         //verify folders
         m.status("Checking the folders you gave...");
-        if(!automation.detectinstallation.isFolderCrowthistle(crowfolder))
-        {
-            return;
-        }
-        if(!automation.detectinstallation.isFolderPots(outfolder))
-        {
-            return;
-        }
+        if(!automation.detectinstallation.isFolderCrowthistle(crowfolder))return;
+        if(!automation.detectinstallation.isFolderPots(outfolder)) return;
         
         m.status("Starting conversion...");
         //Vector<String> files = fileLists.crowthistleSimplicityList();

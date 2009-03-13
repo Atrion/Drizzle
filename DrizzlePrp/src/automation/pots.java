@@ -11,6 +11,23 @@ import uru.moulprp.*;
 
 public class pots
 {
+    public static void CopyMusic(String potsinfolder, String potsfolder)
+    {
+        m.status("Checking the folders you gave...");
+        if(!detectinstallation.isFolderPots(potsinfolder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
+
+        for(String filename: automation.fileLists.potsMusic)
+        {
+            String infile = potsinfolder + "/sfx/" + filename;
+            String outfile = potsfolder + "/MyMusic/" + filename;
+
+            FileUtils.CopyFile(infile, outfile, true, true);
+        }
+
+        m.status("Done copying Pots music!");
+    }
+
     public static void CreateAgeReport(String folder)
     {
         m.state.push();

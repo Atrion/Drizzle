@@ -1276,7 +1276,7 @@ public class mystAutomation
             String infile = infolder + "/sfx/" + filename;
             String outfile = outfolder + "/sfx/" + filename;
             
-            FileUtils.CopyFile(infile, outfile, true);
+            FileUtils.CopyFile(infile, outfile, true, false);
         }
         
         //Handle .age files...
@@ -1999,7 +1999,7 @@ public class mystAutomation
             String infile = crowthistlefolder + "/sfx/" + filename;
             String outfile = outfolder + "/sfx/" + filename;
             
-            FileUtils.CopyFile(infile, outfile, true);
+            FileUtils.CopyFile(infile, outfile, true, false);
         }
         
         //convert .prp files...
@@ -2227,7 +2227,7 @@ public class mystAutomation
             String infile = infolder + "/avi/" + filename;
             String outfile = outfolder + "/avi/" + filename;
             
-            FileUtils.CopyFile(infile, outfile, true);
+            FileUtils.CopyFile(infile, outfile, true, false);
         }
         
         //Handle .ogg files...
@@ -2237,7 +2237,7 @@ public class mystAutomation
             String infile = infolder + "/sfx/" + filename;
             String outfile = outfolder + "/sfx/" + filename;
             
-            FileUtils.CopyFile(infile, outfile, true);
+            FileUtils.CopyFile(infile, outfile, true, false);
         }
         
         //Handle .fni files...

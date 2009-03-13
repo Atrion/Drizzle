@@ -15,6 +15,23 @@ import shared.*;
 
 public class myst5Fixes
 {
+    public static void CopyMusic(String myst5folder, String potsfolder)
+    {
+        m.status("Checking the folders you gave...");
+        if(!detectinstallation.isFolderMyst5(myst5folder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
+
+        for(String filename: automation.fileLists.myst5Music)
+        {
+            String infile = myst5folder + "/sfx/" + filename;
+            String outfile = potsfolder + "/MyMusic/" + filename;
+
+            FileUtils.CopyFile(infile, outfile, true, true);
+        }
+
+        m.status("Done copying Myst5 music!");
+
+    }
     public static void convertABunchOfMyst5Stuff(String myst5folder, String potsfolder)
     {
         m.state.push();
@@ -37,40 +54,8 @@ public class myst5Fixes
         
         //verify folders
         m.status("Checking the folders you gave...");
-        File myst5file = new File(myst5folder);
-        if(!myst5file.exists())
-        {
-            m.err("The Myst5 folder you selected doesn't exist.");
-            return;
-        }
-        if(!myst5file.isDirectory())
-        {
-            m.err("The Myst5 folder you selected must be a folder, not a file.");
-            return;
-        }
-        File myst5exe = new File(myst5folder+"/MystV.exe");
-        if(!myst5exe.exists())
-        {
-            m.err("The Myst5 folder you selected doesn't seem to contain Myst5.  Please select the folder that contains MystV.exe");
-            return;
-        }
-        File potsfile = new File(potsfolder);
-        if(!potsfile.exists())
-        {
-            m.err("The PathOfTheShell/CompleteChronicles folder you selected doesn't exist.");
-            return;
-        }
-        if(!potsfile.isDirectory())
-        {
-            m.err("The PathOfTheShell/CompleteChronicles folder you selected must be a folder, not a file.");
-            return;
-        }
-        File potsexe = new File(potsfile+"/UruExplorer.exe");
-        if(!potsexe.exists())
-        {
-            m.err("The Pots folder you selected doesn't seem to contain Pots.  Please select the folder that contains UruExplorer.exe");
-            return;
-        }
+        if(!detectinstallation.isFolderMyst5(myst5folder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
         
         m.status("Starting conversion...");
         Vector<String> files = uru.generics.convertArrayToVector(automation.fileLists.mystvFiles);
