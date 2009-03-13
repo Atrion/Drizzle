@@ -51,6 +51,23 @@ public class prpfile
         extraobjects.add(obj);
         this.mergeExtras();
     }
+    /*public PrpRootObject readSingleObject(String name, Typeid type, String filename)
+    {
+        for(PrpObjectIndex.ObjectindexObjecttype oiot: objectindex.types)
+        {
+            if(oiot.type==type)
+            {
+                for(PrpObjectIndex.ObjectindexObjecttypeObjectdesc oiotod: oiot.descs)
+                {
+                    if(oiotod.desc.objectname.toString().equals(name))
+                    {
+                        context c = context.createFromBytestream(Bytestream.)
+                        oiotod.offset;
+                    }
+                }
+            }
+        }
+    }*/
     public Uruobjectdesc findDescInIndex(String name, Typeid type)
     {
         for(PrpObjectIndex.ObjectindexObjecttype oiot: objectindex.types)
@@ -201,7 +218,11 @@ public class prpfile
     {
         for(PrpRootObject obj: objects)
         {
-            if(obj.header.desc.objectname.toString().equals(name) && obj.header.desc.objecttype.equals(type))
+            /*if(obj==null||obj.header==null||obj.header.desc==null||obj.header.objecttype==null||obj.header.desc.objectname==null||obj.header.desc.objecttype==null)
+            {
+                int dummy=0;
+            }*/
+            if(obj!=null &&obj.header.desc.objectname.toString().equals(name) && obj.header.desc.objecttype.equals(type))
             {
                 return obj;
             }

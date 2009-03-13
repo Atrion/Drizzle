@@ -8,9 +8,80 @@ package prpdistiller;
 import uru.moulprp.*;
 import java.util.Vector;
 import java.util.HashMap;
+import java.util.ArrayDeque;
+import shared.m;
 
 public class distiller
 {
+    public static int distillEverything(prpfile dest, Vector<prpfile> prpfiles, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
+    {
+        int numlevels = 0;
+        while(true)
+        {
+            int numSaw = distillEverythingOneLayerDeep(dest,prpfiles,refReassigns);
+            if(numSaw==0)
+            {
+                return numlevels;
+            }
+            else
+            {
+                numlevels++;
+            }
+        }
+    }
+
+    public static int distillEverythingOneLayerDeep(prpfile dest, Vector<prpfile> prpfiles, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
+    {
+        Pageid destid = dest.header.pageid;
+
+        int numSaw = 0;
+
+        //ArrayDeque<PrpRootObject> newobjs = new ArrayDeque();
+        //HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
+        for(Uruobjectdesc desc: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, dest))
+        {
+            if(!desc.pageid.equals(destid))
+            {
+                //copy this object.
+                numSaw++;
+
+                if(desc.objecttype==Typeid.plSceneNode)
+                {
+                    //point it to the local scenenode instead. (assume it has 1 and only 1.)
+                    Uruobjectdesc sndesc = dest.FindAllObjectsOfType(Typeid.plSceneNode)[0].header.desc;
+                    sndesc.copyInto(desc);
+                }
+                else
+                {
+                    //find it
+                    boolean found = false;
+                    for(prpfile prp: prpfiles)
+                    {
+                        PrpRootObject obj = prp.findObject(desc.objectname.toString(), desc.objecttype);
+                        if(obj!=null)
+                        {
+                            //found it
+                            distiller.copyObjectAndModifyRef(obj, dest, refReassigns);
+                            if(desc.objecttype==Typeid.plSceneObject)
+                            {
+                                //add to scenenode.
+                                uru.moulprp.x0000Scenenode sn = dest.FindAllObjectsOfType(Typeid.plSceneNode)[0].castTo();
+                                sn.addToObjectrefs1(Uruobjectref.createFromUruobjectdesc(desc));
+                            }
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found) m.warn("Unable to find obj.");
+                }
+            }
+        }
+
+        updateAllReferences(dest, refReassigns);
+
+        return numSaw;
+    }
+
     public static HashMap<Uruobjectdesc, Uruobjectdesc> distillTextures(String texturePrp, String destinationPrp, String[] affectedPrps)
     {
         prpfile destprp = prpfile.createFromFile(destinationPrp, true);
@@ -85,12 +156,17 @@ public class distiller
         }
     }
     
-    public static void updateAllReferences(prpfile prpToUpdate, Uruobjectdesc olddesc, Uruobjectdesc newdesc)
+    public static void updateAllReferences(prpfile prpToUpdate, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {
         Vector<Uruobjectdesc> descs = shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, prpToUpdate);
         for(Uruobjectdesc desc: descs)
         {
-            if(desc.equals(olddesc))
+            Uruobjectdesc newdesc = refReassigns.get(desc);
+            if(newdesc==null)
+            {
+                //not reassigned so ignore.
+            }
+            else
             {
                 newdesc.copyInto(desc);
             }

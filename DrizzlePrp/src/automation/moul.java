@@ -102,7 +102,18 @@ public class moul
         if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
         {
             prpfile textprp = prpfile.createFromFile(infolder + "/dat/Neighborhood_District_Textures.prp", true);
-            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+            //prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+            
+            prpfile prp1 = prpfile.createFromFile(infolder + "/dat/Neighborhood_District_nb01.prp", false);
+            Vector<prpfile> prpfiles = new Vector();
+            prpfiles.add(prp1);
+            prpfiles.add(textprp);
+            //HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
+            //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
+            //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
+            //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
+            int levels = prpdistiller.distiller.distillEverything(prp, prpfiles, refReassigns);
+            m.msg("Levels deep: "+Integer.toString(levels));
         }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {
