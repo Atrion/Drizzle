@@ -2725,7 +2725,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="350" y="10" width="350" height="-1"/>
+                      <AbsoluteConstraints x="350" y="10" width="350" height="300"/>
                     </Constraint>
                   </Constraints>
 
@@ -2735,14 +2735,14 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButton105">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton105"/>
+                        <Property name="text" type="java.lang.String" value="Check(url,timer,search)"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton105ActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="10" y="130" width="120" height="-1"/>
+                          <AbsoluteConstraints x="10" y="210" width="180" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2753,7 +2753,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="70" y="10" width="210" height="-1"/>
+                          <AbsoluteConstraints x="90" y="10" width="210" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2764,7 +2764,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="70" y="40" width="70" height="-1"/>
+                          <AbsoluteConstraints x="90" y="40" width="70" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2775,7 +2775,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="70" y="70" width="210" height="-1"/>
+                          <AbsoluteConstraints x="90" y="70" width="210" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2801,27 +2801,27 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton16">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Start saving"/>
+                        <Property name="text" type="java.lang.String" value="Start saving(url,timer,outfolder)"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="10" y="100" width="120" height="-1"/>
+                          <AbsoluteConstraints x="10" y="180" width="210" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton18">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cancel"/>
+                        <Property name="text" type="java.lang.String" value="Cancel All"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="203" y="100" width="80" height="-1"/>
+                          <AbsoluteConstraints x="260" y="150" width="80" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2832,6 +2832,61 @@
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="10" y="70" width="70" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState52">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="textfieldState52"/>
+                        <Property name="name" type="java.lang.String" value="tmsrch" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="90" y="100" width="210" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="shared.State.TextfieldState" name="textfieldState53">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Mar 14 2009, 2:05:00 PM"/>
+                        <Property name="name" type="java.lang.String" value="tmtime" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="90" y="130" width="210" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel60">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="search"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="10" y="100" width="-1" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel61">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="date &amp; time:"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="10" y="130" width="80" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton37">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Save at time(url, outfolder, date&amp;time)"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton37ActionPerformed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="10" y="240" width="250" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2859,7 +2914,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="370" y="300" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="260" y="340" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>

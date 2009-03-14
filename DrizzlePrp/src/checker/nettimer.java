@@ -14,6 +14,10 @@ import shared.*;
 
 import java.lang.Runnable;
 import java.lang.Thread;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Vector;
+import java.util.Date;
 
 public class nettimer
 {
@@ -128,12 +132,45 @@ public class nettimer
         }, 0, period);
         
     }
+    static Vector<Timer> timers;
+    public static void SavePageAtSpecificTime(final String address, final String outfolder, String datetime, final String prefix, final String suffix)
+    {
+        Timer newtimer = new Timer(true);
+        if (timers==null) timers = new Vector();
+        synchronized(timers)
+        {
+            timers.add(newtimer);
+        }
+        long d = Date.parse(datetime);
+        Date date = new Date(d);
+        newtimer.schedule(new TimerTask(){
+            public void run()
+            {
+                m.msg("Reading from "+address);
+                byte[] data = shared.HttpUtils.geturl(address);
+                String outfile = outfolder+"/"+prefix+FileUtils.SanitizeFilename(shared.DateTimeUtils.GetSortableCurrentDate())+suffix;
+                m.msg("Saving to "+outfile);
+                FileUtils.WriteFile(outfile, data);
+            }
+        }, date);
+    }
     public static void CancelTimers()
     {
         if(timer!=null)
         {
             timer.cancel();
             timer = null;
+        }
+        if(timers!=null)
+        {
+            synchronized(timers)
+            {
+                for(Timer t: timers)
+                {
+                    t.cancel();
+                }
+                timers.removeAllElements();
+            }
         }
     }
 

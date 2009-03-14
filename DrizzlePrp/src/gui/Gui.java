@@ -577,6 +577,11 @@ public class Gui extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
+        textfieldState52 = new shared.State.TextfieldState();
+        textfieldState53 = new shared.State.TextfieldState();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jButton37 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -2250,29 +2255,29 @@ public class Gui extends javax.swing.JFrame {
             jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
             jPanel36.setLayout(null);
 
-            jButton105.setText("jButton105");
+            jButton105.setText("Check(url,timer,search)");
             jButton105.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton105ActionPerformed(evt);
                 }
             });
             jPanel36.add(jButton105);
-            jButton105.setBounds(10, 130, 120, 36);
+            jButton105.setBounds(10, 210, 180, 36);
 
             textfieldState26.setText("http://example.com/page.html");
             textfieldState26.setName("address"); // NOI18N
             jPanel36.add(textfieldState26);
-            textfieldState26.setBounds(70, 10, 210, 20);
+            textfieldState26.setBounds(90, 10, 210, 20);
 
             textfieldState27.setText("60");
             textfieldState27.setName("updateTime"); // NOI18N
             jPanel36.add(textfieldState27);
-            textfieldState27.setBounds(70, 40, 70, 20);
+            textfieldState27.setBounds(90, 40, 70, 20);
 
             textfieldState28.setText("c:\\path\\to\\outfolder");
             textfieldState28.setName("searchnet"); // NOI18N
             jPanel36.add(textfieldState28);
-            textfieldState28.setBounds(70, 70, 210, 20);
+            textfieldState28.setBounds(90, 70, 210, 20);
 
             jLabel1.setText("url:");
             jPanel36.add(jLabel1);
@@ -2282,30 +2287,57 @@ public class Gui extends javax.swing.JFrame {
             jPanel36.add(jLabel2);
             jLabel2.setBounds(10, 40, 70, 16);
 
-            jButton16.setText("Start saving");
+            jButton16.setText("Start saving(url,timer,outfolder)");
             jButton16.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton16ActionPerformed(evt);
                 }
             });
             jPanel36.add(jButton16);
-            jButton16.setBounds(10, 100, 120, 36);
+            jButton16.setBounds(10, 180, 210, 36);
 
-            jButton18.setText("Cancel");
+            jButton18.setText("Cancel All");
             jButton18.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton18ActionPerformed(evt);
                 }
             });
             jPanel36.add(jButton18);
-            jButton18.setBounds(203, 100, 80, 36);
+            jButton18.setBounds(260, 150, 80, 36);
 
             jLabel51.setText("outfolder");
             jPanel36.add(jLabel51);
             jLabel51.setBounds(10, 70, 70, 16);
 
+            textfieldState52.setText("textfieldState52");
+            textfieldState52.setName("tmsrch"); // NOI18N
+            jPanel36.add(textfieldState52);
+            textfieldState52.setBounds(90, 100, 210, 20);
+
+            textfieldState53.setText("Mar 14 2009, 2:05:00 PM");
+            textfieldState53.setName("tmtime"); // NOI18N
+            jPanel36.add(textfieldState53);
+            textfieldState53.setBounds(90, 130, 210, 20);
+
+            jLabel60.setText("search");
+            jPanel36.add(jLabel60);
+            jLabel60.setBounds(10, 100, 38, 16);
+
+            jLabel61.setText("date & time:");
+            jPanel36.add(jLabel61);
+            jLabel61.setBounds(10, 130, 80, 16);
+
+            jButton37.setText("Save at time(url, outfolder, date&time)");
+            jButton37.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton37ActionPerformed(evt);
+                }
+            });
+            jPanel36.add(jButton37);
+            jButton37.setBounds(10, 240, 250, 36);
+
             jPanel49.add(jPanel36);
-            jPanel36.setBounds(350, 10, 350, 0);
+            jPanel36.setBounds(350, 10, 350, 300);
 
             jButton1.setText("Run Code Validation");
             jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -2323,7 +2355,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton6);
-            jButton6.setBounds(370, 300, 53, 36);
+            jButton6.setBounds(260, 340, 53, 36);
 
             AdvTabState.addTab("Misc", jPanel49);
 
@@ -4692,7 +4724,7 @@ private void jButton105ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     String address = this.textfieldState26.getText();
     String timer = this.textfieldState27.getText();
     double timer2 = Double.parseDouble(timer);
-    String search = this.textfieldState28.getText();
+    String search = this.textfieldState52.getText();
     checker.nettimer.timer(address, timer2, search);
 }//GEN-LAST:event_jButton105ActionPerformed
 
@@ -4995,12 +5027,12 @@ private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton15ActionPerformed
 
 private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-    GuiUtils.showTrayIcon("/gui/Pterosaur2b4-16.png");
+    //GuiUtils.showTrayIcon("/gui/Pterosaur2b4-16.png");
     String address = this.textfieldState26.getText();
     String timer = this.textfieldState27.getText();
     double timer2 = Double.parseDouble(timer);
-    String search = this.textfieldState28.getText();
-    checker.nettimer.SavePageAtTime(address,timer2,search,"",".html");
+    String outfolder = this.textfieldState28.getText();
+    checker.nettimer.SavePageAtTime(address,timer2,outfolder,"",".html");
 }//GEN-LAST:event_jButton16ActionPerformed
 
 private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -5026,6 +5058,14 @@ private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
     automation.pots.CopyMusic(this.textfieldState34.getText(),this.textfieldState34.getText());
 }//GEN-LAST:event_jButton36ActionPerformed
+
+private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+    //GuiUtils.showTrayIcon("/gui/Pterosaur2b4-16.png");
+    String address = this.textfieldState26.getText();
+    String outfolder = this.textfieldState28.getText();
+    String datetime = this.textfieldState53.getText();
+    checker.nettimer.SavePageAtSpecificTime(address,outfolder,datetime,"",".html");
+}//GEN-LAST:event_jButton37ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5178,6 +5218,7 @@ private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton36;
+    private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton42;
@@ -5297,6 +5338,8 @@ private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -5424,6 +5467,8 @@ private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.TextfieldState textfieldState5;
     private shared.State.TextfieldState textfieldState50;
     private shared.State.TextfieldState textfieldState51;
+    private shared.State.TextfieldState textfieldState52;
+    private shared.State.TextfieldState textfieldState53;
     private shared.State.TextfieldState textfieldState6;
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState8;
