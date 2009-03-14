@@ -132,6 +132,12 @@ public class Uam
         //int randnum = (new java.util.Random()).nextInt(num);
         //String result = ageList.data.ages.get(randnum).propername;
         //return result;
+        if(ageList==null)
+        {
+            m.err("You need to load the Age List in the UAM tab first.");
+            return "";
+        }
+
         String[] fanages = new String[ageList.data.ages.size()];
         for(int i=0;i<ageList.data.ages.size();i++)
         {

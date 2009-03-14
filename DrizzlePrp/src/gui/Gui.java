@@ -459,6 +459,7 @@ public class Gui extends javax.swing.JFrame {
         jButton31 = new javax.swing.JButton();
         jButton34 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
+        jLabel59 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         MemTab = new javax.swing.JPanel();
         textfieldState36 = new shared.State.TextfieldState();
@@ -1277,6 +1278,7 @@ public class Gui extends javax.swing.JFrame {
 
             jPanel5.setLayout(null);
 
+            jLabel58.setForeground(new java.awt.Color(0, 102, 102));
             jLabel58.setText("Fill out the info in the MystV, Moul, and Crowthistle tabs, then click these buttons to put their music in your Relto's musicbox.");
             jPanel5.add(jLabel58);
             jLabel58.setBounds(10, 20, 770, 16);
@@ -1316,6 +1318,11 @@ public class Gui extends javax.swing.JFrame {
             });
             jPanel5.add(jButton36);
             jButton36.setBounds(20, 180, 150, 36);
+
+            jLabel59.setForeground(new java.awt.Color(0, 102, 102));
+            jLabel59.setText("(Make sure you fill out the 'Pots Folder' on the Moul tab for this one.)");
+            jPanel5.add(jLabel59);
+            jLabel59.setBounds(180, 190, 510, 16);
 
             tabsState1.addTab("Music", jPanel5);
 
@@ -1386,6 +1393,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel30.setForeground(new java.awt.Color(0, 102, 102));
             jLabel30.setText("Memories: this area is for extracting images, notes, etc. from Uru (either offline or online)");
 
+            jLabel43.setForeground(new java.awt.Color(0, 102, 102));
             jLabel43.setText("Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle");
 
             javax.swing.GroupLayout MemTabLayout = new javax.swing.GroupLayout(MemTab);
@@ -1479,6 +1487,7 @@ public class Gui extends javax.swing.JFrame {
 
             jTextField2.setEditable(false);
 
+            jLabel4.setForeground(new java.awt.Color(0, 102, 102));
             jLabel4.setText("Enter a list of angles(20=full circle) and distances.  They will be summed as vectors.");
 
             jTextArea3.setColumns(20);
@@ -1614,6 +1623,7 @@ public class Gui extends javax.swing.JFrame {
             ProxyTab.add(checkboxState10);
             checkboxState10.setBounds(250, 170, 130, 28);
 
+            jLabel17.setForeground(new java.awt.Color(0, 102, 102));
             jLabel17.setText("You have to stop and start the server for settings changes to take effect.");
             ProxyTab.add(jLabel17);
             jLabel17.setBounds(40, 40, 420, 16);
@@ -5285,6 +5295,7 @@ private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

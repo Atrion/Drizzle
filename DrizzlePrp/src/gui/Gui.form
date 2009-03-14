@@ -1084,6 +1084,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel58">
                       <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="66" green="66" red="0" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Fill out the info in the MystV, Moul, and Crowthistle tabs, then click these buttons to put their music in your Relto&apos;s musicbox."/>
                       </Properties>
                       <Constraints>
@@ -1141,6 +1144,19 @@
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="20" y="180" width="150" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel59">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="66" green="66" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="(Make sure you fill out the &apos;Pots Folder&apos; on the Moul tab for this one.)"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="190" width="510" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -1295,6 +1311,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel43">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="0" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle"/>
               </Properties>
             </Component>
@@ -1471,6 +1490,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Enter a list of angles(20=full circle) and distances.  They will be summed as vectors."/>
                   </Properties>
                 </Component>
@@ -1617,6 +1639,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="0" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="You have to stop and start the server for settings changes to take effect."/>
               </Properties>
               <Constraints>
