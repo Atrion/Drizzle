@@ -59,7 +59,7 @@ public class moul
         
         //verify folders
         m.status("Checking the folders you gave...");
-        if(!detectinstallation.isFolderPots(myst5folder)) return;
+        if(!detectinstallation.isFolderMoul(myst5folder)) return;
         if(!detectinstallation.isFolderPots(potsfolder)) return;
         
         m.status("Starting conversion...");
