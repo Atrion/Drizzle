@@ -240,4 +240,9 @@ public class m
         if(state.curstate.showStatusMessages)
             message(s);
     }
+
+    public static void throwUncaughtException(String s)
+    {
+        throw new shared.uncaughtexception(s);
+    }
 }

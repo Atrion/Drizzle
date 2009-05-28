@@ -273,6 +273,10 @@ public enum Typeid implements compilable
     //ahnonay
     plSwimMsg,
     plVolumeSensorConditionalObjectNoArbitration,
+
+    //misc pots
+    plInstanceDrawInterface,
+    plLODMipmap,
     
     plLeafController,
     nil,
@@ -510,6 +514,9 @@ public enum Typeid implements compilable
                 
         tri( 0x456, 0x456, -2, -2, plSwimMsg),
         tri( -2, 0x13B, -2, -2, plVolumeSensorConditionalObjectNoArbitration), //not in pots
+
+        tri( 0x0D2, -2, -2, -2, plInstanceDrawInterface),
+        tri( 0x12D, -2, -2, -2, plLODMipmap),
         
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };

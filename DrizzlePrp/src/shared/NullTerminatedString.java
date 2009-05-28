@@ -23,7 +23,7 @@ import java.util.Vector;
  *
  * @author user
  */
-public class NullTerminatedString
+/*public class NullTerminatedString
 {
     Bytes string;
     
@@ -44,4 +44,4 @@ public class NullTerminatedString
     {
         return string.toString();
     }
-}
+}*/

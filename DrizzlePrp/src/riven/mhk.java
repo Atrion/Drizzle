@@ -23,7 +23,9 @@ import shared.MystInStream;
 import shared.readexception;
 import shared.Bytes;
 import shared.mystobj;
-import shared.NullTerminatedString;
+//import shared.NullTerminatedString;
+import shared.Ntstring;
+import shared.m;
 
 public class mhk
 {
@@ -184,14 +186,17 @@ public class mhk
             {
                 short u1;
                 short u2;
-                NullTerminatedString u3;
+                //NullTerminatedString u3;
+                Ntstring u3;
                 
                 public mhktype2a(MystInStream c) throws readexception
                 {
                     u1 = c.readshortBigendian();
                     u2 = c.readshortBigendian();
 
-                    u3 = new NullTerminatedString(c.fork(offsetToNames+offsetToTypeinfo+u1,false));
+                    //u3 = new NullTerminatedString(c.fork(offsetToNames+offsetToTypeinfo+u1,false));
+                    //u3 = new Ntstring(c.fork(offsetToNames+offsetToTypeinfo+u1,false));
+                    m.err("Fixthis: needs to use Ntstring.");
                 }
                 
             }

@@ -46,7 +46,7 @@ public class pots
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
                 uru.moulprp.x0029SoundBuffer sound = obj.castTo();
-                m.status("  Ogg file:"+sound.oggfile.toString());
+                m.status("  Ogg file:"+sound.oggfile.toString()+" flags:"+Integer.toString(sound.flags)+" chans:"+Integer.toString(sound.channels));
             }
 
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))

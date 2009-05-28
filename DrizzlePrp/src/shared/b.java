@@ -46,6 +46,15 @@ public class b
         }
         return true;
     }
+    public static int bytewiseAverage(int i, int j)
+    {
+        int b1 = ((i&0xFF) + (j&0xFF))/2;
+        int b2 = (((i&0xFF00)>>>8) + ((j&0xFF00)>>>8))/2;
+        int b3 = (((i&0xFF0000)>>>16) + ((j&0xFF0000)>>>16))/2;
+        int b4 = (((i&0xFF000000)>>>24) + ((j&0xFF000000)>>>24))/2;
+        int result = b1 | b2<<8 | b3<<16 | b4<<24;
+        return result;
+    }
     public static byte shr(byte a, byte b)
     {
         return (byte)(ByteToInt32(a) >>> ByteToInt32(b));

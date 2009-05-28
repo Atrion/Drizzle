@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.util.zip.DataFormatException;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class zip
 {
@@ -60,7 +61,34 @@ public class zip
         }
         catch(Exception e)
         {
-            throw new shared.uncaughtexception("Exception during zip decompression.");
+            throw new shared.uncaughtexception("Exception during gzip decompression.");
+        }
+    }
+    public static byte[] compressGzip(byte[] input)
+    {
+        try
+        {
+            ByteArrayOutputStream baout = new ByteArrayOutputStream();
+            GZIPOutputStream out = new GZIPOutputStream(baout);
+
+            ByteArrayInputStream in = new ByteArrayInputStream(input);
+
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+
+            out.finish();
+            out.close();
+            byte[] result = baout.toByteArray();
+            return result;
+
+        }
+        catch(Exception e)
+        {
+            throw new shared.uncaughtexception("Exception during gzip compression.");
         }
     }
 }

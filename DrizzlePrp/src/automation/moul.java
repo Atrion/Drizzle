@@ -66,7 +66,7 @@ public class moul
         Vector<String> files = fileLists.moulSimplicityList();
         automation.mystAutomation.convertMoulToPots(myst5folder, potsfolder, files, true);
         
-        
+        //
         
         shared.State.AllStates.pop();
         m.state.pop();
@@ -79,11 +79,19 @@ public class moul
     public static void proccessPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {
         String pagename = prp.header.pagename.toString();
-        if(agename.equals("city") && (pagename.equals("bahroFlyers_arch") || pagename.equals("bahroFlyers_city1")
-                || pagename.equals("islmBahroShoutFerry") || pagename.equals("islmBahroShoutLibrary") || pagename.equals("islmBahroShoutPalace")))
+        if(agename.equals("city") && (pagename.equals("bahroFlyers_arch") || pagename.equals("bahroFlyers_city1")))
         {
             prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
             prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+        }
+        if(agename.equals("city") && (pagename.equals("islmBahroShoutFerry") || pagename.equals("islmBahroShoutLibrary") || pagename.equals("islmBahroShoutPalace")))
+        {
+            prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
+            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
+
+            //change link sound
+            uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
+            sb.flags = 1;
         }
         if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
         {
@@ -100,6 +108,10 @@ public class moul
             //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
             int levels = prpdistiller.distiller.distillEverything(prp, prpfiles, refReassigns);
             m.msg("Levels deep: "+Integer.toString(levels));
+
+            //change link sound
+            uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
+            sb.flags = 1;
         }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {
@@ -190,6 +202,11 @@ public class moul
             Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelahnonayvortex*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
             layer.texture = mmref;
         
+        }
+        if(agename.equals("city") && pagename.equals("islmLakeLightMeter"))
+        {
+            prpfile textprp = prpfile.createFromFile(infolder + "/dat/city_District_Textures.prp", true);
+            prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
         }
     }
     

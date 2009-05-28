@@ -1275,6 +1275,10 @@ public class mystAutomation
         {
             String infile = infolder + "/sfx/" + filename;
             String outfile = outfolder + "/sfx/" + filename;
+            //if(filename.equals("xLink-Stereo.ogg"))
+            //{
+            //    outfile = outfolder+"/sfx/"+"xLink-StereoMOUL.ogg";
+            //}
             
             FileUtils.CopyFile(infile, outfile, true, false);
         }

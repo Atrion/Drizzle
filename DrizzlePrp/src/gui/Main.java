@@ -26,13 +26,15 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    static Gui gui;
+    static public Gui gui;
     static String javaversion = "";
     static double javaversion2 = 0.0;
     static String os = "";
     static String osversion = "";
     static double osversion2 = 0.0;
     static long maxmemory = 0;
+
+    static public Runnable debugcheck;
     
     public static void main(String[] args)
     {
@@ -90,11 +92,12 @@ public class Main extends javax.swing.JFrame {
                     osversion2 = Double.parseDouble(osversion);
                 }catch(Exception e){}
                 gui = new Gui();
+                if(debugcheck!=null) debugcheck.run();
                 //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
                 //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
                 //java.awt.Image img = image.getImage();
-                java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
-                gui.setIconImage(img);
+                //java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
+                //gui.setIconImage(img);
                 gui.setVisible(true);
             }
         });

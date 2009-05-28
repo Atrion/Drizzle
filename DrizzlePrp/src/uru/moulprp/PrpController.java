@@ -366,7 +366,7 @@ public class PrpController extends uruobj
                 xouttan = new Vertex(c);
             }
             value = new Vertex(c);
-            m.msg("hspoint3key: "+c.curRootObject.objecttype.toString()+":"+c.curRootObject.objectname.toString());
+            //m.msg("hspoint3key: "+c.curRootObject.objecttype.toString()+":"+c.curRootObject.objectname.toString());
         }
         public void compile(Bytedeque c)
         {
@@ -442,7 +442,7 @@ public class PrpController extends uruobj
             {
                 xpoint3controller = new plPoint3Controller(c);
             }
-            m.msg("simpleposcontroller:"+c.curRootObject.toString());
+            //m.msg("simpleposcontroller:"+c.curRootObject.toString());
         }
         public void compile(Bytedeque c)
         {

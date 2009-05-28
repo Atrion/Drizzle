@@ -204,7 +204,9 @@ public class UamGui
         public java.awt.Dimension getPreferredSize()
         {
             this.setFont(this.getFont().deriveFont(12.0f));
-            int w = (showicon?20:3) + this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename) + 3;
+            java.awt.Graphics g = this.getGraphics();
+            java.awt.FontMetrics fm = g.getFontMetrics();
+            int w = (showicon?20:3) + fm.stringWidth(FriendlyAgename) + 3;
             //int w = 400;
             //int w = showicon?20:3;
             //w+= this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename);
@@ -555,6 +557,7 @@ public class UamGui
     }
     public static void RefreshInfo(String potsfolder2)
     {
+        m.msg("refresh");
         //list Ages...
         //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
         GetLocalInfo(potsfolder2);
@@ -567,6 +570,8 @@ public class UamGui
         //final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
         final Vector<AgeListItemInfo> ages2 = ages;
         Object selection = agelist.getSelectedValue();
+        mirlist.setModel(new javax.swing.DefaultListModel());
+        verlist.setModel(new javax.swing.DefaultListModel());
         agelist.setModel(new javax.swing.ListModel() {
             public int getSize() {
                 return ages2.size();
@@ -579,8 +584,6 @@ public class UamGui
             public void addListDataListener(ListDataListener l) {}
             public void removeListDataListener(ListDataListener l) {}
         });
-        verlist.setModel(new javax.swing.DefaultListModel());
-        mirlist.setModel(new javax.swing.DefaultListModel());
         
         //try to re-select the item that was selected before.
         if(selection==null)
@@ -744,6 +747,7 @@ public class UamGui
         //final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);
         //final Vector<UamConfigNew.UamConfigData.Age.Version> vers = Uam.ageList.data.getAge(age).versions;
         final Vector<UamConfigNew.UamConfigData.Age.Version> vers = Uam.ageList.getAllVersions(age);
+        //m.msg(Integer.toString(vers.size()));
         verlist.setModel(new javax.swing.ListModel() {
             public int getSize() {
                 return vers.size();
@@ -763,6 +767,7 @@ public class UamGui
             }
         });*/
         if(verlist.getModel().getSize()>0) verlist.setSelectedIndex(0);
+        //verlist.repaint();
         
     }
     public static void GetMirrorListGui(String age, String ver)

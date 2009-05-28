@@ -198,7 +198,21 @@ strictfp public class Flt extends uruobj implements ICompilable
     public boolean approxequals(float f, float tolerance)
     {
         float f2 = this.toJavaFloat();
-        float diff = f2-f;
+        return areapproxequals(f2,f,tolerance);
+    }
+    public boolean approxequals(float f)
+    {
+        float tolerance = (float)0.000001;
+        return approxequals(f,tolerance);
+    }
+    public static boolean areapproxequals(double f1, double f2)
+    {
+        double tolerance = (double)0.000001;
+        return areapproxequals(f1,f2,tolerance);
+    }
+    public static boolean areapproxequals(double f1, double f2, double tolerance)
+    {
+        double diff = f2-f1;
         diff = java.lang.Math.abs(diff);
         if(diff<tolerance)
         {
@@ -208,11 +222,6 @@ strictfp public class Flt extends uruobj implements ICompilable
         {
             return false;
         }
-    }
-    public boolean approxequals(float f)
-    {
-        float tolerance = (float)0.000001;
-        return approxequals(f,tolerance);
     }
     public boolean equals(Object o)
     {

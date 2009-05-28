@@ -96,8 +96,8 @@ public class EmbeddedClasses
     
     public static class PlPointControllerChannel extends uruobj
     {
-        PlMatrixChannel matrixchannel;
-        PrpTaggedObject emb;
+        public PlMatrixChannel matrixchannel;
+        public PrpTaggedObject emb;
         
         public PlPointControllerChannel(context c) throws readexception
         {

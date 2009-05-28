@@ -55,11 +55,12 @@ public class Gui extends javax.swing.JFrame {
     //String moul;
     //String pots;
     //String out;
-    String settingsfile;
+    public String settingsfile;
     Settings settings = new Settings();
     //boolean dosavesettings = false;
     
     deepview.deepview deep;
+    public final shared.State.TabsState tabs;
     
     /** Creates new form Gui */
     public Gui()
@@ -76,7 +77,12 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.AgeLabel = this.ageInfo3;
         gui.UamGui.startup = this.uamStartupButtongroup;
         gui.UamGui.init();
+        tabs = this.tabsState3;
         this.setTitle("Drizzle "+Integer.toString(Version.version));
+
+        //set icon:
+        java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
+        this.setIconImage(img);
         
         GuiUtils.SetKeymaps();
         
@@ -311,6 +317,8 @@ public class Gui extends javax.swing.JFrame {
         //this.loadsettings();
         //dosavesettings = true;
         shared.State.AllStates.loadandpush(settingsfile);
+
+
     }
     public static class Settings implements java.io.Serializable
     {

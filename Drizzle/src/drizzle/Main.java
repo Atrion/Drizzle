@@ -18,7 +18,7 @@ public class Main {
             File file = shared.GetResource.getResourceAsFile("/drizzle/DrizzlePrp.jar", true);
             String[] command = new String[]{
                 "java",
-                "-Xmx800m",
+                "-Xmx1020m",//"-Xmx800m",
                 "-jar",
                 file.getAbsolutePath(),
             };

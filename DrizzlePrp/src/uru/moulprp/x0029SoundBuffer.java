@@ -31,12 +31,12 @@ public class x0029SoundBuffer extends uruobj
 {
     //Objheader xheader;
     
-    int flags;
-    int datalength; //the length of the uncompressed file.
+    public int flags;
+    public int datalength; //the length of the uncompressed file.
     public Urustring oggfile;
-    short channels;
-    plWAVHeader wavHeader;
-    byte[] xinternaldata;
+    public short channels;
+    public plWAVHeader wavHeader;
+    public byte[] xinternaldata;
     
     public x0029SoundBuffer(context c)//,boolean hasHeader)
     {

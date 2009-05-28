@@ -45,6 +45,12 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
+    public static long GetFilesize(String filename)
+    {
+        File f = new File(filename);
+        long result = f.length();
+        return result;
+    }
     public static String SanitizeFilename(String filename)
     {
         String result = filename;
@@ -57,6 +63,12 @@ public class FileUtils {
         result = result.replace("<", "_");
         result = result.replace(">", "_");
         result = result.replace("|", "_");
+        return result;
+    }
+    public static long GetModtime(String filename)
+    {
+        File f = new File(filename);
+        long result = f.lastModified();
         return result;
     }
     public static String GetNextFilename(String folder, String prefix, String suffix)

@@ -99,9 +99,24 @@ public class distiller
         for(PrpRootObject layer2: layers)
         {
             x0006Layer layer = layer2.castTo();
-            PrpRootObject texture2 = textprp.findObjectWithRef(layer.texture);
-            uru.moulprp.x0004MipMap texture = texture2.castTo();
-            distiller.copyObjectAndModifyRef(texture2, destprp, refReassigns);
+            if(layer.texture.hasref())
+            {
+                PrpRootObject texture2 = textprp.findObjectWithRef(layer.texture);
+                //if(texture2.header.objecttype==Typeid.plMipMap)
+                //{
+                    //uru.moulprp.x0004MipMap texture = texture2.castTo();
+                    distiller.copyObjectAndModifyRef(texture2, destprp, refReassigns);
+                //}
+                //else if (texture2.header.objecttype==Typeid.plCubicEnvironMap)
+                //{
+                //    uru.moulprp.x0005Environmap texture = texture2.castTo();
+                //    distiller.copyObjectAndModifyRef(texture2, destprp, refReassigns);
+                //}
+                //else
+                //{
+                //    m.throwUncaughtException("Should have plMipMap or plCubicEnvironMap.");
+                //}
+            }
         }
         
         distiller.updateTextureRefs(destprp,refReassigns);
