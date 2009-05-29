@@ -520,7 +520,6 @@ public class Gui extends javax.swing.JFrame {
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
         jButton145 = new javax.swing.JButton();
-        jButton144 = new javax.swing.JButton();
         jLabel56 = new javax.swing.JLabel();
         jPanel47 = new javax.swing.JPanel();
         textfieldState46 = new shared.State.TextfieldState();
@@ -1670,7 +1669,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton126);
-            jButton126.setBounds(20, 140, 160, 36);
+            jButton126.setBounds(20, 160, 160, 36);
 
             jButton137.setText("Get Offline list.");
             jButton137.addActionListener(new java.awt.event.ActionListener() {
@@ -1679,9 +1678,9 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton137);
-            jButton137.setBounds(20, 170, 130, 36);
+            jButton137.setBounds(20, 190, 130, 36);
 
-            jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Sanity check"));
 
             checkboxState25.setSelected(true);
             checkboxState25.setText("ignore known overrides");
@@ -1700,26 +1699,25 @@ public class Gui extends javax.swing.JFrame {
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton139, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel6Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(checkboxState25, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton139, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(checkboxState25, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(jButton139)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkboxState25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(10, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             jPanel41.add(jPanel6);
-            jPanel6.setBounds(200, 120, 190, 90);
+            jPanel6.setBounds(190, 120, 200, 100);
 
-            jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
             jPanel7.setLayout(null);
 
             jButton134.setText("Select...");
@@ -1729,12 +1727,12 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel7.add(jButton134);
-            jButton134.setBounds(300, 0, 80, 36);
+            jButton134.setBounds(300, 10, 80, 36);
 
             textfieldState42.setText("textfieldState42");
             textfieldState42.setName("genFolder"); // NOI18N
             jPanel7.add(textfieldState42);
-            textfieldState42.setBounds(120, 10, 180, 20);
+            textfieldState42.setBounds(120, 20, 180, 20);
 
             jButton133.setText("Generate uam.status.txt");
             jButton133.addActionListener(new java.awt.event.ActionListener() {
@@ -1743,14 +1741,14 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel7.add(jButton133);
-            jButton133.setBounds(10, 30, 180, 36);
+            jButton133.setBounds(10, 40, 180, 36);
 
             jLabel44.setText("archive folder:");
             jPanel7.add(jLabel44);
-            jLabel44.setBounds(10, 10, 100, 16);
+            jLabel44.setBounds(10, 20, 100, 16);
 
             jPanel41.add(jPanel7);
-            jPanel7.setBounds(20, 30, 380, 70);
+            jPanel7.setBounds(20, 30, 380, 80);
 
             jButton15.setText("Name a random Age!");
             jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -1759,15 +1757,15 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton15);
-            jButton15.setBounds(20, 110, 160, 36);
-
-            MiscPanel.add(jPanel41);
-            jPanel41.setBounds(370, 50, 410, 230);
+            jButton15.setBounds(20, 130, 160, 36);
 
             jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
+            jPanel46.setLayout(null);
 
-            textfieldState45.setText("textfieldState45");
+            textfieldState45.setText("EderRiltahInaltahv");
             textfieldState45.setName("ageReportPath"); // NOI18N
+            jPanel46.add(textfieldState45);
+            textfieldState45.setBounds(90, 30, 150, 20);
 
             jButton145.setText("Report");
             jButton145.addActionListener(new java.awt.event.ActionListener() {
@@ -1775,47 +1773,18 @@ public class Gui extends javax.swing.JFrame {
                     jButton145ActionPerformed(evt);
                 }
             });
+            jPanel46.add(jButton145);
+            jButton145.setBounds(161, 50, 80, 36);
 
-            jButton144.setText("select...");
-            jButton144.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton144ActionPerformed(evt);
-                }
-            });
+            jLabel56.setText("Agename:");
+            jPanel46.add(jLabel56);
+            jLabel56.setBounds(20, 30, 100, 16);
 
-            jLabel56.setText("Folder containing Age files:");
+            jPanel41.add(jPanel46);
+            jPanel46.setBounds(130, 230, 260, 100);
 
-            javax.swing.GroupLayout jPanel46Layout = new javax.swing.GroupLayout(jPanel46);
-            jPanel46.setLayout(jPanel46Layout);
-            jPanel46Layout.setHorizontalGroup(
-                jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel46Layout.createSequentialGroup()
-                    .addGap(21, 21, 21)
-                    .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel46Layout.createSequentialGroup()
-                            .addComponent(jLabel56)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(textfieldState45, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
-                            .addComponent(jButton144))
-                        .addComponent(jButton145))
-                    .addContainerGap(16, Short.MAX_VALUE))
-            );
-            jPanel46Layout.setVerticalGroup(
-                jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel46Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel56)
-                        .addComponent(textfieldState45, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton144))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton145)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-
-            MiscPanel.add(jPanel46);
-            jPanel46.setBounds(30, 310, 496, 118);
+            MiscPanel.add(jPanel41);
+            jPanel41.setBounds(370, 50, 410, 360);
 
             jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
 
@@ -5001,12 +4970,8 @@ private void jButton143ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     alcugsinterface.parser.testmsg(msg);
 }//GEN-LAST:event_jButton143ActionPerformed
 
-private void jButton144ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton144ActionPerformed
-    GuiUtils.getUserSelectedFolder(this.textfieldState45);
-}//GEN-LAST:event_jButton144ActionPerformed
-
 private void jButton145ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton145ActionPerformed
-    automation.pots.CreateAgeReport(this.textfieldState45.getText());
+    automation.pots.CreateAgeReport(this.textfieldState39.getText(), this.textfieldState45.getText());
 }//GEN-LAST:event_jButton145ActionPerformed
 
 private void textfieldState47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState47ActionPerformed
@@ -5198,7 +5163,6 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton141;
     private javax.swing.JButton jButton142;
     private javax.swing.JButton jButton143;
-    private javax.swing.JButton jButton144;
     private javax.swing.JButton jButton145;
     private javax.swing.JButton jButton146;
     private javax.swing.JButton jButton147;

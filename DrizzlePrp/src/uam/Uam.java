@@ -16,6 +16,9 @@ import shared.*;
 import java.util.HashMap;
 import java.io.File;
 
+import uru.moulprp.prpfile;
+import uru.moulprp.PrpRootObject;
+import uru.moulprp.Typeid;
 
 public class Uam
 {
@@ -221,6 +224,24 @@ public class Uam
             }
         }
         m.msg("Done checking for sequence prefix duplicates.");
+
+
+        //This following block works, but it takes a long time, and fails on a Neighborhood prp (I guess the prpfile.createFromFile chokes, even though we read as raw.)
+        /*m.msg("Checking for missing ogg files...");
+        for(File f: shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".prp", false))
+        {
+            prpfile prp = prpfile.createFromFile(f, true);
+            for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
+            {
+                uru.moulprp.x0029SoundBuffer sb = ro.castTo();
+                String oggfile = sb.oggfile.toString();
+                if(!shared.FileUtils.Exists(potsfolder+"/sfx/"+oggfile))
+                {
+                    m.msg("  Oggfile: "+oggfile+" not present, but used in: "+f.getName());
+                }
+            }
+        }
+        m.msg("Done checking for missing ogg files.");*/
 
     }
     public static void launchUru()

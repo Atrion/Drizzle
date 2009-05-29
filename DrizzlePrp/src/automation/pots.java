@@ -28,7 +28,7 @@ public class pots
         m.status("Done copying Pots music!");
     }
 
-    public static void CreateAgeReport(String folder)
+    public static void CreateAgeReport(String potsfolder, String agename)
     {
         m.state.push();
         m.state.curstate.showConsoleMessages = true;
@@ -37,7 +37,8 @@ public class pots
         m.state.curstate.showWarningMessages = false;
         m.state.curstate.showStatusMessages = true;
         
-        for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename+"_District_", ".prp", false))
         {
             uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(f, true);
             m.status("Prp file:"+f.getName());
@@ -47,6 +48,12 @@ public class pots
             {
                 uru.moulprp.x0029SoundBuffer sound = obj.castTo();
                 m.status("  Ogg file:"+sound.oggfile.toString()+" flags:"+Integer.toString(sound.flags)+" chans:"+Integer.toString(sound.channels));
+
+                //check if ogg file is present:
+                if(!FileUtils.Exists(potsfolder+"/sfx/"+sound.oggfile.toString()))
+                {
+                    m.status("    Warning: this file is not present in the sfx folder.");
+                }
             }
 
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
@@ -58,7 +65,8 @@ public class pots
             m.status("");
         }
         
-        for(File f: FileUtils.FindAllFiles(folder, ".pak", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".pak", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false))
         {
             m.status("Pak file:"+f.getName());
             uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f,3,false);
@@ -69,7 +77,8 @@ public class pots
             m.status("");
         }
         
-        for(File f: FileUtils.FindAllFiles(folder, ".age", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".age", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".age", false))
         {
             m.status("Age file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -78,7 +87,8 @@ public class pots
             m.status("");
         }
         
-        for(File f: FileUtils.FindAllFiles(folder, ".fni", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".fni", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".fni", false))
         {
             m.status("Fni file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -87,7 +97,8 @@ public class pots
             m.status("");
         }
         
-        for(File f: FileUtils.FindAllFiles(folder, ".sdl", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".sdl", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/SDL/", agename, ".sdl", false))
         {
             m.status("Sdl file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -96,7 +107,8 @@ public class pots
             m.status("");
         }
         
-        for(File f: FileUtils.FindAllFiles(folder, ".sum", false))
+        //for(File f: FileUtils.FindAllFiles(folder, ".sum", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".sum", false))
         {
             m.status("Sum file:"+f.getName());
             //uru.moulprp.sumfile sum = new uru.moulprp.sumfile(FileUtils.ReadFile(f), true, 3);

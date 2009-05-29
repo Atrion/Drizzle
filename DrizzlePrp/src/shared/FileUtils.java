@@ -86,11 +86,15 @@ public class FileUtils {
     }
     public static Vector<File> FindAllFiles(String folder, String ext, boolean recurse)
     {
+        return FindAllFiles(folder,null,ext,recurse);
+    }
+    public static Vector<File> FindAllFiles(String folder, String prefix, String ext, boolean recurse)
+    {
         Vector<File> result = new Vector();
-        FindAllFiles(result,folder,ext,recurse);
+        FindAllFiles(result,folder,prefix,ext,recurse);
         return result;
     }
-    public static void FindAllFiles(Vector<File> result, String folder, String ext, boolean recurse)
+    public static void FindAllFiles(Vector<File> result, String folder, String prefix, String ext, boolean recurse)
     {
         File fold = new File(folder);
         for(File f: fold.listFiles())
@@ -99,14 +103,17 @@ public class FileUtils {
             {
                 if(recurse)
                 {
-                    FindAllFiles(result,f.getAbsolutePath(),ext,recurse);
+                    FindAllFiles(result,f.getAbsolutePath(),prefix,ext,recurse);
                 }
             }
             else if(f.isFile())
             {
-                if(ext==null || f.getName().endsWith(ext))
+                if(prefix==null || f.getName().startsWith(prefix))
                 {
-                    result.add(f);
+                    if(ext==null || f.getName().endsWith(ext))
+                    {
+                        result.add(f);
+                    }
                 }
             }
         }
