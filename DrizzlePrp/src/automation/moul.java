@@ -91,7 +91,7 @@ public class moul
 
             //change link sound
             uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
-            sb.flags = 1;
+            sb.flags = 3;
         }
         if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
         {
@@ -111,7 +111,7 @@ public class moul
 
             //change link sound
             uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
-            sb.flags = 1;
+            sb.flags = 3;
         }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {

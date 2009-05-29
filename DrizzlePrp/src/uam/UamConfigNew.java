@@ -235,8 +235,9 @@ public class UamConfigNew
         data.comments.add("The aequalsatransposeequalsainverse tag is just used to mark the end, so we know we got the whole file.");
         data.welcome = "Welcome to the UruAgeManager sub-project of Drizzle!";*/
         UamConfigNew config;
+        String statusfile = folderWith7zs+"/"+uam.Uam.statusFilename;
         try{
-            config = new UamConfigNew(new java.io.FileInputStream(folderWith7zs+"/"+uam.Uam.statusFilename));
+            config = new UamConfigNew(new java.io.FileInputStream(statusfile));
         }catch(Exception e){
             m.err("Error reading config file.");
             return;
@@ -265,6 +266,8 @@ public class UamConfigNew
             UamConfigData.Age age = config.data.getAgeOrCreate(agename);
             if(age.filename==null)
             {
+                m.msg("New age: "+agename);
+
                 age.filename = agename;
                 age.propername = age.filename;
                 age.deletable = "true";
@@ -274,6 +277,8 @@ public class UamConfigNew
             UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr,true);
             if(version.name==null)
             {
+                m.msg("New version: "+agename+": "+versionstr);
+
                 version.name = versionstr;
                 version.archive = "7z";
                 
@@ -292,7 +297,10 @@ public class UamConfigNew
         //config.data.sort();
         
         String finalresult = config.data.generateXml();
-        m.msg(finalresult);
+        //m.msg(finalresult);
+        shared.FileUtils.CopyFile(statusfile, statusfile+shared.DateTimeUtils.GetSortableCurrentDate()+".xml", false, false);
+        shared.FileUtils.WriteFile(statusfile, b.StringToBytes(finalresult));
+        m.status("Finished creating new status file!");
     }
     public static class UamConfigData
     {
