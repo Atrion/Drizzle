@@ -557,7 +557,7 @@ public class UamGui
     }
     public static void RefreshInfo(String potsfolder2)
     {
-        m.msg("refresh");
+        //m.msg("refresh");
         //list Ages...
         //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
         GetLocalInfo(potsfolder2);
