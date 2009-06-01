@@ -521,6 +521,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState45 = new shared.State.TextfieldState();
         jButton145 = new javax.swing.JButton();
         jLabel56 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
         jPanel47 = new javax.swing.JPanel();
         textfieldState46 = new shared.State.TextfieldState();
         textfieldState47 = new shared.State.TextfieldState();
@@ -1669,7 +1670,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton126);
-            jButton126.setBounds(20, 160, 160, 36);
+            jButton126.setBounds(20, 190, 160, 36);
 
             jButton137.setText("Get Offline list.");
             jButton137.addActionListener(new java.awt.event.ActionListener() {
@@ -1678,7 +1679,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton137);
-            jButton137.setBounds(20, 190, 130, 36);
+            jButton137.setBounds(20, 220, 130, 36);
 
             jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Sanity check"));
 
@@ -1715,7 +1716,7 @@ public class Gui extends javax.swing.JFrame {
             );
 
             jPanel41.add(jPanel6);
-            jPanel6.setBounds(190, 120, 200, 100);
+            jPanel6.setBounds(190, 160, 200, 100);
 
             jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
             jPanel7.setLayout(null);
@@ -1748,7 +1749,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel44.setBounds(10, 20, 100, 16);
 
             jPanel41.add(jPanel7);
-            jPanel7.setBounds(20, 30, 380, 80);
+            jPanel7.setBounds(20, 60, 380, 80);
 
             jButton15.setText("Name a random Age!");
             jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -1757,7 +1758,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton15);
-            jButton15.setBounds(20, 130, 160, 36);
+            jButton15.setBounds(20, 160, 160, 36);
 
             jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
             jPanel46.setLayout(null);
@@ -1781,10 +1782,16 @@ public class Gui extends javax.swing.JFrame {
             jLabel56.setBounds(20, 30, 100, 16);
 
             jPanel41.add(jPanel46);
-            jPanel46.setBounds(130, 230, 260, 100);
+            jPanel46.setBounds(130, 270, 260, 100);
+
+            jLabel62.setFont(jLabel62.getFont());
+            jLabel62.setForeground(new java.awt.Color(0, 102, 102));
+            jLabel62.setText("Everything here uses the Pots folder from the UAM tab.");
+            jPanel41.add(jLabel62);
+            jLabel62.setBounds(20, 30, 330, 16);
 
             MiscPanel.add(jPanel41);
-            jPanel41.setBounds(370, 50, 410, 360);
+            jPanel41.setBounds(370, 50, 410, 380);
 
             jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
 
@@ -5312,6 +5319,7 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

@@ -90,11 +90,15 @@ public class FileUtils {
     }
     public static Vector<File> FindAllFiles(String folder, String prefix, String ext, boolean recurse)
     {
+        return FindAllFiles(folder,prefix,ext,recurse,true);
+    }
+    public static Vector<File> FindAllFiles(String folder, String prefix, String ext, boolean recurse, boolean casesensitive)
+    {
         Vector<File> result = new Vector();
-        FindAllFiles(result,folder,prefix,ext,recurse);
+        FindAllFiles(result,folder,prefix,ext,recurse,casesensitive);
         return result;
     }
-    public static void FindAllFiles(Vector<File> result, String folder, String prefix, String ext, boolean recurse)
+    public static void FindAllFiles(Vector<File> result, String folder, String prefix, String ext, boolean recurse, boolean casesensitive)
     {
         File fold = new File(folder);
         for(File f: fold.listFiles())
@@ -103,16 +107,29 @@ public class FileUtils {
             {
                 if(recurse)
                 {
-                    FindAllFiles(result,f.getAbsolutePath(),prefix,ext,recurse);
+                    FindAllFiles(result,f.getAbsolutePath(),prefix,ext,recurse,casesensitive);
                 }
             }
             else if(f.isFile())
             {
-                if(prefix==null || f.getName().startsWith(prefix))
+                if(casesensitive)
                 {
-                    if(ext==null || f.getName().endsWith(ext))
+                    if(prefix==null || f.getName().startsWith(prefix))
                     {
-                        result.add(f);
+                        if(ext==null || f.getName().endsWith(ext))
+                        {
+                            result.add(f);
+                        }
+                    }
+                }
+                else
+                {
+                    if(prefix==null || f.getName().toLowerCase().startsWith(prefix.toLowerCase()))
+                    {
+                        if(ext==null || f.getName().toLowerCase().endsWith(ext.toLowerCase()))
+                        {
+                            result.add(f);
+                        }
                     }
                 }
             }

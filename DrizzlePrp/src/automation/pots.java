@@ -36,9 +36,14 @@ public class pots
         m.state.curstate.showNormalMessages = false;
         m.state.curstate.showWarningMessages = false;
         m.state.curstate.showStatusMessages = true;
-        
+
+        if(!FileUtils.Exists(potsfolder+"/dat/"+agename+".age"))
+        {
+            m.status("Couldn't find "+agename+".age, you should probably have entered the name of the Age. (e.g. 'EderRilteh' for Eder Kemo.)");
+        }
+
         //for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename+"_District_", ".prp", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename+"_District_", ".prp", false,false))
         {
             uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(f, true);
             m.status("Prp file:"+f.getName());
@@ -66,7 +71,7 @@ public class pots
         }
         
         //for(File f: FileUtils.FindAllFiles(folder, ".pak", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false,false))
         {
             m.status("Pak file:"+f.getName());
             uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f,3,false);
@@ -78,7 +83,7 @@ public class pots
         }
         
         //for(File f: FileUtils.FindAllFiles(folder, ".age", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".age", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".age", false,false))
         {
             m.status("Age file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -88,7 +93,7 @@ public class pots
         }
         
         //for(File f: FileUtils.FindAllFiles(folder, ".fni", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".fni", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".fni", false,false))
         {
             m.status("Fni file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -98,7 +103,7 @@ public class pots
         }
         
         //for(File f: FileUtils.FindAllFiles(folder, ".sdl", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/SDL/", agename, ".sdl", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/SDL/", agename, ".sdl", false,false))
         {
             m.status("Sdl file:"+f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
@@ -108,7 +113,7 @@ public class pots
         }
         
         //for(File f: FileUtils.FindAllFiles(folder, ".sum", false))
-        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".sum", false))
+        for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".sum", false,false))
         {
             m.status("Sum file:"+f.getName());
             //uru.moulprp.sumfile sum = new uru.moulprp.sumfile(FileUtils.ReadFile(f), true, 3);
