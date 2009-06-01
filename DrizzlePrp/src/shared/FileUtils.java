@@ -101,6 +101,11 @@ public class FileUtils {
     public static void FindAllFiles(Vector<File> result, String folder, String prefix, String ext, boolean recurse, boolean casesensitive)
     {
         File fold = new File(folder);
+        if(!fold.exists() || !fold.isDirectory())
+        {
+            m.warn("Folder doesn't exist.");
+            return;
+        }
         for(File f: fold.listFiles())
         {
             if(f.isDirectory())
