@@ -47,7 +47,7 @@ public class vaultAutomation
             }
             else
             {
-                m.err("The input folder must have either 'vault.dat' or some number of '.s' files.");
+                m.err("The input folder must have either 'vault.dat' or some number of '.v' files.");
                 return;
             }
         }

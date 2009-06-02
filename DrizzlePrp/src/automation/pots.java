@@ -39,7 +39,7 @@ public class pots
 
         if(!FileUtils.Exists(potsfolder+"/dat/"+agename+".age"))
         {
-            m.status("Couldn't find "+agename+".age, you should probably have entered the name of the Age. (e.g. 'EderRilteh' for Eder Kemo.)");
+            m.status("Couldn't find "+agename+".age, you should probably have entered the filename of the Age. (e.g. 'EderRilteh' for Eder Rilteh Inaltahv.)");
         }
 
         //for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
