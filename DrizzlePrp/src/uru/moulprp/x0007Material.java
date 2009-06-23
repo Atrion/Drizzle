@@ -46,7 +46,7 @@ public class x0007Material extends uruobj
     
     public x0007Material(context c) throws readexception //,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
         u1 = data.readInt(); e.ensureflags(u1,0); //loadflags

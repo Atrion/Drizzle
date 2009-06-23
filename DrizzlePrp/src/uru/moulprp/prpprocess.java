@@ -29,7 +29,8 @@ public class prpprocess
     public static prpfile ProcessAllObjects(context c, boolean isRaw)
     {
         PrpHeader header = new PrpHeader(c);
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         Vector<PrpRootObject> rootobjects = new Vector<PrpRootObject>();
 
         int numobjecttypes = objectindex.indexCount;
@@ -54,7 +55,8 @@ public class prpprocess
     public static void ProcessAllObjectsOfType(context c, Typeid typeid)
     {
         PrpHeader header = new PrpHeader(c);
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
 
         int numobjecttypes = objectindex.indexCount;
         for(int i_type=0;i_type<numobjecttypes;i_type++)
@@ -78,7 +80,8 @@ public class prpprocess
         int size = d.size;
         Typeid type = d.desc.objecttype;
         
-        context stream = c.Fork(new Bytestream(c.in,offset));
+        //context stream = c.Fork(new Bytestream(c.in,offset));
+        context stream = c.Fork(c.in.Fork(offset));
         stream.curRootObject = d.desc;
         stream.curRootObjectOffset = offset;
         stream.curRootObjectSize = size;

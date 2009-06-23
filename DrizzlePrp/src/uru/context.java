@@ -30,6 +30,7 @@ import uru.moulprp.Typeid;
 import shared.Pair;
 import java.util.HashMap;
 import shared.cmap;
+import shared.IBytestream;
 
 /**
  *
@@ -40,7 +41,7 @@ public class context extends shared.BaseContext
     public int readversion; //3==pots,6==moul,7==hexisle,5==myst5,4==crowthistle(crowthistle&myst5 are the same)
     public int writeversion;
     public boolean compile;
-    public Bytestream in;
+    public IBytestream in;
     public Bytedeque out;
     public boolean outputVertices;
     public Vector<Float> vertices;
@@ -63,7 +64,7 @@ public class context extends shared.BaseContext
 
     //public Typeid typesToRead;
 
-    public static context createFromBytestream(Bytestream in)
+    public static context createFromBytestream(IBytestream in)
     {
         //return new context(-1,3,false,in,null,false,null);
         context result = new context();
@@ -102,7 +103,7 @@ public class context extends shared.BaseContext
     {
         this.in = in2;
     }
-    public context Fork(Bytestream newIn)
+    public context Fork(IBytestream newIn)
     {
         context result = Fork();
         result.in = newIn;

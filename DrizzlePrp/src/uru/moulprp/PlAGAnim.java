@@ -44,7 +44,7 @@ public class PlAGAnim extends uruobj
     
     public PlAGAnim(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
         name = new Urustring(c);

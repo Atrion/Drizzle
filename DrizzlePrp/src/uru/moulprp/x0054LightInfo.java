@@ -59,7 +59,7 @@ public class x0054LightInfo extends uruobj
     
     public x0054LightInfo(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         
         parent = new PlObjInterface(c);//,false);

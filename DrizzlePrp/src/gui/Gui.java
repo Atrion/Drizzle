@@ -391,8 +391,8 @@ public class Gui extends javax.swing.JFrame {
         languageButtonGroup = new shared.State.ButtongroupState();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
-        jButton61 = new javax.swing.JButton();
         jButton107 = new javax.swing.JButton();
+        jButton61 = new javax.swing.JButton();
         checkboxState24 = new shared.State.CheckboxState();
         jPanel27 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -531,10 +531,6 @@ public class Gui extends javax.swing.JFrame {
         jButton147 = new javax.swing.JButton();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
-        jPanel28 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
         AdvTabState = new shared.State.TabsState();
         jPanel48 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
@@ -767,6 +763,10 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea5 = new javax.swing.JTextArea();
         imagePanel2 = new shared.ImagePanel();
+        jPanel28 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
 
         uamStartupButtongroup.setName("uamStartup");
 
@@ -786,13 +786,7 @@ public class Gui extends javax.swing.JFrame {
         });
 
         jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
-
-        jButton61.setText("Delete settings and exit");
-        jButton61.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton61ActionPerformed(evt);
-            }
-        });
+        jPanel26.setLayout(null);
 
         jButton107.setText("Save settings now");
         jButton107.addActionListener(new java.awt.event.ActionListener() {
@@ -800,36 +794,23 @@ public class Gui extends javax.swing.JFrame {
                 jButton107ActionPerformed(evt);
             }
         });
+        jPanel26.add(jButton107);
+        jButton107.setBounds(10, 50, 160, 36);
+
+        jButton61.setText("Delete settings and exit");
+        jButton61.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton61ActionPerformed(evt);
+            }
+        });
+        jPanel26.add(jButton61);
+        jButton61.setBounds(10, 20, 160, 36);
 
         checkboxState24.setSelected(true);
         checkboxState24.setText("Save settings on exit.");
         checkboxState24.setName("saveOnExit"); // NOI18N
-
-        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
-        jPanel26.setLayout(jPanel26Layout);
-        jPanel26Layout.setHorizontalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel26Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel26Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(checkboxState24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton107, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        jPanel26Layout.setVerticalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel26Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton61)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton107)
-                .addGap(12, 12, 12)
-                .addComponent(checkboxState24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        jPanel26.add(checkboxState24);
+        checkboxState24.setBounds(20, 80, 180, 28);
 
         jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
 
@@ -884,7 +865,7 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(jButton20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton54)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         tabsState3.setName("mainTabs"); // NOI18N
@@ -1876,43 +1857,6 @@ public class Gui extends javax.swing.JFrame {
 
             MiscPanel.add(jPanel47);
             jPanel47.setBounds(20, 50, 327, 163);
-
-            jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
-            jPanel28.setLayout(null);
-
-            languageButtonGroup.add(jRadioButton1);
-            jRadioButton1.setSelected(true);
-            jRadioButton1.setText("English");
-            jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jRadioButton1ActionPerformed(evt);
-                }
-            });
-            jPanel28.add(jRadioButton1);
-            jRadioButton1.setBounds(20, 20, 68, 28);
-
-            languageButtonGroup.add(jRadioButton2);
-            jRadioButton2.setText("Deutsch");
-            jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jRadioButton2ActionPerformed(evt);
-                }
-            });
-            jPanel28.add(jRadioButton2);
-            jRadioButton2.setBounds(20, 50, 72, 28);
-
-            languageButtonGroup.add(jRadioButton3);
-            jRadioButton3.setText("Francais");
-            jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jRadioButton3ActionPerformed(evt);
-                }
-            });
-            jPanel28.add(jRadioButton3);
-            jRadioButton3.setBounds(20, 80, 74, 28);
-
-            MiscPanel.add(jPanel28);
-            jPanel28.setBounds(80, 260, 230, 140);
 
             tabsState3.addTab("Misc", MiscPanel);
 
@@ -3413,13 +3357,11 @@ public class Gui extends javax.swing.JFrame {
                     jPanel18.add(checkboxState5);
                     checkboxState5.setBounds(130, 170, 410, 28);
 
-                    checkboxState6.setSelected(true);
                     checkboxState6.setText("Report suffixes written(including forced changes) and changed Age names.");
                     checkboxState6.setName("reportSuffixes"); // NOI18N
                     jPanel18.add(checkboxState6);
                     checkboxState6.setBounds(130, 210, 490, 28);
 
-                    checkboxState7.setSelected(true);
                     checkboxState7.setText("Report prp files processed.");
                     checkboxState7.setName("reportPrp"); // NOI18N
                     jPanel18.add(checkboxState7);
@@ -3799,6 +3741,43 @@ public class Gui extends javax.swing.JFrame {
 
                         tabsState3.addTab("Help", HelpTab);
 
+                        jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
+                        jPanel28.setLayout(null);
+
+                        languageButtonGroup.add(jRadioButton1);
+                        jRadioButton1.setSelected(true);
+                        jRadioButton1.setText("English");
+                        jRadioButton1.setMargin(new java.awt.Insets(0, 2, 0, 2));
+                        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jRadioButton1ActionPerformed(evt);
+                            }
+                        });
+                        jPanel28.add(jRadioButton1);
+                        jRadioButton1.setBounds(20, 20, 110, 20);
+
+                        languageButtonGroup.add(jRadioButton2);
+                        jRadioButton2.setText("Deutsch");
+                        jRadioButton2.setMargin(new java.awt.Insets(0, 2, 0, 2));
+                        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jRadioButton2ActionPerformed(evt);
+                            }
+                        });
+                        jPanel28.add(jRadioButton2);
+                        jRadioButton2.setBounds(20, 40, 120, 20);
+
+                        languageButtonGroup.add(jRadioButton3);
+                        jRadioButton3.setText("Francais");
+                        jRadioButton3.setMargin(new java.awt.Insets(0, 2, 0, 2));
+                        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jRadioButton3ActionPerformed(evt);
+                            }
+                        });
+                        jPanel28.add(jRadioButton3);
+                        jRadioButton3.setBounds(20, 60, 120, 20);
+
                         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                         getContentPane().setLayout(layout);
                         layout.setHorizontalGroup(
@@ -3813,22 +3792,27 @@ public class Gui extends javax.swing.JFrame {
                                         .addGap(16, 16, 16)
                                         .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(32, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                                            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))))
+                                .addGap(17, 17, 17))
                         );
                         layout.setVerticalGroup(
                             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(19, 19, 19))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(tabsState3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(18, Short.MAX_VALUE))
                         );
 
                         pack();

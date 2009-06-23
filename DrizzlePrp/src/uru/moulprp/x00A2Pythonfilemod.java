@@ -41,7 +41,7 @@ public class x00A2Pythonfilemod extends uruobj
     
     public x00A2Pythonfilemod(context c) throws readexception//,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlMultiModifier(c);//,false);
         pyfile = new Urustring(c);
@@ -147,7 +147,7 @@ public class x00A2Pythonfilemod extends uruobj
         }
         public Pythonlisting(context c, Urustring pyfile) throws readexception
         {
-            Bytestream data = c.in;
+            shared.IBytestream data = c.in;
 
             index = data.readInt();
             type = data.readInt();

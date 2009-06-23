@@ -47,7 +47,8 @@ public class prputils
         //do header work.
         
         //process the object index, which is *not* a part of this struct.
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         int numobjecttypes = objectindex.indexCount;
         for(int i_type=0;i_type<numobjecttypes;i_type++)
         {
@@ -85,7 +86,8 @@ public class prputils
         report.append("Object types:\n");
         
         //process the object index, which is *not* a part of this struct.
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         int numobjecttypes = objectindex.indexCount;
         for(int i=0;i<numobjecttypes;i++)
         {
@@ -133,7 +135,7 @@ public class prputils
     }*/
     public static prpfile ProcessAllMoul(context c, boolean reportProgress, Typeid[] typesToRead)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
 
         PrpHeader header = new PrpHeader(c);
         
@@ -162,7 +164,8 @@ public class prputils
         result.header = header;
         
         //process the object index, which is *not* a part of this struct.
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(data,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(data,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         //_staticsettings.onObjectIndexLoaded(objectindex);
         result.objectindex = objectindex;
         
@@ -194,7 +197,8 @@ public class prputils
                 if(!_staticsettings.doVisit(desc)) continue; //should we process this object?
                 //rootobj object = null;
                 PrpRootObject object = null;
-                context stream = c.Fork(new Bytestream(data,offset));
+                //context stream = c.Fork(new Bytestream(data,offset));
+                context stream = c.Fork(c.in.Fork(offset));
                 stream.curRootObject = desc;
                 stream.curRootObjectOffset = offset;
                 stream.curRootObjectSize = size;
@@ -316,7 +320,8 @@ public class prputils
                     //scan for string references in unparsed object:
                     if(_staticsettings.tryToFindReferencesInUnknownObjects)
                     {
-                        Bytestream bs = new Bytestream(data,offset);
+                        //Bytestream bs = new Bytestream(data,offset);
+                        shared.IBytestream bs = data.Fork(offset);
                         byte[] bytes = bs.readBytes(size);
                         //Urustring.attemptRecoveryScan(bytes);
                         for(int curbyte=0;curbyte<bytes.length;curbyte++)
@@ -379,7 +384,8 @@ public class prputils
         //do header work.
         
         //process the object index, which is *not* a part of this struct.
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         int numobjecttypes = objectindex.indexCount;
         for(int i=0;i<numobjecttypes;i++)
         {
@@ -397,7 +403,8 @@ public class prputils
                 //do per-object work.
                 if(typetodump==null || desc.objecttype==typetodump)
                 {
-                    Bytestream bs = new Bytestream(c.in,offset);
+                    //Bytestream bs = new Bytestream(c.in,offset);
+                    shared.IBytestream bs = c.in.Fork(offset);
                     byte[] bytes = bs.readBytes(size);
                     shared.FileUtils.WriteFile(outfolder+"/"+desc.toString()+".dat", bytes);
                 }
@@ -773,7 +780,8 @@ public class prputils
         result.header = header;
         
         //process the object index, which is *not* a part of this struct.
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
         result.objectindex = objectindex;
         
         int numobjecttypes = objectindex.indexCount;
@@ -791,7 +799,8 @@ public class prputils
                 
                 //do per-object work.
                 PrpRootObject object = null;
-                context stream = c.Fork(new Bytestream(c.in,offset));
+                //context stream = c.Fork(new Bytestream(c.in,offset));
+                context stream = c.Fork(c.in.Fork(offset));
                 stream.curRootObject = desc;
                 stream.curRootObjectOffset = offset;
                 stream.curRootObjectSize = size;

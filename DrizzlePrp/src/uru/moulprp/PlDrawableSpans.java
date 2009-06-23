@@ -70,7 +70,7 @@ public class PlDrawableSpans extends uruobj
     
     public PlDrawableSpans(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         //parent = new PlSynchedObject(c); //should this be a keyedobject??? No, it shouldn't!
         newunknown = data.readInt();
@@ -259,7 +259,7 @@ public class PlDrawableSpans extends uruobj
         
         public SpanSubset(context c) throws readexception
         {
-            Bytestream data = c.in;
+            shared.IBytestream data = c.in;
             visible = data.readInt(); e.ensureflags(visible,1,0); //is sometimes 0 in hex isle.
             materialindex = data.readInt();
             if(materialindex==0 || materialindex==3)
@@ -388,7 +388,7 @@ public class PlDrawableSpans extends uruobj
 
         public x0240plSpaceTree(context c) throws readexception
         {
-            Bytestream data = c.in;
+            shared.IBytestream data = c.in;
             ////if(hasHeader) xheader = new Objheader(data);
             childnodes = data.readShort();
             leafnodes = data.readInt();
@@ -461,7 +461,7 @@ public class PlDrawableSpans extends uruobj
         
         public Mesh(context c)
         {
-            Bytestream data = c.in;
+            shared.IBytestream data = c.in;
             if(c.readversion==7)
             {
                 //sub_5059A0

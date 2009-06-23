@@ -56,7 +56,7 @@ public class x0006Layer extends uruobj
     
     public x0006Layer(context c) throws readexception //,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new x0041LayerInterface(c); //contains the plmipmap.
         //the next 5 flags are the hsGMatState

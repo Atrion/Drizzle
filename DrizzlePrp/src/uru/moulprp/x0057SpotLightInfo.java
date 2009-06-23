@@ -43,7 +43,7 @@ public class x0057SpotLightInfo extends uruobj
     
     public x0057SpotLightInfo(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         
         parent = new x0056OmniLightInfo(c);//,false);

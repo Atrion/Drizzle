@@ -48,7 +48,7 @@ public class x0015CoordinateInterface extends uruobj
             int dummy=0;
         }
 
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlObjInterface(c);//,false);
         localToParent = new Transmatrix(c);

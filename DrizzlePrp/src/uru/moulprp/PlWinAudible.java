@@ -40,7 +40,7 @@ public class PlWinAudible extends uruobj
     
     public PlWinAudible(context c) throws readexception //,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         
         parent = new x0012Audible(c);//,false);

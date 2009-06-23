@@ -59,7 +59,7 @@ public class PlATCAnim extends uruobj
     
     public PlATCAnim(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlAGAnim(c);//,false);
         u1 = new Flt(c);

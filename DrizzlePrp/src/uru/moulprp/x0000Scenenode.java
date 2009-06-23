@@ -42,7 +42,7 @@ public class x0000Scenenode extends uruobj
     
     public x0000Scenenode(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         ////if(hasHeader) xheader = new Objheader(c);
         count1 = data.readInt();
         /*objectrefs1 = new Uruobjectref[count1];

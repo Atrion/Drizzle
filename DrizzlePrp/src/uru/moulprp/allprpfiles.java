@@ -55,7 +55,8 @@ public class allprpfiles
                 context c = context.createFromBytestream(new Bytestream(filedata));
                 //c.readversion = 3;
                 PrpHeader header = new PrpHeader(c);
-                PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+                //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
+                PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
                 prpfile prp = new prpfile();
                 prp.header = header;
                 prp.objectindex = objectindex;

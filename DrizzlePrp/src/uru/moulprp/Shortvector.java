@@ -20,6 +20,7 @@ package uru.moulprp;
 
 import uru.Bytestream;
 import uru.Bytedeque;
+import shared.IBytestream;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Shortvector extends uruobj
     int length;
     short[] elements;
     
-    public Shortvector(Bytestream data)
+    public Shortvector(IBytestream data)
     {
         length = data.readInt();
         elements = new short[length];

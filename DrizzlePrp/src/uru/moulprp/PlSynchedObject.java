@@ -58,7 +58,7 @@ public class PlSynchedObject extends uruobj
     }
     public PlSynchedObject(context c)//,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         //parent = new x0002Keyedobject(data);
         flags = data.readInt(); e.ensureflags(flags,0x00,0x04,0x0C,0x10,0x20,0x28,0x38,0x80,0x84,0x8C); //if fails, check cobbs

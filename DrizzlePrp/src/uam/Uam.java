@@ -210,7 +210,7 @@ public class Uam
 
             if(complain)
             {
-                String complaint = "The file "+pyfile+" was found in these files: ";
+                String complaint = "  The file "+pyfile+" was found in these files: ";
                 for(String pakfile: paklist)
                 {
                     complaint += pakfile+", ";
@@ -230,7 +230,7 @@ public class Uam
             String seq = agefile.getVariable("SequencePrefix");
             if(seqprefs.containsKey(seq))
             {
-                m.msg("Sequence Prefix from ",f.getName()," already used in ",seqprefs.get(seq));
+                m.msg("  Sequence Prefix from ",f.getName()," already used in ",seqprefs.get(seq));
             }
             else
             {
@@ -256,6 +256,24 @@ public class Uam
             }
         }
         m.msg("Done checking for missing ogg files.");*/
+
+        m.msg("Checking for prps with duplicate page IDs...");
+        java.util.HashMap<uru.moulprp.Pageid,String> pageids = new java.util.HashMap();
+        Vector<File> prpfiles = shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".prp", false);
+        for(File f: prpfiles)
+        {
+            IBytestream c = shared.SerialBytestream.createFromFile(f);
+            uru.moulprp.PrpHeader header = new uru.moulprp.PrpHeader(c);
+            if(pageids.containsKey(header.pageid))
+            {
+                m.msg("  Pageid ",header.pageid.toString()," used in both ",f.getName()," and ",pageids.get(header.pageid));
+            }
+            else
+            {
+                pageids.put(header.pageid, f.getName());
+            }
+        }
+        m.msg("Done checking for duplicate page IDs.");
 
     }
     public static void launchUru()

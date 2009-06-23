@@ -23,6 +23,7 @@ import uru.Bytestream;
 import shared.e;
 import shared.m;
 import uru.Bytedeque;
+import shared.IBytestream;
 
 /**
  *
@@ -49,7 +50,7 @@ public class Uruobjectdesc extends uruobj
     
     public Uruobjectdesc(context c)
     {
-        Bytestream data = c.in;
+        IBytestream data = c.in;
 
         this.rootobj = c.curRootObject;
         

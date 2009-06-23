@@ -81,7 +81,7 @@ public class PlParticleSystem extends uruobj
     
     public PlParticleSystem(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new x001EModifier(c);//,false);
         material = new Uruobjectref(c);

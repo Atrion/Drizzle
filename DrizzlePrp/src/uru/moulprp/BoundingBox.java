@@ -49,7 +49,7 @@ public class BoundingBox extends uruobj
 
     public BoundingBox(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         flags = data.readInt();
         mode = data.readInt();
         min = c.readObj(Vertex.class);

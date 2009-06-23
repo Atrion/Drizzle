@@ -133,7 +133,7 @@ public class x0004MipMap extends uruobj
     
     public x0004MipMap(context c) throws readexception //,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new x0003Bitmap(c);//,false);
         texwidth = data.readInt();

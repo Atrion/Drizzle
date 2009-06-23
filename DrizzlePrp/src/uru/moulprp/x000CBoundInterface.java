@@ -46,7 +46,7 @@ public class x000CBoundInterface extends uruobj
     
     public x000CBoundInterface(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlObjInterface(c);//,false); //I don't think this is the problem, since x0010 is the parent for other classes which work perfectly.(some use the array and some don't, but they all work.)
         //u1 = data.readInt();

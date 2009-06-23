@@ -95,7 +95,8 @@ public class prpfile
         context c = context.createFromBytestream(new Bytestream(filedata));
         c.curFile = filename;
         result.header = new PrpHeader(c);
-        result.objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,result.header.offsetToObjectIndex)));
+        //result.objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,result.header.offsetToObjectIndex)));
+        result.objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(result.header.offsetToObjectIndex)));
         result.filename = filename;
         
         return result;

@@ -29,6 +29,15 @@ public abstract class IBytestream
         }
         return result;
     }
+    public short[] readShorts(int num)
+    {
+        short[] result = new short[num];
+        for(int i=0;i<num;i++)
+        {
+            result[i] = readShort();
+        }
+        return result;
+    }
     /*public static IBytestream createFromFilename(String filename)
     {
         return createFromFilenameOffset(filename,0);

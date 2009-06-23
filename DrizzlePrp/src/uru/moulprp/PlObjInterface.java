@@ -42,7 +42,7 @@ public class PlObjInterface extends uruobj
     
     public PlObjInterface(context c) throws readexception
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);
         sceneobject = new Uruobjectref(c);

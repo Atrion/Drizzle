@@ -47,7 +47,7 @@ public class x0001Sceneobject extends uruobj
     
     public x0001Sceneobject(context c) throws readexception //,boolean hasHeader)
     {
-        Bytestream data = c.in;
+        shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
         spaninfo = new Uruobjectref(c); //drawinterface

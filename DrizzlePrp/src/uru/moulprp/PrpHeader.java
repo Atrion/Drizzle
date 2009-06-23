@@ -25,6 +25,7 @@ import shared.m;
 import uru.Bytedeque;
 import shared.Bytes;
 //import java.util.Vector;
+import shared.IBytestream;
 
 /**
  *
@@ -51,9 +52,14 @@ public class PrpHeader extends uruobj
     
     //PrpObjectIndex objectindex;
 
+
+    public PrpHeader(IBytestream data)
+    {
+        this(context.createFromBytestream(data));
+    }
     public PrpHeader(context c)
     {
-        Bytestream data = c.in;
+        IBytestream data = c.in;
         //data = datas;
         //version = data.readInt(); e.ensure(version,5,6);
         version = data.readShort();
@@ -119,14 +125,14 @@ public class PrpHeader extends uruobj
             //version = data.readInt(); e.ensure(version,5);
             version2 = data.readShort();
             pageid = new Pageid(c);
-            m.msg("Pageid:"+pageid.toString());
+            //m.msg("Pageid:"+pageid.toString());
             //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16); //16 was garden_district_itinerantbugcloud
             pagetype = new Pagetype(c);
             agename = new Urustring(c);
             Urustring district = new Urustring(c);
             pagename = new Urustring(c);
             short majorversion = data.readShort(); e.ensureflags(majorversion,63);
-            short minorversion = data.readShort(); e.ensureflags(minorversion,12);
+            short minorversion = data.readShort(); e.ensureflags(minorversion,12,11); //11 is in some UntilUru files used in the Offline-KI.
             int unknown3 = data.readInt(); e.ensureflags(unknown3,0);
             int unknown4 = data.readInt(); e.ensureflags(unknown4,8);
             payloadlength = data.readInt();
