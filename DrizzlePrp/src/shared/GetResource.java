@@ -25,11 +25,14 @@ public class GetResource
         try{
             File jarfile = new File(GetResource.class.getProtectionDomain().getCodeSource().getLocation().toURI());
             String jarpath = jarfile.getAbsolutePath();
+            m.msg("jarpath:",jarpath);
             if(jarfile.isFile())
             {
+                m.msg("jarfile is file.");
                 Vector<String> zipentries = shared.zip.getAllEntries(jarpath);
                 for(String s: zipentries)
                 {
+                    m.msg("/"+s);
                     result.add("/"+s);
                 }
             }

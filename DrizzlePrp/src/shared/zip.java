@@ -105,6 +105,7 @@ public class zip
             {
                 ZipEntry ze = (ZipEntry)entries.nextElement();
                 String name = ze.getName();
+                result.add(name);
                 //m.msg(name);
             }
         }catch(Exception e)

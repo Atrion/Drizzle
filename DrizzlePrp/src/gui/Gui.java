@@ -3860,6 +3860,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //shared.zip.getAllEntries("C:\\Documents and Settings\\user\\Local Settings\\Temp\\Drizzle6683135168305972449.tmp");
         /*String path = "G:\\prps\\moul\\dat";
         //String strtofind = "femaleamazed";
         String strtofind = "blowkiss";
