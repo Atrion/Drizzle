@@ -57,12 +57,12 @@ public class fileHandler
             p = proxySettings.packages.getPackageByName(packageToUse);
             if(p==null)
             {
-                m.err("Package no longer exists: "+packageToUse);
+                m.err("Package no longer exists: ",packageToUse);
                 return;
             }
             if(!p.handlesDomain(domain))
             {
-                m.warn(p.name+" doesn't handle domain: "+domain);
+                m.warn(p.name," doesn't handle domain: ",domain);
                 p = null;
             }
         }
@@ -72,7 +72,7 @@ public class fileHandler
         }
         if(p==null)
         {
-            m.warn("No package can be found that handles domain: "+domain);
+            m.warn("No package can be found that handles domain: ",domain);
             return;
         }
 
@@ -211,7 +211,7 @@ public class fileHandler
         }
         //response.setContentType("text/html");
         handleDone(request, response);
-        if(proxySettings.logFilesRead) m.msg("Read file: "+domain+target);
+        if(proxySettings.logFilesRead) m.msg("Read file: ",domain+target);
         instream.close();
         //response.setStatus(HttpServletResponse.SC_OK);
         //((Request)request).setHandled(true);

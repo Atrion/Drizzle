@@ -140,7 +140,7 @@ public class PlODEPhysical extends uruobj
         if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
         {
 
-            m.msg("Physics: type="+Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
+            m.msg("Physics: type=",Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
                     +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
                     +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
                     +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
@@ -302,7 +302,7 @@ public class PlODEPhysical extends uruobj
         }
         else
         {
-            m.msg("Skipping physics: type="+Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
+            m.msg("Skipping physics: type=",Integer.toString(type)+";f8="+f8.toString()+";u8=0x"+Integer.toHexString(u8)
                     +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
                     +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
                     +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
@@ -315,8 +315,8 @@ public class PlODEPhysical extends uruobj
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented."+this.toString());
-        m.warn("not tested with pots."+this.toString());
+        m.warn("compile not implemented.",this.toString());
+        m.warn("not tested with pots.",this.toString());
     }
     
     public void compileSpecial(Bytedeque c)

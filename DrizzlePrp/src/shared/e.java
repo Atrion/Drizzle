@@ -45,7 +45,7 @@ public class e
         int result = var & (~allflags);
         if(result!=0)
         {
-            m.warn("Flag not in list of allowed flags. These are the disallowed flags: "+Integer.toBinaryString(result));
+            m.warn("Flag not in list of allowed flags. These are the disallowed flags: ",Integer.toBinaryString(result));
         }
     }
     /*public static void ensure(short a, int ... options)

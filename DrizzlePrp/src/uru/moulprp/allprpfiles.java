@@ -43,7 +43,7 @@ public class allprpfiles
         }
         
         File[] files = prpfolder.listFiles();
-        m.msg("Parsing files... count="+Integer.toString(files.length));
+        m.msg("Parsing files... count=",Integer.toString(files.length));
         for(int i=0;i<files.length;i++)
         {
             File curfile = files[i];

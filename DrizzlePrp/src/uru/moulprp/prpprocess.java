@@ -69,7 +69,7 @@ public class prpprocess
             }
         }
         
-        m.msg("Done Processing All Object of Type: "+typeid.toString());
+        m.msg("Done Processing All Object of Type: ",typeid.toString());
     }
     
     public static PrpRootObject ProcessObjectindexObjecttypeObjectdesc(context c, PrpObjectIndex.ObjectindexObjecttypeObjectdesc d, boolean isRaw)
@@ -91,7 +91,7 @@ public class prpprocess
             if(shortby!=0)
             {
                 if(d.desc.objecttype!=Typeid.plHKPhysical)
-                    m.msg("Prp: Object was not the expected size. It was off by:"+Integer.toString(shortby));
+                    m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
             }
         }
         
@@ -104,7 +104,7 @@ public class prpprocess
         {
             object = new PrpRootObject(c, isRaw, length);
         }catch(readexception e){
-            m.msg("Problem reading object:"+e.toString());
+            m.msg("Problem reading object:",e.toString());
         }
         
         if(object==null)

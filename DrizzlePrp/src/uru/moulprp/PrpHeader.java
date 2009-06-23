@@ -171,7 +171,7 @@ public class PrpHeader extends uruobj
         //override the agename
         if(c.ageName!=null)
         {
-            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Altering agename in prp header from "+agename.toString()+" to "+c.ageName);
+            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Altering agename in prp header from ",agename.toString()," to ",c.ageName);
             agename = Urustring.createFromString(c.ageName);
         }
     }

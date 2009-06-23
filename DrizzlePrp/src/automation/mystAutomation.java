@@ -1044,7 +1044,7 @@ public class mystAutomation
                 for(Typeid curtype: typeequals) if(curtype==type) return true;
                 for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
                 
-                m.msg("Skipping type(1): "+type.toString());
+                m.msg("Skipping type(1): ",type.toString());
                 return false;
             }
         }
@@ -1625,7 +1625,7 @@ public class mystAutomation
                 if(removeThisSceneobject)
                 {
                     //actually remove it.
-                    m.msg("Removing SceneObject that indirectly references PlLadderModifier: "+obj.header.desc.toString());
+                    m.msg("Removing SceneObject that indirectly references PlLadderModifier: ",obj.header.desc.toString());
                     //prp.removeRootObject(obj);
                     objsToDelete.add(obj);
                 }
@@ -1659,7 +1659,7 @@ public class mystAutomation
                             Uruobjectref coordsref = so.regioninfo;
                             if(coordsref.hasref())
                             {
-                                m.msg("Translating smartseek for object... "+obj.header.desc.toString());
+                                m.msg("Translating smartseek for object... ",obj.header.desc.toString());
                                 uru.moulprp.x0015CoordinateInterface coords = prputils.findObjectWithDesc(prp, coordsref.xdesc).castTo();
                                 Transmatrix m = coords.localToParent;
                                 RealMatrix m2 = m.convertToMatrix();
@@ -1696,7 +1696,7 @@ public class mystAutomation
                         uru.moulprp.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
                         Urustring oldpyfile = pythfilemod.pyfile;
                         pythfilemod.pyfile = Urustring.createFromString(pythfilemod.pyfile.toString().replace(agename, newagename));
-                        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Changing Agename in VeryVerySpecialPythonFileMod from "+agename+" to "+newagename);
+                        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Changing Agename in VeryVerySpecialPythonFileMod from ",agename," to ",newagename);
                     }
                 }
             }
@@ -1882,7 +1882,7 @@ public class mystAutomation
                     if(type==typeequals[i]) return true;
                 }
                 
-                m.msg("Skipping type(2): "+type.toString());
+                m.msg("Skipping type(2): ",type.toString());
                 return false;
             }
             
@@ -2190,7 +2190,7 @@ public class mystAutomation
                     }) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
                 }
                 
-                m.msg("Skipping type(3): "+type.toString());
+                m.msg("Skipping type(3): ",type.toString());
                 return false;
             }
         }
@@ -2489,7 +2489,7 @@ public class mystAutomation
         }
         
         File[] files = prpfolder.listFiles();
-        m.msg("Parsing files... count="+Integer.toString(files.length));
+        m.msg("Parsing files... count=",Integer.toString(files.length));
         for(int i=0;i<files.length;i++)
         {
             File curfile = files[i];
@@ -2733,7 +2733,7 @@ public class mystAutomation
             File prpfolder = new File(dir+"/dat/");
             if (!prpfolder.isDirectory() || !prpfolder.exists())
             {
-                m.err("Prp directory not in proper format or not found: "+dir);
+                m.err("Prp directory not in proper format or not found: ",dir);
                 return;
             }
             File[] files = prpfolder.listFiles();

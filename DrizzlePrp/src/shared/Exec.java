@@ -17,7 +17,7 @@ public class Exec
         //if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
         if(!FileUtils.Exists(execFile))
         {
-            m.err("Unable to launch program: "+execFile+" because it doesn't exist.");
+            m.err("Unable to launch program: ",execFile," because it doesn't exist.");
             return;
         }
         String[] command = new String[]{
@@ -28,11 +28,11 @@ public class Exec
         {
             java.lang.Process p = Runtime.getRuntime().exec(command, null, new File(folder));
             //Process proc = Runtime.getRuntime().exec(command);
-            m.status(name+" launched!");
+            m.status(name," launched!");
         }
         catch(java.io.IOException e)
         {
-            m.err("Unable to launch "+name+".");
+            m.err("Unable to launch ",name+".");
         }
 
                 

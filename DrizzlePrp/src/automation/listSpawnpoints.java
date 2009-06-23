@@ -24,7 +24,7 @@ public class listSpawnpoints
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plSpawnModifier)
                 {
-                    m.msg("SpawnPoint: "+obj2.toString()+" uses plSpawnModifier: "+ref.toString());
+                    m.msg("SpawnPoint: ",obj2.toString()," uses plSpawnModifier: ",ref.toString());
                 }
             }
         }

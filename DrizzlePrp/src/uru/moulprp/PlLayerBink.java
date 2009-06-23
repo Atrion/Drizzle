@@ -72,7 +72,7 @@ public class PlLayerBink extends uruobj
             {
                 m.msg("PlLayerAVI: Unhandled case.");
             }
-            if(shared.State.AllStates.getStateAsBoolean("reportAviFiles")) m.msg("AviFile: "+filename.toString());
+            if(shared.State.AllStates.getStateAsBoolean("reportAviFiles")) m.msg("AviFile: ",filename.toString());
         }
         
         public void compile(Bytedeque c)

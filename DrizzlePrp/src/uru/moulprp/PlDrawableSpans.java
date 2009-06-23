@@ -25,7 +25,7 @@ import uru.Bytedeque;
 import shared.e;
 import shared.m;
 import shared.b;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -39,7 +39,8 @@ public class PlDrawableSpans extends uruobj
     int zbias;
     int blendflags;
     int matcount;
-    Uruobjectref[] materials;
+    //public Uruobjectref[] materials;
+    public Vector<Uruobjectref> materials;
     public int subsetcount;
     public SpanSubset[] subsets;
     int unused;
@@ -53,19 +54,19 @@ public class PlDrawableSpans extends uruobj
     public BoundingBox xMaxWorldBounds;
     //int lightcount;
     //Vector<LightInfo> lightinfos = new Vector<LightInfo>();
-    GrowVector<Uruobjectref> lightinfos;
+    public GrowVector<Uruobjectref> lightinfos;
     public int matrixsetcount;
     public Transmatrix[] localToWorlds; //was blendmatrix
     public Transmatrix[] worldToLocals; //was matrix2
     public Transmatrix[] localToBones; //was matrix3
     public Transmatrix[] boneToLocals; //was matrix4
-    int subsetgroupcount;
-    SubsetGroup[] subsetgroups;
-    int meshcount;
-    Mesh[] meshes;
-    Typeid embeddedtype;
+    public int subsetgroupcount;
+    public SubsetGroup[] subsetgroups;
+    public int meshcount;
+    public Mesh[] meshes;
+    public Typeid embeddedtype;
     public x0240plSpaceTree xspacetree;
-    Uruobjectref scenenode;
+    public Uruobjectref scenenode;
     
     public PlDrawableSpans(context c) throws readexception
     {
@@ -77,21 +78,21 @@ public class PlDrawableSpans extends uruobj
         zbias = data.readInt();
         blendflags = data.readInt();
         matcount = data.readInt(); //so far so good.
-        //materials = c.readVector(Uruobjectref.class,matcount);
-        materials = new Uruobjectref[matcount];
-        for(int i=0;i<matcount;i++)
+        materials = c.readVector(Uruobjectref.class,matcount);
+        //materials = new Uruobjectref[matcount];
+        /*for(int i=0;i<matcount;i++)
         {
             materials[i] = new Uruobjectref(c);
             //TODO: remove the next block, it's a test hack!
-            /*if(xheader.desc.objectname.toString().equals("EderDelin_garden_00000000_0Spans"))
-            {
-                if(i==17 || i==24 || i==34) materials[i] = materials[0];
-            }*/
+            //if(xheader.desc.objectname.toString().equals("EderDelin_garden_00000000_0Spans"))
+            //{
+            //    if(i==17 || i==24 || i==34) materials[i] = materials[0];
+            //}
             if(materials[i].hasref() && materials[i].xdesc.objectname.toString().toLowerCase().startsWith("watercurrent"))
             {
                 int dummy=0;
             }
-        }
+        }*/
         
         subsetcount = data.readInt();
         subsets = c.readArray(SpanSubset.class,subsetcount);
@@ -179,7 +180,8 @@ public class PlDrawableSpans extends uruobj
         data.writeInt(zbias);
         data.writeInt(blendflags);
         data.writeInt(matcount);
-        data.writeArray2(materials);
+        //data.writeArray2(materials);
+        data.writeVector2(materials);
         data.writeInt(subsetcount);
         data.writeArray2(subsets);
         data.writeInt(unused);
@@ -221,14 +223,20 @@ public class PlDrawableSpans extends uruobj
         }
         scenenode.compile(data);
     }
+    public int addMaterial(Uruobjectref mat)
+    {
+        materials.add(mat);
+        matcount++;
+        return matcount-1;
+    }
     
     static public class SpanSubset extends uruobj
     {
-        int visible;
-        int materialindex;
+        public int visible;
+        public int materialindex;
         public Transmatrix localToWorld; //was transforms1
         public Transmatrix worldToLocal; //was transforms2
-        int lightingflags;
+        public int lightingflags;
         public BoundingBox localBounds; //was uegclassesca1
         public BoundingBox worldBounds; //was uegclassesca2
         public int blendflag;
@@ -351,9 +359,9 @@ public class PlDrawableSpans extends uruobj
     
     static public class SubsetGroup extends uruobj
     {
-        int u1;
-        int subsetcount;
-        int[] subsetindex;
+        public int u1;
+        public int subsetcount;
+        public int[] subsetindex;
         
         public SubsetGroup(context c)
         {

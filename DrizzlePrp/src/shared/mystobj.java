@@ -46,7 +46,7 @@ abstract public class mystobj //implements compilable
     
     public void compile(Bytedeque data)
     {
-        m.err("Mystobj doesn't implement compile. "+this.toString());
+        m.err("Mystobj doesn't implement compile. ",this.toString());
     }
     
     /*void compile(Bytedeque data)

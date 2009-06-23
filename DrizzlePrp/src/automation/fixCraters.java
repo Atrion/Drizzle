@@ -91,7 +91,7 @@ public class fixCraters
         //PrpRootObject newclustergroup = PrpRootObject.createFromDescAndObject(desc, clustergroup); //create a new PrpRootObject for the other prp
         PrpRootObject newclustergroup = PrpRootObject.createFromDescAndObject(desc, objToMove.getObject()); //create a new PrpRootObject for the other prp
         //newclustergroup.header.desc.pageid.setPagenum(11); //put on page 11
-        m.msg("moving object from "+objToMove.header.desc.toString()+" to "+newclustergroup.header.desc.toString());
+        m.msg("moving object from ",objToMove.header.desc.toString()+" to "+newclustergroup.header.desc.toString());
 
         movedObjects.add(newclustergroup); //its now been moved, but not all its dependencies.
 
@@ -115,13 +115,13 @@ public class fixCraters
             if(ref.xdesc.objecttype==Typeid.plSceneNode) //change to this page's scenenode.
             {
                 //use this page's sceneobject instead.
-                m.msg("modifying scenenode from "+ref.xdesc.toString()+" to "+scenenode.header.desc.toString());
+                m.msg("modifying scenenode from ",ref.xdesc.toString()+" to "+scenenode.header.desc.toString());
                 ref.xdesc = scenenode.header.desc;
             }
             else if(objectsContainDesc(movedObjects, ref.xdesc))
             {
                 //we've already brought this object over. Just set the pageid.
-                m.msg("already moved obj "+ref.xdesc.toString()+" new pageid is "+pid.toString());
+                m.msg("already moved obj ",ref.xdesc.toString()+" new pageid is "+pid.toString());
                 ref.xdesc.pageid = pid;
             }
             else
@@ -130,7 +130,7 @@ public class fixCraters
                 if(ref.xdesc.objecttype==Typeid.plCubicEnvironMap || ref.xdesc.objecttype==Typeid.plMipMap)
                 {
                     //these objects should stay where they are.
-                    m.msg("not moving texture "+ref.xdesc.toString());
+                    m.msg("not moving texture ",ref.xdesc.toString());
                 }
                 else
                 {

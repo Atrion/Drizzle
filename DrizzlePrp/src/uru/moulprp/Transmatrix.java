@@ -320,4 +320,21 @@ public strictfp class Transmatrix extends uruobj
         //e.ensure(flts[3][3]==1);
         return new Vertex(x,y,z);
     }
+
+    public Transmatrix deepClone()
+    {
+        return new Transmatrix(this);
+    }
+    public Transmatrix(Transmatrix t)
+    {
+        this.isnotIdentity = t.isnotIdentity;
+        if(t.isnotIdentity!=0)
+        {
+            this.xmatrix = new int[t.xmatrix.length];
+            for(int i=0;i<t.xmatrix.length;i++)
+            {
+                this.xmatrix[i] = t.xmatrix[i];
+            }
+        }
+    }
 }

@@ -204,13 +204,13 @@ public class PlWin32Sound extends uruobj
                     softStarts = new plEAXSourceSoftSettings(c);
                     softEnds = new plEAXSourceSoftSettings(c);
                     occlusionSoftValue = new Flt(c);
-                    if(shared.State.AllStates.getStateAsBoolean("reportEaxSourceSettings")) m.msg("PlEaxSourceSettings(pots/moul): "+softStarts.toString()+" : "+softEnds.toString()+" : "+occlusionSoftValue.toString());
+                    if(shared.State.AllStates.getStateAsBoolean("reportEaxSourceSettings")) m.msg("PlEaxSourceSettings(pots/moul): ",softStarts.toString()+" : "+softEnds.toString()+" : "+occlusionSoftValue.toString());
                 }
                 else if(c.readversion==4)
                 {
                     xu1 = new Flt(c);
                     xsoft = new plEAXSourceSoftSettings(c);
-                    if(shared.State.AllStates.getStateAsBoolean("reportEaxSourceSettings")) m.msg("PlEaxSourceSettings(crow/mystv): "+xu1.toString()+" : "+xsoft.toString());
+                    if(shared.State.AllStates.getStateAsBoolean("reportEaxSourceSettings")) m.msg("PlEaxSourceSettings(crow/mystv): ",xu1.toString()+" : "+xsoft.toString());
                     
                     //set values for writing...
                     //occlusionSoftValue = xu1;

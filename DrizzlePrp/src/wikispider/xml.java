@@ -140,7 +140,7 @@ public class xml
         Node queryresult = findNode(xpathquery);
         if(queryresult==null)
         {
-            m.err("Unable to find property in xml list: "+xpathquery);
+            m.err("Unable to find property in xml list: ",xpathquery);
             return "";
         }
         else

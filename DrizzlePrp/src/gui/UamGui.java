@@ -116,7 +116,7 @@ public class UamGui
             {
                 //int dummy=0;
                 //String s = shared.debug.getStackTrace();
-                m.msg("Minor multithread bug: null: agename="+agename);
+                m.msg("Minor multithread bug: null: agename=",agename);
                 return;
             }
             switch(status)
@@ -333,7 +333,9 @@ public class UamGui
                 return ali;
             }
         });
-        
+
+
+
         //load list if called for...
         shared.State.AllStates.addCallbackAfterInit(new shared.delegate() {
             public void callback(Object arg) {
@@ -926,7 +928,7 @@ public class UamGui
         String archiveType = uam.Uam.ageList.getArchiveType(age, ver);
         if(!archiveType.equals("7z"))
         {
-            m.err("This version is in a archive type not currently supported: "+archiveType);
+            m.err("This version is in a archive type not currently supported: ",archiveType);
             return false;
         }
         
@@ -937,7 +939,7 @@ public class UamGui
         m.status("Checking to see if we already have this version in the cache...");
         if(FileUtils.Exists(potsfolder+Uam.ageArchivesFolder+age+Uam.versionSep+ver+".7z"))
         {
-            m.status("Using cached version of Age: "+age+", Version: "+ver+" ...");
+            m.status("Using cached version of Age: ",age,", Version: ",ver," ...");
             
             //String hash = Uam.ageList.getWhirlpool(age, ver);
             String hash = Uam.ageList.getSha1(age, ver);
@@ -975,7 +977,7 @@ public class UamGui
         }
         else
         {
-            m.msg("Attempting to download Age: "+age+", Version: "+ver+", Mirror: "+mir);
+            m.msg("Attempting to download Age: ",age,", Version: ",ver,", Mirror: ",mir);
             //uam.Uam.DownloadAge7Zip(age,ver,mir,potsfolder);
 
             //ensure pots folder. We don't need this here.

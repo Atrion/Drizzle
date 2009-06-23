@@ -54,7 +54,7 @@ public class ThreadDownloader extends Thread
         catch(FileNotFoundException e)
         {
             //throw new DownloadErrorException("Error opening file for saving: "+e.getMessage());
-            m.err("Error opening file for saving: "+e.getMessage());
+            m.err("Error opening file for saving: ",e.getMessage());
             return false;
         }
         finally      

@@ -12,6 +12,6 @@ public class readwarningexception extends readexception
     public readwarningexception(String msg)
     {
         super(msg,true);
-        m.warn("(readexception) " + msg);
+        m.warn("(readexception) " , msg);
     }
 }

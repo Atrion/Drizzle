@@ -42,7 +42,7 @@ public class HttpUtils
             return bytes;
         } catch (Exception e) {
             //e.printStackTrace();
-            m.warn("Unable to download: "+address);
+            m.warn("Unable to download: ",address);
         }
         return null;
     }

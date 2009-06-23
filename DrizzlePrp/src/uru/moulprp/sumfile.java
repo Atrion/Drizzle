@@ -76,7 +76,7 @@ public class sumfile
         try{
             result = new sumfile(shared.FileUtils.ReadFile(f),true,readversion);
         }catch(shared.readexception e){
-            m.err("Error reading sumfile:"+f.getName());
+            m.err("Error reading sumfile:",f.getName());
         }
         return result;
     }

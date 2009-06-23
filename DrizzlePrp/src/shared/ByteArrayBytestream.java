@@ -27,6 +27,11 @@ public class ByteArrayBytestream extends IBytestream
         return result;
     }
     
+
+    protected int read()
+    {
+        return b.ByteToInt32(readByte());
+    }
     public byte readByte()
     {
         byte result = data[pos];

@@ -107,7 +107,7 @@ public class moul
             //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
             //prpdistiller.distiller.distillEverythingOneLayerDeep(prp, prpfiles, refReassigns);
             int levels = prpdistiller.distiller.distillEverything(prp, prpfiles, refReassigns);
-            m.msg("Levels deep: "+Integer.toString(levels));
+            m.msg("Levels deep: ",Integer.toString(levels));
 
             //change link sound
             uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();

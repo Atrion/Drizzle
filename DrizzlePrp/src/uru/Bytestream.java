@@ -208,13 +208,16 @@ public class Bytestream extends IBytestream
             return 0;
         }
     }
+    protected int read()
+    {
+        return b.ByteToInt32(readByte());
+    }
     public byte readByte()
     {
         byte result = peekByte();
         pos += 1;
         return result;
     }
-    
     public short readShort()
     {
         short result = peekShort();

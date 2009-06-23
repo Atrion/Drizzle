@@ -48,4 +48,13 @@ public class x0041LayerInterface extends uruobj
         parent.compile(data);
         ref.compile(data);
     }
+    public x0041LayerInterface(x0041LayerInterface s)
+    {
+        this.parent = s.parent.deepClone();
+        this.ref = s.ref.deepClone();
+    }
+    public x0041LayerInterface deepClone()
+    {
+        return new x0041LayerInterface(this);
+    }
 }

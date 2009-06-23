@@ -46,6 +46,7 @@ public class m
         public boolean showStatusMessages = true;
         public boolean writeToFile = false;
         public boolean scrollOutput = true;
+        public boolean translate = false;
         public String filename;
         
         public stateclass()
@@ -63,6 +64,7 @@ public class m
             result.showWarningMessages = this.showWarningMessages;
             result.writeToFile = this.writeToFile;
             result.scrollOutput = this.scrollOutput;
+            result.translate = this.translate;
             result.filename = this.filename;
             return result;
         }
@@ -72,7 +74,7 @@ public class m
     public static void time()
     {
         long time = java.util.Calendar.getInstance().getTimeInMillis();
-        m.msg("time: "+Long.toString(time));
+        m.msg("time: ",Long.toString(time));
     }
     public static void redirectStdOut()
     {
@@ -112,7 +114,7 @@ public class m
             String msg = new String(CharString);
             if(msg.equals("\r\n")) return;
             if(msg.equals("")) return;
-            m.console(tag+msg);
+            m.console(tag,msg);
             //m.msg("Console:"+tag+msg);
         }
         public void write(int b)
@@ -144,8 +146,25 @@ public class m
         }
     }
     
-    private static void message(String s)
+    private static void message(String... ss)
     {
+        //translate if necessary.
+        if(state.curstate.translate)
+        {
+            for(int i=0;i<ss.length;i++)
+            {
+                ss[i] = translation.translation.translate(ss[i]);
+            }
+        }
+
+        //merge the string parts
+        StringBuilder sb = new StringBuilder();
+        for(String spart: ss)
+        {
+            sb.append(spart);
+        }
+        String s = sb.toString();
+
         if(justUseConsole)
         {
             System.out.println(s);
@@ -198,44 +217,47 @@ public class m
         }
     }
     
-    public static void msgsafe(String s)
+    /*public static void msgsafe(String... s)
     {
-        /*final String s2 = s;
-        javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
-            public void run() {
-                msg(s2);
-            }
-        });*/
+        //final String s2 = s;
+        //javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+        //    public void run() {
+        //        msg(s2);
+        //    }
+        //});
         msg(s);
-    }
-    public static void msg(String s)
+    }*/
+    public static void msg(String... s)
     {
         //Main.message(s);
         if(state.curstate.showNormalMessages)
             message(s);
     }
 
-    public static void err(String s)
+    public static void err(String... s)
     {
         //Main.message(s);
         if(state.curstate.showErrorMessages)
-            message("Error: "+s);
+            message(shared.generic.prependToArray("Error: ", s, String.class));
+            //message("Error: "+s);
         //throw new Exception(s);
     }
     
-    public static void warn(String s)
+    public static void warn(String... s)
     {
         if(state.curstate.showWarningMessages)
-            message("Warning: "+s);
+            message(shared.generic.prependToArray("Warning: ", s, String.class));
+            //message("Warning: "+s);
     }
     
-    public static void console(String s)
+    public static void console(String... s)
     {
         if(state.curstate.showConsoleMessages)
-            message("Console:"+s);
+            message(shared.generic.prependToArray("Console: ", s, String.class));
+            //message("Console:"+s);
     }
 
-    public static void status(String s)
+    public static void status(String... s)
     {
         if(state.curstate.showStatusMessages)
             message(s);

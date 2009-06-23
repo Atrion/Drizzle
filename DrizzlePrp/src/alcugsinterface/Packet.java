@@ -84,7 +84,7 @@ public class Packet
                 PlNetAck na = new PlNetAck(c,this);
                 break;
             default:
-                m.msg("got unknown msg type: 0x"+Integer.toHexString(packettype));
+                m.msg("got unknown msg type: 0x",Integer.toHexString(packettype));
                 break;
         }
         

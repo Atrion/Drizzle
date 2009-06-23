@@ -125,4 +125,24 @@ public class generic
         //return convertVectorToArray(result, objclass);
         
     }
+    public static <T> T[] prependToArray(T item, T[] values, Class c)
+    {
+        T[] result = (T[])generic.makeArray(c, values.length+1);
+        result[0] = item;
+        for(int i=0;i<values.length;i++)
+        {
+            result[i+1] = values[i];
+        }
+        return result;
+    }
+    public static <T> T[] appendToArray(T[] values, T item, Class c)
+    {
+        T[] result = (T[])generic.makeArray(c, values.length+1);
+        for(int i=0;i<values.length;i++)
+        {
+            result[i] = values[i];
+        }
+        result[values.length] = item;
+        return result;
+    }
 }

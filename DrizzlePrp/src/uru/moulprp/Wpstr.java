@@ -63,5 +63,12 @@ public class Wpstr extends uruobj
         deque.writeShort(strlen);
         deque.writeBytes(string);
     }
+    public Wpstr deepClone()
+    {
+        Wpstr result = new Wpstr();
+        result.strlen = strlen;
+        result.string = b.CopyBytes(string);
+        return result;
+    }
 
 }

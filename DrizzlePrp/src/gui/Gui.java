@@ -146,7 +146,7 @@ public class Gui extends javax.swing.JFrame {
         m.redirectStdOut();
 
         //check memory...
-        if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle"+Integer.toString(gui.Version.version)+".jar and ran DrizzlePrp.jar.  You should run Drizzle"+Integer.toString(gui.Version.version)+".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
+        if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
         if(Main.javaversion2<1.6) m.warn("Your version of java seems to be older than 1.6; some things might not work.");
         if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://alcugs.almlys.org/Drizzle for details.");
         //try{
@@ -158,8 +158,6 @@ public class Gui extends javax.swing.JFrame {
         //this.setIconImage(image.getImage());
         //}catch(Exception e){}
         
-        String helpstr = shared.GetResource.getResourceAsString("/gui/help.txt");
-        jTextArea5.setText(helpstr);
         //jTextArea5.repaint();
         //jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
 
@@ -318,6 +316,9 @@ public class Gui extends javax.swing.JFrame {
         //dosavesettings = true;
         shared.State.AllStates.loadandpush(settingsfile);
 
+        //String helpstr = shared.GetResource.getResourceAsString("/gui/help.txt");
+        //jTextArea5.setText(helpstr);
+        translation.translation.registerResourceString("/gui/help.txt", jTextArea5);
 
     }
     public static class Settings implements java.io.Serializable
@@ -387,6 +388,7 @@ public class Gui extends javax.swing.JFrame {
 
         filedirButtonGroup = new javax.swing.ButtonGroup();
         uamStartupButtongroup = new shared.State.ButtongroupState();
+        languageButtonGroup = new shared.State.ButtongroupState();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jButton61 = new javax.swing.JButton();
@@ -529,6 +531,10 @@ public class Gui extends javax.swing.JFrame {
         jButton147 = new javax.swing.JButton();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
         AdvTabState = new shared.State.TabsState();
         jPanel48 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
@@ -592,6 +598,11 @@ public class Gui extends javax.swing.JFrame {
         jButton37 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        jButton38 = new javax.swing.JButton();
+        jButton40 = new javax.swing.JButton();
+        jButton41 = new javax.swing.JButton();
+        jButton46 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -758,6 +769,8 @@ public class Gui extends javax.swing.JFrame {
         imagePanel2 = new shared.ImagePanel();
 
         uamStartupButtongroup.setName("uamStartup");
+
+        languageButtonGroup.setName("language");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drizzle");
@@ -1864,6 +1877,43 @@ public class Gui extends javax.swing.JFrame {
             MiscPanel.add(jPanel47);
             jPanel47.setBounds(20, 50, 327, 163);
 
+            jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
+            jPanel28.setLayout(null);
+
+            languageButtonGroup.add(jRadioButton1);
+            jRadioButton1.setSelected(true);
+            jRadioButton1.setText("English");
+            jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRadioButton1ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jRadioButton1);
+            jRadioButton1.setBounds(20, 20, 68, 28);
+
+            languageButtonGroup.add(jRadioButton2);
+            jRadioButton2.setText("Deutsch");
+            jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRadioButton2ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jRadioButton2);
+            jRadioButton2.setBounds(20, 50, 72, 28);
+
+            languageButtonGroup.add(jRadioButton3);
+            jRadioButton3.setText("Francais");
+            jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRadioButton3ActionPerformed(evt);
+                }
+            });
+            jPanel28.add(jRadioButton3);
+            jRadioButton3.setBounds(20, 80, 74, 28);
+
+            MiscPanel.add(jPanel28);
+            jPanel28.setBounds(80, 260, 230, 140);
+
             tabsState3.addTab("Misc", MiscPanel);
 
             AdvTabState.setName("subadv"); // NOI18N
@@ -2330,7 +2380,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton1);
-            jButton1.setBounds(130, 280, 170, 36);
+            jButton1.setBounds(160, 170, 170, 36);
 
             jButton6.setText("test!!!");
             jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -2339,7 +2389,49 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton6);
-            jButton6.setBounds(260, 340, 53, 36);
+            jButton6.setBounds(250, 210, 53, 36);
+
+            jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
+            jPanel13.setLayout(null);
+
+            jButton38.setText("list en strings");
+            jButton38.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton38ActionPerformed(evt);
+                }
+            });
+            jPanel13.add(jButton38);
+            jButton38.setBounds(0, 20, 140, 36);
+
+            jButton40.setText("test de language");
+            jButton40.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton40ActionPerformed(evt);
+                }
+            });
+            jPanel13.add(jButton40);
+            jButton40.setBounds(0, 50, 140, 36);
+
+            jButton41.setText("Record Missing Translations");
+            jButton41.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton41ActionPerformed(evt);
+                }
+            });
+            jPanel13.add(jButton41);
+            jButton41.setBounds(40, 90, 190, 36);
+
+            jButton46.setText("Save Missing Translations");
+            jButton46.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton46ActionPerformed(evt);
+                }
+            });
+            jPanel13.add(jButton46);
+            jButton46.setBounds(50, 120, 190, 36);
+
+            jPanel49.add(jPanel13);
+            jPanel13.setBounds(30, 240, 260, 170);
 
             AdvTabState.addTab("Misc", jPanel49);
 
@@ -3748,7 +3840,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         UruFileTypes type = UruCrypt.DetectType(this.textfieldState15.getText());
-        m.msg("Filetype is:"+type.toString());
+        m.msg("Filetype is:",type.toString());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -4196,15 +4288,15 @@ public class Gui extends javax.swing.JFrame {
             
             if(i==0)
             {
-                m.msg("servertime="+Long.toString(servertime));
-                m.msg("dnitime="+Long.toString(dnitime));
-                m.msg("agetime="+Long.toString(agetime));
-                m.msg("agetime%="+Double.toString(pt.percentTimeOfDay));
-                m.msg("Time of cur day: "+new java.util.Date(curdaystart).toString());
-                m.msg("Time of next day: "+new java.util.Date(nextdaystart).toString());
+                m.msg("servertime=",Long.toString(servertime));
+                m.msg("dnitime=",Long.toString(dnitime));
+                m.msg("agetime=",Long.toString(agetime));
+                m.msg("agetime%=",Double.toString(pt.percentTimeOfDay));
+                m.msg("Time of cur day: ",new java.util.Date(curdaystart).toString());
+                m.msg("Time of next day: ",new java.util.Date(nextdaystart).toString());
             }
-            m.msg("Time of today's "+pairs[i].name+" symbol: "+new java.util.Date(curdaysymbol).toString());
-            m.msg("Time of tomorrow's "+pairs[i].name+" symbol: "+new java.util.Date(nextdaysymbol).toString());
+            m.msg("Time of today's ",pairs[i].name," symbol: ",new java.util.Date(curdaysymbol).toString());
+            m.msg("Time of tomorrow's ",pairs[i].name," symbol: ",new java.util.Date(nextdaysymbol).toString());
         //}
         //catch(Exception e)
         //{
@@ -4215,7 +4307,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
         long time = new java.util.Date().getTime();
-        m.msg("Current GMT time is: "+Long.toString(time));
+        m.msg("Current GMT time is: ",Long.toString(time));
         int tzoffset = java.util.Calendar.getInstance().get(java.util.Calendar.ZONE_OFFSET);
         int dstoffset = java.util.Calendar.getInstance().get(java.util.Calendar.DST_OFFSET);
         //long localtime = time + tzoffset + dstoffset;
@@ -4225,10 +4317,10 @@ public class Gui extends javax.swing.JFrame {
         long low2 = time/10000000L + 1240428288L;
         long high2 = (time % 10000000L) / 10;
         localtime = time - 7*60*60*1000; //adjust time zone.
-        m.msg("Current local time is: "+Long.toString(localtime));
-            m.msg("Time of gmttime: "+new java.util.Date(time));
-            m.msg("Time of localtime: "+new java.util.Date(localtime));
-        m.msg("test: "+new java.util.Date(1240428288));
+        m.msg("Current local time is: ",Long.toString(localtime));
+            m.msg("Time of gmttime: ",(new java.util.Date(time)).toString());
+            m.msg("Time of localtime: ",(new java.util.Date(localtime)).toString());
+        m.msg("test: ",(new java.util.Date(1240428288)).toString());
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
@@ -4252,7 +4344,7 @@ public class Gui extends javax.swing.JFrame {
         byte[] filecontents = FileUtils.ReadFile(textfieldState15.getText());
         byte[] md5 = shared.CryptHashes.GetMd5(filecontents);
         String md5str = b.BytesToHexString(md5);
-        m.msg("md5: "+md5str);
+        m.msg("md5: ",md5str);
     }//GEN-LAST:event_jButton47ActionPerformed
 
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
@@ -4321,7 +4413,32 @@ private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     //shared.State.AllStates.loadandpush(settingsfile);
     
-    jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
+
+    //set language if called for...
+    int startuptype = shared.State.AllStates.getStateAsInt("language");
+    String code = "en";
+    switch(startuptype)
+    {
+        case 0:
+            //english
+            code = "en";
+            break;
+        case 1:
+            //german
+            code = "de";
+            break;
+        case 2:
+            //french
+            code = "fr";
+            break;
+        default:
+            m.err("Unhandled language type.");
+            break;
+    }
+    translation.translation.setLanguage(code);
+
+    //scroll the help window down.
+    //jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
     
 }//GEN-LAST:event_formWindowOpened
 
@@ -4673,10 +4790,10 @@ private void jButton104ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     m.state.pop();
     
-    m.msg("Subcount3s handled: "+Integer.toString(realmyst.Count3Undone.subcount3.numhandled));
-    m.msg("Subcount3s ignored: "+Integer.toString(realmyst.Count3Undone.subcount3.numignored));
-    m.msg("Count3s handled: "+Integer.toString(realmyst.Count3Undone.numhandled));
-    m.msg("Count3s ignored: "+Integer.toString(realmyst.Count3Undone.numignored));
+    m.msg("Subcount3s handled: ",Integer.toString(realmyst.Count3Undone.subcount3.numhandled));
+    m.msg("Subcount3s ignored: ",Integer.toString(realmyst.Count3Undone.subcount3.numignored));
+    m.msg("Count3s handled: ",Integer.toString(realmyst.Count3Undone.numhandled));
+    m.msg("Count3s ignored: ",Integer.toString(realmyst.Count3Undone.numignored));
     
     /*File f2 = new File(outfol+"/mdb");
     for(File child: f2.listFiles())
@@ -4799,7 +4916,7 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             if(pos!=-1)
             {
                 String filename = f.getName();
-                m.msg("String found in file:"+filename+"  at pos 0x"+Integer.toHexString(pos));
+                m.msg("String found in file:",filename,"  at pos 0x",Integer.toHexString(pos));
                 int dummy=0;
             }
         }
@@ -4808,7 +4925,7 @@ private void jButton109ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             boolean allfound = filesearcher.search.searchForStrings(f, searchstrs);
             if(allfound)
             {
-                m.msg("Strings all found in file:"+f.getName());
+                m.msg("Strings all found in file:",f.getName());
             }
         }
     }
@@ -4904,7 +5021,7 @@ private void jButton128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         byte[] filecontents = FileUtils.ReadFile(textfieldState15.getText());
         byte[] hash = shared.CryptHashes.GetWhirlpool(filecontents);
         String hashstr = b.BytesToHexString(hash);
-        m.msg("Whirlpool: "+hashstr);
+        m.msg("Whirlpool: ",hashstr);
 }//GEN-LAST:event_jButton128ActionPerformed
 
 private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton129ActionPerformed
@@ -4953,7 +5070,7 @@ private void jButton138ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         java.io.ByteArrayInputStream in = new java.io.ByteArrayInputStream(filecontents);
         byte[] hash = shared.CryptHashes.GetHash(in, shared.CryptHashes.Hashtype.sha1);
         String hashstr = b.BytesToHexString(hash);
-        m.msg("Sha1: "+hashstr);
+        m.msg("Sha1: ",hashstr);
 }//GEN-LAST:event_jButton138ActionPerformed
 
 private void jButton139ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton139ActionPerformed
@@ -5046,6 +5163,34 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     String datetime = this.textfieldState53.getText();
     checker.nettimer.SavePageAtSpecificTime(address,outfolder,datetime,"",".html");
 }//GEN-LAST:event_jButton37ActionPerformed
+
+private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+    translation.translation.saveCurrentStrings();
+}//GEN-LAST:event_jButton38ActionPerformed
+
+private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
+    translation.translation.testLanguage("de");
+}//GEN-LAST:event_jButton40ActionPerformed
+
+private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    translation.translation.setLanguage("en");
+}//GEN-LAST:event_jRadioButton1ActionPerformed
+
+private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    translation.translation.setLanguage("de");
+}//GEN-LAST:event_jRadioButton2ActionPerformed
+
+private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    translation.translation.setLanguage("fr");
+}//GEN-LAST:event_jRadioButton3ActionPerformed
+
+private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+    translation.translation.recordMissingTranslations();
+}//GEN-LAST:event_jButton41ActionPerformed
+
+private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+    translation.translation.saveMissingTranslations();
+}//GEN-LAST:event_jButton46ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5198,12 +5343,16 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton36;
     private javax.swing.JButton jButton37;
+    private javax.swing.JButton jButton38;
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton40;
+    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
     private javax.swing.JButton jButton47;
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton5;
@@ -5330,6 +5479,7 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -5344,6 +5494,7 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
@@ -5368,6 +5519,9 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
@@ -5393,6 +5547,7 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private shared.State.ButtongroupState languageButtonGroup;
     private shared.State.ListState listState2;
     private shared.State.ListState listState3;
     private shared.State.ListState listState4;

@@ -97,7 +97,7 @@ public class Pageid extends uruobj
         {
             //prefix = /*ctx.sequencePrefix*/xOverridePrefix;
             prefix = c.sequencePrefix;
-            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence prefix 0x"+Integer.toHexString(prefix));
+            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence prefix 0x",Integer.toHexString(prefix));
             // I have no clue why, but this seems to be necessary
             // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
             // found for both Cyan and fan-created ages, it is what both PRPTool and PlasmaExplorer show
@@ -114,7 +114,7 @@ public class Pageid extends uruobj
             Integer newpagenum = c.pagenumMap.get(this.getPageNumber());
             if(newpagenum!=null)
             {
-                if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing sequence suffix "+Integer.toString(suffix)+" with "+Integer.toString(newpagenum));
+                if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing sequence suffix ",Integer.toString(suffix)+" with "+Integer.toString(newpagenum));
                 //suffix = newsuffix;
                 this.setPagenum(newpagenum);
             }
@@ -189,7 +189,7 @@ public class Pageid extends uruobj
         
         //int rawdata = getRawData();
         // convert it to TPOTS format
-        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing "+toString());
+        if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing ",toString());
         //int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
         int newprefix = prefix<0 ? (0xFFFF00|(0xFF & (-prefix))) : prefix;
         int newdata = (suffix & 0x000000FF) | ((newprefix & 0x00FFFFFF)<<8);

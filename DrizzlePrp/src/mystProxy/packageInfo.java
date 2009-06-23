@@ -58,7 +58,7 @@ public class packageInfo
             }
             catch(Exception e)
             {
-                m.err("Unable to find/read DrizzleServer.txt in dir:"+file.getPath());
+                m.err("Unable to find/read DrizzleServer.txt in dir:",file.getPath());
             }
         }
         else
@@ -73,7 +73,7 @@ public class packageInfo
             }
             catch(Exception e)
             {
-                m.err("Unable to find/read DrizzleServer.txt in zip:"+file.getPath());
+                m.err("Unable to find/read DrizzleServer.txt in zip:",file.getPath());
             }
         }
         
@@ -104,7 +104,7 @@ public class packageInfo
                 }
                 catch(Exception e2)
                 {
-                    m.warn("Unable to load custom site handler for site: "+name);
+                    m.warn("Unable to load custom site handler for site: ",name);
                 }
             }
         }

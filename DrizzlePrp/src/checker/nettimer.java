@@ -121,11 +121,11 @@ public class nettimer
         timer.schedule(new java.util.TimerTask(){
             public void run()
             {
-                m.msg("Reading from "+address);
+                m.msg("Reading from ",address);
                 byte[] data = shared.HttpUtils.geturl(address);
                 //String outfile = FileUtils.GetNextFilename(outfolder, "save", suffix);
                 String outfile = outfolder+"/"+prefix+FileUtils.SanitizeFilename(shared.DateTimeUtils.GetSortableCurrentDate())+suffix;
-                m.msg("Saving to "+outfile);
+                m.msg("Saving to ",outfile);
                 FileUtils.WriteFile(outfile, data);
                 //GuiUtils.DisplayTrayMessage("File Saved", "The page "+address+" has been saved to "+outfile);
             }
@@ -146,10 +146,10 @@ public class nettimer
         newtimer.schedule(new TimerTask(){
             public void run()
             {
-                m.msg("Reading from "+address);
+                m.msg("Reading from ",address);
                 byte[] data = shared.HttpUtils.geturl(address);
                 String outfile = outfolder+"/"+prefix+FileUtils.SanitizeFilename(shared.DateTimeUtils.GetSortableCurrentDate())+suffix;
-                m.msg("Saving to "+outfile);
+                m.msg("Saving to ",outfile);
                 FileUtils.WriteFile(outfile, data);
             }
         }, date);

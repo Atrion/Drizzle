@@ -251,7 +251,7 @@ public class UamConfigNew
             int ind = filename.indexOf(sep);
             if(ind==-1)
             {
-                m.msg("Skipping "+filename+" because it contains no version in the name.");
+                m.msg("Skipping ",filename," because it contains no version in the name.");
                 break;
             }
             String name = filename.substring(0,ind);
@@ -266,7 +266,7 @@ public class UamConfigNew
             UamConfigData.Age age = config.data.getAgeOrCreate(agename);
             if(age.filename==null)
             {
-                m.msg("New age: "+agename);
+                m.msg("New age: ",agename);
 
                 age.filename = agename;
                 age.propername = age.filename;
@@ -277,7 +277,7 @@ public class UamConfigNew
             UamConfigData.Age.Version version = age.getVersionOrCreate(versionstr,true);
             if(version.name==null)
             {
-                m.msg("New version: "+agename+": "+versionstr);
+                m.msg("New version: ",agename,": ",versionstr);
 
                 version.name = versionstr;
                 version.archive = "7z";

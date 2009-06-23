@@ -140,39 +140,39 @@ public class Node //implements NodeTypes.ImageType
             case ImageNode:
                 m.msg("ImageNode:");
                 //m.msg("  idx="+Integer.toString(idx));
-                m.msg("  agename:"+this.ImageNode_GetAgeName());
-                m.msg("  caption:"+this.ImageNode_GetCaption());
-                m.msg("  owner:"+Integer.toString(owner));
+                m.msg("  agename:",this.ImageNode_GetAgeName());
+                m.msg("  caption:",this.ImageNode_GetCaption());
+                m.msg("  owner:",Integer.toString(owner));
                 //this.ImageNode_GetImageData()
                 break;
             case PlayerInfoNode:
                 m.msg("PlayerInfoNode:");
-                m.msg("  avatar name:"+this.PlayerInfoNode_GetAvatarName());
-                m.msg("  owner:"+Integer.toString(owner));
-                m.msg("  ki number:"+Integer.toString(this.PlayerInfoNode_GetKINumber()));
+                m.msg("  avatar name:",this.PlayerInfoNode_GetAvatarName());
+                m.msg("  owner:",Integer.toString(owner));
+                m.msg("  ki number:",Integer.toString(this.PlayerInfoNode_GetKINumber()));
                 break;
             case TextNoteNode:
                 m.msg("TextNoteNode:");
-                m.msg("  owner:"+Integer.toString(owner));
-                m.msg("  creator:"+Integer.toString(creator));
-                m.msg("  agename:"+this.TextNoteNode_GetAgename());
-                m.msg("  title:"+this.TextNoteNode_GetTitle());
-                m.msg("  text:"+this.TextNoteNode_GetText());
+                m.msg("  owner:",Integer.toString(owner));
+                m.msg("  creator:",Integer.toString(creator));
+                m.msg("  agename:",this.TextNoteNode_GetAgename());
+                m.msg("  title:",this.TextNoteNode_GetTitle());
+                m.msg("  text:",this.TextNoteNode_GetText());
                 break;
             case VNodeMgrPlayerNode:
                 m.msg("VNodeMgrPlayerNode:");
-                m.msg("  xu17:"+Integer.toString(xu17));
-                m.msg("  gender?:"+xu20.toString());
-                m.msg("  avatar name:"+xu26.toString());
-                m.msg("  login id:"+xu28.toString());
-                m.msg("  id???:"+xu27.toString());
-                m.msg("  xu18:"+Integer.toString(xu18));
+                m.msg("  xu17:",Integer.toString(xu17));
+                m.msg("  gender?:",xu20.toString());
+                m.msg("  avatar name:",xu26.toString());
+                m.msg("  login id:",xu28.toString());
+                m.msg("  id???:",xu27.toString());
+                m.msg("  xu18:",Integer.toString(xu18));
                 break;
             case SDLNode:
                 m.msg("SDLNode:");
-                m.msg("  agename:"+this.age_name.toString());
-                m.msg("  xu12:"+Integer.toString(xu12));
-                m.msg("  xu30 size:"+Integer.toString(xu30.strlen));
+                m.msg("  agename:",this.age_name.toString());
+                m.msg("  xu12:",Integer.toString(xu12));
+                m.msg("  xu30 size:",Integer.toString(xu30.strlen));
                 if(this.age_name.toString().toLowerCase().equals("myst"))
                 {
                     int dummy=0;
@@ -194,29 +194,29 @@ public class Node //implements NodeTypes.ImageType
                 break;
             case MarkerListNode:
                 m.msg("MarkerListNode:");
-                m.msg("  agename:"+this.age_name.toString());
-                m.msg("  creator:"+Integer.toString(creator));
-                m.msg("  gamename:"+this.xu20.toString());
-                m.msg("  avatarname:"+this.xu21.toString());
-                m.msg("  blob1(id):"+Integer.toString(blob1));
+                m.msg("  agename:",this.age_name.toString());
+                m.msg("  creator:",Integer.toString(creator));
+                m.msg("  gamename:",this.xu20.toString());
+                m.msg("  avatarname:",this.xu21.toString());
+                m.msg("  blob1(id):",Integer.toString(blob1));
                 break;
             case MarkerNode:
                 m.msg("MarkerNode:");
-                m.msg("  agename:"+this.age_name.toString());
-                m.msg("  creator:"+Integer.toString(creator));
+                m.msg("  agename:",this.age_name.toString());
+                m.msg("  creator:",Integer.toString(creator));
                 Flt f16 = Flt.createFromData(xu16);
                 Flt f17 = Flt.createFromData(xu17);
                 Flt f18 = Flt.createFromData(xu18);
-                m.msg("  f16:"+f16.toString());
-                m.msg("  f17:"+f17.toString());
-                m.msg("  f18:"+f18.toString());
-                m.msg("  markertext:"+xu28.toString());
-                m.msg("  blob1(id):"+Integer.toString(blob1));
+                m.msg("  f16:",f16.toString());
+                m.msg("  f17:",f17.toString());
+                m.msg("  f18:",f18.toString());
+                m.msg("  markertext:",xu28.toString());
+                m.msg("  blob1(id):",Integer.toString(blob1));
                 //agename, creator, and blob1 together seem to identify which game this belongs to.
                 break;
             case FolderNode:
                 m.msg("FolderNode:");
-                m.msg("  Folder type: "+Integer.toString((xu12)));
+                m.msg("  Folder type: ",Integer.toString((xu12)));
                 /*if(xu20!=null && !xu20.toString().equals(""))
                 {
                     m.msg(xu20.toString());
@@ -224,9 +224,9 @@ public class Node //implements NodeTypes.ImageType
                 break;
             case ChronicleNode:
                 m.msg("ChronicleNode:");
-                m.msg("  Agename: "+age_name.toString());
-                m.msg("  Varname: "+xu20.toString());
-                m.msg("  Varvalue: "+xu28.toString());
+                m.msg("  Agename: ",age_name.toString());
+                m.msg("  Varname: ",xu20.toString());
+                m.msg("  Varvalue: ",xu28.toString());
                 break;
         }
     }

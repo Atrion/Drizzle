@@ -78,6 +78,10 @@ strictfp public class Flt extends uruobj implements ICompilable
     {
         this.rawdata = Float.floatToRawIntBits(f);
     }
+    public Flt(Flt f)
+    {
+        this.rawdata = f.rawdata;
+    }
     private void assign(float f)
     {
         this.rawdata = Float.floatToRawIntBits(f);
@@ -236,5 +240,9 @@ strictfp public class Flt extends uruobj implements ICompilable
             return ((Flt)o).rawdata==this.rawdata;
         }
         return false;
+    }
+    public Flt deepClone()
+    {
+        return new Flt(this);
     }
 }

@@ -96,7 +96,7 @@ public class CustomSiteTheRivenJournals implements ICustomSite
         {
             int dummy=0;
             String code = request.getQueryString();
-            m.msg("Code encountered:"+code);
+            m.msg("Code encountered:",code);
             if(code.equals("paul23")) response.addCookie(createCookie("stamps","1"));
             if(code.equals("peter27")) response.addCookie(createCookie("stamps","2"));
             if(code.equals("timothy29")) response.addCookie(createCookie("stamps","3"));

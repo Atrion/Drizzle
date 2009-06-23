@@ -54,7 +54,7 @@ public class Count3Undone
             //byte[] rawdata = c.readBytes(size-8);
             byte[] rawdata1 = c.readBytes(size-8-4);
             possibility = c.readInt(); //the texture index! -1 presumably means no texture.
-            m.msg("Possibility: "+Integer.toString(possibility));
+            m.msg("Possibility: ",Integer.toString(possibility));
             //if(true)return;
         }
         

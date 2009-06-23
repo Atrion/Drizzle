@@ -1081,7 +1081,7 @@ public class PrpController extends uruobj
                             }
                     break;
                 default:
-                    m.err("prpcontroller: specialcompile: unhandled type."+Integer.toString(leaf.controllertype));
+                    m.err("prpcontroller: specialcompile: unhandled type.",Integer.toString(leaf.controllertype));
                     break;
             }
         }

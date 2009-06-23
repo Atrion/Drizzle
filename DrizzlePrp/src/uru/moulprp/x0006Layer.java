@@ -104,4 +104,29 @@ public class x0006Layer extends uruobj
         identity.compile(data);
         
     }
+    private x0006Layer(){}
+    public x0006Layer deepClone()
+    {
+        x0006Layer result =new x0006Layer();
+        result.ambient = ambient.deepClone();
+        result.diffuse = diffuse.deepClone();
+        result.emissive = emissive.deepClone();
+        result.flags1 = flags1;
+        result.flags2 = flags2;
+        result.flags3 = flags3;
+        result.flags4 = flags4;
+        result.flags5 = flags5;
+        result.identity = identity.deepClone();
+        result.lodbias = lodbias.deepClone();
+        result.matrix = matrix.deepClone();
+        result.opacity = opacity.deepClone();
+        result.parent = parent.deepClone();
+        result.shader1 = shader1.deepClone();
+        result.shader2 = shader2.deepClone();
+        result.specular = specular.deepClone();
+        result.specularPower = specularPower.deepClone();
+        result.texture = texture.deepClone();
+        result.uvwSource = uvwSource;
+        return result;
+    }
 }

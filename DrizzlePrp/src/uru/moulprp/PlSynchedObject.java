@@ -120,4 +120,28 @@ public class PlSynchedObject extends uruobj
             }
         }
     }
+    public PlSynchedObject deepClone()
+    {
+        PlSynchedObject result = new PlSynchedObject();
+        result.flags = flags;
+        if(sdllinks!=null)
+        {
+            result.sdllinks = new Wpstr[sdllinks.length];
+            for(int i=0;i<sdllinks.length;i++)
+            {
+                result.sdllinks[i] = sdllinks[i].deepClone();
+            }
+        }
+        if(sdllinks2!=null)
+        {
+            result.sdllinks2 = new Wpstr[sdllinks2.length];
+            for(int i=0;i<sdllinks.length;i++)
+            {
+                result.sdllinks2[i] = sdllinks2[i].deepClone();
+            }
+        }
+        result.xstringcount = xstringcount;
+        result.xstringcount2 = xstringcount2;
+        return result;
+    }
 }

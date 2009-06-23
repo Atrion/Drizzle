@@ -35,7 +35,7 @@ public class x0016DrawInterface extends uruobj
     //Objheader xheader;
     PlObjInterface parent;
     public int subsetgroupcount;
-    public SubsetGroup[] subsetgroups;
+    public SubsetGroupRef[] subsetgroups;
     int visregioncount;
     Uruobjectref[] visibleregion;
     
@@ -44,10 +44,10 @@ public class x0016DrawInterface extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlObjInterface(c);//,false);
         subsetgroupcount = c.in.readInt();
-        subsetgroups = new SubsetGroup[subsetgroupcount];
+        subsetgroups = new SubsetGroupRef[subsetgroupcount];
         for(int i=0;i<subsetgroupcount;i++)
         {
-            subsetgroups[i] = new SubsetGroup(c);
+            subsetgroups[i] = new SubsetGroupRef(c);
         }
         visregioncount = c.in.readInt();
         visibleregion = new Uruobjectref[visregioncount];
@@ -72,12 +72,12 @@ public class x0016DrawInterface extends uruobj
         }
     }
     
-    static public class SubsetGroup extends uruobj
+    static public class SubsetGroupRef extends uruobj
     {
         public int subsetgroupindex;
         public Uruobjectref span;
         
-        public SubsetGroup(context c) throws readexception
+        public SubsetGroupRef(context c) throws readexception
         {
             subsetgroupindex = c.in.readInt();
             span = new Uruobjectref(c);

@@ -19,6 +19,7 @@ public abstract class IBytestream
     abstract public int getFilelength();
     abstract public int getBytesRemaining();
     abstract public IBytestream Fork(long offset);
+    abstract protected int read();
     public int[] readInts(int num)
     {
         int[] result = new int[num];
@@ -136,5 +137,11 @@ public abstract class IBytestream
         }
         return result;
     }
-    
+    public short readShortBigEndian()
+    {
+        int b1 = this.read();
+        int b2 = this.read();
+        short result = (short)(b1<<8 | b2);
+        return result;
+    }
 }

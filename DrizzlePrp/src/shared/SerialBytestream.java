@@ -51,6 +51,20 @@ public class SerialBytestream extends IBytestream
         result.skip(offset);
         return result;
     }
+    protected int read()
+    {
+        try
+        {
+            pos += 1;
+            int result = in.read();
+            return result;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new shared.uncaughtexception("Unable to read byte, probably hit end of file.:"+e.getMessage());
+        }
+    }
     public byte readByte()
     {
         try

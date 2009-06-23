@@ -11,6 +11,10 @@ import java.io.ByteArrayInputStream;
 import java.util.zip.DataFormatException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import java.util.Vector;
+import java.util.zip.ZipFile;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
 
 public class zip
 {
@@ -90,5 +94,23 @@ public class zip
         {
             throw new shared.uncaughtexception("Exception during gzip compression.");
         }
+    }
+    public static Vector<String> getAllEntries(String zipfilename)
+    {
+        Vector<String> result = new Vector();
+        try{
+            ZipFile zf = new java.util.zip.ZipFile(zipfilename);
+            java.util.Enumeration entries = zf.entries();
+            while(entries.hasMoreElements())
+            {
+                ZipEntry ze = (ZipEntry)entries.nextElement();
+                String name = ze.getName();
+                //m.msg(name);
+            }
+        }catch(Exception e)
+        {
+            throw new shared.uncaughtexception("Error while reading zipfile. "+e.getMessage());
+        }
+        return result;
     }
 }

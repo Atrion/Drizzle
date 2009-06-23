@@ -57,8 +57,8 @@ public class PlRidingAnimatedPhysicalDetector extends uruobj
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented."+this.toString());
-        m.warn("not tested with pots."+this.toString());
+        m.warn("compile not implemented.",this.toString());
+        m.warn("not tested with pots.",this.toString());
     }
     
 }

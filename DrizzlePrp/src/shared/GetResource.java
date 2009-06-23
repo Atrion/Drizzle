@@ -13,20 +13,92 @@ import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.io.File;
 import shared.Bytedeque2;
+import java.util.Vector;
 
 public class GetResource
 {
+    public static boolean enableTranslations = true;
+
+    public static Vector<String> listAllResources()
+    {
+        Vector<String> result = new Vector();
+        try{
+            File jarfile = new File(GetResource.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            String jarpath = jarfile.getAbsolutePath();
+            if(jarfile.isFile())
+            {
+                Vector<String> zipentries = shared.zip.getAllEntries(jarpath);
+                for(String s: zipentries)
+                {
+                    result.add("/"+s);
+                }
+            }
+            else
+            {
+                Vector<File> entries = FileUtils.FindAllFiles(jarpath, null, true);
+                for(File f: entries)
+                {
+                    String relpath = FileUtils.GetRelativePath(jarfile,f);
+                    result.add("/"+relpath);
+                }
+            }
+        }catch(Exception e)
+        {
+            throw new shared.uncaughtexception("Unable to reflect on this jar file."+e.getMessage());
+        }
+        return result;
+    }
+    /*private static void findAllResources(Vector<String> list, String folder)
+    {
+        try{
+            String jarpath = new File(GetResource.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath();
+            shared.zip.getAllEntries(jarpath);
+            //shared.zip.getAllEntries("C:/Documents%20and Settings/user/Desktop/DrizzleAdjunct/DrizzleAdjunct/DrizzlePrp.jar");
+        }catch(Exception e)
+        {
+            m.err("You shouldn't see this.");
+            m.err(e.getMessage());
+            return;
+        }
+    }*/
     public static boolean hasResource(String path)
     {
-        URL url = GetResource.class.getResource(path);
+        URL url = findResource(path);
         return (url!=null);
     }
-    
+    private static URL findResource(String path)
+    {
+        URL url = GetResource.class.getResource(path);
+        if(url==null)
+        {
+            if(enableTranslations)
+            {
+                URL url2 = GetResource.class.getResource(path+"--"+translation.translation.getCurLanguage());
+                if(url2==null)
+                {
+                    return GetResource.class.getResource(path+"--"+translation.translation.getDefaultLanguage());
+                }
+                else
+                {
+                    return url2;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return url;
+        }
+
+    }
     public static Image getResourceAsImage(/*Object relativeObj,*/ String path)
     {
         try
         {
-            URL url = GetResource.class.getResource(/*".."+*/path);
+            URL url = findResource(/*".."+*/path);
             //URL url = relativeObj.getClass().getResource(path);
             //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
             BufferedImage img = javax.imageio.ImageIO.read(url);
@@ -34,7 +106,7 @@ public class GetResource
         }
         catch(Exception e)
         {
-            m.err("Unable to load Image resource:"+path);
+            m.err("Unable to load Image resource:",path);
             return null;
         }
     }
@@ -43,7 +115,7 @@ public class GetResource
     {
         try
         {
-            URL url = GetResource.class.getResource(/*".."+*/path);
+            URL url = findResource(/*".."+*/path);
             InputStream in = url.openStream();
             int bytesread = 0;
             byte[] buffer = new byte[1024];
@@ -62,7 +134,7 @@ public class GetResource
         }
         catch(Exception e)
         {
-            m.err("Unable to load Image resource:"+path);
+            m.err("Unable to load Image resource:",path);
             return null;
         }
     }
@@ -70,13 +142,13 @@ public class GetResource
     {
         try
         {
-            URL url = GetResource.class.getResource(path);
+            URL url = findResource(path);
             InputStream in = url.openStream();
             return in;
         }
         catch(Exception e)
         {
-            m.err("Unable to load Stream resource:"+path);
+            m.err("Unable to load Stream resource:",path);
             return null;
         }
     }
@@ -88,7 +160,7 @@ public class GetResource
             if(deleteOnExit) temp.deleteOnExit();
             FileOutputStream out = new FileOutputStream(temp);
             
-            URL url = GetResource.class.getResource(path);
+            URL url = findResource(path);
             InputStream in = url.openStream();
             int bytesread = 0;
             byte[] buffer = new byte[1024];
@@ -110,19 +182,24 @@ public class GetResource
         }
         catch(Exception e)
         {
-            m.err("Unable to open file resource:"+path);
+            m.err("Unable to open file resource:",path);
             e.printStackTrace();
             return null;
         }
     }
 
+    public static byte[] getResourceAsByteArray(String path)
+    {
+        Bytes result = getResourceAsBytes(path);
+        return result.getByteArray();
+    }
     public static Bytes getResourceAsBytes(String path)
     {
         try
         {
             Bytedeque2 result = new Bytedeque2();
 
-            URL url = GetResource.class.getResource(path);
+            URL url = findResource(path);
             InputStream in = url.openStream();
             int bytesread = 0;
             byte[] buffer = new byte[1024];

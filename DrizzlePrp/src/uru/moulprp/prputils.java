@@ -182,13 +182,13 @@ public class prputils
                     parseThisType = true;
                 }
             }
-            if(reportProgress) m.msg("type="+type.toString());
+            if(reportProgress) m.msg("type=",type.toString());
             for(int j=0;j<numObjects;j++)
             {
                 Uruobjectdesc desc = objectindex.types[i].descs[j].desc;
                 int offset = objectindex.types[i].descs[j].offset;
                 int size = objectindex.types[i].descs[j].size;
-                if(shared.State.AllStates.getStateAsBoolean("reportObjects")) m.msg("ObjectReport: "+desc.toString());
+                if(shared.State.AllStates.getStateAsBoolean("reportObjects")) m.msg("ObjectReport: ",desc.toString());
                 
                 //do per-object work.
                 if(!_staticsettings.doVisit(desc)) continue; //should we process this object?
@@ -303,14 +303,14 @@ public class prputils
                     }catch(readexception e){}
                     catch(Exception e)
                     {
-                        m.err("Unexpected exception: "+e.getMessage());
+                        m.err("Unexpected exception: ",e.getMessage());
                     }
                     //break;
                 }
                 else
                 {
                     //TODO: restore this line, it's just kind of annoying.
-                    m.msg("unhandled object type:"+desc.objecttype.toString());
+                    m.msg("unhandled object type:",desc.objecttype.toString());
                     handled = false;
 
                     //scan for string references in unparsed object:
@@ -334,7 +334,7 @@ public class prputils
                                 if(e.isGoodString(str))
                                 {
                                     //_staticsettings.reportFoundUnknownReference(str);
-                                    m.msg("Found unknown reference:"+str);
+                                    m.msg("Found unknown reference:",b.BytesToString(str));
                                 }
                             }
                         }
@@ -356,7 +356,7 @@ public class prputils
                     if(shortby!=0)
                     {
                         if(desc.objecttype!=Typeid.plHKPhysical)
-                            m.msg("Prp: Object was not the expected size. It was off by:"+Integer.toString(shortby));
+                            m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
                     }
                 }
                 //_staticsettings.onObjectLoaded(object);
@@ -688,7 +688,7 @@ public class prputils
                     int numMaterials = curDrawableSpan.matcount;
                     for(int j=0;j<numMaterials;j++) //for each material...
                     {
-                        Uruobjectref materialRef = curDrawableSpan.materials[j];
+                        Uruobjectref materialRef = curDrawableSpan.materials.get(j);
                         if(materialRef.hasRef!=0)
                         {
                             PrpRootObject curMaterial1 = findObjectWithDesc(prp,materialRef.xdesc);
@@ -706,12 +706,12 @@ public class prputils
                                         //replace this material;
                                         /*curDrawableSpan.materials[j].xdesc = stableMaterial;
                                         if(stableMaterial==null) m.err("No stable material given.");*/
-                                        badMaterials.add(curDrawableSpan.materials[j]);
+                                        badMaterials.add(curDrawableSpan.materials.get(j));
                                         badmaterial = true;
                                     }
                                 }
                                 //if this material is the first good one, make it the stable material.
-                                if(!badmaterial && stableMaterial==null) stableMaterial = curDrawableSpan.materials[j].xdesc;
+                                if(!badmaterial && stableMaterial==null) stableMaterial = curDrawableSpan.materials.get(j).xdesc;
                             }
                             else
                             {
@@ -901,7 +901,7 @@ public class prputils
                         }
                         break;
                     default:
-                        m.msg("unhandled object type:"+desc.objecttype.toString());
+                        m.msg("unhandled object type:",desc.objecttype.toString());
                         handled = false;
                         break;
                 }
@@ -914,7 +914,7 @@ public class prputils
                     if(shortby!=0)
                     {
                         //if(desc.objecttype!=Typeid.plHKPhysical)
-                            m.msg("Prp: Object was not the expected size. It was off by:"+Integer.toString(shortby));
+                            m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
                     }
                 }
                 
@@ -977,7 +977,7 @@ public class prputils
                         else
                         {
                             int material = span.subsets[subset].materialindex;
-                            Uruobjectdesc matdesc = span.materials[material].xdesc;
+                            Uruobjectdesc matdesc = span.materials.get(material).xdesc;
                             if(matdesc.objectname.toString().toLowerCase().startsWith("crater"))
                             {
                                 int dummy=0;

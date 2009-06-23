@@ -87,4 +87,15 @@ public class Rgba extends uruobj
                 +":"+a.toString();
     }
     
+    public Rgba(Rgba d)
+    {
+        this.a = d.a.deepClone();
+        this.b = d.b.deepClone();
+        this.g = d.g.deepClone();
+        this.r = d.r.deepClone();
+    }
+    public Rgba deepClone()
+    {
+        return new Rgba(this);
+    }
 }

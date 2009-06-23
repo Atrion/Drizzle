@@ -165,7 +165,7 @@ public class sevenzip
             if(numerrors!=0)
             {
                 //errors during extraction.
-                m.err("Errors during extraction: "+Long.toString(numerrors));
+                m.err("Errors during extraction: ",Long.toString(numerrors));
                 return false;
             }
             
@@ -359,7 +359,7 @@ public class sevenzip
             switch (askExtractMode) {
                 case IInArchive.NExtract_NAskMode_kExtract:
                     //PrintString("Extracting  "+_filePath);
-                    m.msgsafe("Extracting "+_filePath);
+                    m.msg("Extracting ",_filePath);
                     break;
                 case IInArchive.NExtract_NAskMode_kTest:
                     PrintString("Testing     ");

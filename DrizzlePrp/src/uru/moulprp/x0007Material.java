@@ -92,4 +92,25 @@ public class x0007Material extends uruobj
             maplayerrefs.get(i).compile(data);
         }
     }
+    private x0007Material(){}
+    public x0007Material deepClone()
+    {
+        x0007Material result = new x0007Material();
+        result.parent = parent.deepClone();
+        result.flags = flags;
+        result.layercount = layercount;
+        result.layerrefs = new Vector();
+        for(Uruobjectref ref: layerrefs)
+        {
+            result.layerrefs.add(ref.deepClone());
+        }
+        result.u1 = u1;
+        result.lightmapcount = lightmapcount;
+        result.maplayerrefs = new Vector();
+        for(Uruobjectref ref: maplayerrefs)
+        {
+            result.maplayerrefs.add(ref.deepClone());
+        }
+        return result;
+    }
 }

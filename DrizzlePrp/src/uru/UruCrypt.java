@@ -53,7 +53,7 @@ public class UruCrypt {
         if(filestring.startsWith(new String(eoaHeader))) return UruFileTypes.eoaenc;
         if(filestring.startsWith(new String(briceissmartHeader)))
         {
-            m.warn("briceissmart encountered(it needs to be implemented):"+filename);
+            m.warn("briceissmart encountered(it needs to be implemented):",filename);
             return UruFileTypes.briceissmart;
         }
         
@@ -499,8 +499,8 @@ public class UruCrypt {
         if(shared.State.AllStates.getStateAsBoolean("reportDecryption"))
         {
             m.msg("decrypting notthedroids...");
-            m.msg("header:"+new String(header));
-            m.msg("payload length:"+Integer.toString(innerlength));
+            m.msg("header:",new String(header));
+            m.msg("payload length:",Integer.toString(innerlength));
         }
         
         byte[] result = new byte[innerlength];
@@ -531,8 +531,8 @@ public class UruCrypt {
         if(shared.State.AllStates.getStateAsBoolean("reportDecryption"))
         {
             m.msg("decrypting whatdoyousee...");
-            m.msg("header:"+new String(header));
-            m.msg("payload length:"+Integer.toString(innerlength));
+            m.msg("header:",new String(header));
+            m.msg("payload length:",Integer.toString(innerlength));
         }
         
         byte[] result = new byte[innerlength];
@@ -703,7 +703,7 @@ public class UruCrypt {
         int actuallength = lengthbytes & 0xFFF;
         if (actuallength > 255)
         {
-            m.warn("urustring over 255 bytes:"+ new String(urustring));
+            m.warn("urustring over 255 bytes:", new String(urustring));
         }
         byte[] result = new byte[actuallength];
         //if((actuallength > 0) && (urustring[startpos]>0x7F))

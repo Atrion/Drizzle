@@ -94,7 +94,9 @@ public class PrpRootObject extends uruobj implements Comparable
         result.header = Objheader.createFromDesc(desc);
         
         result.readversion = 3;
-        result.hasChanged = false;
+        //result.hasChanged = false;
+        result.hasChanged = true;
+        m.status("altered hasChanged flag.(remove this)");
         result.hasRaw = false;
         result.hasParsed = true;
         
@@ -108,7 +110,7 @@ public class PrpRootObject extends uruobj implements Comparable
         }
         catch(readexception e)
         {
-            m.err("Unable to parse rawdata: "+e.getMessage());
+            m.err("Unable to parse rawdata: ",e.getMessage());
         }
     }
     public void parseRawDataNow() throws readexception

@@ -37,7 +37,7 @@ public class ImagePanel extends JPanel
             img = shared.GetResource.getResourceAsImage(name);
         }catch(Exception e)
         {
-            m.err("Unable to load resource: "+name);
+            m.err("Unable to load resource: ",name);
         }
         //this.jPanel32.getGraphics().drawImage(img, 0, 0, rootPane);
     }

@@ -87,20 +87,34 @@ public class Uam
         public void printStatsMessage()
         {
             this.countStats();
-            String result;
+            //String result;
             if(this.fullyUpToDate)
             {
-                result = "You have everything installed!";
+                m.msg("You have everything installed!");
             }
             else
             {
-                StringBuilder result2 = new StringBuilder();
-                if(this.numNotInstalled!=0) result2.append("Ages not installed: "+Integer.toString(this.numNotInstalled)+"    ");
-                if(this.numUpdatable!=0) result2.append("Ages updatable: "+Integer.toString(this.numUpdatable)+"    ");
-                if(this.numUnknown!=0) result2.append("Ages with unknown installation status: "+Integer.toString(this.numUnknown)+"    ");
-                result = result2.toString();
+                //StringBuilder result2 = new StringBuilder();
+                Vector<String> result2 = new Vector();
+                if(this.numNotInstalled!=0)
+                {
+                    result2.add("Ages not installed: ");
+                    result2.add(Integer.toString(this.numNotInstalled)+"    ");
+                }
+                if(this.numUpdatable!=0)
+                {
+                    result2.add("Ages updatable: ");
+                    result2.add(Integer.toString(this.numUpdatable)+"    ");
+                }
+                if(this.numUnknown!=0)
+                {
+                    result2.add("Ages with unknown installation status: ");
+                    result2.add(Integer.toString(this.numUnknown)+"    ");
+                }
+                //result = result2.toString();
+                m.msg(shared.generic.convertVectorToArray(result2, String.class));
             }
-            m.msgsafe(result);
+            //m.msgsafe(result);
         }
     }
     public static class AgeInstallInfo
@@ -216,7 +230,7 @@ public class Uam
             String seq = agefile.getVariable("SequencePrefix");
             if(seqprefs.containsKey(seq))
             {
-                m.msg("Sequence Prefix from "+f.getName()+" already used in "+seqprefs.get(seq));
+                m.msg("Sequence Prefix from ",f.getName()," already used in ",seqprefs.get(seq));
             }
             else
             {
@@ -296,13 +310,13 @@ public class Uam
         }*/
         for(UamConfigNew.UamConfigData.Age age: ageList.data.ages)
         {
-            m.msg("Age: "+age.filename);
+            m.msg("Age: ",age.filename);
             for(UamConfigNew.UamConfigData.Age.Version ver: age.versions)
             {
-                m.msg("  Ver: "+ver.name);
+                m.msg("  Ver: ",ver.name);
                 for(UamConfigNew.UamConfigData.Age.Version.Mirror mir: ver.mirrors)
                 {
-                    m.msg("    Mir: "+mir.url);
+                    m.msg("    Mir: ",mir.url);
                 }
             }
         }

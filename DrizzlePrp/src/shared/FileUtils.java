@@ -45,6 +45,20 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
+    public static String GetRelativePath(File ancestor, File descendant)
+    {
+        String result = "";
+        File curfolder = descendant;
+        if(curfolder.isFile()) curfolder = curfolder.getParentFile();
+        while(!curfolder.equals(ancestor))
+        {
+            //result.append(curfolder.getName()+"/");
+            result = curfolder.getName()+"/"+result;
+            curfolder = curfolder.getParentFile();
+        }
+        if(descendant.isFile()) result = result + descendant.getName();
+        return result.toString();
+    }
     public static long GetFilesize(String filename)
     {
         File f = new File(filename);
@@ -176,13 +190,13 @@ public class FileUtils {
         {
             //String name = entry.getName();
             //String fullfilename = outputfolder+"/"+name;
-            m.msg("Deleting "+absoluteFilename);
+            m.msg("Deleting ",absoluteFilename);
             if(f.exists() && f.isFile())
             {
                 boolean success = f.delete();
                 if(!success)
                 {
-                    m.warn("Unable to delete file: "+absoluteFilename);
+                    m.warn("Unable to delete file: ",absoluteFilename);
                 }
             }
         }
@@ -194,7 +208,7 @@ public class FileUtils {
         if(file.exists())
         {
             boolean result = file.delete();
-            if(!result) m.err("Unable to delete file: "+filename);
+            if(!result) m.err("Unable to delete file: ",filename);
         }
     }
     public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder)
@@ -220,7 +234,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Unable to copy file "+infile+" to "+outfile);
+            m.err("Unable to copy file ",infile," to ",outfile);
         }
         finally
         {
@@ -273,7 +287,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Error reading file:"+filename.getAbsolutePath()+":"+e.getMessage());
+            m.err("Error reading file:",filename.getAbsolutePath()+":"+e.getMessage());
             return null;
         }
         
@@ -320,7 +334,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Error writing file:"+filename.getAbsolutePath()+":"+e.getMessage());
+            m.err("Error writing file:",filename.getAbsolutePath()+":"+e.getMessage());
         }
         
     }
@@ -335,7 +349,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Error appending file:"+filename);
+            m.err("Error appending file:",filename);
         }
     }
     static public void CreateFolder(String filename)
@@ -349,7 +363,7 @@ public class FileUtils {
             }
             else
             {
-                m.warn("Unable to create folder because there is already a file with that name: "+filename);
+                m.warn("Unable to create folder because there is already a file with that name: ",filename);
             }
         }
         else
@@ -357,7 +371,7 @@ public class FileUtils {
             boolean result = f.mkdirs();
             if(!result)
             {
-                m.warn("Unable to create folder: "+filename);
+                m.warn("Unable to create folder: ",filename);
             }
         }
     }

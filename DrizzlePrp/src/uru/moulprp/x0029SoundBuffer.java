@@ -51,7 +51,7 @@ public class x0029SoundBuffer extends uruobj
             m.msg("haven't tested this: soundbuffer");
             xinternaldata = c.readBytes(datalength);
         }
-        if(shared.State.AllStates.getStateAsBoolean("reportOggFiles")) m.msg("Ogg File: "+oggfile.toString());
+        if(shared.State.AllStates.getStateAsBoolean("reportOggFiles")) m.msg("Ogg File: ",oggfile.toString());
     }
     public void compile(Bytedeque data)
     {

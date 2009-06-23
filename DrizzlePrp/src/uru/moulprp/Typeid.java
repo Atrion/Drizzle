@@ -649,7 +649,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Moul isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Moul isn't listed as having type: 0x",Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
                 //throw new readexception("Typeid: unknown type:0x"+Integer.toHexString(b.Int16ToInt32(type)));
             }
@@ -790,7 +790,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Pots isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Pots isn't listed as having type: 0x",Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
             }
             /*switch(type)
@@ -937,7 +937,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("Myst5 isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("Myst5 isn't listed as having type: 0x",Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
             }
         }
@@ -950,7 +950,7 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.err("HexIsle isn't listed as having type: 0x"+Integer.toHexString(b.Int16ToInt32(type)));
+                m.err("HexIsle isn't listed as having type: 0x",Integer.toHexString(b.Int16ToInt32(type)));
                 return unknown;
             }
         }
@@ -970,13 +970,13 @@ public enum Typeid implements compilable
             }
             else
             {
-                m.warn("Typeid: Compilation problem: Pots isn't listed as having type: "+t.toString());
+                m.warn("Typeid: Compilation problem: Pots isn't listed as having type: ",t.toString());
                 return (short)0x8000;
             }
         }
         else
         {
-            m.err("Typeid: Compilation error(you shouldn't see this): "+t.toString());
+            m.err("Typeid: Compilation error(you shouldn't see this): ",t.toString());
             return (short)0x8000;
         }
         /*switch(t)
