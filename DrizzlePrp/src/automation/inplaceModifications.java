@@ -139,8 +139,9 @@ public class inplaceModifications
         
         //save changes.
         String filename2 = outfolder+"/dat/"+new File(filename).getName();
-        Bytes result = prp.saveAsBytes();
-        FileUtils.WriteFile(filename2, result);
+        //Bytes result = prp.saveAsBytes();
+        //FileUtils.WriteFile(filename2, result);
+        prp.saveAsFile(filename2);
         
     }
 

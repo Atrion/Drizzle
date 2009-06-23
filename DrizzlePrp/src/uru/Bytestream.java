@@ -57,7 +57,8 @@ public class Bytestream extends IBytestream
     }
     public IBytestream Fork(long offset)
     {
-        throw new uncaughtexception("Haven't implemented fork yet.");
+        //throw new uncaughtexception("Haven't implemented fork yet.");
+        return new Bytestream(this, (int)offset);
     }
     public Bytestream(byte[] newData)
     {

@@ -58,8 +58,9 @@ public class hackFactory
         prpfile prp = createBuiltInPrp(agename,pid);
         
         //compile
-        Bytes prpoutputbytes = prp.saveAsBytes();
-        prpoutputbytes.saveAsFile(outfolder+"/dat/"+agename+"_District_"+prp.header.pagename.toString()+".prp");
+        //Bytes prpoutputbytes = prp.saveAsBytes();
+        //prpoutputbytes.saveAsFile(outfolder+"/dat/"+agename+"_District_"+prp.header.pagename.toString()+".prp");
+        prp.saveAsFile(outfolder+"/dat/"+agename+"_District_"+prp.header.pagename.toString()+".prp");
     }
     
     public static prpfile createBuiltInPrp(String agename, Pageid pid)
@@ -188,8 +189,9 @@ public class hackFactory
         prpfile prp = prpfile.createFromObjectsAndInfo(objects, "Minkata", "minkDusttest", thispid, Pagetype.createDefault());
         
         //compile
-        Bytes prpoutputbytes = prp.saveAsBytes();
-        prpoutputbytes.saveAsFile(outfolder+"/dat/Minkata_District_minkDusttest.prp");
+        //Bytes prpoutputbytes = prp.saveAsBytes();
+        //prpoutputbytes.saveAsFile(outfolder+"/dat/Minkata_District_minkDusttest.prp");
+        prp.saveAsFile(outfolder+"/dat/Minkata_District_minkDusttest.prp");
         
     }
 }

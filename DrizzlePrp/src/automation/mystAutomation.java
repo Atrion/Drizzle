@@ -37,6 +37,7 @@ import uru.moulprp.*;
 import shared.Pair;
 import shared.generic;
 import shared.cmap;
+import shared.IBytestream;
 
 public class mystAutomation
 {
@@ -1353,8 +1354,9 @@ public class mystAutomation
                 }
             }
             
-            Bytes prpdata = Bytes.createFromFile(infile);
-            Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            //Bytes prpdata = Bytes.createFromFile(infile);
+            //Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
             context c = context.createFromBytestream(bytestream);
             c.curFile = filename; //helpful for debugging.
             
@@ -1393,8 +1395,9 @@ public class mystAutomation
                 outfile = outfile.replaceFirst("_District_"+oldpagename, "_District_"+newpagename);
             }
             
-            Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
-            prpoutputbytes.saveAsFile(outfile);
+            //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+            //prpoutputbytes.saveAsFile(outfile);
+            prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
             
             shared.State.AllStates.pop();
             
@@ -2015,8 +2018,9 @@ public class mystAutomation
             String outfile = outfolder + "/dat/" + filename.replaceFirst("_", "_District_");
             String agename = common.getAgenameFromFilename(filename);
             
-            Bytes prpdata = Bytes.createFromFile(infile);
-            Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            //Bytes prpdata = Bytes.createFromFile(infile);
+            //Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+            IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
             context c = context.createFromBytestream(bytestream);
             c.curFile = filename; //helpful for debugging.
             
@@ -2033,8 +2037,9 @@ public class mystAutomation
 
             processPrp(prp,agename,agenames,outfolder,crowthistlefolder);
 
-            Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
-            prpoutputbytes.saveAsFile(outfile);
+            //Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
+            //prpoutputbytes.saveAsFile(outfile);
+            prp.saveAsBytes(new crowDecider()).writeAllBytesToFile(outfile);
         }
         
         //Handle .(others) files...
@@ -2401,8 +2406,9 @@ public class mystAutomation
             //}
             else
             {
-                Bytes prpdata = Bytes.createFromFile(infile);
-                Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+                //Bytes prpdata = Bytes.createFromFile(infile);
+                //Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+                IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
                 context c = context.createFromBytestream(bytestream);
                 c.curFile = filename; //helpful for debugging.
             
@@ -2424,8 +2430,9 @@ public class mystAutomation
             
                 processPrp(prp,agename,agenames,outfolder,infolder);
 
-                Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
-                prpoutputbytes.saveAsFile(outfile);
+                //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+                //prpoutputbytes.saveAsFile(outfile);
+                prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
             }
         }
         

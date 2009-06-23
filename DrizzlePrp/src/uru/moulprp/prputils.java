@@ -465,12 +465,13 @@ public class prputils
             //prpfile prp = ProcessAllMoul(c,false);
             prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.moulReadable);
             
-            Bytes fullbyte = RecompilePrp(prp, decider);
+            Bytedeque fullbyte = RecompilePrp(prp, decider);
             String filename = prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
-            FileUtils.WriteFile(outfolder+"/"+filename, fullbyte);
+            //FileUtils.WriteFile(outfolder+"/"+filename, fullbyte);
+            fullbyte.writeAllBytesToFile(outfolder+"/"+filename);
         }
         
-        public static Bytes RecompilePrp(prpfile prp, Decider decider)
+        public static Bytedeque RecompilePrp(prpfile prp, Decider decider)
         {
             //fix payiferen pageid conflict problem.
             /*if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
@@ -665,7 +666,7 @@ public class prputils
             fulldeque.writeBytedeque(oideque);
             
             //save to file. in=fulldeque out=!!!
-            byte[] fullbyte = fulldeque.getAllBytes();
+            //byte[] fullbyte = fulldeque.getAllBytes();
             //String filename = header.agename.toString()+"_District_"+header.pagename.toString()+".prp";
             //FileUtils.WriteFile(_staticsettings.outputdir+filename, fullbyte);
 
@@ -676,7 +677,8 @@ public class prputils
                 //_staticsettings.sequencePrefix = 0x00;
             //}
             m.msg("Recompilated completed!");
-            return new Bytes(fullbyte);
+            //return new Bytes(fullbyte);
+            return fulldeque;
         }
         
         //a bit of a hack, to replace LayerAnimations with other materials.

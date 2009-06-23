@@ -76,8 +76,9 @@ public class fixCraters
         prpfile newprp = prpfile.createFromObjectsAndInfo(movedobjects, agename, pagename, pid, Pagetype.createDefault());
         //sn.castToSceneNode().regenerateAllSceneobjectsFromPrpRootObjects(uru.generics.convertArrayToVector(newprp.objects));
 
-        Bytes bytestowrite = newprp.saveAsBytes();
-        bytestowrite.saveAsFile(outfolder+"/dat/"+agename+"_District_"+pagename+".prp");
+        //Bytes bytestowrite = newprp.saveAsBytes();
+        //bytestowrite.saveAsFile(outfolder+"/dat/"+agename+"_District_"+pagename+".prp");
+        newprp.saveAsFile(outfolder+"/dat/"+agename+"_District_"+pagename+".prp");
         
     }
     

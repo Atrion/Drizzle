@@ -204,8 +204,9 @@ public class deepview
                 //then save changes.
                 String filename2 = prp.filename;
                 String filename = foldername+"/" + new File(filename2).getName();
-                Bytes result = prp.saveAsBytes();
-                FileUtils.WriteFile(filename, result);
+                //Bytes result = prp.saveAsBytes();
+                //FileUtils.WriteFile(filename, result);
+                prp.saveAsFile(filename);
             }
         }
         

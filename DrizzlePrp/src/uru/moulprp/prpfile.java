@@ -194,11 +194,12 @@ public class prpfile
     public void saveAsFile(String filename)
     {
         this.mergeExtras();
-        Bytes result = this.saveAsBytes();
-        FileUtils.WriteFile(filename, result);
+        shared.IBytedeque result = this.saveAsBytes();
+        //FileUtils.WriteFile(filename, result);
+        result.writeAllBytesToFile(filename);
         
     }
-    public Bytes saveAsBytes()
+    public shared.IBytedeque saveAsBytes()
     {
         //use the decider that always returns true by default.
         /*class compileDecider implements uru.moulprp.prputils.Compiler.Decider{
@@ -208,11 +209,11 @@ public class prpfile
         }*/
         return saveAsBytes(uru.moulprp.prputils.Compiler.getDefaultDecider());
     }
-    public Bytes saveAsBytes(Decider decider)
+    public shared.IBytedeque saveAsBytes(Decider decider)
     {
         mergeExtras();
         orderObjects();
-        Bytes result = prputils.Compiler.RecompilePrp(this, decider);
+        shared.IBytedeque result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
     public PrpRootObject findObject(String name, Typeid type)

@@ -96,7 +96,7 @@ public class PrpRootObject extends uruobj implements Comparable
         result.readversion = 3;
         //result.hasChanged = false;
         result.hasChanged = true;
-        m.status("altered hasChanged flag.(remove this)");
+        //m.status("altered hasChanged flag.(remove this)");
         result.hasRaw = false;
         result.hasParsed = true;
         

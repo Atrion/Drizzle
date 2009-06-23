@@ -205,8 +205,17 @@ public class UamGui
         {
             this.setFont(this.getFont().deriveFont(12.0f));
             java.awt.Graphics g = this.getGraphics();
-            java.awt.FontMetrics fm = g.getFontMetrics();
-            int w = (showicon?20:3) + fm.stringWidth(FriendlyAgename) + 3;
+            
+            int w;
+            if(g!=null)
+            {
+                java.awt.FontMetrics fm = g.getFontMetrics();
+                w = (showicon?20:3) + fm.stringWidth(FriendlyAgename) + 3;
+            }
+            else
+            {
+                w = 40; //hack
+            }
             //int w = 400;
             //int w = showicon?20:3;
             //w+= this.getGraphics().getFontMetrics().stringWidth(FriendlyAgename);

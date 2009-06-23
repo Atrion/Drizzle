@@ -266,7 +266,7 @@ public class Uam
             uru.moulprp.PrpHeader header = new uru.moulprp.PrpHeader(c);
             if(pageids.containsKey(header.pageid))
             {
-                m.msg("  Pageid ",header.pageid.toString()," used in both ",f.getName()," and ",pageids.get(header.pageid));
+                m.msg("  Pageid ",header.pageid.toString2()," used in both ",f.getName()," and ",pageids.get(header.pageid));
             }
             else
             {

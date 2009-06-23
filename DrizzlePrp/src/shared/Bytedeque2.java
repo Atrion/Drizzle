@@ -46,7 +46,10 @@ public class Bytedeque2 extends IBytedeque
     public Bytedeque2()
     {
     }
-    
+    protected Iterator<byte[]> getIterator()
+    {
+        return deque.iterator();
+    }
     public void prependBytes(byte[] data)
     {
         deque.addFirst(data);
@@ -173,7 +176,6 @@ public class Bytedeque2 extends IBytedeque
         byte[] bytes = d.getAllBytes();
         writeBytes(bytes);
     }
-    
     public byte[] getAllBytes()
     {
         int bytecount = 0;

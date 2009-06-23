@@ -182,8 +182,9 @@ public class hexisle
 
             //processPrp(prp,agename,agenames,outfolder);
 
-            Bytes prpoutputbytes = prp.saveAsBytes();
-            prpoutputbytes.saveAsFile(outfile);
+            //Bytes prpoutputbytes = prp.saveAsBytes();
+            //prpoutputbytes.saveAsFile(outfile);
+            prp.saveAsFile(outfile);
         }
     }
     
