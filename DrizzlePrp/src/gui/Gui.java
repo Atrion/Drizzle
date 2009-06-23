@@ -320,6 +320,8 @@ public class Gui extends javax.swing.JFrame {
         //jTextArea5.setText(helpstr);
         translation.translation.registerResourceString("/gui/help.txt", jTextArea5);
 
+        SetBackgroundColour(true);
+
     }
     public static class Settings implements java.io.Serializable
     {
@@ -531,6 +533,8 @@ public class Gui extends javax.swing.JFrame {
         jButton147 = new javax.swing.JButton();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        sliderState1 = new shared.State.SliderState();
         AdvTabState = new shared.State.TabsState();
         jPanel48 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
@@ -1857,6 +1861,37 @@ public class Gui extends javax.swing.JFrame {
 
             MiscPanel.add(jPanel47);
             jPanel47.setBounds(20, 50, 327, 163);
+
+            jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("How rainy of a day is it?"));
+
+            sliderState1.setMinimum(20);
+            sliderState1.setValue(76);
+            sliderState1.setName("raininess"); // NOI18N
+            sliderState1.addChangeListener(new javax.swing.event.ChangeListener() {
+                public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                    sliderState1StateChanged(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+            jPanel25.setLayout(jPanel25Layout);
+            jPanel25Layout.setHorizontalGroup(
+                jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel25Layout.createSequentialGroup()
+                    .addGap(14, 14, 14)
+                    .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(19, Short.MAX_VALUE))
+            );
+            jPanel25Layout.setVerticalGroup(
+                jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel25Layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(40, Short.MAX_VALUE))
+            );
+
+            MiscPanel.add(jPanel25);
+            jPanel25.setBounds(20, 240, 330, 110);
 
             tabsState3.addTab("Misc", MiscPanel);
 
@@ -3844,6 +3879,9 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //shared.GuiUtils.printUIManagerResources();
+        //shared.GuiUtils.setBackgroundColour(java.awt.Color.cyan);
+        //shared.GuiUtils.updateGui(this);
         //shared.zip.getAllEntries("C:\\Documents and Settings\\user\\Local Settings\\Temp\\Drizzle6683135168305972449.tmp");
         /*String path = "G:\\prps\\moul\\dat";
         //String strtofind = "femaleamazed";
@@ -5176,6 +5214,43 @@ private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
     translation.translation.saveMissingTranslations();
 }//GEN-LAST:event_jButton46ActionPerformed
+public void SetBackgroundColour(boolean immediate)
+{
+    int newrain = this.sliderState1.getValue();
+    double newrainpercentage = ((double)newrain)/100.0;
+    shared.ColorUtils.RGB24 rgb24 = new shared.ColorUtils.RGB24(174, 178, 195);
+    shared.ColorUtils.RGB rgb = rgb24.convertToRGB();
+
+    boolean usehsv = true;
+    java.awt.Color newcolour;
+    if(usehsv)
+    {
+        shared.ColorUtils.HSV hsv = rgb.convertToHSV();
+        hsv.v = newrainpercentage;
+        newcolour = hsv.convertToRGB().convertToRGB24().convertToJavaColor();
+    }
+    else
+    {
+        shared.ColorUtils.HSL hsl = rgb.convertToHSL();
+        hsl.l = newrainpercentage;
+        newcolour = hsl.convertToRGB().convertToRGB24().convertToJavaColor();
+    }
+
+    //final Gui gui23 = this;
+    //m.msg("setcolor");
+    shared.GuiUtils.setBackgroundColour(newcolour);
+    //m.msg(newcolour.toString());
+    shared.GuiUtils.updateGui(this,immediate);
+}
+private void sliderState1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderState1StateChanged
+    //change the raininess! //174,178,195
+    //;
+    //m.msg("trying to change colour."+Boolean.toString(this.sliderState1.getValueIsAdjusting()));
+    if(!this.sliderState1.getValueIsAdjusting())
+    {
+        SetBackgroundColour(false);
+    }
+}//GEN-LAST:event_sliderState1StateChanged
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5477,6 +5552,7 @@ private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
@@ -5536,6 +5612,7 @@ private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private shared.State.ListState listState2;
     private shared.State.ListState listState3;
     private shared.State.ListState listState4;
+    private shared.State.SliderState sliderState1;
     private shared.State.TabsState tabsState1;
     private shared.State.TabsState tabsState2;
     private shared.State.TabsState tabsState3;

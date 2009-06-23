@@ -269,7 +269,60 @@ public class GuiUtils
             }
         }*/
     }
+    public static void printUIManagerResources()
+    {
+        for (Object key: UIManager.getDefaults().keySet())
+        {
+            m.msg(key.toString());
+        }
 
+    }
+    public static void setBackgroundColour(java.awt.Color colour)
+    {
+        javax.swing.plaf.ColorUIResource res = new javax.swing.plaf.ColorUIResource(colour);
+        //If you want to add the others, see the font list below.
+        UIManager.put("Panel.background", res);
+        UIManager.put("Button.background", res);
+        UIManager.put("TextArea.background", res);
+        UIManager.put("RadioButton.background", res);
+        UIManager.put("CheckBox.background", res);
+        UIManager.put("TextField.background", res);
+        UIManager.put("TabbedPane.background", res);
+
+    }
+    /*public static void setBackgroundColour(java.awt.Color colour, java.awt.Component c)
+    {
+        javax.swing.plaf.ColorUIResource res = new javax.swing.plaf.ColorUIResource(colour);
+        //If you want to add the others, see the font list below.
+        m.msg("pb"+UIManager.get("Panel.background").toString());
+        UIManager.put("Panel.background", res);
+        m.msg("pb"+UIManager.get("Panel.background").toString());
+        UIManager.put("Button.background", res);
+        UIManager.put("TextArea.background", res);
+        UIManager.put("RadioButton.background", res);
+        UIManager.put("CheckBox.background", res);
+        UIManager.put("TextField.background", res);
+        UIManager.put("TabbedPane.background", res);
+        updateGui(c);
+        m.msg("pb"+UIManager.get("Panel.background").toString());
+
+    }*/
+    public static void updateGui(final java.awt.Component c, boolean immediate)
+    {
+        if(immediate)
+        {
+            javax.swing.SwingUtilities.updateComponentTreeUI(c);
+        }
+        else
+        {
+            javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+
+                    public void run() {
+                        javax.swing.SwingUtilities.updateComponentTreeUI(c);
+                    }
+                });
+        }
+    }
     public static void setCrossPlatformFonts(boolean tryToUseFixedWidth)
     {
         //The regular JRE only comes with the one font, without bold, italics, or fixedwidth.  The JDK JRE has bold, italics, and fixedwidth as well.

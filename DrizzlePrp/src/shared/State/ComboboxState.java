@@ -31,12 +31,12 @@ public class ComboboxState extends javax.swing.JComboBox implements IState
         common.addSpecialMenu(this);
     }
     
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         this.setSelectedItem(obj);
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         return this.getSelectedItem();
     }
@@ -51,7 +51,7 @@ public class ComboboxState extends javax.swing.JComboBox implements IState
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 

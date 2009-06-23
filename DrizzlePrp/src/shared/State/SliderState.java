@@ -13,11 +13,11 @@ package shared.State;
  *
  * @author user
  */
-public class CheckboxState extends javax.swing.JCheckBox implements IState
+public class SliderState extends javax.swing.JSlider implements IState
 {
-    private Boolean _default = false;
+    private Integer _default = 0;
     
-    public CheckboxState()
+    public SliderState()
     {
         super();
         
@@ -38,9 +38,14 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
     
     public void initialise()
     {
-        _default = (Boolean)this.getStateValue();
-        this.addActionListener(new java.awt.event.ActionListener() {
+        _default = (Integer)this.getStateValue();
+        /*this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                change();
+            }
+        });*/
+        this.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent e) {
                 change();
             }
         });
@@ -51,11 +56,14 @@ public class CheckboxState extends javax.swing.JCheckBox implements IState
     {
         //Object obj = AllStates.getState(this.getActionCommand());
         //if(obj!=null) this.setSelected((Boolean)obj);
-        this.setSelected((Boolean)obj);
+        //this.setSelected((Integer)obj);
+        this.setValue((Integer)obj);
     }
     public Object getStateValue()
     {
-        return this.isSelected();
+        //return this.
+        //return (Integer)null;
+        return this.getValue();
     }
     
     public String getStateName()

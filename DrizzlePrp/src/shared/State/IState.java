@@ -13,8 +13,8 @@ public interface IState
 {
     //void setDefault(Object obj);
     Object getDefault();
-    void putValue(Object obj);
-    Object getValue();
+    void putStateValue(Object obj);
+    Object getStateValue();
     String getStateName();
     void initialise();
 }

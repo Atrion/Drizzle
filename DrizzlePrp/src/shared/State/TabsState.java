@@ -22,7 +22,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
     }
     public void initialise()
     {
-        _default = (Integer)this.getValue();
+        _default = (Integer)this.getStateValue();
         this.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 change();
@@ -30,7 +30,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
         });
         //common.addSpecialMenu(this); //doesn't really matter for Tabs.
     }
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         int i = (Integer)obj;
         if(i>=this.getTabCount())
@@ -43,7 +43,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
         }
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         return this.getSelectedIndex();
     }
@@ -60,7 +60,7 @@ public class TabsState extends javax.swing.JTabbedPane implements IState
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 

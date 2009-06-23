@@ -22,7 +22,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
     }
     public void initialise()
     {
-        _default = (Integer)this.getValue();
+        _default = (Integer)this.getStateValue();
         for(AbstractButton curbutton: this.buttons)
         {
             curbutton.addActionListener(new java.awt.event.ActionListener() {
@@ -34,7 +34,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
         }
         //common.addSpecialMenu(this);
     }
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         Enumeration<AbstractButton> buttonses = this.getElements();
         int i = 0;
@@ -55,7 +55,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
         this.clearSelection(); //otherwise set no selection.
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         Enumeration<AbstractButton> buttons = this.getElements();
         int i = 0;
@@ -87,7 +87,7 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 

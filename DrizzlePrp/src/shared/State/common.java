@@ -25,7 +25,7 @@ public class common
                     mi.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             Object o = state2.getDefault();
-                            state2.putValue(o);
+                            state2.putStateValue(o);
                         }
                     });
                     java.awt.Point p = e.getPoint();

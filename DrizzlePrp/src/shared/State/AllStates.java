@@ -242,7 +242,7 @@ public class AllStates //implements java.io.Serializable
         for(IState state: refs)
         {
             String name = state.getStateName();
-            Object val = state.getValue();
+            Object val = state.getStateValue();
             states.put(name, val);
         }
     }
@@ -272,13 +272,13 @@ public class AllStates //implements java.io.Serializable
                 Object value = states.get(name);
                 if(value!=null)
                 {
-                    state.putValue(value);
+                    state.putStateValue(value);
                 }
                 else
                 {
                     //Do nothing, because this function is only called from loadAndPush() which hasn't set the default yet, but will.
                     //Alternatively, we could have loadAndPush() set the defaults before calling this; in which case this will just reassign the defaults.
-                    state.putValue(state.getDefault());
+                    state.putStateValue(state.getDefault());
                 }
             }
         }
@@ -287,7 +287,7 @@ public class AllStates //implements java.io.Serializable
     {
         for(IState state: refs)
         {
-            state.putValue(state.getDefault());
+            state.putStateValue(state.getDefault());
         }
     }
     public static void resetSettings(String filename)
@@ -319,7 +319,7 @@ public class AllStates //implements java.io.Serializable
     public static void update(IState state)
     {
         //shared.m.msg("updating");
-        setState(state.getStateName(), state.getValue());
+        setState(state.getStateName(), state.getStateValue());
     }
     
 }

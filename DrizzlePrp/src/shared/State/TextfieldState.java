@@ -28,7 +28,7 @@ public class TextfieldState extends javax.swing.JTextField implements IState
     
     public void initialise()
     {
-        _default = (String)this.getValue();
+        _default = (String)this.getStateValue();
         //is this correct?
         /*this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -53,12 +53,12 @@ public class TextfieldState extends javax.swing.JTextField implements IState
         common.addSpecialMenu(this);
     }
  
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         this.setText((String)obj);
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         return this.getText();
     }
@@ -73,7 +73,7 @@ public class TextfieldState extends javax.swing.JTextField implements IState
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 

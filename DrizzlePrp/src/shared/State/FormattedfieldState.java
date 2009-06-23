@@ -23,7 +23,7 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
 
     public void initialise()
     {
-        _default = (String)this.getValue();
+        _default = (String)this.getStateValue();
         //is this correct?
         this.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 
@@ -43,12 +43,12 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
         common.addSpecialMenu(this);
     }
 
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         this.setText((String)obj);
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         return this.getText();
     }
@@ -63,7 +63,7 @@ public class FormattedfieldState extends javax.swing.JFormattedTextField impleme
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 

@@ -51,6 +51,7 @@ public class Main extends javax.swing.JFrame {
             //j.
 
             shared.GuiUtils.setCrossPlatformFonts(true);
+            //shared.GuiUtils.setBackgroundColour(java.awt.Color.CYAN);
 
         }
         catch(Exception e){

@@ -24,7 +24,7 @@ public class ListState extends javax.swing.JList implements IState
     
     public void initialise()
     {
-        _default = (int[])this.getValue();
+        _default = (int[])this.getStateValue();
         //is this correct?
         this.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -34,12 +34,12 @@ public class ListState extends javax.swing.JList implements IState
         common.addSpecialMenu(this);
     }
 
-    public void putValue(Object obj)
+    public void putStateValue(Object obj)
     {
         this.setSelectedIndices((int[])obj);
     }
 
-    public Object getValue()
+    public Object getStateValue()
     {
         return this.getSelectedIndices();
     }
@@ -71,7 +71,7 @@ public class ListState extends javax.swing.JList implements IState
     //}
     public Object getDefault()
     {
-        if(_default==null) return getValue();
+        if(_default==null) return getStateValue();
         else return this._default;
     }
 
