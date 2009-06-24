@@ -2977,7 +2977,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButton38">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="list en strings"/>
+                        <Property name="text" type="java.lang.String" value="list all strings"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton38ActionPerformed"/>
@@ -2990,7 +2990,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton40">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="test de language"/>
+                        <Property name="text" type="java.lang.String" value="test current language"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton40ActionPerformed"/>
@@ -2998,19 +2998,6 @@
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="0" y="50" width="140" height="-1"/>
-                        </Constraint>
-                      </Constraints>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton41">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Record Missing Translations"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton41ActionPerformed"/>
-                      </Events>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="40" y="90" width="190" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>

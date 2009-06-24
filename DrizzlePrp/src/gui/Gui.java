@@ -67,6 +67,7 @@ public class Gui extends javax.swing.JFrame {
     {
         settingsfile = FileUtils.GetPresentWorkingDirectory()+"drizzlesettings.canbedeleted.dat";
         initComponents();
+        translation.translation.registerGUIForm(this);
         
         gui.UamGui.gui = this;
         gui.UamGui.agelist = this.jList1;
@@ -601,7 +602,6 @@ public class Gui extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jButton38 = new javax.swing.JButton();
         jButton40 = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
         jButton46 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
@@ -2373,7 +2373,7 @@ public class Gui extends javax.swing.JFrame {
             jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
             jPanel13.setLayout(null);
 
-            jButton38.setText("list en strings");
+            jButton38.setText("list all strings");
             jButton38.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton38ActionPerformed(evt);
@@ -2382,7 +2382,7 @@ public class Gui extends javax.swing.JFrame {
             jPanel13.add(jButton38);
             jButton38.setBounds(0, 20, 140, 36);
 
-            jButton40.setText("test de language");
+            jButton40.setText("test current language");
             jButton40.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     jButton40ActionPerformed(evt);
@@ -2390,15 +2390,6 @@ public class Gui extends javax.swing.JFrame {
             });
             jPanel13.add(jButton40);
             jButton40.setBounds(0, 50, 140, 36);
-
-            jButton41.setText("Record Missing Translations");
-            jButton41.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton41ActionPerformed(evt);
-                }
-            });
-            jPanel13.add(jButton41);
-            jButton41.setBounds(40, 90, 190, 36);
 
             jButton46.setText("Save Missing Translations");
             jButton46.addActionListener(new java.awt.event.ActionListener() {
@@ -3879,6 +3870,9 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        uam.GuiModal uamform = new uam.GuiModal(null, false, null);
+        translation.translation.printStringsForAllGuiForms();
+        uamform.toString();
         //shared.GuiUtils.printUIManagerResources();
         //shared.GuiUtils.setBackgroundColour(java.awt.Color.cyan);
         //shared.GuiUtils.updateGui(this);
@@ -5192,7 +5186,7 @@ private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton38ActionPerformed
 
 private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-    translation.translation.testLanguage("de");
+    translation.translation.testCurrentLanguage();
 }//GEN-LAST:event_jButton40ActionPerformed
 
 private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -5206,10 +5200,6 @@ private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
     translation.translation.setLanguage("fr");
 }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-    translation.translation.recordMissingTranslations();
-}//GEN-LAST:event_jButton41ActionPerformed
 
 private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
     translation.translation.saveMissingTranslations();
@@ -5407,7 +5397,6 @@ private void sliderState1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;

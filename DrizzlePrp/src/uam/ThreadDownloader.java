@@ -32,7 +32,13 @@ public class ThreadDownloader extends Thread
     //long freespace = -1;
     String outputfilename = null;
     GuiModal window;
-    
+
+    GuiModal getwindow()
+    {
+        if(window==null) window = new GuiModal(null, true, this);
+        return window;
+    }
+
     public static boolean downloadAsFile(String url, String filename)
     {
         FileOutputStream out = null;
@@ -119,7 +125,7 @@ public class ThreadDownloader extends Thread
             //    this.wait(1000);
             //}catch(InterruptedException e){}
             this.stop();
-            this.window.setVisible(false);
+            getwindow().setVisible(false);
             m.warn("You shouldn't use 'Unsafe Cancel' if at all possible.");
         }
     }
@@ -145,7 +151,8 @@ public class ThreadDownloader extends Thread
         this.out = out;
         //doCancel = new AtomicBoolean();
         //doCancel.set(false);
-        window = new GuiModal(null, true, this);
+        //window = new GuiModal(null, true, this);
+        getwindow();
         //window.setVisible(true);
         //window.sho
         //java.awt.Dialog.ModalityType.
@@ -157,8 +164,8 @@ public class ThreadDownloader extends Thread
     @Override public void run()
     {
         //download.
-        window.showButDontBlock();
-        window.finishedShowingMonitor.waitCorrectly();
+        getwindow().showButDontBlock();
+        getwindow().finishedShowingMonitor.waitCorrectly();
         //try{
         //window.finishedShowingMonitor.wait(1000);
         //}catch(Exception e){}
@@ -241,7 +248,7 @@ public class ThreadDownloader extends Thread
                 {
                     int prog = (int)((1000L*transferred)/contentlength);
                     //Double prog = (100.0*transferred)/contentlength;
-                    window.setProgress(prog);
+                    getwindow().setProgress(prog);
                 }
 
                 //check for cancel...
@@ -341,6 +348,6 @@ public class ThreadDownloader extends Thread
             wasSuccessful = false;
         }
         
-        window.setVisible(false);
+        getwindow().setVisible(false);
     }
 }

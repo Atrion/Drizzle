@@ -12,6 +12,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.text.JTextComponent;
 import javax.swing.JTextArea;
+import javax.swing.JTabbedPane;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 import javax.swing.JFrame;
 import java.util.Vector;
@@ -28,6 +32,10 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.io.File;
 import java.util.LinkedHashSet;
+import java.lang.ref.WeakReference;
+import java.util.Set;
+import java.util.WeakHashMap;
+import shared.Pair;
 
 /*
  * General idea is to do nothing unless changing to a non-default language, in which case:
@@ -44,22 +52,40 @@ public class translation
     private static String curlanguage = defaultlanguage;
 
     //missing translation recorder
-    public static boolean doRecordMissingTranslations = false;
-    private static LinkedHashSet<String> missingTranslations; //linked to maintain order
+    public static boolean doRecordMissingTranslations = true;
+    private static LinkedHashSet<String> missingTranslations = new LinkedHashSet(); //linked to maintain order
     private static HashSet<String> allstrings;
 
     //string->string  translations
     static Map<String,String> translator;// = new HashMap();
 
     //auto-registered components tied to their string.
-    static Map<Object,String> defaults;
+    //static Map<Object,String> defaults;
+    private static WeakHashMap<Component, String> defaults = new WeakHashMap();
     
     //registered components tied to their resource-name:
-    private static HashMap<JTextComponent, String> jTextComponents = new HashMap();
+    private static WeakHashMap<Component, String> resourcecomponents = new WeakHashMap();
 
+    //registered Gui Forms
+    //private static HashSet<java.lang.ref.WeakReference<Container>> guiforms = new HashSet();
+    private static WeakHashMap<Container, String> guiforms = new WeakHashMap();
+
+    public static void registerGUIForm(Container c)
+    {
+        //guiforms.add(new java.lang.ref.WeakReference(c));
+        guiforms.put(c, null);
+        if(!curlanguage.equals(defaultlanguage))
+        {
+            traverseGuiForm(c/*, true, true*/,null);
+        }
+    }
     public static void registerResourceString(String path, JTextComponent textbox)
     {
-        jTextComponents.put(textbox, path);
+        resourcecomponents.put(textbox, path);
+        if(!curlanguage.equals(defaultlanguage))
+        {
+            traverseResource(textbox);
+        }
     }
 
     public static String getCurLanguage()
@@ -76,19 +102,45 @@ public class translation
 
         //setLanguage("de");
     }
+    public static void testCurrentLanguage()
+    {
+        testLanguage(curlanguage);
+    }
     public static void testLanguage(String language)
     {
-        loadLanguage(language);
+        //translator = java.util.Collections.synchronizedMap(new HashMap());
+        Vector<shared.Pair<String,String>> lang = new Vector();
+        loadLanguage(language,null,lang);
 
-        HashSet<String> strings = getAllStrings();
+        HashSet<String> strings = getAllLiteralStrings();
 
-        for(String key: translator.keySet())
+        //check for keys that are not string literals:
+        for(Pair<String,String> t: lang)
         {
-            if(!strings.contains(key))
+            if(!strings.contains(t.left))
             {
-                m.warn("Translation key is not in gui nor string literal: ",key);
+                m.warn("Translation key is not a string literal(may not be a problem): ",t.left);
             }
         }
+
+        //check for empty translations:
+        for(Pair<String,String> t: lang)
+        {
+            if(t.right.equals("") && !t.left.equals("")) m.warn("Right hand side is empty: ",t.left);
+        }
+
+        //check for duplicate keys:
+        for(Pair<String,String> t: lang)
+        {
+            int freq = 0;
+            for(Pair<String,String> s: lang)
+            {
+                if(t.left.equals(s.left)) freq++;
+            }
+            if(freq>1) m.warn("Key is present more than once: ",t.left);
+        }
+
+        m.status("Done testing language!");
     }
     public static void setLanguage(String language)
     {
@@ -99,12 +151,25 @@ public class translation
         if(!prevlanguage.equals(language))
         {
             //load string->string translations from file.
-            loadLanguage(language);
+            translator = java.util.Collections.synchronizedMap(new HashMap());
+            loadLanguage(language,translator,null);
 
             //auto-find gui elements, setting new values, and saving the defaults if we haven't already.
-            boolean storeDefaults = (defaults==null);
-            if(storeDefaults) defaults = java.util.Collections.synchronizedMap(new IdentityHashMap());
-            findLabels(gui.Main.gui, storeDefaults, true);
+            /*for(WeakReference<Container> form: guiforms)
+            {
+                Container c = form.get();
+                if(c!=null)
+                {
+                    traverseGuiForm(c,null);
+                }
+            }*/
+            for(Container c: guiforms.keySet())
+            {
+                traverseGuiForm(c,null);
+            }
+            //boolean storeDefaults = (defaults==null);
+            //if(storeDefaults) defaults = java.util.Collections.synchronizedMap(new IdentityHashMap());
+            //traverseGuiForm(gui.Main.gui, storeDefaults, true);
 
             //enable translations.
             m.state.curstate.translate = true;
@@ -114,14 +179,23 @@ public class translation
         }
 
         //set manually registered components from their resource.
-        for(JTextComponent textbox: jTextComponents.keySet())
+        for(Component textbox: resourcecomponents.keySet())
         {
-            textbox.setText(shared.GetResource.getResourceAsString(jTextComponents.get(textbox)));
+            traverseResource(textbox);
+        }
+
+    }
+    private static void traverseResource(Component c)
+    {
+        if(c instanceof JTextComponent)
+        {
+            JTextComponent tc = (JTextComponent)c;
+            tc.setText(shared.GetResource.getResourceAsString(resourcecomponents.get(tc)));
 
             //hack to scroll the help window down.
-            if(textbox instanceof JTextArea)
+            if(tc instanceof JTextArea)
             {
-                final JTextComponent textbox2 = textbox;
+                final JTextComponent textbox2 = tc;
                 javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
 
                     public void run() {
@@ -130,16 +204,14 @@ public class translation
                 });
             }
         }
-
     }
-
     //loads the string translator from file.
-    private static void loadLanguage(String language)
+    private static void loadLanguage(String language, Map<String,String> trans, Vector<shared.Pair<String,String>> output)
     {
         //'language' is the 2-letter language code.
         boolean asresource = false;
 
-        translator = java.util.Collections.synchronizedMap(new HashMap());
+        //translator = java.util.Collections.synchronizedMap(new HashMap());
         //defaults = java.util.Collections.synchronizedMap(new HashMap());
 
         String langFile;
@@ -162,17 +234,19 @@ public class translation
             String right = line.substring(index+sep.length());
             if(left.length()==0 || right.length()==0) throw new shared.uncaughtexception("Invalid language file at line "+Integer.toString(i+1));
 
-            translator.put(left, right);
+            if(trans!=null) trans.put(left, right);
+            if(output!=null) output.add(new shared.Pair(left, right));
         }
     }
     public static void recordMissingTranslations()
     {
         doRecordMissingTranslations = true;
         missingTranslations = new LinkedHashSet();
-        allstrings = getAllStrings();
     }
     public static void saveMissingTranslations()
     {
+        allstrings = getAllLiteralStrings();
+        
         StringBuilder result = new StringBuilder();
         for(String str: missingTranslations)
         {
@@ -202,22 +276,57 @@ public class translation
 
         return result;
     }
-    public static HashSet<String> getAllStrings()
+    public static void printStringsForAllGuiForms()
     {
-        //get the gui strings.
-        if(defaults==null)
+        LinkedHashSet<String> vals = new LinkedHashSet();
+        getAllCurrentGuiStrings(vals);
+        StringBuilder output = new StringBuilder();
+        for(String s: vals)
+        {
+            output.append(s+sep+"\n");
+        }
+        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/drizzleGuiformsStrings.txt", b.StringToBytes(output.toString()));
+    }
+    private static void getAllCurrentGuiStrings(LinkedHashSet<String> vals)
+    {
+        /*for(WeakReference<Container> formref: guiforms)
+        {
+            Container form = formref.get();
+            if(form!=null)
+            {
+                //traverseGuiForm(form,true,false,vals);
+            }
+        }*/
+        for(Container form: guiforms.keySet())
+        {
+            traverseGuiForm(form,vals);
+        }
+        /*if(defaults==null)
         {
             defaults = java.util.Collections.synchronizedMap(new IdentityHashMap());
-            JFrame g = gui.Main.gui;
+            //JFrame g = gui.Main.gui;
             //Vector<JLabel> labels = new Vector();
-            findLabels(g,true,false);
+            for(WeakReference<Container> formref: guiforms)
+            {
+                Container form = formref.get();
+                if(form!=null)
+                {
+                    traverseGuiForm(form,true,false);
+                }
+            }
         }
-
-        HashSet<String> vals = new HashSet();
         for(String val: defaults.values())
         {
             vals.add(val);
-        }
+        }*/
+    }
+    public static LinkedHashSet<String> getAllLiteralStrings()
+    {
+        LinkedHashSet<String> vals = new LinkedHashSet();
+
+        //get the gui strings.
+        //getAllCurrentGuiStrings(vals);
+
 
         //get the string literals
         String[] ignorePackages = {"/org/bouncycastle","/org/apache","/org/mortbay","/javax","/ie/wombat","/SevenZip","/automation/fileLists"};
@@ -242,7 +351,7 @@ public class translation
                     if(s.contains("\n") || s.contains("\r") ||s.contains(sep))
                     {
                         //m.warn("String literal contains newline or separator: ",s);
-                        m.warn("Ignoring: ",s);
+                        //m.warn("Ignoring: ",s);
                     }
                     else
                     {
@@ -257,87 +366,191 @@ public class translation
     public static void saveCurrentStrings()
     {
         //translator = java.util.Collections.synchronizedMap(new HashMap());
-        HashSet<String> vals = getAllStrings();
+        HashSet<String> vals = getAllLiteralStrings();
 
         StringBuilder result = new StringBuilder();
         for(String val: vals)
         {
             //String val = defaults.get(key);
             if(val.equals("")) continue;
-            result.append(/*"//"+*/val+sep+val+"\n");//+" : "+val+"\n");
+            result.append(/*"//"+*/val+sep+"\n");//+" : "+val+"\n");
         }
         String result2 = result.toString();
-        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/en.txt", b.StringToBytes(result2));
+        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/drizzle.allstrings.txt", b.StringToBytes(result2));
     }
 
-    private static void findLabels(Container curcomp, boolean storeDefaults, boolean setNewValues)
+    private static void traverseGuiForm(Container c/*, boolean storeDefaults, boolean setNewValues*/,Set vals)
     {
-        for(Component c: curcomp.getComponents())
+        for(Component child: c.getComponents())
         {
             //recurse:
-            if (c instanceof Container)
+            if (child instanceof Container)
             {
-                findLabels((Container)c,storeDefaults,setNewValues);
+                traverseGuiForm((Container)child/*,storeDefaults,setNewValues*/,vals);
             }
-
-            //Get text from component if applicable.
-            String text = null;
-            if (c instanceof JLabel)
-            {
-                JLabel label = (JLabel)c;
-                if(storeDefaults) defaults.put(c, label.getText());
-                if(setNewValues) label.setText(translate(defaults.get(c)));
-                //translator.put(text, text);
-                //m.msg("jlabel found! "+text);
-            }
-            if (c instanceof JButton)
-            {
-                JButton button = (JButton)c;
-                if(storeDefaults) defaults.put(c, button.getText());
-                if(setNewValues) button.setText(translate(defaults.get(c)));
-                //translator.put(text, text);
-                //m.msg("jbutton found! "+text);
-            }
-            if (c instanceof JPanel)
-            {
-                JPanel panel = (JPanel)c;
-                Border border = panel.getBorder();
-                if(border instanceof TitledBorder)
-                {
-                    TitledBorder tborder = (TitledBorder)border;
-                    if(storeDefaults) defaults.put(c, tborder.getTitle());
-                    if(setNewValues) tborder.setTitle(translate(defaults.get(c)));
-                    //translator.put(text, text);
-                    //m.msg("titled border found! "+text);
-                }
-            }
-            if (c instanceof JCheckBox)
-            {
-                JCheckBox checkbox = (JCheckBox)c;
-                if(storeDefaults) defaults.put(c, checkbox.getText());
-                if(setNewValues) checkbox.setText(translate(defaults.get(c)));
-                //translator.put(text, text);
-                //m.msg("checkbox: "+text);
-            }
-            if (c instanceof JRadioButton)
-            {
-                JRadioButton radiobutton = (JRadioButton)c;
-                if(storeDefaults) defaults.put(c, radiobutton.getText());
-                if(setNewValues) radiobutton.setText(translate(defaults.get(c)));
-                //translator.put(text, text);
-                //m.msg("radiobutton: "+text);
-            }
-
-            //add text to translation strings.
-            /*if(text!=null)
-            {
-                //translator.put(text, text);
-                if(storeDefaults)
-                {
-                    defaults.put(c, text);
-                    //translator.put(text,text);
-                }
-            }*/
         }
+
+        //Get text from component if applicable.
+        //String text = null;
+
+        //if(!(c instanceof JTabbedPane)) return;
+        
+        if (c instanceof JLabel)
+        {
+            JLabel label = (JLabel)c;
+            //if(storeDefaults) defaults.put(c, label.getText());
+            //if(setNewValues) label.setText(translate(defaults.get(c)));
+            //if(storeDefaults) label.putClientProperty("def", label.getText());
+            //if(setNewValues) label.setText(translate((String)label.getClientProperty("def")));
+            //String def = (String)label.getClientProperty("def");
+            //if(def==null)
+            //{
+            //    def = label.getText();
+            //    label.putClientProperty("def", def);
+            //}
+            //label.setText(translate(def));
+            //if(vals!=null) vals.add(def);
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = label.getText();
+                defaults.put(c, def);
+            }
+            label.setText(translate(def));
+            if(vals!=null) vals.add(def);
+            //translator.put(text, text);
+            //m.msg("jlabel found! "+text);
+        }
+        else if (c instanceof JButton)
+        {
+            JButton button = (JButton)c;
+            //if(storeDefaults) defaults.put(c, button.getText());
+            //if(setNewValues) button.setText(translate(defaults.get(c)));
+            //if(storeDefaults) button.putClientProperty("def", button.getText());
+            //if(setNewValues) button.setText(translate((String)button.getClientProperty("def")));
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = button.getText();
+                defaults.put(c, def);
+            }
+            button.setText(translate(def));
+            if(vals!=null) vals.add(def);
+            //translator.put(text, text);
+            //m.msg("jbutton found! "+text);
+        }
+        else if (c instanceof JPanel)
+        {
+            JPanel panel = (JPanel)c;
+            Border border = panel.getBorder();
+            if(border instanceof TitledBorder)
+            {
+                TitledBorder tborder = (TitledBorder)border;
+                //if(storeDefaults) defaults.put(c, tborder.getTitle());
+                //if(setNewValues) tborder.setTitle(translate(defaults.get(c)));
+                //if(storeDefaults) panel.putClientProperty("def", tborder.getTitle());
+                //if(setNewValues) tborder.setTitle(translate((String)panel.getClientProperty("def")));
+                String def = defaults.get(c);
+                if(def==null)
+                {
+                    def = tborder.getTitle();
+                    defaults.put(c, def);
+                }
+                tborder.setTitle(translate(def));
+                if(vals!=null) vals.add(def);
+                //translator.put(text, text);
+                //m.msg("titled border found! "+text);
+            }
+        }
+        else if (c instanceof JCheckBox)
+        {
+            JCheckBox checkbox = (JCheckBox)c;
+            //if(storeDefaults) defaults.put(c, checkbox.getText());
+            //if(setNewValues) checkbox.setText(translate(defaults.get(c)));
+            //if(storeDefaults) checkbox.putClientProperty("def", checkbox.getText());
+            //if(setNewValues) checkbox.setText(translate((String)checkbox.getClientProperty("def")));
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = checkbox.getText();
+                defaults.put(c, def);
+            }
+            checkbox.setText(translate(def));
+            if(vals!=null) vals.add(def);
+            //translator.put(text, text);
+            //m.msg("checkbox: "+text);
+        }
+        else if (c instanceof JRadioButton)
+        {
+            JRadioButton radiobutton = (JRadioButton)c;
+            //radiobutton.put
+            //if(storeDefaults) defaults.put(c, radiobutton.getText());
+            //if(setNewValues) radiobutton.setText(translate(defaults.get(c)));
+            //if(storeDefaults) radiobutton.putClientProperty("def", radiobutton.getText());
+            //if(setNewValues) radiobutton.setText(translate((String)radiobutton.getClientProperty("def")));
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = radiobutton.getText();
+                defaults.put(c, def);
+            }
+            radiobutton.setText(translate(def));
+            if(vals!=null) vals.add(def);
+            //translator.put(text, text);
+            //m.msg("radiobutton: "+text);
+        }
+        else if (c instanceof JTabbedPane)
+        {
+            JTabbedPane tabs = (JTabbedPane)c;
+            for(int i=0;i<tabs.getTabCount();i++)
+            {
+                Component tab = tabs.getComponentAt(i);
+                JComponent ptab = (JComponent)tab;
+                //if(storeDefaults) ptab.putClientProperty("def", tabs.getTitleAt(i));
+                //if(setNewValues) tabs.setTitleAt(i, translate((String)ptab.getClientProperty("def")));
+                String def = defaults.get(tab);
+                if(def==null)
+                {
+                    def = tabs.getTitleAt(i);
+                    defaults.put(tab, def);
+                }
+                tabs.setTitleAt(i,translate(def));
+                if(vals!=null) vals.add(def);
+            }
+        }
+        else if (c instanceof JDialog)
+        {
+            JDialog frame = (JDialog)c;
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = frame.getTitle();
+                defaults.put(c, def);
+            }
+            frame.setTitle(translate(def));
+            if(vals!=null) vals.add(def);
+        }
+        else if (c instanceof JFrame)
+        {
+            JFrame frame = (JFrame)c;
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = frame.getTitle();
+                defaults.put(c, def);
+            }
+            frame.setTitle(translate(def));
+            if(vals!=null) vals.add(def);
+        }
+        //add text to translation strings.
+        /*if(text!=null)
+        {
+            //translator.put(text, text);
+            if(storeDefaults)
+            {
+                defaults.put(c, text);
+                //translator.put(text,text);
+            }
+        }*/
     }
 }

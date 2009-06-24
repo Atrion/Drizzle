@@ -21,6 +21,7 @@ public class GuiModal extends javax.swing.JDialog {
     public GuiModal(java.awt.Frame parent, boolean modal, ThreadDownloader td) {
         super(parent, modal);
         initComponents();
+        translation.translation.registerGUIForm(this);
         this.td = td;
         this.jProgressBar1.setStringPainted(displayPercentage);
     }
