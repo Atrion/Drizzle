@@ -122,4 +122,14 @@ public class Time
         long dnitime = ServerTimeToDniTime(servertime);
         return dnitime;
     }
+
+    public static String TimeToString(long time)
+    {
+        //long time = PtGetServerTime();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss", java.util.Locale.CANADA);
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+        String result = sdf.format(new Date(time));
+        return result;
+    }
+
 }

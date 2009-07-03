@@ -275,6 +275,34 @@ public class Uam
         }
         m.msg("Done checking for duplicate page IDs.");
 
+
+        m.msg("Checking .sum files...");
+        for(File f: shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".sum", false))
+        {
+            uru.moulprp.sumfile sf = uru.moulprp.sumfile.readFromFile(f, 3);
+            for(uru.moulprp.sumfile.sumfileFileinfo sfi: sf.files)
+            {
+                String filename = potsfolder+"/"+sfi.filename.toString();
+                if(FileUtils.Exists(filename))
+                {
+                    byte[] expectedhash = sfi.md5;
+                    byte[] actualhash = shared.CryptHashes.GetHash(filename, shared.CryptHashes.Hashtype.md5);
+                    if(b.isEqual(actualhash, expectedhash))
+                    {
+                        //is good!
+                    }
+                    else
+                    {
+                        m.msg("  File listed in ",f.getAbsolutePath()," has the wrong hash: ",filename);
+                    }
+                }
+                else
+                {
+                    m.msg("  File listed in ",f.getAbsolutePath()," was not found: ",filename);
+                }
+            }
+        }
+        m.msg("Done checking .sum files.");
     }
     public static void launchUru()
     {

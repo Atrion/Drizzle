@@ -16,6 +16,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 import javax.swing.JFrame;
 import java.util.Vector;
@@ -49,15 +50,18 @@ public class translation
 {
     private static final String sep = "{->}";
     private static final String defaultlanguage = "en";
+    private static final boolean updateEvenWhenNewLanguageIsSameAsPrevious = true;
     private static String curlanguage = defaultlanguage;
+    private static boolean enabled = false;
+    private static String pathToStringFiles = null;
 
     //missing translation recorder
-    public static boolean doRecordMissingTranslations = true;
+    private static boolean doRecordMissingTranslations = true;
     private static LinkedHashSet<String> missingTranslations = new LinkedHashSet(); //linked to maintain order
     private static HashSet<String> allstrings;
 
     //string->string  translations
-    static Map<String,String> translator;// = new HashMap();
+    private static Map<String,String> translator;// = new HashMap();
 
     //auto-registered components tied to their string.
     //static Map<Object,String> defaults;
@@ -72,22 +76,34 @@ public class translation
 
     public static void registerGUIForm(Container c)
     {
+        if(!enabled) return;
         //guiforms.add(new java.lang.ref.WeakReference(c));
         guiforms.put(c, null);
-        if(!curlanguage.equals(defaultlanguage))
+        if(updateEvenWhenNewLanguageIsSameAsPrevious || !curlanguage.equals(defaultlanguage))
         {
             traverseGuiForm(c/*, true, true*/,null);
         }
     }
     public static void registerResourceString(String path, JTextComponent textbox)
     {
+        if(!enabled) return;
         resourcecomponents.put(textbox, path);
-        if(!curlanguage.equals(defaultlanguage))
+        if(updateEvenWhenNewLanguageIsSameAsPrevious || !curlanguage.equals(defaultlanguage))
         {
             traverseResource(textbox);
         }
     }
 
+    public static void enable(String pathToStringFiles2)
+    {
+        if(pathToStringFiles2.endsWith("/")) pathToStringFiles2 = pathToStringFiles2.substring(0, pathToStringFiles2.length()-1);
+        pathToStringFiles = pathToStringFiles2;
+        enabled = true;
+    }
+    public static void disable()
+    {
+        enabled = false;
+    }
     public static String getCurLanguage()
     {
         return curlanguage;
@@ -144,11 +160,13 @@ public class translation
     }
     public static void setLanguage(String language)
     {
+        if(!enabled) return;
+
         String prevlanguage = curlanguage;
         curlanguage = language;
 
         //things that are only done when going to the non-default language. (we could just do it, but it's less efficient for a lot of things.)
-        if(!prevlanguage.equals(language))
+        if(updateEvenWhenNewLanguageIsSameAsPrevious || !prevlanguage.equals(language))
         {
             //load string->string translations from file.
             translator = java.util.Collections.synchronizedMap(new HashMap());
@@ -175,7 +193,7 @@ public class translation
             m.state.curstate.translate = true;
             shared.GetResource.enableTranslations = true;
 
-            m.msg("Setting language to ",language);
+            //m.msg("Setting language to ",language);
         }
 
         //set manually registered components from their resource.
@@ -209,7 +227,7 @@ public class translation
     private static void loadLanguage(String language, Map<String,String> trans, Vector<shared.Pair<String,String>> output)
     {
         //'language' is the 2-letter language code.
-        boolean asresource = false;
+        boolean asresource = true;
 
         //translator = java.util.Collections.synchronizedMap(new HashMap());
         //defaults = java.util.Collections.synchronizedMap(new HashMap());
@@ -217,7 +235,7 @@ public class translation
         String langFile;
         if(asresource)
         {
-            langFile = shared.GetResource.getResourceAsString("/lang/"+language+".txt");
+            langFile = shared.GetResource.getResourceAsString(pathToStringFiles+"/"+language+".txt");
         }
         else
         {
@@ -230,6 +248,7 @@ public class translation
         {
             String line = lines[i];
             int index = line.indexOf(sep);
+            if(index==-1 && (line.startsWith("//")||line.equals(""))) continue;  //skip comments and empty lines.
             String left = line.substring(0, index);
             String right = line.substring(index+sep.length());
             if(left.length()==0 || right.length()==0) throw new shared.uncaughtexception("Invalid language file at line "+Integer.toString(i+1));
@@ -258,8 +277,19 @@ public class translation
         byte[] result2 = b.StringToBytes(result.toString());
         FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/DrizzleNeededTranslations.txt", result2);
     }
+    public static String translate(String... strs)
+    {
+        StringBuilder result = new StringBuilder();
+        for(String str: strs)
+        {
+            result.append(translate(str));
+        }
+        return result.toString();
+    }
     public static String translate(String str)
     {
+        if(!enabled) return str;
+
         String result = null;
         if(translator!=null) result = translator.get(str);
         if(result==null)
@@ -398,6 +428,11 @@ public class translation
         if (c instanceof JLabel)
         {
             JLabel label = (JLabel)c;
+            //m.msg(label.getText());
+            //if(label.getText().startsWith("(Select an Age"))
+            //{
+            //    int dummy=0;
+            //}
             //if(storeDefaults) defaults.put(c, label.getText());
             //if(setNewValues) label.setText(translate(defaults.get(c)));
             //if(storeDefaults) label.putClientProperty("def", label.getText());
@@ -529,6 +564,10 @@ public class translation
             }
             frame.setTitle(translate(def));
             if(vals!=null) vals.add(def);
+
+            //c.invalidate();
+            //c.validate();
+            c.repaint();
         }
         else if (c instanceof JFrame)
         {
@@ -541,6 +580,26 @@ public class translation
             }
             frame.setTitle(translate(def));
             if(vals!=null) vals.add(def);
+
+            //c.invalidate();
+            //c.validate();
+            c.repaint();
+        }
+        else if (c instanceof JFileChooser)
+        {
+            JFileChooser frame = (JFileChooser)c;
+            String def = defaults.get(c);
+            if(def==null)
+            {
+                def = frame.getDialogTitle();
+                defaults.put(c, def);
+            }
+            frame.setDialogTitle(translate(def));
+            if(vals!=null) vals.add(def);
+
+            //c.invalidate();
+            //c.validate();
+            c.repaint();
         }
         //add text to translation strings.
         /*if(text!=null)

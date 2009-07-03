@@ -1,0 +1,5 @@
+//Dustin's English overrides; okay changes to this file with him first.
+
+Warning: {->}Warning: 
+Crowthistle{->}Crowthistle
+Setting language to {->}Setting language to: 

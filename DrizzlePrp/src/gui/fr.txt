@@ -1,0 +1,207 @@
+//Chacal's French translations; okay changes to this file with him first.
+
+Warning: {->}Avertissement: 
+Ignoring: {->}Ignoré: 
+Get Latest List{->}Rafraîchir la liste
+( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://alcugs.almlys.org/Drizzle )
+Ages:{->}Âges:
+Versions:{->}Versions:
+Download{->}Télécharger
+Delete{->}Supprimer
+Mirrors:{->}Serveurs miroirs:
+Server:{->}Serveur:
+Select...{->}Choisir...
+select...{->}choisir...
+select{->}choisir...
+Select....{->}Choisir...
+Pots folder:{->}Dossier POTS:
+Change server...{->}Changer serveur...
+UAM Settings{->}Paramètres UAM
+Launch Uru{->}Démarrer Uru
+You have the latest version.{->}Vous avez la version la plus récente.
+You have a version, but not the latest.{->}Vous avez une version, mais pas la plus récente.
+You don't have this Age installed.{->}Vous n'avez pas téléchargé cet Âge.
+You have this Age, but its version is unknown.{->}Vous avez cet Âge, mais la version est inconnue.
+Legend{->}Légende
+Do not load Age list at startup.{->}Ne pas charger la liste au démarrage.
+Load last saved Age list at startup.{->}Charger la liste au démarrage.
+Download most recent Age list at startup.{->}Télécharger la liste au démarrage.
+Automatically download list?{->}Chargement automatique de la liste?
+Info:{->}Info:
+<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Cet onglet permet de convertir les fichiers de MystV, Moul et Crowthistle pour les intégrer à Uru. ( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://alcugs.almlys.org/Drizzle )</html>
+SoundDecompress (When conversion is done, it will ask you to run this.){->}Démarrer SoundDecompress (utiliser lorsque la conversion est terminée)
+Start...{->}Démarrer
+Moul folder:{->}Dossier MOUL:
+//select...{->Auswählen...
+Myst 5 Folder:{->}Dossier Myst 5:
+Pots Folder:{->}Dossier POTS:
+Crowthistle folder:{->}Dossier Crowthistle:
+<html>Fill out the info in the MystV, Moul, and Crowthistle tabs, then click these buttons to put their music in your Relto's musicbox.</html>{->}<html>Complétez l'information requise dans les onglets MystV, Moul, et Crowthistle puis cliquez sur ces boutons pour faire jouer leur musique dans l'appareil de votre Relto .</html>
+MystV music...{->}Musique de MystV
+Moul music...{->}Musique de Moul
+Crowthistle music...{->}Musique de Crowthistle
+Pots music...{->}Musique de POTS
+(Make sure you fill out the 'Pots Folder' on the Moul tab for this one.){->}(Assurez-vous d'avoir choisi le 'Dossier POTS' dans l'onglet 'Moul'.)
+Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://alcugs.almlys.org/Drizzle.
+infolder:{->}Dossier source:
+outfolder:{->}Dossier destination:
+Memories: this area is for extracting images, notes, etc. from Uru (either offline or online){->}Souvenirs: Cet onglet permet d'extraire images, notes, etc. de Uru (versions multi-joueurs ou autonome)
+Enter a list of angles(20=full circle) and distances.  They will be summed as vectors.{->}Entrez une liste d'angles (20=cercle complet) et de distances. Ils seront additionnés vectoriellement.
+sum...{->}Addition
+Predict Pod events{->}Prédire évènements
+Notes:{->}Notes:
+Start Server{->}Démarrer serveur
+base folder:{->}Dossier racine:
+port:{->}Port:
+Stop Server{->}Arrêter serveur
+Indicate in the log when files are read?{->}Indiquez dans le journal quand les fichiers sont lus?
+You have to stop and start the server for settings changes to take effect.{->}Vous devex arrêter et redémarrer le serveur pour que les changements prennent effet.
+This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}<html>Ce serveur proxy permet de parcourir de vieux sites web archivés en .zip. De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://alcugs.almlys.org/Drizzle.</html>
+List Available Ages...{->}Liste des Âges disponibles
+Get Offline list.{->}Liste locale
+Run Tests...{->}Démarrer tests
+ignore known overrides{->}Ignorer doublons connus
+Sanity check{->}Test de cohérence
+Name a random Age!{->}Un Âge au hasard
+Report{->}Rapport
+Agename:{->}Nom de l'Âge:
+Age reports{->}Rapports sur les Âges
+Everything here uses the Pots folder from the UAM tab.{->}Tous ces tests utilisent le dossier POTS de l'onglet UAM.
+UAM Advanced{->}UAM avancé
+start{->}démarrer
+Prefix:{->}Préfixe:
+file:{->}fichier:
+Language{->}Langue
+Read file.{->}Lire le fichier
+Read{->}Lire
+Clear{->}Vider
+Save changes.{->}Enregistrer changements
+MystV folder:{->}Dossier MystV:
+Output folder:{->}Dossier destination:
+Select All{->}Sélectionner tout
+Select None{->}Sélectionner aucun
+read all...{->}Lire tout
+Files to process:{->}Fichiers à traiter:
+start...{->}Démarrer
+Select all{->}Sélectionner tout
+Select none{->}Sélectionner aucun
+Output:{->}Destination:
+Translation:{->}Traduction:
+Remove dupes.{->}Enlever doublons
+Clear log.{->}Vider le journal
+Alphabetise.{->}Alphabétiser
+Log{->}Journal
+Save settings now{->}Enregistrer paramètres maintenant
+//Alternate Save settings now: Einstellungen speichern.
+Delete settings and exit{->}Supprimer paramètres et quitter
+Save settings on exit.{->}<html>Enregistrer les paramètres en quittant</html>
+Settings{->}Paramètres
+Setting language to {->}Langue changée pour: 
+Current GMT time is: {->}Heure GMT actuelle: 
+Current local time is: {->}Heure locale actuelle: 
+
+//Time of gmttime: {->
+//Time of localtime: {->
+//Time of cur day: {->
+//Time of next day: {->
+
+Time of today's {->}Apparition aujourd'hui du portail de
+ symbol: {->} [EMPTY] 
+Time of tomorrow's {->}Apparition demain du portail de  
+Not parsing final table in vault.dat{->}Table finale de vault.dat non traitée
+Getting data...{->}Lecture des données.
+In the output folder, there will be a file called 'memories.xml'; open it with your web-browser to view the memories.{->}Dans le dossier de destination, vous trouverez un fichier 'memories.xml'. Ouvrez-le dans un fureteur web pour voir les souvenirs.
+Finished creating Memories files!{->}Création du fichier de souvenirs terminée.
+Error: {->}Erreur: 
+You must select an output folder that already exists.{->}Vous devez choisir un dossier de destination existant.
+Folder doesn't exist.{->}Le dossier n'existe pas.
+The input folder must have either 'vault.dat' or some number of '.v' files.{->}Le dossier source doit contenir soit le fichier 'vault.dat' soit des fichiers '.v'.
+Ages not installed: {->}Âges non installés:
+ launched!{->} lancé.
+Cleaning up any previous version...{->}Nettoyage des versions précédentes.
+This Age is listed as not being safely deletable; performing upgrade only.{->}Cet Âge est marqué comme ne pouvant pas être détruit sans danger. 
+Checking to see if we already have this version in the cache...{->}Vérification de la présence de cette version dans la cache...
+Using cached version of Age: {->}Utilisation de la version cachée de cet Âge: 
+, Version: {->}, Version: 
+Checking integrity...{->}Vérification d'intégrité.
+File integrity is good!{->}Fichier intègre.
+Extracting {->}Extraction 
+Age installed!{->}Âge installé.
+Ages updatable: {->}Âges pouvant être mis à jour: 
+Deleting {->}Suppression 
+Attempting to download Age: {->}Tentatice de téléchargement de l'Âge: 
+, Mirror: {->}, serveur miroir: 
+The PathOfTheShell/CompleteChronicles folder you selected doesn't exist.{->}Le dossier POTS choisi n'existe pas.
+Checking the folders you gave...{->}Vérification des dossiers choisis.
+The Myst5 folder you selected doesn't exist.{->}Le dossier MystV choisi n'existe pas.
+The Crowthistle folder you selected doesn't exist.{->}Le dossier Crowthistle choisi n'existe pas.
+The MOUL folder you selected doesn't exist.{->}Le dossier MOUL choisi n'existe pas.
+Unable to launch program: {->}Incapable de lancer le programme: 
+ because it doesn't exist.{->} parce qu'il n'existe pas.
+Starting conversion...{->}Démarrage de la conversion.
+Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.){->}N'oubliez pas de lancer SoundDecompress.exe dans votre dossier POTS, pour que les sons fonctionnent! Vous pouvez aussi utiliser le bouton dans l'onglet 'Conversion simple' si vous préférez. Si SoundDecompress plante, vous devez démarrer Uru, quitter, ensuite essayer de nouveau.
+Conversion completed!{->}Conversion terminée.
+
+//Tabs:
+Moul{->}Moul
+MystV{->}MystV
+Crowthistle{->}Crowthistle
+Music{->}Musique
+tab3{->}Onglet3
+Pots{->}POTS
+Reports{->}Rapports
+Settings{->}Paramètres
+SpecialMods{->}Mods Spéciales
+HexIsle{->}HexIsle
+List Analysis{->}Analyse de listes 
+CrossRefTool{->}CrossRefTool
+Old{->}Périmé
+Misc{->}Divers
+Encryption{->}Chiffrement
+realMyst{->}realMyst
+Riven{->}Riven
+Legacy{->}Héritage
+DeepView{->}DeepView
+Manual Conversion{->}Conversion Manuelle
+UruAgeManager(UAM){->}UruAgeManager(UAM)
+Conversion(Simplicity){->}Conversion Simple
+Memories{->}Souvenirs
+GameHelp{->}Aide Uru
+Proxy{->}Proxy
+Advanced{->}Avancé
+Help{->}Aide
+
+//UAM downloader:
+Only use "Unsafe Cancel" if "Cancel" doesn't work after 30 seconds.{->}<html>N'utilisez 'Abandon risqué' que si 'Abandon' n'a pas fonctionné après 30 secondes.</html>
+Pause/Resume{->}Pause/Continuer
+Cancel{->}Abandon
+Unsafe Cancel{->}Abandon risqué
+UAM Downloading...{->}Téléchargement UAM
+
+//misc
+(Select an Age, or click "Get Latest List" to get the latest list of Ages.){->}Choisissez un Âge, ou cliques sur 'Rafraîchir' pour obtenir la dernière liste du serveur.
+//<html>(Select an Age, or click "Get Latest List" to get the latest list of Ages.)</html>{-><html>Choisissez un Âge, ou cliques sur 'Rafraîchir' pour obtenir la dernière liste du serveur.</html>
+Save Missing Translations{->}Conserver les traductions manquantes
+How rainy of a day is it?{->}Est-ce un jour de pluie?
+archive folder:{->}Dossier d'archives:
+Generate uam.status.txt{->}Générer uam.status.txt
+Error reading config file.{->}Erreur de lecture du fichier de configuration.
+You need to load the Age List in the UAM tab first.{->}Vous devez d'abord charger la liste des Âges dans l'onglet UAM.
+Click the select button to pick a folder.{->}Cliquez sur le bouton 'Choisir' pour choisir un dossier.
+
+//file select form
+Enter path or folder name:{->} Entrez le chemin ou le nom du dossier:
+Filter{->} Filtre
+Folders{->} Dossiers
+null{->} 
+Files{->} Fichiers
+Enter file name:{->} Entrez le nom du fichier
+OK{->} OK
+Update{->} Mise à jour
+Create Folder{->} Créer un dossier
+
+//misc dialogs
+Enter a server.{->}Entrez le nom d'un serveur
+Enter the server you want to use.{->}Entrez le nom du serveur que vous voulez utiliser
+Folder Name:{->}Nom du dossier:
+

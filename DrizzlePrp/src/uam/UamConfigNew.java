@@ -156,11 +156,17 @@ public class UamConfigNew
     }
     public String getAgeInfo(String agename)
     {
-        return data.getAge(agename).info;
+        String curlang = translation.translation.getCurLanguage();
+        String result = data.getAge(agename).infos.get(curlang);
+        if(result==null) result = data.getAge(agename).info;
+        return result;
     }
     public String getWelcomeMessage()
     {
-        return data.welcome;
+        String curlang = translation.translation.getCurLanguage();
+        String result = data.welcomes.get(curlang);
+        if(result==null) result = data.welcome;
+        return result;
     }
     public String getAgeProperName(String agename)
     {
@@ -306,6 +312,7 @@ public class UamConfigNew
     {
         public Vector<String> comments = new Vector();
         public String welcome = "";
+        public HashMap<String,String> welcomes = new HashMap();
         public Vector<Age> ages = new Vector();
         public boolean aequalsatransposeequalsainverse = false;
         
@@ -334,6 +341,7 @@ public class UamConfigNew
                         Element e = (Element)child;
                         String tag = e.getTagName();
                         if(tag.equals("welcome")) welcome = e.getTextContent();
+                        else if(tag.startsWith("welcome--")) welcomes.put(tag.substring("welcome--".length()), e.getTextContent());
                         else if(tag.equals("age")) ages.add(new Age(e));
                         else if(tag.equals("age2")) ages.add(new Age(e));
                         else if(tag.equals("aequalsatransposeequalsainverse")) aequalsatransposeequalsainverse = true;
@@ -357,6 +365,7 @@ public class UamConfigNew
             s.append("<uam>\n");
             for(String comment: comments) s.append("\t<!--"+comment+"-->\n");
             s.append("\t<welcome>"+welcome+"</welcome>\n");
+            for(String lang: welcomes.keySet()) s.append("\t<welcome--"+lang+">"+welcomes.get(lang)+"</welcome--"+lang+">\n");
             for(Age age: ages) age.generateXml(s);
             s.append("\t<aequalsatransposeequalsainverse />\n");
             s.append("</uam>\n");
@@ -400,6 +409,7 @@ public class UamConfigNew
             private String mainfile = null;
             public String deletable = null;
             public String info = null;
+            public HashMap<String,String> infos = new HashMap();
             public String propername = null;
             public int minver = 0;
             //public ArrayDeque<Version> versions = new ArrayDeque();
@@ -420,6 +430,7 @@ public class UamConfigNew
                             if(tag.equals("filename")) filename = e.getTextContent();
                             else if(tag.equals("deletable")) deletable = e.getTextContent();
                             else if(tag.equals("info")) info = e.getTextContent();
+                            else if(tag.startsWith("info--")) infos.put(tag.substring("info--".length()), e.getTextContent());
                             else if(tag.equals("name")) propername = e.getTextContent();
                             else if(tag.equals("minver")) minver = Integer.parseInt(e.getTextContent());
                             else if(tag.equals("version")) versions.add(new Version(e));
@@ -448,6 +459,7 @@ public class UamConfigNew
                 s.append("\t\t<name>"+propername+"</name>\n");
                 s.append("\t\t<deletable>"+deletable+"</deletable>\n");
                 s.append("\t\t<info>"+info+"</info>\n");
+                for(String lang: infos.keySet()) s.append("\t\t<info--"+lang+">"+infos.get(lang)+"</info--"+lang+">\n");
                 if(minver!=0) s.append("\t\t<minver>"+Integer.toString(minver)+"</minver>\n");
                 for(String del: dels) s.append("\t\t<del>"+del+"</del>\n");
                 for(Version version: versions) version.generateXml(s);

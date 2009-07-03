@@ -136,10 +136,36 @@ public class GuiUtils
                 //drives.setSelectedIndex(0);
             //}
         }*/
-        public CustomJFileChooser()
+        static CustomJFileChooser getInstance()
+        {
+            //This list is the ones visible with a Motif look-and-feel.
+            //We're forcing the strings to english so that our translator can catch them.
+
+            UIManager.put("FileChooser.helpButtonText","Help");
+            UIManager.put("FileChooser.openButtonText","OK");
+            UIManager.put("FileChooser.updateButtonText", "Update");
+            UIManager.put("FileChooser.cancelButtonText","Cancel");
+
+            UIManager.put("FileChooser.pathLabelText","Enter path or folder name:");
+            UIManager.put("FileChooser.filterLabelText","Filter");
+            UIManager.put("FileChooser.acceptAllFileFilterText","*");
+
+            UIManager.put("FileChooser.enterFileNameLabelText", "Enter file name:");
+            UIManager.put("FileChooser.filesLabelText", "Files");
+            UIManager.put("FileChooser.foldersLabelText","Folders");
+            
+            //com.sun.java.swing.plaf.motif.MotifFileChooserUI b;
+
+            return new CustomJFileChooser();
+        }
+        private CustomJFileChooser()
         {
             super();
             this.setPreferredSize(new java.awt.Dimension(700,500));
+            this.setDialogTitle("Select...");
+            //java.util.Locale l = new java.util.Locale("en","ca");
+            //this.setLocale(l);
+            //setDefaultLocale(java.util.Locale.ENGLISH);
 
             java.awt.LayoutManager lm = this.getLayout();
             //java.awt.BorderLayout.SOUTH
@@ -177,6 +203,9 @@ public class GuiUtils
             pan2.add(createfolderbutton);
             this.addImpl(pan2, java.awt.BorderLayout.EAST, -1);
 
+
+            translation.translation.registerGUIForm(this);
+            
             /*this.addMouseListener(new javax.swing.event.MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {
                     if(e.getButton()==MouseEvent.BUTTON3)
@@ -418,7 +447,7 @@ public class GuiUtils
         //int dummy=0;
     }
 
-    private static JFileChooser getJFileChooser()
+    public static JFileChooser getJFileChooser()
     {
         if(onlyUseASingleJFileChooser)
         {
@@ -447,7 +476,7 @@ public class GuiUtils
                 //}
                 //else
                 //{
-                    _fc = new CustomJFileChooser();
+                    _fc = CustomJFileChooser.getInstance();
                 //}
                 //m.msg(Long.toString(System.currentTimeMillis()));
                 //javax.swing.UIManager.getUI(_fc).
@@ -465,18 +494,18 @@ public class GuiUtils
         }
         else
         {
-            return new CustomJFileChooser();
+            return CustomJFileChooser.getInstance();
         }
     }
     
     public static void getStringFromUser(JTextComponent field, String message, String title)
     {
-        String result = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+        String result = JOptionPane.showInputDialog(null, translation.translation.translate(message), translation.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
         if(result!=null) field.setText(result);
     }
     public static String getStringFromUser(String message, String title)
     {
-        String result = JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+        String result = JOptionPane.showInputDialog(null, translation.translation.translate(message), translation.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
         if(result==null) result = "";
         return result;
     }
