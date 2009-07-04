@@ -308,6 +308,7 @@ public class prputils
                     catch(Exception e)
                     {
                         m.err("Unexpected exception: ",e.getMessage());
+                        //e.printStackTrace();
                     }
                     //break;
                 }
@@ -694,7 +695,7 @@ public class prputils
                 {
                     PlDrawableSpans curDrawableSpan = (PlDrawableSpans)prp.objects[i].prpobject.object;
                     
-                    int numMaterials = curDrawableSpan.matcount;
+                    int numMaterials = curDrawableSpan.materialsCount;
                     for(int j=0;j<numMaterials;j++) //for each material...
                     {
                         Uruobjectref materialRef = curDrawableSpan.materials.get(j);
@@ -977,17 +978,17 @@ public class prputils
                     if(subsetgroup==-1) continue;
                     Uruobjectdesc spandesc = di.subsetgroups[j].span.xdesc;
                     PlDrawableSpans span = findObjectWithDesc(prp,spandesc).castTo();//x004CDrawableSpans.class);
-                    int numsubsets = span.subsetgroups[subsetgroup].subsetcount;
+                    int numsubsets = span.DIIndices[subsetgroup].indicesCount;
                     for(int k=0;k<numsubsets;k++)
                     {
-                        int subset = span.subsetgroups[subsetgroup].subsetindex[k];
-                        if(subset>=span.subsets.length)
+                        int subset = span.DIIndices[subsetgroup].indices[k];
+                        if(subset>=span.icicles.length)
                         {
                             m.warn("Subset is not present.");
                         }
                         else
                         {
-                            int material = span.subsets[subset].materialindex;
+                            int material = span.icicles[subset].parent.parent.materialindex;
                             Uruobjectdesc matdesc = span.materials.get(material).xdesc;
                             if(matdesc.objectname.toString().toLowerCase().startsWith("crater"))
                             {

@@ -128,7 +128,7 @@ public class GetResource
                 bytesread = in.read(buffer,0,1024);
                 if(bytesread!=-1)
                 {
-                    result.append(new String(buffer,0,bytesread));
+                    result.append(new String(buffer,0,bytesread,"ISO-8859-1"));
                 }
             }
             String result2 = result.toString();

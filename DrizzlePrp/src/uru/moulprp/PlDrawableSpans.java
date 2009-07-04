@@ -35,50 +35,60 @@ public class PlDrawableSpans extends uruobj
 {
     //Objheader xheader;
     //PlSynchedObject parent;
-    int newunknown;
-    int zbias;
-    int blendflags;
-    int matcount;
+    int props; //unknown
+    int renderLevel; //zbias
+    int criteria; //blendflags
+    int materialsCount;
     //public Uruobjectref[] materials;
     public Vector<Uruobjectref> materials;
-    public int subsetcount;
-    public SpanSubset[] subsets;
+    public int icicleCount; //subsetcount
+    public PlIcicle[] icicles; //subsets
     int unused;
-    int listcount;
-    int[] unused2;
+    int spanCount; //listcount
+    int[] spanSourceIndices; //unused2
     //byte[] unused3;
-    Uruobjectref[] unused3;
+    Uruobjectref[] fogEnvironmentRefs; //unused3
     //BoundingBox[] xboundingBoxes;
     public BoundingBox xLocalBounds;
     public BoundingBox xWorldBounds;
     public BoundingBox xMaxWorldBounds;
     //int lightcount;
     //Vector<LightInfo> lightinfos = new Vector<LightInfo>();
-    public GrowVector<Uruobjectref> lightinfos;
+    //public GrowVector<Uruobjectref> lightinfos;
+    //public Vector<Uruobjectref> permaLight = new Vector();
+    //public Vector<Uruobjectref> permaProj = new Vector();
+    public int sourceSpanCount;
     public int matrixsetcount;
     public Transmatrix[] localToWorlds; //was blendmatrix
     public Transmatrix[] worldToLocals; //was matrix2
     public Transmatrix[] localToBones; //was matrix3
     public Transmatrix[] boneToLocals; //was matrix4
-    public int subsetgroupcount;
-    public SubsetGroup[] subsetgroups;
+    public int DIIndicesCount; //subsetgroupcount
+    public PlDISpanIndex[] DIIndices; //subsetgroups
     public int meshcount;
-    public Mesh[] meshes;
+    public PlGBufferGroup[] groups; //meshes
     public Typeid embeddedtype;
     public x0240plSpaceTree xspacetree;
     public Uruobjectref scenenode;
+
+    static final int kSpanTypeMask = 0xC0000000;
+    static final int kSpanIDMask = 0x3FFFFFFF;
+    static final int kSpanTypeIcicle = 0x00000000;
+    static final int kSpanTypeUnknown = 0x80000000;
+    static final int kSpanTypeParticleSpan = 0xC0000000;
+    Vector<PlIcicle> spans = new Vector(); //should really allow any PlSpans, in practice, just all of the icicles, I think.
     
     public PlDrawableSpans(context c) throws readexception
     {
         shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         //parent = new PlSynchedObject(c); //should this be a keyedobject??? No, it shouldn't!
-        newunknown = data.readInt();
+        props = data.readInt();
         
-        zbias = data.readInt();
-        blendflags = data.readInt();
-        matcount = data.readInt(); //so far so good.
-        materials = c.readVector(Uruobjectref.class,matcount);
+        renderLevel = data.readInt();
+        criteria = data.readInt();
+        materialsCount = data.readInt(); //so far so good.
+        materials = c.readVector(Uruobjectref.class,materialsCount);
         //materials = new Uruobjectref[matcount];
         /*for(int i=0;i<matcount;i++)
         {
@@ -94,11 +104,11 @@ public class PlDrawableSpans extends uruobj
             }
         }*/
         
-        subsetcount = data.readInt();
-        subsets = c.readArray(SpanSubset.class,subsetcount);
-        for(int i=0;i<subsetcount;i++)
+        icicleCount = data.readInt();
+        icicles = c.readArray(PlIcicle.class,icicleCount);
+        for(int i=0;i<icicleCount;i++)
         {
-            if(subsets[i].materialindex==58)
+            if(icicles[i].parent.parent.materialindex==58)
             {
                 int breakdummy = 0;
             }
@@ -112,13 +122,27 @@ public class PlDrawableSpans extends uruobj
         {
             unused = data.readInt(); e.ensure(unused==0);
         }
-        listcount = data.readInt(); e.ensure(listcount==subsetcount);//so far so good.
-        unused2 = data.readInts(listcount);
-        //unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
-        unused3 = new Uruobjectref[subsetcount];
-        for(int i=0;i<subsetcount;i++)
+        spanCount = data.readInt(); e.ensure(spanCount==icicleCount);//so far so good.
+        //spanSourceIndices = data.readInts(spanCount);
+        spanSourceIndices = new int[spanCount];
+        for(int i=0;i<spanCount;i++)
         {
-            unused3[i] = new Uruobjectref(c);
+            spanSourceIndices[i] = c.readInt();
+            if((spanSourceIndices[i]&kSpanTypeMask)==kSpanTypeIcicle)
+            {
+                spans.add(icicles[spanSourceIndices[i]&kSpanIDMask]);
+            }
+            else if((spanSourceIndices[i]&kSpanTypeMask)==kSpanTypeParticleSpan)
+            {
+                throw new shared.uncaughtexception("Unhandled case in PlDrawableSpans");
+            }
+        }
+
+        //unused3 = data.readBytes(subsetcount); //should all be zero. see pyprp.
+        fogEnvironmentRefs = new Uruobjectref[icicleCount];
+        for(int i=0;i<icicleCount;i++)
+        {
+            fogEnvironmentRefs[i] = new Uruobjectref(c);
         }
         
         if(c.readversion==7)
@@ -128,7 +152,7 @@ public class PlDrawableSpans extends uruobj
             //c.readInt();
         }
         
-        if(subsetcount>0)
+        if(icicleCount>0)
         {
             //xboundingBoxes = c.readArray(BoundingBox.class,3);
             xLocalBounds = new BoundingBox(c);
@@ -145,17 +169,52 @@ public class PlDrawableSpans extends uruobj
         }
         while(newLightInfo.lightcount > 0);*/
         //The lightinfos is read very differently in pyprp, the final int is actually part of another structure, which happens to always? be zero.
-        lightinfos = new GrowVector<Uruobjectref>(Uruobjectref.class, c);
+        //lightinfos = new GrowVector<Uruobjectref>(Uruobjectref.class, c);
+        for(int i=0;i<spanCount;i++)
+        {
+            if((spans.get(i).parent.parent.props&PlSpan.kPropHasPermaLights)!=0)
+            {
+                if(spans.get(i).parent.parent.permaLights!=null) throw new shared.uncaughtexception("Unhandled permalights.");
+                spans.get(i).parent.parent.permaLightsCount = c.readInt();
+                spans.get(i).parent.parent.permaLights = c.readArray(Uruobjectref.class, spans.get(i).parent.parent.permaLightsCount);
+            }
+            if((spans.get(i).parent.parent.props&PlSpan.kPropHasPermaProjs)!=0)
+            {
+                if(spans.get(i).parent.parent.permaProjs!=null) throw new shared.uncaughtexception("Unhandled permaprojs.");
+                spans.get(i).parent.parent.permaProjsCount = c.readInt();
+                spans.get(i).parent.parent.permaProjs = c.readArray(Uruobjectref.class, spans.get(i).parent.parent.permaProjsCount);
+            }
+        }
+
+        sourceSpanCount = c.readInt();
+        if(sourceSpanCount!=0)
+        {
+            throw new shared.uncaughtexception("Unhandled sourceSpans.");
+        }
         
         matrixsetcount = data.readInt();
-        localToWorlds = c.readArray(Transmatrix.class,matrixsetcount);
-        worldToLocals = c.readArray(Transmatrix.class,matrixsetcount);
-        localToBones = c.readArray(Transmatrix.class,matrixsetcount);
-        boneToLocals = c.readArray(Transmatrix.class,matrixsetcount);
-        subsetgroupcount = data.readInt(); //hexisle line 346
-        subsetgroups = c.readArray(SubsetGroup.class,subsetgroupcount); //fDIIndices, hexisle starts at line 386
+        //localToWorlds = c.readArray(Transmatrix.class,matrixsetcount);
+        //worldToLocals = c.readArray(Transmatrix.class,matrixsetcount);
+        //localToBones = c.readArray(Transmatrix.class,matrixsetcount);
+        //boneToLocals = c.readArray(Transmatrix.class,matrixsetcount);
+        localToWorlds = new Transmatrix[matrixsetcount];
+        worldToLocals  = new Transmatrix[matrixsetcount];
+        localToBones = new Transmatrix[matrixsetcount];
+        boneToLocals = new Transmatrix[matrixsetcount];
+        for(int i=0;i<matrixsetcount;i++)
+        {
+            localToWorlds[i] = new Transmatrix(c);
+            worldToLocals[i] = new Transmatrix(c);
+            localToBones[i] = new Transmatrix(c);
+            boneToLocals[i] = new Transmatrix(c);
+        }
+
+        DIIndicesCount = data.readInt(); //hexisle line 346
+        DIIndices = c.readArray(PlDISpanIndex.class,DIIndicesCount); //fDIIndices, hexisle starts at line 386
+
         meshcount = data.readInt(); //so far so good.
-        meshes = c.readArray(Mesh.class,meshcount); //plGBufferGroups
+        groups = c.readArray(PlGBufferGroup.class,meshcount); //plGBufferGroups
+
         embeddedtype = Typeid.Read(c);
         switch(embeddedtype)
         {
@@ -176,36 +235,61 @@ public class PlDrawableSpans extends uruobj
     public void compile(Bytedeque data)
     {
         //parent.compile(data);
-        data.writeInt(newunknown);
-        data.writeInt(zbias);
-        data.writeInt(blendflags);
-        data.writeInt(matcount);
+        data.writeInt(props);
+        data.writeInt(renderLevel);
+        data.writeInt(criteria);
+        data.writeInt(materialsCount);
         //data.writeArray2(materials);
         data.writeVector2(materials);
-        data.writeInt(subsetcount);
-        data.writeArray2(subsets);
+        data.writeInt(icicleCount);
+        data.writeArray2(icicles);
         data.writeInt(unused);
-        data.writeInt(listcount);
-        data.writeInts(unused2);
+        data.writeInt(spanCount);
+        data.writeInts(spanSourceIndices);
         //data.writeBytes(unused3);
-        data.writeArray2(unused3);
-        if(subsetcount>0)
+        data.writeArray2(fogEnvironmentRefs);
+        if(icicleCount>0)
         {
             //data.writeArray(xboundingBoxes);
             xLocalBounds.compile(data);
             xWorldBounds.compile(data);
             xMaxWorldBounds.compile(data);
         }
-        lightinfos.compile(data);
+        //lightinfos.compile(data);
+        for(int i=0;i<spanCount;i++)
+        {
+            if((spans.get(i).parent.parent.props&PlSpan.kPropHasPermaLights)!=0)
+            {
+                data.writeInt(spans.get(i).parent.parent.permaLightsCount);
+                data.writeArray2(spans.get(i).parent.parent.permaLights);
+            }
+            if((spans.get(i).parent.parent.props&PlSpan.kPropHasPermaProjs)!=0)
+            {
+                data.writeInt(spans.get(i).parent.parent.permaProjsCount);
+                data.writeArray2(spans.get(i).parent.parent.permaProjs);
+            }
+        }
+
+        data.writeInt(sourceSpanCount);
+
         data.writeInt(matrixsetcount);
-        data.writeArray2(localToWorlds);
-        data.writeArray2(worldToLocals);
-        data.writeArray2(localToBones);
-        data.writeArray2(boneToLocals);
-        data.writeInt(subsetgroupcount);
-        data.writeArray2(subsetgroups);
+        //data.writeArray2(localToWorlds);
+        //data.writeArray2(worldToLocals);
+        //data.writeArray2(localToBones);
+        //data.writeArray2(boneToLocals);
+        for(int i=0;i<matrixsetcount;i++)
+        {
+
+            localToWorlds[i].compile(data);
+            worldToLocals[i].compile(data);
+            localToBones[i].compile(data);
+            boneToLocals[i].compile(data);
+        }
+
+        data.writeInt(DIIndicesCount);
+        data.writeArray2(DIIndices);
         data.writeInt(meshcount);
-        data.writeArray2(meshes);
+        data.writeArray2(groups);
         //TODO: remove next line, it's a hack.
         //embeddedtype = Typeid.nil;
         embeddedtype.compile(data);
@@ -226,13 +310,148 @@ public class PlDrawableSpans extends uruobj
     public int addMaterial(Uruobjectref mat)
     {
         materials.add(mat);
-        matcount++;
-        return matcount-1;
+        materialsCount++;
+        return materialsCount-1;
     }
-    
-    static public class SpanSubset extends uruobj
+    static public class PlSpan extends uruobj
     {
-        public int visible;
+        public int subType; //visible
+        public int materialindex;
+        public Transmatrix localToWorld; //was transforms1
+        public Transmatrix worldToLocal; //was transforms2
+        public int props; //lightingflags
+        public BoundingBox localBounds; //was uegclassesca1
+        public BoundingBox worldBounds; //was uegclassesca2
+        public int numMatrices; //blendflag
+        public int baseMatrix; //blendindex
+        public short localUVWChans; //u1
+        public short maxBoneIdx; //u2
+        public short penBoneIdx; //u3
+        public Flt minDist; //u4
+        public Flt maxDist; //u5
+        public Flt waterHeight; //xu6
+
+        public static int kLiteMaterial = 0x0;
+        public static int kPropNoDraw = 0x1;
+        public static int kPropNoShadowCast = 0x2;
+        public static int kPropFacesSortable = 0x4;
+        public static int kPropVolatile = 0x8;
+        public static int kWaterHeight = 0x10;
+        public static int kPropRunTimeLight = 0x20;
+        public static int kPropReverseSort = 0x40;
+        public static int kPropHasPermaLights = 0x80;
+        public static int kPropHasPermaProjs = 0x100;
+        public static int kLiteVtxPreshaded = 0x200;
+        public static int kLiteVtxNonPreshaded = 0x400;
+        public static int kLiteProjection = 0x800;
+        public static int kLiteShadowErase = 0x1000;
+        public static int kLiteShadow = 0x2000;
+        public static int kPropMatHasSpecular = 0x10000;
+        public static int kPropProjAsVtx = 0x20000;
+        public static int kPropSkipProjection = 0x40000;
+        public static int kPropNoShadow = 0x80000;
+        public static int kPropForceShadow = 0x100000;
+        public static int kPropDisableNormal = 0x200000;
+        public static int kPropCharacter = 0x400000;
+        public static int kPartialSort = 0x800000;
+        public static int kVisLOS = 0x1000000;
+
+        //do not compile these:
+        public int permaLightsCount;
+        public Uruobjectref[] permaLights;// = new Vector();
+        public int permaProjsCount;
+        public Uruobjectref[] permaProjs;// = new Vector();
+
+
+        public PlSpan(context c) throws readexception
+        {
+            subType = c.readInt(); e.ensureflags(subType,1,0); //is sometimes 0 in hex isle.
+            materialindex = c.readInt();
+            if(materialindex==0 || materialindex==3)
+            {
+                if(c.curRootObject.objectname.toString().toLowerCase().startsWith("minkata_minkexteriorday_4000000c_2blendspans"))
+                {
+                    int breakdummy= 0;
+                }
+            }
+            localToWorld = c.readObj(Transmatrix.class);
+            worldToLocal = c.readObj(Transmatrix.class);
+            props = c.readInt(); //props
+            localBounds = c.readObj(BoundingBox.class);
+            worldBounds = c.readObj(BoundingBox.class);
+            numMatrices = c.readInt();
+            baseMatrix = c.readInt();
+            localUVWChans = c.readShort();
+            maxBoneIdx = c.readShort();
+            penBoneIdx = c.readShort();
+            minDist = c.readObj(Flt.class);
+            maxDist = c.readObj(Flt.class); //so far so good
+            if((props & 0x10)!=0)
+            {
+                waterHeight = c.readObj(Flt.class);
+            }
+        }
+
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(subType);
+            c.writeInt(materialindex);
+            localToWorld.compile(c);
+            worldToLocal.compile(c);
+            c.writeInt(props);
+            localBounds.compile(c);
+            worldBounds.compile(c);
+            c.writeInt(numMatrices);
+            c.writeInt(baseMatrix);
+            c.writeShort(localUVWChans);
+            c.writeShort(maxBoneIdx);
+            c.writeShort(penBoneIdx);
+            minDist.compile(c);
+            maxDist.compile(c);
+            if((props & 0x10)!=0)
+            {
+                waterHeight.compile(c);
+            }
+        }
+    }
+    static public class PlVertexSpan extends uruobj
+    {
+        public PlSpan parent;
+        public int groupIdx; //meshindex
+        public int VBufferIdx; //unused1
+        public int cellIdx; //unused2
+        public int cellOffset; //vertexstart1
+        public int VStartIdx; //vertexstart2
+        public int VLength; //vertexcount
+
+        public PlVertexSpan(context c) throws readexception
+        {
+            parent = new PlSpan(c);
+            groupIdx = c.readInt();
+            VBufferIdx = c.readInt();
+            cellIdx = c.readInt();
+            cellOffset = c.readInt();
+            VStartIdx = c.readInt();
+            VLength = c.readInt();
+        }
+
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(groupIdx);
+            c.writeInt(VBufferIdx);
+            c.writeInt(cellIdx);
+            c.writeInt(cellOffset);
+            c.writeInt(VStartIdx);
+            c.writeInt(VLength);
+        }
+
+    }
+    static public class PlIcicle extends uruobj //SpanSubset
+    {
+        public PlVertexSpan parent;
+
+        /*public int visible;
         public int materialindex;
         public Transmatrix localToWorld; //was transforms1
         public Transmatrix worldToLocal; //was transforms2
@@ -252,91 +471,46 @@ public class PlDrawableSpans extends uruobj
         int unused2;
         int vertexstart1;
         int vertexstart2;
-        int vertexcount;
-        int surfaceindex;
-        int indexstart;
-        int indexcount;
+        int vertexcount;*/
+        public int IBufferIdx; //surfaceindex
+        public int IStartIdx; //indexstart
+        public int ILength; //indexcount
         
-        public SpanSubset(context c) throws readexception
+        public PlIcicle(context c) throws readexception
         {
-            shared.IBytestream data = c.in;
-            visible = data.readInt(); e.ensureflags(visible,1,0); //is sometimes 0 in hex isle.
-            materialindex = data.readInt();
-            if(materialindex==0 || materialindex==3)
-            {
-                if(c.curRootObject.objectname.toString().toLowerCase().startsWith("minkata_minkexteriorday_4000000c_2blendspans"))
-                {
-                    int breakdummy= 0;
-                }
-            }
-            localToWorld = c.readObj(Transmatrix.class);
-            worldToLocal = c.readObj(Transmatrix.class);
-            lightingflags = data.readInt(); //props
-            localBounds = c.readObj(BoundingBox.class);
-            worldBounds = c.readObj(BoundingBox.class);
-            blendflag = data.readInt();
-            blendindex = data.readInt();
-            u1 = data.readShort();
-            u2 = data.readShort();
-            u3 = data.readShort();
-            u4 = c.readObj(Flt.class);
-            u5 = c.readObj(Flt.class); //so far so good
-            if((lightingflags & 0x10)!=0)
-            {
-                xu6 = c.readObj(Flt.class);
-            }
+            /*shared.IBytestream data = c.in;
             meshindex = data.readInt(); //groupIdx
             unused1 = data.readInt(); //vBufferIdx
             unused2 = data.readInt(); //cellIdx
             vertexstart1 = data.readInt(); //cellOffset
             vertexstart2 = data.readInt(); //vStartIdx
-            vertexcount = data.readInt(); //vLength
+            vertexcount = data.readInt(); //vLength*/
+            parent = new PlVertexSpan(c);
             if(c.readversion==7)
             {
                 //hex isle doesn't have the next two fields.
+                m.warn("not sure if setting correct default for PlIcicle.");
             }
             else
             {
-                surfaceindex = data.readInt(); //bufferIdx
-                indexstart = data.readInt(); //startIdx
+                IBufferIdx = c.readInt(); //bufferIdx
+                IStartIdx = c.readInt(); //startIdx
             }
-            indexcount = data.readInt(); //iLength
-            if((lightingflags&0x4)!=0)
+            ILength = c.readInt(); //iLength
+            if((parent.parent.props&0x4)!=0)
             {
-                int dummy=0;
+                //int dummy=0;
+                //there is more stuff to read here.
+                throw new shared.uncaughtexception("Unhandled case in PlIcicle.");
             }
         }
         
-        public void compile(Bytedeque data)
+        public void compile(Bytedeque c)
         {
-            data.writeInt(visible);
-            data.writeInt(materialindex);
-            localToWorld.compile(data);
-            worldToLocal.compile(data);
-            data.writeInt(lightingflags);
-            localBounds.compile(data);
-            worldBounds.compile(data);
-            data.writeInt(blendflag);
-            data.writeInt(blendindex);
-            data.writeShort(u1);
-            data.writeShort(u2);
-            data.writeShort(u3);
-            u4.compile(data);
-            u5.compile(data);
-            if((lightingflags & 0x10)!=0)
-            {
-                xu6.compile(data);
-            }
-            data.writeInt(meshindex);
-            data.writeInt(unused1);
-            data.writeInt(unused2);
-            data.writeInt(vertexstart1);
-            data.writeInt(vertexstart2);
-            data.writeInt(vertexcount);
-            data.writeInt(surfaceindex);
-            data.writeInt(indexstart);
-            data.writeInt(indexcount);
-            
+            parent.compile(c);
+            c.writeInt(IBufferIdx);
+            c.writeInt(IStartIdx);
+            c.writeInt(ILength);
         }
     }
     
@@ -357,24 +531,24 @@ public class PlDrawableSpans extends uruobj
         }
     }*/
     
-    static public class SubsetGroup extends uruobj
+    static public class PlDISpanIndex extends uruobj //SubsetGroup
     {
-        public int u1;
-        public int subsetcount;
-        public int[] subsetindex;
+        public int flags; //u1
+        public int indicesCount; //subsetcount
+        public int[] indices; //subsetindex
         
-        public SubsetGroup(context c)
+        public PlDISpanIndex(context c)
         {
-            u1 = c.in.readInt();
-            subsetcount = c.in.readInt();
-            subsetindex = c.in.readInts(subsetcount);
+            flags = c.in.readInt();
+            indicesCount = c.in.readInt();
+            indices = c.in.readInts(indicesCount);
         }
         
         public void compile(Bytedeque data)
         {
-            data.writeInt(u1);
-            data.writeInt(subsetcount);
-            data.writeInts(subsetindex);
+            data.writeInt(flags);
+            data.writeInt(indicesCount);
+            data.writeInts(indices);
         }
     }
     static public class x0240plSpaceTree extends uruobj
@@ -440,7 +614,7 @@ public class PlDrawableSpans extends uruobj
     }
     
     
-    static public class Mesh extends uruobj
+    static public class PlGBufferGroup extends uruobj //Mesh
     {
         //byte vertexformat;
         byte fformat;
@@ -459,12 +633,12 @@ public class PlDrawableSpans extends uruobj
         int u3;
         int lastindex;
         
-        public Mesh(context c)
+        public PlGBufferGroup(context c)
         {
             shared.IBytestream data = c.in;
             if(c.readversion==7)
             {
-                //sub_5059A0
+                //sub_5059A0  //504f80???
                 int mesh1 = c.readInt(); //76
                 byte mesh2 = c.readByte(); //0 //this+4+6
                 byte mesh3 = c.readByte(); e.ensure(mesh3==1);//1 //v3+11, used in an if statement.
@@ -484,8 +658,11 @@ public class PlDrawableSpans extends uruobj
                 SubMeshAlt[] submeshalt = new SubMeshAlt[vertexstoragecount];
                 for(int i=0;i<vertexstoragecount;i++)
                 {
-                    submeshalt[i] = new SubMeshAlt(c,fformat,v7,mesh6,mesh2,mesh1,count);
+                    //submeshalt[i] = new SubMeshAlt(c,fformat,v7,mesh6,mesh2,mesh1,count);
                     //submeshalt[i] = new SubMeshAlt(c,hi1,);
+                    int v12 = c.readInt();
+                    byte v15 = c.readByte();
+                    //sub50e890(c,mesh1);
                 }
                 //TODO rest of this, but it seems to work perfectly up to this point.
                 surfacecount = data.readInt();
@@ -525,10 +702,15 @@ public class PlDrawableSpans extends uruobj
                 lastindex = data.readInt();
             }
         }
+        public void sub50e890()
+        {
+
+        }
         public static class SubMeshAlt
         {
             public SubMeshAlt(context c, byte fformat, int v7, int v17, byte mesh2, int mesh1, int count)
             {
+                //sub_50e890?
                 int submesh1 = c.readInt(); //768, size in bytes?
                 byte submesh2 = c.readByte(); //0
                 m.warn("TODO: make this check if the short is in range.");

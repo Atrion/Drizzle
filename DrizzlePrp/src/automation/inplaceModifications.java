@@ -548,17 +548,17 @@ public class inplaceModifications
                 }
             }
             //do the bounds
-            if(drawspan.subsetcount>0)
+            if(drawspan.icicleCount>0)
             {
                 //drawspan.xLocalBounds.transform(translation);
                 drawspan.xWorldBounds.transform(translation);
                 drawspan.xMaxWorldBounds.transform(translation);
             }
-            for(int i=0;i<drawspan.subsets.length;i++)
+            for(int i=0;i<drawspan.icicles.length;i++)
             {
                 //drawspan.subsets[i].localBounds.transform(translation);
-                PlDrawableSpans.SpanSubset ss = drawspan.subsets[i];
-                drawspan.subsets[i].worldBounds.transform(translation);
+                PlDrawableSpans.PlIcicle ss = drawspan.icicles[i];
+                drawspan.icicles[i].parent.parent.worldBounds.transform(translation);
             }
             if(drawspan.xspacetree!=null) //fixes e.g. treetrunks
             {
@@ -579,7 +579,7 @@ public class inplaceModifications
                 //drawspan.worldToLocals[i] = drawspan.worldToLocals[i].mult(invtranslation);
             }
             
-            for(int i=0;i<drawspan.subsets.length;i++)
+            for(int i=0;i<drawspan.icicles.length;i++)
             {
                 
                 //this block breaks, e.g. trees aren't translated.  So not everything with a coordinterface shouldn't be translated.
@@ -610,8 +610,8 @@ public class inplaceModifications
                 if(hascoordinterface) continue;*/
                 
                 //moves e.g. tree trunks.
-                drawspan.subsets[i].localToWorld = translation.mult(drawspan.subsets[i].localToWorld);
-                drawspan.subsets[i].worldToLocal = drawspan.subsets[i].worldToLocal.mult(invtranslation);
+                drawspan.icicles[i].parent.parent.localToWorld = translation.mult(drawspan.icicles[i].parent.parent.localToWorld);
+                drawspan.icicles[i].parent.parent.worldToLocal = drawspan.icicles[i].parent.parent.worldToLocal.mult(invtranslation);
             }
             
             /*drawspan.matrixsetcount = 1;
