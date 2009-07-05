@@ -168,6 +168,11 @@ public class UamConfigNew
         if(result==null) result = data.welcome;
         return result;
     }
+    public int getDrizzleVersion()
+    {
+        int result = Integer.parseInt(data.drizzle);
+        return result;
+    }
     public String getAgeProperName(String agename)
     {
         return data.getAge(agename).propername;
@@ -250,6 +255,13 @@ public class UamConfigNew
         }
         //UamConfigData data = new UamConfigData
         //data.loadFromUamConfig(config);
+
+        //set latest drizzle version.
+        if(gui.Version.version > Integer.parseInt(config.data.drizzle))
+        {
+            config.data.drizzle = Integer.toString(gui.Version.version);
+        }
+
         for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, suffix))
         {
             String filename = f.getName();
@@ -313,6 +325,7 @@ public class UamConfigNew
         public Vector<String> comments = new Vector();
         public String welcome = "";
         public HashMap<String,String> welcomes = new HashMap();
+        public String drizzle = "1";
         public Vector<Age> ages = new Vector();
         public boolean aequalsatransposeequalsainverse = false;
         
@@ -342,6 +355,7 @@ public class UamConfigNew
                         String tag = e.getTagName();
                         if(tag.equals("welcome")) welcome = e.getTextContent();
                         else if(tag.startsWith("welcome--")) welcomes.put(tag.substring("welcome--".length()), e.getTextContent());
+                        else if(tag.equals("drizzle")) drizzle = e.getTextContent();
                         else if(tag.equals("age")) ages.add(new Age(e));
                         else if(tag.equals("age2")) ages.add(new Age(e));
                         else if(tag.equals("aequalsatransposeequalsainverse")) aequalsatransposeequalsainverse = true;
@@ -366,6 +380,7 @@ public class UamConfigNew
             for(String comment: comments) s.append("\t<!--"+comment+"-->\n");
             s.append("\t<welcome>"+welcome+"</welcome>\n");
             for(String lang: welcomes.keySet()) s.append("\t<welcome--"+lang+">"+welcomes.get(lang)+"</welcome--"+lang+">\n");
+            s.append("\t<drizzle>"+drizzle+"</drizzle>\n");
             for(Age age: ages) age.generateXml(s);
             s.append("\t<aequalsatransposeequalsainverse />\n");
             s.append("</uam>\n");

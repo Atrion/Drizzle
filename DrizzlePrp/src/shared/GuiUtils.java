@@ -602,6 +602,7 @@ public class GuiUtils
         keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK),new DefaultEditorKit.CutAction());
         keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, InputEvent.SHIFT_DOWN_MASK),new DefaultEditorKit.PasteAction());
         keymap.addActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK),actionmap.get(DefaultEditorKit.selectAllAction));
-        
+
     }
+
 }

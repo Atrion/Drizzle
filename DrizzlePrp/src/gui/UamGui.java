@@ -35,7 +35,7 @@ public class UamGui
     public static JList agelist;
     public static JList verlist;
     public static JList mirlist;
-    public static gui.Gui gui;
+    public static gui.Gui guiform;
     public static JButton downloadbutton;
     public static JButton deletebutton;
     public static JLabel AgeLabel;
@@ -401,8 +401,8 @@ public class UamGui
             }
         }*/
         
-        String welcomeMessage = Uam.ageList.getWelcomeMessage();
-        m.msg(welcomeMessage);
+        //String welcomeMessage = Uam.ageList.getWelcomeMessage();
+        //m.msg(welcomeMessage);
         
         //Vector<String> availableAges = Uam.ageList.getAllAgeNames();
         
@@ -571,6 +571,10 @@ public class UamGui
         //m.msg("refresh");
         //list Ages...
         //final Vector<String> ages = uam.Uam.ageList.getAllAgeNames();
+
+        String welcomeMessage = Uam.ageList.getWelcomeMessage();
+        m.msg(welcomeMessage);
+
         GetLocalInfo(potsfolder2);
         Vector<AgeListItemInfo> ages = new Vector();
         for(UamConfigNew.UamConfigData.Age age: Uam.ageList.data.ages)
@@ -608,6 +612,11 @@ public class UamGui
             agelist.setSelectedValue(selection, true); //doesn't die even if selection is no longer there.
         }
         
+        if(uam.Uam.ageList.getDrizzleVersion()>gui.Version.version)
+        {
+            m.msg("(","A new version of Drizzle is available: ","Drizzle"+Integer.toString(uam.Uam.ageList.getDrizzleVersion()),")");
+        }
+
         uam.Uam.installInfo.printStatsMessage();
     }
     public static void GetAgeListGuiOffline(String potsfolder)

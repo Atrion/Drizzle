@@ -11,9 +11,9 @@ import javax.swing.JComponent;
 
 public class common
 {
-    public static void addSpecialMenu(IState state, JComponent component)
+    public static void addSpecialMenu(final IState state, final JComponent component)
     {
-        final IState state2 = state;
+        //final IState state2 = state;
         //JComponent component = (JComponent)state;
         component.addMouseListener(new javax.swing.event.MouseInputListener() {
             public void mouseClicked(MouseEvent e) {
@@ -21,15 +21,41 @@ public class common
                 {
                     javax.swing.JPopupMenu popup = new javax.swing.JPopupMenu();
                     javax.swing.JComponent parent = (javax.swing.JComponent)e.getSource();
-                    javax.swing.JMenuItem mi = new javax.swing.JMenuItem("set to default");
-                    mi.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            Object o = state2.getDefault();
-                            state2.putStateValue(o);
-                        }
-                    });
+
+                    if(state!=null)
+                    {
+                        javax.swing.JMenuItem mi = new javax.swing.JMenuItem("set to default");
+                        mi.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                Object o = state.getDefault();
+                                state.putStateValue(o);
+                            }
+                        });
+                        popup.add(mi);
+                    }
+
+                    if(component instanceof javax.swing.text.JTextComponent)
+                    {
+                        javax.swing.JMenuItem mi2 = new javax.swing.JMenuItem("copy");
+                        mi2.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                String sel = ((javax.swing.text.JTextComponent)component).getSelectedText();
+                                shared.clipboard.SetString(sel);
+                            }
+                        });
+                        popup.add(mi2);
+
+                        javax.swing.JMenuItem mi3 = new javax.swing.JMenuItem("copy all");
+                        mi3.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                String sel = ((javax.swing.text.JTextComponent)component).getText();
+                                shared.clipboard.SetString(sel);
+                            }
+                        });
+                        popup.add(mi3);
+                    }
+
                     java.awt.Point p = e.getPoint();
-                    popup.add(mi);
                     popup.show(parent, p.x , p.y);
                 }
             }
@@ -40,6 +66,7 @@ public class common
             public void mouseDragged(MouseEvent e) {}
             public void mouseMoved(MouseEvent e) {}
         });
+
     }
     
     public static void addSpecialMenu(IState state)

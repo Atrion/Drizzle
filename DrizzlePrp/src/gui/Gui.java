@@ -77,7 +77,7 @@ public class Gui extends javax.swing.JFrame {
 
         translation.translation.registerGUIForm(this);
         
-        gui.UamGui.gui = this;
+        gui.UamGui.guiform = this;
         gui.UamGui.agelist = this.jList1;
         gui.UamGui.verlist = this.jList2;
         gui.UamGui.mirlist = this.jList3;
@@ -522,8 +522,8 @@ public class Gui extends javax.swing.JFrame {
         jButton35 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea3 = new shared.State.TextareaStateless();
         jButton43 = new javax.swing.JButton();
         jScrollPane14 = new javax.swing.JScrollPane();
         textareaState1 = new shared.State.TextareaState();
@@ -579,8 +579,8 @@ public class Gui extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         textfieldState11 = new shared.State.TextfieldState();
         jButton73 = new javax.swing.JButton();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea6 = new shared.State.TextareaStateless();
         jPanel4 = new javax.swing.JPanel();
         jButton23 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
@@ -794,15 +794,15 @@ public class Gui extends javax.swing.JFrame {
         jButton112 = new javax.swing.JButton();
         jButton113 = new javax.swing.JButton();
         HelpTab = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
         imagePanel2 = new shared.ImagePanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea5 = new shared.State.TextareaStateless();
         jPanel27 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jButton54 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea1 = new shared.State.TextareaStateless();
 
         uamStartupButtongroup.setName("uamStartup");
 
@@ -1573,7 +1573,7 @@ public class Gui extends javax.swing.JFrame {
             jTextArea3.setColumns(20);
             jTextArea3.setRows(5);
             jTextArea3.setText("//angle1,dist1\n//angle2,dist2\n\n//e.g.:\n//8.5,360\n//1,556\n//2,442\n//15,420\n\n//15,1386\n//11,274\n//11,164\n//17,269\n//11.25,237\n//10,807\n//16.5,91\n//15,1049\n//1,50\n//15,41\n//9,50\n//7,524\n//0,1154\n//2,629\n\n//0.25,780\n//1,2052\n//7,825\n//10,866\n//2,105\n//10,2212\n//11.25,1245\n//15,748\n//13,429\n//16.25,315\n//10.5,264\n//15,461\n//15,652\n\n//2.75,109\n//0,1259\n//14,210\n//9,196\n//15,415\n//17,160\n//15,360\n//13,251\n//17.25,424\n\n//5,835\n//5,342\n//10,369\n//5,538\n//2.25,205\n//5,205\n//7.5,511\n");
-            jScrollPane3.setViewportView(jTextArea3);
+            jScrollPane11.setViewportView(jTextArea3);
 
             javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
             jPanel11.setLayout(jPanel11Layout);
@@ -1583,9 +1583,9 @@ public class Gui extends javax.swing.JFrame {
                     .addContainerGap()
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton35)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel11Layout.setVerticalGroup(
@@ -1593,7 +1593,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createSequentialGroup()
                     .addComponent(jLabel4)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton35)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2013,10 +2013,10 @@ public class Gui extends javax.swing.JFrame {
 
             jTextArea6.setColumns(20);
             jTextArea6.setRows(5);
-            jScrollPane11.setViewportView(jTextArea6);
+            jScrollPane1.setViewportView(jTextArea6);
 
-            jPanel48.add(jScrollPane11);
-            jScrollPane11.setBounds(30, 130, 770, 230);
+            jPanel48.add(jScrollPane1);
+            jScrollPane1.setBounds(30, 130, 770, 250);
 
             AdvTabState.addTab("List Analysis", jPanel48);
 
@@ -3772,10 +3772,7 @@ public class Gui extends javax.swing.JFrame {
 
                         tabsState3.addTab("Advanced", AdvTabState);
 
-                        jTextArea5.setColumns(20);
-                        jTextArea5.setEditable(false);
-                        jTextArea5.setRows(5);
-                        jScrollPane10.setViewportView(jTextArea5);
+                        HelpTab.setLayout(null);
 
                         imagePanel2.setImageFile("/gui/Pterosaur2b4.png");
 
@@ -3790,26 +3787,15 @@ public class Gui extends javax.swing.JFrame {
                             .addGap(0, 124, Short.MAX_VALUE)
                         );
 
-                        javax.swing.GroupLayout HelpTabLayout = new javax.swing.GroupLayout(HelpTab);
-                        HelpTab.setLayout(HelpTabLayout);
-                        HelpTabLayout.setHorizontalGroup(
-                            HelpTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HelpTabLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(imagePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(27, Short.MAX_VALUE))
-                        );
-                        HelpTabLayout.setVerticalGroup(
-                            HelpTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HelpTabLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(HelpTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(imagePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(73, Short.MAX_VALUE))
-                        );
+                        HelpTab.add(imagePanel2);
+                        imagePanel2.setBounds(10, 40, 135, 124);
+
+                        jTextArea5.setColumns(20);
+                        jTextArea5.setRows(5);
+                        jScrollPane2.setViewportView(jTextArea5);
+
+                        HelpTab.add(jScrollPane2);
+                        jScrollPane2.setBounds(150, 40, 810, 370);
 
                         tabsState3.addTab("Help", HelpTab);
 
@@ -3848,10 +3834,10 @@ public class Gui extends javax.swing.JFrame {
 
                         jTextArea1.setColumns(20);
                         jTextArea1.setRows(5);
-                        jScrollPane1.setViewportView(jTextArea1);
+                        jScrollPane10.setViewportView(jTextArea1);
 
-                        jPanel27.add(jScrollPane1);
-                        jScrollPane1.setBounds(160, 30, 440, 130);
+                        jPanel27.add(jScrollPane10);
+                        jScrollPane10.setBounds(160, 27, 440, 130);
 
                         getContentPane().add(jPanel27);
                         jPanel27.setBounds(10, 510, 620, 180);
@@ -5643,18 +5629,18 @@ private void sliderState1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
+    private shared.State.TextareaStateless jTextArea1;
+    private shared.State.TextareaStateless jTextArea3;
     private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
+    private shared.State.TextareaStateless jTextArea5;
+    private shared.State.TextareaStateless jTextArea6;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
