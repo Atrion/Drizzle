@@ -24,12 +24,14 @@ import shared.e;
 import shared.m;
 import uru.Bytedeque;
 import shared.IBytestream;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
  * @author user
  */
-public class Uruobjectdesc extends uruobj
+public class Uruobjectdesc extends uruobj implements java.io.Serializable
 {
     byte flag;
     //int pageid;
@@ -46,7 +48,7 @@ public class Uruobjectdesc extends uruobj
     //byte xu1;
     short xm5unknown;
 
-    public Uruobjectdesc rootobj;
+    transient public Uruobjectdesc rootobj;
     
     public Uruobjectdesc(context c)
     {
@@ -149,7 +151,7 @@ public class Uruobjectdesc extends uruobj
     }
     public PrpRootObject getObjectDescribed(prpfile prp)
     {
-        PrpRootObject result = prputils.findObjectWithDesc(prp, this);
+        PrpRootObject result = prp.findObjectWithDesc(this);
         return result;
     }
     public boolean equals(Object obj)
@@ -163,6 +165,36 @@ public class Uruobjectdesc extends uruobj
         if(!this.pageid.equals(o.pageid)) return false;
         if(!this.pagetype.equals(o.pagetype)) return false;
         return true;
+    }
+    public void addXml(StringBuilder s)
+    {
+        s.append("<desc>");
+        s.append("<name>");objectname.addXml(s);s.append("</name>");
+        s.append("<type>");objecttype.addXml(s);s.append("</type>");
+        s.append("<pageid>");pageid.addXml(s);s.append("</pageid>");
+        s.append("<pagetype>");pagetype.addXml(s);s.append("</pagetype>");
+        s.append("<flag>");s.append(Byte.toString(flag));s.append("</flag>");
+        s.append("<xu1>");s.append(Byte.toString(xu1));s.append("</xu1>");
+        s.append("</desc>");
+    }
+    public static Uruobjectdesc createFromXml(Element e1)
+    {
+        Uruobjectdesc result = new Uruobjectdesc();
+        for(Node child=e1.getFirstChild();child!=null;child=child.getNextSibling())
+        {
+            if(child.getNodeType()==Node.ELEMENT_NODE)
+            {
+                Element e2 = (Element)child;
+                String tag = e2.getTagName();
+                if(tag.equals("name")) result.objectname = Urustring.createFromXml(e2);
+                else if(tag.equals("type")) result.objecttype = Typeid.createFromXml(e2);
+                else if(tag.equals("pageid")) result.pageid = Pageid.createFromXml(e2);
+                else if(tag.equals("pagetype")) result.pagetype = Pagetype.createFromXml(e2);
+                else if(tag.equals("flag")) result.flag = Byte.parseByte(e2.getTextContent());
+                else if(tag.equals("xu1")) result.xu1 = Byte.parseByte(e2.getTextContent());
+            }
+        }
+        return result;
     }
     public int hashCode()
     {

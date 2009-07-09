@@ -24,6 +24,7 @@ import uru.Bytedeque;
 import shared.e;
 import shared.m;
 import shared.b;
+import uru.moulprp.Transmatrix;
 //import java.util.Vector;
 
 /**
@@ -61,6 +62,54 @@ public class x0015CoordinateInterface extends uruobj
         {
             children[i] = new Uruobjectref(c);
         }
+    }
+    public void translate(double x, double y, double z, PrpRootObject[] coordinateinterfaces)
+    {
+        Uruobjectref parentCI = findCIParent(coordinateinterfaces);
+        boolean moveLocalToParent = (parentCI==null);
+        translate(x,y,z,moveLocalToParent);
+    }
+    public void translate(double x2, double y2, double z2, boolean moveLocalToParent)
+    {
+        float x = (float)x2;
+        float y = (float)y2;
+        float z = (float)z2;
+
+        Transmatrix translation = Transmatrix.createFromVector(x, y, z);
+        Transmatrix invtranslation = Transmatrix.createFromVector(-x, -y, -z);
+
+
+        this.localToWorld = translation.mult(this.localToWorld);
+        this.worldToLocal = this.worldToLocal.mult(invtranslation);
+
+        //we don't want to translate localtoparent if we'll be translating the parent anyway.
+        if(moveLocalToParent)
+        {
+            this.localToParent = translation.mult(this.localToParent);
+            this.parentToLocal = this.parentToLocal.mult(invtranslation);
+        }
+        else
+        {
+            //do nothing.
+        }
+
+    }
+    public Uruobjectref findCIParent(PrpRootObject[] coordinateinterfaces)
+    {
+        Uruobjectref so = this.parent.sceneobject;
+        return findCIParent(so, coordinateinterfaces);
+    }
+    public static Uruobjectref findCIParent(Uruobjectref sceneobject, PrpRootObject[] coordinateinterfaces)
+    {
+        for(PrpRootObject obj: coordinateinterfaces)
+        {
+            x0015CoordinateInterface ci2 = obj.castTo();
+            for(Uruobjectref ref: ci2.children)
+            {
+                if(ref.equals(sceneobject)) return ref;
+            }
+        }
+        return null;
     }
     private x0015CoordinateInterface(){}
     public static x0015CoordinateInterface createDefault(Uruobjectref sceneobject)

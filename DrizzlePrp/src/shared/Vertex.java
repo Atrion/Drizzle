@@ -63,6 +63,14 @@ public strictfp class Vertex extends uruobj implements ICompilable
     {
         return new Vertex(new Flt(0), new Flt(0), new Flt(0));
     }
+    public static Vertex createFromDoubles(double x, double y, double z)
+    {
+        Vertex result = new Vertex();
+        result.x = Flt.createFromJavaFloat((float)x);
+        result.y = Flt.createFromJavaFloat((float)y);
+        result.z = Flt.createFromJavaFloat((float)z);
+        return result;
+    }
     public static Vertex createFromFloats(float x, float y, float z)
     {
         Vertex result = new Vertex();
@@ -127,6 +135,14 @@ public strictfp class Vertex extends uruobj implements ICompilable
         Flt x2 = this.x.add(v.x);
         Flt y2 = this.y.add(v.y);
         Flt z2 = this.z.add(v.z);
+        Vertex result = new Vertex(x2,y2,z2);
+        return result;
+    }
+    public Vertex add(double x, double y, double z)
+    {
+        Flt x2 = this.x.add((float)x);
+        Flt y2 = this.y.add((float)y);
+        Flt z2 = this.z.add((float)z);
         Vertex result = new Vertex(x2,y2,z2);
         return result;
     }

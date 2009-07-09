@@ -701,7 +701,7 @@ public class prputils
                         Uruobjectref materialRef = curDrawableSpan.materials.get(j);
                         if(materialRef.hasRef!=0)
                         {
-                            PrpRootObject curMaterial1 = findObjectWithDesc(prp,materialRef.xdesc);
+                            PrpRootObject curMaterial1 = prp.findObjectWithDesc(materialRef.xdesc);
                             if(curMaterial1!=null) //if null, then it should be in another page,
                             {
                                 x0007Material curMaterial = (x0007Material)curMaterial1.prpobject.object;
@@ -747,26 +747,6 @@ public class prputils
         
     }
     
-    public static PrpRootObject findObjectWithDesc(prpfile prp, Uruobjectdesc desc)
-    {
-        int numobjects = prp.objects.length;
-        for(int i=0;i<numobjects;i++)
-        {
-            PrpRootObject curobj = prp.objects[i];
-            Uruobjectdesc curdesc = curobj.header.desc;
-            /*if(curdesc==null || curdesc.objectname==null || curdesc.objectname.toString()==null||desc==null||desc.objectname==null||desc.objectname.toString()==null)
-            {
-                int dummy=0;
-            }*/
-            if(curdesc.objectname.toString().equals(desc.objectname.toString())
-                    &&(curdesc.objecttype==desc.objecttype)
-                    &&(curdesc.pageid.equals(desc.pageid)))
-            {
-                return curobj;
-            }
-        }
-        return null;
-    }
     
     public static prpfile ProcessPotsPrp(context c)//(byte[] data)
     {
@@ -977,7 +957,7 @@ public class prputils
                     int subsetgroup = di.subsetgroups[j].subsetgroupindex;
                     if(subsetgroup==-1) continue;
                     Uruobjectdesc spandesc = di.subsetgroups[j].span.xdesc;
-                    PlDrawableSpans span = findObjectWithDesc(prp,spandesc).castTo();//x004CDrawableSpans.class);
+                    PlDrawableSpans span = prp.findObjectWithDesc(spandesc).castTo();//x004CDrawableSpans.class);
                     int numsubsets = span.DIIndices[subsetgroup].indicesCount;
                     for(int k=0;k<numsubsets;k++)
                     {
@@ -994,7 +974,7 @@ public class prputils
                             {
                                 int dummy=0;
                             }
-                            x0007Material mat = findObjectWithDesc(prp,matdesc).castTo();//x0007Material.class);
+                            x0007Material mat = prp.findObjectWithDesc(matdesc).castTo();//x0007Material.class);
                             //for(int l=0;l<mat.layercount;l++)
                             for(Uruobjectref layerref: mat.layerrefs)
                             {

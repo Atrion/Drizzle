@@ -38,16 +38,16 @@ public class PlDrawableSpans extends uruobj
     int props; //unknown
     int renderLevel; //zbias
     int criteria; //blendflags
-    int materialsCount;
+    public int materialsCount;
     //public Uruobjectref[] materials;
     public Vector<Uruobjectref> materials;
     public int icicleCount; //subsetcount
     public PlIcicle[] icicles; //subsets
     int unused;
-    int spanCount; //listcount
-    int[] spanSourceIndices; //unused2
+    public int spanCount; //listcount
+    public int[] spanSourceIndices; //unused2
     //byte[] unused3;
-    Uruobjectref[] fogEnvironmentRefs; //unused3
+    public Uruobjectref[] fogEnvironmentRefs; //unused3
     //BoundingBox[] xboundingBoxes;
     public BoundingBox xLocalBounds;
     public BoundingBox xWorldBounds;
@@ -76,7 +76,7 @@ public class PlDrawableSpans extends uruobj
     static final int kSpanTypeIcicle = 0x00000000;
     static final int kSpanTypeUnknown = 0x80000000;
     static final int kSpanTypeParticleSpan = 0xC0000000;
-    Vector<PlIcicle> spans = new Vector(); //should really allow any PlSpans, in practice, just all of the icicles, I think.
+    public Vector<PlIcicle> spans = new Vector(); //should really allow any PlSpans, in practice, just all of the icicles, I think.
     
     public PlDrawableSpans(context c) throws readexception
     {
@@ -130,7 +130,12 @@ public class PlDrawableSpans extends uruobj
             spanSourceIndices[i] = c.readInt();
             if((spanSourceIndices[i]&kSpanTypeMask)==kSpanTypeIcicle)
             {
-                spans.add(icicles[spanSourceIndices[i]&kSpanIDMask]);
+                int iciIdx = spanSourceIndices[i]&kSpanIDMask;
+                if(iciIdx!=i)
+                {
+                    m.warn("icicles and spans don't align.");
+                }
+                spans.add(icicles[iciIdx]);
             }
             else if((spanSourceIndices[i]&kSpanTypeMask)==kSpanTypeParticleSpan)
             {

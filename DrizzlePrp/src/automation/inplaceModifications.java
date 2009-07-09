@@ -369,7 +369,7 @@ public class inplaceModifications
                             //found an ATCAnim, translate it.
                             PrpRootObject animroot = prp.findObjectWithRef(ref2);
                             PlATCAnim anim = animroot.castTo();
-                            boolean hasparent = findCIParent(obj.getref(), coordinateinterfaces) != null;
+                            boolean hasparent = x0015CoordinateInterface.findCIParent(obj.getref(), coordinateinterfaces) != null;
                             
                             for(int i=0;i<anim.parent.effectcount;i++)
                             {
@@ -644,7 +644,7 @@ public class inplaceModifications
                 }
             }
             //find a parent if it exists.
-            Uruobjectref parent = findCIParent(ci, coordinateinterfaces);
+            Uruobjectref parent = ci.findCIParent(coordinateinterfaces);
             
             //moves e.g. spawnpoint
             ci.localToWorld = translation.mult(ci.localToWorld);
@@ -693,7 +693,7 @@ public class inplaceModifications
             }
             if(hascoordinterface) continue;*/
 
-            
+            //phys.translate(x,y,z);
             if(phys.havok.mass.equals(Flt.zero()))
             //if(true)
             {
@@ -778,21 +778,4 @@ public class inplaceModifications
         
     }
     
-    public static Uruobjectref findCIParent(x0015CoordinateInterface ci, PrpRootObject[] coordinateinterfaces)
-    {
-        Uruobjectref so = ci.parent.sceneobject;
-        return findCIParent(so, coordinateinterfaces);
-    }
-    public static Uruobjectref findCIParent(Uruobjectref sceneobject, PrpRootObject[] coordinateinterfaces)
-    {
-        for(PrpRootObject obj: coordinateinterfaces)
-        {
-            x0015CoordinateInterface ci2 = obj.castTo();
-            for(Uruobjectref ref: ci2.children)
-            {
-                if(ref.equals(sceneobject)) return ref;
-            }
-        }
-        return null;
-    }
 }

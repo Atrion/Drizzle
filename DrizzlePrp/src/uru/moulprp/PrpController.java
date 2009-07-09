@@ -252,8 +252,14 @@ public class PrpController extends uruobj
                 int dummy=0;
             }
         }
+
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(flag);
+            scalecontroller.compile(c);
+        }
     }
-    public static class plScaleValueController
+    public static class plScaleValueController extends uruobj
     {
         plLeafController parent;
         int count;
@@ -271,8 +277,15 @@ public class PrpController extends uruobj
                 keys[i] = new hsScaleKey(c);
             }
         }
+
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeInt(count);
+            c.writeArray2(keys);
+        }
     }
-    public static class hsScaleKey
+    public static class hsScaleKey extends uruobj
     {
         hsKeyFrame keyframe;
         Vertex xintan;
@@ -291,8 +304,19 @@ public class PrpController extends uruobj
             }
             value = new hsScaleValue(c);
         }
+
+        public void compile(Bytedeque c)
+        {
+            keyframe.compile(c);
+            if((keyframe.flags&0x02)!=0)
+            {
+                xintan.compile(c);
+                xouttan.compile(c);
+            }
+            value.compile(c);
+        }
     }
-    public static class hsScaleValue
+    public static class hsScaleValue extends uruobj
     {
         Vertex s;
         Quat q;
@@ -303,6 +327,12 @@ public class PrpController extends uruobj
 
             s = new Vertex(c);
             q = new Quat(c);
+        }
+
+        public void compile(Bytedeque c)
+        {
+            s.compile(c);
+            q.compile(c);
         }
     }
     public static class hsMatrix44Key extends uruobj

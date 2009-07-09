@@ -72,6 +72,10 @@ public strictfp class Transmatrix extends uruobj
                     result[i][j] = i==j?1:0;
         }
     }*/
+    public static Transmatrix createFromVector2(double x, double y, double z)
+    {
+        return createFromVector((float)x,(float)y,(float)z);
+    }
     public static Transmatrix createFromVector(float x, float y, float z)
     {
         double[][] doublemat = new double[4][4];

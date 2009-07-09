@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package wikispider;
+package shared;
 
 import java.io.File;
 import shared.m;
@@ -53,6 +53,16 @@ public class xml
     
     //public UamConfigData data; //removed
     
+    public static String sanitise(String in)
+    {
+        in = in.replace("&", "&amp;");
+        in = in.replace("\"", "&quot;");
+        in = in.replace("'", "&apos;");
+        in = in.replace("<", "&lt;");
+        in = in.replace(">", "&gt;");
+        return in;
+    }
+
     public xml(byte[] data)
     {
         this(new java.io.ByteArrayInputStream(data));
@@ -126,7 +136,7 @@ public class xml
         }
     }
     
-    Vector<String> getStrings(String xpathquery)
+    public Vector<String> getStrings(String xpathquery)
     {
         Vector<String> result = new Vector();
         for(Node n: this.findNodes(xpathquery))
@@ -135,7 +145,7 @@ public class xml
         }
         return result;
     }
-    String getString(String xpathquery)
+    public String getString(String xpathquery)
     {
         Node queryresult = findNode(xpathquery);
         if(queryresult==null)
@@ -149,7 +159,7 @@ public class xml
             return result;
         }
     }
-    Node findNode(String xpathquery)
+    public Node findNode(String xpathquery)
     {
         Object result2;
         try
@@ -164,7 +174,7 @@ public class xml
         Node result3 = (result.getLength()>0)?result.item(0):null;
         return result3;
     }
-    Vector<Node> findNodes(String xpathquery)
+    public Vector<Node> findNodes(String xpathquery)
     {
         Object result2;
         try
@@ -183,6 +193,15 @@ public class xml
             result.add(result3.item(i));
         }
         return result;
+    }
+
+    public static class ConfigErrorException extends RuntimeException
+    {
+        public ConfigErrorException(String msg)
+        {
+            super(msg);
+            m.err(msg);
+        }
     }
 
 }

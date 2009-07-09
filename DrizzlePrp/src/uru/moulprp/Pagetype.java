@@ -23,9 +23,13 @@ import shared.Bytes;
 import uru.Bytedeque;
 import shared.e;
 import shared.m;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
-public class Pagetype extends uruobj
+public class Pagetype extends uruobj implements java.io.Serializable
 {
+    //usually: 8 is Textures or BuiltIn, 4 is a global one, and 0 is a regular page.
+
     short pagetype;
     
     public Pagetype(context c)
@@ -63,7 +67,15 @@ public class Pagetype extends uruobj
     {
         return Short.toString(pagetype);
     }
-    
+    public void addXml(StringBuilder s)
+    {
+        s.append(Short.toString(pagetype));
+    }
+    public static Pagetype createFromXml(Element e1)
+    {
+        int pagetype = Integer.parseInt(e1.getTextContent());
+        return Pagetype.createWithType(pagetype);
+    }
     public boolean equals(Object o)
     {
         if(o==null) return false;

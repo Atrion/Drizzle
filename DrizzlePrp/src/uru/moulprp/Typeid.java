@@ -23,6 +23,8 @@ import uru.Bytestream;
 import uru.Bytedeque;
 import shared.m;
 import shared.b;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -30,7 +32,7 @@ import shared.b;
  */
 //this is a class I made myself, to encapsulate changing object type ids.
 //public class Typeid
-public enum Typeid implements compilable
+public enum Typeid implements compilable, java.io.Serializable
 {
     //starting bunch.
     plSceneNode,
@@ -277,6 +279,7 @@ public enum Typeid implements compilable
     //misc pots
     plInstanceDrawInterface,
     plLODMipmap,
+    plSubworldRegionDetector,
     
     plLeafController,
     nil,
@@ -477,7 +480,7 @@ public enum Typeid implements compilable
         tri( -2, -2, 0x200, -2, plAvBrainPirahna), //not in pots
         tri( 0x494, -2, -2, -2, plAvBrainQuab),
         tri( 0x0CD, 0x0CD, 0x0AE, -2, plArmatureEffectsMgr),
-        tri( 0x0FE, -2, 0x0D7, -2, plFilterCoordInterface),
+        tri( 0x0FE, 0xFE, 0x0D7, -2, plFilterCoordInterface),
         
         tri( 0x135, 0x135, 0x101, -2, plParticleFollowSystemEffect),
         tri( 0x00A, 0x00A, 0x00A, -2, plParticleCollisionEffectBeat),
@@ -517,6 +520,7 @@ public enum Typeid implements compilable
 
         tri( 0x0D2, -2, -2, -2, plInstanceDrawInterface),
         tri( 0x12D, -2, -2, -2, plLODMipmap),
+        tri( 0x0F3, 0x0F3, -2, -2, plSubworldRegionDetector),
         
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
     };
@@ -1115,4 +1119,14 @@ public enum Typeid implements compilable
     {
         return t == enumvalue;
     }*/
+    public void addXml(StringBuilder s)
+    {
+        s.append(this.toString());
+    }
+    public static Typeid createFromXml(Element e1)
+    {
+        String name = e1.getTextContent();
+        Typeid result = java.lang.Enum.valueOf(Typeid.class, name);
+        return result;
+    }
 }

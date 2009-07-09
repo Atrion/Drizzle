@@ -25,6 +25,8 @@ import shared.b;
 import shared.m;
 import shared.Bytes;
 import shared.e;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -33,7 +35,7 @@ import shared.e;
 //this is a class I made myself, to encapsulate changing page ids.
 
 //In pots GlobalAvatars, the pages wrap around so that MaleFall,6 has the same Pageid as MalePelletBookLeft,262
-public class Pageid extends uruobj
+public class Pageid extends uruobj implements java.io.Serializable
 {
     public int prefix;
     public int suffix;
@@ -214,6 +216,26 @@ public class Pageid extends uruobj
         if(this.prefix!=o2.prefix) return false;
         if(this.suffix!=o2.suffix) return false;
         return true;
+    }
+    public void addXml(StringBuilder s)
+    {
+        s.append("<prefix>"+Integer.toString(prefix)+"</prefix>");
+        s.append("<suffix>"+Integer.toString(suffix)+"</suffix>");
+    }
+    public static Pageid createFromXml(Element e1)
+    {
+        Pageid result = new Pageid();
+        for(Node child=e1.getFirstChild();child!=null;child=child.getNextSibling())
+        {
+            if(child.getNodeType()==Node.ELEMENT_NODE)
+            {
+                Element e2 = (Element)child;
+                String tag = e2.getTagName();
+                if(tag.equals("prefix")) result.prefix = Integer.parseInt(e2.getTextContent());
+                else if(tag.equals("suffix")) result.suffix = Integer.parseInt(e2.getTextContent());
+            }
+        }
+        return result;
     }
     public int hashCode()
     {

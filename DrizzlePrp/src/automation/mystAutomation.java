@@ -870,6 +870,8 @@ public class mystAutomation
         Typeid.plSwimCircularCurrentRegion,
         Typeid.plSwimStraightCurrentRegion,
         Typeid.plVolumeSensorConditionalObjectNoArbitration,
+
+        Typeid.plSubworldRegionDetector,
         
     };
     
@@ -1606,7 +1608,7 @@ public class mystAutomation
                 {
                     if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
                     {
-                        uru.moulprp.PlLogicModifier lmod = prputils.findObjectWithDesc(prp, ref.xdesc).castTo();
+                        uru.moulprp.PlLogicModifier lmod = prp.findObjectWithDesc(ref.xdesc).castTo();
                         if(lmod.parent.message.type==Typeid.plNotifyMsg)
                         {
                             uru.moulprp.uruobj a = lmod.parent.message.prpobject.object;
@@ -1655,7 +1657,7 @@ public class mystAutomation
                 {
                     if(ref.hasref()&&ref.xdesc.objecttype==Typeid.plOneShotMod)
                     {
-                        uru.moulprp.PlOneShotMod osm = prputils.findObjectWithDesc(prp, ref.xdesc).castTo();
+                        uru.moulprp.PlOneShotMod osm = prp.findObjectWithDesc(ref.xdesc).castTo();
                         if(osm.smartseek!=0)
                         {
                             //found it!
@@ -1663,7 +1665,7 @@ public class mystAutomation
                             if(coordsref.hasref())
                             {
                                 m.msg("Translating smartseek for object... ",obj.header.desc.toString());
-                                uru.moulprp.x0015CoordinateInterface coords = prputils.findObjectWithDesc(prp, coordsref.xdesc).castTo();
+                                uru.moulprp.x0015CoordinateInterface coords = prp.findObjectWithDesc(coordsref.xdesc).castTo();
                                 Transmatrix m = coords.localToParent;
                                 RealMatrix m2 = m.convertToMatrix();
                                 //org.apache.commons.math.linear.RealMatrixImpl b;

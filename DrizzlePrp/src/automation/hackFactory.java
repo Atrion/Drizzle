@@ -82,7 +82,7 @@ public class hackFactory
         prpfile prp = prpfile.createFromObjectsAndInfo(objects, agename, "BuiltIn", pid, Pagetype.createWithType(8));
         return prp;
     }
-    
+
     public static PrpRootObject createSceneNode(String name, Pageid pid)
     {
         x0000Scenenode sn = x0000Scenenode.createDefault();

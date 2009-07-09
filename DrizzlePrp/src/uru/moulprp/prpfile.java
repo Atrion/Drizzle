@@ -68,6 +68,16 @@ public class prpfile
             }
         }
     }*/
+    public boolean contains(Uruobjectdesc desc)
+    {
+        PrpRootObject result = this.findObjectWithDesc(desc);
+        return (result!=null);
+    }
+    public boolean contains(String name, Typeid type)
+    {
+        Uruobjectdesc desc = findDescInIndex(name,type);
+        return (desc!=null);
+    }
     public Uruobjectdesc findDescInIndex(String name, Typeid type)
     {
         for(PrpObjectIndex.ObjectindexObjecttype oiot: objectindex.types)
@@ -174,7 +184,22 @@ public class prpfile
         
         return result;
     }
-    
+    public void addScenenode()
+    {
+        uru.moulprp.x0000Scenenode sn = uru.moulprp.x0000Scenenode.createDefault();
+
+        String nodename = this.header.agename.toString() + "_" + this.header.pagename.toString();
+        Uruobjectdesc sndesc = Uruobjectdesc.createDefaultWithTypeNamePagePagetype(Typeid.plSceneNode, nodename, this.header.pageid, this.header.pagetype);
+        PrpRootObject snro = PrpRootObject.createFromDescAndObject(sndesc, sn);
+        this.addObject(snro);
+    }
+    public static prpfile create(String agename, String pagename, Pageid pageid, Pagetype pagetype)
+    {
+        //create the prpfile
+        PrpRootObject[] objects = new PrpRootObject[]{ };
+        prpfile prp = prpfile.createFromObjectsAndInfo(objects, agename, pagename, pageid, pagetype);
+        return prp;
+    }
     public static prpfile createFromFile(String filename, boolean readRaw)
     {
         File f = new File(filename);
@@ -238,9 +263,30 @@ public class prpfile
             m.warn("Tried to remove object, but the ref given has no desc.");
             return null;
         }
-        PrpRootObject result = prputils.findObjectWithDesc(this, ref.xdesc);
+        PrpRootObject result = findObjectWithDesc(ref.xdesc);
         return result;
     }
+    public PrpRootObject findObjectWithDesc(Uruobjectdesc desc)
+    {
+        int numobjects = this.objects.length;
+        for(int i=0;i<numobjects;i++)
+        {
+            PrpRootObject curobj = this.objects[i];
+            Uruobjectdesc curdesc = curobj.header.desc;
+            /*if(curdesc==null || curdesc.objectname==null || curdesc.objectname.toString()==null||desc==null||desc.objectname==null||desc.objectname.toString()==null)
+            {
+                int dummy=0;
+            }*/
+            if(curdesc.objectname.toString().equals(desc.objectname.toString())
+                    &&(curdesc.objecttype==desc.objecttype)
+                    &&(curdesc.pageid.equals(desc.pageid)))
+            {
+                return curobj;
+            }
+        }
+        return null;
+    }
+
     public void tagRootObjectAsDeleted(PrpRootObject obj)
     {
         if(obj==null) return;

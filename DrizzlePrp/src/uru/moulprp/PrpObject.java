@@ -381,6 +381,8 @@ public class PrpObject extends uruobj
                 return new PlSwimRegionInterface.PlSwimStraightCurrentRegion(c);
             case plVolumeSensorConditionalObjectNoArbitration:
                 return new PlVolumeSensorConditionalObject.PlVolumeSensorConditionalObjectNoArbitration(c);
+            case plSubworldRegionDetector:
+                return new PlSubworldRegionDetector(c);
             default:
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());

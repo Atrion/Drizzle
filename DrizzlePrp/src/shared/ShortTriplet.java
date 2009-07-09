@@ -39,6 +39,12 @@ public class ShortTriplet extends uruobj
         q = c.readShort();
         r = c.readShort();
     }
+    public ShortTriplet(int p, int q, int r)
+    {
+        this.p = (short)p;
+        this.q = (short)q;
+        this.r = (short)r;
+    }
     private ShortTriplet(){}
     public static ShortTriplet createFromShorts(short p, short q, short r)
     {

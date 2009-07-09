@@ -46,7 +46,29 @@ public class PlHKPhysical extends uruobj
     
     //plODEPHysical
     public PlODEPhysical ode;
-    
+
+    /*public void translate(double x, double y, double z)
+    {
+        if(havok!=null)
+        {
+            if(havok.mass.equals(Flt.zero()))
+            //if(true)
+            {
+                //e.g. ground
+                Transmatrix translation = Transmatrix.createFromVector2(x, y, z);
+                havok.transformVertices(translation);
+            }
+            else
+            {
+                //e.g. pressureregions, savecloths
+                havok.position = havok.position.add(Vertex.createFromDoubles(x, y, z));
+            }
+        }
+        else
+        {
+            throw new shared.uncaughtexception("PlHKPhysical does not currently translate non-havok vertices.");
+        }
+    }*/
     public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
     {
         potsflags pots = new potsflags();
@@ -275,6 +297,58 @@ public class PlHKPhysical extends uruobj
             pots.zzzLOSDB = 0x4;
             pots.zzzgroup0 = 0x104;
         }
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x44 && group0==0x20 )
+        {
+            //untested; er'cana
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x44;
+            pots.zzzgroup0 = 0x124;
+        }
+        else if(( u14==0x0 && u15==0x0 && LOSDB==0x44 && group0==0x120 )||
+                ( u14==0x0 && u15==0x0 && LOSDB==0x40 && group0==0x120 ))
+        {
+            //untested; er'cana
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            pots.zzzgroup0 = 0x100;
+        }
+        else if( u14==0x2 && u15==0x0 && LOSDB==0x0 && group0==0x0 )
+        {
+            //untested; relto
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x0;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x1000000;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x40;
+            pots.zzzgroup0 = 0x0;
+        }
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x80 && group0==0x0 )
+        {
+            //untested; ahnonay moul
+            //cannot find example of 80 flag, so just pretending it's 0 (but removing givemass, because I feel like it :P)
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x20000;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = 0x0;
+            pots.zzzgroup0 = 0x4;
+
+            //pots.givemass = true; //delete this.
+        }
         else
         {
             if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
@@ -318,7 +392,13 @@ public class PlHKPhysical extends uruobj
         {
         }
     }
-    
+
+    public void convertPXtoHK()
+    {
+        this.havok = this.physx.convertToHavok();
+        this.physx = null;
+        this._version = 3; //set as pots version.
+    }
     
     public PlHKPhysical(context c) throws readexception
     {
@@ -377,7 +457,7 @@ public class PlHKPhysical extends uruobj
     public static class PXPhysical extends uruobj
     {
         PlSynchedObject parent;
-        Flt mass;
+        public Flt mass;
         Flt RC;
         Flt EL;
         byte format;
@@ -388,8 +468,8 @@ public class PlHKPhysical extends uruobj
         Uruobjectref scenenode;
         Uruobjectref subworld;
         Uruobjectref soundgroup;
-        Vertex position;
-        Quat orientation;
+        public Vertex position;
+        public Quat orientation;
         HsBitVector group; //4,20,200,24,120,100,124,300,700  //count is always 1 in moul
         PXSphereBounds xu24a;
         PXBoxBounds xu24b;
@@ -632,12 +712,181 @@ public class PlHKPhysical extends uruobj
             soundgroup.compile(c);
         }
         
+        public HKPhysical convertToHavok()
+        {
+            //This block converts the flags from moul to pots.
+            moulflags moul = new moulflags();
+            moul.u14 = u14;
+            moul.u15 = u15;
+            moul.LOSDB = LOSDB;
+            moul.group0 = group.values[0];
+            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
+            if(pots==null)
+            {
+                m.err("plHKPhysical: Unexpected combination.");
+            }
+            //int zzzformat = b.ByteToInt32(format);
+            short zzzu1 = pots.zzzu1;
+            short zzzcoltype = pots.zzzcoltype;
+            int zzzflagsdetect = pots.zzzflagsdetect;
+            int zzzflagsrespond = pots.zzzflagsrespond;
+            byte zzzu2 = pots.zzzu2;
+            byte zzzu3 = pots.zzzu3;
+            int zzzLOSDB = pots.zzzLOSDB;
+            HsBitVector zzzgroup = new HsBitVector(pots.zzzgroup0);
+
+            //extras
+            if(pots.givemass) mass = Flt.one();
+
+
+            //compile as if it were an HKPhysical.
+            HKPhysical r = new HKPhysical();
+            r.parent = parent;
+            r.position = position;
+            r.orientation = orientation;
+            //m.msg("compiling quat differently.");
+            //orientation.x.compile(c);
+            //orientation.y.compile(c);
+            //orientation.z.compile(c);
+            //orientation.w.compile(c);
+            r.mass = mass;
+            r.RC = RC;
+            r.EL = EL;
+
+
+            //c.writeInt(zzzformat);
+            r.format = b.ByteToInt32(format);
+            r.u1 = zzzu1;  // u1; only non-zero on one-object in Cleft.
+
+            //coltype: not at all right!
+            r.coltype = zzzcoltype;
+
+            //flagsdetect:
+            r.flagsdetect = zzzflagsdetect;
+            /*switch(u15)
+            {
+                case 0x00:
+                    c.writeInt(0x00);
+                    break;
+                case 0x08:
+                    //c.writeInt(0x020000); //also occurs, but much rarer.
+                    c.writeInt(0x08000000);
+                    break;
+                case 0x10:
+                    c.writeInt(0x800000);
+                    break;
+                case 0x18:
+                    c.writeInt(0x01020000);
+                    break;
+                default:
+                    m.err("plhkphysical: Unhandled write case.");
+                    break;
+            }*/
+
+            //flagsrespond: this is way off!
+            r.flagsrespond = zzzflagsrespond;
+            /*switch(u14)
+            {
+                case 0x00:
+                    switch(LOSDB)
+                    {
+                        case 0x01:
+                        case 0x05:
+                            c.writeInt(0x01020000);
+                            break;
+                        case 0x02:
+                            c.writeInt(0x00020000);
+                            break;
+                        case 0x04:
+                            c.writeInt(0x00000000);
+                            break;
+                        default:
+                            m.msg("Unhandled.");
+                            break;
+                    }
+                    break;
+                case 0x02:
+                    c.writeInt(0x01000000);
+                    break;
+                case 0x04:
+                    c.writeInt(0x03800000);
+                    //c.writeInt(0x03800002);
+                    //c.writeInt(0x03800004);
+                    break;
+                case 0x05:
+                    c.writeInt(0x00000000);
+                    break;
+            }*/
+
+            r.u2 = zzzu2; //u2; only non-zero on great-stairs.
+            r.u3 = zzzu3; //u3; only non-zero on great-stairs.
+
+            switch(format)
+            {
+                case 0x01: //box
+                    r.xboxbounds = xu24b.convertToHKBoxBounds();
+                    //xu24b.compileSpecial(c);
+                    break;
+                case 0x02: //sphere
+                    r.xspherebounds = xu24a.convertToHKSphereBounds();
+                    //xu24a.compileSpecial(c);
+                    break;
+                case 0x03: //hull
+                    r.xhullbounds = xu24c.convertToHKHullBounds();
+                    //xu24c.compileSpecial(c);
+                    break;
+                case 0x04: //proxy
+                    r.xproxybounds = xu24d.convertToHKProxyBounds();
+                    //xu24d.compileSpecial(c);
+                    break;
+                case 0x05: //explicit
+                    r.xexplicitbounds = xu24d.convertToHKExplicitBounds();
+                    //xu24d.compileSpecial(c);
+                    break;
+                default:
+                    m.err("Unknown hkphysical flag");
+                    break;
+            }
+
+            r.sceneobject = sceneobject;
+            r.group = zzzgroup;
+            r.scenenode = scenenode;
+            r.LOSDB = zzzLOSDB;
+            r.subworld = subworld;
+            r.soundgroup = soundgroup;
+
+            return r;
+        }
+
         public void compile(Bytedeque c)
         {
             m.err("hkphysical: compile not implemented.");
         }
         
+        /*public void transformVertices(Transmatrix mat)
+        {
+            switch(format)
+            {
+                case 0x01: //box
+                    xu24b.transformVertices(mat);
+                    break;
+                case 0x02: //sphere
+                    xu24a.transformVertices(mat);
+                    break;
+                case 0x03: //hull
+                    xu24c.transformVertices(mat);
+                    break;
+                case 0x04: //proxy
+                case 0x05: //explicit
+                    xu24d.transformVertices(mat);
+                    break;
+                default:
+                    m.err("Unknown pxphysical flag");
+                    break;
+            }
+        }*/
     }
+
     
     public static class HKPhysical extends uruobj
     {
@@ -821,8 +1070,11 @@ public class PlHKPhysical extends uruobj
     
     public static class HKBoxBounds extends uruobj
     {
-        HKProxyBounds parent;
-        
+        public HKProxyBounds parent;
+        public HKBoxBounds()
+        {
+            parent = new HKProxyBounds();
+        }
         public HKBoxBounds(context c) throws readexception
         {
             parent = new HKProxyBounds(c);
@@ -843,7 +1095,11 @@ public class PlHKPhysical extends uruobj
         //HKBounds parent;
         Vertex offset;
         Flt radius;
-        
+
+        public HKSphereBounds()
+        {
+
+        }
         public HKSphereBounds(context c) throws readexception
         {
             //parent = new HKBounds(c);
@@ -866,7 +1122,11 @@ public class PlHKPhysical extends uruobj
         //HKBounds parent;
         int vertexcount;
         Vertex[] vertices;
-        
+
+        public HKHullBounds()
+        {
+
+        }
         public HKHullBounds(context c) throws readexception
         {
             //parent = new HKBounds(c);
@@ -892,7 +1152,10 @@ public class PlHKPhysical extends uruobj
         HKHullBounds parent;
         int facecount;
         ShortTriplet[] faces;
-        
+        public HKProxyBounds()
+        {
+            parent = new HKHullBounds();
+        }
         public HKProxyBounds(context c) throws readexception
         {
             parent = new HKHullBounds(c);
@@ -914,7 +1177,11 @@ public class PlHKPhysical extends uruobj
     public static class HKExplicitBounds extends uruobj
     {
         HKProxyBounds parent;
-        
+
+        public HKExplicitBounds()
+        {
+            parent = new HKProxyBounds();
+        }
         public HKExplicitBounds(context c) throws readexception
         {
             parent = new HKProxyBounds(c);
@@ -944,6 +1211,14 @@ public class PlHKPhysical extends uruobj
         {
             offset.compile(c);
             radius.compile(c);
+        }
+
+        public HKSphereBounds convertToHKSphereBounds()
+        {
+            HKSphereBounds result = new HKSphereBounds();
+            result.offset = offset;
+            result.radius = radius;
+            return result;
         }
     }
     
@@ -1010,6 +1285,62 @@ public class PlHKPhysical extends uruobj
             c.writeArray(vertices);
             c.writeInt(facecount);
             c.writeShorts(faces);
+        }
+        public HKBoxBounds convertToHKBoxBounds()
+        {
+            HKBoxBounds result = new HKBoxBounds();
+
+            int vertexcount = 8;
+            int facecount = 12;
+            Vertex[] vertices = new Vertex[]{
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+            };
+            ShortTriplet[] faces = new ShortTriplet[]{
+                new ShortTriplet(0,2,1),
+                new ShortTriplet(1,2,3),
+                new ShortTriplet(0,1,4),
+                new ShortTriplet(1,5,4),
+                new ShortTriplet(0,4,2),
+                new ShortTriplet(2,4,6),
+                new ShortTriplet(1,3,7),
+                new ShortTriplet(7,5,1),
+                new ShortTriplet(3,2,7),
+                new ShortTriplet(2,6,7),
+                new ShortTriplet(4,7,6),
+                new ShortTriplet(4,5,7),
+            };
+            //reverse-chirality:
+            /*short[] faces = new short[]{
+                0,1,2,
+                1,3,2,
+                0,4,1,
+                1,4,5,
+                0,2,4,
+                2,6,4,
+                1,7,3,
+                7,1,5,
+                3,7,2,
+                2,7,6,
+                4,6,7,
+                4,7,5,
+            };*/
+
+            e.ensure(vertices.length==vertexcount);
+            e.ensure(faces.length==facecount*3);
+
+            result.parent.parent.vertexcount = vertexcount;
+            result.parent.parent.vertices = vertices;
+            result.parent.facecount = facecount;
+            result.parent.faces = faces;
+
+            return result;
         }
     }
     
@@ -1092,6 +1423,14 @@ public class PlHKPhysical extends uruobj
             c.writeInt(vertexcount);
             e.ensure(vertices.length==vertexcount);
             c.writeArray(vertices);
+        }
+        public HKHullBounds convertToHKHullBounds()
+        {
+            HKHullBounds result = new HKHullBounds();
+            result.vertexcount = vertexcount;
+            e.ensure(vertices.length==vertexcount);
+            result.vertices = vertices;
+            return result;
         }
     }
     
@@ -1187,6 +1526,52 @@ public class PlHKPhysical extends uruobj
                 e.ensure(xu36b.length==surfacecount*3);
                 c.writeShorts(xu36b);
             }
+        }
+        public HKProxyBounds convertToHKProxyBounds()
+        {
+            HKProxyBounds result = new HKProxyBounds();
+
+            result.parent.vertexcount = vertexcount;
+            e.ensure(vertices.length==vertexcount);
+            result.parent.vertices = vertices;
+
+            result.facecount = surfacecount;
+            result.faces = new ShortTriplet[surfacecount];
+            if(vertexcount<=256) //this may need tweeking.
+            {
+                e.ensure(xu36a.length==surfacecount*3);
+                for(int i=0;i<surfacecount;i++)
+                {
+                    short s1 = b.ByteToInt16(xu36a[i*3+0]);
+                    short s2 = b.ByteToInt16(xu36a[i*3+1]);
+                    short s3 = b.ByteToInt16(xu36a[i*3+2]);
+                    result.faces[i] = new ShortTriplet(s1,s2,s3);
+                    //c.writeShort(s1);
+                }
+                //c.writeBytes(xu36a);
+            }
+            else
+            {
+                e.ensure(xu36b.length==surfacecount*3);
+                for(int i=0;i<surfacecount;i++)
+                {
+                    short s1 = xu36b[i*3+0];
+                    short s2 = xu36b[i*3+1];
+                    short s3 = xu36b[i*3+2];
+                    result.faces[i] = new ShortTriplet(s1,s2,s3);
+                }
+                //c.writeShorts(xu36b);
+            }
+
+            return result;
+        }
+        public HKExplicitBounds convertToHKExplicitBounds()
+        {
+            HKExplicitBounds result = new HKExplicitBounds();
+
+            result.parent = this.convertToHKProxyBounds();
+
+            return result;
         }
     }
     

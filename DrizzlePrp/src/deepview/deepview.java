@@ -336,6 +336,11 @@ public class deepview
             panel.add(new dvWpstr((Wpstr)obj,name,this));
             return;
         }
+        else if(objclass==uru.moulprp.Bstr.class)
+        {
+            panel.add(new dvBstr((Bstr)obj,name,this));
+            return;
+        }
         else if(objclass==uru.moulprp.Transmatrix.class)
         {
             panel.add(new dvTransmatrix((Transmatrix)obj,name,this));

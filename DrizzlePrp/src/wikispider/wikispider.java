@@ -5,6 +5,7 @@
 
 package wikispider;
 
+import shared.xml;
 import shared.m;
 import shared.b;
 import shared.FileUtils;
@@ -262,10 +263,25 @@ public class wikispider
                         String pageurl=startingUrl + "/index.php?title="+safeinname;
                         data = shared.HttpUtils.geturl(pageurl);
                         if(data==null) return;
-                        xml x = new xml(data);
-                        //String imgurl = x.getString("//div[@class='fullImageLink']/a/@href");
-                        String imgurl = x.getString("//div[@id='file']/a/@href"); //also works.
-                        imgurl = startingUrl+"/"+imgurl;
+                        String imgurl=null;
+                        int method = 1;
+                        switch(method)
+                        {
+                            case 0:
+                                xml x = new xml(data);
+                                //String imgurl = x.getString("//div[@class='fullImageLink']/a/@href");
+                                imgurl = x.getString("//div[@id='file']/a/@href"); //also works.
+                                imgurl = startingUrl+"/"+imgurl;
+                                break;
+                            case 1:
+                                String start = "<div class=\"fullImageLink\" id=\"file\"><a href=\"";
+                                String pagestr = b.BytesToString(data);
+                                int startpos = pagestr.indexOf(start) + start.length();
+                                int endpos = pagestr.indexOf("\"", startpos);
+                                imgurl = pagestr.substring(startpos, endpos);
+                                imgurl = startingUrl+"/"+imgurl;
+                                break;
+                        }
                         //The newer MediaWiki versions also let you use /Special:Filepath/Imagename.jpg  or /Special:Filepath?file=Imagename.jpg
                         byte[] data2 = shared.HttpUtils.geturl(imgurl);
                         if(data==null) return;

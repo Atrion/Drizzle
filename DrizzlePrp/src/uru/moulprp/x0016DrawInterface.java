@@ -24,7 +24,7 @@ import uru.Bytedeque;
 import shared.e;
 import shared.m;
 import shared.b;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
@@ -33,11 +33,11 @@ import shared.b;
 public class x0016DrawInterface extends uruobj
 {
     //Objheader xheader;
-    PlObjInterface parent;
+    public PlObjInterface parent;
     public int subsetgroupcount;
     public SubsetGroupRef[] subsetgroups;
-    int visregioncount;
-    Uruobjectref[] visibleregion;
+    public int visregioncount;
+    public Uruobjectref[] visibleregion;
     
     public x0016DrawInterface(context c) throws readexception
     {
@@ -56,6 +56,25 @@ public class x0016DrawInterface extends uruobj
             visibleregion[i] = new Uruobjectref(c);
         }
         
+    }
+    public Vector<Uruobjectref> findAllMaterials(Vector<prpfile> prps)
+    {
+        Vector<Uruobjectref> result = new Vector();
+        for(SubsetGroupRef sgr: subsetgroups)
+        {
+            if(sgr.subsetgroupindex!=-1)
+            {
+                uru.moulprp.PlDrawableSpans spans = prpdistiller.distiller.findObject(prps, sgr.span.xdesc).castTo();
+                uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
+                for(int subsetind: spanindex.indices)
+                {
+                    uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
+                    Uruobjectref matrefb = spans.materials.get(icicle.parent.parent.materialindex);
+                    result.add(matrefb);
+                }
+            }
+        }
+        return result;
     }
     public void compile(Bytedeque data)
     {

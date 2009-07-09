@@ -287,7 +287,7 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Error reading file:",filename.getAbsolutePath()+":"+e.getMessage());
+            m.err("Error reading file:",filename.getAbsolutePath()+": ( "+e.getMessage()," )");
             return null;
         }
         

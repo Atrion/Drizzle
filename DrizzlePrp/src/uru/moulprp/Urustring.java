@@ -25,12 +25,14 @@ import shared.e;
 import shared.b;
 import uru.Bytedeque;
 import shared.IBytestream;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
  * @author user
  */
-public class Urustring extends uruobj
+public class Urustring extends uruobj implements java.io.Serializable
 {
     byte[] unencryptedString; //unencrypted form of this string.
 
@@ -142,7 +144,14 @@ public class Urustring extends uruobj
     {
         unencryptedString = unencrypted;
     }
-    
+    public void addXml(StringBuilder s)
+    {
+        s.append(shared.xml.sanitise(this.toString()));
+    }
+    public static Urustring createFromXml(Element e1)
+    {
+        return Urustring.createFromString(e1.getTextContent());
+    }
     public boolean equals(Object o)
     {
         if(o==null) return false;

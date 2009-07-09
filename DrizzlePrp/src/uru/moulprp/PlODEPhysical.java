@@ -575,12 +575,12 @@ public class PlODEPhysical extends uruobj
         //find the offset vector through the coordinate interface.
         e.ensure(prp!=null);
         e.ensure(sceneobject.hasref());
-        PrpRootObject a = prputils.findObjectWithDesc(prp, sceneobject.xdesc);
+        PrpRootObject a = prp.findObjectWithDesc(sceneobject.xdesc);
         e.ensure(a.header.objecttype==Typeid.plSceneObject);
         x0001Sceneobject b = a.castTo();
         Uruobjectref d = b.regioninfo;
         e.ensure(d.hasref());
-        PrpRootObject f = prputils.findObjectWithDesc(prp, d.xdesc);
+        PrpRootObject f = prp.findObjectWithDesc(d.xdesc);
         x0015CoordinateInterface g = f.castTo();
         Vertex offset = g.localToParent.convertTo3Vector();
         return offset;
