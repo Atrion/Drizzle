@@ -86,6 +86,10 @@ public class Bytestream extends IBytestream
         
         return result;
     }
+    public static Bytestream createFromFilename(String filename)
+    {
+        return createFromBytes(shared.Bytes.createFromFile(filename));
+    }
     /*public static Bytestream createSerial(String filename)
     {
         Bytestream result = new Bytestream();
