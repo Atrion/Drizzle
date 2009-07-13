@@ -460,9 +460,21 @@ public class AutoMod
                 list.add(prp.findObject("YeeshaPageErcaPlants", Typeid.plSceneObject).header.desc);
                 list.add(prp.findObject("YeeshaPageErcaPlantsDecal", Typeid.plSceneObject).header.desc);
                 list.add(prp.findObject("RgnYeeshaPageErcaPlants", Typeid.plSceneObject).header.desc);
+
+
                 //list.add(prp.findObject("CalStar07Dtct", Typeid.plSceneObject).header.desc);
                 //list.add(prp.findObject("CalendarGlare07", Typeid.plSceneObject).header.desc);
                 //list.add(prp.findObject("CalendarStarDecal", Typeid.plSceneObject).header.desc);
+
+                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythPOTSIcon"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+                //list.add(prp.findObject("POTSiconRgn", Typeid.plInterfaceInfoModifier).header.desc);
+                //list.add(prp.findObject("cRgnSnsIconLinker_Enter", Typeid.plObjectInVolumeDetector).header.desc);
+                list.add(prp.findObject("POTSiconRgn", Typeid.plSceneObject).header.desc);
+
+                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar07Get"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar07Vis_1"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStarSNDCtrl"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+
                 info.list = list;
 
                 info.createObjectList = true; info.outputFileForObjectList = outfolder+"/dat/"+filename+".profile";
