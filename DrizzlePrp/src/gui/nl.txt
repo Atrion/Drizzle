@@ -1,0 +1,208 @@
+// Dutch translation by Erik
+
+Warning: {->}Waarschuwing: 
+Ignoring: {->}Genegeerd: 
+Get Latest List{->}Haal de nieuwste lijst
+( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( Hulp is te vinden onder het tabblad "Help", of uitgebreide hulp is te vinden op http://alcugs.almlys.org/Drizzle )
+Ages:{->}Tijden:
+Versions:{->}Versies:
+Download{->}Downloaden
+Delete{->}Verwijderen
+Mirrors:{->}Spiegelservers:
+Server:{->}Server:
+Select...{->}Bladeren...
+select...{->}Bladeren...
+//select{->Bladeren
+//Select....{->Bladeren....
+select{->}Bladeren...
+Select....{->}Bladeren...
+Pots folder:{->}POTS-map:
+Change server...{->}Server wijzigen...
+UAM Settings{->}UAM-instellingen
+Launch Uru{->}Uru starten
+You have the latest version.{->}Je hebt de nieuwste versie.
+You have a version, but not the latest.{->}Je hebt een versie, maar niet de nieuwste.
+You don't have this Age installed.{->}Je hebt deze Tijd niet geïnstalleerd.
+You have this Age, but its version is unknown.{->}Je hebt deze Tijd, maar de versie is onbekend.
+Legend{->}Legenda
+Do not load Age list at startup.{->}De lijst met Tijden niet laden bij het opstarten.
+Load last saved Age list at startup.{->}De laatst opgeslagen lijst met Tijden laden bij het opstarten.
+Download most recent Age list at startup.{->}De recentste lijst met Tijden downloaden bij het opstarten.
+Automatically download list?{->}Lijst automatisch downloaden?
+Info:{->}Info:
+<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Dit gedeelte is voor het omzetten van MystV-/MOUL-/Crowthistle-bestanden om te spelen in Uru. Zie het tabblad Help of http://alcugs.almlys.org/Drizzle</html>
+SoundDecompress (When conversion is done, it will ask you to run this.){->}SoundDecompress (Als het omzetten klaar is, word je gevraagd dit uit te voeren)
+Start...{->}Starten...
+Moul folder:{->}MOUL-map:
+//select...{->Bladeren...
+Myst 5 Folder:{->}Myst5-map:
+Pots Folder:{->}POTS-map:
+Crowthistle folder:{->}Crowthistle-map:
+<html>Fill out the info in the MystV, Moul, and Crowthistle tabs, then click these buttons to put their music in your Relto's musicbox.</html>{->}<html>Vul de gegevens in op de MystV-, MOUL- en Crowthistle-tabbladen en klik dan op deze knoppen om de muziek daarvan op de muziekspeler van je Relto te plaatsen.</html>
+MystV music...{->}Muziek van MystV...
+Moul music...{->}Muziek van MOUL...
+Crowthistle music...{->}Muziek van Crowthistle...
+Pots music...{->}Muziek van POTS...
+(Make sure you fill out the 'Pots Folder' on the Moul tab for this one.){->}(Let erop dat je hiervoor de POTS-map op het tabblad MOUL invult.)
+Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}Instructies zijn te vinden op het tabblad Help of op http://alcugs.almlys.org/Drizzle
+infolder:{->}Invoermap
+outfolder:{->}Uitvoermap
+Memories: this area is for extracting images, notes, etc. from Uru (either offline or online){->}Herinneringen: dit gedeelte is voor het uitlezen van afbeeldingen, notities, etc. van Uru (hetzij offline hetzij online)
+Enter a list of angles(20=full circle) and distances.  They will be summed as vectors.{->}Voer een lijst van hoeken (20=hele cirkel) en afstanden in. Ze zullen worden opgeteld als vectoren.
+sum...{->}Som...
+Predict Pod events{->}De gebeurtenissen in de observatieposten voorspellen 
+Notes:{->}Notities:
+Start Server{->}De server starten
+base folder:{->}De hoofdmap:
+port:{->}Poort:
+Stop Server{->}De server stoppen
+Indicate in the log when files are read?{->}In het logboek aangeven wanneer er bestanden worden gelezen?
+You have to stop and start the server for settings changes to take effect.{->}Je moet de server stoppen en starten om de gewijzigde instellingen te laten werken.
+This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}Deze proxyserver is voor het bekijken van oude, gearchiveerde websites. Meer informatie op het tabblad Help of op http://alcugs.almlys.org/Drizzle
+List Available Ages...{->}De beschikbare Tijden opsommen...
+Get Offline list.{->}Offline lijst laden.
+Run Tests...{->}Tests uitvoeren...
+ignore known overrides{->}bekende problemen negeren
+Sanity check{->}Gezondheidscontrole
+Name a random Age!{->}Noem een willekeurige Tijd!
+Report{->}Rapport
+Agename:{->}Tijdnaam:
+Age reports{->}Tijdrapporten
+Everything here uses the Pots folder from the UAM tab.{->}Alles hier gebruikt de POTS-map van het tabblad UAM.
+UAM Advanced{->}UAM Gevorderd
+start{->}starten
+Prefix:{->}Voorvoegsel:
+file:{->}Bestand:
+Language{->}Taal
+Read file.{->}Bestand lezen
+Read{->}Lezen
+Clear{->}Legen
+Save changes.{->}Wijzigingen opslaan.
+MystV folder:{->}MystV-map:
+Output folder:{->}Uitvoermap:
+Select All{->}Alles selecteren
+Select None{->}Alles deselecteren
+read all...{->}Alles lezen...
+Files to process:{->}Bestanden om te verwerken:
+start...{->}Starten...
+Select all{->}Alles selecteren
+Select none{->}Alles deselecteren
+Output:{->}Uitvoer:
+Translation:{->}Vertaling:
+Remove dupes.{->}Dubbelen verwijderen. 
+Clear log.{->}Logboek legen.
+Alphabetise.{->}Alfabetiseren.
+Log{->}Logboek
+Save settings now{->}Instellingen nu opslaan.
+Delete settings and exit{->}Instellingen verwijderen en afsluiten.
+Save settings on exit.{->}Instellingen opslaan bij het afsluiten.
+Settings{->}Instellingen
+Setting language to {->}De taal wordt ingesteld op 
+Current GMT time is: {->}Huidige GMT-tijd is:
+Current local time is: {->}Huidige lokale tijd is:
+
+//Time of gmttime: {->
+//Time of localtime: {->
+//Time of cur day: {->
+//Time of next day: {->
+
+Time of today's {->}Tijd van vandaags
+ symbol: {->} symbool: 
+Time of tomorrow's {->}Tijd van morgens
+Not parsing final table in vault.dat{->}De laatste tabel in vault.dat wordt niet verwerkt
+Getting data...{->}Gegevens verkrijgen...
+In the output folder, there will be a file called 'memories.xml'; open it with your web-browser to view the memories.{->}In de uitvoermap zal een bestand 'memories.xml' komen; open het met je webbrowser om de herinneringen te zien.
+Finished creating Memories files!{->}Klaar met het maken van herinneringsbestanden.
+Error: {->}Fout: 
+You must select an output folder that already exists.{->}Je moet een uitvoermap opgeven die al bestaat.
+Folder doesn't exist.{->}De map bestaat niet.
+The input folder must have either 'vault.dat' or some number of '.v' files.{->}De invoermap moet een 'vault.dat' of een aantal '.v'-bestanden bevatten.
+Ages not installed: {->}Niet geïnstalleerde Tijden: 
+ launched!{->} gestart!
+Cleaning up any previous version...{->}Eventuele vorige versie opruimen...
+This Age is listed as not being safely deletable; performing upgrade only.{->}Van deze Tijd is vermeld dat hij niet veilig te verwijderen is; alleen een upgrade wordt uitgevoerd.
+Checking to see if we already have this version in the cache...{->}Controleren of we deze versie al opgeslagen hebben...
+Using cached version of Age: {->}Opgeslagen versie wordt gebruikt van de Tijd: 
+, Version: {->}, Versie: 
+Checking integrity...{->}Integriteit controleren...
+File integrity is good!{->}Bestandsitegriteit is in orde!
+Extracting {->}Uitlezen van 
+Age installed!{->}Tijd geïnstalleerd!
+Ages updatable: {->}Tijden die bijgewerkt kunnen worden: 
+Deleting {->}Verwijderen van 
+Attempting to download Age: {->}Aan het proberen deze Tijd te downloaden: 
+, Mirror: {->}, Spiegelserver: 
+The PathOfTheShell/CompleteChronicles folder you selected doesn't exist.{->}De PathOfTheShell-/CompleteChronicles-map die je hebt geselecteerd bestaat niet.
+Checking the folders you gave...{->}De opgegeven mappen controleren...
+The Myst5 folder you selected doesn't exist.{->}De Myst5-map die je hebt geselecteerd bestaat niet.
+The Crowthistle folder you selected doesn't exist.{->}De Crowthistle-map die je hebt geselecteerd bestaat niet.
+The MOUL folder you selected doesn't exist.{->}De MOUL-map die je hebt geselecteerd bestaat niet.
+Unable to launch program: {->}Het is niet mogelijk het volgende programma te starten: 
+ because it doesn't exist.{->} omdat het niet bestaat.
+Starting conversion...{->}Omzetten wordt begonnen...
+Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.){->}Vergeet niet om SoundDecompress.exe in je POTS-map uit te voeren om de geluiden te laten werken! (Je kunt ook op de knop SoundDecompress klikken als je wilt.) (Als SoundDecompress crasht, dan moet je inloggen in Uru, afsluiten, en het opnieuw proberen.)
+Conversion completed!{->}Omzetten voltooid!
+
+//Tabs:
+Moul{->}MOUL
+MystV{->}Myst V
+Crowthistle{->}Crowthistle
+Music{->}Muziek
+tab3{->}tabblad 3
+Pots{->}POTS
+Reports{->}Rapporten
+Settings{->}Instellingen
+SpecialMods{->}Speciale aanpassingen
+HexIsle{->}Hex Isle
+List Analysis{->}Lijstanalyse
+CrossRefTool{->}CrossRefTool
+Old{->}Oud
+Misc{->}Overig
+Encryption{->}Versleuteling
+realMyst{->}RealMyst
+Riven{->}Riven
+Legacy{->}Oude dingen
+DeepView{->}DeepView
+Manual Conversion{->}Handmatig omzetten
+UruAgeManager(UAM){->}UruAgeManager(UAM)
+Conversion(Simplicity){->}Omzetten (Eenvoudig)
+Memories{->}Herinneringen
+GameHelp{->}Spelhulp
+Proxy{->}Proxy
+Advanced{->}Gevorderd
+Help{->}Help
+
+//UAM downloader:
+Only use "Unsafe Cancel" if "Cancel" doesn't work after 30 seconds.{->}Gebruik alleen "Onveilig annuleren" als "Annuleren" na 30 seconden nog niet werkt.
+Pause/Resume{->}Pauzeren/Vervolgen
+Cancel{->}Annuleren
+Unsafe Cancel{->}Onveilig annuleren
+UAM Downloading...{->}UAM downloaden...
+
+//misc
+(Select an Age, or click "Get Latest List" to get the latest list of Ages.){->}(Selecteer een Tijd of klik op "Haal de nieuwste lijst" om de nieuwste lijst met Tijden te krijgen.)
+//<html>(Select an Age, or click "Get Latest List" to get the latest list of Ages.)</html>{-><html>(Selecteer een Tijd of klik op "Haal de nieuwste lijst" om de nieuwste lijst met Tijden te krijgen.)</html>
+Save Missing Translations{->}Missende vertalingen opslaan
+How rainy of a day is it?{->}Hoe regenachtig is het vandaag?
+archive folder:{->}Archiefmap:
+Generate uam.status.txt{->}uam.status.txt genereren
+Error reading config file.{->}Er ging iets fout bij het lezen van het configuratiebestand.
+You need to load the Age List in the UAM tab first.{->}Je moet eerst de lijst met Tijden op het tabblad UAM laden.
+Click the select button to pick a folder.{->}Klik op "Bladeren..." om een map te kiezen.
+
+//file select form
+Enter path or folder name:{->}Vul een pad of mapnaam in:
+Filter{->}Filteren
+Folders{->}Mappen
+null{->}leeg
+Files{->}Bestanden
+Enter file name:{->}Vul een bestandsnaam in:
+OK{->}OK
+Update{->}Vernieuwen
+Create Folder{->}Map aanmaken
+
+//misc dialogs
+Enter a server.{->}Vul een server in.
+Enter the server you want to use.{->}Vul de server in die je wilt gebruiken.
+Folder Name:{->}Mapnaam:
+

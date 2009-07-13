@@ -347,6 +347,9 @@ public class Gui extends javax.swing.JFrame {
             case 2:
                 translation.translation.setLanguage("fr");
                 break;
+            case 3:
+                translation.translation.setLanguage("nl");
+                break;
             default:
                 m.err("Unhandled language in pushlanguge()");
                 break;
@@ -421,14 +424,15 @@ public class Gui extends javax.swing.JFrame {
         filedirButtonGroup = new javax.swing.ButtonGroup();
         uamStartupButtongroup = new shared.State.ButtongroupState();
         languageButtonGroup = new shared.State.ButtongroupState();
-        jPanel26 = new javax.swing.JPanel();
-        jButton107 = new javax.swing.JButton();
-        jButton61 = new javax.swing.JButton();
-        checkboxState24 = new shared.State.CheckboxState();
         jPanel28 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jPanel26 = new javax.swing.JPanel();
+        jButton107 = new javax.swing.JButton();
+        jButton61 = new javax.swing.JButton();
+        checkboxState24 = new shared.State.CheckboxState();
         tabsState3 = new shared.State.TabsState();
         UAMTab = new javax.swing.JPanel();
         jButton124 = new javax.swing.JButton();
@@ -827,36 +831,6 @@ public class Gui extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
-        jPanel26.setLayout(null);
-
-        jButton107.setText("Save settings now");
-        jButton107.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton107ActionPerformed(evt);
-            }
-        });
-        jPanel26.add(jButton107);
-        jButton107.setBounds(10, 50, 230, 36);
-
-        jButton61.setText("Delete settings and exit");
-        jButton61.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton61ActionPerformed(evt);
-            }
-        });
-        jPanel26.add(jButton61);
-        jButton61.setBounds(10, 20, 230, 36);
-
-        checkboxState24.setSelected(true);
-        checkboxState24.setText("Save settings on exit.");
-        checkboxState24.setName("saveOnExit"); // NOI18N
-        jPanel26.add(checkboxState24);
-        checkboxState24.setBounds(20, 80, 210, 50);
-
-        getContentPane().add(jPanel26);
-        jPanel26.setBounds(640, 510, 250, 180);
-
         jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
         jPanel28.setLayout(null);
 
@@ -894,8 +868,49 @@ public class Gui extends javax.swing.JFrame {
         jPanel28.add(jRadioButton3);
         jRadioButton3.setBounds(10, 70, 80, 20);
 
+        languageButtonGroup.add(jRadioButton4);
+        jRadioButton4.setText("Nederlands");
+        jRadioButton4.setMargin(new java.awt.Insets(0, 2, 0, 2));
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+        jPanel28.add(jRadioButton4);
+        jRadioButton4.setBounds(10, 90, 94, 20);
+
         getContentPane().add(jPanel28);
-        jPanel28.setBounds(900, 510, 100, 180);
+        jPanel28.setBounds(890, 510, 110, 180);
+
+        jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
+        jPanel26.setLayout(null);
+
+        jButton107.setText("Save settings now");
+        jButton107.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton107ActionPerformed(evt);
+            }
+        });
+        jPanel26.add(jButton107);
+        jButton107.setBounds(10, 50, 230, 36);
+
+        jButton61.setText("Delete settings and exit");
+        jButton61.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton61ActionPerformed(evt);
+            }
+        });
+        jPanel26.add(jButton61);
+        jButton61.setBounds(10, 20, 230, 36);
+
+        checkboxState24.setSelected(true);
+        checkboxState24.setText("Save settings on exit.");
+        checkboxState24.setName("saveOnExit"); // NOI18N
+        jPanel26.add(checkboxState24);
+        checkboxState24.setBounds(20, 80, 210, 50);
+
+        getContentPane().add(jPanel26);
+        jPanel26.setBounds(630, 510, 250, 180);
 
         tabsState3.setName("mainTabs"); // NOI18N
 
@@ -1122,17 +1137,17 @@ public class Gui extends javax.swing.JFrame {
             jRadioButton5.setSelected(true);
             jRadioButton5.setText("Do not load Age list at startup.");
             jPanel44.add(jRadioButton5);
-            jRadioButton5.setBounds(10, 30, 250, 20);
+            jRadioButton5.setBounds(10, 30, 360, 20);
 
             uamStartupButtongroup.add(jRadioButton6);
             jRadioButton6.setText("Load last saved Age list at startup.");
             jPanel44.add(jRadioButton6);
-            jRadioButton6.setBounds(10, 50, 240, 20);
+            jRadioButton6.setBounds(10, 50, 360, 20);
 
             uamStartupButtongroup.add(jRadioButton7);
             jRadioButton7.setText("Download most recent Age list at startup.");
             jPanel44.add(jRadioButton7);
-            jRadioButton7.setBounds(10, 70, 340, 20);
+            jRadioButton7.setBounds(10, 70, 360, 20);
 
             UAMTab.add(jPanel44);
             jPanel44.setBounds(590, 40, 380, 100);
@@ -1392,7 +1407,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel5.add(jButton30);
-            jButton30.setBounds(20, 60, 160, 36);
+            jButton30.setBounds(20, 60, 170, 36);
 
             jButton31.setText("Moul music...");
             jButton31.addActionListener(new java.awt.event.ActionListener() {
@@ -1401,7 +1416,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel5.add(jButton31);
-            jButton31.setBounds(20, 100, 160, 36);
+            jButton31.setBounds(20, 100, 170, 36);
 
             jButton34.setText("Crowthistle music...");
             jButton34.addActionListener(new java.awt.event.ActionListener() {
@@ -1410,7 +1425,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel5.add(jButton34);
-            jButton34.setBounds(20, 140, 160, 36);
+            jButton34.setBounds(20, 140, 170, 36);
 
             jButton36.setText("Pots music...");
             jButton36.addActionListener(new java.awt.event.ActionListener() {
@@ -1419,7 +1434,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel5.add(jButton36);
-            jButton36.setBounds(20, 180, 160, 36);
+            jButton36.setBounds(20, 180, 170, 36);
 
             jLabel59.setForeground(new java.awt.Color(0, 102, 102));
             jLabel59.setText("(Make sure you fill out the 'Pots Folder' on the Moul tab for this one.)");
@@ -1741,7 +1756,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton126);
-            jButton126.setBounds(10, 180, 220, 36);
+            jButton126.setBounds(10, 180, 240, 36);
 
             jButton137.setText("Get Offline list.");
             jButton137.addActionListener(new java.awt.event.ActionListener() {
@@ -1750,7 +1765,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton137);
-            jButton137.setBounds(10, 210, 220, 36);
+            jButton137.setBounds(10, 210, 240, 36);
 
             jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Sanity check"));
             jPanel6.setLayout(null);
@@ -1813,7 +1828,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel41.add(jButton15);
-            jButton15.setBounds(10, 150, 220, 36);
+            jButton15.setBounds(10, 150, 240, 36);
 
             jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
             jPanel46.setLayout(null);
@@ -3697,7 +3712,6 @@ public class Gui extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel23Layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(textfieldState19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel22)
@@ -3868,10 +3882,10 @@ public class Gui extends javax.swing.JFrame {
                             jScrollPane10.setViewportView(jTextArea1);
 
                             jPanel27.add(jScrollPane10);
-                            jScrollPane10.setBounds(160, 27, 440, 130);
+                            jScrollPane10.setBounds(160, 27, 430, 130);
 
                             getContentPane().add(jPanel27);
-                            jPanel27.setBounds(10, 510, 620, 180);
+                            jPanel27.setBounds(10, 510, 610, 180);
 
                             pack();
                         }// </editor-fold>//GEN-END:initComponents
@@ -4644,10 +4658,17 @@ private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton86ActionPerformed
     Vector<String> v = new Vector<String>();
     File f = new File(textfieldState1.getText());
+<<<<<<< .mine
+    if (!f.getParentFile().getName().equals("dat")) {
+        m.err("The file you specify must be in a folder called \"dat\"");
+        return;
+    }
+=======
     if (!f.getParentFile().getName().equals("dat")) {
            m.err("The file you specify must be in a folder called \"dat\"");
            return;
     }
+>>>>>>> .r2329
     String filename = f.getName();
     String infolder = f.getParentFile().getParent();
     v.add(filename);
@@ -5331,6 +5352,10 @@ private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton144ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton144ActionPerformed
     GuiUtils.getUserSelectedFolder(textfieldState54);
 }//GEN-LAST:event_jButton144ActionPerformed
+
+private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    pushlanguage(false);
+}//GEN-LAST:event_jRadioButton4ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5668,6 +5693,7 @@ private void jButton144ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
