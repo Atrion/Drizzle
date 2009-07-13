@@ -141,6 +141,22 @@ public class x00A2Pythonfilemod extends uruobj
             result.xString = str;
             return result;
         }
+        public static Pythonlisting createWithString(int index, Bstr str)
+        {
+            Pythonlisting result = new Pythonlisting();
+            result.type = 4;
+            result.index = index;
+            result.xString = str;
+            return result;
+        }
+        public static Pythonlisting createWithBoolean(int index, boolean booleanval)
+        {
+            Pythonlisting result = new Pythonlisting();
+            result.type = 3;
+            result.index = index;
+            result.xBoolean = booleanval?1:0;
+            return result;
+        }
         public Pythonlisting(context c) throws readexception
         {
             this(c,Urustring.createFromString("(this constructor doesn't show the pyfile)"));

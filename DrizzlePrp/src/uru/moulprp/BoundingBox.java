@@ -101,5 +101,25 @@ public class BoundingBox extends uruobj
         }
 
     }
+    BoundingBox(){}
+    public BoundingBox deepClone()
+    {
+        BoundingBox r = new BoundingBox();
+        r.flags = this.flags;
+        r.mode = this.mode;
+        r.min = this.min.deepClone();
+        r.max = this.max.deepClone();
+        r.xboundingboxcorner = this.xboundingboxcorner.deepClone();
+        r.xdiff0 = this.xdiff0.deepClone();
+        r.xdot0 = this.xdot0.deepClone();
+        r.xmag20 = this.xmag20.deepClone();
+        r.xdiff1 = this.xdiff1.deepClone();
+        r.xdot1 = this.xdot1.deepClone();
+        r.xmag21 = this.xmag21.deepClone();
+        r.xdiff2 = this.xdiff2.deepClone();
+        r.xdot2 = this.xdot2.deepClone();
+        r.xmag22 = this.xmag22.deepClone();
+        return r;
+    }
 
 }

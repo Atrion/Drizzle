@@ -26,6 +26,9 @@ import shared.e;
 import shared.m;
 import shared.b;
 import java.util.Vector;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.ArrayDeque;
 
 /**
  *
@@ -35,15 +38,15 @@ public class PlDrawableSpans extends uruobj
 {
     //Objheader xheader;
     //PlSynchedObject parent;
-    int props; //unknown
-    int renderLevel; //zbias
-    int criteria; //blendflags
+    public int props; //unknown
+    public int renderLevel; //zbias
+    public int criteria; //blendflags
     public int materialsCount;
     //public Uruobjectref[] materials;
     public Vector<Uruobjectref> materials;
     public int icicleCount; //subsetcount
     public PlIcicle[] icicles; //subsets
-    int unused;
+    public int unused;
     public int spanCount; //listcount
     public int[] spanSourceIndices; //unused2
     //byte[] unused3;
@@ -68,7 +71,7 @@ public class PlDrawableSpans extends uruobj
     public int meshcount;
     public PlGBufferGroup[] groups; //meshes
     public Typeid embeddedtype;
-    public x0240plSpaceTree xspacetree;
+    public PlSpaceTree xspacetree;
     public Uruobjectref scenenode;
 
     static final int kSpanTypeMask = 0xC0000000;
@@ -77,6 +80,7 @@ public class PlDrawableSpans extends uruobj
     static final int kSpanTypeUnknown = 0x80000000;
     static final int kSpanTypeParticleSpan = 0xC0000000;
     public Vector<PlIcicle> spans = new Vector(); //should really allow any PlSpans, in practice, just all of the icicles, I think.
+    public int oldiciclecount;
     
     public PlDrawableSpans(context c) throws readexception
     {
@@ -228,7 +232,7 @@ public class PlDrawableSpans extends uruobj
             case nil:
                 break;
             case plSpaceTree:
-                xspacetree = new x0240plSpaceTree(c);
+                xspacetree = new PlSpaceTree(c);
                 break;
             default:
                 m.msg("unknown type.");
@@ -236,6 +240,95 @@ public class PlDrawableSpans extends uruobj
         }
         scenenode = c.readObj(Uruobjectref.class);
         
+    }
+    //this class is not finished...
+    public static class modPlDrawableSpans
+    {
+        int props;
+        int renderLevel;
+        int criteria;
+        Uruobjectref scenenode;
+        BoundingBox xLocalBounds;
+        BoundingBox xWorldBounds;
+        BoundingBox xMaxWorldBounds;
+        Transmatrix[] localToBones;
+        Transmatrix[] boneToLocals;
+        Transmatrix[] worldToLocals;
+        Transmatrix[] localToWorlds;
+        Uruobjectref[] fogEnvironmentRefs;
+        //HashSet<PlGBufferGroup> buffergroups = new HashSet();
+        HashSet<HashSet<modPlIcicle>> modicicles = new HashSet();
+        //HashSet<Uruobjectref> materials = new HashSet();
+        public static class modPlIcicle
+        {
+            PlIcicle icicle;
+            Uruobjectref material;
+            PlGBufferGroup buffergroup;
+        }
+
+        public void addFromSubsetgroupindex(PlDrawableSpans span, int subsetGroupIndex)
+        {
+            if(subsetGroupIndex!=-1)
+            {
+                PlDrawableSpans.PlDISpanIndex spanindex = span.DIIndices[subsetGroupIndex];
+                HashSet<modPlIcicle> icicles = new HashSet();
+                for(int subsetind: spanindex.indices)
+                {
+                    PlIcicle icicle = span.icicles[subsetind];
+                    Uruobjectref material = span.materials.get(icicle.parent.parent.materialindex);
+                    PlGBufferGroup bg = span.groups[icicle.parent.groupIdx];
+
+                    modPlIcicle mi = new modPlIcicle();
+                    mi.icicle = icicle.deepClone();
+                    mi.material = material.deepClone();
+                    mi.buffergroup = bg; //perhaps we should be cloning this, but I'm lazy :P
+                    icicles.add(mi);
+                }
+                modicicles.add(icicles);
+            }
+        }
+        public void copyDefaultsFromOtherDrawableSpans(PlDrawableSpans span)
+        {
+            this.props = span.props;
+            this.renderLevel = span.renderLevel;
+            this.criteria = span.criteria;
+            this.fogEnvironmentRefs = span.fogEnvironmentRefs;
+            this.xLocalBounds = span.xLocalBounds;
+            this.xWorldBounds = span.xWorldBounds;
+            this.xMaxWorldBounds = span.xMaxWorldBounds;
+            this.localToBones = span.localToBones;
+            this.boneToLocals = span.boneToLocals;
+            this.localToWorlds = span.localToWorlds;
+            this.worldToLocals = span.worldToLocals;
+            this.scenenode = span.scenenode;
+        }
+        public PlDrawableSpans createDrawableSpans()
+        {
+            PlDrawableSpans r = new PlDrawableSpans();
+
+            r.props = this.props;
+            r.renderLevel = this.renderLevel;
+            r.criteria = this.criteria;
+            r.unused = 0;
+            r.fogEnvironmentRefs = this.fogEnvironmentRefs;
+            r.xLocalBounds = this.xLocalBounds;
+            r.xWorldBounds = this.xWorldBounds;
+            r.xMaxWorldBounds = this.xMaxWorldBounds;
+
+            r.localToBones = this.localToBones;
+            r.boneToLocals = this.boneToLocals;
+            r.localToWorlds = this.localToWorlds;
+            r.worldToLocals = this.worldToLocals;
+
+            r.embeddedtype = Typeid.plSceneNode; //means null here.
+            r.xspacetree = null;
+
+            r.scenenode = this.scenenode;
+
+            //generate the rest...
+            m.err("not finished.");
+            return r;
+        }
     }
     public void compile(Bytedeque data)
     {
@@ -312,6 +405,7 @@ public class PlDrawableSpans extends uruobj
         }
         scenenode.compile(data);
     }
+    public PlDrawableSpans(){}
     public int addMaterial(Uruobjectref mat)
     {
         materials.add(mat);
@@ -418,6 +512,27 @@ public class PlDrawableSpans extends uruobj
                 waterHeight.compile(c);
             }
         }
+        PlSpan(){}
+        public PlSpan deepClone()
+        {
+            PlSpan r = new PlSpan();
+            r.subType = this.subType;
+            r.materialindex = this.materialindex;
+            r.localToWorld = this.localToWorld.deepClone();
+            r.worldToLocal = this.worldToLocal.deepClone();
+            r.props = this.props;
+            r.localBounds = this.localBounds.deepClone();
+            r.worldBounds = this.worldBounds.deepClone();
+            r.numMatrices = this.numMatrices;
+            r.baseMatrix = this.baseMatrix;
+            r.localUVWChans = this.localUVWChans;
+            r.maxBoneIdx = this.maxBoneIdx;
+            r.penBoneIdx = this.penBoneIdx;
+            r.minDist = this.minDist.deepClone();
+            r.maxDist = this.maxDist.deepClone();
+            r.waterHeight = this.waterHeight.deepClone();
+            return r;
+        }
     }
     static public class PlVertexSpan extends uruobj
     {
@@ -450,7 +565,19 @@ public class PlDrawableSpans extends uruobj
             c.writeInt(VStartIdx);
             c.writeInt(VLength);
         }
-
+        PlVertexSpan(){}
+        public PlVertexSpan deepClone()
+        {
+            PlVertexSpan result = new PlVertexSpan();
+            result.parent = parent.deepClone();
+            result.groupIdx = this.groupIdx;
+            result.VBufferIdx = this.VBufferIdx;
+            result.cellIdx = this.cellIdx;
+            result.cellOffset = this.cellOffset;
+            result.VStartIdx = this.VStartIdx;
+            result.VLength = this.VLength;
+            return result;
+        }
     }
     static public class PlIcicle extends uruobj //SpanSubset
     {
@@ -517,6 +644,16 @@ public class PlDrawableSpans extends uruobj
             c.writeInt(IStartIdx);
             c.writeInt(ILength);
         }
+        PlIcicle(){}
+        public PlIcicle deepClone()
+        {
+            PlIcicle result = new PlIcicle();
+            result.parent = parent.deepClone();
+            result.IBufferIdx = IBufferIdx;
+            result.IStartIdx = IStartIdx;
+            result.ILength = ILength;
+            return result;
+        }
     }
     
 
@@ -556,7 +693,7 @@ public class PlDrawableSpans extends uruobj
             data.writeInts(indices);
         }
     }
-    static public class x0240plSpaceTree extends uruobj
+    static public class PlSpaceTree extends uruobj
     {
         ////Objheader xheader;
         public short childnodes;
@@ -565,7 +702,7 @@ public class PlDrawableSpans extends uruobj
         public Nodes[] nodes2;
 
 
-        public x0240plSpaceTree(context c) throws readexception
+        public PlSpaceTree(context c) throws readexception
         {
             shared.IBytestream data = c.in;
             ////if(hasHeader) xheader = new Objheader(data);
@@ -579,6 +716,7 @@ public class PlDrawableSpans extends uruobj
             }
             //nodes2 = data.readVector(Nodes.class, allnodes);
         }
+        public PlSpaceTree(){}
         public void compile(Bytedeque data)
         {
             data.writeShort(childnodes);
@@ -590,13 +728,13 @@ public class PlDrawableSpans extends uruobj
             }
         }
 
-        public class Nodes
+        public static class Nodes
         {
             public BoundingBox boundingbox;
-            short type;
-            short parent;
-            short left;
-            short right;
+            public short type;
+            public short parent;
+            public short left;
+            public short right;
 
             public Nodes(context c) throws readexception
             {
@@ -606,7 +744,7 @@ public class PlDrawableSpans extends uruobj
                 left = c.in.readShort(); //typeid?
                 right = c.in.readShort(); //typeid?
             }
-            
+            public Nodes(){}
             public void compile(Bytedeque data)
             {
                 boundingbox.compile(data);
@@ -617,7 +755,276 @@ public class PlDrawableSpans extends uruobj
             }
         }
     }
-    
+    static public class modPlSpaceTree
+    {
+        modNode root;
+        private static boolean breadthFirst = true;
+
+        private PlSpaceTree source;
+        private HashMap<Integer,Integer> renumberingsource;
+        public PlDrawableSpans treespansource;
+
+        public PlSpaceTree generatePlSpaceTree()
+        {
+            PlSpaceTree r = new PlSpaceTree();
+            PlSpaceTree.Nodes rootnode = new PlSpaceTree.Nodes();
+            rootnode.parent = -1;
+            //if(breadthFirst)
+            //{
+                //recommended.
+                modNode[] nodes = getSortedNodeList();
+                PlSpaceTree.Nodes[] nodes2 = new PlSpaceTree.Nodes[nodes.length];
+                for(int i=0;i<nodes.length;i++)
+                {
+                    modNode node = nodes[i];
+                    PlSpaceTree.Nodes node2 = new PlSpaceTree.Nodes();
+                    if(node==null)
+                    {
+                        int dummy=0;
+                    }
+                    if(node.isleaf())
+                    {
+                        node2.boundingbox = node.icicleBounds;
+                        node2.parent = (node.parent==null)?-1:(short)node.parent.index;
+                        node2.type = (short)node.type;
+                        node2.left = (short)node.icicle; //equals node.index
+                        node2.right = 0;
+                    }
+                    else
+                    {
+                        node2.boundingbox = node.icicleBounds;
+                        node2.parent = (node.parent==null)?-1:(short)node.parent.index;
+                        node2.type = (short)node.type;
+                        node2.left = (short)node.left.index;
+                        node2.right = (short)node.right.index;
+                    }
+                    nodes2[i] = node2;
+                }
+                r.nodes2 = nodes2;
+            //}
+            //else
+            //{
+                //Vector<PlSpaceTree.Nodes> nodes = new Vector();
+                //generatePlSpaceTreeDepthFirst(nodes, root, rootnode);
+                //r.nodes2 = shared.generic.convertVectorToArray(nodes, PlSpaceTree.Nodes.class);
+            //}
+            r.allnodes = r.nodes2.length;
+            int leafcount = 0;
+            for(modNode node: nodes)
+            {
+                if(node.isleaf()) leafcount++;
+            }
+            r.leafnodes = leafcount;
+            r.childnodes = (short)(r.allnodes - 1);  //assuming one root.
+            return r;
+        }
+        private modNode[] getSortedNodeList()
+        {
+            Vector<modNode> nodes = new Vector();
+            getNodeList(nodes, root);
+
+            int count = nodes.size();
+            int leafcount = 0;
+            for(modNode node: nodes) if(node.isleaf()) leafcount++;
+
+            modNode[] result = new modNode[nodes.size()];
+
+            int curPos = leafcount;
+            for(int i=0;i<count;i++)
+            {
+                modNode node = nodes.get(i);
+                if(node.isleaf())
+                {
+                    node.index = node.icicle;
+                }
+                else
+                {
+                    if(node==root)
+                    {
+                        node.index = count-1;
+                    }
+                    else
+                    {
+                        node.index = curPos;
+                        curPos++;
+                    }
+                }
+                if(result[node.index]!=null)
+                {
+                    int dummy=0;
+                }
+                result[node.index] = node;
+            }
+            return result;
+        }
+        private void getNodeList(Vector<modNode> nodes, modNode curnode)
+        {
+            if(curnode.isleaf())
+            {
+                nodes.add(curnode);
+            }
+            else
+            {
+                curnode.left.parent = curnode;
+                curnode.right.parent = curnode;
+                getNodeList(nodes,curnode.left);
+                getNodeList(nodes,curnode.right);
+                nodes.add(curnode);
+            }
+        }
+
+        /*private void generatePlSpaceTreeDepthFirst(Vector<PlSpaceTree.Nodes> nodes, modNode node, PlSpaceTree.Nodes node2)
+        {
+            if(node.isleaf)
+            {
+                node2.left = (short)node.icicle;
+                node2.right = 0;
+                node2.boundingbox = node.icicleBounds;
+                node2.type = 1;
+                nodes.add(node2);
+            }
+            else
+            {
+                //do the left
+                PlSpaceTree.Nodes left = new PlSpaceTree.Nodes();
+                //left.parent = (short)node.icicle;
+                generatePlSpaceTreeDepthFirst(nodes,node.left,left);
+                node2.left = (short)(nodes.size()-1); //the last thing in the vector.
+                //do the right
+                PlSpaceTree.Nodes right = new PlSpaceTree.Nodes();
+                //right.parent = (short)node.icicle;
+                generatePlSpaceTreeDepthFirst(nodes,node.right,right);
+                node2.right = (short)(nodes.size()-1); //the last thing in the vector.
+                //add this node
+
+                node2.boundingbox = node.icicleBounds;
+                node2.type = 0;
+                nodes.add(node2);
+                int thisindex = nodes.size() - 1;
+                left.parent = (short)thisindex;
+                right.parent = (short)thisindex;
+            }
+        }*/
+        public void renumber(HashMap<Integer,Integer> renumbering)
+        {
+            this.renumberingsource = renumbering;
+            boolean keep = renumber(renumbering, root);
+            if(!keep)
+            {
+                throw new shared.uncaughtexception("Unhandled case.");
+            }
+        }
+        private boolean renumber(HashMap<Integer, Integer> renumbering, modNode node)
+        {
+            if(node.isleaf())
+            {
+                Integer newicicle = renumbering.get(node.icicle);
+                if(newicicle!=null)
+                {
+                    node.icicle = newicicle;
+                    return true;
+                }
+                else
+                {
+                    //this node has been removed.
+                    return false;
+                }
+            }
+            else
+            {
+                boolean stillhaveleft = renumber(renumbering, node.left);
+                boolean stillhaveright = renumber(renumbering, node.right);
+                if(stillhaveleft)
+                {
+                    if(stillhaveright)
+                    {
+                        return true; //all is well.
+                    }
+                    else
+                    {
+                        //make this node into the left node.
+                        node.icicle = node.left.icicle;
+                        node.type = node.left.type;
+                        node.right = node.left.right;
+                        node.icicleBounds = node.left.icicleBounds;
+                        node.left = node.left.left; //must be the last thing moved :P
+                        return true;
+                    }
+                }
+                else
+                {
+                    if(stillhaveright)
+                    {
+                        //make this node into the right node.
+                        node.icicle = node.right.icicle;
+                        node.type = node.right.type;
+                        node.left = node.right.left;
+                        node.icicleBounds = node.right.icicleBounds;
+                        node.right = node.right.right; //must be the last thing moved :P
+                        return true;
+                    }
+                    else
+                    {
+                        return false; //we don't have any leafs, so kill this node.
+                    }
+                }
+            }
+        }
+        public void readFromPlSpaceTree(PlSpaceTree t)
+        {
+            int roots=0;
+            for(PlSpaceTree.Nodes n: t.nodes2)
+            {
+                if(n.parent==-1) roots++;
+            }
+            if(roots!=1)
+            {
+                throw new shared.uncaughtexception("More than one root found.");
+            }
+            this.source = t;
+            PlSpaceTree.Nodes node = t.nodes2[t.nodes2.length-1];
+            root = readFromSpaceTree(t,node);
+        }
+        private modNode readFromSpaceTree(PlSpaceTree t, PlSpaceTree.Nodes node)
+        {
+            modNode node2 = new modNode();
+            node2.icicleBounds = node.boundingbox;
+            node2.type = node.type;
+            if(!node2.isleaf())
+            {
+                //node2.isleaf = false;
+                PlSpaceTree.Nodes left = t.nodes2[node.left];
+                PlSpaceTree.Nodes right = t.nodes2[node.right];
+                node2.left = readFromSpaceTree(t,left);
+                node2.right = readFromSpaceTree(t,right);
+            }
+            else //else type==1
+            {
+                //node2.isleaf = true;
+                node2.icicle = node.left; //this is how it's encoded; and node.right is always 0.
+            }
+            return node2;
+        }
+
+        public static class modNode
+        {
+            int icicle;
+            BoundingBox icicleBounds; //we could suck this out of the icicle itself too, probably.
+            //boolean isleaf;
+            int type;
+            //modNode parent;
+            modNode left;
+            modNode right;
+
+            private int index; //just used internally, don't rely on it.
+            private modNode parent; //just used internally, don't rely on it.
+
+            public boolean isleaf()
+            {
+                return (type&0x1)!=0;
+            }
+        }
+    }
     
     static public class PlGBufferGroup extends uruobj //Mesh
     {

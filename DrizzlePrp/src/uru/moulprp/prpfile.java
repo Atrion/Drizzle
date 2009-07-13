@@ -46,6 +46,13 @@ public class prpfile
     {
         extraobjects = new Vector<PrpRootObject>();
     }
+    public PrpRootObject addObject(Typeid type, String name, uruobj obj)
+    {
+        Uruobjectdesc desc = Uruobjectdesc.createDefaultWithTypeNamePagePagetype(type, name, this.header.pageid, this.header.pagetype);
+        PrpRootObject ro = PrpRootObject.createFromDescAndObject(desc, obj);
+        this.addObject(ro);
+        return ro;
+    }
     public void addObject(PrpRootObject obj)
     {
         extraobjects.add(obj);
@@ -68,6 +75,40 @@ public class prpfile
             }
         }
     }*/
+    public Vector<String> findAllSceneobjectsThatStartWith(String startString)
+    {
+        Vector<String> result = new Vector();
+        for(PrpRootObject obj: objects)
+        {
+            if(obj.header.objecttype==Typeid.plSceneObject)
+            {
+                if(obj.header.desc.objectname.toString().startsWith(startString))
+                {
+                    result.add(obj.header.desc.objectname.toString());
+                }
+            }
+        }
+        return result;
+    }
+    public Vector<String> findAllSceneobjectsThatReferencePythonfilemod(String pfmname)
+    {
+        Vector<String> result = new Vector();
+        for(PrpRootObject obj: objects)
+        {
+            if(obj.header.objecttype==Typeid.plSceneObject)
+            {
+                uru.moulprp.x0001Sceneobject so = obj.castTo();
+                for(Uruobjectref ref: so.objectrefs2)
+                {
+                    if(ref.hasref() && ref.xdesc.objecttype==Typeid.plPythonFileMod && ref.xdesc.objectname.toString().equals(pfmname))
+                    {
+                        result.add(obj.header.desc.objectname.toString());
+                    }
+                }
+            }
+        }
+        return result;
+    }
     public boolean contains(Uruobjectdesc desc)
     {
         PrpRootObject result = this.findObjectWithDesc(desc);

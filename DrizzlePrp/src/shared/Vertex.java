@@ -158,5 +158,12 @@ public strictfp class Vertex extends uruobj implements ICompilable
         String s = "  ";
         return "("+x.toString()+s+y.toString()+s+z.toString()+")";
     }
-
+    public Vertex deepClone()
+    {
+        Vertex r = new Vertex();
+        r.x = this.x.deepClone();
+        r.y = this.y.deepClone();
+        r.z = this.z.deepClone();
+        return r;
+    }
 }

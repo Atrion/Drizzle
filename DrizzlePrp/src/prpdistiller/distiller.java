@@ -17,6 +17,43 @@ import java.io.InputStream;
 
 public class distiller
 {
+    //Moves part of a drawablespan to another drawablespan and changes the refs.
+    //Not finished...
+    public static void distillDrawableSpans(prpfile prp, Vector<uru.moulprp.x0016DrawInterface> drawInterfacesToDistill, String targetDrawableSpansName)
+    {
+        if(true) throw new shared.uncaughtexception("not finished.");
+        //find or create the destination drawablespans.
+        /*PrpRootObject destobj = prp.findObject(targetDrawableSpansName, Typeid.plDrawableSpans);
+        if(destobj==null)
+        {
+            PlDrawableSpans destspan = new uru.moulprp.PlDrawableSpans();
+            destobj = prp.addObject(Typeid.plDrawableSpans, targetDrawableSpansName, destspan);
+        }
+        else
+        {
+            throw new shared.uncaughtexception("Unhandled case.");
+        }
+        PlDrawableSpans dest = destobj.castTo();*/
+        PlDrawableSpans.modPlDrawableSpans dest = new PlDrawableSpans.modPlDrawableSpans();
+
+        //collect items for distillation:
+        for(x0016DrawInterface di: drawInterfacesToDistill)
+        {
+            for(x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+            {
+                if(sgr.subsetgroupindex!=-1)
+                {
+                    uru.moulprp.PlDrawableSpans spans = prp.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
+                    dest.addFromSubsetgroupindex(spans, sgr.subsetgroupindex);
+                }
+            }
+        }
+        
+        //move items to new drawablespans:
+
+        //trim the old one.
+
+    }
     public static int distillEverything(prpfile dest, Vector<prpfile> prpfiles, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {
         int numlevels = 0;
@@ -251,17 +288,18 @@ public class distiller
         {
             m.msg("Trimming PlDrawableSpans.");
             HashSet<uru.moulprp.PlDrawableSpans.PlGBufferGroup> usedgroups = new HashSet();
-            HashMap<Integer, Integer> groupsRenumbering = new HashMap();
-            HashMap<Integer, Integer> groupsRenumberingRev = new HashMap();
             HashSet<uru.moulprp.PlDrawableSpans.PlIcicle> usedicicles = new HashSet();
-            HashMap<Integer, Integer> iciclesRenumbering = new HashMap();
-            HashMap<Integer, Integer> iciclesRenumberingRev = new HashMap();
             HashSet<Uruobjectref> usedmaterials = new HashSet();
+            HashSet<uru.moulprp.PlDrawableSpans.PlDISpanIndex> usedspanindexs = new HashSet();
+
+            /*HashMap<Integer, Integer> groupsRenumbering = new HashMap();
+            HashMap<Integer, Integer> groupsRenumberingRev = new HashMap();
+            HashMap<Integer, Integer> iciclesRenumbering = new HashMap();
+            HashMap<Integer, Integer> RevIciclesRenumbering = new HashMap();
             HashMap<Integer, Integer> materialsRenumbering = new HashMap();
             HashMap<Integer, Integer> materialsRenumberingRev = new HashMap();
-            HashSet<uru.moulprp.PlDrawableSpans.PlDISpanIndex> usedspanindexs = new HashSet();
             HashMap<Integer, Integer> spanindexRenumbering = new HashMap();
-            HashMap<Integer, Integer> spanindexRenumberingRev = new HashMap();
+            HashMap<Integer, Integer> spanindexRenumberingRev = new HashMap();*/
 
             //find the used parts of the DrawableSpan:
             for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
@@ -287,10 +325,32 @@ public class distiller
                 }
             }
 
+            boolean printflags = false;
+            if(printflags)
+            {
+                for(uru.moulprp.PlDrawableSpans.PlIcicle icicle: usedicicles)
+                {
+                    m.msg("Props: 0x"+Integer.toHexString(icicle.parent.parent.props));
+                    for(Uruobjectref ref: icicle.parent.parent.permaProjs)
+                    {
+                        m.msg("Permaproj ref: "+ref.toString());
+                    }
+                }
+            }
+
             //null entries and make array remappings.
             for(PrpRootObject spanobj: dest.FindAllObjectsOfType(Typeid.plDrawableSpans))
             {
                 uru.moulprp.PlDrawableSpans spans = spanobj.castTo();
+
+                HashMap<Integer, Integer> groupsRenumbering = new HashMap();
+                HashMap<Integer, Integer> groupsRenumberingRev = new HashMap();
+                HashMap<Integer, Integer> iciclesRenumbering = new HashMap();
+                HashMap<Integer, Integer> RevIciclesRenumbering = new HashMap();
+                HashMap<Integer, Integer> materialsRenumbering = new HashMap();
+                HashMap<Integer, Integer> materialsRenumberingRev = new HashMap();
+                HashMap<Integer, Integer> spanindexRenumbering = new HashMap();
+                HashMap<Integer, Integer> spanindexRenumberingRev = new HashMap();
 
                 //trim materials
                 int cur=0;
@@ -319,6 +379,10 @@ public class distiller
 
                 //trim icicles
                 cur=0;
+                if(iciclesRenumbering.size()!=0 || RevIciclesRenumbering.size()!=0)
+                {
+                    int dummy=0;
+                }
                 for(int i=0;i<spans.icicles.length;i++)
                 {
                     if(!usedicicles.contains(spans.icicles[i]))
@@ -328,7 +392,11 @@ public class distiller
                     else
                     {
                         iciclesRenumbering.put(cur, i);
-                        iciclesRenumberingRev.put(i, cur);
+                        RevIciclesRenumbering.put(i, cur);
+                        if(iciclesRenumbering.size()!=RevIciclesRenumbering.size())
+                        {
+                            int dummy=0;
+                        }
                         cur++;
                     }
                 }
@@ -339,6 +407,7 @@ public class distiller
                     newicicles[i] = ici;
                 }
                 spans.icicles = newicicles;
+                spans.oldiciclecount = spans.icicleCount;
                 spans.icicleCount = newicicles.length;
 
                 //trim buffergroups
@@ -420,6 +489,26 @@ public class distiller
                 spans.spans = newspans;
                 //no count item here.
 
+                //trim spacetree
+                if(spans.embeddedtype==Typeid.plSpaceTree)
+                {
+                    boolean advancedPlSpaceTrim = true;
+                    if(advancedPlSpaceTrim)
+                    {
+                        PlDrawableSpans.PlSpaceTree st = spans.xspacetree;
+                        PlDrawableSpans.modPlSpaceTree modst = new PlDrawableSpans.modPlSpaceTree();
+                        modst.treespansource = spans;
+                        modst.readFromPlSpaceTree(st);
+                        modst.renumber(RevIciclesRenumbering);
+                        spans.xspacetree = modst.generatePlSpaceTree();
+                        int dummy=0;
+                    }
+                    else
+                    {
+                        spans.embeddedtype = Typeid.nil;
+                    }
+                }
+
 
 
                 //change references to the arrays.
@@ -437,7 +526,7 @@ public class distiller
                                 uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
                                 for(int i=0;i<spanindex.indices.length;i++)
                                 {
-                                    spanindex.indices[i] = iciclesRenumberingRev.get(spanindex.indices[i]);
+                                    spanindex.indices[i] = RevIciclesRenumbering.get(spanindex.indices[i]);
                                     int subsetind = spanindex.indices[i];
 
                                     uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
@@ -573,12 +662,12 @@ public class distiller
             {
                 //skip scenenodes.
             }
-            else if(ref.objecttype==Typeid.plCoordinateInterface)
+            /*else if(ref.objecttype==Typeid.plCoordinateInterface)
             {
                 uru.moulprp.x0015CoordinateInterface ci = obj.castTo();
                 everythingNeeded.add(ref);
                 //skip the children.
-            }
+            }*/
             else if(ref.objecttype==Typeid.plDrawableSpans)
             {
                 if(callee.header.objecttype==Typeid.plDrawInterface)

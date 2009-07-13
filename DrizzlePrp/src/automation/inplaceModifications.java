@@ -562,7 +562,7 @@ public class inplaceModifications
             }
             if(drawspan.xspacetree!=null) //fixes e.g. treetrunks
             {
-                for(PlDrawableSpans.x0240plSpaceTree.Nodes node: drawspan.xspacetree.nodes2)
+                for(PlDrawableSpans.PlSpaceTree.Nodes node: drawspan.xspacetree.nodes2)
                 {
                     node.boundingbox.transform(translation);
                 }
