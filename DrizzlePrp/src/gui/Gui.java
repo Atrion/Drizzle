@@ -793,6 +793,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState54 = new shared.State.TextfieldState();
         jButton144 = new javax.swing.JButton();
         jLabel53 = new javax.swing.JLabel();
+        jButton49 = new javax.swing.JButton();
         jPanel37 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -3638,6 +3639,13 @@ public class Gui extends javax.swing.JFrame {
 
                             jLabel53.setText("Pots:");
 
+                            jButton49.setText("Create All Profiles");
+                            jButton49.addActionListener(new java.awt.event.ActionListener() {
+                                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                    jButton49ActionPerformed(evt);
+                                }
+                            });
+
                             javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
                             jPanel23.setLayout(jPanel23Layout);
                             jPanel23Layout.setHorizontalGroup(
@@ -3689,7 +3697,9 @@ public class Gui extends javax.swing.JFrame {
                                                     .addComponent(jButton93))
                                                 .addComponent(textfieldState20, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton49))
                                     .addGap(312, 312, 312))
                             );
                             jPanel23Layout.setVerticalGroup(
@@ -3729,7 +3739,8 @@ public class Gui extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jButton91))
                                         .addGroup(jPanel23Layout.createSequentialGroup()
-                                            .addGap(41, 41, 41)
+                                            .addComponent(jButton49)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(jButton41)
                                             .addGap(39, 39, 39)
                                             .addComponent(jButton99)))
@@ -5349,6 +5360,11 @@ private void jButton144ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
     pushlanguage(false);
 }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton49ActionPerformed
+    File f = new File(textfieldState18.getText());
+    automation.AutoMod.CreateAllProfiles(f.getParentFile().getParent(), textfieldState19.getText(), textfieldState54.getText());
+}//GEN-LAST:event_jButton49ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5518,6 +5534,7 @@ private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JButton jButton46;
     private javax.swing.JButton jButton47;
     private javax.swing.JButton jButton48;
+    private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton50;
     private javax.swing.JButton jButton51;

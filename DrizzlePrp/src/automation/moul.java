@@ -64,10 +64,10 @@ public class moul
         
         m.status("Starting conversion...");
         Vector<String> files = fileLists.moulSimplicityList();
-        boolean skipmainfiles = false;
+        boolean skipmainfiles = true;
         if(skipmainfiles)
         {
-            m.warn("Turn this (skipmainfiles) back on!!!!!!");
+            m.err("Turn this (skipmainfiles) back on!!!!!!");
         }
         else
         {
@@ -75,9 +75,10 @@ public class moul
         }
 
         //run distillations, etc.
-        automation.AutoMod.SimplicityAutoMod(myst5folder, potsfolder, "Ercana_District_ercaDustAdditions.prp");
-        automation.AutoMod.SimplicityAutoMod(myst5folder, potsfolder, "Personal_District_psnlDustAdditions.prp");
-        automation.AutoMod.SimplicityAutoMod(myst5folder, potsfolder, "AhnySphere02_District_ahny2DustAdditions.prp");
+        for(String file: automation.AutoMod.SimplicityAutoModMoulFiles)
+        {
+            automation.AutoMod.SimplicityAutoMod(myst5folder, potsfolder, file);
+        }
         
         shared.State.AllStates.pop();
         m.state.pop();

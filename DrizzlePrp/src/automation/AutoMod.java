@@ -550,6 +550,29 @@ public class AutoMod
 
         if(!useProfiles) m.status("Done AutoMod.");
     }
+    public static final String[] SimplicityAutoModMoulFiles = new String[]{
+            "Teledahn_District_tldnDustAdditions.prp",
+            "Personal02_District_philDustAdditions.prp",
+            "GreatZero_District_grtzDustAdditions.prp",
+            "Myst_District_mystDustAdditions.prp",
+            "Garrison_District_grsnDustAdditions.prp",
+            "Garrison_District_grsnDustAdditions2.prp",
+            "Kadish_District_kdshDustAdditions.prp",
+            "Gira_District_giraDustAdditions.prp",
+            "Descent_District_dsntDustAdditions.prp",
+            "Cleft_District_clftDustAdditions2.prp",
+            "Cleft_District_clftDustAdditions.prp",
+            //"Personal_District_psnlDustAdditions.prp",
+            "AhnySphere02_District_ahny2DustAdditions.prp",
+            "Ercana_District_ercaDustAdditions.prp",
+        };
+    public static void CreateAllProfiles(String infolder, String outfolder, String cleanpotsfolder)
+    {
+        for(String file: SimplicityAutoModMoulFiles)
+        {
+            AutoMod(infolder, outfolder, file, cleanpotsfolder, false);
+        }
+    }
     public static void DustAdditionsGenericCalendarStar(AutoModInfo c, String agename, String fourLetterAgename, int sequencePrefix, int additionsPagenum, String sourcePagename, int calendarStarNum)
     {
         DustAdditionsGenericCalendarStar(c,agename,fourLetterAgename,sequencePrefix,additionsPagenum,sourcePagename,calendarStarNum,"",sourcePagename);
