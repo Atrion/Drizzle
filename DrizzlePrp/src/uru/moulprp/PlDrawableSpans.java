@@ -757,9 +757,10 @@ public class PlDrawableSpans extends uruobj
     }
     static public class modPlSpaceTree
     {
-        modNode root;
-        private static boolean breadthFirst = true;
+        public modNode root;
+        //private static boolean breadthFirst = true;
 
+        //for debugging:
         private PlSpaceTree source;
         private HashMap<Integer,Integer> renumberingsource;
         public PlDrawableSpans treespansource;
@@ -911,7 +912,9 @@ public class PlDrawableSpans extends uruobj
             boolean keep = renumber(renumbering, root);
             if(!keep)
             {
-                throw new shared.uncaughtexception("Unhandled case.");
+                //throw new shared.uncaughtexception("Unhandled case.");
+                m.warn("Nulling PlSpaceTree...");
+                this.root = null;
             }
         }
         private boolean renumber(HashMap<Integer, Integer> renumbering, modNode node)

@@ -37,6 +37,12 @@ public class AutoMod
         String infile = infolder+"/dat/"+filename;
         File infile2 = new File(infile);
         //String filename = infile2.getName();
+        AutoModInfo args = new AutoModInfo();
+        args.filename = filename;
+        args.infolder = infolder;
+        args.cleanpotsfolder = cleanpotsfolder;
+        args.useProfiles = useProfiles;
+        args.outfolder = outfolder;
 
         //this one is still good, just disabling temporarily
         if(filename.equals("Personal_District_psnlMYSTII.prp"))
@@ -44,6 +50,44 @@ public class AutoMod
             prpfile prp = prpfile.createFromFile(infile, true);
             ModReltoBooksDynamicTextMap(prp);
             prp.saveAsFile(outfolder+"/"+filename);
+        }
+        if(filename.equals("Teledahn_District_tldnDustAdditions.prp"))
+        {
+            //DustAdditionsTeledahn(args);
+            DustAdditionsGenericCalendarStar(args,"Teledahn","tldn",11,80,"tldnSlaveCave",9);
+        }
+        if(filename.equals("Personal02_District_philDustAdditions.prp"))
+        {
+            DustAdditionsPersonal02(args);
+        }
+        if(filename.equals("GreatZero_District_grtzDustAdditions.prp"))
+        {
+            //this.DustAdditionsGenericCalendarStar(args, filename, filename, sequencePrefix, additionsPagenum, filename, calendarStarNum);
+            DustAdditionsGenericCalendarStar(args,"GreatZero","grtz",39,80,"GreatZeroInterior",11);
+        }
+        if(filename.equals("Myst_District_mystDustAdditions.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Myst","myst",28,80,"Fireplace",12);
+        }
+        if(filename.equals("Garrison_District_grsnDustAdditions.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Garrison","grsn",2,120,"grsnTrainingCenterHalls",1);
+        }
+        if(filename.equals("Garrison_District_grsnDustAdditions2.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Garrison","grsn",2,121,"grsnPrison",4,"2","grsnPrison");
+        }
+        if(filename.equals("Kadish_District_kdshDustAdditions.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Kadish","kdsh",22,80,"kdshPillars",2);
+        }
+        if(filename.equals("Gira_District_giraDustAdditions.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Gira","gira",24,80,"giraCanyon",3);
+        }
+        if(filename.equals("Descent_District_dsntDustAdditions.prp"))
+        {
+            DustAdditionsGenericCalendarStar(args,"Descent","dsnt",21,80,"TreasureBookShaft",5,"","dsntTreasureBookShaft");
         }
         if(filename.equals("Cleft_District_clftDustAdditions2.prp"))
         {
@@ -488,6 +532,16 @@ public class AutoMod
             info.sourceprpfiles = sources;
             info.trimDrawableSpans = true;
             info.runtests = false;
+            info.forcedDuplicateInclusions = new distiller.includeDuplicateDecider() {
+                public boolean include(Uruobjectdesc desc)
+                {
+                    Typeid tid = desc.objecttype;
+                    String name = desc.objectname.toString();
+                    if(tid==Typeid.hsGMaterial || tid==Typeid.plLayer || tid==Typeid.plLayerAnimation) return true;
+                    if(tid==Typeid.plViewFaceModifier) return true;
+                    return false;
+                }
+            };
             prpdistiller.distiller.distillList(info);
 
             //save the dest file.
@@ -496,7 +550,144 @@ public class AutoMod
 
         if(!useProfiles) m.status("Done AutoMod.");
     }
+    public static void DustAdditionsGenericCalendarStar(AutoModInfo c, String agename, String fourLetterAgename, int sequencePrefix, int additionsPagenum, String sourcePagename, int calendarStarNum)
+    {
+        DustAdditionsGenericCalendarStar(c,agename,fourLetterAgename,sequencePrefix,additionsPagenum,sourcePagename,calendarStarNum,"",sourcePagename);
+    }
+    public static void DustAdditionsGenericCalendarStar(AutoModInfo c, String agename, String fourLetterAgename, int sequencePrefix, int additionsPagenum, String sourcePagename, int calendarStarNum, String outpagesuffix, String altDestPagename)
+    {
+        prpdistiller.distiller.distillInfo info = new prpdistiller.distiller.distillInfo();
 
+        prpfile dest = prpfile.create(agename, fourLetterAgename+"DustAdditions"+outpagesuffix, Pageid.createFromPrefixPagenum(sequencePrefix, additionsPagenum), Pagetype.createWithType(0));
+        dest.addScenenode();
+
+        Vector<prpfile> sources = new Vector();
+        prpfile prp;
+        sources.add(prp = prpfile.createFromFile(c.infolder+"/dat/"+agename+"_District_"+sourcePagename+".prp", true));
+        sources.add(prpfile.createFromFile(c.infolder+"/dat/"+agename+"_District_Textures.prp", true));
+
+        if(!c.useProfiles)
+        {
+            Vector<prpfile> altdests = new Vector();
+            altdests.add(prpfile.createFromFile(c.cleanpotsfolder+"/dat/"+agename+"_District_"+altDestPagename+".prp", true));
+            altdests.add(prpfile.createFromFile(c.cleanpotsfolder+"/dat/"+agename+"_District_Textures.prp", true));
+            info.altdests = altdests;
+
+            Vector<Uruobjectdesc> list = new Vector();
+            String starnum = ((calendarStarNum<10)?"0":"")+Integer.toString(calendarStarNum);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar"+starnum+"Get"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar"+starnum+"Vis_1"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar"+starnum+"Vis_3"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStarSNDCtrl"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythSparky-SNDCtrl"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            if(agename.equals("Myst")) list.add(prp.findObject("floor_closed_door", Typeid.plCoordinateInterface).header.desc);
+
+            info.list = list;
+            info.createObjectList = true; info.outputFileForObjectList = c.outfolder+"/dat/"+c.filename+".profile";
+        }
+        else
+        {
+            info.usePreexistingObjectList = true; info.objectListResourceName = "/files/profiles/"+c.filename+".profile";
+        }
+
+        info.dest = dest;
+        info.sourceprpfiles = sources;
+        info.trimDrawableSpans = true;
+        info.runtests = false;
+        info.forcedDuplicateInclusions = new distiller.includeDuplicateDecider() {
+            public boolean include(Uruobjectdesc desc)
+            {
+                Typeid tid = desc.objecttype;
+                String name = desc.objectname.toString();
+                if(tid==Typeid.hsGMaterial || tid==Typeid.plLayer || tid==Typeid.plLayerAnimation) return true;
+                if(tid==Typeid.plViewFaceModifier) return true;
+                return false;
+            }
+        };
+        prpdistiller.distiller.distillList(info);
+
+        if(agename.equals("Gira"))
+        {
+            //this changes the draw order so that the fog doesn't override these, but it may mess up other things.  In practice, I can't see a problem on Relto, so we don't have to distill to another drawablespans or use a different prp file to keep them separate.
+            for(String sobj: new String[]{"CalendarStarDecal",})
+            {
+                try{
+                uru.moulprp.x0016DrawInterface di = dest.findObject(sobj, Typeid.plDrawInterface).castTo();
+                for(uru.moulprp.x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                {
+                    if(sgr.subsetgroupindex!=-1)
+                    {
+                        uru.moulprp.PlDrawableSpans spans = dest.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
+                        //spans.criteria = 0x10000007; //the fog is 20000008
+                        spans.criteria = 0x20000003; //0x20000007 was too high.
+                    }
+                }
+                }catch(Exception e){m.err("exception");}
+            }
+        }
+        if(agename.equals("Kadish"))
+        {
+            //CalendarStarDecal has messed up coordinateinterface, as if it should have a parent but doesn't.  Perhaps it is on another page, tied to pillar03, so that it moves up with pillar03.
+            //let's translate it by the height pillar03 moves up (48 feet)
+            uru.moulprp.x0015CoordinateInterface ci = dest.findObject("CalendarStarDecal", Typeid.plCoordinateInterface).castTo();
+            ci.translate(0, 0, (-89.4645)-(-137.4645), false);
+            ci.localToParent = ci.localToWorld;
+            ci.parentToLocal = ci.worldToLocal;
+        }
+
+        //save the dest file.
+        dest.saveAsFile(c.outfolder+"/dat/"+c.filename);
+    }
+    public static void DustAdditionsPersonal02(AutoModInfo c)
+    {
+        prpdistiller.distiller.distillInfo info = new prpdistiller.distiller.distillInfo();
+
+        prpfile dest = prpfile.create("Personal02", "philDustAdditions", Pageid.createFromPrefixPagenum(12, 80), Pagetype.createWithType(0));
+        dest.addScenenode();
+
+        Vector<prpfile> sources = new Vector();
+        prpfile prp;
+        sources.add(prp = prpfile.createFromFile(c.infolder+"/dat/philRelto_District_PhilsRelto.prp", true));
+        sources.add(prpfile.createFromFile(c.infolder+"/dat/philRelto_District_Textures.prp", true));
+
+        if(!c.useProfiles)
+        {
+            Vector<prpfile> altdests = new Vector();
+            altdests.add(prpfile.createFromFile(c.cleanpotsfolder+"/dat/Personal02_District_philRelto.prp", true));
+            altdests.add(prpfile.createFromFile(c.cleanpotsfolder+"/dat/Personal02_District_Textures.prp", true));
+            info.altdests = altdests;
+
+            Vector<Uruobjectdesc> list = new Vector();
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar10Get"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStar10Vis_1"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+            for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythCalStarSNDCtrl"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+
+            info.list = list;
+            info.createObjectList = true; info.outputFileForObjectList = c.outfolder+"/dat/"+c.filename+".profile";
+        }
+        else
+        {
+            info.usePreexistingObjectList = true; info.objectListResourceName = "/files/profiles/"+c.filename+".profile";
+        }
+
+        info.dest = dest;
+        info.sourceprpfiles = sources;
+        info.trimDrawableSpans = true;
+        info.runtests = false;
+        prpdistiller.distiller.distillList(info);
+
+        //save the dest file.
+        dest.saveAsFile(c.outfolder+"/dat/"+c.filename);
+    }
+
+    public static class AutoModInfo
+    {
+        String infolder;
+        String outfolder;
+        String filename;
+        String cleanpotsfolder;
+        boolean useProfiles;
+    }
     public static void AddXDustChronicleShowHideToObject(prpfile prp, x0001Sceneobject sceneobject, String sdlvar, String valToMatch, boolean reverse)
     {
         //create pfm

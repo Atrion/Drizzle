@@ -500,7 +500,15 @@ public class distiller
                         modst.treespansource = spans;
                         modst.readFromPlSpaceTree(st);
                         modst.renumber(RevIciclesRenumbering);
-                        spans.xspacetree = modst.generatePlSpaceTree();
+                        if(modst.root!=null)
+                        {
+                            spans.xspacetree = modst.generatePlSpaceTree();
+                        }
+                        else
+                        {
+                            spans.embeddedtype = Typeid.nil;
+                            spans.xspacetree = null;
+                        }
                         int dummy=0;
                     }
                     else

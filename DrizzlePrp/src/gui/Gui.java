@@ -4658,17 +4658,10 @@ private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton86ActionPerformed
     Vector<String> v = new Vector<String>();
     File f = new File(textfieldState1.getText());
-<<<<<<< .mine
     if (!f.getParentFile().getName().equals("dat")) {
         m.err("The file you specify must be in a folder called \"dat\"");
         return;
     }
-=======
-    if (!f.getParentFile().getName().equals("dat")) {
-           m.err("The file you specify must be in a folder called \"dat\"");
-           return;
-    }
->>>>>>> .r2329
     String filename = f.getName();
     String infolder = f.getParentFile().getParent();
     v.add(filename);
