@@ -251,7 +251,7 @@ public class AutoMod
             Vector<prpfile> sources = new Vector();
             prpfile prp;
             sources.add(prpfile.createFromFile(infolder+"/dat/Personal_District_Textures.prp", true));
-            sources.add(prpfile.createFromFile(infolder+"/dat/Personal_District_BuiltIn.prp", true));
+            //sources.add(prpfile.createFromFile(infolder+"/dat/Personal_District_BuiltIn.prp", true));
             sources.add(prp = prpfile.createFromFile(infolder+"/dat/Personal_District_psnlMYSTII.prp", true));
             //sources.add(prpfile.createFromFile("C:\\Documents and Settings\\user\\Desktop\\output/dat/PersonalMOUL_District_Textures.prp", true));
             //sources.add(prpfile.createFromFile("C:\\Documents and Settings\\user\\Desktop\\output/dat/PersonalMOUL_District_BuiltIn.prp", true));
@@ -261,11 +261,12 @@ public class AutoMod
             {
                 Vector<prpfile> altdests = new Vector();
                 altdests.add(prpfile.createFromFile(cleanpotsfolder+"/dat/Personal_District_Textures.prp", true));
-                altdests.add(prpfile.createFromFile(cleanpotsfolder+"/dat/Personal_District_BuiltIn.prp", true));
+                //altdests.add(prpfile.createFromFile(cleanpotsfolder+"/dat/Personal_District_BuiltIn.prp", true));
                 altdests.add(prpfile.createFromFile(cleanpotsfolder+"/dat/Personal_District_psnlMYSTII.prp", true));
                 info.altdests = altdests;
 
                 Vector<Uruobjectdesc> list = new Vector();
+
                 //storm:
                 for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage24 - Storm_6")) list.add(prp.findObject(sobj, Typeid.plSceneObject).header.desc);
 
@@ -280,8 +281,12 @@ public class AutoMod
                 for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage21 - PineTrees_0"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
                 for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage22 - Grass_0"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
                 for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage23 - ErcanaPlants_7"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
-                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage25 - CleftPole_0"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
 
+                //cleft pole
+                for(String sobj: prp.findAllSceneobjectsThatReferencePythonfilemod("cPythYeeshaPage25 - CleftPole_0"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
+                list.add(prp.findObject("AgeSDLHook", Typeid.plSceneObject).header.desc); //collider around wedges.
+
+                //wedges
                 for(String sobj: prp.findAllSceneobjectsThatStartWith("Wedge"))list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
                 list.add(prp.findObject("Cylinder02", Typeid.plSceneObject).header.desc); //collider around wedges.
 
@@ -312,6 +317,7 @@ public class AutoMod
                     if(type==Typeid.plViewFaceModifier) return true; //they all have similar names and are small.
                     if(type==Typeid.hsGMaterial || type==Typeid.plLayer || type==Typeid.plLayerAnimation) return true;
                     if(name.startsWith("Butte04")||name.startsWith("Butte004")||name.startsWith("Butte06")||name.startsWith("Butte006")) return true;
+                    if(name.equals("AgeSDLHook")) return true;
                     //if(name.startsWith("Butte")) return true;
                     return false;
                 }
@@ -343,6 +349,37 @@ public class AutoMod
                 AddXDustShowToObject(dest, so);
                 }catch(Exception e){m.err("exception");}
             }*/
+
+            //change cleft pole python page:
+            try{
+            uru.moulprp.x00A2Pythonfilemod pfm = dest.findObject("cPythBahroPoles", Typeid.plPythonFileMod).castTo();
+            pfm.pyfile = Urustring.createFromString("psnlBahroPolesMOUL");
+            /*Vector<uru.moulprp.x00A2Pythonfilemod.Pythonlisting> listings = new Vector();
+            for(int i=0;i<pfm.listcount;i++)
+            {
+                uru.moulprp.x00A2Pythonfilemod.Pythonlisting listing = pfm.listings.get(i);
+                if(listing.index >= 48)
+                {
+                    listings.add(listing);
+                }
+            }
+            pfm.clearListings();
+            for(uru.moulprp.x00A2Pythonfilemod.Pythonlisting listing: listings)
+            {
+                //pfm.addListing(listing);
+            }*/
+            }catch(Exception e){m.err("exception");}
+
+            /*try{
+            uru.moulprp.x00A2Pythonfilemod pfm = dest.findObject("cPythClftLinkBookGUI", Typeid.plPythonFileMod).castTo();
+            for(int i=0;i<pfm.listcount;i++)
+            {
+                if(pfm.listings.get(i).index==4)
+                {
+                    pfm.listings.get(i).xString = Bstr.createFromString("Cleft");
+                }
+            }
+            }catch(Exception e){m.err("exception");}*/
 
             //switch calendar yeesha page number from 20 to 26:
             try{
@@ -389,6 +426,17 @@ public class AutoMod
                 }
             }
             }catch(Exception e){m.err("exception");}
+
+            //take away the mass from the CalendarStoneProxyXX
+            /*try{
+                for(int i=1;i<=12;i++)
+                {
+                    String prox = "CalendarStoneProxy"+(i<10?"0":"")+Integer.toString(i);
+                    uru.moulprp.PlHKPhysical phys = dest.findObject(prox, Typeid.plHKPhysical).castTo();
+                    phys.convertPXtoHK();
+                    phys.havok.mass = Flt.zero();
+                }
+            }catch(Exception e){m.err("exception");}*/
 
             //save the dest file.
             dest.saveAsFile(outfolder+"/dat/"+filename);
@@ -562,9 +610,9 @@ public class AutoMod
             "Descent_District_dsntDustAdditions.prp",
             "Cleft_District_clftDustAdditions2.prp",
             "Cleft_District_clftDustAdditions.prp",
-            //"Personal_District_psnlDustAdditions.prp",
             "AhnySphere02_District_ahny2DustAdditions.prp",
             "Ercana_District_ercaDustAdditions.prp",
+            "Personal_District_psnlDustAdditions.prp",
         };
     public static void CreateAllProfiles(String infolder, String outfolder, String cleanpotsfolder)
     {

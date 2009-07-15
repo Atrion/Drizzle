@@ -320,7 +320,9 @@ public class PlHKPhysical extends uruobj
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = LOSDB;
-            pots.zzzgroup0 = 0x100;
+            pots.zzzgroup0 = 0x104;
+
+            //0,0,40,120 is the CalendarStoneProxyXX colliders in Relto; the mass should be set to 0?
         }
         else if( u14==0x2 && u15==0x0 && LOSDB==0x0 && group0==0x0 )
         {

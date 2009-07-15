@@ -26,8 +26,8 @@ You don't have this Age installed.{->}Je hebt deze Tijd niet geïnstalleerd.
 You have this Age, but its version is unknown.{->}Je hebt deze Tijd, maar de versie is onbekend.
 Legend{->}Legenda
 Do not load Age list at startup.{->}De lijst met Tijden niet laden bij het opstarten.
-Load last saved Age list at startup.{->}De laatst opgeslagen lijst met Tijden laden bij het opstarten.
-Download most recent Age list at startup.{->}De recentste lijst met Tijden downloaden bij het opstarten.
+Load last saved Age list at startup.{->}Laatst opgeslagen lijst met Tijden laden bij het opstarten.
+Download most recent Age list at startup.{->}Recentste lijst met Tijden downloaden bij het opstarten.
 Automatically download list?{->}Lijst automatisch downloaden?
 Info:{->}Info:
 <html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Dit gedeelte is voor het omzetten van MystV-/MOUL-/Crowthistle-bestanden om te spelen in Uru. Zie het tabblad Help of http://alcugs.almlys.org/Drizzle</html>

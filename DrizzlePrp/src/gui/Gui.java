@@ -1143,7 +1143,7 @@ public class Gui extends javax.swing.JFrame {
             uamStartupButtongroup.add(jRadioButton6);
             jRadioButton6.setText("Load last saved Age list at startup.");
             jPanel44.add(jRadioButton6);
-            jRadioButton6.setBounds(10, 50, 360, 20);
+            jRadioButton6.setBounds(10, 50, 364, 20);
 
             uamStartupButtongroup.add(jRadioButton7);
             jRadioButton7.setText("Download most recent Age list at startup.");
