@@ -35,7 +35,7 @@ public class m
 {
     
     private static JTextArea _outputTextArea; //you must set this from the GUI.
-    private static boolean justUseConsole = false;
+    private static boolean justUseConsole = true;
     
     public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
     {

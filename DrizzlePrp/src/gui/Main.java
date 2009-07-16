@@ -20,13 +20,14 @@ package gui;
 
 
 import javax.swing.UIManager;
+import shared.m;
 
 public class Main extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
      */
-    static public Gui gui;
+    static public Gui guiform;
     static String javaversion = "";
     static double javaversion2 = 0.0;
     static String os = "";
@@ -38,70 +39,80 @@ public class Main extends javax.swing.JFrame {
     
     public static void main(String[] args)
     {
-        //select whether to match the native widgets or use the Swing appearance.
-        try
-        {
-            //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
-            //javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
-            //javax.swing.UIManager.setLookAndFeel( sun.java.swing.plaf.gtk.GTKLooktAndFeel());
-            //javax.swing.UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
-            javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
-            //javax.swing.JDialog j = new javax.swing.JDialog();
-            //j.
-
-            shared.GuiUtils.setCrossPlatformFonts(true);
-            //shared.GuiUtils.setBackgroundColour(java.awt.Color.CYAN);
-
-        }
-        catch(Exception e){
-            int dummy=0;
-        }
-
-        //Run the main form.
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
+        try{
+            //javaversion = System.getProperty("java.version");
+            javaversion = System.getProperty("java.specification.version");
+            System.out.println("Using JRE version: "+javaversion);
+            javaversion2 = Double.parseDouble(javaversion);
+            /*String[] verparts = version.split(".");
+            String verstr = verparts[0]+"."+verparts[1];
+            float jreversion = Float.parseFloat(verstr);
+            float minver = 1.6f;
+            if(jreversion<minver)
             {
-                try{
-                    //javaversion = System.getProperty("java.version");
-                    javaversion = System.getProperty("java.specification.version");
-                    System.out.println("Using JRE version: "+javaversion);
-                    javaversion2 = Double.parseDouble(javaversion);
-                    /*String[] verparts = version.split(".");
-                    String verstr = verparts[0]+"."+verparts[1];
-                    float jreversion = Float.parseFloat(verstr);
-                    float minver = 1.6f;
-                    if(jreversion<minver)
-                    {
-                        System.out.println("Your JRE version is too old.");
-                    }*/
-                    //System.out.println("Written with JRE version 1.6.0");
-                    
-                    //get jar name:
-                    //String source = Gui.class.getProtectionDomain().getCodeSource().getLocation().toString();
-                    //shared.m.msg(source);
-                }catch(Exception e){}
-                try{
-                    maxmemory = Runtime.getRuntime().maxMemory();
-                }catch(Exception e){}
-                try{
-                    os = System.getProperty("os.name");
-                }catch(Exception e){}
-                try{
-                    osversion = System.getProperty("os.version");
-                    osversion2 = Double.parseDouble(osversion);
-                }catch(Exception e){}
-                gui = new Gui();
-                if(debugcheck!=null) debugcheck.run();
-                //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
-                //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
-                //java.awt.Image img = image.getImage();
-                //java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
-                //gui.setIconImage(img);
-                gui.setVisible(true);
+                System.out.println("Your JRE version is too old.");
+            }*/
+            //System.out.println("Written with JRE version 1.6.0");
+
+            //get jar name:
+            //String source = Gui.class.getProtectionDomain().getCodeSource().getLocation().toString();
+            //shared.m.msg(source);
+        }catch(Exception e){}
+        try{
+            maxmemory = Runtime.getRuntime().maxMemory();
+        }catch(Exception e){}
+        try{
+            os = System.getProperty("os.name");
+        }catch(Exception e){}
+        try{
+            osversion = System.getProperty("os.version");
+            osversion2 = Double.parseDouble(osversion);
+        }catch(Exception e){}
+
+        if(args.length>0)
+        {
+            //command-line mode.
+            System.out.println("Using the ommandline interface!");
+            gui.CommandLine.HandleArguments(args);
+        }
+        else
+        {
+            //select whether to match the native widgets or use the Swing appearance.
+            try
+            {
+                //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                //javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
+                //javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
+                //javax.swing.UIManager.setLookAndFeel( sun.java.swing.plaf.gtk.GTKLooktAndFeel());
+                //javax.swing.UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
+                javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
+                //javax.swing.JDialog j = new javax.swing.JDialog();
+                //j.
+
+                shared.GuiUtils.setCrossPlatformFonts(true);
+                //shared.GuiUtils.setBackgroundColour(java.awt.Color.CYAN);
+
             }
-        });
+            catch(Exception e){
+                int dummy=0;
+            }
+
+            //Run the main form.
+            java.awt.EventQueue.invokeLater(new Runnable()
+            {
+                public void run()
+                {
+                    guiform = new Gui();
+                    if(debugcheck!=null) debugcheck.run();
+                    //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
+                    //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
+                    //java.awt.Image img = image.getImage();
+                    //java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
+                    //gui.setIconImage(img);
+                    guiform.setVisible(true);
+                }
+            });
+        }
     }
     
     /*public static void message(String msg)

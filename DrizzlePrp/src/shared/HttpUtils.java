@@ -21,6 +21,8 @@ public class HttpUtils
 
     public static byte[] geturl(String address, String useragent)
     {
+        //address = java.net.URLEncoder.encode(address, "UTF-8");
+        address = address.replaceAll(" ", "%20");
         try {
             //m.msg("Checking...");
             URL url = new URL(address);
@@ -45,6 +47,13 @@ public class HttpUtils
             m.warn("Unable to download: ",address);
         }
         return null;
+    }
+
+    public static String geturlAsString(String address)
+    {
+        byte[] data = geturl(address);
+        String result = b.BytesToString(data);
+        return result;
     }
 
 }

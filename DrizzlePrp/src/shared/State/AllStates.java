@@ -7,6 +7,7 @@ package shared.State;
 
 import java.util.Vector;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 //import java.util.Map;
 import java.io.ObjectInputStream;
@@ -255,7 +256,7 @@ public class AllStates //implements java.io.Serializable
                 p.ref.setValue(p.val);
             }
         }*/
-        Vector<String> names = new Vector<String>();
+        HashSet<String> names = new HashSet();
         for(IState state: refs)
         {
             String name = state.getStateName();
