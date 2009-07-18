@@ -76,10 +76,10 @@ public class GetResource
         {
             if(enableTranslations)
             {
-                URL url2 = GetResource.class.getResource(path+"--"+translation.translation.getCurLanguage());
+                URL url2 = GetResource.class.getResource(path+"--"+shared.translation.getCurLanguage());
                 if(url2==null)
                 {
-                    return GetResource.class.getResource(path+"--"+translation.translation.getDefaultLanguage());
+                    return GetResource.class.getResource(path+"--"+shared.translation.getDefaultLanguage());
                 }
                 else
                 {

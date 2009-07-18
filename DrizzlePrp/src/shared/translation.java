@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package translation;
+package shared;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;

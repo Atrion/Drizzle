@@ -30,6 +30,12 @@ public class CommandLine
         {
             uru.server.Dataserver.CreateFiles(args[1], args[2], true);
         }
+        else if(args[0].equals("-input"))
+        {
+            java.util.Scanner s = new java.util.Scanner(System.in);
+            String a = s.nextLine();
+            System.out.print(a);
+        }
         else
         {
             m.err("Unknown command.  Use -help for some of the options.");

@@ -25,6 +25,8 @@ import java.io.OutputStream;
 //import java.io.Writer;
 import java.util.Vector;
 import java.io.PrintStream;
+import java.util.Stack;
+import java.io.InputStream;
 
 /**
  *
@@ -34,8 +36,47 @@ public class m
 {
     
     private static JTextArea _outputTextArea; //you must set this from the GUI.
-    private static boolean justUseConsole = false;
+    private static boolean justUseConsole = true;
     
+    public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
+    {
+        public boolean showNormalMessages = true;
+        public boolean showWarningMessages = true;
+        public boolean showErrorMessages = true;
+        public boolean showConsoleMessages = true;
+        public boolean showStatusMessages = true;
+        public boolean writeToFile = false;
+        public boolean scrollOutput = true;
+        public boolean translate = false;
+        public String filename;
+        
+        public stateclass()
+        {
+            //this.filename = FileUtils.GetInitialWorkingDirectory()+"/Drizzle.output.txt";
+        }
+        
+        public stateclass clone() //used for shallow clone, if you want.
+        {
+            stateclass result = new stateclass();
+            result.showNormalMessages = this.showNormalMessages;
+            result.showConsoleMessages = this.showConsoleMessages;
+            result.showErrorMessages = this.showErrorMessages;
+            result.showStatusMessages = this.showStatusMessages;
+            result.showWarningMessages = this.showWarningMessages;
+            result.writeToFile = this.writeToFile;
+            result.scrollOutput = this.scrollOutput;
+            result.translate = this.translate;
+            result.filename = this.filename;
+            return result;
+        }
+    }
+    public static StateStack<stateclass> state = new StateStack<stateclass>(new stateclass(),true,true);
+    
+    public static void time()
+    {
+        long time = java.util.Calendar.getInstance().getTimeInMillis();
+        m.msg("time: ",Long.toString(time));
+    }
     public static void redirectStdOut()
     {
         if(justUseConsole==false)
@@ -74,7 +115,8 @@ public class m
             String msg = new String(CharString);
             if(msg.equals("\r\n")) return;
             if(msg.equals("")) return;
-            m.msg("Console:"+tag+msg);
+            m.console(tag,msg);
+            //m.msg("Console:"+tag+msg);
         }
         public void write(int b)
         {
@@ -105,15 +147,52 @@ public class m
         }
     }
     
-    private static void message(String s)
+    private static void message(String... ss)
     {
+        //translate if necessary.
+        if(state.curstate.translate)
+        {
+            for(int i=0;i<ss.length;i++)
+            {
+                //ss[i] = shared.translation.translate(ss[i]);
+            }
+        }
+
+        //merge the string parts
+        StringBuilder sb = new StringBuilder();
+        for(String spart: ss)
+        {
+            sb.append(spart);
+        }
+        String s = sb.toString();
+
         if(justUseConsole)
         {
             System.out.println(s);
         }
         else if(_outputTextArea!=null)
         {
-            _outputTextArea.append(s+"\n");
+            //javax.swing.JScrollPane a;
+            //javax.swing.JTextArea b;
+            final String s2 = s;
+            javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+                public void run() {
+                    _outputTextArea.append(s2+"\n");
+                    if(state.curstate.scrollOutput)
+                    {
+                        //set the view position to the height, plus a little extra.
+                        int h = _outputTextArea.getHeight();
+                        _outputTextArea.scrollRectToVisible(new java.awt.Rectangle(0, h+40, 0, 0));
+                    }
+                }
+            });
+            /*_outputTextArea.append(s+"\n");
+            if(state.curstate.scrollOutput)
+            {
+                //set the view position to the height, plus a little extra.
+                int h = _outputTextArea.getHeight();
+                _outputTextArea.scrollRectToVisible(new java.awt.Rectangle(0, h+40, 0, 0));
+            }*/
         }
         else
         {
@@ -124,6 +203,11 @@ public class m
             
         }
         
+        if(state.curstate.writeToFile)
+        {
+            //FileUtils.AppendText(state.curstate.filename, s+"\n");
+        }
+
         String[] trapmessages = {"compile not implemented"};
         for(int i=0;i<trapmessages.length;i++)
         {
@@ -134,22 +218,129 @@ public class m
         }
     }
     
-    public static void msg(String s)
+    /*public static void msgsafe(String... s)
+    {
+        //final String s2 = s;
+        //javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+        //    public void run() {
+        //        msg(s2);
+        //    }
+        //});
+        msg(s);
+    }*/
+    public static void msg(String... s)
     {
         //Main.message(s);
-        message(s);
+        if(state.curstate.showNormalMessages)
+            message(s);
     }
 
-    public static void err(String s)
+    public static void err(String... s)
     {
         //Main.message(s);
-        message("Error: "+s);
+        if(state.curstate.showErrorMessages)
+            message(shared.generic.prependToArray("Error: ", s, String.class));
+            //message("Error: "+s);
         //throw new Exception(s);
     }
     
-    public static void warn(String s)
+    public static void warn(String... s)
     {
-        message("Warning: "+s);
+        if(state.curstate.showWarningMessages)
+            message(shared.generic.prependToArray("Warning: ", s, String.class));
+            //message("Warning: "+s);
     }
     
+    public static void console(String... s)
+    {
+        if(state.curstate.showConsoleMessages)
+            message(shared.generic.prependToArray("Console: ", s, String.class));
+            //message("Console:"+s);
+    }
+
+    public static void status(String... s)
+    {
+        if(state.curstate.showStatusMessages)
+            message(s);
+    }
+
+    public static void throwUncaughtException(String s)
+    {
+        throw new shared.uncaughtexception(s);
+    }
+
+    public static class StreamRedirector
+    {
+        public static void Redirect(Process p)
+        {
+            Poller poller = new Poller(p);
+            poller.start();
+        }
+        public static class Poller extends Thread
+        {
+            private static final int polltime = 100; //in milliseconds.
+
+            InputStream parentStdin;
+            PrintStream parentStdout;
+            PrintStream parentStderr;
+
+            OutputStream childStdin;
+            InputStream childStdout;
+            InputStream childStderr;
+
+            private boolean quit = false;
+
+            public Poller(Process p)
+            {
+                parentStdin = System.in;
+                parentStdout = System.out;
+                parentStderr = System.err;
+
+                childStdin = p.getOutputStream();
+                childStdout = p.getInputStream();
+                childStderr = p.getErrorStream();
+
+                this.setDaemon(true); //so it won't stop the application from terminating.
+            }
+            @Override public void run()
+            {
+                while(!quit)
+                {
+                    poll();
+                    try{
+                        sleep(polltime);
+                    }catch(Exception e){}
+                }
+            }
+
+            private void poll()
+            {
+                //int available = childStdout.available();
+                try{
+                    while(childStdout.available()!=0)
+                    {
+                        int b = childStdout.read();
+                        parentStdout.write(b);
+                    }
+
+                    while(childStderr.available()!=0)
+                    {
+                        int b = childStderr.read();
+                        parentStderr.write(b);
+                    }
+                    //input doesn't quite work.
+                    while(parentStdin.available()!=0)
+                    {
+                        int b = parentStdin.read();
+                        //parentStdout.print("hi");
+                        childStdin.write(b);
+                    }
+                }catch(Exception e){
+                    int dummy=0;
+                    //no sense writing an error message :P
+                }
+            }
+        }
+    }
+
 }

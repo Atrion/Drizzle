@@ -204,7 +204,7 @@ public class GuiUtils
             this.addImpl(pan2, java.awt.BorderLayout.EAST, -1);
 
 
-            translation.translation.registerGUIForm(this);
+            shared.translation.registerGUIForm(this);
             
             /*this.addMouseListener(new javax.swing.event.MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {
@@ -500,12 +500,12 @@ public class GuiUtils
     
     public static void getStringFromUser(JTextComponent field, String message, String title)
     {
-        String result = JOptionPane.showInputDialog(null, translation.translation.translate(message), translation.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
+        String result = JOptionPane.showInputDialog(null, shared.translation.translate(message), shared.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
         if(result!=null) field.setText(result);
     }
     public static String getStringFromUser(String message, String title)
     {
-        String result = JOptionPane.showInputDialog(null, translation.translation.translate(message), translation.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
+        String result = JOptionPane.showInputDialog(null, shared.translation.translate(message), shared.translation.translate(title), JOptionPane.PLAIN_MESSAGE);
         if(result==null) result = "";
         return result;
     }

@@ -47,6 +47,11 @@ public class Main {
                 System.out.println(arg);
             }*/
             Process proc = Runtime.getRuntime().exec(fullcommand);
+            if(args.length>0)
+            {
+                //only redirect the output/err streams if we have command-line arguments; i.e. command-line interface is being used.
+                shared.m.StreamRedirector.Redirect(proc);
+            }
             proc.waitFor();
         }
         catch(Exception e)

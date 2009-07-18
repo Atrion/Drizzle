@@ -156,14 +156,14 @@ public class UamConfigNew
     }
     public String getAgeInfo(String agename)
     {
-        String curlang = translation.translation.getCurLanguage();
+        String curlang = shared.translation.getCurLanguage();
         String result = data.getAge(agename).infos.get(curlang);
         if(result==null) result = data.getAge(agename).info;
         return result;
     }
     public String getWelcomeMessage()
     {
-        String curlang = translation.translation.getCurLanguage();
+        String curlang = shared.translation.getCurLanguage();
         String result = data.welcomes.get(curlang);
         if(result==null) result = data.welcome;
         return result;

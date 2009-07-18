@@ -761,7 +761,7 @@ public class UamGui
         else
         {
             deletebutton.setEnabled(false);
-            AgeLabel.setText(translation.translation.translate("<html>","(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)","</html>"));
+            AgeLabel.setText(shared.translation.translate("<html>","(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)","</html>"));
             //AgeLabel.setText("<html><font face='Lucida' size='12'>(Select an Age, or click \"Get Latest List\" to get the latest list of Ages.)</font></html>");
         }
         //final Vector<String> vers = uam.Uam.ageList.getAllVersionsOfAge(age);

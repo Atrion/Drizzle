@@ -65,7 +65,7 @@ public class Gui extends javax.swing.JFrame {
     /** Creates new form Gui */
     public Gui()
     {
-        translation.translation.enable("/gui/");
+        shared.translation.enable("/gui/");
         settingsfile = FileUtils.GetPresentWorkingDirectory()+"drizzlesettings.canbedeleted.dat";
         initComponents();
         int maxwidth = 1024; int maxheight = 740; //don't change these.
@@ -75,7 +75,7 @@ public class Gui extends javax.swing.JFrame {
         this.setBounds((maxwidth-width)/2, (maxheight-height)/2, width, height);
         this.setTitle("Drizzle "+Integer.toString(Version.version));
 
-        translation.translation.registerGUIForm(this);
+        shared.translation.registerGUIForm(this);
         
         gui.UamGui.guiform = this;
         gui.UamGui.agelist = this.jList1;
@@ -328,7 +328,7 @@ public class Gui extends javax.swing.JFrame {
         pushlanguage(true);
         //String helpstr = shared.GetResource.getResourceAsString("/gui/help.txt");
         //jTextArea5.setText(helpstr);
-        translation.translation.registerResourceString("/gui/help.txt", jTextArea5);
+        shared.translation.registerResourceString("/gui/help.txt", jTextArea5);
 
         SetBackgroundColour(true);
 
@@ -339,22 +339,22 @@ public class Gui extends javax.swing.JFrame {
         switch(langnum)
         {
             case 0:
-                translation.translation.setLanguage("en");
+                shared.translation.setLanguage("en");
                 break;
             case 1:
-                translation.translation.setLanguage("de");
+                shared.translation.setLanguage("de");
                 break;
             case 2:
-                translation.translation.setLanguage("fr");
+                shared.translation.setLanguage("fr");
                 break;
             case 3:
-                translation.translation.setLanguage("nl");
+                shared.translation.setLanguage("nl");
                 break;
             default:
                 m.err("Unhandled language in pushlanguge()");
                 break;
         }
-        if(!silent) m.msg("Setting language to ",translation.translation.getCurLanguage());
+        if(!silent) m.msg("Setting language to ",shared.translation.getCurLanguage());
     }
     public static class Settings implements java.io.Serializable
     {
@@ -4091,7 +4091,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         uam.GuiModal uamform = new uam.GuiModal(null, false, null);
         Object filechooser = shared.GuiUtils.getJFileChooser();
-        translation.translation.printStringsForAllGuiForms();
+        shared.translation.printStringsForAllGuiForms();
         uamform.toString();
         filechooser.toString();
         //shared.GuiUtils.printUIManagerResources();
@@ -4711,7 +4711,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
             m.err("Unhandled language type.");
             break;
     }
-    translation.translation.setLanguage(code);*/
+    shared.translation.setLanguage(code);*/
     //pushlanguage();
 
     //scroll the help window down.
@@ -5446,30 +5446,30 @@ private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton37ActionPerformed
 
 private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
-    translation.translation.saveCurrentStrings();
+    shared.translation.saveCurrentStrings();
 }//GEN-LAST:event_jButton38ActionPerformed
 
 private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-    translation.translation.testCurrentLanguage();
+    shared.translation.testCurrentLanguage();
 }//GEN-LAST:event_jButton40ActionPerformed
 
 private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-    //translation.translation.setLanguage("en");
+    //shared.translation.setLanguage("en");
     pushlanguage(false);
 }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-    //translation.translation.setLanguage("de");
+    //shared.translation.setLanguage("de");
     pushlanguage(false);
 }//GEN-LAST:event_jRadioButton2ActionPerformed
 
 private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-    //translation.translation.setLanguage("fr");
+    //shared.translation.setLanguage("fr");
     pushlanguage(false);
 }//GEN-LAST:event_jRadioButton3ActionPerformed
 
 private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
-    translation.translation.saveMissingTranslations();
+    shared.translation.saveMissingTranslations();
 }//GEN-LAST:event_jButton46ActionPerformed
 public void SetBackgroundColour(boolean immediate)
 {

@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.util.Vector;
 import java.io.PrintStream;
 import java.util.Stack;
+import java.io.InputStream;
 
 /**
  *
@@ -153,7 +154,7 @@ public class m
         {
             for(int i=0;i<ss.length;i++)
             {
-                ss[i] = translation.translation.translate(ss[i]);
+                ss[i] = shared.translation.translate(ss[i]);
             }
         }
 
@@ -267,4 +268,79 @@ public class m
     {
         throw new shared.uncaughtexception(s);
     }
+
+    //input doesn't quite work: it is correctly received but isn't passed on quite correctly.
+    public static class StreamRedirector
+    {
+        public static void Redirect(Process p)
+        {
+            Poller poller = new Poller(p);
+            poller.start();
+        }
+        public static class Poller extends Thread
+        {
+            private static final int polltime = 100; //in milliseconds.
+
+            InputStream parentStdin;
+            PrintStream parentStdout;
+            PrintStream parentStderr;
+
+            OutputStream childStdin;
+            InputStream childStdout;
+            InputStream childStderr;
+
+            private boolean quit = false;
+
+            public Poller(Process p)
+            {
+                parentStdin = System.in;
+                parentStdout = System.out;
+                parentStderr = System.err;
+
+                childStdin = p.getOutputStream();
+                childStdout = p.getInputStream();
+                childStderr = p.getErrorStream();
+
+                this.setDaemon(true); //so it won't stop the application from terminating.
+            }
+            @Override public void run()
+            {
+                while(!quit)
+                {
+                    poll();
+                    try{
+                        sleep(polltime);
+                    }catch(Exception e){}
+                }
+            }
+
+            private void poll()
+            {
+                //int available = childStdout.available();
+                try{
+                    while(childStdout.available()!=0)
+                    {
+                        int b = childStdout.read();
+                        parentStdout.write(b);
+                    }
+
+                    while(childStderr.available()!=0)
+                    {
+                        int b = childStderr.read();
+                        parentStderr.write(b);
+                    }
+
+                    while(parentStdin.available()!=0)
+                    {
+                        int b = parentStdin.read();
+                        childStdin.write(b);
+                    }
+                }catch(Exception e){
+                    int dummy=0;
+                    //no sense writing an error message :P
+                }
+            }
+        }
+    }
+
 }
