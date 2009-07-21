@@ -97,6 +97,7 @@ public class fileLists
         "NB01BahroShout01--Reverb.ogg", "NB01BahroShout01.ogg", // bahro shouters in the city and the hood
         "ahnyOutsideHutWater_Loop.ogg","ahnyRigRotation.ogg",
         //"xLink-Stereo.ogg", //moul's has different stereo properties.
+        "FireworksExplode01.ogg","FireworksExplode02.ogg","FireworksExplode03.ogg","FireworksExplode04.ogg","FireworksExplode05.ogg","FireworksExplode06.ogg","FireworksLaunch01.ogg","FireworksLaunch02.ogg","FireworksLaunch03.ogg","FireworksLaunch04.ogg", //sparkly island.
     };
     private static String[] moulSimplicityList2 = {
             "city_District_islmLakeLightMeter.prp",

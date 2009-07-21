@@ -64,7 +64,7 @@ public class moul
         
         m.status("Starting conversion...");
         Vector<String> files = fileLists.moulSimplicityList();
-        boolean skipmainfiles = true;
+        boolean skipmainfiles = false;
         if(skipmainfiles)
         {
             m.err("Turn this (skipmainfiles) back on!!!!!!");
