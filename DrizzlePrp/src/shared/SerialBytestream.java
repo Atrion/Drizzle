@@ -41,6 +41,19 @@ public class SerialBytestream extends IBytestream
     {
         return createFromFilenameOffset(filename,0);
     }
+    @Override public void close()
+    {
+        try{
+            if(this.in!=null)
+            {
+                this.in.close();
+                this.in = null;
+            }
+        }catch(Exception e)
+        {
+            m.err("Unable to close SerialBytestream.");
+        }
+    }
     protected SerialBytestream(){}
     public static IBytestream createFromFilenameOffset(String filename, int offset)
     {

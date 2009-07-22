@@ -121,6 +121,8 @@ public class ByteArrayBytestream extends IBytestream
                 if(i % 4==3) result += " ";
                 if(i%16==15) result += "\n";
             }
+
+            fork.close();
         }
         catch(Exception e)
         {

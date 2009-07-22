@@ -48,7 +48,10 @@ public class prputils
         
         //process the object index, which is *not* a part of this struct.
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         int numobjecttypes = objectindex.indexCount;
         for(int i_type=0;i_type<numobjecttypes;i_type++)
         {
@@ -87,7 +90,10 @@ public class prputils
         
         //process the object index, which is *not* a part of this struct.
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         int numobjecttypes = objectindex.indexCount;
         for(int i=0;i<numobjecttypes;i++)
         {
@@ -165,7 +171,10 @@ public class prputils
         
         //process the object index, which is *not* a part of this struct.
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(data,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         //_staticsettings.onObjectIndexLoaded(objectindex);
         result.objectindex = objectindex;
         
@@ -198,7 +207,9 @@ public class prputils
                 //rootobj object = null;
                 PrpRootObject object = null;
                 //context stream = c.Fork(new Bytestream(data,offset));
-                context stream = c.Fork(c.in.Fork(offset));
+                //context stream = c.Fork(c.in.Fork(offset));
+                context stream = c.Fork(offset);
+
                 stream.curRootObject = desc;
                 stream.curRootObjectOffset = offset;
                 stream.curRootObjectSize = size;
@@ -366,6 +377,8 @@ public class prputils
                     }
                 }
                 //_staticsettings.onObjectLoaded(object);
+
+                stream.close();
                 
             }
         }
@@ -386,7 +399,10 @@ public class prputils
         
         //process the object index, which is *not* a part of this struct.
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         int numobjecttypes = objectindex.indexCount;
         for(int i=0;i<numobjecttypes;i++)
         {
@@ -764,7 +780,10 @@ public class prputils
         
         //process the object index, which is *not* a part of this struct.
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         result.objectindex = objectindex;
         
         int numobjecttypes = objectindex.indexCount;
@@ -783,7 +802,8 @@ public class prputils
                 //do per-object work.
                 PrpRootObject object = null;
                 //context stream = c.Fork(new Bytestream(c.in,offset));
-                context stream = c.Fork(c.in.Fork(offset));
+                //context stream = c.Fork(c.in.Fork(offset));
+                context stream = c.Fork(offset);
                 stream.curRootObject = desc;
                 stream.curRootObjectOffset = offset;
                 stream.curRootObjectSize = size;
@@ -909,7 +929,7 @@ public class prputils
                             m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
                     }
                 }
-                
+                stream.close();
             }
         }
         

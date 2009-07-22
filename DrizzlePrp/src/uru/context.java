@@ -78,6 +78,11 @@ public class context extends shared.BaseContext
         result.sequencePrefix = null;
         return result;
     }
+    public void close()
+    {
+        if(this.in!=null) this.in.close();
+        //if(this.out!=null) this.out.close();
+    }
     
     public static context createDefault(Bytedeque out)
     {
@@ -103,20 +108,34 @@ public class context extends shared.BaseContext
     {
         this.in = in2;
     }
-    public context Fork(IBytestream newIn)
+    /*public context Fork(IBytestream newIn)
     {
         context result = Fork();
+        result.in.Fork(readversion)
         result.in = newIn;
+        return result;
+    }*/
+    public context Fork()
+    {
+        context result = Fork_();
+        if(result.in!=null) result.in = result.in.Fork();
+        return result;
+    }
+    public context Fork(long offset)
+    {
+        context result = Fork_();
+        if(result.in!=null) result.in = result.in.Fork(offset);
         return result;
     }
     
-    public context Fork()
+    private context Fork_() //must be private!!!  Doesn't actually fork the instream.
     {
         context result = new context();
         result.readversion = readversion;
         result.writeversion = writeversion;
         result.compile = compile;
-        result.in = in==null?in:in.Fork();
+        //result.in = in==null?in:in.Fork();
+        result.in = in;
         result.out = out;
         result.outputVertices = outputVertices;
         result.vertices = vertices;

@@ -30,7 +30,10 @@ public class prpprocess
     {
         PrpHeader header = new PrpHeader(c);
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
         Vector<PrpRootObject> rootobjects = new Vector<PrpRootObject>();
 
         int numobjecttypes = objectindex.indexCount;
@@ -56,7 +59,10 @@ public class prpprocess
     {
         PrpHeader header = new PrpHeader(c);
         //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,header.offsetToObjectIndex)));
-        PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        //PrpObjectIndex objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(header.offsetToObjectIndex)));
+        context c2 = c.Fork(header.offsetToObjectIndex);
+        PrpObjectIndex objectindex = new PrpObjectIndex(c2);
+        c2.close();
 
         int numobjecttypes = objectindex.indexCount;
         for(int i_type=0;i_type<numobjecttypes;i_type++)
@@ -81,7 +87,8 @@ public class prpprocess
         Typeid type = d.desc.objecttype;
         
         //context stream = c.Fork(new Bytestream(c.in,offset));
-        context stream = c.Fork(c.in.Fork(offset));
+        //context stream = c.Fork(c.in.Fork(offset));
+        context stream = c.Fork(offset);
         stream.curRootObject = d.desc;
         stream.curRootObjectOffset = offset;
         stream.curRootObjectSize = size;
@@ -97,7 +104,8 @@ public class prpprocess
                     m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
             }
         }
-        
+
+        stream.close();
         return result;
     }
     private static PrpRootObject ProcessRootObject(context c, Typeid type, boolean isRaw, int length)

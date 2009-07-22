@@ -147,7 +147,10 @@ public class prpfile
         c.curFile = filename;
         result.header = new PrpHeader(c);
         //result.objectindex = new PrpObjectIndex(c.Fork(new Bytestream(c.in,result.header.offsetToObjectIndex)));
-        result.objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(result.header.offsetToObjectIndex)));
+        //result.objectindex = new PrpObjectIndex(c.Fork(c.in.Fork(result.header.offsetToObjectIndex)));
+        context c2 = c.Fork(result.header.offsetToObjectIndex);
+        result.objectindex = new PrpObjectIndex(c2);
+        c2.close();
         result.filename = filename;
         
         return result;
@@ -249,11 +252,14 @@ public class prpfile
     public static prpfile createFromFile(File f, boolean readRaw)
     {
         //read file
-        byte[] filedata = shared.FileUtils.ReadFile(f);
-        context c = context.createFromBytestream(new Bytestream(filedata));
+        //Test removal:
+        //byte[] filedata = shared.FileUtils.ReadFile(f);
+        //context c = context.createFromBytestream(new Bytestream(filedata));
+        context c = context.createFromBytestream(shared.SerialBytestream.createFromFile(f)); //test add
         c.curFile = f.getAbsolutePath();
         prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c,readRaw); //read raw
         prp.filename = f.getAbsolutePath();
+        c.close(); //test add
         
         return prp;
     }

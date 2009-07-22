@@ -1151,6 +1151,8 @@ public class PlDrawableSpans extends uruobj
                 //int dataSize = HexislePlDrawableSpans.GetVertexDataSize();
                 byte[] rawdata = c.in.readBytes(dataSize);
                 int rawdataversion = c.readversion;
+
+                c2.close();
             }
         }
         public void compile(Bytedeque data)
@@ -1210,6 +1212,8 @@ public class PlDrawableSpans extends uruobj
                     int dataSize = GetVertexDataSize(count, fformat, c2);
                     rawdata = c.in.readBytes(dataSize);
                     rawdataversion = c.readversion;
+
+                    c2.close();
                 }
                 else
                 {

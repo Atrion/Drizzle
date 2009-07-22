@@ -38,6 +38,10 @@ public abstract class IBytestream
         }
         return result;
     }
+    public void close()
+    {
+        //do nothing by default, but may be overridden.
+    }
     /*public static IBytestream createFromFilename(String filename)
     {
         return createFromFilenameOffset(filename,0);

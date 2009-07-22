@@ -1400,6 +1400,8 @@ public class mystAutomation
             //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
             //prpoutputbytes.saveAsFile(outfile);
             prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
+
+            c.close();
             
             shared.State.AllStates.pop();
             
@@ -2042,6 +2044,8 @@ public class mystAutomation
             //Bytes prpoutputbytes = prp.saveAsBytes(new crowDecider());
             //prpoutputbytes.saveAsFile(outfile);
             prp.saveAsBytes(new crowDecider()).writeAllBytesToFile(outfile);
+
+            c.close();
         }
         
         //Handle .(others) files...
@@ -2435,6 +2439,8 @@ public class mystAutomation
                 //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
                 //prpoutputbytes.saveAsFile(outfile);
                 prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
+
+                c.close();
             }
         }
         
