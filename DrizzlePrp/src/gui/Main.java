@@ -72,7 +72,7 @@ public class Main extends javax.swing.JFrame {
         if(args.length>0)
         {
             //command-line mode.
-            System.out.println("Using the ommandline interface!");
+            System.out.println("Using the commandline interface!");
             gui.CommandLine.HandleArguments(args);
         }
         else

@@ -322,18 +322,24 @@ public class m
                     {
                         int b = childStdout.read();
                         parentStdout.write(b);
+                        parentStdout.flush();
                     }
 
                     while(childStderr.available()!=0)
                     {
                         int b = childStderr.read();
                         parentStderr.write(b);
+                        parentStderr.flush();
                     }
-
+                    //input doesn't quite work.
                     while(parentStdin.available()!=0)
                     {
                         int b = parentStdin.read();
+                        //parentStdout.print("hi");
+                        parentStdout.write(b);
+                        parentStdout.flush();
                         childStdin.write(b);
+                        childStdin.flush();
                     }
                 }catch(Exception e){
                     int dummy=0;
