@@ -710,6 +710,22 @@ public class Gui extends javax.swing.JFrame {
         jButton149 = new javax.swing.JButton();
         jButton150 = new javax.swing.JButton();
         jButton151 = new javax.swing.JButton();
+        jPanel32 = new javax.swing.JPanel();
+        textfieldState59 = new shared.State.TextfieldState();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        textfieldState60 = new shared.State.TextfieldState();
+        textfieldState61 = new shared.State.TextfieldState();
+        textfieldState62 = new shared.State.TextfieldState();
+        jButton152 = new javax.swing.JButton();
+        jLabel73 = new javax.swing.JLabel();
+        textfieldState63 = new shared.State.TextfieldState();
+        jButton153 = new javax.swing.JButton();
+        jButton154 = new javax.swing.JButton();
+        jButton155 = new javax.swing.JButton();
         jPanel33 = new javax.swing.JPanel();
         textfieldState13 = new shared.State.TextfieldState();
         jButton80 = new javax.swing.JButton();
@@ -3061,6 +3077,91 @@ public class Gui extends javax.swing.JFrame {
                 tabsState4.addTab("DataserverGenerator", jPanel29);
 
                 AdvTabState.addTab("Server", tabsState4);
+
+                jPanel32.setLayout(null);
+
+                textfieldState59.setText("-help");
+                textfieldState59.setName("cl0"); // NOI18N
+                jPanel32.add(textfieldState59);
+                textfieldState59.setBounds(160, 70, 170, 20);
+
+                jLabel68.setText("command:");
+                jPanel32.add(jLabel68);
+                jLabel68.setBounds(80, 70, 70, 16);
+
+                jLabel69.setText("Use a command of \"-help\" for options.");
+                jPanel32.add(jLabel69);
+                jLabel69.setBounds(80, 30, 260, 16);
+
+                jLabel70.setText("arg1:");
+                jPanel32.add(jLabel70);
+                jLabel70.setBounds(80, 120, 60, 16);
+
+                jLabel71.setText("arg2:");
+                jPanel32.add(jLabel71);
+                jLabel71.setBounds(80, 160, 70, 16);
+
+                jLabel72.setText("arg3:");
+                jPanel32.add(jLabel72);
+                jLabel72.setBounds(80, 200, 70, 16);
+
+                textfieldState60.setName("cl1"); // NOI18N
+                jPanel32.add(textfieldState60);
+                textfieldState60.setBounds(160, 120, 370, 20);
+
+                textfieldState61.setName("cl2"); // NOI18N
+                jPanel32.add(textfieldState61);
+                textfieldState61.setBounds(160, 160, 370, 20);
+
+                textfieldState62.setName("cl3"); // NOI18N
+                jPanel32.add(textfieldState62);
+                textfieldState62.setBounds(160, 200, 370, 20);
+
+                jButton152.setText("Call...");
+                jButton152.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton152ActionPerformed(evt);
+                    }
+                });
+                jPanel32.add(jButton152);
+                jButton152.setBounds(150, 270, 80, 36);
+
+                jLabel73.setText("arg4:");
+                jPanel32.add(jLabel73);
+                jLabel73.setBounds(80, 240, 70, 16);
+
+                textfieldState63.setName("cl4"); // NOI18N
+                jPanel32.add(textfieldState63);
+                textfieldState63.setBounds(160, 240, 370, 20);
+
+                jButton153.setText("Select...");
+                jButton153.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton153ActionPerformed(evt);
+                    }
+                });
+                jPanel32.add(jButton153);
+                jButton153.setBounds(530, 110, 80, 36);
+
+                jButton154.setText("Select...");
+                jButton154.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton154ActionPerformed(evt);
+                    }
+                });
+                jPanel32.add(jButton154);
+                jButton154.setBounds(530, 150, 80, 36);
+
+                jButton155.setText("Select...");
+                jButton155.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton155ActionPerformed(evt);
+                    }
+                });
+                jPanel32.add(jButton155);
+                jButton155.setBounds(530, 190, 80, 36);
+
+                AdvTabState.addTab("CommandLine", jPanel32);
 
                 jPanel33.setLayout(null);
 
@@ -5547,6 +5648,22 @@ private void jButton150ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton151ActionPerformed
     GuiUtils.getUserSelectedFolder(this.textfieldState57);
 }//GEN-LAST:event_jButton151ActionPerformed
+
+private void jButton152ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton152ActionPerformed
+    gui.CommandLine.HandleArguments(new String[]{textfieldState59.getText(),textfieldState60.getText(),textfieldState61.getText(),textfieldState62.getText(),textfieldState63.getText()});
+}//GEN-LAST:event_jButton152ActionPerformed
+
+private void jButton153ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton153ActionPerformed
+    GuiUtils.getUserSelectedFileOrFolder(textfieldState60);
+}//GEN-LAST:event_jButton153ActionPerformed
+
+private void jButton154ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton154ActionPerformed
+    GuiUtils.getUserSelectedFileOrFolder(textfieldState61);
+}//GEN-LAST:event_jButton154ActionPerformed
+
+private void jButton155ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton155ActionPerformed
+    GuiUtils.getUserSelectedFileOrFolder(textfieldState62);
+}//GEN-LAST:event_jButton155ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5690,6 +5807,10 @@ private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton150;
     private javax.swing.JButton jButton151;
+    private javax.swing.JButton jButton152;
+    private javax.swing.JButton jButton153;
+    private javax.swing.JButton jButton154;
+    private javax.swing.JButton jButton155;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
@@ -5847,7 +5968,13 @@ private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
@@ -5878,6 +6005,7 @@ private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
@@ -5994,7 +6122,12 @@ private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState56;
     private shared.State.TextfieldState textfieldState57;
     private shared.State.TextfieldState textfieldState58;
+    private shared.State.TextfieldState textfieldState59;
     private shared.State.TextfieldState textfieldState6;
+    private shared.State.TextfieldState textfieldState60;
+    private shared.State.TextfieldState textfieldState61;
+    private shared.State.TextfieldState textfieldState62;
+    private shared.State.TextfieldState textfieldState63;
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;

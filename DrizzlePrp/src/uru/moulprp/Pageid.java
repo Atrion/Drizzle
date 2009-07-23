@@ -172,9 +172,32 @@ public class Pageid extends uruobj implements java.io.Serializable
         {
             if(suffix<33)
             {
-                m.warn("Unhandled pageid suffix: investigate now!");
+                //not really a problem; 32 happens often with Moul Textures, e.g.
+                //m.warn("Unhandled pageid suffix: investigate now!");
             }
             return suffix - 33;
+        }
+    }
+    public int getSequencePrefix()
+    {
+        if(suffix<33)
+        {
+            return prefix-1;
+        }
+        else
+        {
+            return prefix;
+        }
+    }
+    public void setSequencePrefix(int newval)
+    {
+        if(suffix<33)
+        {
+            prefix = newval + 1;
+        }
+        else
+        {
+            prefix = newval;
         }
     }
     //public int getRawData()

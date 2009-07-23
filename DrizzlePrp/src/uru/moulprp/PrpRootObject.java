@@ -207,5 +207,17 @@ public class PrpRootObject extends uruobj implements Comparable
         this.ensureParsed();
         return prpobject.object;
     }
+    public int getRawSize()
+    {
+        if(!this.hasRaw) throw new shared.uncaughtexception("Cannot get rawsize on non-raw object.");
+        int result = rawdata.length;
+        return result;
+    }
+    public byte[] getRawMd5()
+    {
+        if(!this.hasRaw) throw new shared.uncaughtexception("Cannot get md5 on non-raw object.");
+        byte[] result = shared.CryptHashes.GetHash(rawdata, shared.CryptHashes.Hashtype.md5);
+        return result;
+    }
     
 }

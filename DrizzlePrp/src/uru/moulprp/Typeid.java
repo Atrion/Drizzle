@@ -280,10 +280,12 @@ public enum Typeid implements compilable, java.io.Serializable
     plInstanceDrawInterface,
     plLODMipmap,
     plSubworldRegionDetector,
+    plPipeResMakeMsg,
 
     //misc moul
     plActivePrintShape,
     plCameraBrain1_FirstPerson,
+    plClimbMsg,
     
     plLeafController,
     nil,
@@ -519,7 +521,10 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x02A, -2, -2, -2, plAliasModifier),
         tri( 0x0EC, 0x0EC, -2, -2, plPrintShape),
                 
-        tri( 0x456, 0x456, -2, -2, plSwimMsg),
+        //tri( 0x456, 0x456, -2, -2, plSwimMsg),
+        tri( 0x451, 0x456, -2, -2, plSwimMsg),
+        tri( -2, 0x451, -2, -2, plClimbMsg),
+        tri( 0x456, -2, -2, -2, plPipeResMakeMsg),
         tri( -2, 0x13B, -2, -2, plVolumeSensorConditionalObjectNoArbitration), //not in pots
 
         tri( 0x0D2, -2, -2, -2, plInstanceDrawInterface),
