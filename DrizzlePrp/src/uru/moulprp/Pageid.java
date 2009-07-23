@@ -37,6 +37,8 @@ import org.w3c.dom.Node;
 //In pots GlobalAvatars, the pages wrap around so that MaleFall,6 has the same Pageid as MalePelletBookLeft,262
 public class Pageid extends uruobj implements java.io.Serializable
 {
+    private static final long serialVersionUID = -4399754547712612873L; //change/remove this if we want to force a new version to not read an old version.
+
     public int prefix;
     public int suffix;
     
