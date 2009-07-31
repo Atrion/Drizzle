@@ -25,9 +25,10 @@ public class Main {
             }*/
 
             File file = shared.GetResource.getResourceAsFile("/drizzle/DrizzlePrp.jar", true);
+            int heapsize = 800; //900;
             String[] command = new String[]{
                 "java",
-                "-Xmx1020m",//"-Xmx800m",
+                "-Xmx"+Integer.toString(heapsize)+"m",//"-Xmx1020m",//"-Xmx800m",
                 "-jar",
                 file.getAbsolutePath(),
             };
