@@ -13,22 +13,35 @@ import shared.m;
 
 public class ChangeNameAndPrefix
 {
-    public static void ChangeNameAndPrefix(String inputfilename, String outputfolder, String newname, String newprefix)
+    public static void ChangeName(String inputfilename, String outputfolder, String newname)
     {
         m.msg("Not currently changing Python refs.");
 
+        //read old one:
+        prpfile prp = prpfile.createFromFile(inputfilename, true);
+
+        //calculate new values:
+        String oldname = prp.header.agename.toString();
+        Urustring newnam = Urustring.createFromString(newname);
+
+        //change header entries:
+        prp.header.agename = newnam;
+
+        //save it!
+        String outputfilename = outputfolder + "/" + prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
+        prp.saveAsFile(outputfilename);
+
+    }
+    public static void ChangePrefix(String inputfilename, String outputfolder, String newprefix)
+    {
         //read old one:
         prpfile prp = prpfile.createFromFile(inputfilename, false);
 
         //calculate new values:
         int newpre = Integer.parseInt(newprefix);
-        String oldname = prp.header.agename.toString();
-        String distname = prp.header.pagename.toString();
-        Urustring newnam = Urustring.createFromString(newname);
         Pageid oldpid = prp.header.pageid.deepClone();
 
-        //change header entries:
-        prp.header.agename = newnam;
+
         prp.header.pageid.setSequencePrefix(newpre);
 
         //change uruobjectdesc entries:
@@ -41,7 +54,19 @@ public class ChangeNameAndPrefix
         }
 
         //save it!
-        String outputfilename = outputfolder + "/" + newnam+"_District_"+distname+".prp";
+        String outputfilename = outputfolder + "/" + prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
+        prp.saveAsFile(outputfilename);
+    }
+    public static void ChangePagename(String inputfilename, String outputfolder, String newname)
+    {
+
+        //read old one:
+        prpfile prp = prpfile.createFromFile(inputfilename, true);
+
+        prp.header.pagename = Urustring.createFromString(newname);
+
+        //save it!
+        String outputfilename = outputfolder + "/" + prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
         prp.saveAsFile(outputfilename);
 
     }

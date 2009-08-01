@@ -25,7 +25,7 @@ public class Main {
             }*/
 
             File file = shared.GetResource.getResourceAsFile("/drizzle/DrizzlePrp.jar", true);
-            int heapsize = 800; //900;
+            int heapsize = 800; //900;  //all Simplicity works with 400 on Win32.
             String[] command = new String[]{
                 "java",
                 "-Xmx"+Integer.toString(heapsize)+"m",//"-Xmx1020m",//"-Xmx800m",

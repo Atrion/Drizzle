@@ -35,4 +35,9 @@ public class Pair<S, T>
         if(!right.equals(p.right)) return false;
         return true;
     }
+
+    public int hashCode()
+    {
+        return left.hashCode()<<16 + right.hashCode();
+    }
 }

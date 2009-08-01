@@ -23,7 +23,9 @@ public class CommandLine
             m.msg("  -mirrordataserver exampleserver.com c:/outfolder    ->Mirrors an Alcugs dataserver at the given address, saving to the given output folder.");
             m.msg("  -generatedataserver c:/infolder c:/outfolder    ->Generates an Alcugs dataserver using the given input Uru installation, saving to the given output folder.");
             m.msg("  -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
-            m.msg("  -changenameandprefix c:/inputfile.prp c:/outputfile.prp NewAgeName NewSequencePrefix");
+            m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
+            m.msg("  -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
+            m.msg("  -changepage c:/inputfile.prp c:/outputfolder NewPageName");
         }
         else if(args[0].equals("-mirrordataserver"))
         {
@@ -43,9 +45,17 @@ public class CommandLine
         {
             automation.PrpDiff.FindDiff(args[1], args[2], args[3]);
         }
-        else if(args[0].equals("-changenameandprefix"))
+        else if(args[0].equals("-changeagename"))
         {
-            automation.ChangeNameAndPrefix.ChangeNameAndPrefix(args[1], args[2], args[3], args[4]);
+            automation.ChangeNameAndPrefix.ChangeName(args[1], args[2], args[3]);
+        }
+        else if(args[0].equals("-changeprefix"))
+        {
+            automation.ChangeNameAndPrefix.ChangePrefix(args[1], args[2], args[3]);
+        }
+        else if(args[0].equals("-changepage"))
+        {
+            automation.ChangeNameAndPrefix.ChangePagename(args[1],args[2],args[3]);
         }
         else
         {

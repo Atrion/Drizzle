@@ -713,7 +713,6 @@ public class Gui extends javax.swing.JFrame {
         jPanel32 = new javax.swing.JPanel();
         textfieldState59 = new shared.State.TextfieldState();
         jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
@@ -726,6 +725,7 @@ public class Gui extends javax.swing.JFrame {
         jButton153 = new javax.swing.JButton();
         jButton154 = new javax.swing.JButton();
         jButton155 = new javax.swing.JButton();
+        jButton156 = new javax.swing.JButton();
         jPanel33 = new javax.swing.JPanel();
         textfieldState13 = new shared.State.TextfieldState();
         jButton80 = new javax.swing.JButton();
@@ -3089,10 +3089,6 @@ public class Gui extends javax.swing.JFrame {
                 jPanel32.add(jLabel68);
                 jLabel68.setBounds(80, 70, 70, 16);
 
-                jLabel69.setText("Use a command of \"-help\" for options.");
-                jPanel32.add(jLabel69);
-                jLabel69.setBounds(80, 30, 260, 16);
-
                 jLabel70.setText("arg1:");
                 jPanel32.add(jLabel70);
                 jLabel70.setBounds(80, 120, 60, 16);
@@ -3160,6 +3156,15 @@ public class Gui extends javax.swing.JFrame {
                 });
                 jPanel32.add(jButton155);
                 jButton155.setBounds(530, 190, 80, 36);
+
+                jButton156.setText("Help");
+                jButton156.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton156ActionPerformed(evt);
+                    }
+                });
+                jPanel32.add(jButton156);
+                jButton156.setBounds(400, 270, 110, 36);
 
                 AdvTabState.addTab("CommandLine", jPanel32);
 
@@ -5664,6 +5669,10 @@ private void jButton154ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton155ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton155ActionPerformed
     GuiUtils.getUserSelectedFileOrFolder(textfieldState62);
 }//GEN-LAST:event_jButton155ActionPerformed
+
+private void jButton156ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton156ActionPerformed
+    gui.CommandLine.HandleArguments(new String[]{"-help"});
+}//GEN-LAST:event_jButton156ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5811,6 +5820,7 @@ private void jButton155ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton153;
     private javax.swing.JButton jButton154;
     private javax.swing.JButton jButton155;
+    private javax.swing.JButton jButton156;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
@@ -5969,7 +5979,6 @@ private void jButton155ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
