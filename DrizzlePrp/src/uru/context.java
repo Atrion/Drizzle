@@ -60,7 +60,8 @@ public class context extends shared.BaseContext
     
     //whether to just read the PrpRootObject as raw data.
     public boolean isRaw;
-    
+
+    //public uru.moulprp.prpfile curprp; //used in plODEPhysical.
 
     //public Typeid typesToRead;
 
@@ -310,6 +311,10 @@ public class context extends shared.BaseContext
     public short[] readShorts(int count)
     {
         return in.readShorts(count);
+    }
+    public float readFloat()
+    {
+        return in.readFloat();
     }
     public String toString()
     {

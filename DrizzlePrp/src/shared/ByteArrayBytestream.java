@@ -26,7 +26,12 @@ public class ByteArrayBytestream extends IBytestream
         result.pos = 0;
         return result;
     }
-    
+
+    public void skip(long n)
+    {
+        pos += n;
+        if(pos>=data.length) m.throwUncaughtException("Skipped past end of array.");
+    }
 
     protected int read()
     {

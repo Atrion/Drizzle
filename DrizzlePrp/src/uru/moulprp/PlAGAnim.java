@@ -66,7 +66,7 @@ public class PlAGAnim extends uruobj
                 throw new shared.readwarningexception("RelativeMatrixChannelApplicator: not converting.");
             }
         }
-        if(c.readversion==4)
+        if(c.readversion==4||c.readversion==7) //sep9revert
         {
             byte flag = c.readByte();
             if((flag&0x01)!=0 && name.toString().equals("(Entire Animation)"))

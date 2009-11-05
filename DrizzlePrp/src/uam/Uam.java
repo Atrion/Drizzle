@@ -162,13 +162,13 @@ public class Uam
         {
             fanages[i] = ageList.data.ages.get(i).propername;
         }
-        String item = shared.RandomUtils.GetRandomItem(automation.ageLists.potsages,automation.ageLists.convertedages, fanages);
+        String item = shared.RandomUtils.GetRandomItem(auto.ageLists.potsages,auto.ageLists.convertedages, fanages);
         return item;
     }
 
     public static void RunTests(String potsfolder)
     {
-        if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
+        if(!auto.AllGames.getPots().isFolderX(potsfolder)) return;
         boolean ignoreKnownOverrides = shared.State.AllStates.getStateAsBoolean("uamig");
 
         m.msg("Checking for python file duplicates...");

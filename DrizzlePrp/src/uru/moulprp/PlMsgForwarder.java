@@ -30,11 +30,16 @@ import shared.readexception;
 
 public class PlMsgForwarder extends uruobj
 {
+    PlSingleModifier xparent; //only in hexisle //perhaps a plMultiModifier?
     int count;
     Uruobjectref[] refs;
     
     public PlMsgForwarder(context c) throws readexception
     {
+        if(c.readversion==7)
+        {
+            xparent = new PlSingleModifier(c);
+        }
         count = c.readInt();
         refs = c.readArray(Uruobjectref.class, count);
     }

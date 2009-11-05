@@ -34,7 +34,7 @@ public class x0096Win32StaticSound extends uruobj
 {
     //Objheader xheader;
     
-    PlWin32Sound parent;
+    public PlWin32Sound parent;
     
     public x0096Win32StaticSound(context c) throws readexception
     {

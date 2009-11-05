@@ -315,7 +315,7 @@ public class Bytestream extends IBytestream
     {
         int readahead = 128; //you can change this.
 
-        String result = "(pos=0x"+Integer.toHexString(pos)+")\n";
+        String result = "(pos=0x"+Integer.toHexString(pos)+"="+Integer.toString(pos)+")\n";
         result += "Data:\n";
         if(!( pos + readahead <= maxpos+1 ))
         {

@@ -53,6 +53,23 @@ public abstract class PrpMessage extends PrpTaggedObject
         }
     }*/
     
+    public static class PlResponderEnableMsg extends uruobj
+    {
+        PlMessage parent;
+        byte b1;
+
+        public PlResponderEnableMsg(context c) throws readexception
+        {
+            parent = new PlMessage(c);
+            b1 = c.readByte();
+        }
+
+        public void compile(Bytedeque c)
+        {
+            parent.compile(c);
+            c.writeByte(b1);
+        }
+    }
     public static class PlSimSuppressMsg extends uruobj
     {
         PlMessage parent;
@@ -104,7 +121,6 @@ public abstract class PrpMessage extends PrpTaggedObject
             u2 = new Uruobjectref(c);
         }
     }
-    
     public static class PlCameraMsg extends uruobj
     {
         PlMessage parent;
@@ -251,7 +267,7 @@ public abstract class PrpMessage extends PrpTaggedObject
                 //this is correct.
                 u2 = c.readArray(Flt.class, 7);
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7) //sep9brevert
             {
                 u2 = new Flt[7];
                 if(u1.count>0)
@@ -562,7 +578,23 @@ public abstract class PrpMessage extends PrpTaggedObject
             }
         }
     }
+    public static class plEventCallbackSetupMsg extends uruobj //not in pots
+    {
+        PlMessage parent;
+        int count;
+        PlOneShotMsg.PlOneShotCallback[] callbacks;
 
+        public plEventCallbackSetupMsg(context c) throws readexception
+        {
+            parent = new PlMessage(c);
+            count = c.readInt();
+            callbacks = new PlOneShotMsg.PlOneShotCallback[count];
+            for(int i=0;i<count;i++)
+            {
+                callbacks[i] = new PlOneShotMsg.PlOneShotCallback(c);
+            }
+        }
+    }
     public static class PlOneShotMsg extends uruobj
     {
         PlMessage parent;
@@ -572,8 +604,36 @@ public abstract class PrpMessage extends PrpTaggedObject
         public PlOneShotMsg(context c) throws readexception
         {
             parent = new PlMessage(c);
-            count = c.readInt();
-            callbacks = c.readArray(PlOneShotCallback.class, count);
+            if(c.readversion==7)
+            {
+                //has a plEventCallbackSetupMsg (o8AA1D8) at offset28  (offset32)
+                plEventCallbackSetupMsg msg = new plEventCallbackSetupMsg(c);
+
+                //generate other versions data:
+                count = msg.count;
+                callbacks = msg.callbacks;
+
+                //if(true) throw new shared.readexception("Can't quite handle hexisle's PlOneShotMsg");
+                /*count = 0;
+                callbacks = new PlOneShotCallback[0];
+                m.warn("Breaking plOneShotMsg");
+                xref = new Uruobjectref(c);
+                int u1 = c.readInt();
+                int u2 = c.readInt();
+                int u3 = c.readInt();
+                for(int i=0;i<u3;i++)
+                {
+                    PrpTaggedObject obj = new PrpTaggedObject(c);
+                    //Uruobjectref ref1 = new Uruobjectref(c);
+                }*/
+                //byte b1 = c.readByte();
+                int dummy=0;
+            }
+            else
+            {
+                count = c.readInt();
+                callbacks = c.readArray(PlOneShotCallback.class, count);
+            }
         }
         
         public void compile(Bytedeque c)
@@ -902,15 +962,21 @@ public abstract class PrpMessage extends PrpTaggedObject
             refs = c.readArray(Uruobjectref.class, refcount);
             if(c.readversion==3||c.readversion==6)
             {
-                u1 = c.readInt();
-                u2 = c.readInt();
+                u1 = c.readInt(); //timestamp p1
+                u2 = c.readInt(); //timestamp p2
                 flags = c.readInt();
             }
             else if(c.readversion==4||c.readversion==7)
             {
                 //if(refcount!=0)
                 //{
-                    xu1 = c.readInt();
+                    //changed xu1 to flags.
+                    flags = c.readInt();
+                    if(flags!=0)
+                    {
+                        //m.err("not an error, but remember to check this out.");
+                        int dummy=0;
+                    }
                 //}
                 //the other flags will all default to 0.
             }

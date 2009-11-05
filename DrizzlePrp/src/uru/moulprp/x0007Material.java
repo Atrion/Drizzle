@@ -35,24 +35,24 @@ public class x0007Material extends uruobj
 {
     //Objheader xheader;
     public PlSynchedObject parent;
-    public int u1;
-    public int flags;
-    public int layercount;
-    public int lightmapcount;
+    public int loadFlags; //was u1
+    public int compFlags; //was flags
+    public int layercount; //was layercount
+    public int piggybackcount; //was lightmapcount
     //public Uruobjectref[] layerrefs;
     //public Uruobjectref[] maplayerrefs;
     public Vector<Uruobjectref> layerrefs = new Vector<Uruobjectref>();
-    public Vector<Uruobjectref> maplayerrefs = new Vector<Uruobjectref>();
+    public Vector<Uruobjectref> piggybackrefs = new Vector<Uruobjectref>(); //was maplayerrefs
     
     public x0007Material(context c) throws readexception //,boolean hasHeader)
     {
         shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);
-        u1 = data.readInt(); e.ensureflags(u1,0); //loadflags
-        flags = data.readInt(); e.ensureflags(flags,0x00,0x0400,0x1000,0x2000,0x2400/*fanages:*/,0x2010,0x10); //compflags
+        loadFlags = data.readInt(); e.ensureflags(loadFlags,0); //loadflags
+        compFlags = data.readInt(); e.ensureflags(compFlags,0x00,0x0400,0x1000,0x2000,0x2400/*fanages:*/,0x2010,0x10); //compflags
         layercount = data.readInt();
-        lightmapcount = data.readInt();
+        piggybackcount = data.readInt();
         //layerrefs = new Uruobjectref[layercount];
         for(int i=0;i<layercount;i++)
         {
@@ -60,17 +60,25 @@ public class x0007Material extends uruobj
             layerrefs.add(new Uruobjectref(c));
         }
         //maplayerrefs = new Uruobjectref[lightmapcount];
-        for(int i=0;i<lightmapcount;i++)
+        for(int i=0;i<piggybackcount;i++)
         {
             //maplayerrefs[i] = new Uruobjectref(c);
-            maplayerrefs.add(new Uruobjectref(c));
+            piggybackrefs.add(new Uruobjectref(c));
         }
+    }
+    public static x0007Material createEmpty()
+    {
+        x0007Material r = new x0007Material();
+        r.parent = PlSynchedObject.createEmpty();
+        r.layerrefs = new Vector();
+        r.piggybackrefs = new Vector();
+        return r;
     }
     public void compile(Bytedeque data)
     {
         parent.compile(data);
-        data.writeInt(u1);
-        data.writeInt(flags);
+        data.writeInt(loadFlags);
+        data.writeInt(compFlags);
         /*data.writeInt(layercount);
         data.writeInt(lightmapcount);
         for(int i=0;i<layercount;i++)
@@ -82,14 +90,14 @@ public class x0007Material extends uruobj
             maplayerrefs[i].compile(data);
         }*/
         data.writeInt(layerrefs.size());
-        data.writeInt(maplayerrefs.size());
+        data.writeInt(piggybackrefs.size());
         for(int i=0;i<layerrefs.size();i++)
         {
             layerrefs.get(i).compile(data);
         }
-        for(int i=0;i<maplayerrefs.size();i++)
+        for(int i=0;i<piggybackrefs.size();i++)
         {
-            maplayerrefs.get(i).compile(data);
+            piggybackrefs.get(i).compile(data);
         }
     }
     private x0007Material(){}
@@ -97,20 +105,25 @@ public class x0007Material extends uruobj
     {
         x0007Material result = new x0007Material();
         result.parent = parent.deepClone();
-        result.flags = flags;
+        result.compFlags = compFlags;
         result.layercount = layercount;
         result.layerrefs = new Vector();
         for(Uruobjectref ref: layerrefs)
         {
             result.layerrefs.add(ref.deepClone());
         }
-        result.u1 = u1;
-        result.lightmapcount = lightmapcount;
-        result.maplayerrefs = new Vector();
-        for(Uruobjectref ref: maplayerrefs)
+        result.loadFlags = loadFlags;
+        result.piggybackcount = piggybackcount;
+        result.piggybackrefs = new Vector();
+        for(Uruobjectref ref: piggybackrefs)
         {
-            result.maplayerrefs.add(ref.deepClone());
+            result.piggybackrefs.add(ref.deepClone());
         }
         return result;
+    }
+    public void addLayer(Uruobjectref layerref)
+    {
+        layerrefs.add(layerref);
+        layercount = layerrefs.size();
     }
 }

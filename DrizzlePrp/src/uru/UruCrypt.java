@@ -42,7 +42,20 @@ public class UruCrypt {
     private static byte[] notthedroidsHeader = { 'n','o','t','t','h','e','d','r','o','i','d','s' };
     private static byte[] eoaHeader = {(byte)0x88,(byte)0x42,(byte)0x87,(byte)0x0D};
     private static byte[] briceissmartHeader = { 'B','r','i','c','e','I','s','S','m','a','r','t' };
-    
+
+    public static byte[] DecryptAny(String filename)
+    {
+        byte[] encdata = FileUtils.ReadFile(filename);
+        return DecryptAny(encdata);
+    }
+    public static byte[] DecryptAny(byte[] encdata)
+    {
+        if(b.startswith(encdata, whatdoyouseeHeader)) return DecryptWhatdoyousee(encdata);
+        else if(b.startswith(encdata, notthedroidsHeader)) return DecryptNotthedroids(encdata);
+        else if(b.startswith(encdata, eoaHeader)) return DecryptEoa(encdata);
+        else m.throwUncaughtException("Unknown encryption type.");
+        return null;
+    }
     public static UruFileTypes DetectType(String filename)
     {
         String filestring = FileUtils.ReadFileAsString(filename);

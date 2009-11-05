@@ -67,7 +67,120 @@ public class PlODEPhysical extends uruobj
     Flt f6b;
     
     public PlHKPhysical.HKPhysical convertee;
-    
+    public PlHKPhysical.HKPhysical convertToHKPhysical(prpfile prp)
+    {
+        if(type==5)
+        {
+            convertee.format = 4;
+            convertee.xproxybounds = new PlHKPhysical.HKProxyBounds();
+            convertee.xproxybounds.parent.vertexcount = vertexcount;
+            e.ensure(vertices.length==vertexcount);
+            convertee.xproxybounds.parent.vertices = vertices;
+
+            //write surfaces
+            convertee.xproxybounds.facecount = surfacecount;
+            convertee.xproxybounds.faces = new shared.ShortTriplet[surfacecount];
+
+            for(int i=0;i<surfacecount;i++)
+            {
+                short point1 = (short)surfaces[i*3+0];
+                short point2 = (short)surfaces[i*3+1];
+                short point3 = (short)surfaces[i*3+2];
+                shared.ShortTriplet trip = shared.ShortTriplet.createFromShorts(point1, point2, point3);
+                convertee.xproxybounds.faces[i] = trip;
+            }
+
+        }
+        else if(type==1)
+        {
+            convertee.format = 1;
+
+            convertee.xboxbounds = new PlHKPhysical.HKBoxBounds();
+            //convertee.xboxbounds.parent.
+
+            Vertex center = findOffsetVectorFromSceneObject(prp, sceneobject);
+            m.msg("Resizing boxes in ODEPhysical...");
+            Vertex cornervector = new Vertex(f1.mult((float)0.5),f2.mult((float)0.5),f3.mult((float)0.5)); //is this order correct?
+
+            //boxbounds is just proxybounds
+            int vertexcount = 8;
+            int facecount = 12;
+            Vertex[] vertices = new Vertex[]{
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.sub(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.sub(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.sub(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+                new Vertex(center.x.add(cornervector.x),center.y.add(cornervector.y),center.z.add(cornervector.z)),
+            };
+            short[] faces = new short[]{
+                0,2,1,
+                1,2,3,
+                0,1,4,
+                1,5,4,
+                0,4,2,
+                2,4,6,
+                1,3,7,
+                7,5,1,
+                3,2,7,
+                2,6,7,
+                4,7,6,
+                4,5,7,
+            };
+            //reverse-chirality:
+            //short[] faces = new short[]{
+            //    0,1,2,
+            //    1,3,2,
+            //    0,4,1,
+            //    1,4,5,
+            //    0,2,4,
+            //    2,6,4,
+            //    1,7,3,
+            //    7,1,5,
+            //    3,7,2,
+            //    2,7,6,
+            //    4,6,7,
+            //    4,7,5,
+            //};
+
+            e.ensure(vertices.length==vertexcount);
+            e.ensure(faces.length==facecount*3);
+
+            convertee.xboxbounds.parent.parent.vertexcount = vertexcount;
+            convertee.xboxbounds.parent.parent.vertices = vertices;
+            convertee.xboxbounds.parent.facecount = facecount;
+            convertee.xboxbounds.parent.faces = new shared.ShortTriplet[facecount];
+            for(int i=0;i<facecount;i++)
+            {
+                short point1 = (short)faces[i*3+0];
+                short point2 = (short)faces[i*3+1];
+                short point3 = (short)faces[i*3+2];
+                shared.ShortTriplet trip = shared.ShortTriplet.createFromShorts(point1, point2, point3);
+                convertee.xboxbounds.parent.faces[i] = trip;
+            }
+
+        }
+        else if(type==2)
+        {
+            convertee.format = 2;
+
+            convertee.xspherebounds = new PlHKPhysical.HKSphereBounds();
+            Vertex offset = findOffsetVectorFromSceneObject(prp, sceneobject);
+            convertee.xspherebounds.offset = offset;
+            convertee.xspherebounds.radius = u4;
+        }
+        else if(type==6)
+        {
+            m.throwUncaughtException("ODEPhysical: unable to compile type 6.");
+        } //convertee.format = 0;//changethis!!!
+        else
+        {
+            m.throwUncaughtException("ODEPhysical: unable to compile unknown type.");
+        }
+        return convertee;
+    }
     public PlODEPhysical(context c) throws readexception
     {
         parent = new PlSynchedObject(c);
@@ -128,11 +241,11 @@ public class PlODEPhysical extends uruobj
         }
         u13 = c.readShort(); //LOSDB
         
-        if(c.readversion==7)
+        /*if(c.readversion==7)
         {
             //int xu14 = c.readInt();
             //int xu15 = c.readInt();
-        }
+        }*/
         
         sceneobject = new Uruobjectref(c); //plSceneObject
         scenenode = new Uruobjectref(c); //plSceneNode
@@ -155,11 +268,26 @@ public class PlODEPhysical extends uruobj
         convertee.mass = Flt.zero();
         convertee.RC = Flt.zero();
         convertee.EL = Flt.zero();
-        if(type==5) convertee.format = 4;
-        else if(type==1) convertee.format = 1;
-        else if(type==2) convertee.format = 2;
-        else if(type==6) throw new shared.readwarningexception("ODEPhysical: able to read, but ignoring unhandled type 6.(cylinder)"); //convertee.format = 0;//changethis!!!
-        else throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
+        if(type==5)
+        {
+            convertee.format = 4;
+        }
+        else if(type==1)
+        {
+            convertee.format = 1;
+        }
+        else if(type==2)
+        {
+            convertee.format = 2;
+        }
+        else if(type==6)
+        {
+            throw new shared.readwarningexception("ODEPhysical: able to read, but ignoring unhandled type 6.(cylinder)");
+        } //convertee.format = 0;//changethis!!!
+        else
+        {
+            throw new readexception("ODEPhysical: able to read okay, but throwing error to ignore unhandled format.");
+        }
         convertee.u1 = 0;
         convertee.coltype = 0x200;
         convertee.flagsdetect = 0;
@@ -306,7 +434,9 @@ public class PlODEPhysical extends uruobj
                     +";u9=0x"+Integer.toHexString(u9)+";u10=0x"+Integer.toHexString(u10)
                     +";u11="+Integer.toString(u11)+";u12=0x"+Integer.toHexString(u12)
                     +";u13="+Short.toString(u13)+";object="+c.curRootObject.toString());
-            if(shared.State.AllStates.getStateAsBoolean("skipPhysics")) throw new readexception("ODEPhysical: unhandled case.");
+            //if(shared.State.AllStates.getStateAsBoolean("skipPhysics")) throw new readexception("ODEPhysical: unhandled case.");
+            boolean skipPhysics = false;
+            if(skipPhysics) throw new readexception("ODEPhysical: unhandled case.");
         }
        
        //if(convertee.flagsdetect!=0x0) convertee.mass = Flt.one();

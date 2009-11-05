@@ -118,7 +118,9 @@ public class PlHKPhysical extends uruobj
             pots.zzzgroup0 = 0x0;
         }
         else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
-                ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 ))
+                ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 )
+                ||( u14==0x5 && u15==0x8 && LOSDB==0x2 && group0==0x0 ) //added for moul bevin heek chair clicks.
+                )
             //ladders
         //else if( u14==0x5 )
         {
@@ -131,7 +133,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzflagsrespond = 0x0;
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
-            pots.zzzLOSDB = 0x0;
+            pots.zzzLOSDB = LOSDB;
             pots.zzzgroup0 = 0x4;
             
             pots.givemass = true;
@@ -297,7 +299,8 @@ public class PlHKPhysical extends uruobj
             pots.zzzLOSDB = 0x4;
             pots.zzzgroup0 = 0x104;
         }
-        else if( u14==0x0 && u15==0x0 && LOSDB==0x44 && group0==0x20 )
+        else if(( u14==0x0 && u15==0x0 && LOSDB==0x44 && group0==0x20 )||
+                ( u14==0x0 && u15==0x0 && LOSDB==0x40 && group0==0x20 ))
         {
             //untested; er'cana
             pots.zzzu1 = 0x0;
@@ -351,6 +354,49 @@ public class PlHKPhysical extends uruobj
 
             //pots.givemass = true; //delete this.
         }
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x08 && group0==0x0 )
+        {
+            //untested; garrison wall bottom blockers.
+            //cannot find examples, so cheating.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x20000;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            pots.zzzgroup0 = 0x4;
+
+            //pots.givemass = true; //delete this.
+        }
+        else if( u14==0x1 && u15==0x0 && LOSDB==0x0 && group0==0x120 )
+        {
+            //garrison wall, using pots equivalents.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            pots.zzzgroup0 = 0x100;
+
+            //pots.givemass = true; //delete this.
+        }
+        else if( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x124 )
+        {
+            //garrison wall, using pots equivalents.
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x400;
+            pots.zzzflagsdetect = 0x20000;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            pots.zzzgroup0 = 0x104;
+
+            //pots.givemass = true; //delete this.
+        }
         else
         {
             if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
@@ -401,7 +447,13 @@ public class PlHKPhysical extends uruobj
         this.physx = null;
         this._version = 3; //set as pots version.
     }
-    
+    public void convertODEtoHK(prpfile prp)
+    {
+        this.havok = this.ode.convertToHKPhysical(prp);
+        this.ode = null;
+        this._version = 3; //set as pots version.
+    }
+    public PlHKPhysical(){}
     public PlHKPhysical(context c) throws readexception
     {
         String filenameStart = "";
@@ -435,6 +487,43 @@ public class PlHKPhysical extends uruobj
             havok = new HKPhysical(c);
         }
         
+    }
+
+    public static PlHKPhysical createStaticTriangleMeshFromVerticesAndFaces(Vertex[] vertices, ShortTriplet[] faces, Uruobjectref scenenode, Uruobjectref sceneobject)
+    {
+        PlHKPhysical r = new PlHKPhysical();
+        r._version = 3;
+        r.havok = new HKPhysical();
+        r.havok.parent = PlSynchedObject.createDefault();
+        r.havok.position = Vertex.zero();
+        r.havok.orientation = Quat.identityW();//Quat.identity(); //w=1
+        r.havok.mass = Flt.zero();
+        r.havok.RC = Flt.createFromJavaFloat(0.5f); //0.5?
+        r.havok.EL = Flt.createFromJavaFloat(0.0f); //0.0?
+        r.havok.format = 4; //proxy bounds
+
+        r.havok.u1 = 0x0;
+        r.havok.coltype = 0x200;
+        r.havok.flagsdetect = 0x0;
+        r.havok.flagsrespond = 0x0;
+        r.havok.u2 = 0x0;
+        r.havok.u3 = 0x0;
+        r.havok.LOSDB = 0x44; //avatarWalkable and collidesWithCamera.
+        r.havok.group = HsBitVector.createWithValues(0);
+
+        r.havok.xproxybounds = new HKProxyBounds();
+        r.havok.xproxybounds.facecount = faces.length;
+        r.havok.xproxybounds.faces = faces;
+        r.havok.xproxybounds.parent = new HKHullBounds();
+        r.havok.xproxybounds.parent.vertexcount = vertices.length;
+        r.havok.xproxybounds.parent.vertices = vertices;
+
+        r.havok.soundgroup = Uruobjectref.none();
+        r.havok.subworld = Uruobjectref.none();
+        r.havok.scenenode = scenenode;
+        r.havok.sceneobject = sceneobject;
+
+        return r;
     }
     public void compile(Bytedeque c)
     {
@@ -517,8 +606,10 @@ public class PlHKPhysical extends uruobj
             //if(soundgroup.hasRef!=0)
             //    dummy=0;
             position = new Vertex(c); //position?
-            
-            if(shared.State.AllStates.getStateAsBoolean("plpxphysicalQuatChange"))
+
+            boolean plpxphysicalQuatChange = false;
+            //if(shared.State.AllStates.getStateAsBoolean("plpxphysicalQuatChange"))
+            if(plpxphysicalQuatChange)
             {
                 orientation = Quat.readXYZW(c.in);
                 m.warn("Using new Quat form in PlPXPhysical, if you have problems with physics, try reverting it.");
@@ -574,7 +665,8 @@ public class PlHKPhysical extends uruobj
             potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
             if(pots==null)
             {
-                throw new shared.readwarningexception("plHKPhysical: Can read okay, but failing in order to ignore.");
+                String msg = "plHKPhysical: Can read okay, but failing in order to ignore. (u14="+Integer.toString(moul.u14)+", u15="+Integer.toString(moul.u15)+", losdb=0x"+Integer.toHexString(moul.LOSDB)+", group0=0x"+Integer.toHexString(moul.group0)+" ) ("+c.curRootObject.toString()+")";
+                throw new shared.readwarningexception(msg);
             }
         }
 
@@ -896,15 +988,15 @@ public class PlHKPhysical extends uruobj
         public Vertex position;
         public Quat orientation;
         public Flt mass; //mass
-        Flt RC; //friction coefficient
-        Flt EL; //elasticity
-        int format;
-        short u1; //2,
+        public Flt RC; //friction coefficient
+        public Flt EL; //elasticity
+        public int format;
+        public short u1; //2,
         public short coltype; //200,400,100,2
         public int flagsdetect; //8000000,1020000,20000,800000,1000000
         public int flagsrespond; //1020000,20000,1800002,3800000,3820000,3800002,3840000,3860000,2000000,3840002,1000000,3800004
-        byte u2; //1
-        byte u3; //1
+        public byte u2; //1
+        public byte u3; //1
         HKBoxBounds xboxbounds;
         HKSphereBounds xspherebounds;
         HKHullBounds xhullbounds;

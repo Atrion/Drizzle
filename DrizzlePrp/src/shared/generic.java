@@ -30,6 +30,22 @@ public class generic
             throw new shared.uncaughtexception("gereric: Unable to create an instance of this class.");
         }
     }
+    public static <T> T createObjectWithSingleArgumentConstructor(Class<T> c, Class arg0class, Object arg0)
+    {
+        try
+        {
+            //Constructor constr = c.getConstructor();
+            Constructor constr = c.getConstructor(arg0class);
+            //Object result = constr.newInstance();
+            Object result = constr.newInstance(arg0);
+            T result2 = c.cast(result);
+            return result2;
+        }
+        catch(Exception e)
+        {
+            throw new shared.uncaughtexception("gereric: Unable to create an instance of this 1-arg class.");
+        }
+    }
     public static <T> T createShallowClone(T obj)
     {
         try

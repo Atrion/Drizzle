@@ -33,11 +33,11 @@ import shared.b;
 public class x001CSimulationInterface extends uruobj
 {
     //Objheader xheader;
-    PlObjInterface parent;
+    public PlObjInterface parent;
     //int count;
     //int[] props;
-    HsBitVector props;
-    int u2;
+    public HsBitVector props;
+    public int u2;
     public Uruobjectref physical;
     
     public x001CSimulationInterface(context c) throws readexception
@@ -63,6 +63,16 @@ public class x001CSimulationInterface extends uruobj
             u2 = 0;
         }
         physical = new Uruobjectref(c);
+    }
+    public x001CSimulationInterface(){}
+    public static x001CSimulationInterface createWithPlHKPhysical(Uruobjectref sceneobj, Uruobjectref physref)
+    {
+        x001CSimulationInterface r = new x001CSimulationInterface();
+        r.parent = PlObjInterface.createDefault(sceneobj);
+        r.physical = physref;
+        r.u2 = 0;
+        r.props = HsBitVector.createDefault();
+        return r;
     }
     public void compile(Bytedeque data)
     {

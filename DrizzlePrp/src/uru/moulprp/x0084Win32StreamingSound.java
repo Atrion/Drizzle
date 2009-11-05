@@ -34,7 +34,7 @@ public class x0084Win32StreamingSound extends uruobj
 {
     //Objheader xheader;
     
-    PlWin32Sound parent;
+    public PlWin32Sound parent;
     
     public x0084Win32StreamingSound(context c) throws readexception
     {

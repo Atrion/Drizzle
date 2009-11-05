@@ -88,6 +88,11 @@ public class x0001Sceneobject extends uruobj
         result.scenenode = scenenode;
         return result;
     }
+    public void clearObjectrefs2()
+    {
+        count2 = 0;
+        objectrefs2.clear();
+    }
     public void addToObjectrefs2(Uruobjectref ref)
     {
         count2++;

@@ -44,6 +44,10 @@ public class prpprocess
             {
                 PrpRootObject ro = ProcessObjectindexObjecttypeObjectdesc( c, objectindex.types[i_type].descs[j_obj], isRaw );
                 rootobjects.add(ro);
+                if(ro.header.objecttype==Typeid.plAudioInterface || ro.header.desc.objecttype==Typeid.plAudioInterface)
+                {
+                    int dummy=0;
+                }
             }
         }
         

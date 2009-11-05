@@ -55,8 +55,8 @@ public class PrpObject extends uruobj
                 return new PlWinAudible(c);
             case plCoordinateInterface:
                 return new x0015CoordinateInterface(c);
-            case plDrawInterface:
-                return new x0016DrawInterface(c);
+            //case plDrawInterface:
+            //    return new plDrawInterface(c);
             case plSpawnModifier:
                 return new x003DSpawnModifier(c);
             case plDrawableSpans:
@@ -383,12 +383,30 @@ public class PrpObject extends uruobj
                 return new PlVolumeSensorConditionalObject.PlVolumeSensorConditionalObjectNoArbitration(c);
             case plSubworldRegionDetector:
                 return new PlSubworldRegionDetector(c);
+            case plResponderEnableMsg:
+                return new PrpMessage.PlResponderEnableMsg(c);
+            case plParticleUniformWind:
+                return new PlParticleWindEffect.PlParticleUniformWind(c);
             default:
+                uruobj result = tryread(c,type);
+                if(result!=null) return result;
                 //m.err("prprootobject: unhandled type.");
                 throw new shared.readwarningexception("PrpObject: type constructor not in main list: "+type.toString());
         }
     }
-
+    public uruobj tryread(context c, Typeid type)
+    {
+        final String prefix = "uru.moulprp.";
+        try{
+            String classname = prefix+type.toString();
+            Class plasmaClass = Class.forName(classname);
+            Class<uruobj> plasmaClass2 = (Class<uruobj>)plasmaClass;
+            uruobj r = shared.generic.createObjectWithSingleArgumentConstructor(plasmaClass2, context.class, c);
+            return r;
+        }catch(Exception e){
+            return null;
+        }
+    }
     public PrpObject(context c, Typeid type) throws readexception
     {
         object = this.getObject(c, type);

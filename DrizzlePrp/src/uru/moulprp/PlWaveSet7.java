@@ -34,7 +34,7 @@ public class PlWaveSet7 extends uruobj
 {
     PlMultiModifier parent;
     Flt u1;
-    public waveset7sub sub1;
+    public plFixedWaterState7 sub1;
     int refcount1;
     Uruobjectref[] refs1;
     int refcount2;
@@ -47,7 +47,7 @@ public class PlWaveSet7 extends uruobj
     {
         parent = new PlMultiModifier(c);
         u1 = new Flt(c);
-        sub1 = new waveset7sub(c);
+        sub1 = new plFixedWaterState7(c);
         refcount1 = c.readInt();
         refs1 = c.readArray(Uruobjectref.class, refcount1);
         refcount2 = c.readInt();
@@ -84,11 +84,45 @@ public class PlWaveSet7 extends uruobj
             }
         }
     }
-    
-    public static class waveset7sub extends uruobj
+    public static class WaveState extends uruobj
     {
-        Flt[] u2; //5
-        Flt[] u3; //5
+        Flt fMaxLength;
+        Flt fMinLength;
+        Flt fAmpOverLen;
+        Flt fChop;
+        Flt fAngleDev;
+        Flt xhexisle;
+
+        public WaveState(context c)
+        {
+            fMaxLength = new Flt(c);
+            fMinLength = new Flt(c);
+            fAmpOverLen = new Flt(c);
+            fChop = new Flt(c);
+            fAngleDev = new Flt(c);
+            if(c.readversion==7)
+            {
+                m.warn("Guessing hexisle plWaveSet7 value.");
+                //just guessing that the new one is at the end.
+                xhexisle = new Flt(c);
+            }
+        }
+
+        public void compile(Bytedeque c)
+        {
+            fMaxLength.compile(c);
+            fMinLength.compile(c);
+            fAmpOverLen.compile(c);
+            fChop.compile(c);
+            fAngleDev.compile(c);
+        }
+    }
+    public static class plFixedWaterState7 extends uruobj //was waveset7sub
+    {
+        //Flt[] u2; //5
+        //Flt[] u3; //5
+        WaveState fGeoState;
+        WaveState fTexState;
         Flt u4;
         Vertex u5;
         Vertex u6;
@@ -102,10 +136,13 @@ public class PlWaveSet7 extends uruobj
         Flt u14;
         Flt u15;
         
-        public waveset7sub(context c) throws readexception
+        public plFixedWaterState7(context c) throws readexception
         {
-            u2 = c.readArray(Flt.class, 5);
-            u3 = c.readArray(Flt.class, 5);
+            //These first two things are actually objects with
+            //u2 = c.readArray(Flt.class, 5);
+            //u3 = c.readArray(Flt.class, 5);
+            fGeoState = new WaveState(c);
+            fTexState = new WaveState(c);
             u4 = new Flt(c);
             u5 = new Vertex(c);
             u6 = new Vertex(c);
@@ -114,7 +151,7 @@ public class PlWaveSet7 extends uruobj
             u9 = new Vertex(c);
             u10 = new Vertex(c);
             u11 = new Vertex(c);
-            u12 = c.readArray(Flt.class, 25);
+            u12 = c.readArray(Flt.class, 25); //just all in a row.
             u13 = new Vertex(c);
             u14 = new Flt(c);
             u15 = new Flt(c);
@@ -122,8 +159,10 @@ public class PlWaveSet7 extends uruobj
         
         public void compile(Bytedeque c)
         {
-            c.writeArray(u2);
-            c.writeArray(u3);
+            //c.writeArray(u2);
+            //c.writeArray(u3);
+            fGeoState.compile(c);
+            fTexState.compile(c);
             u4.compile(c);
             u5.compile(c);
             u6.compile(c);

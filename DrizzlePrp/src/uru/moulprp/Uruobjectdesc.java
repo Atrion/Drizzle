@@ -108,6 +108,11 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         shared.reporter.reportEvent(new uru.reporterReports.refEncountered(c.curRootObject, this), "refEncountered");
     }
     private Uruobjectdesc(){}
+    public static Uruobjectdesc createDefaultWithTypeNamePrp(Typeid type, String name, prpfile prp)
+    {
+        return createDefaultWithTypeNamePagePagetype(type,name,prp.header.pageid,prp.header.pagetype);
+    }
+
     public static Uruobjectdesc createDefaultWithTypeNamePage(Typeid type, String name, Pageid page)
     {
         return createDefaultWithTypeNamePagePagetype(type,name,page,Pagetype.createDefault());

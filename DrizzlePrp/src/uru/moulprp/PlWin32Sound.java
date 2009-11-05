@@ -26,8 +26,8 @@ import shared.m;
 
 public class PlWin32Sound extends uruobj
 {
-    PlSound parent;
-    byte channel; //0 means left channel, 1 means right channel.
+    public PlSound parent;
+    public byte channel; //0 means left channel, 1 means right channel.
     
     public PlWin32Sound(context c) throws readexception
     {
@@ -43,29 +43,33 @@ public class PlWin32Sound extends uruobj
     
     public static class PlSound extends uruobj
     {
-        PlSynchedObject parent;
-        byte playing;
-        Double64 time;
-        int maxfalloff;
-        int minfalloff;
-        Flt curvolume;
-        Flt desiredvolume;
-        int outervol;
-        int innercone;
-        int outercone;
-        Flt fadedvolume;
-        int properties;
-        byte type;
-        byte priority;
-        plFadeParams fadeInParams;
-        plFadeParams fadeOutParams;
-        Uruobjectref softRegion;
-        Uruobjectref dataBuffer; //plSoundBuffer
-        plEAXSourceSettings EAXSettings;
-        Uruobjectref softOcclusionRegion;
+        public PlSynchedObject parent;
+        public byte playing;
+        public Double64 time;
+        public int maxfalloff;
+        public int minfalloff;
+        public Flt curvolume;
+        public Flt desiredvolume;
+        public int outervol;
+        public int innercone;
+        public int outercone;
+        public Flt fadedvolume;
+        public int properties;
+        public byte type;
+        public byte priority;
+        public plFadeParams fadeInParams;
+        public plFadeParams fadeOutParams;
+        public Uruobjectref softRegion;
+        public Uruobjectref dataBuffer; //plSoundBuffer
+        public plEAXSourceSettings EAXSettings;
+        public Uruobjectref softOcclusionRegion;
         
         //short xu1;
         Urustring xu1;
+
+        public static final int kPropLooping = 0x4;
+        public static final int kPropAutoStart = 0x8;
+
 
         public PlSound(context c) throws readexception
         {
@@ -83,7 +87,7 @@ public class PlWin32Sound extends uruobj
             properties = c.readInt();
             type = c.readByte();
             priority = c.readByte();
-            if(c.readversion==4)
+            if(c.readversion==4||c.readversion==7)
             {
                 //xu1 = c.readShort();
                 xu1 = new Urustring(c);
@@ -226,6 +230,10 @@ public class PlWin32Sound extends uruobj
                     
                     m.warn("Sound: Fudging some sound settings.");
                     //throw new readexception("plEAXSourceSetting: can read, but throwing error to skip.");
+                }
+                else
+                {
+                    m.throwUncaughtException("Unimplemented.");
                 }
             }
         }

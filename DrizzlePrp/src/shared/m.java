@@ -34,7 +34,8 @@ import java.io.InputStream;
  */
 public class m
 {
-    
+    public static Integer debugCount = 0;
+
     private static JTextArea _outputTextArea; //you must set this from the GUI.
     private static boolean justUseConsole = true;
     
@@ -75,7 +76,7 @@ public class m
     public static void time()
     {
         long time = java.util.Calendar.getInstance().getTimeInMillis();
-        m.msg("time: ",Long.toString(time));
+        m.msg("time(ms): ",Long.toString(time));
     }
     public static void redirectStdOut()
     {
@@ -266,6 +267,7 @@ public class m
 
     public static void throwUncaughtException(String s)
     {
+        if(debugCount!=null) m.msg("CurPos: "+Integer.toString(debugCount));
         throw new shared.uncaughtexception(s);
     }
 

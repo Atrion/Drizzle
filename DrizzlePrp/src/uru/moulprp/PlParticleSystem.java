@@ -469,6 +469,7 @@ public class PlParticleSystem extends uruobj
         int count;
         Flt[] u2;
         Flt[] u3;
+        int xhexisle;
         
         public plSimpleParticleGenerator(context c) throws readexception
         {
@@ -476,6 +477,10 @@ public class PlParticleSystem extends uruobj
             count = c.readInt();
             u2 = c.readArray(Flt.class, count*5); //5 actually consists of a vertex and 2 floats.
             u3 = c.readArray(Flt.class, 9);
+            if(c.readversion==7)
+            {
+                xhexisle = c.readInt(); //I don't know what this is for...
+            }
         }
         
         public void compile(Bytedeque c)

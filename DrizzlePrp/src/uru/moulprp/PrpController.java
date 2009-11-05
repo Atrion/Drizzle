@@ -722,7 +722,7 @@ public class PrpController extends uruobj
                         break;
                 }
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 byte controllertype2 = c.readByte(); //int in pots, byte in moul
                 count2 = c.readInt();
@@ -789,7 +789,7 @@ public class PrpController extends uruobj
         {
             //m.err("plLeafController doesn't implement compile directly.");
             
-            if(this.readversion==4 || this.readversion==6)
+            if(this.readversion==4 || this.readversion==6 || this.readversion==7) //sep9brevert
             {
                 compileSpecial(c);
             }
@@ -1128,7 +1128,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1150,7 +1150,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7) //sep10rev
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1172,7 +1172,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1194,7 +1194,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1217,7 +1217,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7) //sep10rev
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1241,7 +1241,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7) //sep10rev
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1264,7 +1264,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1284,7 +1284,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1305,7 +1305,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1327,7 +1327,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1347,7 +1347,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1367,7 +1367,7 @@ public class PrpController extends uruobj
             {
                 framenum = c.readShort();
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Flt flt = new Flt(c);
                 //m.msg(flt.toString());
@@ -1385,7 +1385,7 @@ public class PrpController extends uruobj
         
         public plCompoundController(context c) throws readexception
         {
-            e.ensure(c.readversion==6||c.readversion==4);
+            e.ensure(c.readversion==6||c.readversion==4||c.readversion==7);
             
             u1 = new PrpTaggedObject(c);
             u2 = new PrpTaggedObject(c);
@@ -1660,7 +1660,7 @@ public class PrpController extends uruobj
         
         public uk(context c) throws readexception
         {
-            if(c.readversion==3||c.readversion==4)
+            if(c.readversion==3||c.readversion==4||c.readversion==7) //sep9revert
             {
                 xu0 = c.readInt();
                 //m.msg("xu0="+Integer.toString(xu0));

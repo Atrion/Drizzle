@@ -56,16 +56,20 @@ public class Uruobjectref extends uruobj
                 hasRef = 1;
             }
         }
+        else
+        {
+            m.throwUncaughtException("Unhandled readversion.");
+        }
         
         //trap
-        if(xdesc!=null && xdesc.objecttype==Typeid.plLadderModifier && c.curRootObject!= null && c.curRootObject.objecttype==Typeid.plLogicModifier)
+        /*if(xdesc!=null && xdesc.objecttype==Typeid.plLadderModifier && c.curRootObject!= null && c.curRootObject.objecttype==Typeid.plLogicModifier)
         {
             if(shared.State.AllStates.getStateAsBoolean("removeLadders"))
             {
                 int dummy=0;
                 //throw new shared.readwarningexception("Removing plLogicModifier that references plLadderModifier:"+xdesc.objectname.toString());
             }
-        }
+        }*/
     }
     public static Uruobjectref createDefaultWithTypeNamePage(Typeid type, String name, Pageid page)
     {

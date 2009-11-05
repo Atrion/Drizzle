@@ -32,9 +32,9 @@ import shared.b;
  *
  * @author user
  */
-public class PrpVolumeIsect extends uruobj
+public class PrpVolumeIsect // extends uruobj
 {
-    Typeid vitype;
+    /*Typeid vitype;
     public uruobj isect;
     
     public PrpVolumeIsect(context c) throws readexception
@@ -43,10 +43,10 @@ public class PrpVolumeIsect extends uruobj
         switch(vitype)
         {
             case plVolumeIsect:
-                isect = new PlVolumeIsect(c);
+                isect = new plVolumeIsect(c);
                 break;
             case plConvexIsect:
-                isect = new PlConvexIsect(c);
+                isect = new plConvexIsect(c);
                 break;
             default:
                 m.err("prpvolumeisect: unhandled type");
@@ -68,42 +68,9 @@ public class PrpVolumeIsect extends uruobj
                 m.err("prpvolumeisect: unhandled type");
                 break;
         }
-    }
+    }*/
     
-    public static class PlVolumeIsect extends uruobj
-    {
-        public PlVolumeIsect(context c)
-        {
-            //do nothing.
-        }
-        
-        public void compile(Bytedeque c)
-        {
-            //do nothing.
-        }
-    }
     
-    public static class PlConvexIsect extends uruobj
-    {
-        PlVolumeIsect parent;
-        short count;
-        public PlConvexPlane[] planes;
-        
-        public PlConvexIsect(context c) throws readexception
-        {
-            parent = new PlVolumeIsect(c);
-            count = c.readShort();
-            int count2 = b.Int16ToInt32(count);
-            planes = c.readArray(PlConvexPlane.class, count2);
-        }
-        
-        public void compile(Bytedeque c)
-        {
-            parent.compile(c);
-            c.writeShort(count);
-            c.writeArray2(planes);
-        }
-    }
     
     public static class PlConvexPlane extends uruobj
     {

@@ -49,7 +49,17 @@ public class x0056OmniLightInfo extends uruobj
         att1 = new Flt(c);
         att2 = new Flt(c);
         att3 = new Flt(c);
-        cutoffdistance = new Flt(c);
+        if(c.readversion==7)
+        {
+            //nothing to read.
+            //cutoffdistance seems to be the one to skip, as att1, att2, and att3 are the coeffecients of the 1/(a+bx+cx^2)
+            cutoffdistance = Flt.createFromJavaFloat(1000000.0f);  //just make a big cutoff???
+        }
+        else
+        {
+            cutoffdistance = new Flt(c);
+        }
+        //m.msg("omnilightinfo: "+att1.toString()+"  "+att2.toString()+"   "+att3.toString()+"    "+((cutoffdistance==null)?"":cutoffdistance.toString()));
     }
     public void compile(Bytedeque data)
     {

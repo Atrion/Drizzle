@@ -57,7 +57,7 @@ public class PlAGMasterMod extends uruobj
         {
             u2 = new Bstr(c);
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             u2 = Bstr.createFromNothing();
         }
@@ -75,7 +75,7 @@ public class PlAGMasterMod extends uruobj
                 xu5 = new Uruobjectref(c);
             }
         }
-        else if(c.readversion==4)
+        else if(c.readversion==4||c.readversion==7)
         {
             xxrefscount = c.readInt();
             //if(ucount!=0) throw new readexception("PlAGMasterMod: unhandled case.");

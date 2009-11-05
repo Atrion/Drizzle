@@ -27,6 +27,20 @@ import java.util.Vector;
  */
 public class b
 {
+    public static boolean f(int flags, int mask)
+    {
+        boolean r = ((flags&mask)!=0);
+        return r;
+    }
+    public static boolean startswith(byte[] data, byte[] startstr)
+    {
+        if(data.length<startstr.length) return false;
+        for(int i=0;i<startstr.length;i++)
+        {
+            if(data[i]!=startstr[i]) return false;
+        }
+        return true;
+    }
     public static byte[] substr(byte[] data, int offset, int length)
     {
         byte[] result = new byte[length];
@@ -150,6 +164,14 @@ public class b
         short result = (short)( a | b );
         return result;
         
+    }
+    public static short BytesToInt16BigEndian(byte[] bytes, int startpos)
+    {
+        int a = ByteToInt32(bytes[startpos+0])<<8;
+        int b = ByteToInt32(bytes[startpos+1])<<0;
+        short result = (short)( a | b );
+        return result;
+
     }
     public static long BytesToInt64(byte[] bytes, int startpos)
     {
@@ -427,7 +449,7 @@ public class b
         }
         else if(c>='A' && c<='F')
         {
-            return c='A'+10;
+            return c-'A'+10;
         }
         else if(c>='0' && c<='9')
         {
@@ -537,10 +559,14 @@ public class b
     //untested
     public static int reverseEndianness(int value)
     {
-        byte b1 = (byte)((value >> 0) & 0xFF);
-        byte b2 = (byte)((value >> 8) & 0xFF);
-        byte b3 = (byte)((value >> 16) & 0xFF);
-        byte b4 = (byte)((value >> 24) & 0xFF);
+        //byte b1 = (byte)((value >> 0) & 0xFF);
+        //byte b2 = (byte)((value >> 8) & 0xFF);
+        //byte b3 = (byte)((value >> 16) & 0xFF);
+        //byte b4 = (byte)((value >> 24) & 0xFF);
+        int b1 = ((value >>> 0) & 0xFF);
+        int b2 = ((value >>> 8) & 0xFF);
+        int b3 = ((value >>> 16) & 0xFF);
+        int b4 = ((value >>> 24) & 0xFF);
         int result = (b1 << 24) | (b2 << 16) | (b3 << 8) | (b4 << 0);
         return result;
     }

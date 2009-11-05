@@ -18,7 +18,19 @@ public abstract class IBytedeque
     abstract public void writeByte(byte b);
     abstract public void writeShorts(short[] shorts);
     abstract protected Iterator<byte[]> getIterator();
-    
+
+    public void writeFloat(float f)
+    {
+        int data = Float.floatToIntBits(f);
+        writeInt(data);
+    }
+    public void writeFloats(float[] fs)
+    {
+        for(int i=0;i<fs.length;i++)
+        {
+            writeFloat(fs[i]);
+        }
+    }
     public <T extends ICompilable> void writeArray(T[] vector)
     {
         int length = vector.length;

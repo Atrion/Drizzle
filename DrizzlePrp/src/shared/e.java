@@ -27,6 +27,13 @@ import shared.m;
  */
 public class e
 {
+    public static void force(boolean statement)
+    {
+        if(!statement)
+        {
+            m.throwUncaughtException("Condition not met.");
+        }
+    }
     public static void ensure(boolean statement)
     {
         if(!statement)
@@ -72,6 +79,14 @@ public class e
         }
         Main.message("ensure: typeid element is not in set.");
     }*/
+    public static boolean isin(int a, int... options)
+    {
+        for(int i=0; i<options.length; i++)
+        {
+            if(a==options[i]) return true;
+        }
+        return false;
+    }
     public static void ensureflags(int a, int ... options)
     {
         for(int i=0; i<options.length; i++)

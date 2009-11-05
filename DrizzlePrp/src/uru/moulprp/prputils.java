@@ -187,11 +187,18 @@ public class prputils
             
             //do per-type work.
             boolean parseThisType = false;
-            for(int k=0;k<typesToRead.length;k++)
+            if(typesToRead==null)
             {
-                if (typesToRead[k]==type)
+                parseThisType = true;
+            }
+            else
+            {
+                for(int k=0;k<typesToRead.length;k++)
                 {
-                    parseThisType = true;
+                    if (typesToRead[k]==type)
+                    {
+                        parseThisType = true;
+                    }
                 }
             }
             if(reportProgress) m.msg("type=",type.toString());
@@ -319,6 +326,7 @@ public class prputils
                     catch(Exception e)
                     {
                         m.err("Unexpected exception: ",e.getMessage());
+                        e.printStackTrace();
                         //e.printStackTrace();
                     }
                     //break;
@@ -436,7 +444,7 @@ public class prputils
         
         _staticsettings.reportReferences = true;
         _staticsettings.tryToFindReferencesInUnknownObjects = true;
-        ProcessAllMoul(c,false, automation.mystAutomation.moulReadable);
+        ProcessAllMoul(c,false, auto.mystAutomation.moulReadable);
         //String report = "Cross-Reference report:\n\n" + _staticsettings.referenceReport.toString() + "\n\nScanned Reference Report:\n\n" + _staticsettings.scannedReferenceReport.toString();
         String report = "howfound;fromname;fromtype;fromnumber;toname;totype;tonumber;topageid\n" + _staticsettings.referenceReport.toString() + _staticsettings.scannedReferenceReport.toString();
         FileUtils.WriteFile(outfolder+"/crosslinkreport.csv", report.getBytes());
@@ -480,7 +488,7 @@ public class prputils
             
             
             //prpfile prp = ProcessAllMoul(c,false);
-            prpfile prp = prpfile.createFromContext(c, automation.mystAutomation.moulReadable);
+            prpfile prp = prpfile.createFromContext(c, auto.mystAutomation.moulReadable);
             
             Bytedeque fullbyte = RecompilePrp(prp, decider);
             String filename = prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
@@ -488,7 +496,7 @@ public class prputils
             fullbyte.writeAllBytesToFile(outfolder+"/"+filename);
         }
         
-        public static Bytedeque RecompilePrp(prpfile prp, Decider decider)
+        public static Bytedeque RecompilePrp(prpfile prp, uru.moulprp.prputils.Compiler.Decider decider)
         {
             //fix payiferen pageid conflict problem.
             /*if (prp.header.agename.toString().toLowerCase().equals("payiferen"))
@@ -965,13 +973,13 @@ public class prputils
         StringBuilder report = new StringBuilder();
         
         context c = context.createFromBytestream(new Bytestream(data));
-        prpfile prp = ProcessAllMoul(c,false,automation.mystAutomation.moulReadable);
+        prpfile prp = ProcessAllMoul(c,false,auto.mystAutomation.moulReadable);
         for(int i=0;i<prp.objects.length;i++)
         {
             PrpRootObject curobj = prp.objects[i];
             if(curobj.header.desc.objecttype==Typeid.plDrawInterface)
             {
-                x0016DrawInterface di = (x0016DrawInterface)curobj.prpobject.object;
+                plDrawInterface di = (plDrawInterface)curobj.prpobject.object;
                 for(int j=0;j<di.subsetgroupcount;j++)
                 {
                     int subsetgroup = di.subsetgroups[j].subsetgroupindex;

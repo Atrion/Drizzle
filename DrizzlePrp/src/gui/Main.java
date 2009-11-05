@@ -85,9 +85,18 @@ public class Main extends javax.swing.JFrame {
                 //javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel());
                 //javax.swing.UIManager.setLookAndFeel( sun.java.swing.plaf.gtk.GTKLooktAndFeel());
                 //javax.swing.UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
-                javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
                 //javax.swing.JDialog j = new javax.swing.JDialog();
                 //j.
+                //javax.swing.UIManager.setLookAndFeel(new com.sun.java.swing.plaf.motif.MotifLookAndFeel());
+                //javax.swing.UIManager.setLookAndFeel(new org.jvnet.substance.skin.SubstanceModerateLookAndFeel());
+                //javax.swing.UIManager.setLookAndFeel(new org.jvnet.substance.skin.SubstanceBusinessLookAndFeel());
+                //org.jvnet.substance.SubstanceLookAndFeel.setSkin(new org.jvnet.substance.skin.BusinessSkin());
+                //javax.swing.LookAndFeel laf = new com.jgoodies.looks.windows.WindowsLookAndFeel();
+                //javax.swing.LookAndFeel laf = new com.jgoodies.looks.plastic.PlasticXPLookAndFeel();
+                javax.swing.LookAndFeel laf;
+                //laf = new com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel();
+                laf = new com.sun.java.swing.plaf.motif.MotifLookAndFeel();
+                javax.swing.UIManager.setLookAndFeel(laf);
 
                 shared.GuiUtils.setCrossPlatformFonts(true);
                 //shared.GuiUtils.setBackgroundColour(java.awt.Color.CYAN);
@@ -102,6 +111,7 @@ public class Main extends javax.swing.JFrame {
             {
                 public void run()
                 {
+                //org.jvnet.substance.SubstanceLookAndFeel.setSkin(new org.jvnet.substance.skin.ModerateSkin());
                     guiform = new Gui();
                     if(debugcheck!=null) debugcheck.run();
                     //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");

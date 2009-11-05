@@ -208,3 +208,10 @@ Enter a server.{->}Gib einen Server an.
 Enter the server you want to use.{->}Gib den Server an, den du benutzen möchtest.
 Folder Name:{->}Name des Verzeichnisses:
 
+//Drizzle22 (also updated conversion paragraph in help.txt)
+Done copying {->}Fertig mit Kopieren 
+ music!{->} der Musik!
+//HexIsle folder:{->}HexIsle Ordner:
+HexIsle folder:{->}HexIsle Verzeichnis:
+HexIsle music...{->}HexIsle Musik...
+

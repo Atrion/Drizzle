@@ -26,6 +26,7 @@ public class CommandLine
             m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
             m.msg("  -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
             m.msg("  -changepage c:/inputfile.prp c:/outputfolder NewPageName");
+            m.msg("  -deepview c:/inputfile.prp");
         }
         else if(args[0].equals("-mirrordataserver"))
         {
@@ -43,19 +44,24 @@ public class CommandLine
         }
         else if(args[0].equals("-prpdiff"))
         {
-            automation.PrpDiff.FindDiff(args[1], args[2], args[3]);
+            auto.PrpDiff.FindDiff(args[1], args[2], args[3]);
         }
         else if(args[0].equals("-changeagename"))
         {
-            automation.ChangeNameAndPrefix.ChangeName(args[1], args[2], args[3]);
+            auto.ChangeNameAndPrefix.ChangeName(args[1], args[2], args[3]);
         }
         else if(args[0].equals("-changeprefix"))
         {
-            automation.ChangeNameAndPrefix.ChangePrefix(args[1], args[2], args[3]);
+            auto.ChangeNameAndPrefix.ChangePrefix(args[1], args[2], args[3]);
         }
         else if(args[0].equals("-changepage"))
         {
-            automation.ChangeNameAndPrefix.ChangePagename(args[1],args[2],args[3]);
+            auto.ChangeNameAndPrefix.ChangePagename(args[1],args[2],args[3]);
+        }
+        else if(args[0].equals("-deepview"))
+        {
+            String filename = (args.length>=2)?args[1]:null;
+            deepview2.dvGUI.open(filename);
         }
         else
         {

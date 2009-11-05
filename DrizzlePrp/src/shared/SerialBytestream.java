@@ -64,6 +64,19 @@ public class SerialBytestream extends IBytestream
         result.skip(offset);
         return result;
     }
+    public SerialBytestream(String filename)
+    {
+        this(filename,0);
+    }
+    public SerialBytestream(String filename, int offset)
+    {
+        //SerialBytestream result = new SerialBytestream();
+        //serial = true;
+        sourceName = filename;
+        openfile();
+        skip(offset);
+        //return result;
+    }
     protected int read()
     {
         try
@@ -141,7 +154,7 @@ public class SerialBytestream extends IBytestream
         }
         
     }
-    public int[] readInts(int num)
+    /*public int[] readInts(int num)
     {
         try
         {
@@ -159,7 +172,7 @@ public class SerialBytestream extends IBytestream
             throw new shared.uncaughtexception("Unable to read ints, probably hit end of file.:"+e.getMessage());
         }
         
-    }
+    }*/
     
     private void openfile()
     {
@@ -187,7 +200,7 @@ public class SerialBytestream extends IBytestream
         result.skip(offset);
         return result;
     }
-    private void skip(long n)
+    public void skip(long n)
     {
         try
         {

@@ -26,6 +26,7 @@ import shared.b;
 import shared.m;
 import uru.Bytedeque;
 import shared.e;
+import shared.*;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
 
@@ -87,6 +88,20 @@ public strictfp class Transmatrix extends uruobj
         doublemat[2][3] = z;
         RealMatrix rm = new RealMatrixImpl(doublemat);
         return createFromMatrix(rm);
+    }
+    public static Transmatrix createFromMatrix44(Matrix44 matrix)
+    {
+        Transmatrix r = new Transmatrix();
+        r.isnotIdentity = 1;
+        r.xmatrix = new int[16];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                r.xmatrix[i*4+j] = Float.floatToRawIntBits(matrix.mat[i][j]);
+            }
+        }
+        return r;
     }
     public Transmatrix mult(Transmatrix t2)
     {

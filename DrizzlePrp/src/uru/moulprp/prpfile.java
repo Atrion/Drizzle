@@ -41,10 +41,90 @@ public class prpfile
     public PrpObjectIndex objectindex;
     
     public String filename;
+    private boolean markAsChanged = false;
     
     public prpfile()
     {
         extraobjects = new Vector<PrpRootObject>();
+    }
+    /*public void renameObject(String oldname, Typeid type, String newname)
+    {
+        PrpRootObject obj = findObject(oldname, type);
+        obj.
+    }*/
+    public boolean hasChanged()
+    {
+        return markAsChanged;
+    }
+    public void markAsChanged()
+    {
+        markAsChanged = true;
+    }
+    public Vector<Uruobjectref> getAllRootObjectRefs()
+    {
+        Vector<Uruobjectref> refs = new Vector();
+        for(PrpRootObject ro: objects)
+        {
+            refs.add(ro.getref());
+        }
+        return refs;
+    }
+    public void sort()
+    {
+        PrpRootObject[] newobjects = getSortedObjects();
+        objects = newobjects;
+    }
+    public PrpRootObject[] getSortedObjects()
+    {
+        PrpRootObject[] newobjects = java.util.Arrays.copyOf(objects, objects.length);
+        java.util.Arrays.sort(newobjects, new java.util.Comparator() {
+
+            public int compare(Object o1, Object o2) {
+                PrpRootObject r1 = (PrpRootObject)o1;
+                PrpRootObject r2 = (PrpRootObject)o2;
+                String t1 = r1.header.objecttype.toString();
+                String t2 = r2.header.objecttype.toString();
+                int comp = t1.compareToIgnoreCase(t2);
+                //if(comp==-1||comp==1) return comp;
+                //otherwise they are the same type
+                return comp;
+            }
+        });
+        return newobjects;
+    }
+    public Vector<Vector<PrpRootObject>> getOrderedObjects() //changes the order of objects
+    {
+        Vector<Vector<PrpRootObject>> r = new Vector();
+        PrpRootObject[] newobjects = getSortedObjects();
+        Typeid lasttype = null;
+        Vector<PrpRootObject> lastvec = null;
+        for(PrpRootObject ro: newobjects)
+        {
+            if(ro.header.objecttype!=lasttype)
+            {
+                lastvec = new Vector();
+                r.add(lastvec);
+                lasttype = ro.header.objecttype;
+            }
+            lastvec.add(ro);
+        }
+        return r;
+    }
+    public PrpRootObject findFirstScenenode()
+    {
+        for(PrpRootObject obj: objects)
+        {
+            if(obj.header.objecttype==Typeid.plSceneNode)
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
+    public void addObject(Uruobjectref ref, uruobj obj)
+    {
+        PrpRootObject ro = PrpRootObject.createFromDescAndObject(ref.xdesc, obj);
+        addObject(ro);
     }
     public PrpRootObject addObject(Typeid type, String name, uruobj obj)
     {
@@ -228,7 +308,7 @@ public class prpfile
         
         return result;
     }
-    public void addScenenode()
+    public PrpRootObject addScenenode()
     {
         uru.moulprp.x0000Scenenode sn = uru.moulprp.x0000Scenenode.createDefault();
 
@@ -236,6 +316,7 @@ public class prpfile
         Uruobjectdesc sndesc = Uruobjectdesc.createDefaultWithTypeNamePagePagetype(Typeid.plSceneNode, nodename, this.header.pageid, this.header.pagetype);
         PrpRootObject snro = PrpRootObject.createFromDescAndObject(sndesc, sn);
         this.addObject(snro);
+        return snro;
     }
     public static prpfile create(String agename, String pagename, Pageid pageid, Pagetype pagetype)
     {
@@ -283,6 +364,7 @@ public class prpfile
     }
     public shared.IBytedeque saveAsBytes(Decider decider)
     {
+        if(decider==null) decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
         mergeExtras();
         orderObjects();
         shared.IBytedeque result = prputils.Compiler.RecompilePrp(this, decider);

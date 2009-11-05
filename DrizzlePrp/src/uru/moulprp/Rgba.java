@@ -22,6 +22,7 @@ import uru.Bytestream;
 import uru.Bytedeque;
 import shared.Flt;
 import uru.context;
+import shared.*;
 
 /**
  *
@@ -86,13 +87,31 @@ public class Rgba extends uruobj
                 +":"+b.toString()
                 +":"+a.toString();
     }
-    
+    private Rgba(){}
     public Rgba(Rgba d)
     {
         this.a = d.a.deepClone();
         this.b = d.b.deepClone();
         this.g = d.g.deepClone();
         this.r = d.r.deepClone();
+    }
+    public static Rgba createFromRGBA(RGBA data)
+    {
+        Rgba r = new Rgba();
+        r.r = Flt.createFromJavaFloat(data.r);
+        r.g = Flt.createFromJavaFloat(data.g);
+        r.b = Flt.createFromJavaFloat(data.b);
+        r.a = Flt.createFromJavaFloat(data.a);
+        return r;
+    }
+    public static Rgba createFromVals(float r, float g, float b, float a)
+    {
+        Rgba r2 = new Rgba();
+        r2.r = Flt.createFromJavaFloat(r);
+        r2.g = Flt.createFromJavaFloat(g);
+        r2.b = Flt.createFromJavaFloat(b);
+        r2.a = Flt.createFromJavaFloat(a);
+        return r2;
     }
     public Rgba deepClone()
     {

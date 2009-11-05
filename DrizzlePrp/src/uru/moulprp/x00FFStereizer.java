@@ -31,9 +31,10 @@ import shared.b;
 public class x00FFStereizer extends uruobj
 {
     //Objheader xheader;
-    int u1;
-    int u2;
-    int u3;
+    //int u1;
+    //int u2;
+    //int u3;
+    PlSingleModifier parent;
     Flt u4;
     Flt u5;
     Flt u6;
@@ -48,9 +49,10 @@ public class x00FFStereizer extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         
         //This should probably be a SynchedObject parent;
-        u1 = c.readInt(); e.ensure(u1==0||u1==4);
-        u2 = c.readInt(); e.ensure(u2==1);
-        u3 = c.readInt(); e.ensureflags(u3,0,1);
+        //u1 = c.readInt(); e.ensure(u1==0||u1==4);
+        //u2 = c.readInt(); e.ensure(u2==1);
+        //u3 = c.readInt(); e.ensureflags(u3,0,1);
+        parent = new PlSingleModifier(c);
         u4 = new Flt(c);
         u5 = new Flt(c);
         u6 = new Flt(c);
@@ -62,9 +64,10 @@ public class x00FFStereizer extends uruobj
     }
     public void compile(Bytedeque c)
     {
-        c.writeInt(u1);
-        c.writeInt(u2);
-        c.writeInt(u3);
+        //c.writeInt(u1);
+        //c.writeInt(u2);
+        //c.writeInt(u3);
+        parent.compile(c);
         u4.compile(c);
         u5.compile(c);
         u6.compile(c);

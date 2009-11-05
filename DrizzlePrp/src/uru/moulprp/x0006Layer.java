@@ -34,25 +34,25 @@ import shared.b;
 public class x0006Layer extends uruobj
 {
     //Objheader xheader;
-    x0041LayerInterface parent;
+    public x0041LayerInterface parent;
     public int flags1;
     public int flags2;
     public int flags3;
     public int flags4;
     public int flags5;
     public Transmatrix matrix;
-    public Rgba ambient;
-    public Rgba diffuse;
-    public Rgba emissive;
-    public Rgba specular;
-    int uvwSource;
+    public Rgba ambient; //preshade //was ambient
+    public Rgba diffuse; //runtime //was diffuse
+    public Rgba emissive; //ambient //was emissive
+    public Rgba specular; //specular //was specular
+    public int uvwSource;
     public Flt opacity; //float 0 to 1
     public Flt lodbias;
     public Flt specularPower; //a float with integer! values.
     public Uruobjectref texture;
-    Uruobjectref shader1;
-    Uruobjectref shader2;
-    Transmatrix identity;
+    public Uruobjectref shader1;
+    public Uruobjectref shader2;
+    public Transmatrix identity;
     
     public x0006Layer(context c) throws readexception //,boolean hasHeader)
     {
@@ -128,5 +128,11 @@ public class x0006Layer extends uruobj
         result.texture = texture.deepClone();
         result.uvwSource = uvwSource;
         return result;
+    }
+    public static x0006Layer createEmpty()
+    {
+        x0006Layer r = new x0006Layer();
+        r.parent = uru.moulprp.x0041LayerInterface.createEmpty();
+        return r;
     }
 }

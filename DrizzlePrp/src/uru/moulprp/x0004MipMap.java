@@ -59,29 +59,31 @@ if HsmType = 0x01
     BYTE[(TexWidth >> (L + 1)) * (TexHeight >> (L + 1)) * texel_size] Texel*/
 public class x0004MipMap extends uruobj
 {
+    public boolean resetmemorysize = false;
+
     //Objheader xheader;
-    x0003Bitmap parent;
-    int texwidth;
-    int texheight;
-    int stride;
-    int memorysize;
+    public x0003Bitmap parent;
+    public int texwidth;
+    public int texheight;
+    public int stride;
+    public int memorysize;
     //byte xu1;
-    byte xtype;
-    int[] xu2;
-    int xjpgsize1;
-    byte[] xjpegfile1;
+    public byte xtype;
+    public int[] xu2;
+    public int xjpgsize1;
+    public byte[] xjpegfile1;
     //int[] xextra;
     //Vector<Integer> xextra1 = new Vector<Integer>();
     //Vector<Integer> xextra2 = new Vector<Integer>();
-    Integer[] xextra1;
-    Integer[] xextra2;
-    int xjpgsize2;
-    byte[] xjpegfile2;
-    byte xmipmaplevels;
+    public Integer[] xextra1;
+    public Integer[] xextra2;
+    public int xjpgsize2;
+    public byte[] xjpegfile2;
+    public byte xmipmaplevels;
     //int[][] xagrb;
-    byte[][] xagrb;
+    public byte[][] xagrb;
     //byte[][] xtexel;
-    Image.Dxt xDxt;
+    public Image.Dxt xDxt;
     
     public void invert()
     {
@@ -130,7 +132,8 @@ public class x0004MipMap extends uruobj
                 break;
         }
     }
-    
+
+    private x0004MipMap(){}
     public x0004MipMap(context c) throws readexception //,boolean hasHeader)
     {
         shared.IBytestream data = c.in;
@@ -139,7 +142,7 @@ public class x0004MipMap extends uruobj
         texwidth = data.readInt();
         texheight = data.readInt();
         stride = data.readInt(); e.ensure(stride==texwidth*4);
-        memorysize = data.readInt(); //the size of the rest of the object.
+        memorysize = data.readInt(); //the size of the rest of the object, past the next byte. (i.e. the size of xDxt or xagrb.)
         xmipmaplevels = data.readByte();
         switch(parent.type)
         {
@@ -260,14 +263,8 @@ public class x0004MipMap extends uruobj
     }
     public void compile(Bytedeque deque)
     {
-        //m.err("fixme");
-        parent.compile(deque);
-        deque.writeInt(texwidth);
-        deque.writeInt(texheight);
-        deque.writeInt(stride);
-        deque.writeInt(memorysize);
-        
-        deque.writeByte(xmipmaplevels);
+        //get subportion first.
+        Bytedeque subdeque = new Bytedeque();
         switch(parent.type)
         {
             case 0x00:
@@ -275,12 +272,12 @@ public class x0004MipMap extends uruobj
                 for(int i=0;i<xmipmaplevels;i++)
                 {
                     int levelsize = (texwidth >>> i)*(texheight >>> i);
-                    deque.writeBytes(xagrb[i]);
+                    subdeque.writeBytes(xagrb[i]);
                 }
                 break;
             case 0x01:
                 //deque.writeByte(xmipmaplevels);
-                xDxt.compile(deque);
+                xDxt.compile(subdeque);
                 /*for(int i=0;i<xmipmaplevels;i++)
                 {
                     int levelsize;
@@ -299,30 +296,30 @@ public class x0004MipMap extends uruobj
                 break;
             case 0x02:
                 //deque.writeByte(xu1);
-                deque.writeByte(xtype);
-                
+                subdeque.writeByte(xtype);
+
                 if((xtype&0x01)==0)
                 {
-                    deque.writeInt(xjpgsize1);
-                    deque.writeBytes(xjpegfile1);
+                    subdeque.writeInt(xjpgsize1);
+                    subdeque.writeBytes(xjpegfile1);
                 }
                 else
                 {
                     for(int i=0;i<xextra1.length;i++)
                     {
-                        deque.writeInt(xextra1[i]);
+                        subdeque.writeInt(xextra1[i]);
                     }
                 }
                 if((xtype&0x02)==0)
                 {
-                    deque.writeInt(xjpgsize2);
-                    deque.writeBytes(xjpegfile2); //blue channel.
+                    subdeque.writeInt(xjpgsize2);
+                    subdeque.writeBytes(xjpegfile2); //blue channel.
                 }
                 else
                 {
                     for(int i=0;i<xextra2.length;i++)
                     {
-                        deque.writeInt(xextra2[i]);
+                        subdeque.writeInt(xextra2[i]);
                     }
                 }
                 /*switch(xtype)
@@ -365,5 +362,25 @@ public class x0004MipMap extends uruobj
                 m.msg("x0004mipmap: mystery!");
                 break;
         }
+        byte[] subdequebytes = subdeque.getAllBytes();
+
+        //m.err("fixme");
+        parent.compile(deque);
+        deque.writeInt(texwidth);
+        deque.writeInt(texheight);
+        deque.writeInt(stride);
+        if(this.resetmemorysize) memorysize = subdequebytes.length;
+        deque.writeInt(memorysize);
+        
+        deque.writeByte(xmipmaplevels);
+
+        deque.writeBytes(subdequebytes);
+    }
+
+    public static x0004MipMap createEmpty()
+    {
+        x0004MipMap r = new x0004MipMap();
+        r.parent = x0003Bitmap.createEmpty();
+        return r;
     }
 }

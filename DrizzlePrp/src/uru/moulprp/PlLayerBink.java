@@ -35,9 +35,29 @@ public class PlLayerBink extends uruobj
     
     public PlLayerBink(context c) throws readexception
     {
-        if(c.readversion!=4) m.warn("PlLayerBink currently can only read from myst5");
+        //sub7e1ed0 in moul
+        //if(c.readversion!=4) m.warn("PlLayerBink currently can only read from myst5");
         //although the class is present in Pots, it isn't actually present in any prp files.
-        parent = new PlLayerAVI(c);
+        if(c.readversion==6)
+        {
+            //actually, this is mqo, not necessarily moul.
+            PlLayerAnimation anim = new PlLayerAnimation(c);
+            //int u1 = c.readInt();
+            //byte[] bs2 = c.readBytes(u1);
+            Bstr filename = new Bstr(c);
+            int dummy=0;
+
+            parent = new PlLayerAVI();
+            parent.parent = anim;
+            parent.filename = filename;
+            parent.uref1 = Uruobjectref.none();
+            parent.uref2 = Uruobjectref.none();
+            parent.u2 = 0;
+        }
+        else
+        {
+            parent = new PlLayerAVI(c);
+        }
         
         //u1 = c.readInt();
         
@@ -58,7 +78,8 @@ public class PlLayerBink extends uruobj
         Uruobjectref uref1;
         Uruobjectref uref2;
         int u2;
-        
+
+        public PlLayerAVI(){}
         public PlLayerAVI(context c) throws readexception
         {
             parent = new PlLayerAnimation(c);

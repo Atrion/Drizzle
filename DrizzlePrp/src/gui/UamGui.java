@@ -621,7 +621,7 @@ public class UamGui
     }
     public static void GetAgeListGuiOffline(String potsfolder)
     {
-        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        if(!auto.AllGames.getPots().isFolderX(potsfolder))
         {
             return;
         }
@@ -645,7 +645,7 @@ public class UamGui
     public static void GetAgeListGui(String server, String potsfolder)
     {
         //m.msg("Updating Age list...");
-        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        if(!auto.AllGames.getPots().isFolderX(potsfolder))
         {
             return;
         }
@@ -849,7 +849,7 @@ public class UamGui
         //if(true)return;
         
         //ensure pots folder.
-        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        if(!auto.AllGames.getPots().isFolderX(potsfolder))
         {
             return false;
         }
@@ -929,7 +929,7 @@ public class UamGui
         //String potsfolder = shared.State.AllStates.getStateAsString("uamRoot");
         
         //ensure pots folder.
-        if(!automation.detectinstallation.isFolderPots(potsfolder))
+        if(!auto.AllGames.getPots().isFolderX(potsfolder))
         {
             return false;
         }

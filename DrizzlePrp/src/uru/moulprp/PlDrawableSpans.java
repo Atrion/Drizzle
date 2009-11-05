@@ -43,7 +43,7 @@ public class PlDrawableSpans extends uruobj
     public int criteria; //blendflags
     public int materialsCount;
     //public Uruobjectref[] materials;
-    public Vector<Uruobjectref> materials;
+    public Vector<Uruobjectref> materials = new Vector();
     public int icicleCount; //subsetcount
     public PlIcicle[] icicles; //subsets
     public int unused;
@@ -93,6 +93,10 @@ public class PlDrawableSpans extends uruobj
         criteria = data.readInt();
         materialsCount = data.readInt(); //so far so good.
         materials = c.readVector(Uruobjectref.class,materialsCount);
+        //for(Uruobjectref mat: materials)
+        //{
+        //    m.msg("material: "+mat.toString());
+        //}
         //materials = new Uruobjectref[matcount];
         /*for(int i=0;i<matcount;i++)
         {
@@ -110,6 +114,33 @@ public class PlDrawableSpans extends uruobj
         
         icicleCount = data.readInt();
         icicles = c.readArray(PlIcicle.class,icicleCount);
+        /*if(c.readversion==7)
+        {
+            //set icicle values for missing hexisle vars.
+            int curStartIdx = 0;
+            int curGroupIdx = 0;
+            for(int i=0;i<icicles.length;i++)
+            {
+                PlIcicle icicle = icicles[i];
+                if(i==0) curGroupIdx = icicle.parent.groupIdx;
+                if(icicle.parent.groupIdx!=curGroupIdx)
+                {
+                    //a new group...
+                    int dummy=0;
+                }
+                if(icicle.IBufferIdx!=0)
+                {
+                    int dummy=0;
+                }
+                icicle.IBufferIdx = 0;  //always 0 in Pots anyway, so they probably just removed it.
+                if(icicle.IStartIdx!=curStartIdx)
+                {
+                    int dummy=0;
+                }
+                icicle.IStartIdx = curStartIdx;
+                curStartIdx += icicle.ILength; //they just go in order, so this should work.
+            }
+        }*/
         for(int i=0;i<icicleCount;i++)
         {
             if(icicles[i].parent.parent.materialindex==58)
@@ -119,7 +150,7 @@ public class PlDrawableSpans extends uruobj
         }
         if(c.readversion==7)
         {
-            //I don't think hex isle has the next field.
+            //Hexisle doesn't have this field, but it is always 0 in Pots anyway.
             unused = 0;
         }
         else
@@ -154,12 +185,12 @@ public class PlDrawableSpans extends uruobj
             fogEnvironmentRefs[i] = new Uruobjectref(c);
         }
         
-        if(c.readversion==7)
+        /*if(c.readversion==7)
         {
             //2 uruobjectref vectors here, but apparently they don't get called.
             //c.readInt();
             //c.readInt();
-        }
+        }*/
         
         if(icicleCount>0)
         {
@@ -222,7 +253,20 @@ public class PlDrawableSpans extends uruobj
         DIIndices = c.readArray(PlDISpanIndex.class,DIIndicesCount); //fDIIndices, hexisle starts at line 386
 
         meshcount = data.readInt(); //so far so good.
-        groups = c.readArray(PlGBufferGroup.class,meshcount); //plGBufferGroups
+        if(c.readversion==7)
+        {
+            groups = new PlGBufferGroup[meshcount];
+            for(int i=0;i<groups.length;i++)
+            {
+                HexislePlDrawableSpans.HexislePlGBufferGroup higroup = new HexislePlDrawableSpans.HexislePlGBufferGroup(c);
+                PlGBufferGroup group = higroup.convertToPotsPlGBufferGroup();
+                groups[i] = group;
+            }
+        }
+        else
+        {
+            groups = c.readArray(PlGBufferGroup.class,meshcount); //plGBufferGroups
+        }
 
         embeddedtype = Typeid.Read(c);
         switch(embeddedtype)
@@ -241,6 +285,43 @@ public class PlDrawableSpans extends uruobj
         scenenode = c.readObj(Uruobjectref.class);
         
     }
+
+    
+    public static class PlGBufferCell
+    {
+        int fVtxStart;
+        int fColorStart;
+        int fLength;
+        
+        public PlGBufferCell(context c)
+        {
+            fVtxStart = c.readInt();
+            fColorStart = c.readInt();
+            fLength = c.readInt();
+
+            if(fVtxStart!=0)
+            {
+                int dummy=0;
+            }
+            if(fColorStart!=-1)
+            {
+                int dummy=0;
+            }
+        }
+        public PlGBufferCell(int vtxstart, int colorstart, int length)
+        {
+            fVtxStart = vtxstart;
+            fColorStart = colorstart;
+            fLength = length;
+        }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(fVtxStart);
+            c.writeInt(fColorStart);
+            c.writeInt(fLength);
+        }
+    }
+
     //this class is not finished...
     public static class modPlDrawableSpans
     {
@@ -421,8 +502,8 @@ public class PlDrawableSpans extends uruobj
         public int props; //lightingflags
         public BoundingBox localBounds; //was uegclassesca1
         public BoundingBox worldBounds; //was uegclassesca2
-        public int numMatrices; //blendflag
-        public int baseMatrix; //blendindex
+        public int numMatrices; //was blendflag
+        public int baseMatrix; //was blendindex
         public short localUVWChans; //u1
         public short maxBoneIdx; //u2
         public short penBoneIdx; //u3
@@ -491,6 +572,11 @@ public class PlDrawableSpans extends uruobj
             }
         }
 
+        public static PlSpan createEmpty()
+        {
+            PlSpan r = new PlSpan();
+            return r;
+        }
         public void compile(Bytedeque c)
         {
             c.writeInt(subType);
@@ -549,12 +635,28 @@ public class PlDrawableSpans extends uruobj
             parent = new PlSpan(c);
             groupIdx = c.readInt();
             VBufferIdx = c.readInt();
-            cellIdx = c.readInt();
-            cellOffset = c.readInt();
-            VStartIdx = c.readInt();
-            VLength = c.readInt();
+            if(c.readversion==7)
+            {
+                VStartIdx = c.readInt();
+                VLength = c.readInt();
+                //I think the reasoning here is that there is only ever one cell, so they removed it.  Because there is only one, its idx=0, and its offset is just the vertex offset.
+                cellIdx = 0;
+                cellOffset = VStartIdx;
+            }
+            else
+            {
+                cellIdx = c.readInt();
+                cellOffset = c.readInt();
+                VStartIdx = c.readInt();
+                VLength = c.readInt();
+            }
         }
-
+        public static PlVertexSpan createEmpty()
+        {
+            PlVertexSpan r = new PlVertexSpan();
+            r.parent = PlSpan.createEmpty();
+            return r;
+        }
         public void compile(Bytedeque c)
         {
             parent.compile(c);
@@ -607,7 +709,13 @@ public class PlDrawableSpans extends uruobj
         public int IBufferIdx; //surfaceindex
         public int IStartIdx; //indexstart
         public int ILength; //indexcount
-        
+
+        public static PlIcicle createEmpty()
+        {
+            PlIcicle r = new PlIcicle();
+            r.parent = PlVertexSpan.createEmpty();
+            return r;
+        }
         public PlIcicle(context c) throws readexception
         {
             /*shared.IBytestream data = c.in;
@@ -618,16 +726,19 @@ public class PlDrawableSpans extends uruobj
             vertexstart2 = data.readInt(); //vStartIdx
             vertexcount = data.readInt(); //vLength*/
             parent = new PlVertexSpan(c);
-            if(c.readversion==7)
+            /*if(c.readversion==7)
             {
                 //hex isle doesn't have the next two fields.
                 m.warn("not sure if setting correct default for PlIcicle.");
             }
             else
-            {
+            {*/
                 IBufferIdx = c.readInt(); //bufferIdx
                 IStartIdx = c.readInt(); //startIdx
-            }
+
+                //IBufferIdx = 0;
+                //IStartIdx = 0;
+            //}
             ILength = c.readInt(); //iLength
             if((parent.parent.props&0x4)!=0)
             {
@@ -685,7 +796,15 @@ public class PlDrawableSpans extends uruobj
             indicesCount = c.in.readInt();
             indices = c.in.readInts(indicesCount);
         }
-        
+        PlDISpanIndex(){}
+        public static PlDISpanIndex createWithIndex(int ind)
+        {
+            PlDISpanIndex r = new PlDISpanIndex();
+            r.flags = 0x0;
+            r.indicesCount = 1;
+            r.indices = new int[]{ind};
+            return r;
+        }
         public void compile(Bytedeque data)
         {
             data.writeInt(flags);
@@ -1032,27 +1151,35 @@ public class PlDrawableSpans extends uruobj
     static public class PlGBufferGroup extends uruobj //Mesh
     {
         //byte vertexformat;
-        byte fformat;
-        int size; //length to end of mesh.
+        public byte fformat;
+        public int size; //length to end of mesh.
         //byte[] restofmesh; //ignore it for now.
-        int vertexstoragecount;
-        SubMesh[] submeshes;
+        public int vertexstoragecount;
+        public SubMesh[] submeshes;
         //left off here.
-        int surfacecount;
+        public int surfacecount;
         //Uruvector<Short>[] surfaces;
-        Shortvector[] surfaces;
+        //Shortvector[] surfaces;
+        public Surface[] surfaces;
         //int indexstoragecount;
         //IndexStorage[] indexstorages;
-        int u1;
-        int u2;
-        int u3;
-        int lastindex;
         
-        public PlGBufferGroup(context c)
+        //int u1;
+        //int u2;
+        //int u3;
+        //int lastindex;
+
+        public PlGBufferCell[][] fCells;
+
+        public PlGBufferGroup(){}
+
+        public PlGBufferGroup(context c) throws readexception
         {
             shared.IBytestream data = c.in;
             if(c.readversion==7)
             {
+                HexislePlDrawableSpans.ReadPlGBufferGroup(c);
+                /*if(true)return;
                 //sub_5059A0  //504f80???
                 int mesh1 = c.readInt(); //76
                 byte mesh2 = c.readByte(); //0 //this+4+6
@@ -1091,6 +1218,7 @@ public class PlDrawableSpans extends uruobj
                     int dummy=0;
                 }
                 int dummy=0;
+                */
             }
             else
             {
@@ -1106,22 +1234,75 @@ public class PlDrawableSpans extends uruobj
                 }
                 //TODO rest of this, but it seems to work perfectly up to this point.
                 surfacecount = data.readInt();
-                surfaces = new Shortvector[surfacecount];
+                surfaces = new Surface[surfacecount];
                 for(int i=0;i<surfacecount;i++)
                 {
-                    surfaces[i] = new Shortvector(data);
+                    //surfaces[i] = new Shortvector(data);
+                    surfaces[i] = new Surface(c);
                 }
-                u1 = data.readInt();
-                u2 = data.readInt();
-                u3 = data.readInt();
-                lastindex = data.readInt();
+
+                fCells = new PlGBufferCell[vertexstoragecount][];
+                for(int i=0;i<vertexstoragecount;i++)
+                {
+                    int bufferCellCount = data.readInt();
+                    fCells[i] = new PlGBufferCell[bufferCellCount];
+                    for(int j=0;j<bufferCellCount;j++)
+                    {
+                        fCells[i][j] = new PlGBufferCell(c);
+                    }
+                }
+                //u1 = data.readInt();
+                //u2 = data.readInt();
+                //u3 = data.readInt();
+                //lastindex = data.readInt();
+                int dummy=0;
             }
         }
-        public void sub50e890()
+        public static class Surface
+        {
+            public int numshorts;
+            public shared.ShortTriplet[] faces;
+
+            public Surface(){}
+            public Surface(context c) throws readexception
+            {
+                numshorts = c.readInt();
+                int numfaces = numshorts/3;
+                e.force(numfaces*3==numshorts);
+                faces = c.readArray(shared.ShortTriplet.class, numfaces);
+            }
+            public void compile(Bytedeque c)
+            {
+                c.writeInt(numshorts);
+                c.writeArray2(faces);
+            }
+        }
+        public void createCells()
+        {
+            //e.force(vertexstoragecount==1);
+            /*if(vertexstoragecount==1)
+            {
+                int c2 = b.Int16ToInt32(submeshes[0].count);
+                PlGBufferCell cell= new PlGBufferCell(0,-1,c2);
+                fCells = new PlGBufferCell[1][1];
+                fCells[0][0] = cell;
+            }
+            else*/
+            {
+                fCells = new PlGBufferCell[vertexstoragecount][1];
+                for(int i=0;i<vertexstoragecount;i++)
+                {
+                    int c2 = b.Int16ToInt32(submeshes[i].count);
+                    PlGBufferCell cell = new PlGBufferCell(0,-1,c2);
+                    fCells[i][0] = cell;
+                }
+            }
+        }
+        /*public void sub50e890()
         {
 
-        }
-        public static class SubMeshAlt
+        }*/
+        /*public static class SubMeshAlt
         {
             public SubMeshAlt(context c, byte fformat, int v7, int v17, byte mesh2, int mesh1, int count)
             {
@@ -1154,7 +1335,7 @@ public class PlDrawableSpans extends uruobj
 
                 c2.close();
             }
-        }
+        }*/
         public void compile(Bytedeque data)
         {
             data.writeByte(fformat);
@@ -1169,10 +1350,21 @@ public class PlDrawableSpans extends uruobj
             {
                 surfaces[i].compile(data);
             }
-            data.writeInt(u1);
-            data.writeInt(u2);
-            data.writeInt(u3);
-            data.writeInt(lastindex);
+
+            for(int i=0;i<vertexstoragecount;i++)
+            {
+                int bufferCellCount = fCells[i].length;
+                data.writeInt(bufferCellCount);
+                for(int j=0;j<bufferCellCount;j++)
+                {
+                    fCells[i][j].compile(data);
+                }
+            }
+
+            //data.writeInt(u1);
+            //data.writeInt(u2);
+            //data.writeInt(u3);
+            //data.writeInt(lastindex);
             
         }
         
@@ -1182,15 +1374,256 @@ public class PlDrawableSpans extends uruobj
             short count;
 
             //SubMeshVertex[] vertices;
-            byte[] rawdata;
+            public byte[] _rawdata;
             
             int rawdataversion; //not actual data, just useful for compiling.
-            
+
+            //just convenience:
+            //float[] vertices;
+            PlDrawableSpansEncoders.DecompressedPotsVertices verts = null;
+
+            public SubMesh(){}
+            public int getCount()
+            {
+                return b.Int16ToInt32(count);
+            }
+            public float[] getVertices(byte fformat2)
+            {
+
+                context c = context.createFromBytestream(new Bytestream(_rawdata));
+                //c.compile = true;
+                //c.out = data;
+                c.readversion = rawdataversion;
+                int count2 = getCount();
+                float[] result = new float[count2*3];
+                //GetVertexDataSize(count2,fformat,c);
+
+                //int start = c.in.getAbsoluteOffset();
+                int fformat = b.ByteToInt32(fformat2);
+                int A = (fformat & 0x40) >>> 6;
+                int B = (fformat & 0x30) >>> 4;
+                int C = (fformat & 0x0F) >>> 0;
+
+
+                PlDrawableSpansEncoders.rundataElement x = new PlDrawableSpansEncoders.rundataElement();
+                PlDrawableSpansEncoders.rundataElement y = new PlDrawableSpansEncoders.rundataElement();
+                PlDrawableSpansEncoders.rundataElement z = new PlDrawableSpansEncoders.rundataElement();
+
+                PlDrawableSpansEncoders.rundataElement[] ws = new PlDrawableSpansEncoders.rundataElement[3];
+                for(int i=0;i<3;i++) ws[i] = new PlDrawableSpansEncoders.rundataElement();
+
+                PlDrawableSpansEncoders.rundataColour blue = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour green = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour red = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour alpha = new PlDrawableSpansEncoders.rundataColour();
+
+                PlDrawableSpansEncoders.rundataElement[][] uvs = new PlDrawableSpansEncoders.rundataElement[15][];
+                for(int i=0;i<15;i++)
+                {
+                    uvs[i] = new PlDrawableSpansEncoders.rundataElement[3];
+                    for(int j=0;j<3;j++)
+                    {
+                        uvs[i][j] = new PlDrawableSpansEncoders.rundataElement();
+                    }
+                }
+
+                for(int i=0;i<count2;i++)
+                {
+                    //int possofar = c.in.getAbsoluteOffset() - start;
+
+                    //get vertex.
+                    float xval = x.pollAsElement3(c);
+                    float yval = y.pollAsElement3(c);
+                    float zval = z.pollAsElement3(c);
+                    result[i*3+0] = xval;
+                    result[i*3+1] = yval;
+                    result[i*3+2] = zval;
+
+                    //get weights
+                    for(int j=0;j<B;j++)
+                    {
+                        ws[j].pollAsElement2(c);
+                    }
+
+                    //if A is set to true, get bones
+                    if ((B!=0) && (A!=0))
+                    {
+                        int out1 = c.in.readInt(); //bones
+                        //if(c.compile) c.out.writeInt(out1);
+                    }
+
+                    //normals: these are just a byte now.
+                    //data.readShort(); //nx
+                    //data.readShort(); //ny
+                    //data.readShort(); //nz
+                    if(c.readversion==6)
+                    {
+                        byte out2 = c.in.readByte(); //nx
+                        byte out3 = c.in.readByte(); //ny
+                        byte out4 = c.in.readByte(); //nz
+                    }
+                    else if(c.readversion==3||c.readversion==4)
+                    {
+                        short out2 = c.in.readShort();
+                        short out3 = c.in.readShort();
+                        short out4 = c.in.readShort();
+                    }
+
+                    //colours:
+                    blue.pollAsColour(c);
+                    green.pollAsColour(c);
+                    red.pollAsColour(c);
+                    alpha.pollAsColour(c);
+
+                    //uv texture coordinates
+                    for(int j=0;j<C;j++)
+                    {
+                        for(int k=0;k<3;k++)
+                        {
+                            uvs[j][k].pollAsElement(c);
+                        }
+                    }
+
+                }
+                return result;
+                //int stop = c.in.getAbsoluteOffset();
+                //return stop-start; //return the size we processed.
+            //}
+            }
+            public PlDrawableSpansEncoders.DecompressedPotsVertices decompressAllAndDontSave(byte fformat2)
+            {
+                return new PlDrawableSpansEncoders.DecompressedPotsVertices(_rawdata, fformat2, rawdataversion, this.getCount());
+            }
+            public PlDrawableSpansEncoders.DecompressedPotsVertices decompressAllAndSave(byte fformat2)
+            {
+                if(verts==null)
+                {
+                    PlDrawableSpansEncoders.DecompressedPotsVertices r = new PlDrawableSpansEncoders.DecompressedPotsVertices(_rawdata, fformat2, rawdataversion, this.getCount());
+                    verts = r;
+                }
+                return verts;
+            }
+            public void setWithDecompressedPotsVerts(PlDrawableSpansEncoders.DecompressedPotsVertices verts)
+            {
+                this.verts = verts;
+                this.rawdataversion = 3; //pots version.
+                this.count = (short)verts.count;
+            }
+            public PlDrawableSpansEncoders.RawPotsVertices parseAll(byte fformat2)
+            {
+                context c = context.createFromBytestream(new Bytestream(_rawdata));
+                //c.compile = true;
+                //c.out = data;
+                e.force(rawdataversion==3);
+                c.readversion = rawdataversion;
+                int count2 = getCount();
+                PlDrawableSpansEncoders.RawPotsVertices r = new PlDrawableSpansEncoders.RawPotsVertices(count2);
+                //float[] result = new float[count2*3];
+                //GetVertexDataSize(count2,fformat,c);
+
+                //int start = c.in.getAbsoluteOffset();
+                int fformat = b.ByteToInt32(fformat2);
+                int A = (fformat & 0x40) >>> 6;
+                int B = (fformat & 0x30) >>> 4;
+                int C = (fformat & 0x0F) >>> 0;
+
+
+                PlDrawableSpansEncoders.rundataElement x = new PlDrawableSpansEncoders.rundataElement();
+                PlDrawableSpansEncoders.rundataElement y = new PlDrawableSpansEncoders.rundataElement();
+                PlDrawableSpansEncoders.rundataElement z = new PlDrawableSpansEncoders.rundataElement();
+
+                PlDrawableSpansEncoders.rundataElement[] ws = new PlDrawableSpansEncoders.rundataElement[3];
+                for(int i=0;i<3;i++) ws[i] = new PlDrawableSpansEncoders.rundataElement();
+
+                PlDrawableSpansEncoders.rundataColour blue = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour green = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour red = new PlDrawableSpansEncoders.rundataColour();
+                PlDrawableSpansEncoders.rundataColour alpha = new PlDrawableSpansEncoders.rundataColour();
+
+                PlDrawableSpansEncoders.rundataElement[][] uvs = new PlDrawableSpansEncoders.rundataElement[15][];
+                for(int i=0;i<15;i++)
+                {
+                    uvs[i] = new PlDrawableSpansEncoders.rundataElement[3];
+                    for(int j=0;j<3;j++)
+                    {
+                        uvs[i][j] = new PlDrawableSpansEncoders.rundataElement();
+                    }
+                }
+
+                for(int i=0;i<count2;i++)
+                {
+                    PlDrawableSpansEncoders.RawPotsVertex v = new PlDrawableSpansEncoders.RawPotsVertex();
+                    //int possofar = c.in.getAbsoluteOffset() - start;
+
+                    //get vertex.
+                    v.x = x.pollAsElement(c);
+                    v.y = y.pollAsElement(c);
+                    v.z = z.pollAsElement(c);
+                    //result[i*3+0] = xval;
+                    //result[i*3+1] = yval;
+                    //result[i*3+2] = zval;
+
+                    //get weights
+                    v.ws = new PlDrawableSpansEncoders.RawPotsElement[B];
+                    for(int j=0;j<B;j++)
+                    {
+                        v.ws[j] = ws[j].pollAsElement(c);
+                    }
+
+                    //if A is set to true, get bones
+                    if ((B!=0) && (A!=0))
+                    {
+                        v.bones = c.in.readInt(); //bones
+                        //if(c.compile) c.out.writeInt(out1);
+                    }
+
+                    //normals: these are just a byte now.
+                    //data.readShort(); //nx
+                    //data.readShort(); //ny
+                    //data.readShort(); //nz
+                    /*if(c.readversion==6)
+                    {
+                        byte out2 = c.in.readByte(); //nx
+                        byte out3 = c.in.readByte(); //ny
+                        byte out4 = c.in.readByte(); //nz
+                    }
+                    else if(c.readversion==3||c.readversion==4)
+                    {*/
+                        v.normx = c.in.readShort();
+                        v.normy = c.in.readShort();
+                        v.normz = c.in.readShort();
+                    //}
+
+                    //colours:
+                    v.blue = blue.pollAsColour(c);
+                    v.green = green.pollAsColour(c);
+                    v.red = red.pollAsColour(c);
+                    v.alpha = alpha.pollAsColour(c);
+
+                    //uv texture coordinates
+                    v.uvs = new PlDrawableSpansEncoders.RawPotsElement[C][3];
+                    for(int j=0;j<C;j++)
+                    {
+                        for(int k=0;k<3;k++)
+                        {
+                            v.uvs[j][k] = uvs[j][k].pollAsElement(c);
+                        }
+                    }
+
+                    r.vertices[i] = v;
+                    
+                }
+                //return result;
+                //int stop = c.in.getAbsoluteOffset();
+                //return stop-start; //return the size we processed.
+            //}
+                return r;
+            }
             public SubMesh(context c, byte fformat)
             {
                 if((fformat&0x80)!=0)
                 {
-                    if(c.readversion==7)
+                    /*if(c.readversion==7)
                     {
                         int hi1 = c.readInt();
                         byte hi2 = c.readByte();
@@ -1198,9 +1631,9 @@ public class PlDrawableSpans extends uruobj
                         count = (short)hi1;
                     }
                     else
-                    {
+                    {*/
                         count = c.in.readShort(); //number of vertexes.
-                    }
+                    //}
                     
                     //vertices = new SubMeshVertex[count];
                     //for(int i=0;i<count;i++)
@@ -1209,9 +1642,11 @@ public class PlDrawableSpans extends uruobj
                     context c2 = c.Fork();
                     //c2.readversion = 3;
                     //context c2 = new context(6,3,false,c.in.CreateFork(),null);
-                    int dataSize = GetVertexDataSize(count, fformat, c2);
-                    rawdata = c.in.readBytes(dataSize);
+                    int count2 = b.Int16ToInt32(count);
+                    int dataSize = GetVertexDataSize(count2, fformat, c2);
+                    _rawdata = c.in.readBytes(dataSize);
                     rawdataversion = c.readversion;
+                    //PlDrawableSpansEncoders.DecompressedPotsVertices dpv = this.decompressAll(fformat);
 
                     c2.close();
                 }
@@ -1230,11 +1665,19 @@ public class PlDrawableSpans extends uruobj
                     //rawdata = data.readBytes(dataSize);
                     //Bytestream input = new Bytestream(rawdata);
                     //context c = new context(6,3,true,new Bytestream(rawdata),data,false,null);
-                    context c = context.createFromBytestream(new Bytestream(rawdata));
-                    c.compile = true;
-                    c.out = data;
-                    c.readversion = rawdataversion;
-                    GetVertexDataSize(count,fformat,c);
+                    if(this.verts==null)
+                    {
+                        context c = context.createFromBytestream(new Bytestream(_rawdata));
+                        c.compile = true;
+                        c.out = data;
+                        c.readversion = rawdataversion;
+                        int count2 = b.Int16ToInt32(count);
+                        GetVertexDataSize(count2,fformat,c);
+                    }
+                    else
+                    {
+                        verts.compileSophisticated(data);
+                    }
                 }
                 else
                 {
@@ -1264,7 +1707,7 @@ public class PlDrawableSpans extends uruobj
                     }
                     
                     //returns the compressed value, in some circumstances.
-                    public short pollAsElement(int A, int B, int C, context c)
+                    public short pollAsElement(context c)
                     {
                         if(count==0)
                         {
@@ -1321,7 +1764,7 @@ public class PlDrawableSpans extends uruobj
                         }
                         return 0;
                     }
-                    public void pollAsColour(int A, int B, int C, context c)
+                    public void pollAsColour(context c)
                     {
                         if(count==0)
                         {
@@ -1389,15 +1832,15 @@ public class PlDrawableSpans extends uruobj
                         uvs[i][j] = new rundata();
                     }
                 }
-                
+
                 for(int i=0;i<count;i++)
                 {
                     int possofar = c.in.getAbsoluteOffset() - start;
                     
                     //get vertex.
-                    short xval = x.pollAsElement(A, B, C, c);
-                    short yval = y.pollAsElement(A, B, C, c);
-                    short zval = z.pollAsElement(A, B, C, c);
+                    short xval = x.pollAsElement(c);
+                    short yval = y.pollAsElement(c);
+                    short zval = z.pollAsElement(c);
                     
                     //compute actuall, uncompressed vertex:
                     if (c.outputVertices)
@@ -1417,7 +1860,7 @@ public class PlDrawableSpans extends uruobj
                     //get weights
                     for(int j=0;j<B;j++)
                     {
-                        ws[j].pollAsElement(A, B, C, c);
+                        ws[j].pollAsElement(c);
                     }
                     
                     //if A is set to true, get bones
@@ -1475,7 +1918,7 @@ public class PlDrawableSpans extends uruobj
                             //short sout4 = (short)(fout4*100f);
                         }
                     }
-                    else if(c.readversion==3||c.readversion==4||c.readversion==7)
+                    else if(c.readversion==3||c.readversion==4)
                     {
                         short out2 = c.in.readShort();
                         short out3 = c.in.readShort();
@@ -1489,17 +1932,17 @@ public class PlDrawableSpans extends uruobj
                     }
                     
                     //colours:
-                    blue.pollAsColour(A, B, C, c);
-                    green.pollAsColour(A, B, C, c);
-                    red.pollAsColour(A, B, C, c);
-                    alpha.pollAsColour(A, B, C, c);
+                    blue.pollAsColour(c);
+                    green.pollAsColour(c);
+                    red.pollAsColour(c);
+                    alpha.pollAsColour(c);
                     
                     //uv texture coordinates
                     for(int j=0;j<C;j++)
                     {
                         for(int k=0;k<3;k++)
                         {
-                            uvs[j][k].pollAsElement(A, B, C, c);
+                            uvs[j][k].pollAsElement(c);
                         }
                     }
                     

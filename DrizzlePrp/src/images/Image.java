@@ -331,14 +331,22 @@ public class Image
                 levels[curLevel].compile(c);
             }            
         }
+    
+        public int getDxtType()
+        {
+            if(texelsize==16) return 5;
+            if(texelsize==8) return 1;
+            throw new shared.uncaughtexception("unhandled.");
+        }
+
     }
     
     public static class Agrb
     {
-        byte[][][][] image; //[level][row][column][subpixel]
-        int levels;
-        int texwidth;
-        int texheight;
+        public byte[][][][] image; //[level][row][column][subpixel]
+        public int levels;
+        public int texwidth;
+        public int texheight;
         
         
         public Agrb(byte[] data, int levels, int texwidth, int texheight) throws readexception

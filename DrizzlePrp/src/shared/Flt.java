@@ -29,7 +29,21 @@ strictfp public class Flt extends uruobj implements ICompilable
 {
     int rawdata;
     
-    
+    public static void testJava()
+    {
+        //this test fails, which means that java does not just take the int bits into a float, but can sometimes change it.  It happened about half way through, and expect to wait 20min or so :P
+        for(long i=0;i<4294967296L;i++)
+        {
+            int bits = (int)i;
+            float f = Float.intBitsToFloat(bits);
+            //int orig = Float.floatToIntBits(f);
+            int orig = Float.floatToRawIntBits(f);
+            if(orig!=bits)
+            {
+                int dummy=0;
+            }
+        }
+    }
     public Flt(context c) //legacy, deprecated.
     {
         rawdata = c.in.readInt();
@@ -244,5 +258,15 @@ strictfp public class Flt extends uruobj implements ICompilable
     public Flt deepClone()
     {
         return new Flt(this);
+    }
+    public static Flt read(IBytestream c)
+    {
+        return new Flt(c);
+    }
+    public static Flt readBigEndian(IBytestream c)
+    {
+        Flt r = new Flt();
+        r.rawdata = c.readIntBigEndian();
+        return r;
     }
 }

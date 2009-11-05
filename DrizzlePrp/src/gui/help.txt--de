@@ -15,11 +15,12 @@ Um UAM (UruAgeManager) zu benutzen:
 
 Um Myst5/Moul/Crowthistle Welten einfach zu konvertieren:
 ---------------------------------------------------------
-1) Gehe zur Registerkarte "Konvertierung" und dann zum Bereich MystV.
-2) Wähle das Verzeichnis, in dem du Myst 5 installiert hast (Standardpfad: "C:\Programme\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
-3) Wähle das Verzeichnis, in dem du PathOfTheShell/CompleteChronicles installiert hast. (Standardpfad: "C:\Programme\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" oder "C:\Programme\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
-4) Benutze die "Starten..." Schaltfläche.
-5) Führe im PathOfTheShell/CompleteChronicles Verzeichnis SoundDecompress.exe aus (SoundDecompress.exe könnte abstürzen, falls du Uru nicht zumindest einmal vorher gestartet hast.)
+1) Gehe zur Registerkarte "Konvertierung".
+2) Wähle das Verzeichnis, in dem du PathOfTheShell/CompleteChronicles installiert hast. (Standardpfad: "C:\Programme\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" oder "C:\Programme\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
+3) Wähle das Verzeichnis, in dem du Myst 5 (oder welches Spiel du auch immer konvertieren möchtest) installiert hast (Standardpfad: "C:\Programme\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
+4) Benutze die "Starten..." Schaltfläche und die Welten werden konvertiert. (Das könnte sehr lange dauern.)
+5) (optionell) When du die Musik des Spiels in deiner Relto Musikbox haben willst, klicke auf die Schaltfläche "Musik" hinter dem betreffenden Pfad, den du angeben musst, um die Welten zu konvertieren.
+6) Führe im PathOfTheShell/CompleteChronicles Verzeichnis SoundDecompress.exe aus (SoundDecompress.exe könnte abstürzen, falls du Uru nicht zumindest einmal vorher gestartet hast.)
 
 
 Erinnerungen:

@@ -22,6 +22,106 @@ public class search
         }
         return true;
     }
+    public static boolean searchForData(File f, byte[] searchdata)
+    {
+        return (searchForDataPos(f,searchdata)!=-1);
+    }
+    public static Vector<Integer> searchForDataPoss(File f, byte[] searchdata)
+    {
+        Vector<Integer> result = new Vector();
+        int l = searchdata.length;
+        byte[] data = FileUtils.ReadFile(f);
+        int numpostocheck = data.length-l+1;
+        for(int i=0;i<numpostocheck;i++)
+        {
+            Bytes b;
+            boolean found = true;
+            for(int j=0;j<l;j++)
+            {
+                if(data[i+j]!=searchdata[j])
+                {
+                    found = false;
+                    break;
+                }
+            }
+            if(found)
+            {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+    public static int searchForDataPos(File f, byte[] searchdata)
+    {
+        int l = searchdata.length;
+        byte[] data = FileUtils.ReadFile(f);
+        int numpostocheck = data.length-l+1;
+        for(int i=0;i<numpostocheck;i++)
+        {
+            Bytes b;
+            boolean found = true;
+            for(int j=0;j<l;j++)
+            {
+                if(data[i+j]!=searchdata[j])
+                {
+                    found = false;
+                    break;
+                }
+            }
+            if(found)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static boolean searchForInt(File f, int searchint)
+    {
+        return (searchForIntPos(f,searchint)!=-1);
+    }
+    public static Vector<Integer> searchForIntPoss(File f, int searchint)
+    {
+        Vector<Integer> r = new Vector();
+        byte[] data = FileUtils.ReadFile(f);
+        for(int i=0;i<data.length-3;i++)
+        {
+            int curint = b.BytesToInt32(data, i);
+            if(curint==searchint)
+            {
+                r.add(i);
+            }
+            if(false)
+            {
+                int curintbig = b.reverseEndianness(curint);
+                if(curintbig==searchint)
+                {
+                    r.add(i);
+                }
+            }
+        }
+        return r;
+    }
+    public static int searchForIntPos(File f, int searchint)
+    {
+        byte[] data = FileUtils.ReadFile(f);
+        for(int i=0;i<data.length-3;i++)
+        {
+            int curint = b.BytesToInt32(data, i);
+            if(curint==searchint)
+            {
+                return i;
+            }
+            if(false)
+            {
+                int curintbig = b.reverseEndianness(curint);
+                if(curintbig==searchint)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
     public static boolean searchForString(File f, String searchstr)
     {
         return (searchForStringPos(f,searchstr)!=-1);

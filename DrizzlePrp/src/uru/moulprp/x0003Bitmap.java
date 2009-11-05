@@ -30,15 +30,15 @@ public class x0003Bitmap extends uruobj
 {
     //Objheader xheader;
     //x0002Keyedobject parent;
-    byte version;
-    byte bpp;
-    byte cpb;
-    short flags;
-    byte type;
-    byte xtexel_size;
-    byte subtype;
-    int u1; //low modified time.
-    int u2; //high modified time.
+    public byte version;
+    public byte bpp;
+    public byte fSpace; //was cpb
+    public short flags;
+    public byte type;
+    public byte xtexel_size;
+    public byte subtype;
+    public int u1; //low modified time.
+    public int u2; //high modified time.
     
     public x0003Bitmap(context c)//,boolean hasHeader)
     {
@@ -47,7 +47,7 @@ public class x0003Bitmap extends uruobj
         //parent = new x0002Keyedobject(data);
         version = data.readByte(); e.ensureflags(version,2);
         bpp = data.readByte(); e.ensureflags(bpp,32);
-        cpb = data.readByte(); //unknown //space?
+        fSpace = data.readByte(); //unknown //space?
         flags = data.readShort();
         type = data.readByte();
         if(type!=0 && type!=2)
@@ -62,7 +62,7 @@ public class x0003Bitmap extends uruobj
     {
         deque.writeByte(version);
         deque.writeByte(bpp);
-        deque.writeByte(cpb);
+        deque.writeByte(fSpace);
         deque.writeShort(flags);
         deque.writeByte(type);
         if(type!=0 && type!=2)
@@ -80,7 +80,7 @@ public class x0003Bitmap extends uruobj
         
         result.version = 2;
         result.bpp = 32;
-        result.cpb = 1;
+        result.fSpace = 1;
         result.flags = 1; //0 is none, 1 is that it has an alpha channel.
         result.type = 0;
         result.subtype = 0;
@@ -88,5 +88,10 @@ public class x0003Bitmap extends uruobj
         result.u2 = 0;
         
         return  result;
+    }
+    public static x0003Bitmap createEmpty()
+    {
+        x0003Bitmap r = new x0003Bitmap();
+        return r;
     }
 }

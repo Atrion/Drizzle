@@ -50,7 +50,7 @@ public class PlDynamicEnvMap extends uruobj
         u4 = c.readByte();
         refcount = c.readInt();
         refs = c.readArray(Uruobjectref.class, refcount);
-        if(c.readversion==6||c.readversion==4)
+        if(c.readversion==6||c.readversion==4||c.readversion==7)
         {
             xsubcount = c.readInt();
             xsubs = c.readArray(Urustring.class, xsubcount);
@@ -86,6 +86,7 @@ public class PlDynamicEnvMap extends uruobj
         
         public ithinkthisisPlCubicRenderTarget(context c) throws readexception
         {
+            //sub4e0580 in hexisle
             parent = new plRenderTarget(c);
             if(c.readversion==3||c.readversion==6)
             {
@@ -96,7 +97,7 @@ public class PlDynamicEnvMap extends uruobj
                 child5 = new plRenderTarget(c);
                 child6 = new plRenderTarget(c);
             }
-            else if(c.readversion==4)
+            else if(c.readversion==4||c.readversion==7)
             {
                 Uruobjectref ref1 = new Uruobjectref(c);
                 child1 = new plRenderTarget(c);
@@ -148,6 +149,11 @@ public class PlDynamicEnvMap extends uruobj
             parent = new x0003Bitmap(c);
             u1 = c.readShort();
             u2 = c.readShort();
+            if(c.readversion==7)
+            {
+                //this extra byte must be here, because the next one is used to determine what data to read next.
+                byte u4 = c.readByte();
+            }
             u3 = c.readByte();
             if(u3!=0)
             {

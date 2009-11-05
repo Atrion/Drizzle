@@ -27,6 +27,11 @@ public class textfile
 {
     //Bytes text;
     protected Bytes[] lines;
+
+    public textfile()
+    {
+        lines = new Bytes[0];
+    }
     public void removeVariables(String varname)
     {
         Vector<Bytes> result = new Vector();

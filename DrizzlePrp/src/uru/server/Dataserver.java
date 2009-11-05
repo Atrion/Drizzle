@@ -46,15 +46,15 @@ public class Dataserver
         if(includeGeneralFiles)
         {
             SaveFile(serverdns,outfolder,"/status/lobbylist.txt");
-            SaveFile(serverdns,outfolder,"/status/index_eng.html");
-            SaveFile(serverdns,outfolder,"/status/index_fra.html");
-            SaveFile(serverdns,outfolder,"/status/index_ger.html");
+            TryToSaveFile(serverdns,outfolder,"/status/index_eng.html");
+            TryToSaveFile(serverdns,outfolder,"/status/index_fra.html");
+            TryToSaveFile(serverdns,outfolder,"/status/index_ger.html");
             SaveAndParseAndSaveMfs(serverdns,outfolder,"/install/Expanded/ClientSetupNew.mfs","/install/Expanded/");
             SaveAndParseAndSaveMfs(serverdns,outfolder,"/game_clients/drcExplorer/client.mfs","/game_clients/drcExplorer/");
         }
         if(includePotsAges)
         {
-            for(String age: automation.ageLists.potsages)
+            for(String age: auto.ageLists.potsages)
             {
                 if(!manifests.contains(age))
                 {
@@ -180,6 +180,15 @@ public class Dataserver
         for(Mfs.MfsEntry entry: mfs.other)
         {
             SaveIfNeeded(serverdns, outfolder, serverpath, basepath, entry, "");
+        }
+    }
+    private static byte[] TryToSaveFile(String serverdns, String outfolder, String serverpath)
+    {
+        try{
+            byte[] result = SaveFile(serverdns, outfolder, serverpath);
+            return result;
+        }catch(Exception e){
+            return null;
         }
     }
     private static byte[] SaveFile(String serverdns, String outfolder, String serverpath)

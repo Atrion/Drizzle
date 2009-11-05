@@ -20,6 +20,28 @@ public abstract class IBytestream
     abstract public int getBytesRemaining();
     abstract public IBytestream Fork(long offset);
     abstract protected int read();
+    public void skip(long n)
+    {
+        for(long i=0;i<n;i++)
+        {
+            readByte();
+        }
+    }
+    public float readFloat()
+    {
+        int data = readInt();
+        float result = Float.intBitsToFloat(data);
+        return result;
+    }
+    public float[] readFloats(int num)
+    {
+        float[] result = new float[num];
+        for(int i=0;i<num;i++)
+        {
+            result[i] = readFloat();
+        }
+        return result;
+    }
     public int[] readInts(int num)
     {
         int[] result = new int[num];
@@ -77,11 +99,30 @@ public abstract class IBytestream
         }
         return result;
     }
+    <T> java.lang.reflect.Constructor findIBytestreamConstructor(Class<T> objclass) throws java.lang.NoSuchMethodException
+    {
+        for(java.lang.reflect.Constructor constructor: objclass.getConstructors())
+        {
+            Class[] args = constructor.getParameterTypes();
+            if(args.length==1)// && args[0].equals(IBytestream.class))
+            {
+                //if(args[0].isAssignableFrom(IBytestream.class))
+                if(IBytestream.class.isAssignableFrom(args[0]))
+                {
+                    return constructor;
+                }
+            }
+        }
+        throw new java.lang.NoSuchMethodException();
+        //return null;
+    }
     public <T> T readObj(Class<T> objclass)
     {
         try
         {
-            return (T)objclass.getConstructor(IBytestream.class).newInstance(this);
+
+            //return (T)objclass.getConstructor(IBytestream.class).newInstance(this);
+            return (T)findIBytestreamConstructor(objclass).newInstance(this);
         }
         catch(java.lang.NoSuchMethodException e)
         {
@@ -155,6 +196,15 @@ public abstract class IBytestream
         int b1 = this.read();
         int b2 = this.read();
         short result = (short)(b1<<8 | b2);
+        return result;
+    }
+    public int readIntBigEndian()
+    {
+        int b1 = this.read();
+        int b2 = this.read();
+        int b3 = this.read();
+        int b4 = this.read();
+        int result = (b1<<24 | b2<<16 | b3<<8 | b4);
         return result;
     }
 }

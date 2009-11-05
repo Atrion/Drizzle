@@ -19,7 +19,7 @@ public class distiller
 {
     //Moves part of a drawablespan to another drawablespan and changes the refs.
     //Not finished...
-    public static void distillDrawableSpans(prpfile prp, Vector<uru.moulprp.x0016DrawInterface> drawInterfacesToDistill, String targetDrawableSpansName)
+    public static void distillDrawableSpans(prpfile prp, Vector<uru.moulprp.plDrawInterface> drawInterfacesToDistill, String targetDrawableSpansName)
     {
         if(true) throw new shared.uncaughtexception("not finished.");
         //find or create the destination drawablespans.
@@ -37,9 +37,9 @@ public class distiller
         PlDrawableSpans.modPlDrawableSpans dest = new PlDrawableSpans.modPlDrawableSpans();
 
         //collect items for distillation:
-        for(x0016DrawInterface di: drawInterfacesToDistill)
+        for(plDrawInterface di: drawInterfacesToDistill)
         {
-            for(x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+            for(plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
             {
                 if(sgr.subsetgroupindex!=-1)
                 {
@@ -91,6 +91,23 @@ public class distiller
         public boolean usePreexistingObjectList = false;
         public String objectListResourceName; //only if usePreexistingObjectList
         public includeDuplicateDecider forcedDuplicateInclusions = new distiller.includeDuplicateDecider() { public boolean include(Uruobjectdesc desc) { return false; } }; //only if !usePreexistingObjectList.
+
+        public UpdateRefsCallback updateRefsCallback;
+
+        public void addRefReassignment(Uruobjectdesc d1, Uruobjectdesc d2)
+        {
+            if(d1!=null && d2!=null)
+            {
+                if(!d1.equals(d2))
+                {
+                    refReassigns.put(d1, d2);
+                }
+            }
+        }
+    }
+    public static interface UpdateRefsCallback
+    {
+        void callback(distillInfo info);
     }
     /*static class serializableState implements java.io.Serializable
     {
@@ -148,7 +165,8 @@ public class distiller
                 else
                 {
                     //we've got it, enter the refReassignment.
-                    d.refReassigns.put(desc, destdesc.header.desc);
+                    //d.refReassigns.put(desc, destdesc.header.desc);
+                    d.addRefReassignment(desc, destdesc.header.desc);
                     m.msg("Skipping object, because one with the same name and typeid is in a pots prp already: ", desc.toString());
                 }
             }
@@ -260,7 +278,7 @@ public class distiller
             {
                 int dummy=0;
             }
-            copyObjectAndModifyRef(obj, d.dest, d.refReassigns);
+            copyObjectAndModifyRef(obj, d.dest, /*d.refReassigns,*/d);
         }
 
         //add the scenenodes to refReassigns
@@ -272,12 +290,14 @@ public class distiller
             if(SNdst.length>0)
             {
                 Uruobjectdesc srcsndesc = SNdst[0].header.desc;
-                d.refReassigns.put(srcsndesc, destsndesc);
+                //d.refReassigns.put(srcsndesc, destsndesc);
+                d.addRefReassignment(srcsndesc, destsndesc);
             }
         }
 
         //change all the refs in the dest:
-        updateAllReferences(dest, d.refReassigns);
+        if(d.updateRefsCallback!=null)d.updateRefsCallback.callback(d);
+        updateAllReferences(dest, /*d.refReassigns,*/d);
 
         //trim down the dest PlDrawableSpans by removing unused meshes, maybe?
         if(!d.trimDrawableSpans)
@@ -304,8 +324,8 @@ public class distiller
             //find the used parts of the DrawableSpan:
             for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
             {
-                uru.moulprp.x0016DrawInterface di = diro.castTo();
-                for(uru.moulprp.x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                uru.moulprp.plDrawInterface di = diro.castTo();
+                for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                 {
                     if(sgr.subsetgroupindex!=-1)
                     {
@@ -522,8 +542,8 @@ public class distiller
                 //change references to the arrays.
                 for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
                 {
-                    uru.moulprp.x0016DrawInterface di = diro.castTo();
-                    for(uru.moulprp.x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    uru.moulprp.plDrawInterface di = diro.castTo();
+                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
@@ -554,8 +574,8 @@ public class distiller
             {
                 for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
                 {
-                    uru.moulprp.x0016DrawInterface di = diro.castTo();
-                    for(uru.moulprp.x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    uru.moulprp.plDrawInterface di = diro.castTo();
+                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
@@ -660,6 +680,12 @@ public class distiller
     }
     private static void findDistillList(Vector<prpfile> sourceprpfiles, HashSet<Uruobjectdesc> everythingNeeded, PrpRootObject obj, PrpRootObject callee)
     {
+        if(obj==null)
+        {
+            m.warn("Found a desc whose object is not present in the source prp files.");
+            return;
+        }
+
         //PrpRootObject obj = findObject(sourceprpfiles, needed);
         obj.ensureParsed();
         Uruobjectdesc ref = obj.header.desc;
@@ -676,7 +702,7 @@ public class distiller
                 everythingNeeded.add(ref);
                 //skip the children.
             }*/
-            else if(ref.objecttype==Typeid.plDrawableSpans)
+            else if(callee!=null && ref.objecttype==Typeid.plDrawableSpans) //if callee==null, then we should just include the whole thing, since it was selected to be included in the main list.
             {
                 if(callee.header.objecttype==Typeid.plDrawInterface)
                 {
@@ -690,12 +716,12 @@ public class distiller
                     {
                         if(fog.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, fog.xdesc), obj);
                     }
-                    uru.moulprp.x0016DrawInterface di = callee.castTo();
+                    uru.moulprp.plDrawInterface di = callee.castTo();
                     /*for(Uruobjectref matref: di.findAllMaterials(sourceprpfiles))
                     {
                         if(matref.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, matref.xdesc), obj);
                     }*/
-                    for(uru.moulprp.x0016DrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
@@ -748,7 +774,14 @@ public class distiller
                 for(Uruobjectdesc outref: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, obj))
                 {
                     PrpRootObject outobj = findObject(sourceprpfiles, outref);
-                    findDistillList(sourceprpfiles, everythingNeeded, outobj, obj);
+                    //if(outobj!=null)
+                    //{
+                        findDistillList(sourceprpfiles, everythingNeeded, outobj, obj);
+                    //}
+                    //else
+                    //{
+                    //    m.warn("Found a desc whose object is not present in the source prp files: "+outref.toString());
+                    //}
                 }
             }
         }
@@ -908,6 +941,9 @@ public class distiller
     }*/
     public static int distillEverythingOneLayerDeep(prpfile dest, Vector<prpfile> prpfiles, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {
+        distillInfo reallyShouldntDoThis = new distillInfo();
+        reallyShouldntDoThis.refReassigns = refReassigns;
+
         Pageid destid = dest.header.pageid;
 
         int numSaw = 0;
@@ -937,7 +973,7 @@ public class distiller
                         if(obj!=null)
                         {
                             //found it
-                            distiller.copyObjectAndModifyRef(obj, dest, refReassigns);
+                            distiller.copyObjectAndModifyRef(obj, dest, reallyShouldntDoThis);
                             if(desc.objecttype==Typeid.plSceneObject)
                             {
                                 //add to scenenode.
@@ -953,7 +989,7 @@ public class distiller
             }
         }
 
-        updateAllReferences(dest, refReassigns);
+        updateAllReferences(dest, reallyShouldntDoThis);
 
         return numSaw;
     }
@@ -981,7 +1017,9 @@ public class distiller
                 //if(texture2.header.objecttype==Typeid.plMipMap)
                 //{
                     //uru.moulprp.x0004MipMap texture = texture2.castTo();
-                    distiller.copyObjectAndModifyRef(texture2, destprp, refReassigns);
+                    distillInfo reallyShouldntDoThis = new distillInfo();
+                    reallyShouldntDoThis.refReassigns = refReassigns;
+                    distiller.copyObjectAndModifyRef(texture2, destprp/*, refReassigns*/,reallyShouldntDoThis);
                 //}
                 //else if (texture2.header.objecttype==Typeid.plCubicEnvironMap)
                 //{
@@ -1026,14 +1064,14 @@ public class distiller
         }
                 
     }
-    public static void copyObjectAndModifyRef(PrpRootObject object, prpfile dest, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
+    public static void copyObjectAndModifyRef(PrpRootObject object, prpfile dest, /*HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns,*/ distillInfo d)
     {
         //check if we have already reassigned this object.
-        if(refReassigns==null || object==null||object.header==null)
+        if(d.refReassigns==null || object==null||object.header==null)
         {
             int dummy=0;
         }
-        Uruobjectdesc newpos = refReassigns.get(object.header.desc);
+        Uruobjectdesc newpos = d.refReassigns.get(object.header.desc);
         if(newpos==null)
         {
             //copy the object and add the ref to our list.
@@ -1043,7 +1081,8 @@ public class distiller
             newdesc.pagetype = dest.header.pagetype;
             PrpRootObject newobj = PrpRootObject.createFromDescAndObject(newdesc, object.getObject());
             dest.addObject(newobj);
-            refReassigns.put(olddesc, newdesc);
+            //refReassigns.put(olddesc, newdesc);
+            d.addRefReassignment(olddesc, newdesc);
         }
         else
         {
@@ -1051,19 +1090,28 @@ public class distiller
         }
     }
     
-    public static void updateAllReferences(prpfile prpToUpdate, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
+    public static void updateAllReferences(prpfile prpToUpdate, /*HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns,*/distillInfo d)
     {
         Vector<Uruobjectdesc> descs = shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, prpToUpdate);
         for(Uruobjectdesc desc: descs)
         {
-            Uruobjectdesc newdesc = refReassigns.get(desc);
-            if(newdesc==null)
+            Uruobjectdesc newdesc = d.refReassigns.get(desc);
+            //Uruobjectdesc lastdesc = null;
+            /*if(newdesc==null)
             {
                 //not reassigned so ignore.
             }
             else
             {
                 newdesc.copyInto(desc);
+            }*/
+
+            //this is okay, since we now make sure that when refReassigns are added, they don't point directly to themselves, and there seems to be no problem with loops.
+            while(newdesc!=null)
+            {
+                newdesc.copyInto(desc);
+                //lastdesc = newdesc;
+                newdesc = d.refReassigns.get(newdesc); //keep going while there are transitive reassignments.
             }
         }
     }

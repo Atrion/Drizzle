@@ -31,6 +31,8 @@ import shared.m;
  */
 public class Quat extends uruobj
 {
+    //in realmyst, I see (1,1,1,0)
+
     public Flt w;
     public Flt x;
     public Flt y;
@@ -57,7 +59,7 @@ public class Quat extends uruobj
     {
         //These looked different, but changing it messed up the angle of the door in EderDelin.
         //m.msg("scrambling quat.");
-        if(c.readversion==6||c.readversion==4)
+        if(c.readversion==6||c.readversion==4||c.readversion==7)
         {
             w = new Flt(c);
             x = new Flt(c);
@@ -76,6 +78,10 @@ public class Quat extends uruobj
     public static Quat identity()
     {
         return new Quat(new Flt(0), new Flt(0), new Flt(0), new Flt(1));
+    }
+    public static Quat identityW()
+    {
+        return new Quat(new Flt(1), new Flt(0), new Flt(0), new Flt(0));
     }
     public Quat(Flt w2, Flt x2, Flt y2, Flt z2)
     {
@@ -98,6 +104,23 @@ public class Quat extends uruobj
                 +":"+x.toString()
                 +":"+y.toString()
                 +":"+z.toString();
+    }
+    public static Quat read(IBytestream c)
+    {
+        return new Quat(c);
+    }
+    public static Quat readBigEndian(IBytestream c)
+    {
+        Quat r = new Quat();
+        r.w = Flt.readBigEndian(c);
+        r.x = Flt.readBigEndian(c);
+        r.y = Flt.readBigEndian(c);
+        r.z = Flt.readBigEndian(c);
+        return r;
+    }
+    public RGBA convertToRGBA()
+    {
+        return new RGBA(w.toJavaFloat(),x.toJavaFloat(),y.toJavaFloat(),z.toJavaFloat());
     }
 }
     

@@ -44,7 +44,11 @@ public class GuiUtils
     //public static final boolean useNativeLAFFileChooser = true;
     private static JFileChooser _fc;
     private static TrayIcon _trayicon;
-    
+
+    public static void DisplayMessage(String caption, String message)
+    {
+        javax.swing.JOptionPane.showMessageDialog(null, message, caption, javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void DisplayTrayMessage(String caption, String message)
     {
         if(_trayicon==null)
@@ -309,6 +313,7 @@ public class GuiUtils
     public static void setBackgroundColour(java.awt.Color colour)
     {
         javax.swing.plaf.ColorUIResource res = new javax.swing.plaf.ColorUIResource(colour);
+        //java.awt.Color res = colour;
         //If you want to add the others, see the font list below.
         UIManager.put("Panel.background", res);
         UIManager.put("Button.background", res);
@@ -317,6 +322,12 @@ public class GuiUtils
         UIManager.put("CheckBox.background", res);
         UIManager.put("TextField.background", res);
         UIManager.put("TabbedPane.background", res);
+
+        //UIManager.put("background", res);
+        //UIManager.put("foreground", res);
+        //UIManager.put("nimbusBase", res);
+        //UIManager.put("nimbusBlueGrey", res);
+        //UIManager.put("control", res);
 
     }
     /*public static void setBackgroundColour(java.awt.Color colour, java.awt.Component c)
@@ -338,8 +349,11 @@ public class GuiUtils
     }*/
     public static void updateGui(final java.awt.Component c, boolean immediate)
     {
+//m.msg("hi");
+
         if(immediate)
         {
+//m.msg("hi2");
             javax.swing.SwingUtilities.updateComponentTreeUI(c);
         }
         else
@@ -347,6 +361,7 @@ public class GuiUtils
             javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
 
                     public void run() {
+//m.msg("hi3");
                         javax.swing.SwingUtilities.updateComponentTreeUI(c);
                     }
                 });
@@ -545,16 +560,32 @@ public class GuiUtils
     }
     public static void getUserSelectedFile(JTextComponent field)
     {
+        String filename = getUserSelectedFile(field.getText());
+        if(filename!=null)
+        {
+            field.setText(filename);
+        }
+    }
+    public static String getUserSelectedFile(String defaultFolder)
+    {
+        return getUserSelected(defaultFolder,JFileChooser.FILES_ONLY);
+    }
+    private static String getUserSelected(String defaultFolder, int selectionMode)
+    {
         JFileChooser fc = getJFileChooser();
-        File f = new File(field.getText());
+        File f = new File(defaultFolder);
         File cwd = f.isDirectory()?f:f.getParentFile();
         fc.setCurrentDirectory(cwd);
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.setFileSelectionMode(selectionMode);
         int wasFileChosen = fc.showOpenDialog(null);
         if(wasFileChosen==0)
         {
             String file = fc.getSelectedFile().getAbsolutePath();
-            field.setText(file);
+            return file;
+        }
+        else
+        {
+            return null;
         }
     }
     public static void getUserSelectedFileWithNoPath(JTextComponent field)

@@ -32,8 +32,8 @@ import shared.readexception;
 //aka hsBounds3Ext
 public class BoundingBox extends uruobj
 {
-    public int flags;
-    public int mode;
+    public int extFlags; //was flags
+    public int flags; //was mode
     public Vertex min;
     public Vertex max;
     public Vertex xboundingboxcorner;
@@ -50,11 +50,11 @@ public class BoundingBox extends uruobj
     public BoundingBox(context c) throws readexception
     {
         shared.IBytestream data = c.in;
+        extFlags = data.readInt();
         flags = data.readInt();
-        mode = data.readInt();
         min = c.readObj(Vertex.class);
         max = c.readObj(Vertex.class);
-        if((flags&0x00000001)==0)
+        if((extFlags&0x00000001)==0)
         {
             xboundingboxcorner = c.readObj(Vertex.class);
             xdiff0 = c.readObj(Vertex.class); //axis
@@ -68,24 +68,42 @@ public class BoundingBox extends uruobj
             xmag22 = c.readObj(Flt.class); //y
         }
     }
+    public static BoundingBox createEmpty()
+    {
+        BoundingBox r = new BoundingBox();
+        return r;
+    }
+    public static BoundingBox createFromMinMax(float minx, float miny, float minz, float maxx, float maxy, float maxz)
+    {
+        BoundingBox r = createEmpty();
+        r.extFlags = 0x1; //on-axis
+        r.flags = 0x0;
+        r.min = Vertex.createFromFloats(minx, miny, minz);
+        r.max = Vertex.createFromFloats(maxx, maxy, maxz);
+        return r;
+    }
+    public static BoundingBox createWithZeroes()
+    {
+        return createFromMinMax(0,0,0,0,0,0);
+    }
     public void transform(Transmatrix mat)
     {
         m.warn("BoundingBox transform may not be correct.");
         min = mat.mult(min);
         max = mat.mult(max);
-        if((flags&0x00000001)==0)
+        if((extFlags&0x00000001)==0)
         {
             xboundingboxcorner = mat.mult(xboundingboxcorner);
         }
     }
     public void compile(Bytedeque data)
     {
+        data.writeInt(extFlags);
         data.writeInt(flags);
-        data.writeInt(mode);
         min.compile(data);
         max.compile(data);
 
-        if((flags&0x00000001)==0)
+        if((extFlags&0x00000001)==0)
         {
             xboundingboxcorner.compile(data);
             xdiff0.compile(data);
@@ -105,8 +123,8 @@ public class BoundingBox extends uruobj
     public BoundingBox deepClone()
     {
         BoundingBox r = new BoundingBox();
+        r.extFlags = this.extFlags;
         r.flags = this.flags;
-        r.mode = this.mode;
         r.min = this.min.deepClone();
         r.max = this.max.deepClone();
         r.xboundingboxcorner = this.xboundingboxcorner.deepClone();

@@ -24,6 +24,7 @@ import uru.Bytedeque;
 import shared.e;
 import shared.m;
 import shared.b;
+import shared.Flt;
 //import java.util.Vector;
 
 public class PlDynamicTextMap extends uruobj
@@ -39,6 +40,7 @@ public class PlDynamicTextMap extends uruobj
     //byte u6;
     //byte u7;
     int initBufferLen; //was u4to7
+    byte[] buffer;
     
     public PlDynamicTextMap(context c)//,boolean hasHeader)
     {
@@ -48,11 +50,23 @@ public class PlDynamicTextMap extends uruobj
         visWidth = c.readInt();
         visHeight = c.readInt();
         hasAlpha = c.readByte();
+        if(c.readversion==7)
+        {
+            //I'm not sure if alpha goes before these are between or after.
+            m.warn("Not sure if reading PlDynamicTextMap correctly.");
+            byte b1 = c.readByte();
+            byte b2 = c.readByte();
+            Flt f3 = new Flt(c);
+            Flt f4 = new Flt(c);
+            Flt f5 = new Flt(c);
+            Flt f6 = new Flt(c);
+        }
         //u4 = c.readByte();
         //u5 = c.readByte();
         //u6 = c.readByte();
         //u7 = c.readByte();
         initBufferLen = c.readInt();
+        buffer = c.readBytes(initBufferLen*4); //are these ints?
     }
     public void compile(Bytedeque c)
     {
@@ -65,6 +79,7 @@ public class PlDynamicTextMap extends uruobj
         //c.writeByte(u6);
         //c.writeByte(u7);
         c.writeInt(initBufferLen);
+        c.writeBytes(buffer);
     }
     private PlDynamicTextMap(){}
     public static PlDynamicTextMap createBlank(int visWidth, int visHeight)
@@ -76,6 +91,7 @@ public class PlDynamicTextMap extends uruobj
         result.visHeight = visHeight; //1024;
         result.hasAlpha = 0;
         result.initBufferLen = 0;
+        result.buffer = new byte[0];
         
         return result;
     }

@@ -166,4 +166,20 @@ public strictfp class Vertex extends uruobj implements ICompilable
         r.z = this.z.deepClone();
         return r;
     }
+    public static Vertex read(IBytestream c)
+    {
+        return new Vertex(c);
+    }
+    public static Vertex readBigEndian(IBytestream c)
+    {
+        Vertex r = new Vertex();
+        r.x = Flt.readBigEndian(c);
+        r.y = Flt.readBigEndian(c);
+        r.z = Flt.readBigEndian(c);
+        return r;
+    }
+    public Vector3 getVector3()
+    {
+        return new Vector3(x.toJavaFloat(),y.toJavaFloat(),z.toJavaFloat());
+    }
 }

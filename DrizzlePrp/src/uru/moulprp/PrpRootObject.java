@@ -102,6 +102,18 @@ public class PrpRootObject extends uruobj implements Comparable
         
         return result;
     }
+    public static PrpRootObject createFromTypeNamePrpObject(Typeid type, String name, prpfile prp, uruobj obj)
+    {
+        PrpRootObject r = new PrpRootObject();
+        r.prpobject = PrpObject.createFromUruobj(obj);
+        r.header = Objheader.createFromDesc(Uruobjectdesc.createDefaultWithTypeNamePrp(type, name, prp));
+
+        r.hasChanged = true;
+        r.hasRaw = false;
+        r.hasParsed = true;
+
+        return r;
+    }
     public void ensureParsed()
     {
         try

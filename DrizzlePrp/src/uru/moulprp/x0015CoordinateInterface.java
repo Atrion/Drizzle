@@ -25,6 +25,7 @@ import shared.e;
 import shared.m;
 import shared.b;
 import uru.moulprp.Transmatrix;
+import shared.*;
 //import java.util.Vector;
 
 /**
@@ -123,6 +124,19 @@ public class x0015CoordinateInterface extends uruobj
         result.count = 0;
         result.children = new Uruobjectref[0];
         return result;
+    }
+    public static x0015CoordinateInterface createWithMatrix44(Uruobjectref sceneobject, Matrix44 coords)
+    {
+        x0015CoordinateInterface r = new x0015CoordinateInterface();
+        Matrix44 inv = coords.getInverse();
+        r.parent = PlObjInterface.createDefault(sceneobject);
+        r.localToParent = Transmatrix.createFromMatrix44(coords);
+        r.parentToLocal = Transmatrix.createFromMatrix44(inv);
+        r.localToWorld = Transmatrix.createFromMatrix44(coords);
+        r.worldToLocal = Transmatrix.createFromMatrix44(inv);
+        r.count = 0;
+        r.children = new Uruobjectref[0];
+        return r;
     }
     public void compile(Bytedeque deque)
     {

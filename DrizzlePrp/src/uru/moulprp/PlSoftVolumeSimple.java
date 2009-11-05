@@ -37,7 +37,8 @@ public class PlSoftVolumeSimple extends uruobj
     
     PlSoftVolume parent;
     Flt u1;
-    public PrpVolumeIsect prpvolumeisect;
+    //public PrpVolumeIsect prpvolumeisect;
+    public PrpTaggedObject prpvolumeisect;
     
     public PlSoftVolumeSimple(context c) throws readexception
     {
@@ -45,7 +46,8 @@ public class PlSoftVolumeSimple extends uruobj
         
         parent = new PlSoftVolume(c);//,false);
         u1 = new Flt(c);
-        prpvolumeisect = new PrpVolumeIsect(c);
+        //prpvolumeisect = new PrpVolumeIsect(c);
+        prpvolumeisect = new PrpTaggedObject(c);
         
     }
     public void compile(Bytedeque c)

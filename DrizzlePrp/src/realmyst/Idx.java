@@ -22,9 +22,9 @@ public class Idx
     //byte blockcount; //hard to tell since there's only 1 idx file, but I think this is the block count.
     ReverseInt three;
     //IdxBlock[] idxblocks;
-    IdxBlock SaveGroupIndex;
-    IdxBlock RoomIndex;
-    IdxBlock NamedGroupIndex;
+    IdxBlock SaveGroupIndex; //refs to /sdb
+    IdxBlock RoomIndex; //refs to /sdb
+    IdxBlock NamedGroupIndex; //refs to /sdb
     //int u1;
     //int u2;
     //IdxEntry[] entries;

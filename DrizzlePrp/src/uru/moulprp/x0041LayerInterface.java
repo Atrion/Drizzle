@@ -33,8 +33,8 @@ import shared.b;
 public class x0041LayerInterface extends uruobj
 {
     //Objheader xheader;
-    PlSynchedObject parent;
-    Uruobjectref ref; //underlay, i.e. plMipMap
+    public PlSynchedObject parent;
+    public Uruobjectref ref; //underlay, i.e. plMipMap
     
     public x0041LayerInterface(context c) throws readexception //,boolean hasHeader)
     {
@@ -56,5 +56,12 @@ public class x0041LayerInterface extends uruobj
     public x0041LayerInterface deepClone()
     {
         return new x0041LayerInterface(this);
+    }
+    private x0041LayerInterface(){}
+    public static x0041LayerInterface createEmpty()
+    {
+        x0041LayerInterface r = new x0041LayerInterface();
+        r.parent = PlSynchedObject.createEmpty();
+        return r;
     }
 }

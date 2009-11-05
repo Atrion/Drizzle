@@ -157,6 +157,14 @@ public class x00A2Pythonfilemod extends uruobj
             result.xBoolean = booleanval?1:0;
             return result;
         }
+        public static Pythonlisting createWithInteger(int index, int val)
+        {
+            Pythonlisting r = new Pythonlisting();
+            r.type = 1;
+            r.index = index;
+            r.xInteger = val;
+            return r;
+        }
         public Pythonlisting(context c) throws readexception
         {
             this(c,Urustring.createFromString("(this constructor doesn't show the pyfile)"));
@@ -206,6 +214,10 @@ public class x00A2Pythonfilemod extends uruobj
                         e.ensure(type!=23); //type 23 shouldn't occur, according to my stats.
                         xRef = new Uruobjectref(c);
                         if(shared.State.AllStates.getStateAsBoolean("reportPythonFileMod")) m.msg("PythonFileMod:     ref="+xRef.toString());
+                    }
+                    else
+                    {
+                        m.throwUncaughtException("Unhandled.");
                     }
                     break;
                 case 23:
