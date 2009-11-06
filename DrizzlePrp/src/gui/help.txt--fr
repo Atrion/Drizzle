@@ -17,12 +17,13 @@ UAM permet de télécharger et installer facilement des Âges et des ajouts à votre
 
 Conversion Simple
 --------------------------------------
-Cet onglet permet de convertir facilement les Âges de Myst5, MOUL et Crowthistle au format Uru.
-1) Choisissez l'onglet "Conversion Simple", puis l'onglet "MystV".
-2) Dossier Myst 5: Sélectionnez le dossier où vous avez installé Myst 5. (Par défaut: "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
-3) Dossier POTS: Sélectionnez le dossier où vous avez installé Uru Path Of The Shell ou Uru:Complete Chronicles. (Par défaut: "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
-4) Cliquez sur le bouton "Démarrer".
-5) Cliquez sur le bouton "Démarrer SoundDecompress..." ou bien exécutez SoundDecompress.exe dans votre dossier Uru. (SoundDecompress.exe pourrait planter si vous n'avez pas lancé Uru au moins une fois.)
+Cet onglet permet de convertir facilement les Âges de Myst5, MOUL, Crowthistle et HexIsle au format Uru.
+1) Choisissez l'onglet "Conversion Simple".
+2) Dossier POTS: Sélectionnez le dossier où vous avez installé Uru Path Of The Shell ou Uru:Complete Chronicles. (Par défaut: "C:\Program Files\Ubi Soft\Cyan Worlds\Uru - Ages Beyond Myst" or "C:\Program Files\Ubi Soft\Cyan Worlds\Myst Uru Complete Chronicles".)
+3) Sélectionnez le dossier où vous avez installé Myst 5 (ou autre jeu que vous voulez convertir). (Par défaut: "C:\Program Files\Ubisoft\Cyan Worlds\Myst V End Of Ages".)
+4) Cliquez sur le bouton "Démarrer...". La conversion peut être assez longue.
+5) Optionnellement, si vous voulez convertir la musique d'un jeu pour qu'elle jour dans votre Relto, cliquez sur le bouton correspondant.
+6) Cliquez sur le bouton "Démarrer SoundDecompress..." ou bien exécutez SoundDecompress.exe dans votre dossier Uru. (SoundDecompress.exe pourrait planter si vous n'avez pas lancé Uru au moins une fois.)
 
 
 Souvenirs:
