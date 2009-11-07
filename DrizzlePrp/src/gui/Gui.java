@@ -4761,6 +4761,7 @@ private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton66ActionPerformed
     //auto.mystAutomation.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings(),false,auto.renames.getMoulRenameInfo());
+    auto.moul.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings(), false, auto.moul.getMoulRenameInfo());
 }//GEN-LAST:event_jButton66ActionPerformed
 
 private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton69ActionPerformed
@@ -4819,7 +4820,7 @@ private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton60ActionPerformed
 
 private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton86ActionPerformed
-    Vector<String> v = new Vector<String>();
+    Vector<String> files = new Vector<String>();
     File f = new File(textfieldState1.getText());
     if (!f.getParentFile().getName().equals("dat")) {
         m.err("The file you specify must be in a folder called \"dat\"");
@@ -4827,8 +4828,10 @@ private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
     String filename = f.getName();
     String infolder = f.getParentFile().getParent();
-    v.add(filename);
+    String outfolder = textfieldState8.getText();
+    files.add(filename);
     //auto.mystAutomation.convertMoulToPots(infolder/*textfieldState6.getText()*/,textfieldState8.getText(), v,false,auto.renames.getMoulRenameInfo());
+    auto.moul.convertMoulToPots(infolder, outfolder, files, false, auto.moul.getMoulRenameInfo());
 }//GEN-LAST:event_jButton86ActionPerformed
 
 private void jButton87ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton87ActionPerformed
