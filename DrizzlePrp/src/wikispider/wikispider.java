@@ -232,7 +232,7 @@ public class wikispider
             {
                 if(downloaded) return;
                 m.msg("Downloading: ",name);
-                String safeinname = name.replace(" ", "_");
+                String safeinname = name.replace(" ", "_").replace("&", "&amp;");
                 String safeoutname = name.replace(" ", "_").replace(":", ";");
                 String sourceurl = startingUrl + "/index.php?title="+safeinname+"&action=raw";
                 String outputName = outputFolder+"/"+safeoutname;
