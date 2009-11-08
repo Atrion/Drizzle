@@ -30,22 +30,15 @@ public class mystv //was myst5Fixes
         r.agemodifier = new conversion.AgeModifier() {
             public void ModifyAge(Info info, FileInfo file, textfile tf) {
                 final String[][] alcugsOptionals = {
-                    {"DescentMystV","Page=dsntFootRgns,97,1"},
+                    {"Descent","Page=dsntFootRgns,97,1"},
                     {"Direbo","Page=drboAdditions,98,1"},
-                    {"KveerMystV","Page=kverFootRgns,97,1"},
+                    {"Kveer","Page=kverFootRgns,97,1"},
                     {"Laki","Page=lakiFootRgns,99,1"},
-                    {"MystMystV","Page=mystFootRgns,89,1"},
+                    {"Myst","Page=mystFootRgns,89,1"},
                     {"Siralehn","Page=srlnFootRgns,96,1"},
                     {"Tahgira","Page=thgrFootRgns,97,1"},
                     {"Todelmer","Page=tdlmFootRgns,92,1"},
                 };
-                for(String[] agepair: alcugsOptionals)
-                {
-                    if(file.agename.equals(agepair[0]))
-                    {
-                        tf.appendLine(agepair[1]);
-                    }
-                }
 
                 //Remove all the KveerMystV pages except kverReleeshan and dusttest from the .age file.
                 boolean makeMinimalReleeshan = true;
@@ -65,6 +58,15 @@ public class mystv //was myst5Fixes
                         tf.appendLine("Page=kverReleeshan,22"); //remove the ,1 from the end so that it loads.
                         //agefile.appendLine("Page=dusttest,90"); //leave it alone.
                         //decryptedData = agefile.saveToBytes();
+                    }
+                }
+                
+                // add the additional line AFTER the Kveer fix so that it is not commented out
+                for(String[] agepair: alcugsOptionals)
+                {
+                    if(file.agename.equals(agepair[0]))
+                    {
+                        tf.appendLine(agepair[1]);
                     }
                 }
 
