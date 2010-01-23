@@ -18,7 +18,6 @@
 
 package uru.moulprp;
 
-import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -27,44 +26,38 @@ import shared.m;
 import shared.b;
 import shared.readexception;
 //import java.util.Vector;
+import shared.*;
 
 
-public class PlOneShotMod extends uruobj
+public class pfGUITextBoxMod extends uruobj
 {
-    PlMultiModifier parent;
-    public Urustring animobjectname;
-    public Flt seekDuration;
-    public byte drivable;
-    public byte reversable;
-    public byte smartseek;
-    public byte noseek;
-    byte xb;
+    PfGUIControlMod parent;
+    Bstr str1;
+    byte xb2;
     
-    public PlOneShotMod(context c) throws readexception
+    public pfGUITextBoxMod(context c) throws readexception
     {
-        parent = new PlMultiModifier(c);
-        animobjectname = new Urustring(c);
-        seekDuration = new Flt(c);
-        drivable = c.readByte();
-        reversable = c.readByte();
-        smartseek = c.readByte();
-        noseek = c.readByte();
-        if(c.realreadversion==8)
+        parent = new PfGUIControlMod(c);
+        str1 = new Bstr(c);
+        if(c.readversion==6)
         {
-            xb = c.readByte();
+            xb2 = c.readByte();
+            if(xb2!=0)
+            {
+                //read an Urustring?
+                int dummy=0;
+                m.throwUncaughtException("Unhandled.");
+            }
         }
     }
     
     public void compile(Bytedeque c)
     {
+        //m.warn("compile not implemented.",this.toString());
+        //m.warn("not tested with pots.",this.toString());
+        m.warn("untested pfGUITextBoxMod");
         parent.compile(c);
-        animobjectname.compile(c);
-        seekDuration.compile(c);
-        c.writeByte(drivable);
-        c.writeByte(reversable);
-        c.writeByte(smartseek);
-        c.writeByte(noseek);
-                
+        str1.compile(c);
     }
     
 }

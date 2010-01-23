@@ -18,7 +18,6 @@
 
 package uru.moulprp;
 
-import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -27,44 +26,24 @@ import shared.m;
 import shared.b;
 import shared.readexception;
 //import java.util.Vector;
+import shared.*;
 
 
-public class PlOneShotMod extends uruobj
+public class plAvatarMgr extends uruobj
 {
-    PlMultiModifier parent;
-    public Urustring animobjectname;
-    public Flt seekDuration;
-    public byte drivable;
-    public byte reversable;
-    public byte smartseek;
-    public byte noseek;
-    byte xb;
     
-    public PlOneShotMod(context c) throws readexception
+    
+    public plAvatarMgr(context c) throws readexception
     {
-        parent = new PlMultiModifier(c);
-        animobjectname = new Urustring(c);
-        seekDuration = new Flt(c);
-        drivable = c.readByte();
-        reversable = c.readByte();
-        smartseek = c.readByte();
-        noseek = c.readByte();
-        if(c.realreadversion==8)
-        {
-            xb = c.readByte();
-        }
+        m.throwUncaughtException("We shouldn't actually be reading this.");
+        int dummy=0;
+        //c.readInt();
     }
     
     public void compile(Bytedeque c)
     {
-        parent.compile(c);
-        animobjectname.compile(c);
-        seekDuration.compile(c);
-        c.writeByte(drivable);
-        c.writeByte(reversable);
-        c.writeByte(smartseek);
-        c.writeByte(noseek);
-                
+        m.warn("compile not implemented.",this.toString());
+        m.warn("not tested with pots.",this.toString());
     }
     
 }

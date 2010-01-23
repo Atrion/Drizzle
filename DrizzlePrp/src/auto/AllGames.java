@@ -48,6 +48,7 @@ public class AllGames
     public static class GameInfo
     {
         String GameName;
+        int readversion;
         String DetectionFile;
         String[] MusicFiles;
         

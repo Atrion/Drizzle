@@ -30,11 +30,11 @@ import shared.readexception;
 
 public class PfGUIDraggableMod extends uruobj
 {
-    PfGUIButtonMod.PfGUIControlMod parent;
+    PfGUIControlMod parent;
     
     public PfGUIDraggableMod(context c) throws readexception
     {
-        parent = new PfGUIButtonMod.PfGUIControlMod(c);
+        parent = new PfGUIControlMod(c);
         
     }
     

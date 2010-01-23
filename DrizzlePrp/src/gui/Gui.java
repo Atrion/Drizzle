@@ -72,7 +72,10 @@ public class Gui extends javax.swing.JFrame {
         //int width = 1016; int height = 732; //border of 4
         int width = 1016; int height = 726;
         //this.setMinimumSize(new java.awt.Dimension(width, height));
-        this.setBounds((maxwidth-width)/2, (maxheight-height)/2, width, height);
+        this.setSize(width, height);
+        this.setLocationRelativeTo(null);
+        //this.setd
+        //this.setBounds((maxwidth-width)/2, (maxheight-height)/2, width, height);
         this.setTitle("Drizzle "+Integer.toString(Version.version));
 
         shared.translation.registerGUIForm(this);
@@ -154,7 +157,8 @@ public class Gui extends javax.swing.JFrame {
         m.redirectStdOut();
 
         //check memory...
-        if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
+        //if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
+        if(Main.maxmemory<Main.requiredmemory) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
         if(Main.javaversion2<1.6) m.warn("Your version of java seems to be older than 1.6; some things might not work.");
         if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://alcugs.almlys.org/Drizzle for details.");
         //try{

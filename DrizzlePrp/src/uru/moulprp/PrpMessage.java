@@ -130,6 +130,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         Uruobjectref newcam;
         Uruobjectref triggerer;
         PlCameraConfig cameraConfig;
+        Vertex xvertex;
         
         public PlCameraMsg(context c) throws readexception
         {
@@ -140,6 +141,10 @@ public abstract class PrpMessage extends PrpTaggedObject
             newcam = new Uruobjectref(c);
             triggerer = new Uruobjectref(c);
             cameraConfig = new PlCameraConfig(c);
+            if(c.realreadversion==8)
+            {
+                xvertex = new Vertex(c); //data has weird form.  Looks more like 12 bytes?
+            }
         }
         
         public void compile(Bytedeque c)

@@ -387,6 +387,8 @@ public class PrpObject extends uruobj
                 return new PrpMessage.PlResponderEnableMsg(c);
             case plParticleUniformWind:
                 return new PlParticleWindEffect.PlParticleUniformWind(c);
+            //case plAvatarMgr:
+            //    return new plAvatarMgr(c);
             default:
                 uruobj result = tryread(c,type);
                 if(result!=null) return result;

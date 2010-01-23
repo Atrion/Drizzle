@@ -38,6 +38,8 @@ public class PlAGAnim extends uruobj
     public Urustring name;
     public Flt starttime; //float
     public Flt stoptime; //float
+    float xuk1;
+    float xuk2;
     public int effectcount;
     //effect[] effects;
     public PrpTaggedObject[] effects;
@@ -50,6 +52,11 @@ public class PlAGAnim extends uruobj
         name = new Urustring(c);
         starttime = new Flt(c);
         stoptime = new Flt(c);
+        if(c.realreadversion==8)
+        {
+            xuk1 = c.readFloat();
+            xuk2 = c.readFloat();
+        }
         effectcount = data.readInt();
         //effects = new effect[effectcount];
         effects = new PrpTaggedObject[effectcount*2];

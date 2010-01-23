@@ -38,7 +38,8 @@ import shared.IBytestream;
  */
 public class context extends shared.BaseContext
 {
-    public int readversion; //3==pots,6==moul,7==hexisle,5==myst5,4==crowthistle(crowthistle&myst5 are the same)
+    public int realreadversion;
+    public int readversion; //3==pots,6==moul,7==hexisle,5==myst5,4==crowthistle(crowthistle&myst5 are the same),8==mqo
     public int writeversion;
     public boolean compile;
     public IBytestream in;
@@ -132,6 +133,7 @@ public class context extends shared.BaseContext
     private context Fork_() //must be private!!!  Doesn't actually fork the instream.
     {
         context result = new context();
+        result.realreadversion = realreadversion;
         result.readversion = readversion;
         result.writeversion = writeversion;
         result.compile = compile;

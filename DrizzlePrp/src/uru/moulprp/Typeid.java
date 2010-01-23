@@ -299,7 +299,11 @@ public enum Typeid implements compilable, java.io.Serializable
     plParticleLifeMaxApplicator,
     plParticleAngleApplicator,
     plEventCallbackSetupMsg,
-    
+
+    //mqo
+    pfGUITextBoxMod,
+    plAvatarMgr,
+
     plLeafController,
     nil,
     unknown;
@@ -558,6 +562,9 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x336, -2, -2, 0x2A8, plParticleAngleApplicator),
         tri( -2, -2, -2, 0x336, plEventCallbackSetupMsg), //not in pots
 
+        tri( 0xAB, 0xAB, -2, -2, pfGUITextBoxMod), //not present in moul prps, but in mqo.
+        tri( 0xF4, 0xF4, -2, -2, plAvatarMgr), //not present in moul prps, but in mqo.
+
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle
     };
@@ -686,6 +693,11 @@ public enum Typeid implements compilable, java.io.Serializable
             triplet t = findTriByMoul(type);
             if(t!=null)
             {
+                if(t.type==Typeid.plAvatarMgr)
+                {
+                    int dummy=0;
+                    m.warn("encountered ref to plAvatarMgr");
+                }
                 return t.type;
             }
             else

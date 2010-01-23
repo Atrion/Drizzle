@@ -115,7 +115,7 @@ public class conversion
         String infile = info.infolder + "/dat/" + file.filename;
         //String outfilename = filename.replaceFirst("_", "_District_");
         //String outfile = outfolder + "/dat/" + outfilename;
-        String outfile;
+        /*String outfile;
         if(file.filename.contains("_District_"))
         {
             outfile = info.outfolder + "/dat/" + file.filename;
@@ -123,11 +123,12 @@ public class conversion
         else
         {
             outfile = info.outfolder + "/dat/" + file.filename.replaceFirst("_", "_District_");
-        }
+        }*/
 
         IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
         uru.context c = uru.context.createFromBytestream(bytestream);
         c.curFile = file.filename; //helpful for debugging.
+        c.realreadversion = info.g.readversion;
 
         //modify sequence prefix if Age is in list.
         Integer prefix = info.g.renameinfo.prefices.get(file.agename);
@@ -159,7 +160,14 @@ public class conversion
         if(newpagename!=null)
         {
             prp.header.pagename = Urustring.createFromString(newpagename);
-            outfile = outfile.replaceFirst("_District_"+oldpagename, "_District_"+newpagename);
+            //outfile = outfile.replaceFirst("_District_"+oldpagename, "_District_"+newpagename);
+        }
+        //Change agename, if applicable.
+        String oldagename = prp.header.agename.toString();
+        String newagename = info.g.renameinfo.agenames.get(file.agename);
+        if(newagename!=null)
+        {
+            prp.header.agename = Urustring.createFromString(newagename);
         }
 
         //processPrp(prp,agename,agenames,outfolder);
@@ -168,6 +176,8 @@ public class conversion
 
         //Bytes prpoutputbytes = prp.saveAsBytes();
         //prpoutputbytes.saveAsFile(outfile);
+        String outfile = info.outfolder + "/dat/"+ prp.header.agename.toString() + "_District_" + prp.header.pagename.toString() + ".prp";
+
         prp.saveAsBytes(info.g.decider).writeAllBytesToFile(outfile);
 
         //prp.saveAsFile(outfile);
