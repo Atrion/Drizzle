@@ -44,13 +44,18 @@ public class AllGames
         return _pots;
     }
 
-
+    public static class EmbeddedFileInfo
+    {
+        String drizzlePath;
+        String uruPath;
+    }
     public static class GameInfo
     {
         String GameName;
-        int readversion;
+        public int readversion;
         String DetectionFile;
         String[] MusicFiles;
+        //String[] AviFiles;
         
         //conversion stuff:
         //conversion.Info info;
@@ -61,6 +66,10 @@ public class AllGames
         conversion.PostConversionModifier prpmodifier;
         conversion.FniModifier fnimodifier;
         conversion.AgeModifier agemodifier;
+        Vector<AllGames.EmbeddedFileInfo> embeddedfiles = new Vector();
+        Vector<String> automods = new Vector();
+        //Vector<auto.inplace.Inplace.InplaceModInfo> inplacemods = new Vector();
+        Vector<String> inplacemods = new Vector();
 
         public void addAgeFiles(String agename, String[] filenames)
         {
@@ -83,6 +92,45 @@ public class AllGames
                 allfiles.add(fi);
             }
         }
+        public void addAviFiles(String[] filenames)
+        {
+            for(String filename: filenames)
+            {
+                FileInfo fi = new FileInfo();
+                fi.filename = filename;
+                fi.guessFiletype();
+                allfiles.add(fi);
+            }
+        }
+        public void addEmbeddedFile(String drizzlePath, String uruPath)
+        {
+            AllGames.EmbeddedFileInfo fi = new EmbeddedFileInfo();
+            fi.drizzlePath = drizzlePath;
+            fi.uruPath = uruPath;
+            embeddedfiles.add(fi);
+        }
+        /*public void addInplacemod(String agename, String relpath, String... modnames)
+        {
+            auto.inplace.Inplace.InplaceModInfo im = new auto.inplace.Inplace.InplaceModInfo();
+            im.relpath = relpath;
+            im.modnames = modnames;
+            im.age = agename;
+            inplacemods.add(im);
+        }*/
+        public void addInplacemods(String... relpaths)
+        {
+            for(String relpath: relpaths)
+            {
+                inplacemods.add(relpath);
+            }
+        }
+        public void addAutomods(String[] filenames)
+        {
+            for(String filename: filenames)
+            {
+                automods.add(filename);
+            }
+        }
         public String getNewAgename(FileInfo file)
         {
             String newagename = renameinfo.agenames.get(file.agename);
@@ -96,7 +144,7 @@ public class AllGames
 
     public static class GameConversionSub
     {
-        GameInfo g;
+        public GameInfo g;
 
         public GameConversionSub(GameInfo game)
         {
@@ -156,15 +204,78 @@ public class AllGames
             if(!isFolderX(infolder)) return;
             if(!auto.AllGames.getPots().isFolderX(potsfolder)) return;
 
-            m.status("Starting conversion...");
-            convert(infolder, potsfolder);
-
+            m.status("Starting conversion of ",g.GameName,"...");
+            if(true)
+            {
+                convert(infolder, potsfolder);
+                extractembedded(potsfolder);
+                automod(infolder, potsfolder);
+                inplacemod(potsfolder);
+            }
+            else
+            {
+                m.err("Disable this before release!!!");
+                automod(infolder, potsfolder);
+                inplacemod(potsfolder);
+            }
 
             m.state.pop();
             m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
             //m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
             m.status("Conversion completed!");
 
+        }
+        public void ConvertFiles(String infolder, String outfolder, Vector<String> files)
+        {
+            conversion.Info info = new conversion.Info();
+            info.infolder = infolder;
+            info.outfolder = outfolder;
+            info.g = g;
+            for(String filename: files)
+            {
+                conversion.FileInfo fi = new conversion.FileInfo();
+                fi.filename = filename;
+                fi.guessFiletype();
+                //fi.agename = null; //is this a problem?  yes it is.
+                fi.guessAgename();
+                conversion.convertFile(info, fi);
+            }
+        }
+        public void ExtractPak(String pakfile, String outfolder)
+        {
+            //byte[] decrypteddata = uru.UruCrypt.DecryptAny(pakfile, this.g);
+            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(pakfile, g, true);
+            pak.extractPakFile(true, 23, outfolder);
+        }
+        private void inplacemod(String potsfolder)
+        {
+            auto.inplace.InplaceFile pots = new auto.inplace.InplaceFile(potsfolder,"");
+            for(String im: g.inplacemods)
+            {
+                auto.inplace.Inplace.InplaceMod(pots, im);
+            }
+        }
+        private void automod(String infolder, String outfolder)
+        {
+            for(String filename: g.automods)
+            {
+                auto.mod.AutoMod.SimplicityAutoMod(infolder, outfolder, filename);
+            }
+        }
+        private void extractembedded(String potsfolder)
+        {
+            for(AllGames.EmbeddedFileInfo fi: g.embeddedfiles)
+            {
+                if(shared.GetResource.hasResource(fi.drizzlePath))
+                {
+                    Bytes bytes = shared.GetResource.getResourceAsBytes(fi.drizzlePath);
+                    bytes.saveAsFile(potsfolder+fi.uruPath);
+                }
+                else
+                {
+                    m.throwUncaughtException("Resource not present: "+fi.drizzlePath);
+                }
+            }
         }
         private void convert(String infolder, String potsfolder)
         {

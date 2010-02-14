@@ -26,6 +26,7 @@ import shared.readexception;
 import uru.Bytedeque;
 import shared.b;
 import shared.e;
+import java.util.Vector;
 
 public abstract class PrpMessage extends PrpTaggedObject
 {
@@ -204,31 +205,39 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation.
     public static class PlEventCallbackMsg extends uruobj
     {
-        PlMessage parent;
-        Flt u1;
-        short u2;
-        short u3;
-        short u4;
-        short u5;
+        public PlMessage parent;
+        public Flt eventTime; //was u1
+        public short event; //was u2
+        public short index; //was u3
+        public short repeats; //was u4
+        public short user; //was u5
         
         public PlEventCallbackMsg(context c) throws readexception
         {
             parent = new PlMessage(c);
-            u1 = new Flt(c);
-            u2 = c.readShort();
-            u3 = c.readShort();
-            u4 = c.readShort();
-            u5 = c.readShort();
+            eventTime = new Flt(c);
+            event = c.readShort();
+            index = c.readShort();
+            repeats = c.readShort();
+            user = c.readShort();
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
-            u1.compile(c);
-            c.writeShort(u2);
-            c.writeShort(u3);
-            c.writeShort(u4);
-            c.writeShort(u5);
+            eventTime.compile(c);
+            c.writeShort(event);
+            c.writeShort(index);
+            c.writeShort(repeats);
+            c.writeShort(user);
+        }
+        private PlEventCallbackMsg(){}
+        public static PlEventCallbackMsg createWithSenderAndReceiver(Uruobjectref sender, Uruobjectref receiver)
+        {
+            PlEventCallbackMsg r = new PlEventCallbackMsg();
+            r.eventTime = Flt.createFromJavaFloat(0);
+            r.parent = PlMessage.createWithSenderAndReceiver(sender,receiver);
+            return r;
         }
     }
 
@@ -257,11 +266,11 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation.
     public static class PlAnimCmdMsg extends uruobj
     {
-        PlMessageWithCallbacks parent;
-        HsBitVector u1;
-        Flt[] u2;
-        Urustring u3;
-        Urustring u4;
+        public PlMessageWithCallbacks parent;
+        public HsBitVector u1;
+        public Flt[] u2;
+        public Urustring u3;
+        public Urustring u4;
         
         public PlAnimCmdMsg(context c) throws readexception
         {
@@ -880,22 +889,25 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlMessageWithCallbacks extends uruobj
     {
-        PlMessage parent;
-        int count;
-        PrpTaggedObject[] callbacks;
+        public PlMessage parent;
+        public int count;
+        public Vector<PrpTaggedObject> callbacks;
         
         public PlMessageWithCallbacks(context c) throws readexception
         {
             parent = new PlMessage(c);
             count = c.readInt();
-            callbacks = c.readArray(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
+            //callbacks = c.readArray(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
+            callbacks = c.readVector(PrpTaggedObject.class, count);
         }
         
         public void compile(Bytedeque c)
         {
             parent.compile(c);
-            c.writeInt(count);
-            c.writeArray2(callbacks);
+            //c.writeInt(count);
+            //c.writeArray2(callbacks);
+            c.writeInt(callbacks.size());
+            c.writeVector2(callbacks);
         }
     }
     public static class PlSoundMsg extends uruobj
@@ -956,9 +968,9 @@ public abstract class PrpMessage extends PrpTaggedObject
         public Uruobjectref[] refs;
         int u1;
         int u2;
-        int flags;
+        public int flags;
         
-        int xu1;
+        //int xu1;
         
         public PlMessage(context c) throws readexception
         {
@@ -994,6 +1006,14 @@ public abstract class PrpMessage extends PrpTaggedObject
             result.refcount = 1;
             result.refs = new Uruobjectref[]{ ref };
             return result;
+        }
+        public static PlMessage createWithSenderAndReceiver(Uruobjectref sender, Uruobjectref receiver)
+        {
+            PlMessage r = new PlMessage();
+            r.parentobj = sender;
+            r.refcount = 1;
+            r.refs = new Uruobjectref[]{ receiver };
+            return r;
         }
         public void compile(Bytedeque c)
         {

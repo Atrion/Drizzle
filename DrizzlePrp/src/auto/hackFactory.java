@@ -30,7 +30,8 @@ public class hackFactory
         PlDynamicTextMap map = PlDynamicTextMap.createBlank(visWidth,visHeight);//1024,1024);
         Uruobjectref mapref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, name, prp.header.pageid, prp.header.pagetype);
         PrpRootObject maproot = PrpRootObject.createFromDescAndObject(mapref.xdesc, map);
-        prp.extraobjects.add(maproot);
+        //prp.extraobjects.add(maproot);
+        prp.addObject(maproot);
         
         return maproot;
     }
@@ -46,7 +47,8 @@ public class hackFactory
         so.regioninfo = ciref;
         sceneobject.hasChanged = true;
         
-        prp.extraobjects.add(ciroot);
+        //prp.extraobjects.add(ciroot);
+        prp.addObject(ciroot);
     }
     
     public static void createBuiltInPrpFile(String agename, String outfolder)

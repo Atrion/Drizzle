@@ -86,7 +86,7 @@ public class x0000Scenenode extends uruobj
         result.objectrefs2 = new Vector<Uruobjectref>();
         return result;
     }
-    public void regenerateAllSceneobjectsFromPrpRootObjects(PrpRootObject[] objs)
+    public void regenerateAllSceneobjectsFromPrpRootObjects(Vector<PrpRootObject> objs)
     {
         this.count1 = 0;
         this.objectrefs1.clear();
@@ -115,7 +115,7 @@ public class x0000Scenenode extends uruobj
     {
         m.msg("compile not implemented");
     }
-    public void compileSpecial(Bytedeque deque, PrpRootObject[] allobjects, prputils.Compiler.Decider decider)
+    public void compileSpecial(Bytedeque deque, Vector<PrpRootObject> allobjects, prputils.Compiler.Decider decider)
     {
         //this will get all the sceneobjects, except those tagged as deleted.
         this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects);

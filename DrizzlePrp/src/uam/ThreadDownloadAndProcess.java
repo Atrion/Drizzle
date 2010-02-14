@@ -50,7 +50,9 @@ public class ThreadDownloadAndProcess extends Thread
         thread.start();*/
         final String server2 = server;
         final String potsfolder2 = potsfolder;
-        getQueue().AddItem(new batching.QueueItem() {
+        batching.Queue queue = getQueue();
+        final shared.Monitor trigger = new shared.Monitor();
+        queue.AddItem(new batching.QueueItem() {
             boolean success;
 
             @Override
@@ -103,11 +105,24 @@ public class ThreadDownloadAndProcess extends Thread
                     //int dummy=0;
                     e.printStackTrace();
                 }finally{
-                modal.hideInvisibleModal();
+                    modal.hideInvisibleModal();
+                    trigger.notifyCorrectly();
                 }
             }
         });
-
+        //java.util.concurrent.atomic.AtomicBoolean a;
+        //java.util.concurrent.locks.ReentrantLock b;
+        //java.util.concurrent.
+        //synchronized(trigger){
+            //try{
+            //    trigger.wait();
+            //}catch(Exception e){
+            //    int i = 0;
+            //}
+        //}
+        //queue.waitFor();
+        trigger.waitCorrectly();
+        //m.msg("doneskis!");
     }
     public static void downloadAge(String age,String ver,String mir,String potsfolder,String whirlpool)
     {
@@ -130,6 +145,7 @@ public class ThreadDownloadAndProcess extends Thread
         final String mir2 = mir;
         final String whirlpool2 = whirlpool;
         final boolean doDownload2 = doDownload;
+        final shared.Monitor trigger = new shared.Monitor();
         getQueue().AddItem(new batching.QueueItem() {
 
             boolean success;
@@ -204,9 +220,11 @@ public class ThreadDownloadAndProcess extends Thread
 
                 }finally{
                 modal.hideInvisibleModal();
+                    trigger.notifyCorrectly();
                 }
             }
         });
+        trigger.waitCorrectly();
     }
     public static void extractAge(String age,String ver,String potsfolder,String whirlpool)
     {

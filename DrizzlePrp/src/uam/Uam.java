@@ -123,6 +123,7 @@ public class Uam
     {
         public InstallStatus installationStatus = InstallStatus.notInstalled;
         public HashMap<String, InstallStatus> versions = new HashMap();
+        public String installedVersion = null;
         
         /*public AgeInstallInfo(InstallStatus installationStatus)
         {
@@ -143,6 +144,165 @@ public class Uam
         {
             return !(this==notInstalled || this==noVersionsExist);
         }
+    }
+
+    /*public static void DeleteArchives()
+    {
+        if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+
+        if(shared.GuiUtils.getOKorCancelFromUser(m.trans("Are you sure you want to delete the archives?"),m.trans("Delete the archives?")))
+        {
+            for(String filename: GetAllAgeArchives())
+            {
+                FileUtils.ZeroFile(filename);
+            }
+        }
+    }*/
+    public static void ClearSumFiles()
+    {
+        if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+
+        m.status("Clearing all .sum files...");
+        byte[] sumdata = uru.moulprp.sumfile.createEmptySumfile().getByteArray();
+        for(File sumfile: FileUtils.FindAllFiles(Uam.getPotsFolder()+"/dat/", ".sum", false))
+        {
+            FileUtils.WriteFile(sumfile, sumdata);
+        }
+        m.status("Done!");
+    }
+    public static void TryToFindInstalledVersionsOfAllAges()
+    {
+        for(UamConfigNew.UamConfigData.Age age: Uam.ageList.getAllAges())
+        {
+            String ver = TryToFindInstalledVersionOfAge(age);
+        }
+    }
+    public static String TryToFindInstalledVersionOfAge(String agename)
+    {
+        return TryToFindInstalledVersionOfAge(Uam.ageList.getAge(agename));
+    }
+    private static String TryToFindInstalledVersionOfAge(UamConfigNew.UamConfigData.Age age)
+    {
+        AgeInstallInfo info = Uam.installInfo.getAge(age.filename);
+        if(info.installedVersion!=null) return info.installedVersion;
+
+        for(UamConfigNew.UamConfigData.Age.Version ver: age.versions)
+        {
+            String archivefilename = Uam.getPotsFolder()+Uam.ageArchivesFolder+age.filename+Uam.versionSep+ver.name+".7z";
+            if(FileUtils.Exists(archivefilename))
+            {
+                boolean isinstalled = shared.sevenzip.check(archivefilename,Uam.getPotsFolder(), new shared.sevenzip.FileIncluder() {
+                    public boolean includeFile(String filename) {
+                        if(filename.endsWith(".sum")) return false;
+                        return true;
+                    }
+                });
+                if(isinstalled)
+                {
+                    info.installedVersion = ver.name;
+                    return info.installedVersion;
+                }
+            }
+
+            //m.warn("Unable to find version of installed Age: ",age.filename);
+            //return null; //problem!
+        }
+        return null; //no problem.
+    }
+
+    public static void DeleteOldArchives()
+    {
+        if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+
+        if(Uam.ageList==null)
+        {
+            m.err("You need to load the Age List in the UAM tab first.");
+            return;
+        }
+
+        if(!shared.GuiUtils.getOKorCancelFromUser(m.trans("Are you sure you want to delete the old archives?"),m.trans("Delete the archives?")))
+        {
+            return;
+        }
+
+
+        m.status("Detecting which versions are installed...");
+        TryToFindInstalledVersionsOfAllAges();
+
+
+        for(UamConfigNew.UamConfigData.Age age: Uam.ageList.getAllAges())
+        {
+            AgeInstallInfo info = Uam.installInfo.getAge(age.filename);
+            if(info.installationStatus.isInstalled())
+            {
+                if(info.installedVersion!=null)
+                {
+                    //delete all other archives
+                    for(UamConfigNew.UamConfigData.Age.Version ver: age.versions)
+                    {
+                        if(!ver.name.equals(info.installedVersion))
+                        {
+                            DeleteArchive(age.filename,ver.name);
+                        }
+                    }
+                }
+                else
+                {
+                    //unknown, don't do anything!
+                    m.warn("Unable to detect installed version, so keeping archives for Age: ",age.filename);
+                }
+            }
+            else
+            {
+                //delete all archives.
+                for(UamConfigNew.UamConfigData.Age.Version ver: age.versions)
+                {
+                    DeleteArchive(age.filename,ver.name);
+                }
+            }
+        }
+        m.status("Done!");
+        //gui.UamGui.RefreshInfo(Uam.getPotsFolder());
+
+        gui.UamGui.RefreshInfo();
+
+    }
+    private static void DeleteArchive(String agename, String version)
+    {
+        String f = Uam.getPotsFolder()+Uam.ageArchivesFolder+agename+Uam.versionSep+version+".7z";
+        if(FileUtils.Exists(f))
+        {
+            FileUtils.DeleteFile2(f);
+        }
+    }
+    /*public static void DeleteArchives()
+    {
+        if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+
+        if(shared.GuiUtils.getOKorCancelFromUser(m.trans("Are you sure you want to delete the archives?"),m.trans("Delete the archives?")))
+        {
+            for(String filename: GetAllAgeArchives())
+            {
+                FileUtils.ZeroFile(filename);
+            }
+        }
+    }*/
+    public static Vector<String> GetAllAgeArchives()
+    {
+        if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return null;
+
+        Vector<String> r = new Vector();
+
+        File archivefolder = new File(Uam.getPotsFolder()+Uam.ageArchivesFolder);
+        for(File file: archivefolder.listFiles())
+        {
+            if(file.isFile() && file.getName().endsWith(".7z"))
+            {
+                r.add(file.getAbsolutePath());
+            }
+        }
+
+        return r;
     }
 
     public static String GetRandomAge()
@@ -177,7 +337,7 @@ public class Uam
         for(File f: pakfiles)
         {
             //m.msg(f.getName());
-            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f, 3, true);
+            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f.getAbsolutePath(), auto.AllGames.getPots().g, true);
             for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
             {
                 String pyname = ind.objectname.toString();
@@ -309,6 +469,7 @@ public class Uam
     public static void launchUru()
     {
         shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");
+
         /*String potsfolder = getPotsFolder()+"/";
         if(!automation.detectinstallation.isFolderPots(potsfolder)) return;
         String[] command = new String[]{

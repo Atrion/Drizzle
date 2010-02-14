@@ -25,28 +25,32 @@ import shared.e;
 import shared.m;
 import shared.b;
 import shared.readexception;
-//import java.util.Vector;
+import java.util.Vector;
 
 //I reverse-engineered this myself, via decompilation.
 public class PlSoftVolumeUnion extends uruobj
 {
     PlSoftVolume parent;
     int count;
-    Uruobjectref[] refs;
+    //public Uruobjectref[] refs;
+    public Vector<Uruobjectref> refs;
     
     public PlSoftVolumeUnion(context c) throws readexception
     {
         parent = new PlSoftVolume(c);
         count = c.readInt();
-        refs = c.readArray(Uruobjectref.class, count);
+        //refs = c.readArray(Uruobjectref.class, count);
+        refs = c.readVector(Uruobjectref.class, count);
         
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeInt(count);
-        c.writeArray2(refs);
+        //c.writeInt(count);
+        //c.writeArray2(refs);
+        c.writeInt(refs.size());
+        c.writeVector2(refs);
     }
     
 }

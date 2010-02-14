@@ -19,7 +19,7 @@ public class GuiModal extends javax.swing.JDialog {
     
     /** Creates new form GuiModal3 */
     public GuiModal(java.awt.Frame parent, boolean modal, ThreadDownloader td) {
-        super(parent, modal);
+        super(/*parent*/gui.Main.guiform, /*modal*/false);
         initComponents();
         shared.translation.registerGUIForm(this);
         this.td = td;

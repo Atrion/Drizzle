@@ -89,6 +89,11 @@ public strictfp class Transmatrix extends uruobj
         RealMatrix rm = new RealMatrixImpl(doublemat);
         return createFromMatrix(rm);
     }
+    public void setelement(int row, int col, float val)
+    {
+        int newval = Flt.FloatToIntCode(val);
+        xmatrix[row*4+col] = newval;
+    }
     public static Transmatrix createFromMatrix44(Matrix44 matrix)
     {
         Transmatrix r = new Transmatrix();
@@ -355,5 +360,11 @@ public strictfp class Transmatrix extends uruobj
                 this.xmatrix[i] = t.xmatrix[i];
             }
         }
+    }
+    public Transmatrix inverse()
+    {
+        RealMatrix inv = this.convertToMatrix().inverse();
+        Transmatrix invm = Transmatrix.createFromMatrix(inv);
+        return invm;
     }
 }

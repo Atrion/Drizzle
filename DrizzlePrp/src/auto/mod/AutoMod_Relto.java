@@ -96,8 +96,10 @@ public class AutoMod_Relto
 
                     ss.parent.parent.materialindex = ds.addMaterial(matref);
 
-                    prp.extraobjects.add(PrpRootObject.createFromDescAndObject(matref.xdesc, matclone));
-                    prp.extraobjects.add(PrpRootObject.createFromDescAndObject(layerref.xdesc, layerclone));
+                    //prp.extraobjects.add(PrpRootObject.createFromDescAndObject(matref.xdesc, matclone));
+                    //prp.extraobjects.add(PrpRootObject.createFromDescAndObject(layerref.xdesc, layerclone));
+                    prp.addObject(PrpRootObject.createFromDescAndObject(matref.xdesc, matclone));
+                    prp.addObject(PrpRootObject.createFromDescAndObject(layerref.xdesc, layerclone));
 
                     //create pythonfilemod to get a python hook to these objects.
                     AutoMod_Shared.CreatePythonfilemodReference(prp,"dustReltoDynCovers",map.getref(),8,"dustBook"+book);

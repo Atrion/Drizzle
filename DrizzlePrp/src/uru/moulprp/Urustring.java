@@ -52,7 +52,7 @@ public class Urustring extends uruobj implements java.io.Serializable
     public Urustring(IBytestream c, int readversion)
     {
         //Urustring res = new Urustring();
-        if(readversion==6 || readversion==3)
+        if(readversion==6 || readversion==3 || readversion==8)
         {
             //Bytestream data = c.in;
             short lengthbytes = c.readShort();

@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Future;
+import shared.m;
 
 public class Queue
 {
@@ -29,6 +30,14 @@ public class Queue
         return result;
     }
 
+    /*public void waitFor()
+    {
+        try{
+            a.awaitTermination(1000, TimeUnit.DAYS);
+        }catch(Exception e){
+            m.err("Exception while waiting for thread.");
+        }
+    }*/
     /*public void RunNextItem()
     {
         //queue

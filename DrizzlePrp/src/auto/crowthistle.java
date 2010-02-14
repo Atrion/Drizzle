@@ -41,78 +41,71 @@ public class crowthistle
                 }
             }
         };
-        r.addAgeFiles("MarshScene", new String[]{"MarshScene.age",});
-        r.addAgeFiles("MountainScene", new String[]{"MountainScene.age",});
+        r.fnimodifier = new conversion.FniModifier() {
+            public void ModifyFni(Info info, FileInfo file, textfile tf) {
+                if(file.agename.equals("MarshScene"))
+                {
+                    for(textfile.textline line: tf.getLines())
+                    {
+                        String linestr = line.getString();
+                        if(linestr.startsWith("Graphics.Renderer.Gamma2")) //otherwise it disables gamma in the engine.
+                        {
+                            line.setString("#"+linestr);
+                        }
+                    }
+                }
+            }
+        };
+        r.addAgeFiles("MarshScene", new String[]{
+            "MarshScene.age",
+            "MarshScene.fni",
+            "MarshScene.sum",
+            "MarshScene_Exterior.prp",
+            "MarshScene_Extras.prp",
+            "MarshScene_MWInterior.prp",
+            "MarshScene_Textures.prp",
+            "MarshScene_TourCamera.prp",
+            "MarshScene_WaterHorses.prp",
+        });
+        r.addAgeFiles("MountainScene", new String[]{
+            "MountainScene.age",
+            "MountainScene.fni",
+            "MountainScene.sum",
+            "MountainScene_Courtyard.prp",
+            "MountainScene_EllenHallInterior.prp",
+            "MountainScene_Exterior.prp",
+            "MountainScene_Extras.prp",
+            "MountainScene_Textures.prp",
+            "MountainScene_TourCamera.prp",
+            "MountainScene_tw_g1_g2.prp",
+            "MountainScene_tw_g1_g3.prp",
+            "MountainScene_tw_g1_hm.prp",
+            "MountainScene_tw_g2_g1.prp",
+            "MountainScene_tw_g2_g3.prp",
+            "MountainScene_tw_g2_hm.prp",
+            "MountainScene_tw_g3_g1.prp",
+            "MountainScene_tw_g3_g2.prp",
+            "MountainScene_tw_g3_hm.prp",
+            "MountainScene_tw_hm_g1.prp",
+            "MountainScene_tw_hm_g2.prp",
+            "MountainScene_tw_hm_g3.prp",
+            "MountainScene_tw_shape.prp",
+            "MountainScene_tw_w1.prp",
+            "MountainScene_tw_w2.prp",
+            "MountainScene_tw_w3.prp",
+            "MountainScene_Vista.prp",
+        });
+        r.addSoundFiles(new String[]{
+            "mntnAir_loop.ogg","mntnAmbientMx.ogg","mntnBird01a.ogg","mntnBird01b.ogg","mntnBird02a.ogg","mntnBird02b.ogg","mntnBird02c.ogg","mntnBird03a.ogg","mntnBird04a.ogg","mntnBird04b.ogg","mntnBird05a.ogg","mntnBird05b.ogg","mntnBird06a.ogg","mntnBird06b.ogg","mntnBird07a.ogg","mntnBird07b.ogg","mntnFountain_loop.ogg","mntnWaterfall_loop.ogg","mntnWind_Loop01.ogg",
+            "mrshAmb01.ogg","mrshAmb02.ogg","mrshAmb03.ogg","mrshAmb04.ogg","mrshAmbientMx.ogg","mrshBirdAmb.ogg","mrshRandomCricket01.ogg","mrshRandomCricket02.ogg","mrshRandomCricket03.ogg","mrshRandomCritter01.ogg","mrshRandomCritter02.ogg","mrshRandomCritter03.ogg","mrshRandomCritter04a.ogg","mrshRandomCritter04b.ogg","mrshRandomCritter04c.ogg","mrshRandomCritter04d.ogg","mrshRandomCritter04e.ogg","mrshRandomCritter04f.ogg","mrshRandomCritter04g.ogg","mrshRandomCritter05.ogg","mrshRandomCritter06a.ogg","mrshRandomCritter06b.ogg","mrshRandomCritter06c.ogg","mrshRandomCritter06d.ogg","mrshRandomCritter07a.ogg","mrshRandomCritter07b.ogg","mrshRandomCritter07c.ogg","mrshRandomCritter07d.ogg","mrshRandomCritter08.ogg","mrshRandomCritter09a.ogg","mrshRandomCritter09b.ogg","mrshRandomCritter10.ogg","mrshRandomCritter11a.ogg","mrshRandomCritter11b.ogg","mrshRandomCritter12a.ogg","mrshRandomCritter12b.ogg","mrshRandomCritter13.ogg","mrshRandomCritter14.ogg","mrshRandomCritter15.ogg","mrshRandomCritter16.ogg","mrshRandomCritter17.ogg","mrshRandomCritter18.ogg","mrshRandomFrogs01.ogg","mrshRandomFrogs02.ogg","mrshRandomFrogs03.ogg","mrshRandomFrogs04.ogg","mrshRandomFrogs05.ogg","mrshRandomFrogs06.ogg","mrshRandomFrogs07.ogg","mrshRandomFrogs08.ogg",
+        });
         r.MusicFiles = new String[]{
             "mntnAmbientMx.ogg",
             "mrshAmbientMx.ogg",
         };
-        return r;
-    }
-    /*public static void CopyMusic(String crowfolder, String potsfolder)
-    {
-        m.status("Checking the folders you gave...");
-        if(!detectinstallation.isFolderCrowthistle(crowfolder)) return;
-        if(!detectinstallation.isFolderPots(potsfolder)) return;
+        r.decider = new uru.moulprp.prputils.Compiler.Decider() {
 
-        for(String filename: auto.fileLists.crowMusic)
-        {
-            String infile = crowfolder + "/sfx/" + filename;
-            String outfile = potsfolder + "/MyMusic/" + filename;
-
-            FileUtils.CopyFile(infile, outfile, true, true);
-        }
-
-        m.status("Done copying Crowthistle music!");
-    }*/
-
-    public static void convertCrowthistle(String crowfolder, String outfolder)
-    {
-        m.state.push();
-        m.state.curstate.showConsoleMessages = true;
-        m.state.curstate.showErrorMessages = true;
-        m.state.curstate.showNormalMessages = false;
-        m.state.curstate.showWarningMessages = false;
-        m.state.curstate.showStatusMessages = true;
-
-        
-        
-        //shared.State.AllStates.push();
-        //shared.State.AllStates.revertToDefaults();
-        //shared.State.AllStates.setState("removeDynamicCamMap", true);
-        //shared.State.AllStates.setState("makePlLayersWireframe", false);
-        //shared.State.AllStates.setState("changeVerySpecialPython", true);
-        //shared.State.AllStates.setState("translateSmartseeks", false);
-        //shared.State.AllStates.setState("removeLadders", true);
-        //shared.State.AllStates.setState("automateMystV", true);
-        //shared.State.AllStates.setState("includeAuthoredMaterial", shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial")); //this line doesn't really do anything, just there to remind you.
-        //shared.State.AllStates.setState("includeAuthoredMaterial", false);
-        
-        //verify folders
-        m.status("Checking the folders you gave...");
-        if(!auto.AllGames.getCrowthistle().isFolderX(crowfolder))return;
-        if(!auto.AllGames.getPots().isFolderX(outfolder)) return;
-        
-        m.status("Starting conversion...");
-        //Vector<String> files = fileLists.crowthistleSimplicityList();
-        convertCrowthistleToPots(crowfolder, outfolder);
-        
-        
-        
-        //shared.State.AllStates.pop();
-        m.state.pop();
-        m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
-        //m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
-        m.status("Conversion completed!");
-        
-    }
-
-    public static void convertCrowthistleToPots(String crowthistlefolder, String outfolder)
-    {
-        class crowDecider implements uru.moulprp.prputils.Compiler.Decider
-        {
-            public boolean isObjectToBeIncluded(Uruobjectdesc desc)
-            {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
                 Typeid type = desc.objecttype;
                 String name = desc.objectname.toString();
                 if(desc.objecttype==Typeid.plSceneNode) return true;
@@ -188,8 +181,92 @@ public class crowthistle
                 m.msg("Skipping type(2): ",type.toString());
                 return false;
             }
+        };
+        r.prpmodifier = new conversion.PostConversionModifier() {
 
+            public void ModifyPrp(Info info, FileInfo file, prpfile prp) {
+                auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveDynamicCampMap(prp);
+
+                //moved to conversion:
+                /*String newagename = agenames.get(agename);
+                if(newagename!=null)
+                {
+                    auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_ChangeVerySpecialPython(prp, agename, newagename);
+                }*/
+
+                //shouldn't be needed because Crowthistle has no ladders:
+                auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveLadders(prp);
+            }
+        };
+        return r;
+    }
+    /*public static void CopyMusic(String crowfolder, String potsfolder)
+    {
+        m.status("Checking the folders you gave...");
+        if(!detectinstallation.isFolderCrowthistle(crowfolder)) return;
+        if(!detectinstallation.isFolderPots(potsfolder)) return;
+
+        for(String filename: auto.fileLists.crowMusic)
+        {
+            String infile = crowfolder + "/sfx/" + filename;
+            String outfile = potsfolder + "/MyMusic/" + filename;
+
+            FileUtils.CopyFile(infile, outfile, true, true);
         }
+
+        m.status("Done copying Crowthistle music!");
+    }*/
+
+    /*public static void convertCrowthistle(String crowfolder, String outfolder)
+    {
+        m.state.push();
+        m.state.curstate.showConsoleMessages = true;
+        m.state.curstate.showErrorMessages = true;
+        m.state.curstate.showNormalMessages = false;
+        m.state.curstate.showWarningMessages = false;
+        m.state.curstate.showStatusMessages = true;
+
+        
+        
+        //shared.State.AllStates.push();
+        //shared.State.AllStates.revertToDefaults();
+        //shared.State.AllStates.setState("removeDynamicCamMap", true);
+        //shared.State.AllStates.setState("makePlLayersWireframe", false);
+        //shared.State.AllStates.setState("changeVerySpecialPython", true);
+        //shared.State.AllStates.setState("translateSmartseeks", false);
+        //shared.State.AllStates.setState("removeLadders", true);
+        //shared.State.AllStates.setState("automateMystV", true);
+        //shared.State.AllStates.setState("includeAuthoredMaterial", shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial")); //this line doesn't really do anything, just there to remind you.
+        //shared.State.AllStates.setState("includeAuthoredMaterial", false);
+        
+        //verify folders
+        m.status("Checking the folders you gave...");
+        if(!auto.AllGames.getCrowthistle().isFolderX(crowfolder))return;
+        if(!auto.AllGames.getPots().isFolderX(outfolder)) return;
+        
+        m.status("Starting conversion...");
+        //Vector<String> files = fileLists.crowthistleSimplicityList();
+        convertCrowthistleToPots(crowfolder, outfolder);
+        
+        
+        
+        //shared.State.AllStates.pop();
+        m.state.pop();
+        m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
+        //m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
+        m.status("Conversion completed!");
+        
+    }*/
+
+    //public static void convertCrowthistleToPots(String crowthistlefolder, String outfolder)
+    //{
+        /*class crowDecider implements uru.moulprp.prputils.Compiler.Decider
+        {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc)
+            {
+            }
+
+        }*/
 
         //HashMap<String, Integer> prefices = new HashMap<String, Integer>();
         //prefices.put("MarshScene", 96);
@@ -197,10 +274,10 @@ public class crowthistle
 
         //HashMap<String, String> agenames = new HashMap<String, String>();
 
-        String[] fnifiles = {
+        /*String[] fnifiles = {
             "MarshScene.fni",
             "MountainScene.fni",
-        };
+        };*/
         //String[] agefiles = {
         //    "MarshScene.age",
         //    "MountainScene.age",
@@ -209,7 +286,7 @@ public class crowthistle
         //    "MarshScene.sum",
         //    "MountainScene.sum",
         //};
-        String[] prpfiles = {
+        /*String[] prpfiles = {
             "MarshScene_Exterior.prp",
             "MarshScene_Extras.prp",
             "MarshScene_MWInterior.prp",
@@ -239,19 +316,19 @@ public class crowthistle
             "MountainScene_tw_w2.prp",
             "MountainScene_tw_w3.prp",
             "MountainScene_Vista.prp",
-        };
+        };*/
 
-        Vector<String> files = new Vector();
-        files.add("MarshScene.(others)");
+        //Vector<String> files = new Vector();
+        //files.add("MarshScene.(others)");
 
-        cmap<String,cmap<String,Integer>> authored = new cmap();
-        authored.put("MarshScene","FootRgns",93);
+        //cmap<String,cmap<String,Integer>> authored = new cmap();
+        //authored.put("MarshScene","FootRgns",93);
 
         //create folders...
-        FileUtils.CreateFolder(outfolder+"/dat/");
+        //FileUtils.CreateFolder(outfolder+"/dat/");
 
         //convert .fni files...
-        for(String filename: fnifiles)
+        /*for(String filename: fnifiles)
         {
             String infile = crowthistlefolder + "/dat/" + filename;
             String outfile = outfolder + "/dat/" + filename;
@@ -260,10 +337,10 @@ public class crowthistle
             Bytes decryptedData = UruCrypt.DecryptEoa(encryptedData);
             Bytes wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
-        }
+        }*/
 
         //convert .age files...
-        AllGames.getCrowthistle().ConvertGame(crowthistlefolder, outfolder);
+        //AllGames.getCrowthistle().ConvertGame(crowthistlefolder, outfolder);
         /*for(String filename: agefiles)
         {
             String infile = crowthistlefolder + "/dat/" + filename;
@@ -301,17 +378,17 @@ public class crowthistle
         }*/
 
         //Handle .ogg files...
-        Vector<String> oggfiles = auto.fileLists.crowSfxList();
+        /*Vector<String> oggfiles = auto.fileLists.crowSfxList();
         for(String filename: oggfiles)
         {
             String infile = crowthistlefolder + "/sfx/" + filename;
             String outfile = outfolder + "/sfx/" + filename;
 
             FileUtils.CopyFile(infile, outfile, true, false);
-        }
+        }*/
 
         //convert .prp files...
-        for(String filename: prpfiles)
+        /*for(String filename: prpfiles)
         {
             //Runtime.getRuntime().gc();
 
@@ -345,13 +422,13 @@ public class crowthistle
             prp.saveAsBytes(new crowDecider()).writeAllBytesToFile(outfile);
 
             c.close();
-        }
+        }*/
 
         //Handle .(others) files...
-        Vector<String> otherfiles = common.filterFilenamesByExtension(files, ".(others)");
-        for(String filename: otherfiles)
-        {
-            String agename = common.getAgenameFromFilename(filename);
+        //Vector<String> otherfiles = common.filterFilenamesByExtension(files, ".(others)");
+        //for(String filename: otherfiles)
+        //{
+        //    String agename = common.getAgenameFromFilename(filename);
 
             /*if(shared.State.AllStates.getStateAsBoolean("includeAuthoredMaterial") && authored.get(agename) != null)
             {
@@ -367,20 +444,20 @@ public class crowthistle
                     bytes.saveAsFile(outfile);
                 }
             }*/
-        }
+        //}
 
         //create .sum files...
         //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MarshScene");
-        Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
-        FileUtils.WriteFile(outfolder+"/dat/MarshScene.sum", sum1);
+        //Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
+        //FileUtils.WriteFile(outfolder+"/dat/MarshScene.sum", sum1);
         //Bytes sum2 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", "MountainScene");
-        Bytes sum2 = uru.moulprp.sumfile.createEmptySumfile();
-        FileUtils.WriteFile(outfolder+"/dat/MountainScene.sum", sum2);
+        //Bytes sum2 = uru.moulprp.sumfile.createEmptySumfile();
+        //FileUtils.WriteFile(outfolder+"/dat/MountainScene.sum", sum2);
 
 
-        m.msg("Done Crowthistle work!");
-    }
-    public static void crowProcessPrp(prpfile prp, String agename, HashMap<String, String> agenames,String outfolder, String infolder)
+        //m.msg("Done Crowthistle work!");
+    //}
+    /*public static void crowProcessPrp(prpfile prp, String agename, HashMap<String, String> agenames,String outfolder, String infolder)
     {
         auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveDynamicCampMap(prp);
 
@@ -393,5 +470,5 @@ public class crowthistle
         //shouldn't be needed because Crowthistle has no ladders:
         auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveLadders(prp);
         
-    }
+    }*/
 }

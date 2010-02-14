@@ -31,9 +31,9 @@ public class PlRegionBase extends uruobj
 {
     //Objheader xheader;
     
-    PlSynchedObject parent;
-    Uruobjectref ref;
-    HsBitVector u1;
+    public PlSynchedObject parent;
+    public Uruobjectref ref;
+    public HsBitVector u1;
     
     public PlRegionBase(context c) throws readexception
     {

@@ -19,7 +19,7 @@ public class PrpDiff
         prpfile prp1 = prpfile.createFromFile(sourceprp, true);
         prpfile prp2 = prpfile.createFromFile(destprp, true);
 
-        for(PrpRootObject obj1: prp1.objects)
+        for(PrpRootObject obj1: prp1.objects2)
         {
             PrpRootObject obj2 = prp2.findObjectWithDesc(obj1.header.desc);
             if(obj2==null)
@@ -50,7 +50,7 @@ public class PrpDiff
                 }
             }
         }
-        for(PrpRootObject obj2: prp2.objects)
+        for(PrpRootObject obj2: prp2.objects2)
         {
             PrpRootObject obj1 = prp1.findObjectWithDesc(obj2.header.desc);
             if(obj1==null)

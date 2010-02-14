@@ -16,6 +16,7 @@ public class pots
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "PathOfTheShell/CompleteChronicles";
         r.DetectionFile = "UruExplorer.exe";
+        r.readversion = 3;
         r.MusicFiles = new String[]{
             //AtrusIntro.bik has some music.
             "ahnyCathedralMusic.ogg",
@@ -59,6 +60,31 @@ public class pots
             "clftZandiRadio_Loop.ogg",
             //"tmnaCreditsMusic.ogg", //In ABM, but expansion packs delete it.  Full Peter Gabriel song.
         };
+
+        //It would not hurt to have these in moul conversion too, except for a slowdown.  Perhaps I should do so?
+        r.addInplacemods(
+            "/dat/city_District_palace.prp",
+            "/dat/city_District_courtyard.prp",
+            "/dat/city_District_canyon.prp",
+            "/dat/city_District_cavetjunction.prp",
+            "/dat/city_District_ferry.prp",
+            "/dat/city_District_greatstair.prp",
+            "/dat/city_District_KadishGallery.prp",
+            "/dat/city_District_KahloPub.prp",
+            "/dat/city_District_library.prp"
+        );
+        //r.addInplacemod("city", "/dat/city_District_palace.prp", "RemoveRelevanceRegions", "CityBalconyMarkerFix", "FixKadishDoors");
+        //r.addInplacemod("city", "/dat/city_District_courtyard.prp", "RemoveRelevanceRegions", "CityMuseumDoorFix", "FixKadishDoors", "MakeTeledahnIntoKirelBook");
+        //r.addInplacemod("city", "/dat/city_District_canyon.prp", "RemoveRelevanceRegions", "FixKadishDoors");
+        //r.addInplacemod("city", "/dat/city_District_cavetjunction.prp", "RemoveRelevanceRegions");
+        //r.addInplacemod("city", "/dat/city_District_ferry.prp", "RemoveRelevanceRegions"); //ferry has RemoveRelevanceRegions and the soccer ball added
+        //r.addInplacemod("city", "/dat/city_District_greatstair.prp", "RemoveRelevanceRegions");
+        //r.addInplacemod("city", "/dat/city_District_KadishGallery.prp", "RemoveRelevanceRegions", "FixKadishDoors"); //also add door fix?
+        //r.addInplacemod("city", "/dat/city_District_KahloPub.prp", "RemoveRelevanceRegions");
+        //r.addInplacemod("city", "/dat/city_District_library.prp", "RemoveRelevanceRegions", "FixKadishDoors");
+
+
+
         return r;
     }
 
@@ -125,7 +151,7 @@ public class pots
         for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false,false))
         {
             m.status("Pak file:",f.getName());
-            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f,3,false);
+            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f,auto.AllGames.getPots().g,false);
             for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
             {
                 m.status("  Python file:",ind.objectname.toString());

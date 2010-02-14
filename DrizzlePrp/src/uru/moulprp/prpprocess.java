@@ -55,7 +55,8 @@ public class prpprocess
         prpfile result = new prpfile();
         result.header = header;
         result.objectindex = objectindex;
-        result.objects = uru.generics.convertVectorToArray(rootobjects,PrpRootObject.class);
+        //result.objects = uru.generics.convertVectorToArray(rootobjects,PrpRootObject.class);
+        result.objects2 = rootobjects;
         return result;
     }
     

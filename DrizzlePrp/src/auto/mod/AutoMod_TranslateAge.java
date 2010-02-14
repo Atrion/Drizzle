@@ -36,7 +36,7 @@ public class AutoMod_TranslateAge
         PrpRootObject intide = prp.findObject("PoolSurfaceInnerTide", Typeid.plSceneObject);
         auto.hackFactory.createAndAddCoordinateInterface(prp, outtide);
         auto.hackFactory.createAndAddCoordinateInterface(prp, intide);
-        prp.mergeExtras();
+        //prp.mergeExtras();
 
         //translate the swimdetectregion, so it is below the spawnpoints but still above the swimsurfaces.
         //info: current swimdetectregion01 z:-148.52159(bottom) to -48.52159(top)

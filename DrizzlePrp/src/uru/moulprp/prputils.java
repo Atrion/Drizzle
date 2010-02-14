@@ -392,7 +392,8 @@ public class prputils
         }
         
         m.msg("Process All was successful!");
-        result.objects = uru.generics.convertVectorToArray(objects,PrpRootObject.class);
+        //result.objects = uru.generics.convertVectorToArray(objects,PrpRootObject.class);
+        result.objects2 = objects;
         return result;
         
     }
@@ -554,11 +555,11 @@ public class prputils
             //java.util.Iterator<rootobj> iter = prp.objects.iterator();
             boolean haveEncounteredSceneNode = false;
             //while(iter.hasNext())
-            int numobjs = prp.objects.length;
+            int numobjs = prp.objects2.size();
             for(int i=0;i<numobjs;i++)
             {
                 //rootobj curobj = iter.next();
-                PrpRootObject curobj = prp.objects[i];
+                PrpRootObject curobj = prp.objects2.get(i);
                 
                 //skip this object if it's tagged as deleted.
                 if(curobj.tagDeleted)
@@ -603,7 +604,7 @@ public class prputils
                         //curobj.castTo(x0000Scenenode.class).regenerateAllSceneobjectsFromPrpRootObjects(uncompiledObjects);
                         //curobj.castTo(x0000Scenenode.class).compile(deque);
                         //((x0000Scenenode)curobj.prpobject.object).compileSpecial(deque, decider); //uses the isNormalObjectToBeIncluded function.
-                        curobj.castTo(x0000Scenenode.class).compileSpecial(deque, prp.objects, decider);
+                        curobj.castTo(x0000Scenenode.class).compileSpecial(deque, prp.objects2, decider);
                     }
                     else
                     {
@@ -709,15 +710,15 @@ public class prputils
         //a bit of a hack, to replace LayerAnimations with other materials.
         public static void fixMaterial(prpfile prp)
         {
-            int numobjs = prp.objects.length;
+            int numobjs = prp.objects2.size();
             Uruobjectdesc stableMaterial = null; //the material we can use instead of LayerAnimations.
             Vector<Uruobjectref> badMaterials = new Vector<Uruobjectref>();
             
             for(int i=0;i<numobjs;i++)
             {
-                if(prp.objects[i].header.desc.objecttype==Typeid.plDrawableSpans)
+                if(prp.objects2.get(i).header.desc.objecttype==Typeid.plDrawableSpans)
                 {
-                    PlDrawableSpans curDrawableSpan = (PlDrawableSpans)prp.objects[i].prpobject.object;
+                    PlDrawableSpans curDrawableSpan = (PlDrawableSpans)prp.objects2.get(i).prpobject.object;
                     
                     int numMaterials = curDrawableSpan.materialsCount;
                     for(int j=0;j<numMaterials;j++) //for each material...
@@ -771,8 +772,9 @@ public class prputils
         
     }
     
-    
-    public static prpfile ProcessPotsPrp(context c)//(byte[] data)
+
+    //seems to no longer be used:
+    /*public static prpfile ProcessPotsPrp(context c)//(byte[] data)
     {
         //context c = context.createDefault(new Bytestream(data));
         //c.readversion = 3; //read as pots
@@ -942,10 +944,11 @@ public class prputils
         }
         
         m.msg("Process All was successful!");
-        result.objects = uru.generics.convertVectorToArray(objects,PrpRootObject.class);
+        //result.objects = uru.generics.convertVectorToArray(objects,PrpRootObject.class);
+        result.objects2 = objects;
         return result;
         
-    }
+    }*/
     public static void findAllObjectsOfType(String prpdir, Typeid type)
     {
         class callback implements uru.moulprp.allprpfiles.RootobjCallbackInterface
@@ -974,9 +977,9 @@ public class prputils
         
         context c = context.createFromBytestream(new Bytestream(data));
         prpfile prp = ProcessAllMoul(c,false,auto.mystAutomation.moulReadable);
-        for(int i=0;i<prp.objects.length;i++)
+        for(int i=0;i<prp.objects2.size();i++)
         {
-            PrpRootObject curobj = prp.objects[i];
+            PrpRootObject curobj = prp.objects2.get(i);
             if(curobj.header.desc.objecttype==Typeid.plDrawInterface)
             {
                 plDrawInterface di = (plDrawInterface)curobj.prpobject.object;
@@ -1033,10 +1036,10 @@ public class prputils
     {
         Vector<PrpRootObject> result = new Vector<PrpRootObject>();
         
-        int numobjs = prp.objects.length;
+        int numobjs = prp.objects2.size();
         for(int i=0;i<numobjs;i++)
         {
-            PrpRootObject curobj = prp.objects[i];
+            PrpRootObject curobj = prp.objects2.get(i);
             if(curobj!=null && curobj.header.desc.objecttype==type)
             {
                 result.add(curobj);
@@ -1053,10 +1056,10 @@ public class prputils
         Vector<PrpRootObject> result = new Vector<PrpRootObject>();
         String name2 = name.toLowerCase();
         
-        int numobjs = prp.objects.length;
+        int numobjs = prp.objects2.size();
         for(int i=0;i<numobjs;i++)
         {
-            PrpRootObject curobj = prp.objects[i];
+            PrpRootObject curobj = prp.objects2.get(i);
             if(curobj!=null && curobj.header.desc.objectname.toString().toLowerCase().equals(name2))
             {
                 result.add(curobj);

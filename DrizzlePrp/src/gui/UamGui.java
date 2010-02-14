@@ -38,10 +38,11 @@ public class UamGui
     public static gui.Gui guiform;
     public static JButton downloadbutton;
     public static JButton deletebutton;
+    public static JButton versionbutton;
     public static JLabel AgeLabel;
     public static shared.State.ButtongroupState startup;
     
-    final static boolean updateWhileAdjusting = true;
+    final static boolean updateWhileAdjusting = false;
 
     //static Vector<AgeListItem> ages;
 
@@ -66,6 +67,15 @@ public class UamGui
         public int hashCode()
         {
             return FriendlyAgename.hashCode();
+        }
+        public boolean equals(Object obj)
+        {
+            if(obj==null) return false;
+            if(!(obj instanceof AgeListItemInfo)) return false;
+            AgeListItemInfo o2 = (AgeListItemInfo)obj;
+            if(!this.agename.equals(o2.agename)) return false;
+            if(!this.FriendlyAgename.equals(o2.FriendlyAgename)) return false;
+            return true;
         }
     }
 
@@ -116,7 +126,8 @@ public class UamGui
             {
                 //int dummy=0;
                 //String s = shared.debug.getStackTrace();
-                m.msg("Minor multithread bug: null: agename=",agename);
+                //I think we can ignore this, since it gets replaced right away anyway.
+                //m.msg("Minor multithread bug: null: agename=",agename);
                 return;
             }
             switch(status)
@@ -375,7 +386,34 @@ public class UamGui
             }
         });
     }
-    
+    public static String GetCurrentlySelectedAge()
+    {
+        Object selobj = UamGui.agelist.getSelectedValue();
+        AgeListItemInfo item = (AgeListItemInfo)selobj;
+        return item.agename;
+    }
+    public static void ReportVersion()
+    {
+        String agename = gui.UamGui.GetCurrentlySelectedAge();
+        if(uam.Uam.installInfo.getAge(agename).installationStatus.isInstalled())
+        {
+            String installedVersion = uam.Uam.TryToFindInstalledVersionOfAge(agename);
+            if(installedVersion!=null)
+            {
+                m.msg("Installed Version: ",installedVersion);
+                //UamGui.verlist.invalidate();
+                //UamGui.verlist.repaint();
+            }
+            else
+            {
+                m.warn("Unable to figure out which version is installed for Age: ",agename);
+            }
+        }
+        else
+        {
+            m.msg("This Age isn't installed: ",agename);
+        }
+    }
     public static void GetLocalInfo(String potsfolder)
     {
         //boolean versionTooLowForSomeAges = false;
@@ -566,6 +604,10 @@ public class UamGui
         }*/
         Uam.installInfo = ii;
     }
+    public static void RefreshInfo()
+    {
+        RefreshInfo(Uam.getPotsFolder());
+    }
     public static void RefreshInfo(String potsfolder2)
     {
         //m.msg("refresh");
@@ -585,6 +627,9 @@ public class UamGui
         //final Vector<UamConfigNew.UamConfigData.Age> ages = Uam.ageList.data.ages;
         final Vector<AgeListItemInfo> ages2 = ages;
         Object selection = agelist.getSelectedValue();
+        agelist.setValueIsAdjusting(true);
+        verlist.setValueIsAdjusting(true);
+        mirlist.setValueIsAdjusting(true);
         mirlist.setModel(new javax.swing.DefaultListModel());
         verlist.setModel(new javax.swing.DefaultListModel());
         agelist.setModel(new javax.swing.ListModel() {
@@ -611,6 +656,9 @@ public class UamGui
             //m.msg("reinst");
             agelist.setSelectedValue(selection, true); //doesn't die even if selection is no longer there.
         }
+        agelist.setValueIsAdjusting(false);
+        verlist.setValueIsAdjusting(false);
+        mirlist.setValueIsAdjusting(false);
         
         if(uam.Uam.ageList.getDrizzleVersion()>gui.Version.version)
         {
@@ -744,6 +792,9 @@ public class UamGui
             deletebutton.setEnabled(deletable);
             String info = uam.Uam.ageList.getAgeInfo(age);
             AgeLabel.setText("<html>"+info+"</html>");
+
+            boolean doversion=Uam.installInfo.getAge(age).installationStatus.isInstalled();
+            versionbutton.setEnabled(doversion);
             /*try{
             javax.swing.text.Document doc = AgeLabel.getDocument();
             doc.remove(0, doc.getLength());
@@ -878,7 +929,10 @@ public class UamGui
             {
                 if(f.getName().startsWith(age+uam.Uam.versionSep))
                 {
-                    shared.sevenzip.delete(f.getAbsolutePath(), potsfolder);
+                    if(f.length()!=0) //it may be zero if it has been nulled out.
+                    {
+                        shared.sevenzip.delete(f.getAbsolutePath(), potsfolder);
+                    }
                 }
             }
         }

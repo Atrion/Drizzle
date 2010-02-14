@@ -21,6 +21,7 @@ package shared;
 //import gui.Main;
 //import javax.swing.text.JTextComponent;
 import javax.swing.JTextArea;
+import javax.swing.JProgressBar;
 import java.io.OutputStream;
 //import java.io.Writer;
 import java.util.Vector;
@@ -37,6 +38,7 @@ public class m
     public static Integer debugCount = 0;
 
     private static JTextArea _outputTextArea; //you must set this from the GUI.
+    private static JProgressBar _outputProgressBar; //you must set this from the GUI.
     private static boolean justUseConsole = true;
     
     public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
@@ -146,6 +148,10 @@ public class m
             justUseConsole = false;
             _outputTextArea = newJTextArea;
         }
+    }
+    public static void setProgressBar(JProgressBar newProgressBar)
+    {
+        _outputProgressBar = newProgressBar;
     }
     
     private static void message(String... ss)
@@ -351,4 +357,34 @@ public class m
         }
     }
 
+    public static void setWorking(boolean isWorking)
+    {
+        if(_outputProgressBar!=null)
+        {
+            if(isWorking){
+                javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+                    public void run() {
+                        _outputProgressBar.setIndeterminate(true);
+                        //_outputProgressBar.setValue(50);
+                    }
+                });
+            }else{
+                javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+                    public void run() {
+                        _outputProgressBar.setIndeterminate(false);
+                    }
+                });
+            }
+        }
+    }
+
+    public static String trans(String... ss)
+    {
+        String r = "";
+        for(int i=0;i<ss.length;i++)
+        {
+            r += shared.translation.translate(ss[i]);
+        }
+        return r;
+    }
 }

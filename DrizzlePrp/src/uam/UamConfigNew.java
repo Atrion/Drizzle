@@ -109,6 +109,14 @@ public class UamConfigNew
             m.warn(exception.getMessage());
         }
     }
+    public UamConfigData.Age getAge(String agename)
+    {
+        return data.getAge(agename);
+    }
+    public Vector<UamConfigData.Age> getAllAges()
+    {
+        return data.ages;
+    }
     public Vector<UamConfigData.Age.Version> getAllVersions(String age)
     {
         UamConfigData.Age ageobj = data.getAge(age);

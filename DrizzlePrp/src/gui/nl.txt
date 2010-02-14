@@ -1,10 +1,11 @@
-// Dutch translation by Erik
+// Dutch translation by Wodan and Erik.
 
 Warning: {->}Waarschuwing: 
 Ignoring: {->}Genegeerd: 
-Get Latest List{->}Haal de nieuwste lijst
+//Get Latest List{->}Haal de nieuwste lijst
+Get Latest List{->}Ververs lijst
 ( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( Hulp is te vinden onder het tabblad "Help", of uitgebreide hulp is te vinden op http://alcugs.almlys.org/Drizzle )
-Ages:{->}Tijden:
+Ages:{->}Werelden:
 Versions:{->}Versies:
 Download{->}Downloaden
 Delete{->}Verwijderen
@@ -22,12 +23,12 @@ UAM Settings{->}UAM-instellingen
 Launch Uru{->}Uru starten
 You have the latest version.{->}Je hebt de nieuwste versie.
 You have a version, but not the latest.{->}Je hebt een versie, maar niet de nieuwste.
-You don't have this Age installed.{->}Je hebt deze Tijd niet geïnstalleerd.
-You have this Age, but its version is unknown.{->}Je hebt deze Tijd, maar de versie is onbekend.
+You don't have this Age installed.{->}Je hebt deze Wereld niet geïnstalleerd.
+You have this Age, but its version is unknown.{->}Je hebt deze Wereld, maar de versie is onbekend.
 Legend{->}Legenda
-Do not load Age list at startup.{->}De lijst met Tijden niet laden bij het opstarten.
-Load last saved Age list at startup.{->}Laatst opgeslagen lijst met Tijden laden bij het opstarten.
-Download most recent Age list at startup.{->}Recentste lijst met Tijden downloaden bij het opstarten.
+Do not load Age list at startup.{->}De lijst met Werelden niet laden bij opstarten.
+Load last saved Age list at startup.{->}Laatst opgeslagen lijst met Werelden laden bij opstarten.
+Download most recent Age list at startup.{->}Recentste lijst met Werelden downloaden bij opstarten.
 Automatically download list?{->}Lijst automatisch downloaden?
 Info:{->}Info:
 <html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Dit gedeelte is voor het omzetten van MystV-/MOUL-/Crowthistle-bestanden om te spelen in Uru. Zie het tabblad Help of http://alcugs.almlys.org/Drizzle</html>
@@ -59,15 +60,15 @@ Stop Server{->}De server stoppen
 Indicate in the log when files are read?{->}In het logboek aangeven wanneer er bestanden worden gelezen?
 You have to stop and start the server for settings changes to take effect.{->}Je moet de server stoppen en starten om de gewijzigde instellingen te laten werken.
 This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}Deze proxyserver is voor het bekijken van oude, gearchiveerde websites. Meer informatie op het tabblad Help of op http://alcugs.almlys.org/Drizzle
-List Available Ages...{->}De beschikbare Tijden opsommen...
+List Available Ages...{->}De beschikbare Werelden opsommen
 Get Offline list.{->}Offline lijst laden.
 Run Tests...{->}Tests uitvoeren...
 ignore known overrides{->}bekende problemen negeren
 Sanity check{->}Gezondheidscontrole
-Name a random Age!{->}Noem een willekeurige Tijd!
+Name a random Age!{->}Noem een willekeurige Wereld!
 Report{->}Rapport
-Agename:{->}Tijdnaam:
-Age reports{->}Tijdrapporten
+Agename:{->}Wereldnaam:
+Age reports{->}Wereldrapporten
 Everything here uses the Pots folder from the UAM tab.{->}Alles hier gebruikt de POTS-map van het tabblad UAM.
 UAM Advanced{->}UAM Gevorderd
 start{->}starten
@@ -89,13 +90,15 @@ Select all{->}Alles selecteren
 Select none{->}Alles deselecteren
 Output:{->}Uitvoer:
 Translation:{->}Vertaling:
-Remove dupes.{->}Dubbelen verwijderen. 
+//Remove dupes.{->}Dubbelen verwijderen.
+Remove dupes.{->}Verwijder dubbel.
 Clear log.{->}Logboek legen.
 Alphabetise.{->}Alfabetiseren.
 Log{->}Logboek
-Save settings now{->}Instellingen nu opslaan.
-Delete settings and exit{->}Instellingen verwijderen en afsluiten.
-Save settings on exit.{->}Instellingen opslaan bij het afsluiten.
+Save settings now{->}Instellingen nu opslaan
+//Delete settings and exit{->}Instellingen verwijderen en afsluiten.
+Delete settings and exit{->}Verwijder instellingen en sluit af
+Save settings on exit.{->}<html>Instellingen opslaan bij het afsluiten.</html>
 Settings{->}Instellingen
 Setting language to {->}De taal wordt ingesteld op 
 Current GMT time is: {->}Huidige GMT-tijd is:
@@ -117,20 +120,20 @@ Error: {->}Fout:
 You must select an output folder that already exists.{->}Je moet een uitvoermap opgeven die al bestaat.
 Folder doesn't exist.{->}De map bestaat niet.
 The input folder must have either 'vault.dat' or some number of '.v' files.{->}De invoermap moet een 'vault.dat' of een aantal '.v'-bestanden bevatten.
-Ages not installed: {->}Niet geïnstalleerde Tijden: 
+Ages not installed: {->}Niet geïnstalleerde Werelden: 
  launched!{->} gestart!
 Cleaning up any previous version...{->}Eventuele vorige versie opruimen...
-This Age is listed as not being safely deletable; performing upgrade only.{->}Van deze Tijd is vermeld dat hij niet veilig te verwijderen is; alleen een upgrade wordt uitgevoerd.
+This Age is listed as not being safely deletable; performing upgrade only.{->}Van deze Wereld is vermeld dat hij niet veilig te verwijderen is; alleen een upgrade wordt uitgevoerd.
 Checking to see if we already have this version in the cache...{->}Controleren of we deze versie al opgeslagen hebben...
-Using cached version of Age: {->}Opgeslagen versie wordt gebruikt van de Tijd: 
+Using cached version of Age: {->}Opgeslagen versie wordt gebruikt van de Wereld: 
 , Version: {->}, Versie: 
 Checking integrity...{->}Integriteit controleren...
 File integrity is good!{->}Bestandsitegriteit is in orde!
 Extracting {->}Uitlezen van 
-Age installed!{->}Tijd geïnstalleerd!
-Ages updatable: {->}Tijden die bijgewerkt kunnen worden: 
+Age installed!{->}Wereld geïnstalleerd!
+Ages updatable: {->}Werelden die bijgewerkt kunnen worden: 
 Deleting {->}Verwijderen van 
-Attempting to download Age: {->}Aan het proberen deze Tijd te downloaden: 
+Attempting to download Age: {->}Aan het proberen deze Wereld te downloaden: 
 , Mirror: {->}, Spiegelserver: 
 The PathOfTheShell/CompleteChronicles folder you selected doesn't exist.{->}De PathOfTheShell-/CompleteChronicles-map die je hebt geselecteerd bestaat niet.
 Checking the folders you gave...{->}De opgegeven mappen controleren...
@@ -180,14 +183,14 @@ Unsafe Cancel{->}Onveilig annuleren
 UAM Downloading...{->}UAM downloaden...
 
 //misc
-(Select an Age, or click "Get Latest List" to get the latest list of Ages.){->}(Selecteer een Tijd of klik op "Haal de nieuwste lijst" om de nieuwste lijst met Tijden te krijgen.)
-//<html>(Select an Age, or click "Get Latest List" to get the latest list of Ages.)</html>{-><html>(Selecteer een Tijd of klik op "Haal de nieuwste lijst" om de nieuwste lijst met Tijden te krijgen.)</html>
+(Select an Age, or click "Get Latest List" to get the latest list of Ages.){->}(Selecteer een Wereld of klik op "Ververs lijst" om de nieuwste lijst met Werelden te krijgen.)
+//<html>(Select an Age, or click "Get Latest List" to get the latest list of Ages.)</html>{-><html>(Selecteer een Wereld of klik op "Haal de nieuwste lijst" om de nieuwste lijst met Werelden te krijgen.)</html>
 Save Missing Translations{->}Missende vertalingen opslaan
 How rainy of a day is it?{->}Hoe regenachtig is het vandaag?
 archive folder:{->}Archiefmap:
 Generate uam.status.txt{->}uam.status.txt genereren
 Error reading config file.{->}Er ging iets fout bij het lezen van het configuratiebestand.
-You need to load the Age List in the UAM tab first.{->}Je moet eerst de lijst met Tijden op het tabblad UAM laden.
+You need to load the Age List in the UAM tab first.{->}Je moet eerst de lijst met Werelden op het tabblad UAM laden.
 Click the select button to pick a folder.{->}Klik op "Bladeren..." om een map te kiezen.
 
 //file select form
@@ -205,4 +208,28 @@ Create Folder{->}Map aanmaken
 Enter a server.{->}Vul een server in.
 Enter the server you want to use.{->}Vul de server in die je wilt gebruiken.
 Folder Name:{->}Mapnaam:
+
+//Drizzle22
+Done copying {->}Kopiëren gereed
+ music!{->} muziek!
+HexIsle folder:{->}HexIsle map:
+HexIsle music...{->}HexIsle muziek...
+
+//Drizzle23
+Working...{->}Bezig...
+Starting conversion of {->}Start omzetten van 
+Installed Version: {->}Geinstalleerde versie 
+Clearing all .sum files...{->}Alle .sum files worden gewist....
+Done!{->}Klaar!
+Are you sure you want to delete the old archives?{->}Weet je zeker dat je de oude gegevens wilt verwijderen?
+Delete the archives?{->}Oude archieven verwijderen?
+Ages with unknown installation status: {->}Werelden met onbekende installatie status: 
+Detecting which versions are installed...{->}Controleren welke versies zijn geinstalleerd...
+Unable to detect installed version, so keeping archives for Age: {->}Kan geinstalleerde versie niet vinden, geen wijzigingen in: 
+Start DrizzleDeepview{->}Start DrizzleDeepView
+Delete old archives...{->}Verwijder oude archieven
+Clear .sum files.{->}Wis .sum files.
+Version?{->}Versie?
+
+//Still needs updated conversion paragraph in help.txt
 

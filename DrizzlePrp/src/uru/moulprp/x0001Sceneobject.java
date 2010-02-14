@@ -106,17 +106,19 @@ public class x0001Sceneobject extends uruobj
         animationinfo.compile(deque);
         regioninfo.compile(deque);
         soundinfo.compile(deque);
-        deque.writeInt(count1);
+        //deque.writeInt(count1);
         /*for(int i=0;i<count1;i++)
         {
             objectrefs1[i].compile(deque);
         }*/
+        deque.writeInt(objectrefs1.size());
         deque.writeVector2(objectrefs1);
-        deque.writeInt(count2);
+        //deque.writeInt(count2);
         /*for(int i=0;i<count2;i++)
         {
             objectrefs2[i].compile(deque);
         }*/
+        deque.writeInt(objectrefs2.size());
         deque.writeVector2(objectrefs2);
         scenenode.compile(deque);
     }

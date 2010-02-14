@@ -69,7 +69,7 @@ public class pakfile
                 }
                 else if(pythonversion==23)
                 {
-                    header = new byte[]{(byte)0x6D,(byte)0xF2,(byte)0x0D,(byte)0x0A,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00};
+                    header = new byte[]{(byte)0x3B,(byte)0xF2,(byte)0x0D,(byte)0x0A,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00};
                 }
                 else
                 {
@@ -80,20 +80,25 @@ public class pakfile
             
             //String filename = _staticsettings.outputdir+name+".pyc";
             String filename = outfolder+"/"+name+".pyc";
-            FileUtils.WriteFile(filename, rawdata);
+            FileUtils.WriteFile(filename, rawdata,true);
         }
     }
-    
-    public pakfile(File f, int readversion, boolean readPythonObjects)
+
+    public pakfile(String f, auto.AllGames.GameInfo g, boolean readPythonObjects)
     {
-        byte[] data = shared.FileUtils.ReadFile(f);
-        data = uru.UruCrypt.DecryptWhatdoyousee(data);
+        this(new File(f),g,readPythonObjects);
+    }
+    public pakfile(File f, auto.AllGames.GameInfo g, boolean readPythonObjects)
+    {
+        //byte[] data = shared.FileUtils.ReadFile(f);
+        //data = uru.UruCrypt.DecryptWhatdoyousee(data);
+        byte[] data = uru.UruCrypt.DecryptAny(f.getAbsolutePath(), g);
         IBytestream c = shared.ByteArrayBytestream.createFromByteArray(data);
         objectcount = c.readInt();
         indices = new IndexEntry[objectcount];
         for(int i=0;i<objectcount;i++)
         {
-            indices[i] = new IndexEntry(c, readversion);
+            indices[i] = new IndexEntry(c, g.readversion);
         }
         if(readPythonObjects)
         {
@@ -102,7 +107,7 @@ public class pakfile
             {
                 int offset = indices[i].offset;
                 IBytestream c2 = c.Fork(offset);
-                objects[i] = new PythonObject(c2, readversion);
+                objects[i] = new PythonObject(c2, g.readversion);
             }
         }
     }

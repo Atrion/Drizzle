@@ -17,7 +17,7 @@ public class InvisibleModal extends javax.swing.JDialog {
     
     public static InvisibleModal create()
     {
-        InvisibleModal result = new InvisibleModal(null,enabled);
+        InvisibleModal result = new InvisibleModal(null,false);
         result.setSize(0, 0);
         return result;
     }
@@ -53,8 +53,10 @@ public class InvisibleModal extends javax.swing.JDialog {
 
     /** Creates new form InvisibleModal */
     public InvisibleModal(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super();
+        //super(parent);
         initComponents();
+        //setModal(modal);
     }
 
     /** This method is called from within the constructor to
@@ -67,7 +69,6 @@ public class InvisibleModal extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setModal(true);
         setResizable(false);
         setUndecorated(true);
 

@@ -69,6 +69,18 @@ public class x00A2Pythonfilemod extends uruobj
         }
         return null;
     }
+    public void removeListingByIndex(int index)
+    {
+        Vector<Pythonlisting> listingsToRemove = new Vector();
+        for(Pythonlisting listing: listings)
+        {
+            if(listing.index==index) listingsToRemove.add(listing);
+        }
+        for(Pythonlisting listing: listingsToRemove)
+        {
+            listings.remove(listing);
+        }
+    }
     public static x00A2Pythonfilemod createEmpty()
     {
         return new x00A2Pythonfilemod();
@@ -94,11 +106,12 @@ public class x00A2Pythonfilemod extends uruobj
         {
             pythonrefs[i].compile(deque);
         }
-        deque.writeInt(listcount);
+        //deque.writeInt(listcount);
         /*for(int i=0;i<listcount;i++)
         {
             listings[i].compile(deque);
         }*/
+        deque.writeInt(listings.size());
         deque.writeVector2(listings);
     }
     public void addListing(Pythonlisting listing)

@@ -30,9 +30,9 @@ import shared.readexception;
 //I reverse-engineered this myself, via decompilation.
 public class PlVisRegion extends uruobj
 {
-    PlRegionBase parent;
-    Uruobjectref softvolumesimple;
-    Uruobjectref ref;
+    public PlRegionBase parent;
+    public Uruobjectref softvolumesimple;
+    public Uruobjectref ref;
     
     public PlVisRegion(context c) throws readexception
     {

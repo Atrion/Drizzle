@@ -36,8 +36,9 @@ import uru.Bytestream;
 public class prpfile
 {
     public PrpHeader header;
-    public Vector<PrpRootObject> extraobjects;
-    public PrpRootObject[] objects;
+    //public Vector<PrpRootObject> extraobjects;
+    //public PrpRootObject[] objects;
+    public Vector<PrpRootObject> objects2 = new Vector();
     public PrpObjectIndex objectindex;
     
     public String filename;
@@ -45,7 +46,7 @@ public class prpfile
     
     public prpfile()
     {
-        extraobjects = new Vector<PrpRootObject>();
+        //extraobjects = new Vector<PrpRootObject>();
     }
     /*public void renameObject(String oldname, Typeid type, String newname)
     {
@@ -63,7 +64,7 @@ public class prpfile
     public Vector<Uruobjectref> getAllRootObjectRefs()
     {
         Vector<Uruobjectref> refs = new Vector();
-        for(PrpRootObject ro: objects)
+        for(PrpRootObject ro: objects2)
         {
             refs.add(ro.getref());
         }
@@ -71,13 +72,14 @@ public class prpfile
     }
     public void sort()
     {
-        PrpRootObject[] newobjects = getSortedObjects();
-        objects = newobjects;
+        Vector<PrpRootObject> newobjects = getSortedObjects();
+        objects2 = newobjects;
     }
-    public PrpRootObject[] getSortedObjects()
+    public Vector<PrpRootObject> getSortedObjects()
     {
-        PrpRootObject[] newobjects = java.util.Arrays.copyOf(objects, objects.length);
-        java.util.Arrays.sort(newobjects, new java.util.Comparator() {
+        Vector<PrpRootObject> newobjects = (Vector)objects2.clone();
+        //PrpRootObject[] newobjects = java.util.Arrays.copyOf(objects, objects.length);
+        java.util.Collections.sort(newobjects, new java.util.Comparator() {
 
             public int compare(Object o1, Object o2) {
                 PrpRootObject r1 = (PrpRootObject)o1;
@@ -90,12 +92,25 @@ public class prpfile
                 return comp;
             }
         });
+        /*java.util.Arrays.sort(newobjects, new java.util.Comparator() {
+
+            public int compare(Object o1, Object o2) {
+                PrpRootObject r1 = (PrpRootObject)o1;
+                PrpRootObject r2 = (PrpRootObject)o2;
+                String t1 = r1.header.objecttype.toString();
+                String t2 = r2.header.objecttype.toString();
+                int comp = t1.compareToIgnoreCase(t2);
+                //if(comp==-1||comp==1) return comp;
+                //otherwise they are the same type
+                return comp;
+            }
+        });*/
         return newobjects;
     }
     public Vector<Vector<PrpRootObject>> getOrderedObjects() //changes the order of objects
     {
         Vector<Vector<PrpRootObject>> r = new Vector();
-        PrpRootObject[] newobjects = getSortedObjects();
+        Vector<PrpRootObject> newobjects = getSortedObjects();
         Typeid lasttype = null;
         Vector<PrpRootObject> lastvec = null;
         for(PrpRootObject ro: newobjects)
@@ -112,7 +127,7 @@ public class prpfile
     }
     public PrpRootObject findFirstScenenode()
     {
-        for(PrpRootObject obj: objects)
+        for(PrpRootObject obj: objects2)
         {
             if(obj.header.objecttype==Typeid.plSceneNode)
             {
@@ -135,8 +150,9 @@ public class prpfile
     }
     public void addObject(PrpRootObject obj)
     {
-        extraobjects.add(obj);
-        this.mergeExtras();
+        //extraobjects.add(obj);
+        objects2.add(obj);
+        //this.mergeExtras();
     }
     /*public PrpRootObject readSingleObject(String name, Typeid type, String filename)
     {
@@ -158,7 +174,7 @@ public class prpfile
     public Vector<String> findAllSceneobjectsThatStartWith(String startString)
     {
         Vector<String> result = new Vector();
-        for(PrpRootObject obj: objects)
+        for(PrpRootObject obj: objects2)
         {
             if(obj.header.objecttype==Typeid.plSceneObject)
             {
@@ -173,7 +189,7 @@ public class prpfile
     public Vector<String> findAllSceneobjectsThatReferencePythonfilemod(String pfmname)
     {
         Vector<String> result = new Vector();
-        for(PrpRootObject obj: objects)
+        for(PrpRootObject obj: objects2)
         {
             if(obj.header.objecttype==Typeid.plSceneObject)
             {
@@ -235,9 +251,20 @@ public class prpfile
         
         return result;
     }
-    public void removeObject(Typeid type, String name)
+    public void markObjectDeleted(Uruobjectref ref, boolean warnIfNotPresent)
     {
-        for(PrpRootObject obj: objects)
+        if(ref.hasref())
+        {
+            markObjectDeleted(ref.xdesc.objecttype,ref.xdesc.objectname.toString(),warnIfNotPresent);
+        }
+    }
+    public void markObjectDeleted(Typeid type, String name)
+    {
+        markObjectDeleted(type,name,true);
+    }
+    public void markObjectDeleted(Typeid type, String name, boolean warnIfNotPresent)
+    {
+        for(PrpRootObject obj: objects2)
         {
             if(obj.header.desc.objecttype==type && obj.header.desc.objectname.toString().equals(name))
             {
@@ -245,14 +272,19 @@ public class prpfile
                 return;
             }
         }
-        m.msg("Could not find object to remove.");
+        if(warnIfNotPresent) m.msg("Could not find object to remove.");
+    }
+    public void deleteObject(Typeid type, String name)
+    {
+        PrpRootObject ro = this.findObject(name, type);
+        objects2.remove(ro);
     }
     public void orderObjects()
     {
-        java.util.Arrays.sort(objects);
-        //java.util.Collections.sort(objects);
+        //java.util.Arrays.sort(objects);
+        java.util.Collections.sort(objects2);
     }
-    public void mergeExtras()
+    /*public void mergeExtras()
     {
         int newsize = objects.length + extraobjects.size();
         PrpRootObject[] newobjects = new PrpRootObject[newsize];
@@ -268,7 +300,7 @@ public class prpfile
         
         extraobjects.clear();
         objects = newobjects;
-    }
+    }*/
     /*public PrpRootObject[] getObjects()
     {
         int size = objects.size();
@@ -286,27 +318,31 @@ public class prpfile
     }
     public static prpfile createFromObjectsAndInfo(Vector<PrpRootObject> objs, String agename, String pagename, Pageid pageid, Pagetype pagetype)
     {
-        PrpRootObject[] objs2 = uru.generics.convertVectorToArray(objs, PrpRootObject.class);
-        return createFromObjectsAndInfo(objs2,agename,pagename,pageid,pagetype);
-    }
-    
-    public static prpfile createFromObjectsAndInfo(PrpRootObject[] objs, String agename, String pagename, Pageid pageid, Pagetype pagetype)
-    {
+        //PrpRootObject[] objs2 = uru.generics.convertVectorToArray(objs, PrpRootObject.class);
+        //return createFromObjectsAndInfo(objs2,agename,pagename,pageid,pagetype);
+
         prpfile result = new prpfile();
-        result.objects = objs;
-        result.extraobjects = new Vector<PrpRootObject>();
+        result.objects2 = objs;
+        //result.extraobjects = new Vector<PrpRootObject>();
         /*result.objects = new Vector<PrpRootObject>();
         for(PrpRootObject obj: objs)
         {
             result.objects.add(obj);
         }*/
         result.header = PrpHeader.createFromInfo(agename, pageid, pagetype, pagename);
-        
+
         //these don't seem to be needed for compilation.  We may need to regenerate the ObjectIndex if we want to merge objects in and parse them.
         //result.objectindex = PrpObjectIndex.
         //result.filename
-        
+
         return result;
+
+    }
+    
+    public static prpfile createFromObjectsAndInfo(PrpRootObject[] objs, String agename, String pagename, Pageid pageid, Pagetype pagetype)
+    {
+        Vector<PrpRootObject> objs2 = uru.generics.convertArrayToVector(objs);
+        return createFromObjectsAndInfo(objs2,agename,pagename,pageid,pagetype);
     }
     public PrpRootObject addScenenode()
     {
@@ -344,9 +380,16 @@ public class prpfile
         
         return prp;
     }
+    public static prpfile createFromBytes(byte[] data, boolean readRaw)
+    {
+        context c = context.createFromBytestream(shared.ByteArrayBytestream.createFromByteArray(data));
+        prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c, readRaw);
+        c.close();
+        return prp;
+    }
     public void saveAsFile(String filename)
     {
-        this.mergeExtras();
+        //this.mergeExtras();
         shared.IBytedeque result = this.saveAsBytes();
         //FileUtils.WriteFile(filename, result);
         result.writeAllBytesToFile(filename);
@@ -365,14 +408,15 @@ public class prpfile
     public shared.IBytedeque saveAsBytes(Decider decider)
     {
         if(decider==null) decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
-        mergeExtras();
+        //mergeExtras();
+        this.sort();
         orderObjects();
         shared.IBytedeque result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
     public PrpRootObject findObject(String name, Typeid type)
     {
-        for(PrpRootObject obj: objects)
+        for(PrpRootObject obj: objects2)
         {
             /*if(obj==null||obj.header==null||obj.header.desc==null||obj.header.objecttype==null||obj.header.desc.objectname==null||obj.header.desc.objecttype==null)
             {
@@ -397,10 +441,10 @@ public class prpfile
     }
     public PrpRootObject findObjectWithDesc(Uruobjectdesc desc)
     {
-        int numobjects = this.objects.length;
+        int numobjects = this.objects2.size();
         for(int i=0;i<numobjects;i++)
         {
-            PrpRootObject curobj = this.objects[i];
+            PrpRootObject curobj = this.objects2.get(i);
             Uruobjectdesc curdesc = curobj.header.desc;
             /*if(curdesc==null || curdesc.objectname==null || curdesc.objectname.toString()==null||desc==null||desc.objectname==null||desc.objectname.toString()==null)
             {
@@ -435,7 +479,7 @@ public class prpfile
             }
         }
         objects = newobjects;*/
-        for(PrpRootObject curobj: objects)
+        for(PrpRootObject curobj: objects2)
         {
             if(obj==curobj)
             {
@@ -454,4 +498,23 @@ public class prpfile
         return prputils.FindAllObjectsOfType(this, type);
     }
     
+    public Vector<PrpRootObject> FindObjectsThatReferenceAnother(Uruobjectdesc desc)
+    {
+        Vector<PrpRootObject> r = new Vector();
+        for(PrpRootObject ro: objects2)
+        {
+            uru.moulprp.uruobj obj = ro.getObject();
+            for(Uruobjectdesc curdesc: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, obj))
+            {
+                if(curdesc.equals(desc))
+                {
+                    if(!r.contains(ro))
+                    {
+                        r.add(ro);
+                    }
+                }
+            }
+        }
+        return r;
+    }
 }

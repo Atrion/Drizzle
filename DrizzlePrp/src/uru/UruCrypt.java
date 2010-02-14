@@ -43,15 +43,28 @@ public class UruCrypt {
     private static byte[] eoaHeader = {(byte)0x88,(byte)0x42,(byte)0x87,(byte)0x0D};
     private static byte[] briceissmartHeader = { 'B','r','i','c','e','I','s','S','m','a','r','t' };
 
-    public static byte[] DecryptAny(String filename)
+    private static final int[] notthedroidsKey = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539}; //moul
+    //private static final int[] notthedroidsKey = {0x6c0a5452,0x03827d0f,0x3a170b92,0x16db7fc2};
+    //private static final int[] notthedroidsKey = {0x16db7fc2,0x3a170b92,0x03827d0f,0x6c0a5452};
+
+    private static final int[] notthedroidsKeyMqo = {0x75b2eb65,0x66c2cd85,0x5fc6bf8d,0x2e7a5cf4}; //mqo
+    //private static final int[] notthedroidsKey = {0x2e7a5cf4,0x5fc6bf8d,0x66c2cd85,0x75b2eb65,};
+    //private static final int[] notthedroidsKey = {0xf45c7a2e,0x8dbfc65f,0x85cdc266,0x65ebb275,};
+    //private static final int[] notthedroidsKey =   {0x65ebb275,0x85cdc266,0x8dbfc65f,0xf45c7a2e,};
+
+    public static byte[] DecryptAny(String filename, auto.AllGames.GameInfo game)
     {
         byte[] encdata = FileUtils.ReadFile(filename);
-        return DecryptAny(encdata);
+        return DecryptAny(encdata,game);
     }
-    public static byte[] DecryptAny(byte[] encdata)
+    public static byte[] DecryptAny(byte[] encdata, auto.AllGames.GameInfo game)
     {
         if(b.startswith(encdata, whatdoyouseeHeader)) return DecryptWhatdoyousee(encdata);
-        else if(b.startswith(encdata, notthedroidsHeader)) return DecryptNotthedroids(encdata);
+        else if(b.startswith(encdata, notthedroidsHeader))
+        {
+            if(game.readversion==8) return DecryptNotthedroids(encdata,true); ///mqo
+            else return DecryptNotthedroids(encdata,false); //moul
+        }
         else if(b.startswith(encdata, eoaHeader)) return DecryptEoa(encdata);
         else m.throwUncaughtException("Unknown encryption type.");
         return null;
@@ -472,7 +485,8 @@ public class UruCrypt {
         int v1 = b.BytesToInt32(unencodedblock, 4);
         
         //int[] k = {0x6c0a5452,0x03827d0f,0x3a170b92,0x16db7fc2};  //key
-        int[] k = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539};  //key
+        //int[] k = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539};  //key
+        int[] k = notthedroidsKey;
         int sum = 0;
         int e;
         int DELTA = 0x9e3779b9;
@@ -504,6 +518,12 @@ public class UruCrypt {
     }
     public static byte[] DecryptNotthedroids(byte[] filecontents)
     {
+        return DecryptNotthedroids(filecontents,false);
+    }
+    public static byte[] DecryptNotthedroids(byte[] filecontents, boolean isMqo)
+    {
+        int[] key = isMqo?UruCrypt.notthedroidsKeyMqo:UruCrypt.notthedroidsKey;
+
         int filelength = filecontents.length;
         byte[] header = Arrays.copyOfRange(filecontents, 0, 12);
         byte[] lbytes = Arrays.copyOfRange(filecontents, 12, 16);
@@ -520,7 +540,7 @@ public class UruCrypt {
         byte[] decodedBlock = new byte[8];
         for( int i = 0; i < innerlength; i+=8 ) //for each block of 8
         {
-            DecodeNotthedroidsBlock(filecontents,decodedBlock,i+16,0);
+            DecodeNotthedroidsBlock(filecontents,decodedBlock,i+16,0,key);
             int remainingbytes = innerlength-i;
 
             if(remainingbytes > 8) remainingbytes = 8;
@@ -566,7 +586,7 @@ public class UruCrypt {
         return result;
     }
 
-    private static void DecodeNotthedroidsBlock(byte[] input, byte[] output, int inputpos, int outputpos)
+    private static void DecodeNotthedroidsBlock(byte[] input, byte[] output, int inputpos, int outputpos, int[] key)
     {
         //XXTEA
         //#define MX  ( (((z>>5)^(y<<2))+((y>>3)^(z<<4)))^((sum^y)+(k[(p&3)^e]^z)) )
@@ -585,8 +605,9 @@ public class UruCrypt {
         //}
         //int n = 2; //uru only uses 2. Diff from standard: -2?
         //int[] k = {0x6c0a5452,0x03827d0f,0x3a170b92,0x16db7fc2};  //key
-        int[] k = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539};  //key
+        //int[] k = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539};  //key
         //int[] k = {0x16db7fc2,0x3a170b92,0x03827d0f,0x6c0a5452};  //key
+        //int[] k = notthedroidsKey;
         
         int v0 = b.BytesToInt32(input, inputpos);
         int v1 = b.BytesToInt32(input, inputpos+4);
@@ -607,11 +628,11 @@ public class UruCrypt {
             //int MX = ( (((v0>>>5)^(y<<2))+((y>>>3)^(v0<<4)))^((sum^y)+(k[1^e]^v0)) );
             //y = v1 -= MX;
             p = 1;
-            y = v1 - ( (((v0>>>5)^(y<<2))+((y>>>3)^(v0<<4)))^((sum^y)+(k[(p&3)^e]^v0)) );
+            y = v1 - ( (((v0>>>5)^(y<<2))+((y>>>3)^(v0<<4)))^((sum^y)+(key[(p&3)^e]^v0)) );
             v1 = y;
             
             p = 0;
-            y = v0 - ( (((v1>>>5)^(y<<2))+((y>>>3)^(v1<<4)))^((sum^y)+(k[(p&3)^e]^v1)) ); //p=0
+            y = v0 - ( (((v1>>>5)^(y<<2))+((y>>>3)^(v1<<4)))^((sum^y)+(key[(p&3)^e]^v1)) ); //p=0
             v0 = y;
             //y = v0 -= MX;
             

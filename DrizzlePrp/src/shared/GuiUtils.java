@@ -512,7 +512,14 @@ public class GuiUtils
             return CustomJFileChooser.getInstance();
         }
     }
-    
+
+    public static boolean getOKorCancelFromUser(String message, String title)
+    {
+        int r = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        //r=-1->xed out. r=2->cancel. r=0->okay.
+        if(r==JOptionPane.OK_OPTION) return true;
+        else return false;
+    }
     public static void getStringFromUser(JTextComponent field, String message, String title)
     {
         String result = JOptionPane.showInputDialog(null, shared.translation.translate(message), shared.translation.translate(title), JOptionPane.PLAIN_MESSAGE);

@@ -52,7 +52,7 @@ public class AutoMod
             AutoMod_Relto.ModRelto_FixPineTrees(prp);
             prp.saveAsFile(outfolder+"/dat/"+filename);
         }
-        if(filename.equals("city_District_kdshgalleryDustAdditions.prp"))
+        if(filename.equals("city_District_KadishGalleryDustAdditions.prp"))
         {
             AutoMod_Moul_Others.DustKadishGalleryAdditions(args);
         }
@@ -163,7 +163,7 @@ public class AutoMod
         if(!useProfiles) m.status("Done AutoMod.");
         
     }
-    public static final String[] SimplicityAutoModMoulFiles = new String[]{
+    /*public static final String[] SimplicityAutoModMoulFiles = new String[]{
             "Teledahn_District_tldnDustAdditions.prp",
             "Personal02_District_philDustAdditions.prp",
             "GreatZero_District_grtzDustAdditions.prp",
@@ -183,12 +183,14 @@ public class AutoMod
             "Neighborhood_District_nb01Ayhoheek5Man1Dead.prp",
             "Neighborhood_District_nb01Ayhoheek5Man1State.prp",
 
-        };
-    public static void CreateAllProfiles(String infolder, String outfolder, String cleanpotsfolder)
+        };*/
+    public static void CreateAllProfiles(String moulfolder, String outfolder, String cleanpotsfolder)
     {
-        for(String file: SimplicityAutoModMoulFiles)
+        if(cleanpotsfolder==null) cleanpotsfolder = "H:/DontBackup/prps/pots/"; //I'm lazy today :P
+
+        for(String file: auto.moul.moulAutomods)
         {
-            AutoMod(infolder, outfolder, file, cleanpotsfolder, false);
+            AutoMod(moulfolder, outfolder, file, cleanpotsfolder, false);
         }
     }
     public static class AutoModInfo

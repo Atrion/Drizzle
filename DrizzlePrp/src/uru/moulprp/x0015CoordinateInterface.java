@@ -64,6 +64,32 @@ public class x0015CoordinateInterface extends uruobj
             children[i] = new Uruobjectref(c);
         }
     }
+    public void recalcFromL2WandW2P(Transmatrix w2p)
+    {
+        Transmatrix w2l = this.localToWorld.inverse();
+        //Transmatrix l2p = this.localToWorld.mult(w2p);
+        Transmatrix l2p = w2p.mult(this.localToWorld);
+        Transmatrix p2l = l2p.inverse();
+        this.worldToLocal = w2l;
+        this.localToParent = l2p;
+        this.parentToLocal = p2l;
+    }
+    public static PrpRootObject findParent(prpfile prp, PrpRootObject childcoordinterface)
+    {
+        x0015CoordinateInterface ci = childcoordinterface.castTo();
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plCoordinateInterface))
+        {
+            x0015CoordinateInterface possibleparent = ro.castTo();
+            for(Uruobjectref ch: possibleparent.children)
+            {
+                if(ch.equals(ci.parent.sceneobject))
+                {
+                    return ro;
+                }
+            }
+        }
+        return null;
+    }
     public void translate(double x, double y, double z, PrpRootObject[] coordinateinterfaces)
     {
         Uruobjectref parentCI = findCIParent(coordinateinterfaces);

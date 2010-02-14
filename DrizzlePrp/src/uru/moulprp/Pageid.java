@@ -44,6 +44,9 @@ public class Pageid extends uruobj implements java.io.Serializable
     
     //context ctx;
     //Integer xOverridePrefix;
+
+    //public int sequenceprefix;
+    //public int pagenum;
     
     public Pageid(context c)
     {
@@ -140,6 +143,10 @@ public class Pageid extends uruobj implements java.io.Serializable
     {
         if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower.
         return createFromPrefixSuffix(prefix,pagenum+33);
+        //Pageid r = new Pageid();
+        //r.setSequencePrefix(prefix);
+        //r.setPagenum(pagenum);
+        //return r;
     }
     public void setPagenum(int pagenum)
     {

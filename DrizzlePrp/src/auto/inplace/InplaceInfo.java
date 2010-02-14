@@ -3,14 +3,13 @@
  * and open the template in the editor.
  */
 
-package gui;
+package auto.inplace;
 
 /**
  *
  * @author user
  */
-public class Version
+public class InplaceInfo
 {
-    public static final int version = 23;
-    public static final boolean debug = false;
+
 }

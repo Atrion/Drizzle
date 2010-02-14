@@ -223,7 +223,18 @@ public class hexisle
             "CatfishCanyon_TileRegular.prp",
             "CatfishCanyon_TileTarget.prp",
         });
-        r.addSoundFiles(HexisleSounds);
+        r.addSoundFiles(new String[]{
+            "CatfishCanyon_Amb_Wind_loop.ogg","CatFishCanyonMx.ogg","CC_RiverLoopStereo.ogg",
+            "CC_RandomBird01.ogg","CC_RandomBird02.ogg","CC_RandomBird03.ogg","CC_RandomBird04.ogg","CC_RandomBird05.ogg","CC_RandomBird06.ogg","CC_RandomBird07.ogg","CC_RandomBird08.ogg","CC_RandomBird09.ogg","CC_RandomBird10.ogg","CC_RandomBird11.ogg","CC_RandomBird12.ogg",
+            "DessertDesert_Amb.ogg","DessertDesert_Wind_Loop.ogg","DessertDesertMx.ogg",
+            "LouderSpaceAmb_loop.ogg","LouderSpaceCraters.ogg","LouderSpaceMx.ogg","LS_ShootingStar_loop.ogg","LS_SpeakerStomp.ogg","LS-RotatingSpeaker-Loop.ogg",
+            "LS_Random01.ogg","LS_Random02.ogg","LS_Random03.ogg","LS_Random04.ogg","LS_Random05.ogg","LS_Random06.ogg","LS_Random07.ogg",
+            "MoldyDungeon_Amb01.ogg","MoldyDungeon_Amb02.ogg","MoldyDungeonMx.ogg",
+            "MD_Random01_scurry.ogg","MD_Random02_Squeak.ogg","MD_Random03_Buzz.ogg","MD_Random04_Buzz.ogg","MD_Random05_Buzz.ogg","MD_Random06_Squeak.ogg","MD_Random07_Squeak.ogg","MD_Random08_Squeak.ogg","MD_Random09_Squeak.ogg","MD_Random10_Debris.ogg","MD_Random11_Debris.ogg","MD_Random12_Debris.ogg","MD_Random13_Squeak.ogg",
+            "PlasmaMiasma_Amb.ogg","PlasmaMiasmaMx.ogg","PM_MovingLoop.ogg",
+            "PumkinJungle_Amb.ogg","PumpkinJungleMx.ogg",
+            "PJBirdRandom01.ogg","PJBirdRandom02.ogg","PJBirdRandom03.ogg","PJBirdRandom04.ogg","PJBirdRandom05.ogg","PJBirdRandom06.ogg",
+        });
         }
         return r;
     }
@@ -391,7 +402,7 @@ public class hexisle
 
     public static void fixStartAndLoopForAudio(prpfile prp)
     {
-        for(PrpRootObject obj: prp.objects)
+        for(PrpRootObject obj: prp.objects2)
         {
             Typeid t = obj.header.objecttype;
             uru.moulprp.PlWin32Sound s = null;
@@ -438,7 +449,7 @@ public class hexisle
         phys.havok.group = new uru.moulprp.HsBitVector(0x104); //or should this be 0?
     }
 
-    private static String[] HexisleSounds = {
+    /*private static String[] HexisleSounds = {
         "CatfishCanyon_Amb_Wind_loop.ogg","CatFishCanyonMx.ogg","CC_RiverLoopStereo.ogg",
         "CC_RandomBird01.ogg","CC_RandomBird02.ogg","CC_RandomBird03.ogg","CC_RandomBird04.ogg","CC_RandomBird05.ogg","CC_RandomBird06.ogg","CC_RandomBird07.ogg","CC_RandomBird08.ogg","CC_RandomBird09.ogg","CC_RandomBird10.ogg","CC_RandomBird11.ogg","CC_RandomBird12.ogg",
         "DessertDesert_Amb.ogg","DessertDesert_Wind_Loop.ogg","DessertDesertMx.ogg",
@@ -449,6 +460,6 @@ public class hexisle
         "PlasmaMiasma_Amb.ogg","PlasmaMiasmaMx.ogg","PM_MovingLoop.ogg",
         "PumkinJungle_Amb.ogg","PumpkinJungleMx.ogg",
         "PJBirdRandom01.ogg","PJBirdRandom02.ogg","PJBirdRandom03.ogg","PJBirdRandom04.ogg","PJBirdRandom05.ogg","PJBirdRandom06.ogg",
-    };
+    };*/
 
 }

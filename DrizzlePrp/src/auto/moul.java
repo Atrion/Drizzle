@@ -68,24 +68,75 @@ public class moul
 
             }
         };
-        r.addAgeFiles("Dereno", new String[]{"Dereno.age",});
-        r.addAgeFiles("EderDelin", new String[]{"EderDelin.age",});
-        r.addAgeFiles("EderTsogal", new String[]{"EderTsogal.age",});
-        r.addAgeFiles("GuildPub-Cartographers", new String[]{"GuildPub-Cartographers.age",});
-        r.addAgeFiles("GuildPub-Greeters", new String[]{"GuildPub-Greeters.age",});
-        r.addAgeFiles("GuildPub-Maintainers", new String[]{"GuildPub-Maintainers.age",});
-        r.addAgeFiles("GuildPub-Messengers", new String[]{"GuildPub-Messengers.age",});
-        r.addAgeFiles("GuildPub-Writers", new String[]{"GuildPub-Writers.age",});
-        r.addAgeFiles("Jalak", new String[]{"Jalak.age",});
-        r.addAgeFiles("LiveBahroCaves", new String[]{"LiveBahroCaves.age",});
-        r.addAgeFiles("Minkata", new String[]{"Minkata.age",});
-        r.addAgeFiles("Negilahn", new String[]{"Negilahn.age",});
-        r.addAgeFiles("Neighborhood02", new String[]{"Neighborhood02.age",});
-        r.addAgeFiles("Payiferen", new String[]{"Payiferen.age",});
-        r.addAgeFiles("Tetsonot", new String[]{"Tetsonot.age",});
-        r.addAgeFiles("Kveer", new String[]{"Kveer.age",});
-        r.addAgeFiles("GreatTreePub", new String[]{"GreatTreePub.age",});
-        r.addAgeFiles("Ahnonay", new String[]{"Ahnonay.age",});
+
+        r.addAgeFiles("city", new String[]{
+            "city_District_islmLakeLightMeter.prp",
+            "city_District_bahroFlyers_arch.prp","city_District_bahroFlyers_city1.prp","city_District_bahroFlyers_city2.prp","city_District_bahroFlyers_city3.prp","city_District_bahroFlyers_city4.prp","city_District_bahroFlyers_city5.prp","city_District_bahroFlyers_city6.prp",
+        });
+        r.addAgeFiles("Dereno", new String[]{
+            "Dereno.age","Dereno.fni","Dereno.sum","Dereno_District_DrnoExterior.prp","Dereno_District_DrnoPod.prp","Dereno_District_Textures.prp","Dereno_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("EderDelin", new String[]{
+            "EderDelin.age","EderDelin.fni","EderDelin.sum","EderDelin_District_garden.prp","EderDelin_District_BuiltIn.prp","EderDelin_District_Textures.prp",
+        });
+        r.addAgeFiles("EderTsogal", new String[]{
+            "EderTsogal.age","EderTsogal.fni","EderTsogal.sum","EderTsogal_District_tsoGarden.prp","EderTsogal_District_Textures.prp","EderTsogal_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("GuildPub-Cartographers", new String[]{
+            "GuildPub-Cartographers.age","GuildPub-Cartographers.fni","GuildPub-Cartographers.sum","GuildPub-Cartographers_District_Pub.prp","GuildPub-Cartographers_District_Textures.prp","GuildPub-Cartographers_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("GuildPub-Greeters", new String[]{
+            "GuildPub-Greeters.age","GuildPub-Greeters.fni","GuildPub-Greeters.sum","GuildPub-Greeters_District_Pub.prp","GuildPub-Greeters_District_Textures.prp","GuildPub-Greeters_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("GuildPub-Maintainers", new String[]{
+            "GuildPub-Maintainers.age","GuildPub-Maintainers.fni","GuildPub-Maintainers.sum","GuildPub-Maintainers_District_Pub.prp","GuildPub-Maintainers_District_Textures.prp","GuildPub-Maintainers_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("GuildPub-Messengers", new String[]{
+            "GuildPub-Messengers.age","GuildPub-Messengers.fni","GuildPub-Messengers.sum","GuildPub-Messengers_District_Pub.prp","GuildPub-Messengers_District_Textures.prp","GuildPub-Messengers_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("GuildPub-Writers", new String[]{
+            "GuildPub-Writers.age","GuildPub-Writers.fni","GuildPub-Writers.sum","GuildPub-Writers_District_Pub.prp","GuildPub-Writers_District_Textures.prp","GuildPub-Writers_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Jalak", new String[]{
+            "Jalak.age","Jalak.fni","Jalak.sum","Jalak_District_jlakArena.prp","Jalak_District_Textures.prp","Jalak_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("LiveBahroCaves", new String[]{
+            "LiveBahroCaves.age","LiveBahroCaves.fni","LiveBahroCaves.sum","LiveBahroCaves_District_MINKcave.prp","LiveBahroCaves_District_POTScave.prp","LiveBahroCaves_District_PODcave.prp","LiveBahroCaves_District_BlueSpiralCave.prp","LiveBahroCaves_District_TheSpecialPage.prp","LiveBahroCaves_District_Textures.prp","LiveBahroCaves_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Minkata", new String[]{
+            "Minkata.age","Minkata.csv","Minkata.fni","Minkata.sum","Minkata_District_minkExteriorDay.prp","Minkata_District_minkNightLinkSounds.prp","Minkata_District_minkExteriorNight.prp","Minkata_District_minkExcludeRegions.prp","Minkata_District_minkDistCraterPhysicals.prp","Minkata_District_minkDayLinkSounds.prp","Minkata_District_minkCameras.prp","Minkata_District_Textures.prp","Minkata_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Negilahn", new String[]{
+            "Negilahn.age","Negilahn.fni","Negilahn.sum","Negilahn_District_Jungle.prp","Negilahn_District_MuseumPod.prp","Negilahn_District_Textures.prp","Negilahn_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Neighborhood02", new String[]{
+            "Neighborhood02.age", "Neighborhood02.fni", "Neighborhood02.sum", "Neighborhood02_District_BuiltIn.prp", "Neighborhood02_District_GuildInfo-Cartographers.prp", "Neighborhood02_District_GuildInfo-Greeters.prp", "Neighborhood02_District_GuildInfo-Maintainers.prp", "Neighborhood02_District_GuildInfo-Messengers.prp", "Neighborhood02_District_GuildInfo-Writers.prp", "Neighborhood02_District_krelClassRm.prp", "Neighborhood02_District_krelCommonRm.prp", "Neighborhood02_District_krelKirel.prp", "Neighborhood02_District_krelPrivateRm.prp", "Neighborhood02_District_Textures.prp",
+        });
+        r.addAgeFiles("Payiferen", new String[]{
+            "Payiferen.age","Payiferen.fni","Payiferen.sum","Payiferen_District_Pod.prp","Payiferen_District_Textures.prp","Payiferen_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Tetsonot", new String[]{
+            "Tetsonot.age","Tetsonot.fni","Tetsonot.sum","Tetsonot_District_tetsoPod.prp","Tetsonot_District_Textures.prp","Tetsonot_District_BuiltIn.prp",
+        });
+        r.addAgeFiles("Kveer", new String[]{
+            "Kveer.age","Kveer.fni","Kveer.sum","Kveer_District_BuiltIn.prp","Kveer_District_KveerHalls.prp","Kveer_District_Textures.prp",
+        });
+        r.addAgeFiles("GreatTreePub", new String[]{
+            "GreatTreePub.age","GreatTreePub.fni","GreatTreePub.sum","GreatTreePub_District_BuiltIn.prp","GreatTreePub_District_GreatTree.prp","GreatTreePub_District_Pub.prp","GreatTreePub_District_Textures.prp",
+        });
+        r.addAgeFiles("Ahnonay", new String[]{
+            "Ahnonay.age","Ahnonay.fni","Ahnonay.sum","Ahnonay_District_BuiltIn.prp","Ahnonay_District_EngineerHut.prp","Ahnonay_District_Textures.prp","Ahnonay_District_Vortex.prp","Ahnonay_District_YeeshaSketchBahro.prp",/*"Ahnonay_District_ahnySphereCtrl.prp",*/ //partial Ahnonay Age.
+        });
+        r.addAgeFiles("GlobalAnimations", new String[]{
+            "GlobalAnimations_District_FemaleAmazed.prp","GlobalAnimations_District_FemaleAskQuestion.prp","GlobalAnimations_District_FemaleBeckonBig.prp","GlobalAnimations_District_FemaleBeckonSmall.prp","GlobalAnimations_District_FemaleBow.prp","GlobalAnimations_District_FemaleCallMe.prp","GlobalAnimations_District_FemaleCower.prp","GlobalAnimations_District_FemaleCrazy.prp","GlobalAnimations_District_FemaleCringe.prp","GlobalAnimations_District_FemaleCrossArms.prp","GlobalAnimations_District_FemaleDoh.prp","GlobalAnimations_District_FemaleFlinch.prp","GlobalAnimations_District_FemaleGroan.prp","GlobalAnimations_District_FemaleKneel.prp","GlobalAnimations_District_FemaleLeanLeft.prp","GlobalAnimations_District_FemaleLeanRight.prp","GlobalAnimations_District_FemaleLookAround.prp","GlobalAnimations_District_FemaleOkay.prp", /*eyes go funny*/"GlobalAnimations_District_FemaleOverHere.prp","GlobalAnimations_District_FemalePeer.prp","GlobalAnimations_District_FemaleSalute.prp","GlobalAnimations_District_FemaleScratchHead.prp","GlobalAnimations_District_FemaleShakeFist.prp","GlobalAnimations_District_FemaleShoo.prp","GlobalAnimations_District_FemaleSlouchSad.prp","GlobalAnimations_District_FemaleStop.prp","GlobalAnimations_District_FemaleTalkHand.prp","GlobalAnimations_District_FemaleTapFoot.prp","GlobalAnimations_District_FemaleTaunt.prp","GlobalAnimations_District_FemaleThumbsDown.prp","GlobalAnimations_District_FemaleThumbsDown2.prp","GlobalAnimations_District_FemaleThumbsUp.prp","GlobalAnimations_District_FemaleThumbsUp2.prp","GlobalAnimations_District_FemaleWaveLow.prp","GlobalAnimations_District_FemaleWinded.prp",
+            "GlobalAnimations_District_MaleAmazed.prp","GlobalAnimations_District_MaleAskQuestion.prp", /*arm doesn't go up correctly.*/"GlobalAnimations_District_MaleBeckonBig.prp","GlobalAnimations_District_MaleBeckonSmall.prp","GlobalAnimations_District_MaleBow.prp","GlobalAnimations_District_MaleCallMe.prp","GlobalAnimations_District_MaleCower.prp", /*eyes go funny*/"GlobalAnimations_District_MaleCrazy.prp", /*face goes funny*/"GlobalAnimations_District_MaleCringe.prp","GlobalAnimations_District_MaleCrossArms.prp", /*arms disappear*/"GlobalAnimations_District_MaleDoh.prp", /*face goes funny*/"GlobalAnimations_District_MaleFlinch.prp", /*face goes funny*/"GlobalAnimations_District_MaleGroan.prp","GlobalAnimations_District_MaleKneel.prp","GlobalAnimations_District_MaleLeanLeft.prp","GlobalAnimations_District_MaleLeanRight.prp","GlobalAnimations_District_MaleLookAround.prp","GlobalAnimations_District_MaleOkay.prp","GlobalAnimations_District_MaleOverHere.prp","GlobalAnimations_District_MalePeer.prp","GlobalAnimations_District_MaleSalute.prp","GlobalAnimations_District_MaleScratchHead.prp","GlobalAnimations_District_MaleShakeFist.prp","GlobalAnimations_District_MaleShoo.prp","GlobalAnimations_District_MaleSlouchSad.prp","GlobalAnimations_District_MaleStop.prp","GlobalAnimations_District_MaleTalkHand.prp","GlobalAnimations_District_MaleTapFoot.prp","GlobalAnimations_District_MaleTaunt.prp","GlobalAnimations_District_MaleThumbsDown.prp","GlobalAnimations_District_MaleThumbsDown2.prp","GlobalAnimations_District_MaleThumbsUp.prp","GlobalAnimations_District_MaleThumbsUp2.prp","GlobalAnimations_District_MaleWaveLow.prp","GlobalAnimations_District_MaleWinded.prp",
+            "GlobalAnimations_District_FemaleDance.prp","GlobalAnimations_District_MaleDance.prp", /*arms disappear*/
+        });
+        r.addAgeFiles("Neighborhood", new String[]{
+            "Neighborhood_District_nb01BahroPedestalShout.prp", "city_District_islmBahroShoutFerry.prp","city_District_islmBahroShoutLibrary.prp","city_District_islmBahroShoutPalace.prp",
+        });
+
+
         r.addSoundFiles(new String[]{
             "dln_Air_Loop.ogg","dln_GeeseFlyBy.ogg","dln_GeeseRandom.ogg","dln_RandBird-A01.ogg","dln_RandBird-A02.ogg","dln_RandBird-A03.ogg","dln_RandBird-B01.ogg","dln_RandBird-B02.ogg","dln_RandBird-B03.ogg","dln_RandBird-B04.ogg","dln_RandBird-C01.ogg","dln_RandBird-C02.ogg","dln_RandBird-C03.ogg","dln_RandBird01.ogg","dln_RandBird02.ogg","dln_RandBird03.ogg","dln_RandBird04.ogg","dln_RandBird05.ogg","dln_RandBird06.ogg",
             "drnIceCave_Loop.ogg","drnIceHarps_loop.ogg","drnRandomIce01.ogg","drnRandomIce02.ogg","drnRandomIce03.ogg","drnRandomIce04.ogg","drnRandomIce05.ogg","drnRandomIce06.ogg","drnRandomIce07.ogg","drnRandomIce08.ogg","drnUnderwaterCreature01.ogg","drnUnderwaterCreature02.ogg","drnUnderwaterCreature03.ogg","drnUnderwaterCreature04.ogg",
@@ -132,8 +183,245 @@ public class moul
             "psnlGalleryMusic.ogg", //like islmGalleryMusic.ogg, but more tinny, like from a device.
             "tmnaCreditsMusic.ogg", //the file in ABM, but missing from Pots.
         };
+        r.decider = new uru.moulprp.prputils.Compiler.Decider() {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
+                Typeid type = desc.objecttype;
+                int number = desc.objectnumber;
+                String name = desc.objectname.toString();
+                Pageid pageid = desc.pageid;
+
+                String[] namestartswith = {};
+                String[] nameequals = {};
+
+                boolean useObject = false;
+
+                //blacklist
+                if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
+                //if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                //if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+                if(pageid.prefix==0x22 && pageid.suffix==0x24 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                if(pageid.prefix==0x2A && pageid.suffix==0x25 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+
+                if(pageid.prefix==83 && pageid.suffix==42 && type==type.plHKPhysical && name.equals("ChairFallProxy")) return false; //Ahnonay: this physical crashes it on link in.
+
+                if(name.toLowerCase().equals("envmap02"))
+                {
+                    int dummy=0;
+                }
+
+                /*Typeid[] typeequals = new Typeid[]{
+                        type.plSceneObject,
+
+                        type.plCoordinateInterface,
+                        type.plSpawnModifier,
+                        type.plDrawInterface,
+                        type.plDrawableSpans,
+                        type.hsGMaterial,
+                        type.plLayer,
+                        type.plMipMap,
+                        type.plCubicEnvironMap,
+
+                        type.plOmniLightInfo,
+                        type.plPointShadowMaster,
+                        type.plPythonFileMod,
+                        type.plDirectionalLightInfo,
+                        type.plSimulationInterface,
+                        type.plViewFaceModifier,
+                        type.plAudioInterface,
+                        type.plStereizer,
+                        type.plSoundBuffer,
+                        type.plRandomSoundMod,
+                        type.plWin32StreamingSound,
+                        type.plWin32StaticSound,
+                        type.plWinAudio,
+                        type.plParticleSystem,
+                        type.plParticleCollisionEffectDie,
+                        type.plParticleLocalWind,
+                        type.plBoundInterface,
+                        type.plExcludeRegionModifier,
+                        type.plCameraBrain1,
+                        type.plCameraBrain1_Avatar,
+                        type.plCameraBrain1_Circle,
+                        type.plCameraBrain1_Fixed,
+                        type.plCameraModifier1,
+                        type.plAGModifier,
+
+                        type.plOccluder,
+                        type.plDynamicTextMap,
+
+                        type.plParticleCollisionEffectBounce,
+
+                        type.plSpotLightInfo,
+
+                        type.plShadowCaster,
+                        type.plDirectShadowMaster,
+                        type.plRelevanceRegion,
+                        type.plSoftVolumeSimple,
+
+                        type.plParticleFlockEffect,
+                        type.plFadeOpacityMod,
+                        type.plClusterGroup,
+                        type.plVisRegion,
+                        type.plSoftVolumeUnion,
+                        type.plObjectInVolumeDetector,
+                        type.plObjectInBoxConditionalObject,
+                        type.plInterfaceInfoModifier,
+                        type.plVolumeSensorConditionalObject,
+                        type.plLogicModifier,
+                        type.plActivatorConditionalObject,
+                        type.plFacingConditionalObject,
+                        type.plOneShotMod,
+                        type.plAvLadderMod,
+                        type.plPickingDetector,
+                        type.plCameraRegionDetector,
+
+                        type.plHKPhysical,
+
+                        type.plSoftVolumeIntersect,
+                        type.plEAXListenerMod,
+                        type.plPhysicalSndGroup,
+                        type.plSeekPointMod,
+                        type.plRailCameraMod,
+                        type.plLayerAnimation,
+                        type.plATCAnim,
+                        type.plAGMasterMod,
+                        type.plPanicLinkRegion,
+                        type.plLineFollowMod,
+                        type.plMsgForwarder,
+                        type.plAnimEventModifier,
+                        type.plMultiStageBehMod,
+
+                        type.plDynaFootMgr,
+                        type.plResponderModifier, //crashes POD district of LiveBahroCaves, and minkCameras district of Minkata.
+                        type.plSittingModifier,
+                        type.plImageLibMod,
+                        type.plLimitedDirLightInfo,
+                        type.plAgeGlobalAnim,
+                        type.plDynaPuddleMgr,
+                        type.plWaveSet7,
+                        type.plDynamicEnvMap,
+
+                        //version2
+                        type.plSoftVolumeInvert,
+
+                        //moul personal
+                        type.plDynaRippleMgr,
+                        type.plLayerSDLAnimation,
+                        type.plParticleCollisionEffectBeat,
+                        type.plParticleFadeVolumeEffect,
+
+                        //some GUI stuff
+                        type.pfGUIButtonMod,
+                        type.pfGUIDialogMod,
+                        type.plPostEffectMod,
+                        type.pfGUIDragBarCtrl,
+
+                        type.plMaintainersMarkerModifier,
+                        type.plDistOpacityMod,
+                        type.plMorphSequence,
+                        type.plMorphDataSet,
+                        type.plClothingItem,
+                        type.plSharedMesh,
+
+                        type.plEmoteAnim,
+                        type.pfGUIDraggableMod,
+                        type.pl2WayWinAudible,
+                        type.plArmatureLODMod,
+                        type.plClothingOutfit,
+                        type.plClothingBase,
+                        type.plArmatureEffectsMgr,
+                        type.plLayerLinkAnimation,
+                        type.plAliasModifier,
+                        type.plPrintShape,
+                };*/
+                //Typeid[] typeequals = mystAutomation.moulReadable;
+                Typeid[] typeequals = null;
+
+                String[] namestarts={
+                };
+                if(typeequals==null) return true;
+                for(Typeid curtype: typeequals) if(curtype==type) return true;
+                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
+
+                m.msg("Skipping type(1): ",type.toString());
+                return false;
+            }
+        };
+        r.prpmodifier = new conversion.PostConversionModifier() {
+            public void ModifyPrp(Info info, FileInfo file, prpfile prp) {
+                if(!file.agename.equals("Dereno"))
+                {
+                    //shared.State.AllStates.setState("removeDynamicCamMap", false);
+                    auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveDynamicCampMap(prp);
+                }
+
+                String newAgename = info.g.getNewAgename(file);
+                
+                //moved to conversion:
+                /*String newagename = info.g.renameinfo.agenames.get(file.agename);
+                String newAgename = (newagename==null)?agename:newagename;
+                if(newagename!=null)
+                {
+                    auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_ChangeVerySpecialPython(prp, agename, newagename);
+                }*/
+
+                //auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_RemoveLadders(prp);
+
+                auto.postmod.PostMod_Moul.PostMod_FixTsogalLanguages(prp);
+
+                PostMod_RenameAnimations(prp,newAgename);
+
+                PostMod_FixMinkata(prp,newAgename,info.outfolder);
+
+
+                if(file.agename.equals("EderDelin")||file.agename.equals("EderTsogal"))
+                {
+                    //shared.State.AllStates.setState("translateSmartseeks", true);
+                    PostMod_TranslateSmartseeks(prp);
+                }
+                
+                //all the crazy stuff, should be cleaned up:
+                HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
+                moul.proccessPrp(prp, file.agename, info.g.renameinfo.agenames, info.outfolder, info.infolder, refReassigns);
+            }
+        };
+        r.addAutomods(moulAutomods);
+        r.addInplacemods(
+            "/dat/city_District_palace.prp",
+            "/dat/city_District_courtyard.prp",
+            "/dat/city_District_canyon.prp",
+            "/dat/city_District_cavetjunction.prp",
+            "/dat/city_District_ferry.prp",
+            "/dat/city_District_greatstair.prp",
+            "/dat/city_District_KadishGallery.prp",
+            "/dat/city_District_KahloPub.prp",
+            "/dat/city_District_library.prp"
+        );
         return r;
     }
+    public static String[] moulAutomods= new String[]{
+        //Drizzle23:
+        "city_District_KadishGalleryDustAdditions.prp",
+        //Drizzle22:
+        "city_District_guildhallDustAdditions.prp",
+        "Neighborhood_District_nb01Ayhoheek5Man1Dead.prp",
+        "Neighborhood_District_nb01Ayhoheek5Man1State.prp",
+        //Drizzle21:
+        "Teledahn_District_tldnDustAdditions.prp",
+        "Personal02_District_philDustAdditions.prp",
+        "GreatZero_District_grtzDustAdditions.prp",
+        "Myst_District_mystDustAdditions.prp",
+        "Garrison_District_grsnDustAdditions.prp",
+        "Garrison_District_grsnDustAdditions2.prp",
+        "Kadish_District_kdshDustAdditions.prp",
+        "Gira_District_giraDustAdditions.prp",
+        "Descent_District_dsntDustAdditions.prp",
+        "Cleft_District_clftDustAdditions2.prp",
+        "Cleft_District_clftDustAdditions.prp",
+        "AhnySphere02_District_ahny2DustAdditions.prp",
+        "Ercana_District_ercaDustAdditions.prp",
+        "Personal_District_psnlDustAdditions.prp",
+    };
     public static RenameInfo getMoulRenameInfo()
     {
         RenameInfo r = new RenameInfo();
@@ -329,7 +617,7 @@ public class moul
 
     }*/
 
-    public static void convertMoul(String myst5folder, String potsfolder)
+    /*public static void convertMoul(String myst5folder, String potsfolder)
     {
         m.state.push();
         m.state.curstate.showConsoleMessages = true;
@@ -379,7 +667,7 @@ public class moul
         m.status("Dont forget to run SoundDecompress.exe in your Pots folder, in order to get the sounds working!  (You can also click the SoundDecompress button on the form if you prefer.) (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
         //m.status("Dont forget to run SoundDecompress.exe; the button is at UAM->SoundDecompress. (If SoundDecompress crashes, it means you have to log into Uru, quit, then try again.)");
         m.status("Conversion completed!");
-    }
+    }*/
     
     //static HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns;
     public static void proccessPrp(prpfile prp, String agename, HashMap<String, String> agenames, String outfolder, String infolder, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
@@ -427,8 +715,9 @@ public class moul
             PlAliasModifier alias = PlAliasModifier.createFromName(newname);
             Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
             PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
-            prp.extraobjects.add(aliasroot);
-            prp.mergeExtras();
+            //prp.extraobjects.add(aliasroot);
+            //prp.mergeExtras();
+            prp.addObject(aliasroot);
         }
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
         {
@@ -438,7 +727,7 @@ public class moul
             
             //change respondermodifier from Myst to MystMystV.
             PlResponderModifier rm = prp.findObject("cRespLinkOutMyst", Typeid.plResponderModifier).castTo();
-            PrpMessage.PlLinkToAgeMsg ltam = rm.messages[0].commands[1].message.castTo();
+            PrpMessage.PlLinkToAgeMsg ltam = rm.messages.get(0).commands.get(1).message.castTo();
             ltam.ageLinkStruct.xageinfo.ageFilename = Wpstr.create("MystMystV");
             //ltam.ageLinkStruct.xageinfo.ageInstanceName = Wpstr.create("MystMystV");
             int dummy=0;
@@ -468,8 +757,8 @@ public class moul
         if(agename.equals("Ahnonay") && pagename.equals("EngineerHut"))
         {
             //just disable these objects, so user's can't click them.
-            prp.removeObject(Typeid.plHKPhysical, "SaveClothClkRegion");
-            prp.removeObject(Typeid.plHKPhysical, "BahroRockBook");
+            prp.markObjectDeleted(Typeid.plHKPhysical, "SaveClothClkRegion");
+            prp.markObjectDeleted(Typeid.plHKPhysical, "BahroRockBook");
             
             //set new python files:
             uru.moulprp.x00A2Pythonfilemod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
@@ -500,7 +789,7 @@ public class moul
             
             //change respondermodifier from AhnonayCathedral to AhnonayMOUL.
             PlResponderModifier rm = prp.findObject("cRespLinkOutAhnonay", Typeid.plResponderModifier).castTo();
-            PrpMessage.PlLinkToAgeMsg ltam = rm.messages[0].commands[1].message.castTo();
+            PrpMessage.PlLinkToAgeMsg ltam = rm.messages.get(0).commands.get(1).message.castTo();
             ltam.ageLinkStruct.xageinfo.ageFilename = Wpstr.create("AhnonayMOUL");
 
             //change Ahnonay image.
@@ -772,183 +1061,23 @@ public class moul
         m.msg("Done Moul work!");
     }
     */
-    public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files, boolean isSimplicity, conversion.RenameInfo ri)
-    {
-        class compileDecider implements uru.moulprp.prputils.Compiler.Decider
+    //public static void convertMoulToPots(String infolder, String outfolder, Vector<String> files, boolean isSimplicity, conversion.RenameInfo ri)
+    //{
+        /*class compileDecider implements uru.moulprp.prputils.Compiler.Decider
         {
             public boolean isObjectToBeIncluded(Uruobjectdesc desc)
             {
-                Typeid type = desc.objecttype;
-                int number = desc.objectnumber;
-                String name = desc.objectname.toString();
-                Pageid pageid = desc.pageid;
-
-                String[] namestartswith = {};
-                String[] nameequals = {};
-
-                boolean useObject = false;
-
-                //blacklist
-                if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
-                //if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
-                //if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
-                if(pageid.prefix==0x22 && pageid.suffix==0x24 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
-                if(pageid.prefix==0x2A && pageid.suffix==0x25 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
-
-                if(pageid.prefix==83 && pageid.suffix==42 && type==type.plHKPhysical && name.equals("ChairFallProxy")) return false; //Ahnonay: this physical crashes it on link in.
-
-                if(name.toLowerCase().equals("envmap02"))
-                {
-                    int dummy=0;
-                }
-
-                /*Typeid[] typeequals = new Typeid[]{
-                        type.plSceneObject,
-
-                        type.plCoordinateInterface,
-                        type.plSpawnModifier,
-                        type.plDrawInterface,
-                        type.plDrawableSpans,
-                        type.hsGMaterial,
-                        type.plLayer,
-                        type.plMipMap,
-                        type.plCubicEnvironMap,
-
-                        type.plOmniLightInfo,
-                        type.plPointShadowMaster,
-                        type.plPythonFileMod,
-                        type.plDirectionalLightInfo,
-                        type.plSimulationInterface,
-                        type.plViewFaceModifier,
-                        type.plAudioInterface,
-                        type.plStereizer,
-                        type.plSoundBuffer,
-                        type.plRandomSoundMod,
-                        type.plWin32StreamingSound,
-                        type.plWin32StaticSound,
-                        type.plWinAudio,
-                        type.plParticleSystem,
-                        type.plParticleCollisionEffectDie,
-                        type.plParticleLocalWind,
-                        type.plBoundInterface,
-                        type.plExcludeRegionModifier,
-                        type.plCameraBrain1,
-                        type.plCameraBrain1_Avatar,
-                        type.plCameraBrain1_Circle,
-                        type.plCameraBrain1_Fixed,
-                        type.plCameraModifier1,
-                        type.plAGModifier,
-
-                        type.plOccluder,
-                        type.plDynamicTextMap,
-
-                        type.plParticleCollisionEffectBounce,
-
-                        type.plSpotLightInfo,
-
-                        type.plShadowCaster,
-                        type.plDirectShadowMaster,
-                        type.plRelevanceRegion,
-                        type.plSoftVolumeSimple,
-
-                        type.plParticleFlockEffect,
-                        type.plFadeOpacityMod,
-                        type.plClusterGroup,
-                        type.plVisRegion,
-                        type.plSoftVolumeUnion,
-                        type.plObjectInVolumeDetector,
-                        type.plObjectInBoxConditionalObject,
-                        type.plInterfaceInfoModifier,
-                        type.plVolumeSensorConditionalObject,
-                        type.plLogicModifier,
-                        type.plActivatorConditionalObject,
-                        type.plFacingConditionalObject,
-                        type.plOneShotMod,
-                        type.plAvLadderMod,
-                        type.plPickingDetector,
-                        type.plCameraRegionDetector,
-
-                        type.plHKPhysical,
-
-                        type.plSoftVolumeIntersect,
-                        type.plEAXListenerMod,
-                        type.plPhysicalSndGroup,
-                        type.plSeekPointMod,
-                        type.plRailCameraMod,
-                        type.plLayerAnimation,
-                        type.plATCAnim,
-                        type.plAGMasterMod,
-                        type.plPanicLinkRegion,
-                        type.plLineFollowMod,
-                        type.plMsgForwarder,
-                        type.plAnimEventModifier,
-                        type.plMultiStageBehMod,
-
-                        type.plDynaFootMgr,
-                        type.plResponderModifier, //crashes POD district of LiveBahroCaves, and minkCameras district of Minkata.
-                        type.plSittingModifier,
-                        type.plImageLibMod,
-                        type.plLimitedDirLightInfo,
-                        type.plAgeGlobalAnim,
-                        type.plDynaPuddleMgr,
-                        type.plWaveSet7,
-                        type.plDynamicEnvMap,
-
-                        //version2
-                        type.plSoftVolumeInvert,
-
-                        //moul personal
-                        type.plDynaRippleMgr,
-                        type.plLayerSDLAnimation,
-                        type.plParticleCollisionEffectBeat,
-                        type.plParticleFadeVolumeEffect,
-
-                        //some GUI stuff
-                        type.pfGUIButtonMod,
-                        type.pfGUIDialogMod,
-                        type.plPostEffectMod,
-                        type.pfGUIDragBarCtrl,
-
-                        type.plMaintainersMarkerModifier,
-                        type.plDistOpacityMod,
-                        type.plMorphSequence,
-                        type.plMorphDataSet,
-                        type.plClothingItem,
-                        type.plSharedMesh,
-
-                        type.plEmoteAnim,
-                        type.pfGUIDraggableMod,
-                        type.pl2WayWinAudible,
-                        type.plArmatureLODMod,
-                        type.plClothingOutfit,
-                        type.plClothingBase,
-                        type.plArmatureEffectsMgr,
-                        type.plLayerLinkAnimation,
-                        type.plAliasModifier,
-                        type.plPrintShape,
-                };*/
-                //Typeid[] typeequals = mystAutomation.moulReadable;
-                Typeid[] typeequals = null;
-
-                String[] namestarts={
-                };
-                if(typeequals==null) return true;
-                for(Typeid curtype: typeequals) if(curtype==type) return true;
-                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
-
-                m.msg("Skipping type(1): ",type.toString());
-                return false;
             }
-        }
+        }*/
 
-        HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
+        //HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
 
 
         //Typeid[] readable = mystAutomation.moulReadable;
-        Typeid[] readable = null;
+        //Typeid[] readable = null;
 
         //create folders...
-        FileUtils.CreateFolder(outfolder+"/dat/");
+        //FileUtils.CreateFolder(outfolder+"/dat/");
         //FileUtils.CreateFolder(outfolder+"/SDL/");
 
         /*//Handle .sdl files...
@@ -966,7 +1095,7 @@ public class moul
         }*/
 
         //Handle .fni files...
-        Vector<String> fnifiles = common.filterFilenamesByExtension(files, ".fni");
+        /*Vector<String> fnifiles = common.filterFilenamesByExtension(files, ".fni");
         for(String filename: fnifiles)
         {
             String agename = common.getAgenameFromFilename(filename);
@@ -977,10 +1106,10 @@ public class moul
             byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
             byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
-        }
+        }*/
 
         //Handle .csv files...
-        Vector<String> csvfiles = common.filterFilenamesByExtension(files, ".csv");
+        /*Vector<String> csvfiles = common.filterFilenamesByExtension(files, ".csv");
         for(String filename: csvfiles)
         {
             String agename = common.getAgenameFromFilename(filename);
@@ -991,7 +1120,7 @@ public class moul
             byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
             byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
-        }
+        }*/
 
         //Handle .ogg files...
         /*Vector<String> oggfiles = common.filterFilenamesByExtension(files, ".ogg");
@@ -1008,7 +1137,7 @@ public class moul
         }*/
 
         //Handle .age files...
-        AllGames.getMoul().ConvertGame(infolder, outfolder);
+        //AllGames.getMoul().ConvertGame(infolder, outfolder);
         /*Vector<String> agefiles = common.filterFilenamesByExtension(files, ".age");
         for(String filename: agefiles)
         {
@@ -1058,93 +1187,93 @@ public class moul
 
 
         //Handle .prp files...
-        Vector<String> prpfiles = common.filterFilenamesByExtension(files, ".prp");
-        for(String filename: prpfiles)
-        {
-            String agename = common.getAgenameFromFilename(filename);
-            String infile = infolder + "/dat/" + filename;
-            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, ri.agenames);//.replace("_", "_District_");
-
-            //shared.State.AllStates.push();
-            /*if(isSimplicity)
-            {
-                if(agename.equals("Dereno"))
-                {
-                    shared.State.AllStates.setState("removeDynamicCamMap", false);
-                }
-                else if(agename.equals("EderDelin")||agename.equals("EderTsogal"))
-                {
-                    shared.State.AllStates.setState("translateSmartseeks", true);
-                }
-            }*/
-
-            //Bytes prpdata = Bytes.createFromFile(infile);
-            //Bytestream bytestream = Bytestream.createFromBytes(prpdata);
-            IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
-            context c = context.createFromBytestream(bytestream);
-            c.curFile = filename; //helpful for debugging.
-
-            //modify sequence prefix if Age is in list.
-            Integer prefix = ri.prefices.get(agename);
-            if(prefix!=null)
-            {
-                c.sequencePrefix = prefix;
-            }
-
-            //modify sequence suffix if Age is in list.
-            cmap<Integer,Integer> suffix = ri.pagenums.get(agename);
-            if(suffix!=null)
-            {
-                c.pagenumMap = suffix;
-            }
-
-            //modify agename if Age is in list.
-            String newAgename = ri.agenames.get(agename);
-            if(newAgename!=null)
-            {
-                c.ageName = newAgename;
-            }
-
-            prpfile prp = prpfile.createFromContext(c, readable);
-
-            moulProcessPrp(prp,agename,ri.agenames,outfolder,infolder);
-            auto.moul.proccessPrp(prp,agename,ri.agenames,outfolder,infolder, refReassigns);
-
-            //Change pagename, if applicable.
-            String oldpagename = prp.header.pagename.toString();
-            String newpagename = (String)ri.pagenames.get2(agename,prp.header.pagename.toString());
-            if(newpagename!=null)
-            {
-                prp.header.pagename = Urustring.createFromString(newpagename);
-                outfile = outfile.replaceFirst("_District_"+oldpagename, "_District_"+newpagename);
-            }
-
-            //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
-            //prpoutputbytes.saveAsFile(outfile);
-            prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
-
-            c.close();
-
-            //shared.State.AllStates.pop();
-
-        }
+//        Vector<String> prpfiles = common.filterFilenamesByExtension(files, ".prp");
+//        for(String filename: prpfiles)
+//        {
+//            String agename = common.getAgenameFromFilename(filename);
+//            String infile = infolder + "/dat/" + filename;
+//            String outfile = outfolder + "/dat/" + common.replaceAgenameIfApplicable(filename, ri.agenames);//.replace("_", "_District_");
+//
+//            //shared.State.AllStates.push();
+//            /*if(isSimplicity)
+//            {
+//                if(agename.equals("Dereno"))
+//                {
+//                    shared.State.AllStates.setState("removeDynamicCamMap", false);
+//                }
+//                else if(agename.equals("EderDelin")||agename.equals("EderTsogal"))
+//                {
+//                    shared.State.AllStates.setState("translateSmartseeks", true);
+//                }
+//            }*/
+//
+//            //Bytes prpdata = Bytes.createFromFile(infile);
+//            //Bytestream bytestream = Bytestream.createFromBytes(prpdata);
+//            IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
+//            context c = context.createFromBytestream(bytestream);
+//            c.curFile = filename; //helpful for debugging.
+//
+//            //modify sequence prefix if Age is in list.
+//            Integer prefix = ri.prefices.get(agename);
+//            if(prefix!=null)
+//            {
+//                c.sequencePrefix = prefix;
+//            }
+//
+//            //modify sequence suffix if Age is in list.
+//            cmap<Integer,Integer> suffix = ri.pagenums.get(agename);
+//            if(suffix!=null)
+//            {
+//                c.pagenumMap = suffix;
+//            }
+//
+//            //modify agename if Age is in list.
+//            String newAgename = ri.agenames.get(agename);
+//            if(newAgename!=null)
+//            {
+//                c.ageName = newAgename;
+//            }
+//
+//            prpfile prp = prpfile.createFromContext(c, readable);
+//
+//            moulProcessPrp(prp,agename,ri.agenames,outfolder,infolder);
+//            auto.moul.proccessPrp(prp,agename,ri.agenames,outfolder,infolder, refReassigns);
+//
+//            //Change pagename, if applicable.
+//            String oldpagename = prp.header.pagename.toString();
+//            String newpagename = (String)ri.pagenames.get2(agename,prp.header.pagename.toString());
+//            if(newpagename!=null)
+//            {
+//                prp.header.pagename = Urustring.createFromString(newpagename);
+//                outfile = outfile.replaceFirst("_District_"+oldpagename, "_District_"+newpagename);
+//            }
+//
+//            //Bytes prpoutputbytes = prp.saveAsBytes(new compileDecider());
+//            //prpoutputbytes.saveAsFile(outfile);
+//            prp.saveAsBytes(new compileDecider()).writeAllBytesToFile(outfile);
+//
+//            c.close();
+//
+//            //shared.State.AllStates.pop();
+//
+//        }
 
 
         //Handle .sum files...
-        Vector<String> sumfiles = common.filterFilenamesByExtension(files, ".sum");
+        /*Vector<String> sumfiles = common.filterFilenamesByExtension(files, ".sum");
         for(String filename: sumfiles)
         {
             String agename = common.getAgenameFromFilename(filename);
             //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
             Bytes sum1 = uru.moulprp.sumfile.createEmptySumfile();
             FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, ri.agenames), sum1);
-        }
+        }*/
 
 
         //All done!
-        m.msg("Done Moul work!");
-    }
-    public static void moulProcessPrp(prpfile prp, String agename, HashMap<String, String> agenames,String outfolder, String infolder)
+        //m.msg("Done Moul work!");
+    //}
+    /*public static void moulProcessPrp(prpfile prp, String agename, HashMap<String, String> agenames,String outfolder, String infolder)
     {
         if(!agename.equals("Dereno"))
         {
@@ -1173,7 +1302,7 @@ public class moul
         }
 
 
-    }
+    }*/
 
     public static void PostMod_RenameAnimations(prpfile prp, String newAgename)
     {

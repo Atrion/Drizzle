@@ -26,6 +26,103 @@ import SevenZip.HRESULT;
 //I also modified SevenZip.Archive.SevenZip.Handler by commenting out the exception catcher, so I can catch them instead.
 public class sevenzip
 {
+    public static interface FileIncluder
+    {
+        public boolean includeFile(String filename);
+    }
+    public static boolean check(String filename, String basefolder, FileIncluder includer)
+    {
+        MyRandomAccessFile istream = null;
+        try
+        {
+            //part of the hack to set outputfolder:
+            String root = basefolder+"/";
+
+            //use this for files on disk.
+            istream = new MyRandomAccessFile(filename,"r");
+
+            IInArchive archive = new Handler();
+            int result = archive.Open(istream);
+            if(result!=0&&result!=1)
+            {
+                //we get a value of 1 sometimes, but it works fine.  No exclusive lock maybe?
+                m.err("Problem opening/reading 7z file.");
+            }
+
+            /*ArchiveExtractCallback callback = new ArchiveExtractCallback();
+            callback.Init(archive);
+
+            //the -1 says extract all files, so we don't need the 1st argument.
+            //the NExtract_NAskMode_kExtract means we want to extract the files.
+            int result2 = archive.Extract(null, -1, IInArchive.NExtract_NAskMode_kExtract, callback);
+            if(result2!=0)
+            {
+                //error
+                m.err("Error during extraction.");
+            }
+            long numerrors = callback.NumErrors;
+            if(numerrors!=0)
+            {
+                //errors during extraction.
+                m.err("Errors during extraction: "+Long.toString(numerrors));
+            }*/
+
+            //this block goes through all the entries.
+            int count = archive.size();
+            for(int i=0;i<count;i++)
+            {
+                SevenZipEntry entry = archive.getEntry(i);
+                if(!entry.isDirectory())
+                {
+                    String name = entry.getName();
+                    File fullfilename = new File(basefolder+"/"+name);
+                    /*File f = new File(fullfilename);
+                    if(f.exists() && f.isFile())
+                    {
+                        m.msg("Deleting "+fullfilename);
+                        boolean success = f.delete();
+                        if(!success)
+                        {
+                            m.warn("Unable to delete file: "+name);
+                        }
+                    }*/
+                    //FileUtils.DeleteFile2(fullfilename);
+                    if(!entry.isDirectory() && includer.includeFile(name))
+                    {
+                        long correctsize = entry.getSize();
+                        int correctcrc = (int)entry.getCrc();
+                        if(!fullfilename.exists()) return false;
+                        long actualsize = fullfilename.length();
+                        if(actualsize!=correctsize) return false;
+                        if(correctsize!=0) //bit of a weird behavior: .7z files have the crc as -1 if the size is 0, but the crc should be 0.
+                        {
+                            byte[] data = FileUtils.ReadFile(fullfilename);
+                            int actualcrc = SevenZipCommon.CRC.CalculateDigest(data, data.length);
+                            if(actualcrc!=correctcrc) return false;
+                        }
+                    }
+                }
+            }
+
+
+            archive.close();
+            //istream.close();
+            return true;
+        }
+        catch(Exception e)
+        {
+            m.err("Error during 7zip checking.");
+            return false;
+        }
+        finally
+        {
+            try
+            {
+                if(istream!=null) istream.close();
+            }
+            catch(Exception e){}
+        }
+    }
     public static void delete(String filename, String outputfolder)
     {
         MyRandomAccessFile istream = null;
@@ -419,6 +516,7 @@ public class sevenzip
             SevenZipEntry item = _archiveHandler.getEntry(index);
             
             //Dustin
+            if(item.isDirectory()) return HRESULT.S_OK; //skip directories.  This has the side-effect of not creating empty folders, which we shouldn't have hopefully.
             String name = item.getName().toLowerCase();
             if(name.startsWith("dat/")) _filePath = root + "dat/" + item.getName().substring(4);
             else if(name.startsWith("sfx/")) _filePath = root + "sfx/" + item.getName().substring(4);

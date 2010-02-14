@@ -617,7 +617,7 @@ public class distiller
         }
 
         //test check for missing refs.
-        for(PrpRootObject ro: dest.objects)
+        for(PrpRootObject ro: dest.objects2)
         {
             for(Uruobjectdesc ref: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, ro))
             {
@@ -638,7 +638,7 @@ public class distiller
         {
 
             //test check for missing refs.
-            for(PrpRootObject ro: dest.objects)
+            for(PrpRootObject ro: dest.objects2)
             {
                 for(Uruobjectdesc ref: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, ro))
                 {
@@ -653,7 +653,7 @@ public class distiller
             //test check for source objects which link to dest, but are not included in dest.
             for(prpfile prp: sourceprpfiles)
             {
-                for(PrpRootObject ro: prp.objects)
+                for(PrpRootObject ro: prp.objects2)
                 {
                     ro.ensureParsed();
                     Uruobjectdesc linksToDest=null;

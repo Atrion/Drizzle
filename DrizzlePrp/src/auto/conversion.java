@@ -58,6 +58,22 @@ public class conversion
 
         }
         public String toString(){return filename;}
+        public void guessAgename()
+        {
+            java.io.File f = new java.io.File(filename);
+            String name = f.getName();
+            int dotpos = name.indexOf(".");
+            int undpos = name.indexOf("_");
+            int distpos = name.indexOf("_District_");
+            if(type==Filetype.prp)
+            {
+                agename = name.substring(0,undpos); //this is possibly wrong for some games, as an _ in the name can break it.  But I think only fan Ages have that.
+            }
+            else if(type==Filetype.fni || type==Filetype.sum || type==Filetype.age || type==Filetype.csv)
+            {
+                agename = name.substring(0,dotpos);
+            }
+        }
     }
     public static enum Filetype
     {
@@ -87,6 +103,7 @@ public class conversion
     }
     public static void convertFile(Info info, FileInfo file)
     {
+
         switch(file.type)
         {
             case fni:
@@ -103,6 +120,12 @@ public class conversion
                 break;
             case ogg:
                 convertOgg(info,file);
+                break;
+            case bik:
+                convertBik(info,file);
+                break;
+            case csv:
+                convertCsv(info,file);
                 break;
             default:
                 m.err("Cannot convert this file type: ",file.type.toString());
@@ -168,6 +191,7 @@ public class conversion
         if(newagename!=null)
         {
             prp.header.agename = Urustring.createFromString(newagename);
+            auto.postmod.PostMod_RemoveDynamicCamMap.PostMod_ChangeVerySpecialPython(prp, oldagename, newagename);
         }
 
         //processPrp(prp,agename,agenames,outfolder);
@@ -204,7 +228,7 @@ public class conversion
 
         //byte[] encryptedData = FileUtils.ReadFile(infile);
         //byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData); //UruCrypt.DecryptEoa(encryptedData);
-        byte[] decryptedData = UruCrypt.DecryptAny(infile);
+        byte[] decryptedData = UruCrypt.DecryptAny(infile,info.g);
 
         //modify sequence prefix if Age is in list.
         Integer prefix = info.g.renameinfo.prefices.get(file.agename);
@@ -269,7 +293,7 @@ public class conversion
 
             //byte[] encryptedData = FileUtils.ReadFile(infile);
             //byte[] decryptedData = UruCrypt.DecryptWhatdoyousee(encryptedData);// UruCrypt.DecryptEoa(encryptedData);
-            byte[] decryptedData = UruCrypt.DecryptAny(infile);
+            byte[] decryptedData = UruCrypt.DecryptAny(infile,info.g);
 
             if(info.g.fnimodifier!=null)
             {
@@ -281,5 +305,29 @@ public class conversion
             byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
             FileUtils.WriteFile(outfile, wdysData);
         //}
+    }
+    public static void convertBik(Info info, FileInfo file)
+    {
+        String infile = info.infolder + "/avi/" + file.filename;
+        String outfile = info.outfolder + "/avi/" + info.g.renameinfo.simplefilesrename(file.filename);
+
+        FileUtils.CopyFile(infile, outfile, true, true);
+    }
+    public static void convertCsv(Info info, FileInfo file)
+    {
+        String infile = info.infolder + "/dat/" + file.filename;
+        String outfile = info.outfolder + "/dat/" + info.g.getNewAgename(file)+".csv";
+
+        byte[] decryptedData = UruCrypt.DecryptAny(infile,info.g);
+
+        //if(info.g.csvmodifier!=null)
+        //{
+        //    textfile fnifile = textfile.createFromBytes(decryptedData);
+        //    info.g.fnimodifier.ModifyFni(info, file, fnifile);
+        //    decryptedData = fnifile.saveToByteArray();
+        //}
+
+        byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
+        FileUtils.WriteFile(outfile, wdysData);
     }
 }

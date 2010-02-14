@@ -107,7 +107,7 @@ public class AutoMod_Shared
 
         //find scenenode.
         PrpRootObject sn = null;
-        for(PrpRootObject obj: prp.objects)
+        for(PrpRootObject obj: prp.objects2)
             if(obj.header.objecttype==Typeid.plSceneNode)
                 sn = obj;
 
@@ -121,8 +121,10 @@ public class AutoMod_Shared
         sn.markAsChanged();
         soroot.markAsChanged();
         pfmroot.markAsChanged();
-        prp.extraobjects.add(soroot);
-        prp.extraobjects.add(pfmroot);
+        //prp.extraobjects.add(soroot);
+        //prp.extraobjects.add(pfmroot);
+        prp.addObject(soroot);
+        prp.addObject(pfmroot);
 
     }
 

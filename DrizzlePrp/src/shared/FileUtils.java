@@ -45,6 +45,14 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
+    public static void ZeroFile(String filename)
+    {
+        ZeroFile(new File(filename));
+    }
+    public static void ZeroFile(File file)
+    {
+        FileUtils.WriteFile(file, new byte[]{});
+    }
     public static String GetRelativePath(File ancestor, File descendant)
     {
         String result = "";
@@ -204,14 +212,43 @@ public class FileUtils {
     }
     public static void DeleteFile(String filename)
     {
+        DeleteFile(filename,false);
+    }
+    public static void DeleteFile(String filename, boolean throwexception)
+    {
         File file = new File(filename);
         if(file.exists())
         {
             boolean result = file.delete();
             if(!result) m.err("Unable to delete file: ",filename);
+            if(throwexception) m.throwUncaughtException("");
+        }
+    }
+    public static void CopyTree(String from, String to, boolean overwrite, boolean throwexception)
+    {
+        //does not clear the destination tree first, so it will just overlay.
+        File f = new File(from);
+        if(f.isFile())
+        {
+            CopyFile(from,to,overwrite,true,throwexception);
+        }
+        else if(f.isDirectory())
+        {
+            for(File child: f.listFiles())
+            {
+                CopyTree(from+"/"+child.getName(),to+"/"+child.getName(),overwrite,throwexception);
+            }
+        }
+        else
+        {
+            m.throwUncaughtException("Unhandled case.");
         }
     }
     public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder)
+    {
+        CopyFile(infile,outfile,overwrite,createfolder,false);
+    }
+    public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder, boolean throwexception)
     {
         File in = new File(infile);
         File out = new File(outfile);
@@ -221,7 +258,7 @@ public class FileUtils {
         {
             if(!overwrite) return;
             
-            FileUtils.DeleteFile(outfile);
+            FileUtils.DeleteFile(outfile,throwexception);
         }
         
         
@@ -235,6 +272,7 @@ public class FileUtils {
         catch(Exception e)
         {
             m.err("Unable to copy file ",infile," to ",outfile);
+            if(throwexception) m.throwUncaughtException("");
         }
         finally
         {
@@ -246,6 +284,7 @@ public class FileUtils {
             catch(Exception e)
             {
                 m.err("Unable to close file copying channel.");
+                if(throwexception) m.throwUncaughtException("");
             }
         }
     }

@@ -251,7 +251,10 @@ public class translation
             if(index==-1 && (line.startsWith("//")||line.equals(""))) continue;  //skip comments and empty lines.
             String left = line.substring(0, index);
             String right = line.substring(index+sep.length());
-            if(left.length()==0 || right.length()==0) throw new shared.uncaughtexception("Invalid language file at line "+Integer.toString(i+1));
+            if(left.length()==0 || right.length()==0)
+            {
+                throw new shared.uncaughtexception("Invalid language file at line "+Integer.toString(i+1));
+            }
 
             if(trans!=null) trans.put(left, right);
             if(output!=null) output.add(new shared.Pair(left, right));
@@ -267,15 +270,19 @@ public class translation
         allstrings = getAllLiteralStrings();
         
         StringBuilder result = new StringBuilder();
+        StringBuilder result2 = new StringBuilder();
         for(String str: missingTranslations)
         {
             if(allstrings.contains(str))
             {
                 result.append(str+sep+"\n");
+                result2.append(str+sep+str+"\n");
             }
         }
-        byte[] result2 = b.StringToBytes(result.toString());
-        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/DrizzleNeededTranslations.txt", result2);
+        byte[] resultdata = b.StringToBytes(result.toString());
+        byte[] result2data = b.StringToBytes(result2.toString());
+        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/DrizzleNeededTranslations.txt", resultdata);
+        FileUtils.WriteFile(FileUtils.GetInitialWorkingDirectory()+"/DrizzleNeededTranslationsB.txt", result2data);
     }
     public static String translate(String... strs)
     {
@@ -291,16 +298,35 @@ public class translation
         if(!enabled) return str;
 
         String result = null;
-        if(translator!=null) result = translator.get(str);
-        if(result==null)
+        if(translator!=null)
         {
-            //if(shared.State.AllStates.getStateAsBoolean("recordtrans"))
-            if(doRecordMissingTranslations)
+            result = translator.get(str);
+            if(result==null)
             {
-                //FileUtils.AppendText(FileUtils.GetInitialWorkingDirectory()+"DrizzleNeededTranslations.txt", str+sep+str+"\n");
-                missingTranslations.add(str);
+                //if(shared.State.AllStates.getStateAsBoolean("recordtrans"))
+                if(!curlanguage.equals(defaultlanguage))
+                {
+                    if(doRecordMissingTranslations && !str.equals(""))
+                    {
+                        //FileUtils.AppendText(FileUtils.GetInitialWorkingDirectory()+"DrizzleNeededTranslations.txt", str+sep+str+"\n");
+                        //missingTranslations.
+                        boolean didnthave = missingTranslations.add(str);
+                        if(didnthave)
+                        {
+                            if(str.equals("Save settings now"))
+                            {
+                                int d2 = 0;
+                            }
+                            int dummy=0;
+                        }
+                    }
+                }
+                //if not in translator, leave it as is.
+                result = str;
             }
-            //if not in translator, leave it as is.
+        }
+        else
+        {
             result = str;
         }
 

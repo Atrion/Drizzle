@@ -31,8 +31,8 @@ public class PlRelevanceRegion extends uruobj
 {
     //Objheader xheader;
     
-    PlRegionBase parent;
-    Uruobjectref ref;
+    public PlRegionBase parent;
+    public Uruobjectref ref;
     
     public PlRelevanceRegion(context c) throws readexception
     {

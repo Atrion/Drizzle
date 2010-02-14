@@ -32,6 +32,22 @@ public class b
         boolean r = ((flags&mask)!=0);
         return r;
     }
+    public static int getByte0(int int32)
+    {
+        return (0xFF&int32);
+    }
+    public static int getByte1(int int32)
+    {
+        return (0xFF00&int32)>>>8;
+    }
+    public static int getByte2(int int32)
+    {
+        return (0xFF0000&int32)>>>16;
+    }
+    public static int getByte3(int int32)
+    {
+        return (0xFF000000&int32)>>>24;
+    }
     public static boolean startswith(byte[] data, byte[] startstr)
     {
         if(data.length<startstr.length) return false;

@@ -93,7 +93,7 @@ public class deepview
         
         //get all Uruobjectrefs.
         //allrefs = new Vector<Uruobjectref>();
-        for(PrpRootObject curRootObject: prp.objects)
+        for(PrpRootObject curRootObject: prp.objects2)
         {
             if(curRootObject!=null)
             {
@@ -145,7 +145,7 @@ public class deepview
         for(prpfile prp: prps)
         {
             curprp = prp;
-            for(PrpRootObject curRootObject: prp.objects)
+            for(PrpRootObject curRootObject: prp.objects2)
             {
                 curobj = curRootObject;
                 if(curRootObject==null)
@@ -191,7 +191,7 @@ public class deepview
         for(prpfile prp: prps)
         {
             boolean hasChanged = false;
-            for(PrpRootObject curRootObject: prp.objects)
+            for(PrpRootObject curRootObject: prp.objects2)
             {
                 if(curRootObject.hasChanged)
                 {

@@ -86,6 +86,7 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.mirlist = this.jList3;
         gui.UamGui.deletebutton = this.jButton129;
         gui.UamGui.downloadbutton = this.jButton127;
+        gui.UamGui.versionbutton = this.jButton142;
         gui.UamGui.AgeLabel = this.ageInfo3;
         gui.UamGui.startup = this.uamStartupButtongroup;
         gui.UamGui.init();
@@ -152,6 +153,7 @@ public class Gui extends javax.swing.JFrame {
         
         //fc = new JFileChooser();
         m.setJTextArea(this.jTextArea1); //make sure the messages will come through.
+        m.setProgressBar(jProgressBar1);
         //vis = new visualisation(this.jPanel5.getGraphics());
         m.redirectStdErr();
         m.redirectStdOut();
@@ -475,6 +477,7 @@ public class Gui extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jLabel50 = new javax.swing.JLabel();
         ageInfo3 = new javax.swing.JLabel();
+        jButton142 = new javax.swing.JButton();
         SimpTab = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         textfieldState34 = new shared.State.TextfieldState();
@@ -502,6 +505,7 @@ public class Gui extends javax.swing.JFrame {
         textfieldState66 = new shared.State.TextfieldState();
         jButton100 = new javax.swing.JButton();
         jButton98 = new javax.swing.JButton();
+        jButton160 = new javax.swing.JButton();
         MemTab = new javax.swing.JPanel();
         textfieldState36 = new shared.State.TextfieldState();
         jButton121 = new javax.swing.JButton();
@@ -555,6 +559,8 @@ public class Gui extends javax.swing.JFrame {
         jButton145 = new javax.swing.JButton();
         jLabel56 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
+        jButton140 = new javax.swing.JButton();
+        jButton159 = new javax.swing.JButton();
         jPanel47 = new javax.swing.JPanel();
         textfieldState46 = new shared.State.TextfieldState();
         textfieldState47 = new shared.State.TextfieldState();
@@ -634,6 +640,7 @@ public class Gui extends javax.swing.JFrame {
         jButton46 = new javax.swing.JButton();
         jButton158 = new javax.swing.JButton();
         textfieldState65 = new shared.State.TextfieldState();
+        jButton161 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -848,6 +855,7 @@ public class Gui extends javax.swing.JFrame {
         jButton54 = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea1 = new shared.State.TextareaStateless();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         uamStartupButtongroup.setName("uamStartup");
 
@@ -1199,6 +1207,16 @@ public class Gui extends javax.swing.JFrame {
             UAMTab.add(ageInfo3);
             ageInfo3.setBounds(60, 410, 910, 40);
 
+            jButton142.setText("Version?");
+            jButton142.setEnabled(false);
+            jButton142.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton142ActionPerformed(evt);
+                }
+            });
+            UAMTab.add(jButton142);
+            jButton142.setBounds(490, 320, 100, 36);
+
             tabsState3.addTab("UruAgeManager(UAM)", UAMTab);
 
             SimpTab.setLayout(null);
@@ -1384,6 +1402,15 @@ public class Gui extends javax.swing.JFrame {
             });
             SimpTab.add(jButton98);
             jButton98.setBounds(710, 250, 90, 36);
+
+            jButton160.setText("Start...");
+            jButton160.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton160ActionPerformed(evt);
+                }
+            });
+            SimpTab.add(jButton160);
+            jButton160.setBounds(710, 60, 90, 36);
 
             tabsState3.addTab("Conversion(Simplicity)", SimpTab);
 
@@ -1718,7 +1745,7 @@ public class Gui extends javax.swing.JFrame {
             jButton139.setBounds(10, 20, 130, 36);
 
             jPanel41.add(jPanel6);
-            jPanel6.setBounds(130, 260, 300, 90);
+            jPanel6.setBounds(10, 260, 300, 90);
 
             jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
             jPanel7.setLayout(null);
@@ -1732,7 +1759,6 @@ public class Gui extends javax.swing.JFrame {
             jPanel7.add(jButton134);
             jButton134.setBounds(300, 10, 110, 36);
 
-            textfieldState42.setText("textfieldState42");
             textfieldState42.setName("genFolder"); // NOI18N
             jPanel7.add(textfieldState42);
             textfieldState42.setBounds(130, 20, 170, 20);
@@ -1784,7 +1810,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel56.setBounds(20, 20, 110, 16);
 
             jPanel41.add(jPanel46);
-            jPanel46.setBounds(130, 350, 300, 80);
+            jPanel46.setBounds(10, 350, 300, 80);
 
             jLabel62.setFont(jLabel62.getFont());
             jLabel62.setForeground(new java.awt.Color(0, 102, 102));
@@ -1792,8 +1818,26 @@ public class Gui extends javax.swing.JFrame {
             jPanel41.add(jLabel62);
             jLabel62.setBounds(20, 30, 410, 16);
 
+            jButton140.setText("Delete old archives...");
+            jButton140.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton140ActionPerformed(evt);
+                }
+            });
+            jPanel41.add(jButton140);
+            jButton140.setBounds(250, 150, 240, 36);
+
+            jButton159.setText("Clear .sum files.");
+            jButton159.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton159ActionPerformed(evt);
+                }
+            });
+            jPanel41.add(jButton159);
+            jButton159.setBounds(250, 180, 240, 36);
+
             MiscPanel.add(jPanel41);
-            jPanel41.setBounds(400, 10, 440, 440);
+            jPanel41.setBounds(400, 10, 500, 440);
 
             jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
 
@@ -2275,7 +2319,7 @@ public class Gui extends javax.swing.JFrame {
             textfieldState43.setText("defaulttest");
             textfieldState43.setName("wha"); // NOI18N
             jPanel49.add(textfieldState43);
-            textfieldState43.setBounds(90, 200, 61, 20);
+            textfieldState43.setBounds(20, 200, 61, 20);
 
             jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
             jPanel36.setLayout(null);
@@ -2371,7 +2415,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton1);
-            jButton1.setBounds(160, 170, 170, 36);
+            jButton1.setBounds(50, 170, 170, 36);
 
             jButton6.setText("test!!!");
             jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -2380,7 +2424,7 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton6);
-            jButton6.setBounds(223, 210, 80, 36);
+            jButton6.setBounds(90, 210, 80, 36);
 
             jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
             jPanel13.setLayout(null);
@@ -2422,12 +2466,21 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
             jPanel49.add(jButton158);
-            jButton158.setBounds(460, 340, 64, 36);
+            jButton158.setBounds(260, 200, 64, 36);
 
             textfieldState65.setText("0x4F800000");
             textfieldState65.setName("bitflt"); // NOI18N
             jPanel49.add(textfieldState65);
-            textfieldState65.setBounds(360, 350, 72, 20);
+            textfieldState65.setBounds(260, 170, 72, 20);
+
+            jButton161.setText("Create Distillation Profiles");
+            jButton161.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton161ActionPerformed(evt);
+                }
+            });
+            jPanel49.add(jButton161);
+            jButton161.setBounds(340, 340, 210, 36);
 
             AdvTabState.addTab("Misc", jPanel49);
 
@@ -3191,7 +3244,6 @@ public class Gui extends javax.swing.JFrame {
                                             .addComponent(jButton57)
                                             .addGap(76, 76, 76))
                                         .addGroup(jPanel15Layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(jPanel15Layout.createSequentialGroup()
@@ -3452,8 +3504,8 @@ public class Gui extends javax.swing.JFrame {
                                     .addComponent(jButton68, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel21Layout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton66)
@@ -3693,9 +3745,7 @@ public class Gui extends javax.swing.JFrame {
                                                             .addGroup(jPanel23Layout.createSequentialGroup()
                                                                 .addComponent(jLabel21)
                                                                 .addGap(32, 32, 32))
-                                                            .addGroup(jPanel23Layout.createSequentialGroup()
-                                                                .addComponent(jLabel23)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                                            .addComponent(jLabel23))
                                                         .addComponent(jLabel53))
                                                     .addGap(12, 12, 12)
                                                     .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4048,7 +4098,9 @@ public class Gui extends javax.swing.JFrame {
                                 jScrollPane10.setViewportView(jTextArea1);
 
                                 jPanel27.add(jScrollPane10);
-                                jScrollPane10.setBounds(160, 27, 430, 130);
+                                jScrollPane10.setBounds(160, 27, 430, 110);
+                                jPanel27.add(jProgressBar1);
+                                jProgressBar1.setBounds(20, 150, 570, 14);
 
                                 getContentPane().add(jPanel27);
                                 jPanel27.setBounds(10, 510, 610, 180);
@@ -4765,7 +4817,8 @@ private void jButton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton66ActionPerformed
     //auto.mystAutomation.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings(),false,auto.renames.getMoulRenameInfo());
-    auto.moul.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings(), false, auto.moul.getMoulRenameInfo());
+    //auto.moul.convertMoulToPots(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings(), false, auto.moul.getMoulRenameInfo());
+    auto.AllGames.getMoul().ConvertFiles(textfieldState6.getText(), textfieldState8.getText(), listState3.getSelectedAsStrings());
 }//GEN-LAST:event_jButton66ActionPerformed
 
 private void jButton69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton69ActionPerformed
@@ -4835,7 +4888,8 @@ private void jButton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     String outfolder = textfieldState8.getText();
     files.add(filename);
     //auto.mystAutomation.convertMoulToPots(infolder/*textfieldState6.getText()*/,textfieldState8.getText(), v,false,auto.renames.getMoulRenameInfo());
-    auto.moul.convertMoulToPots(infolder, outfolder, files, false, auto.moul.getMoulRenameInfo());
+    //auto.moul.convertMoulToPots(infolder, outfolder, files, false, auto.moul.getMoulRenameInfo());
+    auto.AllGames.getMoul().ConvertFiles(infolder,outfolder,files);
 }//GEN-LAST:event_jButton86ActionPerformed
 
 private void jButton87ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton87ActionPerformed
@@ -4882,7 +4936,7 @@ private void jButton97ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton97ActionPerformed
 
 private void jButton96ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton96ActionPerformed
-    auto.mystv.convertABunchOfMyst5Stuff(this.textfieldState22.getText(), this.textfieldState34.getText());
+    ThreadedTasks.convertMystV(textfieldState22.getText(), textfieldState34.getText());
 }//GEN-LAST:event_jButton96ActionPerformed
 
 private void jButton99ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton99ActionPerformed
@@ -5236,7 +5290,7 @@ private void jButton116ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton116ActionPerformed
 
 private void jButton114ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton114ActionPerformed
-    auto.moul.convertMoul(this.textfieldState33.getText(), this.textfieldState34.getText());
+    ThreadedTasks.convertMoul(textfieldState33.getText(), textfieldState34.getText());
 }//GEN-LAST:event_jButton114ActionPerformed
 
 private void jButton118ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton118ActionPerformed
@@ -5261,7 +5315,7 @@ private void jButton121ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton121ActionPerformed
 
 private void jButton122ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton122ActionPerformed
-    auto.vaultAutomation.saveImages(this.textfieldState36.getText(),this.textfieldState37.getText());
+    ThreadedTasks.saveMemories(this.textfieldState36.getText(),this.textfieldState37.getText());
 }//GEN-LAST:event_jButton122ActionPerformed
 
 private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton123ActionPerformed
@@ -5269,7 +5323,8 @@ private void jButton123ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton123ActionPerformed
 
 private void jButton124ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton124ActionPerformed
-    gui.UamGui.GetAgeListGui(this.textfieldState38.getText(),this.textfieldState39.getText());
+    //gui.UamGui.GetAgeListGui(this.textfieldState38.getText(),this.textfieldState39.getText());
+    ThreadedTasks.uamDownloadAgeList(this.textfieldState38.getText(),this.textfieldState39.getText());
 }//GEN-LAST:event_jButton124ActionPerformed
 
 private void jButton125ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton125ActionPerformed
@@ -5281,7 +5336,8 @@ private void jButton126ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton126ActionPerformed
 
 private void jButton127ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton127ActionPerformed
-    gui.UamGui.PerformDownload();
+    //gui.UamGui.PerformDownload();
+    ThreadedTasks.uamDownload();
 }//GEN-LAST:event_jButton127ActionPerformed
 
 private void jButton128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton128ActionPerformed
@@ -5292,11 +5348,11 @@ private void jButton128ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton128ActionPerformed
 
 private void jButton129ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton129ActionPerformed
-    gui.UamGui.PerformDeletionAction();
+    ThreadedTasks.uamDelete();
 }//GEN-LAST:event_jButton129ActionPerformed
 
 private void jButton130ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton130ActionPerformed
-    auto.crowthistle.convertCrowthistle(this.textfieldState40.getText(),this.textfieldState34.getText());
+    ThreadedTasks.convertCrowthistle(this.textfieldState40.getText(),this.textfieldState34.getText());
 }//GEN-LAST:event_jButton130ActionPerformed
 
 private void jButton131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton131ActionPerformed
@@ -5396,20 +5452,19 @@ private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton19ActionPerformed
 
 private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-    auto.AllGames.getMystV().CopyMusic(this.textfieldState22.getText(),this.textfieldState34.getText());
+    ThreadedTasks.copyMystVMusic(this.textfieldState22.getText(),this.textfieldState34.getText());
 }//GEN-LAST:event_jButton30ActionPerformed
 
 private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
-    //auto.moul.CopyMusic(this.textfieldState33.getText(),this.textfieldState34.getText());
-    auto.AllGames.getMoul().CopyMusic(this.textfieldState33.getText(), this.textfieldState34.getText());
+    ThreadedTasks.copyMoulMusic(this.textfieldState33.getText(), this.textfieldState34.getText());
 }//GEN-LAST:event_jButton31ActionPerformed
 
 private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
-    auto.AllGames.getCrowthistle().CopyMusic(this.textfieldState40.getText(),this.textfieldState34.getText());
+    ThreadedTasks.copyCrowthistleMusic(this.textfieldState40.getText(),this.textfieldState34.getText());
 }//GEN-LAST:event_jButton34ActionPerformed
 
 private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
-    auto.AllGames.getPots().CopyMusic(this.textfieldState34.getText(),this.textfieldState34.getText());
+    ThreadedTasks.copyPotsMusic(this.textfieldState34.getText(),this.textfieldState34.getText());
 }//GEN-LAST:event_jButton36ActionPerformed
 
 private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
@@ -5555,7 +5610,7 @@ private void jButton158ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton158ActionPerformed
 
 private void jButton91ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton91ActionPerformed
-    auto.AllGames.getHexisle().CopyMusic(this.textfieldState66.getText(), this.textfieldState34.getText());
+    ThreadedTasks.copyHexisleMusic(this.textfieldState66.getText(), this.textfieldState34.getText());
 }//GEN-LAST:event_jButton91ActionPerformed
 
 private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton100ActionPerformed
@@ -5563,12 +5618,32 @@ private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton100ActionPerformed
 
 private void jButton98ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton98ActionPerformed
-    auto.AllGames.getHexisle().ConvertGame(this.textfieldState66.getText(), this.textfieldState34.getText());
+    ThreadedTasks.convertHexisle(this.textfieldState66.getText(), this.textfieldState34.getText());
 }//GEN-LAST:event_jButton98ActionPerformed
 
 private void jButton132ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton132ActionPerformed
     deepview2.dvGUI.open();
 }//GEN-LAST:event_jButton132ActionPerformed
+
+private void jButton140ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton140ActionPerformed
+    ThreadedTasks.uamDeleteOldArchives();
+}//GEN-LAST:event_jButton140ActionPerformed
+
+private void jButton142ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton142ActionPerformed
+    ThreadedTasks.uamFindAgeVersion();
+}//GEN-LAST:event_jButton142ActionPerformed
+
+private void jButton159ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton159ActionPerformed
+    ThreadedTasks.uamClearSumFiles();
+}//GEN-LAST:event_jButton159ActionPerformed
+
+private void jButton160ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton160ActionPerformed
+    ThreadedTasks.inplaceConvertPots(textfieldState34.getText());
+}//GEN-LAST:event_jButton160ActionPerformed
+
+private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton161ActionPerformed
+    auto.mod.AutoMod.CreateAllProfiles(textfieldState33.getText(), textfieldState34.getText(), null);        // TODO add your handling code here:
+}//GEN-LAST:event_jButton161ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5699,7 +5774,9 @@ private void jButton132ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton138;
     private javax.swing.JButton jButton139;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton140;
     private javax.swing.JButton jButton141;
+    private javax.swing.JButton jButton142;
     private javax.swing.JButton jButton143;
     private javax.swing.JButton jButton144;
     private javax.swing.JButton jButton145;
@@ -5717,7 +5794,10 @@ private void jButton132ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton156;
     private javax.swing.JButton jButton157;
     private javax.swing.JButton jButton158;
+    private javax.swing.JButton jButton159;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton160;
+    private javax.swing.JButton jButton161;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
@@ -5926,6 +6006,7 @@ private void jButton132ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;

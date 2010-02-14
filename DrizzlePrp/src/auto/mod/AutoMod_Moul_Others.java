@@ -24,10 +24,12 @@ public class AutoMod_Moul_Others
         private Vector<String> moulsources = new Vector();
         private Vector<String> potssources = new Vector();
         private Vector<String> sceneobjects = new Vector();
+        private Vector<NameAndType> plainobjects = new Vector();
         private Vector<String> pfms = new Vector();
         private String mainprp;
         private boolean includeAllObjects = false;
         public PostMod postmod;
+        public distiller.includeDuplicateDecider extrainclusions;
 
 
         public static interface PostMod
@@ -54,6 +56,11 @@ public class AutoMod_Moul_Others
         public void addSceneobjects(String... filenames)
         {
             for(String s: filenames) sceneobjects.add(s);
+        }
+
+        public void addPlainobjects(NameAndType... filenames)
+        {
+            for(NameAndType s: filenames) plainobjects.add(s);
         }
         
         public void addPythonfilemods(String... pfmss)
@@ -100,7 +107,7 @@ public class AutoMod_Moul_Others
 
                 if(this.includeAllObjects)
                 {
-                    for(PrpRootObject ro: prp.objects)
+                    for(PrpRootObject ro: prp.objects2)
                     {
                         list.add(ro.header.desc);
                     }
@@ -119,6 +126,10 @@ public class AutoMod_Moul_Others
                     }
                 }
 
+                for(NameAndType objinf: plainobjects)
+                {
+                    list.add(prp.findObject(objinf.name, objinf.type).header.desc);
+                }
 
                 info.list = list;
 
@@ -133,6 +144,7 @@ public class AutoMod_Moul_Others
             info.sourceprpfiles = sources;
             info.trimDrawableSpans = true;
             info.runtests = false;
+            final distiller.includeDuplicateDecider extinc = this.extrainclusions;
             info.forcedDuplicateInclusions = new distiller.includeDuplicateDecider() {
                 public boolean include(Uruobjectdesc desc)
                 {
@@ -140,6 +152,7 @@ public class AutoMod_Moul_Others
                     String name = desc.objectname.toString();
                     if(tid==Typeid.hsGMaterial || tid==Typeid.plLayer || tid==Typeid.plLayerAnimation) return true;
                     if(tid==Typeid.plViewFaceModifier) return true;
+                    if(extinc!=null && extinc.include(desc)) return true;
                     return false;
                 }
             };
@@ -269,6 +282,71 @@ public class AutoMod_Moul_Others
     }
     public static void DustKadishGalleryAdditions(AutoModInfo c)
     {
+        DistillHelper helper = new DistillHelper(c);
+        helper.destAgename = "city";
+        helper.destPagename = "KadishGalleryDustAdditions";
+        helper.destPrefix = 6;
+        helper.destPagenum = 80;
+        helper.setMainPrp("city_District_KadishGallery.prp");
+        helper.addMoulSources("city_District_Textures.prp");
+        helper.addPotsSources("city_District_KadishGallery.prp");
+        helper.addSceneobjects(
+            "behKdshDoor1Ext",
+            "behKdshDoor1Int",
+            "behKdshDoor2Ext",
+            "behKdshDoor2Int",
+            "KdshDoor1",
+            "KdshDoor1BtnLeftExt",
+            "KdshDoor1BtnLeftInt",
+            "KdshDoor1CamBlock",
+            "KdshDoor1ConeCollision",
+            "KdshDoor2",
+            "KdshDoor2BtnLeftExt",
+            "KdshDoor2BtnLeftInt",
+            "KdshDoor2CamBlock",
+            "KdshDoor2ConeCollision",
+            "KdshGalleryDoor1Frame",
+            "KdshGalleryDoor2Frame",
+            "rgnKdshDoor1Close",
+            "SfxKdshDoor1Emit",
+            "rgnKdshDoor1OpenExt",
+            "rgnKdshDoor1OpenInt",
+            "rgnKdshDoor2Close",
+            "SfxKdshDoor2Emit",
+            "rgnKdshDoor2OpenExt",
+            "rgnKdshDoor2OpenInt",
+            "xrgnKdshDoor1",
+            "xrgnKdshDoor2"
+        );
+        helper.addSceneobjects(
+            "GalleryThemePlayerCollision",
+            "MusicalButton",
+            "MusicButtonRegion",
+            "MusicPlayerClickRegion",
+            "MusicPlayerPOS",
+            "SfxMusicPlayerEmit",
+            "StandingInstrument"
+        );
+        helper.addPlainobjects(
+            NameAndType.createWithNameType("cSfxSoRegGallery-Verb02", Typeid.plSoftVolumeSimple),
+            NameAndType.createWithNameType("SoftRegionGalleryRelevance", Typeid.plSoftVolumeSimple),
+            NameAndType.createWithNameType("SoftRegionKadishGalleryVis", Typeid.plSoftVolumeSimple)
+        );
+        helper.extrainclusions = new distiller.includeDuplicateDecider() {
+            public boolean include(Uruobjectdesc desc) {
+                String name = desc.objectname.toString();
+                Typeid type = desc.objecttype;
+                if(type==Typeid.plSoftVolumeSimple && name.equals("cSfxSoRegGallery-Verb02")) return true;
+                if(type==Typeid.plSoftVolumeSimple && name.equals("SoftRegionGalleryRelevance")) return true; //we don't actually need this one, since we're removing them anyway.
+                if(type==Typeid.plSoftVolumeSimple && name.equals("SoftRegionKadishGalleryVis")) return true;
+                return false;
+            }
+        };
+        
+        helper.work();
+    }
+    /*public static void DustKadishGalleryAdditions2(AutoModInfo c)
+    {
         String agename = "city";
         String agenamePrefix = "kdshgallery";
         int prefix = 6;
@@ -312,6 +390,7 @@ public class AutoMod_Moul_Others
                 "SfxKdshDoor1Emit",
                 "SfxKdshDoor2Emit",
                 //"SfxMusicPlayerEmit",
+                
             })list.add(prp.findObject(sobj,Typeid.plSceneObject).header.desc);
 
             //list.add(prp.findObject("CalStar07Dtct", Typeid.plSceneObject).header.desc);
@@ -355,7 +434,7 @@ public class AutoMod_Moul_Others
 
         //save the dest file.
         dest.saveAsFile(c.outfolder+"/dat/"+c.filename);
-    }
+    }*/
     public static void DustDescentAdditions(AutoModInfo c)
     {
         String agename = "Descent";

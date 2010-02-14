@@ -6,6 +6,7 @@
 package shared;
 
 import java.util.Vector;
+import java.util.HashMap;
 
 //public abstract interface IBytestream
 public abstract class IBytestream
@@ -20,6 +21,23 @@ public abstract class IBytestream
     abstract public int getBytesRemaining();
     abstract public IBytestream Fork(long offset);
     abstract protected int read();
+    private HashMap<String,Object> _context = new HashMap();
+    public void set(String keyname, Object value)
+    {
+        _context.put(keyname, value);
+    }
+    public Object getValue(String keyname)
+    {
+        return _context.get(keyname);
+    }
+    public int getIntValue(String keyname)
+    {
+        return (Integer)getValue(keyname);
+    }
+    public String getStringValue(String keyname)
+    {
+        return (String)getValue(keyname);
+    }
     public void skip(long n)
     {
         for(long i=0;i<n;i++)
