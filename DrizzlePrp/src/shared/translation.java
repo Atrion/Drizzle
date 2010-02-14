@@ -306,18 +306,18 @@ public class translation
                 //if(shared.State.AllStates.getStateAsBoolean("recordtrans"))
                 if(!curlanguage.equals(defaultlanguage))
                 {
-                    if(doRecordMissingTranslations && !str.equals(""))
+                    if(doRecordMissingTranslations && str!=null && !str.equals(""))
                     {
                         //FileUtils.AppendText(FileUtils.GetInitialWorkingDirectory()+"DrizzleNeededTranslations.txt", str+sep+str+"\n");
                         //missingTranslations.
                         boolean didnthave = missingTranslations.add(str);
                         if(didnthave)
                         {
-                            if(str.equals("Save settings now"))
-                            {
-                                int d2 = 0;
-                            }
-                            int dummy=0;
+                            //if(str.equals("Save settings now"))
+                            //{
+                            //    int d2 = 0;
+                            //}
+                            //int dummy=0;
                         }
                     }
                 }

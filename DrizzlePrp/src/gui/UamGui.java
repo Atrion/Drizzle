@@ -377,7 +377,8 @@ public class UamGui
                         //m.msg(uamserver);
                         String potsfolder2 = shared.State.AllStates.getStateAsString("uamRoot");
                         //m.msg(potsfolder2);
-                        GetAgeListGui(uamserver, potsfolder2);
+                        //GetAgeListGui(uamserver, potsfolder2);
+                        ThreadedTasks.uamDownloadAgeList(uamserver, potsfolder2);
                         break;
                     default:
                         m.err("Unhandled UAM startup type.");

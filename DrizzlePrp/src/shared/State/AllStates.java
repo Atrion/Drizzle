@@ -167,13 +167,17 @@ public class AllStates //implements java.io.Serializable
         }
 
         if(result) pushOutStates();
-        
+
+        //loadandpush2();
+
+        return result;
+    }
+    public static void loadandpush2()
+    {
         for(shared.delegate d: afterInitCallbacks)
         {
             d.callback(null);
         }
-
-        return result;
     }
     public static boolean save(String filename)
     {

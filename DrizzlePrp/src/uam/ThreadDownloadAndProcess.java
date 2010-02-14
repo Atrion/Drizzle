@@ -51,13 +51,13 @@ public class ThreadDownloadAndProcess extends Thread
         final String server2 = server;
         final String potsfolder2 = potsfolder;
         batching.Queue queue = getQueue();
-        final shared.Monitor trigger = new shared.Monitor();
-        queue.AddItem(new batching.QueueItem() {
+        //final shared.Monitor trigger = new shared.Monitor();
+        //queue.AddItem(new batching.QueueItem() {
             boolean success;
 
-            @Override
-            public void run() {
-                InvisibleModal modal = InvisibleModal.createAndShow();
+            //@Override
+            //public void run() {
+                //InvisibleModal modal = InvisibleModal.createAndShow();
                 try{
 
                 String file = server2+"/"+Uam.statusFilename;//"uam.status.txt";
@@ -105,11 +105,11 @@ public class ThreadDownloadAndProcess extends Thread
                     //int dummy=0;
                     e.printStackTrace();
                 }finally{
-                    modal.hideInvisibleModal();
-                    trigger.notifyCorrectly();
+                    //modal.hideInvisibleModal();
+                    //trigger.notifyCorrectly();
                 }
-            }
-        });
+            //}
+        //});
         //java.util.concurrent.atomic.AtomicBoolean a;
         //java.util.concurrent.locks.ReentrantLock b;
         //java.util.concurrent.
@@ -121,7 +121,7 @@ public class ThreadDownloadAndProcess extends Thread
             //}
         //}
         //queue.waitFor();
-        trigger.waitCorrectly();
+        //trigger.waitCorrectly();
         //m.msg("doneskis!");
     }
     public static void downloadAge(String age,String ver,String mir,String potsfolder,String whirlpool)

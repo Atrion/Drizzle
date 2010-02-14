@@ -4761,7 +4761,13 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 
     //scroll the help window down.
     //jTextArea5.scrollRectToVisible(new java.awt.Rectangle(0,0,1,1));
-    
+    //shared.State.AllStates.loadandpush2();
+    javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
+            public void run() {
+                shared.State.AllStates.loadandpush2();
+            }
+        });
+
 }//GEN-LAST:event_formWindowOpened
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

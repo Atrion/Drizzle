@@ -6,6 +6,8 @@
 package shared;
 
 import java.awt.Color;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import java.awt.Component;
@@ -138,7 +140,7 @@ public class GuiThread
         }
     }
 
-    private static class InvisibleGlassPane extends javax.swing.JPanel implements java.awt.event.MouseListener, java.awt.event.FocusListener, java.awt.event.MouseMotionListener
+    private static class InvisibleGlassPane extends javax.swing.JPanel implements java.awt.event.MouseListener, java.awt.event.FocusListener, java.awt.event.MouseMotionListener, java.awt.event.KeyListener, java.awt.event.ComponentListener
     {
         java.awt.Component contentPane;
 
@@ -149,6 +151,8 @@ public class GuiThread
             this.addMouseListener(this);
             this.addMouseMotionListener(this);
             this.addFocusListener(this);
+            this.addKeyListener(this);
+            this.addComponentListener(this);
             //this.setSize(500, 500);
             this.setLayout(new java.awt.BorderLayout());
             this.setOpaque(false);
@@ -159,7 +163,33 @@ public class GuiThread
                 label.setFont(label.getFont().deriveFont(60.0f));
                 label.setForeground(java.awt.Color.DARK_GRAY);
                 this.add(label,java.awt.BorderLayout.CENTER);
+                label.setNextFocusableComponent(label); //don't lost focus.
+                //boolean likelytosucceed = this.requestFocusInWindow();
+                //int dummy=0;
             }
+        }
+
+        public void componentResized(ComponentEvent e) {
+        }
+        public void componentMoved(ComponentEvent e) {
+        }
+        public void componentShown(ComponentEvent e) {
+            boolean likelytosucceed = this.requestFocusInWindow();
+            int dummy=0;
+        }
+        public void componentHidden(ComponentEvent e) {
+        }
+
+        public void keyTyped(KeyEvent e) {
+            int dummy=0;
+        }
+
+        public void keyPressed(KeyEvent e) {
+            int dummy=0;
+        }
+
+        public void keyReleased(KeyEvent e) {
+            int dummy=0;
         }
 
         public void mouseClicked(MouseEvent e) {
@@ -183,8 +213,8 @@ public class GuiThread
         }
 
         public void focusLost(FocusEvent fe) {
-            if (isVisible())
-                requestFocus();
+            //if (isVisible())
+            //    requestFocus();
         }
 
         public void focusGained(FocusEvent fe) {
