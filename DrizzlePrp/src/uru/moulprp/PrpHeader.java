@@ -175,11 +175,11 @@ public class PrpHeader extends uruobj
         if(shared.State.AllStates.getStateAsBoolean("reportPrp")) m.msg("PrpFile: name="+c.curFile+" readversion="+Integer.toString(c.readversion)+" agename="+agename+" pagename="+pagename+" pageid="+pageid.toString());
         
         //override the agename
-        if(c.ageName!=null)
-        {
-            if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Altering agename in prp header from ",agename.toString()," to ",c.ageName);
-            agename = Urustring.createFromString(c.ageName);
-        }
+        //if(c.ageName!=null)
+        //{
+        //    if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Altering agename in prp header from ",agename.toString()," to ",c.ageName);
+        //    agename = Urustring.createFromString(c.ageName);
+        //}
     }
     private PrpHeader(){}
     public static PrpHeader createFromInfo(String agename, Pageid pid, Pagetype pagetype, String pagename)

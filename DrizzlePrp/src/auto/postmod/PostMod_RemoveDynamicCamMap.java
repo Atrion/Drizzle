@@ -21,7 +21,7 @@ public class PostMod_RemoveDynamicCamMap
                 PrpRootObject[] objs = prputils.FindAllObjectsWithName(prp, "VeryVerySpecialPythonFileMod");
                 if(objs.length>0)
                 {
-                    if(objs.length>1) m.warn("More than one VeryVerySpecialPythonFileMod found, just handling the first.");
+                    if(objs.length>1) m.err("More than one VeryVerySpecialPythonFileMod found, just handling the first.");
                     uru.moulprp.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
                     Urustring oldpyfile = pythfilemod.pyfile;
                     pythfilemod.pyfile = Urustring.createFromString(pythfilemod.pyfile.toString().replace(oldAgename, newAgename));

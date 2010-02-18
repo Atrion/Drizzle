@@ -63,15 +63,20 @@ public class pots
 
         //It would not hurt to have these in moul conversion too, except for a slowdown.  Perhaps I should do so?
         r.addInplacemods(
+            //Pots:
             "/dat/city_District_palace.prp",
             "/dat/city_District_courtyard.prp",
             "/dat/city_District_canyon.prp",
             "/dat/city_District_cavetjunction.prp",
             "/dat/city_District_ferry.prp",
             "/dat/city_District_greatstair.prp",
-            "/dat/city_District_KadishGallery.prp",
             "/dat/city_District_KahloPub.prp",
-            "/dat/city_District_library.prp"
+            "/dat/city_District_library.prp",
+            //Moul,Pots:
+            "/dat/city_District_KadishGallery.prp",
+            //Myst5:
+            "/dat/Cleft_District_Desert.prp",
+            "/dat/Cleft_District_tmnaDesert.prp"
         );
         //r.addInplacemod("city", "/dat/city_District_palace.prp", "RemoveRelevanceRegions", "CityBalconyMarkerFix", "FixKadishDoors");
         //r.addInplacemod("city", "/dat/city_District_courtyard.prp", "RemoveRelevanceRegions", "CityMuseumDoorFix", "FixKadishDoors", "MakeTeledahnIntoKirelBook");

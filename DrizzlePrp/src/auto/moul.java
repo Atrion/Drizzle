@@ -72,6 +72,7 @@ public class moul
         r.addAgeFiles("city", new String[]{
             "city_District_islmLakeLightMeter.prp",
             "city_District_bahroFlyers_arch.prp","city_District_bahroFlyers_city1.prp","city_District_bahroFlyers_city2.prp","city_District_bahroFlyers_city3.prp","city_District_bahroFlyers_city4.prp","city_District_bahroFlyers_city5.prp","city_District_bahroFlyers_city6.prp",
+            "city_District_islmBahroShoutFerry.prp","city_District_islmBahroShoutLibrary.prp","city_District_islmBahroShoutPalace.prp", //shouters
         });
         r.addAgeFiles("Dereno", new String[]{
             "Dereno.age","Dereno.fni","Dereno.sum","Dereno_District_DrnoExterior.prp","Dereno_District_DrnoPod.prp","Dereno_District_Textures.prp","Dereno_District_BuiltIn.prp",
@@ -133,7 +134,8 @@ public class moul
             "GlobalAnimations_District_FemaleDance.prp","GlobalAnimations_District_MaleDance.prp", /*arms disappear*/
         });
         r.addAgeFiles("Neighborhood", new String[]{
-            "Neighborhood_District_nb01BahroPedestalShout.prp", "city_District_islmBahroShoutFerry.prp","city_District_islmBahroShoutLibrary.prp","city_District_islmBahroShoutPalace.prp",
+            //"Neighborhood_District_nb01BahroPedestalShout.prp", "city_District_islmBahroShoutFerry.prp","city_District_islmBahroShoutLibrary.prp","city_District_islmBahroShoutPalace.prp",
+            "Neighborhood_District_nb01BahroPedestalShout.prp", //shouters
         });
 
 
@@ -1308,12 +1310,12 @@ public class moul
     {
         if(newAgename.toLowerCase().equals("globalanimations"))
         {
-            if(prp.header.pagename.toString().equals("FemaleDance"))
+            if(prp.header.pagename.toString().equals("FemaleDanceMOUL"))
             {
                 PlEmoteAnim ea = prp.findObject("FemaleDance", Typeid.plEmoteAnim).castTo();
                 ea.parent.parent.name = Urustring.createFromString("FemaleDanceMOUL");
             }
-            if(prp.header.pagename.toString().equals("MaleDance"))
+            if(prp.header.pagename.toString().equals("MaleDanceMOUL"))
             {
                 PlEmoteAnim ea = prp.findObject("MaleDance", Typeid.plEmoteAnim).castTo();
                 ea.parent.parent.name = Urustring.createFromString("MaleDanceMOUL");
