@@ -72,6 +72,7 @@ public class pots
             "/dat/city_District_greatstair.prp",
             "/dat/city_District_KahloPub.prp",
             "/dat/city_District_library.prp",
+            "/dat/city_District_harbor.prp",
             //Moul,Pots:
             "/dat/city_District_KadishGallery.prp",
             //Myst5:

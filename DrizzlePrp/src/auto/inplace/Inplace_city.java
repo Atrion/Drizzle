@@ -180,5 +180,13 @@ public class Inplace_city
             un1.refs.remove(0);
             ro1.markAsChanged();
         }
+        else if(info.relpath.equals("/dat/city_District_harbor.prp"))
+        {
+            //the harbor contains the D'ni backdrop for some reason, so we need to do this one too.
+            PrpRootObject ro1 = prp.findObject("SoftRegionUnionExcludeHarborDrawables", Typeid.plSoftVolumeUnion);
+            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            un1.refs.remove(2);
+            ro1.markAsChanged();
+        }
     }
 }

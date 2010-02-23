@@ -99,6 +99,7 @@ public class Inplace
                 addinfo("city", "/dat/city_District_KadishGallery.prp", "RemoveRelevanceRegions", "FixKadishDoors"); //also add door fix?
                 addinfo("city", "/dat/city_District_KahloPub.prp", "RemoveRelevanceRegions");
                 addinfo("city", "/dat/city_District_library.prp", "RemoveRelevanceRegions", "FixKadishDoors");
+                addinfo("city", "/dat/city_District_harbor.prp", "FixKadishDoors");
             }
             return mods;
         }

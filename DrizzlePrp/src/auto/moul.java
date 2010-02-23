@@ -397,7 +397,8 @@ public class moul
             "/dat/city_District_greatstair.prp",
             "/dat/city_District_KadishGallery.prp",
             "/dat/city_District_KahloPub.prp",
-            "/dat/city_District_library.prp"
+            "/dat/city_District_library.prp",
+            "/dat/city_District_harbor.prp"
         );
         return r;
     }

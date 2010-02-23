@@ -74,11 +74,32 @@ public class m
         }
     }
     public static StateStack<stateclass> state = new StateStack<stateclass>(new stateclass(),true,true);
-    
+
+    private static long lasttime = -1;
+    private static String lasttimemsg;
     public static void time()
     {
-        long time = java.util.Calendar.getInstance().getTimeInMillis();
+        long time = gettime();
         m.msg("time(ms): ",Long.toString(time));
+    }
+    public static long gettime()
+    {
+        long time = java.util.Calendar.getInstance().getTimeInMillis();
+        return time;
+    }
+    public static void marktime(String msg)
+    {
+        long time = gettime();
+        if(lasttime==-1)
+        {
+            m.msg(msg+": (Starting timer)");
+        }
+        else
+        {
+            m.msg(msg+": "+Long.toString(time-lasttime)+"ms (since '"+lasttimemsg+"')");
+        }
+        lasttime = time;
+        lasttimemsg = msg;
     }
     public static void redirectStdOut()
     {
