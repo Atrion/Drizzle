@@ -22,11 +22,17 @@ public class CommandLine
             m.msg("  -help    ->This help screen.");
             m.msg("  -mirrordataserver exampleserver.com c:/outfolder    ->Mirrors an Alcugs dataserver at the given address, saving to the given output folder.");
             m.msg("  -generatedataserver c:/infolder c:/outfolder    ->Generates an Alcugs dataserver using the given input Uru installation, saving to the given output folder.");
-            m.msg("  -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
-            m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
+            //m.msg("  -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
+            m.msg("  -prpdiff c:/source.prp c:/dest.prp");
+            //m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
+            m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName       ->Does not change python/ogg files.");
             m.msg("  -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
             m.msg("  -changepage c:/inputfile.prp c:/outputfolder NewPageName");
             m.msg("  -deepview c:/inputfile.prp");
+            m.msg("  -changeagenameandprefix c:/inputfile.prp c:/outputfolder NewAgeName NewSequencePrefix    ->Changes python/ogg files.");
+            m.msg("  -inplacemod c:/potsfolder dat/inputfile.prp ModName");
+            m.msg("  -listinplacemods    ->Displays all the available InplaceMods.");
+
         }
         else if(args[0].equals("-mirrordataserver"))
         {
@@ -48,11 +54,15 @@ public class CommandLine
         }
         else if(args[0].equals("-changeagename"))
         {
-            auto.ChangeNameAndPrefix.ChangeName(args[1], args[2], args[3]);
+            auto.ChangeNameAndPrefix.ChangeName(args[1], args[2], args[3], false);
         }
         else if(args[0].equals("-changeprefix"))
         {
             auto.ChangeNameAndPrefix.ChangePrefix(args[1], args[2], args[3]);
+        }
+        else if(args[0].equals("-changeagenameandprefix"))
+        {
+            auto.ChangeNameAndPrefix.ChangeNameAndPrefix(args[1],args[2],args[3],args[4],true);
         }
         else if(args[0].equals("-changepage"))
         {
@@ -62,6 +72,14 @@ public class CommandLine
         {
             String filename = (args.length>=2)?args[1]:null;
             deepview2.dvGUI.open(filename);
+        }
+        else if(args[0].equals("-inplacemod"))
+        {
+            auto.inplace.Inplace.InplaceMod(args[1],args[2],args[3]);
+        }
+        else if(args[0].equals("-listinplacemods"))
+        {
+            auto.inplace.Inplace.printAllModNames();
         }
         else
         {

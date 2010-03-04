@@ -24,6 +24,7 @@ public class crowthistle
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "Crowthistle";
         r.DetectionFile = "CT.exe";
+        r.prpMarkerForAgename = "_";
         r.renameinfo.prefices.put("MarshScene", 96);
         r.renameinfo.prefices.put("MountainScene", 95);
         r.agemodifier = new conversion.AgeModifier() {

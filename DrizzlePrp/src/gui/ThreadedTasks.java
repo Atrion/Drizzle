@@ -132,5 +132,11 @@ public class ThreadedTasks
         }});
     }
 
+    public static void custom(final java.lang.Runnable command)
+    {
+        shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
+            command.run();
+        }});
+    }
 
 }

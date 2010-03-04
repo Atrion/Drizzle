@@ -33,9 +33,13 @@ public class GuiThread
     }
     public static void run(GuiThreadInfo info, Runnable command)
     {
-        if(info.setWorkingProgressBar) m.setWorking(true);
-        if(info.useGlassPane) runGlass(info, command);
-        else runModal(info,command);
+        try{
+            if(info.setWorkingProgressBar) m.setWorking(true);
+            if(info.useGlassPane) runGlass(info, command);
+            else runModal(info,command);
+        }catch(shared.cancel e){
+            m.status("Cancelled because of an error.");
+        }
     }
     private static void runGlass(GuiThreadInfo info, Runnable command)
     {

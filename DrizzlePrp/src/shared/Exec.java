@@ -37,5 +37,23 @@ public class Exec
 
                 
     }
-
+    public static int RunAndWait(String command, String... commandsLineArguments)
+    {
+        return RunAndWait(null,command,commandsLineArguments);
+    }
+    public static int RunAndWait(String dir, String command, String... commandsLineArguments)
+    {
+        File d = (dir==null)?null:new File(dir);
+        String[] cmdarray = new String[commandsLineArguments.length+1];
+        cmdarray[0] = command;
+        for(int i=0;i<commandsLineArguments.length;i++) cmdarray[i+1] = commandsLineArguments[i];
+        try{
+            java.lang.Process p = Runtime.getRuntime().exec(cmdarray, null, d);
+            int errorvalue = p.waitFor();
+            return errorvalue;
+        }catch(Exception e){
+            e.printStackTrace();
+            return -1; //should we use a different value?
+        }
+    }
 }

@@ -9,6 +9,17 @@ import java.util.Vector;
 
 public class fileLists
 {
+    //Pots python files
+    public static String[] partialListOfSharedPythonFiles = {
+        "xAgeSDLBoolRespond",
+        "xAgeSDLBoolShowHide",
+        "xAgeSDLBoolToggle",
+    };
+    //Pots sound files.
+    public static String[] partialListofSharedSoundFiles = {
+
+    };
+
     /*//These are the oggs from MystV, that aren't already present in Pots or MoulOffline(they might be in the rest of Moul).
     //As it turns out, this is the same as the ones that simply aren't present in Pots.
     public static String[] mystvOggsNotInPotsNorMouloffline = {

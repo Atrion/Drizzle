@@ -9,6 +9,7 @@ import java.util.Vector;
 import shared.m;
 import uru.moulprp.*;
 import java.lang.reflect.Field;
+import shared.Flt;
 
 public abstract class dvNode
 {
@@ -91,6 +92,7 @@ public abstract class dvNode
             if(info.cls==Urustring.class) return new dvUrustring(info);
             if(info.cls==Uruobjectref.class) return new dvUruobjectref(info);
             if(info.cls==Byte.class) return new dvByte(info);
+            if(info.cls==Flt.class) return new dvFlt(info);
 
             return new dvObject(info);
         }

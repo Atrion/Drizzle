@@ -297,6 +297,14 @@ public class m
         if(debugCount!=null) m.msg("CurPos: "+Integer.toString(debugCount));
         throw new shared.uncaughtexception(s);
     }
+    public static void cancel()
+    {
+        cancel("");
+    }
+    public static void cancel(String s)
+    {
+        throw new shared.cancel(s);
+    }
 
     //input doesn't quite work: it is correctly received but isn't passed on quite correctly.
     public static class StreamRedirector

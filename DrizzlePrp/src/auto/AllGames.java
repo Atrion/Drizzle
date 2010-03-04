@@ -56,6 +56,7 @@ public class AllGames
         String DetectionFile;
         String[] MusicFiles;
         //String[] AviFiles;
+        String prpMarkerForAgename;
         
         //conversion stuff:
         //conversion.Info info;
@@ -70,6 +71,7 @@ public class AllGames
         Vector<String> automods = new Vector();
         //Vector<auto.inplace.Inplace.InplaceModInfo> inplacemods = new Vector();
         Vector<String> inplacemods = new Vector();
+
 
         public void addAgeFiles(String agename, String[] filenames)
         {
@@ -149,6 +151,18 @@ public class AllGames
         public GameConversionSub(GameInfo game)
         {
             g = game;
+        }
+
+        public String GetAgenameFromPrpname(String prpfile)
+        {
+            int lastslash = prpfile.lastIndexOf("/");
+            int lastslash2 = prpfile.lastIndexOf("\\");
+            int ls = Math.max(lastslash, lastslash2);
+            if(ls!=-1) prpfile = prpfile.substring(ls+1);
+            int start = prpfile.indexOf(g.prpMarkerForAgename)+g.prpMarkerForAgename.length();
+            int end = prpfile.lastIndexOf(".prp");
+            String agename = prpfile.substring(start, end);
+            return agename;
         }
 
         public void CopyMusic(String infolder, String potsfolder)

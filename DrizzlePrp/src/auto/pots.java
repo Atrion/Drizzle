@@ -16,6 +16,7 @@ public class pots
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "PathOfTheShell/CompleteChronicles";
         r.DetectionFile = "UruExplorer.exe";
+        r.prpMarkerForAgename = "_District_";
         r.readversion = 3;
         r.MusicFiles = new String[]{
             //AtrusIntro.bik has some music.
@@ -73,6 +74,10 @@ public class pots
             "/dat/city_District_KahloPub.prp",
             "/dat/city_District_library.prp",
             "/dat/city_District_harbor.prp",
+            "/dat/AhnySphere01_District_Sphere01.prp",
+            "/dat/AhnySphere01_District_MaintRoom01.prp",
+            "/dat/AhnySphere01_District_Sphere01OutBuildingInterior.prp",
+            "/dat/Personal_District_psnlMYSTII.prp",
             //Moul,Pots:
             "/dat/city_District_KadishGallery.prp",
             //Myst5:

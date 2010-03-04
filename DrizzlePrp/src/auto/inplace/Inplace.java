@@ -14,6 +14,43 @@ import shared.m;
 
 public class Inplace
 {
+    public static enum ModName
+    {
+        //automatically done ones:
+        RemoveFence,
+        FixKadishDoors,
+        RemoveRelevanceRegions,
+        CityBalconyMarkerFix,
+        CityMuseumDoorFix,
+        MakeTeledahnIntoKirelBook,
+        AhnonayTranslation,
+        ReltoFixPineTree,
+        ReltoMakeDynamicCovers,
+
+        //manual ones:
+        FixGeostates,
+    }
+    public static ModName getModName(String modname)
+    {
+        return ModName.valueOf(modname);
+    }
+    public static void printAllModNames()
+    {
+        for(ModName modname: ModName.values())
+        {
+            m.msg(modname.toString());
+        }
+    }
+    public static void InplaceMod(String potsfolder, String relpath, String modname)
+    {
+        if(!auto.AllGames.getPots().isFolderX(potsfolder)) m.cancel();
+        InplaceFile pots = new InplaceFile(potsfolder);
+        InplaceModInfo info = new InplaceModInfo();
+        info.relpath = relpath;
+        info.modnames = new ModName[]{getModName(modname)};
+        info.age = auto.AllGames.getPots().GetAgenameFromPrpname(relpath);
+        InplaceMod(pots,info);
+    }
     public static void InplaceMod(InplaceFile potsfolder, String relpath)
     {
         InplaceMod(potsfolder, InplaceModInfo.get(relpath));
@@ -24,19 +61,19 @@ public class Inplace
         byte[] data = f.ReadAsBytes();
         prpfile prp = prpfile.createFromBytes(data, true);
 
-        for(String modname: info.modnames)
+        for(ModName modname: info.modnames)
         {
-            if(modname.equals("RemoveFence"))
+            if(modname==ModName.RemoveFence)
             {
                 //Dustin's removal of colliders for the Cleft fence so that avatars can jump over it (and eventually jump into the volcano.)
                 Inplace_Cleft.RemoveFence(info,prp);
             }
-            else if(modname.equals("FixKadishDoors"))
+            else if(modname==ModName.FixKadishDoors)
             {
                 //Fixes the Kadish Gallery doors in the city, so that they can be opened!
                 Inplace_city.FixKadishDoors(info,prp);
             }
-            else if(modname.equals("RemoveRelevanceRegions"))
+            else if(modname==ModName.RemoveRelevanceRegions)
             {
                 //A'moaca and Ashtar's fix for Relevance regions in the city that otherwise makes avatars invisible or some such thing.
                 PrpRootObject[] relregs = prp.FindAllObjectsOfType(Typeid.plRelevanceRegion);
@@ -51,24 +88,40 @@ public class Inplace
                     int i=0;
                 }
             }
-            else if(modname.equals("CityBalconyMarkerFix"))
+            else if(modname==ModName.CityBalconyMarkerFix)
             {
                 //A'moaca and Ashtar's fix for the player not being able to interact with the marker on Alcugs because they link in too close.
                 Inplace_city.CityBalconyMarkerFix(info, prp);
             }
-            else if(modname.equals("CityMuseumDoorFix"))
+            else if(modname==ModName.CityMuseumDoorFix)
             {
                 //A'moaca and Ashtar's fix for the Museum doors which wouldn't open otherwise online.  (Neither Alcugs nor UU nor MOUL.)
                 Inplace_city.CityMuseumDoorFix(info, prp);
             }
-            else if(modname.equals("MakeTeledahnIntoKirelBook"))
+            else if(modname==ModName.MakeTeledahnIntoKirelBook)
             {
                 //turns the Teledahn linking book by the center spire into a KirelMOUL linking book.
                 Inplace_city.MakeTeledahnInfoKirelBook(info, prp);
             }
+            else if(modname==ModName.FixGeostates)
+            {
+                Inplace_Fanages.FixGeostates(info, prp);
+            }
+            else if(modname==ModName.AhnonayTranslation)
+            {
+                Inplace_Misc.TranslateAhny(info, prp);
+            }
+            else if(modname==ModName.ReltoFixPineTree)
+            {
+                Inplace_Misc.ReltoFixPineTree(info, prp);
+            }
+            else if(modname==ModName.ReltoMakeDynamicCovers)
+            {
+                Inplace_Misc.ReltoMakeDynamicCovers(info, prp);
+            }
             else
             {
-                m.err("Unable to find modname: "+modname);
+                m.err("Unable to find modname: "+modname.toString());
             }
         }
         f.SaveFile(prp.saveAsBytes());
@@ -78,7 +131,8 @@ public class Inplace
     public static class InplaceModInfo
     {
         public String relpath;
-        public String[] modnames;
+        //public String[] modnames;
+        public ModName[] modnames;
         public String age;
 
         private InplaceModInfo(){}
@@ -88,22 +142,27 @@ public class Inplace
             if(mods==null)
             {
                 mods = new HashMap();
-                addinfo("Cleft","/dat/Cleft_District_Desert.prp", "RemoveFence");
-                addinfo("Cleft","/dat/Cleft_District_tmnaDesert.prp", "RemoveFence");
-                addinfo("city", "/dat/city_District_palace.prp", "RemoveRelevanceRegions", "CityBalconyMarkerFix", "FixKadishDoors");
-                addinfo("city", "/dat/city_District_courtyard.prp", "RemoveRelevanceRegions", "CityMuseumDoorFix", "FixKadishDoors", "MakeTeledahnIntoKirelBook");
-                addinfo("city", "/dat/city_District_canyon.prp", "RemoveRelevanceRegions", "FixKadishDoors");
-                addinfo("city", "/dat/city_District_cavetjunction.prp", "RemoveRelevanceRegions");
-                addinfo("city", "/dat/city_District_ferry.prp", "RemoveRelevanceRegions"); //ferry has RemoveRelevanceRegions and the soccer ball added
-                addinfo("city", "/dat/city_District_greatstair.prp", "RemoveRelevanceRegions");
-                addinfo("city", "/dat/city_District_KadishGallery.prp", "RemoveRelevanceRegions", "FixKadishDoors"); //also add door fix?
-                addinfo("city", "/dat/city_District_KahloPub.prp", "RemoveRelevanceRegions");
-                addinfo("city", "/dat/city_District_library.prp", "RemoveRelevanceRegions", "FixKadishDoors");
-                addinfo("city", "/dat/city_District_harbor.prp", "FixKadishDoors");
+                addinfo("Cleft","/dat/Cleft_District_Desert.prp", ModName.RemoveFence);
+                addinfo("Cleft","/dat/Cleft_District_tmnaDesert.prp", ModName.RemoveFence);
+                addinfo("city", "/dat/city_District_palace.prp", ModName.RemoveRelevanceRegions, ModName.CityBalconyMarkerFix, ModName.FixKadishDoors);
+                addinfo("city", "/dat/city_District_courtyard.prp", ModName.RemoveRelevanceRegions, ModName.CityMuseumDoorFix, ModName.FixKadishDoors, ModName.MakeTeledahnIntoKirelBook);
+                addinfo("city", "/dat/city_District_canyon.prp", ModName.RemoveRelevanceRegions, ModName.FixKadishDoors);
+                addinfo("city", "/dat/city_District_cavetjunction.prp", ModName.RemoveRelevanceRegions);
+                addinfo("city", "/dat/city_District_ferry.prp", ModName.RemoveRelevanceRegions); //ferry has RemoveRelevanceRegions and the soccer ball added
+                addinfo("city", "/dat/city_District_greatstair.prp", ModName.RemoveRelevanceRegions);
+                addinfo("city", "/dat/city_District_KadishGallery.prp", ModName.RemoveRelevanceRegions, ModName.FixKadishDoors); //also add door fix?
+                addinfo("city", "/dat/city_District_KahloPub.prp", ModName.RemoveRelevanceRegions);
+                addinfo("city", "/dat/city_District_library.prp", ModName.RemoveRelevanceRegions, ModName.FixKadishDoors);
+                addinfo("city", "/dat/city_District_harbor.prp", ModName.FixKadishDoors);
+                addinfo("AhnySphere01", "/dat/AhnySphere01_District_Sphere01.prp", ModName.AhnonayTranslation);
+                addinfo("AhnySphere01", "/dat/AhnySphere01_District_MaintRoom01.prp", ModName.AhnonayTranslation);
+                addinfo("AhnySphere01", "/dat/AhnySphere01_District_Sphere01OutBuildingInterior.prp", ModName.AhnonayTranslation);
+                addinfo("Personal", "/dat/Personal_District_psnlMYSTII.prp", ModName.ReltoFixPineTree, ModName.ReltoMakeDynamicCovers);
+
             }
             return mods;
         }
-        private static void addinfo(String age, String relpath, String... modnames)
+        private static void addinfo(String age, String relpath, ModName... modnames)
         {
             InplaceModInfo r = new InplaceModInfo();
             r.age = age;

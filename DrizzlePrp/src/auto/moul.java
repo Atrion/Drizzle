@@ -30,6 +30,7 @@ public class moul
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "MOUL";
         r.DetectionFile = "tos.txt";
+        r.prpMarkerForAgename = "_District_";
         r.renameinfo = getMoulRenameInfo();
         r.renameinfo.simplefiles.put("psnlMusicPlayer.ogg", "psnlMusicPlayerMOUL.ogg");
         r.agemodifier = new conversion.AgeModifier() {
@@ -169,6 +170,7 @@ public class moul
             "NB01AhyoheekShutters01.ogg","NB01AhyoheekShutters02.ogg","NB01ButtonClick01.ogg", //hood heek dead
             "NB01AhyoheekWin01.ogg","nb01AhyoheekWin02.ogg","NB01AyoheekCountdown01.ogg", //hood heek state
             //"NB01AhyoheekDrone_Loop.ogg"" //moul's has different stereo properties.
+            "psnlGalleryMusic.ogg", //canen in KadishGallery makes this playable in your Relto.
 
         });
         r.MusicFiles = new String[]{

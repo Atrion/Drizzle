@@ -218,6 +218,11 @@ strictfp public class Flt extends uruobj implements ICompilable
                 result[i][j] = arr[i][j].toJavaFloat();
         return result;
     }
+    public boolean isequalto(float f)
+    {
+        float f2 = this.toJavaFloat();
+        return f==f2;
+    }
     public boolean approxequals(float f, float tolerance)
     {
         float f2 = this.toJavaFloat();

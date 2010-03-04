@@ -30,6 +30,7 @@ public class hexisle
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "HexIsle";
         r.DetectionFile = "HexisleGDF.dll";
+        r.prpMarkerForAgename = "_";
         r.MusicFiles = new String[] {
             "CatFishCanyonMx.ogg","DessertDesertMx.ogg","LouderSpaceMx.ogg","MoldyDungeonMx.ogg","PlasmaMiasmaMx.ogg","PumpkinJungleMx.ogg",
         };

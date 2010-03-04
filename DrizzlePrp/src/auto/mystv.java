@@ -27,6 +27,7 @@ public class mystv //was myst5Fixes
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "MystV";
         r.DetectionFile = "MystV.exe";
+        r.prpMarkerForAgename = "_";
         r.agemodifier = new conversion.AgeModifier() {
             public void ModifyAge(Info info, FileInfo file, textfile tf) {
                 final String[][] alcugsOptionals = {

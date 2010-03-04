@@ -86,12 +86,12 @@ public class PlWaveSet7 extends uruobj
     }
     public static class WaveState extends uruobj
     {
-        Flt fMaxLength;
-        Flt fMinLength;
-        Flt fAmpOverLen;
-        Flt fChop;
-        Flt fAngleDev;
-        Flt xhexisle;
+        public Flt fMaxLength;
+        public Flt fMinLength;
+        public Flt fAmpOverLen;
+        public Flt fChop;
+        public Flt fAngleDev;
+        public Flt xhexisle;
 
         public WaveState(context c)
         {
@@ -121,7 +121,7 @@ public class PlWaveSet7 extends uruobj
     {
         //Flt[] u2; //5
         //Flt[] u3; //5
-        WaveState fGeoState;
+        public WaveState fGeoState;
         WaveState fTexState;
         Flt u4;
         Vertex u5;
