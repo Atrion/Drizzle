@@ -11,6 +11,7 @@ import java.util.Vector;
 import java.util.HashMap;
 import uru.moulprp.*;
 import shared.m;
+import shared.b;
 
 public class Inplace
 {
@@ -26,6 +27,7 @@ public class Inplace
         AhnonayTranslation,
         ReltoFixPineTree,
         ReltoMakeDynamicCovers,
+        GahreesenWallSoundFix, //so that you don't crash when nearing the Gahreesen wall.
 
         //manual ones:
         FixGeostates,
@@ -109,7 +111,8 @@ public class Inplace
             }
             else if(modname==ModName.AhnonayTranslation)
             {
-                Inplace_Misc.TranslateAhny(info, prp);
+                String actualmd5 = b.BytesToHexString(shared.CryptHashes.GetMd5(data));
+                Inplace_Misc.TranslateAhny(info, prp, actualmd5);
             }
             else if(modname==ModName.ReltoFixPineTree)
             {
@@ -118,6 +121,10 @@ public class Inplace
             else if(modname==ModName.ReltoMakeDynamicCovers)
             {
                 Inplace_Misc.ReltoMakeDynamicCovers(info, prp);
+            }
+            else if(modname==ModName.GahreesenWallSoundFix)
+            {
+                Inplace_Misc.GahreesenWallSoundFix(info, prp);
             }
             else
             {
@@ -158,6 +165,7 @@ public class Inplace
                 addinfo("AhnySphere01", "/dat/AhnySphere01_District_MaintRoom01.prp", ModName.AhnonayTranslation);
                 addinfo("AhnySphere01", "/dat/AhnySphere01_District_Sphere01OutBuildingInterior.prp", ModName.AhnonayTranslation);
                 addinfo("Personal", "/dat/Personal_District_psnlMYSTII.prp", ModName.ReltoFixPineTree, ModName.ReltoMakeDynamicCovers);
+                addinfo("Garrison", "/dat/Garrison_District_WallRoom.prp", ModName.GahreesenWallSoundFix);
 
             }
             return mods;

@@ -78,6 +78,7 @@ public class pots
             "/dat/AhnySphere01_District_MaintRoom01.prp",
             "/dat/AhnySphere01_District_Sphere01OutBuildingInterior.prp",
             "/dat/Personal_District_psnlMYSTII.prp",
+            "/dat/Garrison_District_WallRoom.prp",
             //Moul,Pots:
             "/dat/city_District_KadishGallery.prp",
             //Myst5:

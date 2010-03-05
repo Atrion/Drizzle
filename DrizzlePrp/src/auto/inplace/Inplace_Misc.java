@@ -10,33 +10,77 @@ import uru.moulprp.*;
 public class Inplace_Misc
 {
 
-    public static void TranslateAhny(Inplace.InplaceModInfo info, prpfile prp)
+    public static void TranslateAhny(Inplace.InplaceModInfo info, prpfile prp, String actualmd5)
     {
+        actualmd5 = actualmd5.toUpperCase();
         String page = prp.header.pagename.toString();
         if(page.equals("Sphere01"))
         {
-            auto.mod.AutoMod_TranslateAge.DustinModAhnySphere01(prp);
+            String offlinekimd5 = "52B861244614C328E9B36416D6EE48CC";
+            if(!actualmd5.equals(offlinekimd5))
+            {
+                auto.mod.AutoMod_TranslateAge.DustinModAhnySphere01(prp);
+            }
         }
         else if(page.equals("MaintRoom01"))
         {
-            auto.mod.AutoMod_TranslateAge.DustinModAhnyMaint01(prp);
+            String offlinekimd5 = "012D1BB5B7D110F7700C41D747D2877E";
+            if(!actualmd5.equals(offlinekimd5))
+            {
+                auto.mod.AutoMod_TranslateAge.DustinModAhnyMaint01(prp);
+            }
         }
         else if(page.equals("Sphere01OutBuildingInterior"))
         {
-            auto.mod.AutoMod_TranslateAge.DustinModAhnyOutBuilding(prp);
+            String offlinekimd5 = "636C36F916B25A0595088DEE01736B80";
+            if(!actualmd5.equals(offlinekimd5))
+            {
+                auto.mod.AutoMod_TranslateAge.DustinModAhnyOutBuilding(prp);
+            }
         }
 
     }
 
     public static void ReltoFixPineTree(Inplace.InplaceModInfo info, prpfile prp)
     {
-        auto.mod.AutoMod_Relto.ModRelto_FixPineTrees(prp);
+        PrpRootObject ro = prp.findObject("cPythYeeshaPage21 - PineTrees_0", Typeid.plPythonFileMod);
+        if(ro==null)
+        {
+            auto.mod.AutoMod_Relto.ModRelto_FixPineTrees(prp);
+        }
+        else
+        {
+            //otherwise we have the Offline-KI pre-modded version.
+        }
     }
 
     public static void ReltoMakeDynamicCovers(Inplace.InplaceModInfo info, prpfile prp)
     {
-        auto.mod.AutoMod_Relto.ModRelto_AddBookCovers(prp);
+        PrpRootObject ro = prp.findObject("book15DynTexture", Typeid.plDynamicTextMap);
+        if(ro==null)
+        {
+            auto.mod.AutoMod_Relto.ModRelto_AddBookCovers(prp);
+        }
+        else
+        {
+            //otherwise we have the Offline-KI pre-modded version.
+        }
     }
 
+    public static void GahreesenWallSoundFix(Inplace.InplaceModInfo info, prpfile prp)
+    {
+        PrpRootObject ro1 = prp.findObject("cSfxRespFeet-MaintOnGlass", Typeid.plResponderModifier);
+        PrpRootObject ro2 = prp.findObject("cSfxRespFeet-MainOnStone", Typeid.plResponderModifier);
+        PlResponderModifier rm1 = ro1.castTo();
+        PlResponderModifier rm2 = ro2.castTo();
+        PrpTaggedObject to1 = rm1.messages.get(0).commands.get(0).message;
+        PrpTaggedObject to2 = rm2.messages.get(0).commands.get(0).message;
+        uru.moulprp.PrpMessage.PlArmatureEffectStateMsg aesm1 = to1.castTo();
+        uru.moulprp.PrpMessage.PlArmatureEffectStateMsg aesm2 = to2.castTo();
+        aesm1.surface = 4; //choose a different sound (was 16)
+        aesm2.surface = 11; //choose a different sound (was 17)
 
+        ro1.markAsChanged();
+        ro2.markAsChanged();
+    }
 }

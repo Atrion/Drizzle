@@ -19,6 +19,13 @@ public abstract class IBytedeque
     abstract public void writeShorts(short[] shorts);
     abstract protected Iterator<byte[]> getIterator();
 
+    public void writeLong(long l)
+    {
+       int i0 = (int)(l);
+       int i1 = (int)(l >>> 32);
+       writeInt(i0);
+       writeInt(i1);
+    }
     public void writeFloat(float f)
     {
         int data = Float.floatToIntBits(f);

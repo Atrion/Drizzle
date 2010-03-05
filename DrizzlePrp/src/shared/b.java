@@ -76,6 +76,15 @@ public class b
         }
         return true;
     }
+    public static boolean isEqualShorts(short[] bs1, short[] bs2)
+    {
+        if(bs1.length!=bs2.length) return false;
+        for( int i=0; i<bs1.length; i++ )
+        {
+            if(bs1[i]!=bs2[i]) return false;
+        }
+        return true;
+    }
     public static int bytewiseAverage(int i, int j)
     {
         int b1 = ((i&0xFF) + (j&0xFF))/2;
@@ -394,6 +403,19 @@ public class b
         int lower = (int)b & 0x0F;
         chars[0] = (char)(upper<10?upper+'0':upper-10+'a');
         chars[1] = (char)(lower<10?lower+'0':lower-10+'a');
+        return new String(chars);
+    }
+    public static String CharToHexString(char b)
+    {
+        char[] chars = new char[4];
+        int n3 = ((int)b & 0xF000)>>12;
+        int n2 = ((int)b & 0x0F00)>>8;
+        int n1 = ((int)b & 0x00F0)>>4;
+        int n0 = ((int)b & 0x000F);
+        chars[0] = (char)(n3<10?n3+'0':n3-10+'a');
+        chars[1] = (char)(n2<10?n2+'0':n2-10+'a');
+        chars[2] = (char)(n1<10?n1+'0':n1-10+'a');
+        chars[3] = (char)(n0<10?n0+'0':n0-10+'a');
         return new String(chars);
     }
     public static String BytesToHexString(byte[] bytes)

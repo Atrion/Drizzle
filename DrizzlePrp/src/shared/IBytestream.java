@@ -45,6 +45,23 @@ public abstract class IBytestream
             readByte();
         }
     }
+    public long readLong()
+    {
+        /*byte b0 = this.readByte();
+        byte b1 = this.readByte();
+        byte b2 = this.readByte();
+        byte b3 = this.readByte();
+        byte b4 = this.readByte();
+        byte b5 = this.readByte();
+        byte b6 = this.readByte();
+        byte b7 = this.readByte();
+        long r = (b7<<56)|(b6<<48)|(b5<<40)|(b4<<32)|(b3<<24)|(b2<<16)|(b1<<8)|(b0<<0);
+        return r;*/
+        long i0 = b.Int32ToInt64(this.readInt());
+        long i1 = b.Int32ToInt64(this.readInt());
+        long r = (i1<<32) | (i0<<0);
+        return r;
+    }
     public float readFloat()
     {
         int data = readInt();

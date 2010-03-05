@@ -839,9 +839,9 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlArmatureEffectStateMsg extends uruobj
     {
-        PlMessage parent;
-        byte surface;
-        byte addsurface;
+        public PlMessage parent;
+        public byte surface;
+        public byte addsurface;
         public PlArmatureEffectStateMsg(context c) throws readexception
         {
             parent = new PlMessage(c);
