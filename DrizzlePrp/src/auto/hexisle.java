@@ -48,22 +48,7 @@ public class hexisle
                 Typeid tid = desc.objecttype;
                 if(tid==Typeid.plPanicLinkRegion) return false;
                 if(tid==Typeid.plVisRegion) return false;
-                if(true) return true;
-
-
-                Typeid[] whitelist = new Typeid[]{
-                    Typeid.hsGMaterial, Typeid.plMipMap, Typeid.plCubicEnvironMap,
-                    Typeid.plSceneNode, Typeid.plSceneObject,
-                    Typeid.plCoordinateInterface, Typeid.plSpawnModifier,
-                    Typeid.plLayer, Typeid.hsGMaterial,
-                    Typeid.plDrawInterface, Typeid.plDrawableSpans,
-                };
-                for(Typeid t: whitelist)
-                {
-                    if(tid==t) return true;
-                }
-
-                return false;
+                return true;
             }
         };
         r.prpmodifier = new conversion.PostConversionModifier() {

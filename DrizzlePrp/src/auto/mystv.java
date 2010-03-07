@@ -194,7 +194,7 @@ public class mystv //was myst5Fixes
                 String name = desc.objectname.toString();
                 Pageid pageid = desc.pageid;
 
-                //blacklist
+                //blacklist some plBoundInterface
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
@@ -211,99 +211,8 @@ public class mystv //was myst5Fixes
                     if(name.equals("FieldBubbleKiller")) return false; //this makes tahgira crash when you link there in 3rd person, I think.
                 }
 
-                if(type==Typeid.plBoundInterface)
-                {
-                    int dummy=0;
-                }
-
-                Typeid[] typeequals = new Typeid[]{
-                    Typeid.plSceneNode, Typeid.plSceneObject, Typeid.plCoordinateInterface, Typeid.plSpawnModifier, Typeid.plFilterCoordInterface, //not having plFilterCoordInterface can crash Uru.
-
-                    Typeid.plMipMap, Typeid.plCubicEnvironMap,
-                    Typeid.plLayer, Typeid.hsGMaterial, Typeid.plDrawableSpans,
-                    Typeid.plViewFaceModifier,
-                    Typeid.plLayerAnimation,
-                    Typeid.plLayerLinkAnimation,
-                    Typeid.plLayerBink, //must have the .bnk files copied over or Uru will crash.
-
-                    Typeid.plHKPhysical, Typeid.plSimulationInterface,
-                    Typeid.plDirectionalLightInfo, Typeid.plOmniLightInfo, Typeid.plSpotLightInfo,
-                    Typeid.plAGMasterMod, Typeid.plAGModifier, Typeid.plATCAnim,
-                    Typeid.plParticleSystem, Typeid.plParticleLocalWind, Typeid.plParticleCollisionEffectDie,
-                    Typeid.plAudioInterface, Typeid.plRandomSoundMod, Typeid.plSoundBuffer, Typeid.plWinAudio, Typeid.plWin32StreamingSound, Typeid.plWin32StaticSound, Typeid.plStereizer,
-                    Typeid.plDrawInterface,
-                    Typeid.plSoftVolumeSimple,
-                    Typeid.plOccluder, Typeid.plShadowCaster, Typeid.plSoftVolumeInvert, Typeid.plSoftVolumeUnion, Typeid.plSoftVolumeIntersect,
-                    Typeid.plObjectInBoxConditionalObject, Typeid.plObjectInVolumeDetector,
-                    Typeid.plActivatorConditionalObject, Typeid.plFacingConditionalObject, Typeid.plVolumeSensorConditionalObject,
-                    Typeid.plInterfaceInfoModifier, Typeid.plLogicModifier,
-                    Typeid.plPointShadowMaster,
-                    Typeid.plDynamicEnvMap,
-                    Typeid.plWaveSet7,
-                    Typeid.plPickingDetector, Typeid.plMsgForwarder, Typeid.plLineFollowMod, Typeid.plExcludeRegionModifier,
-                    Typeid.plPythonFileMod,
-                    Typeid.plResponderModifier,
-                    Typeid.plParticleCollisionEffectBounce, Typeid.plPostEffectMod,
-
-                    Typeid.pfGUIButtonMod,
-                    Typeid.pfGUIDialogMod,
-                    Typeid.plAGAnimBink,
-                    Typeid.plAnimEventModifier,
-                    Typeid.plAxisAnimModifier,
-                    Typeid.plMobileOccluder,
-                    Typeid.plDirectShadowMaster,
-                    Typeid.plVisRegion,
-                    Typeid.plParticleFlockEffect,
-                    Typeid.plImageLibMod,
-
-                    Typeid.plMobileOccluder,
-                    Typeid.plArmatureMod,
-                    Typeid.plArmatureEffectsMgr,
-
-                    Typeid.plParticleCollisionEffectBeat,
-                    Typeid.plParticleFadeVolumeEffect,
-                    Typeid.plParticleFollowSystemEffect,
-
-                    Typeid.pfGUIKnobCtrl,
-
-                    Typeid.plBoundInterface,
-                };
-                String[] namestarts={
-                    /*//"boulder01",
-                    "bridge poles05", //works when plLayerBink is present.
-                    "bubble01haloa01", //works!*/
-                    //"partcoll06", //breaks it.
-                    //"partcoll07", //breaks it.
-                    //"partcoll08", //breaks it.
-                    //"partcoll09",
-                    //"partcollidtablet",
-                    //"particlegroundcollide",
-                    //"craterupper", //works
-                    //"spawnwindmill",
-                    //"startpoint01_1",
-                    //"box",
-                    //"cone",
-                    //"door",
-                    //"raindef0",
-                    //"raindef1",
-                    //"raindeflector",
-                    //"rsin",
-                    //"CaveSnowKiller01",
-                    //"FieldBubbleKiller",
-                };
-                for(Typeid curtype: typeequals) if(curtype==type) return true;
-                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
-
-                if(type==Typeid.plCoordinateInterface)
-                {
-                    for(String start: new String[]{
-                        "arenagateleft",
-                        //"arenalift",
-                    }) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
-                }
-
-                m.msg("Skipping type(3): ",type.toString());
-                return false;
+                // accept the rest
+                return true;
             }
         };
         //These are the oggs from MystV, that aren't already present in Pots or MoulOffline(they might be in the rest of Moul).

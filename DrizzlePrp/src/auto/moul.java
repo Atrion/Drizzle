@@ -190,14 +190,8 @@ public class moul
         r.decider = new uru.moulprp.prputils.Compiler.Decider() {
             public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
                 Typeid type = desc.objecttype;
-                int number = desc.objectnumber;
                 String name = desc.objectname.toString();
                 Pageid pageid = desc.pageid;
-
-                String[] namestartswith = {};
-                String[] nameequals = {};
-
-                boolean useObject = false;
 
                 //blacklist
                 if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
@@ -208,147 +202,8 @@ public class moul
 
                 if(pageid.prefix==83 && pageid.suffix==42 && type==type.plHKPhysical && name.equals("ChairFallProxy")) return false; //Ahnonay: this physical crashes it on link in.
 
-                if(name.toLowerCase().equals("envmap02"))
-                {
-                    int dummy=0;
-                }
-
-                /*Typeid[] typeequals = new Typeid[]{
-                        type.plSceneObject,
-
-                        type.plCoordinateInterface,
-                        type.plSpawnModifier,
-                        type.plDrawInterface,
-                        type.plDrawableSpans,
-                        type.hsGMaterial,
-                        type.plLayer,
-                        type.plMipMap,
-                        type.plCubicEnvironMap,
-
-                        type.plOmniLightInfo,
-                        type.plPointShadowMaster,
-                        type.plPythonFileMod,
-                        type.plDirectionalLightInfo,
-                        type.plSimulationInterface,
-                        type.plViewFaceModifier,
-                        type.plAudioInterface,
-                        type.plStereizer,
-                        type.plSoundBuffer,
-                        type.plRandomSoundMod,
-                        type.plWin32StreamingSound,
-                        type.plWin32StaticSound,
-                        type.plWinAudio,
-                        type.plParticleSystem,
-                        type.plParticleCollisionEffectDie,
-                        type.plParticleLocalWind,
-                        type.plBoundInterface,
-                        type.plExcludeRegionModifier,
-                        type.plCameraBrain1,
-                        type.plCameraBrain1_Avatar,
-                        type.plCameraBrain1_Circle,
-                        type.plCameraBrain1_Fixed,
-                        type.plCameraModifier1,
-                        type.plAGModifier,
-
-                        type.plOccluder,
-                        type.plDynamicTextMap,
-
-                        type.plParticleCollisionEffectBounce,
-
-                        type.plSpotLightInfo,
-
-                        type.plShadowCaster,
-                        type.plDirectShadowMaster,
-                        type.plRelevanceRegion,
-                        type.plSoftVolumeSimple,
-
-                        type.plParticleFlockEffect,
-                        type.plFadeOpacityMod,
-                        type.plClusterGroup,
-                        type.plVisRegion,
-                        type.plSoftVolumeUnion,
-                        type.plObjectInVolumeDetector,
-                        type.plObjectInBoxConditionalObject,
-                        type.plInterfaceInfoModifier,
-                        type.plVolumeSensorConditionalObject,
-                        type.plLogicModifier,
-                        type.plActivatorConditionalObject,
-                        type.plFacingConditionalObject,
-                        type.plOneShotMod,
-                        type.plAvLadderMod,
-                        type.plPickingDetector,
-                        type.plCameraRegionDetector,
-
-                        type.plHKPhysical,
-
-                        type.plSoftVolumeIntersect,
-                        type.plEAXListenerMod,
-                        type.plPhysicalSndGroup,
-                        type.plSeekPointMod,
-                        type.plRailCameraMod,
-                        type.plLayerAnimation,
-                        type.plATCAnim,
-                        type.plAGMasterMod,
-                        type.plPanicLinkRegion,
-                        type.plLineFollowMod,
-                        type.plMsgForwarder,
-                        type.plAnimEventModifier,
-                        type.plMultiStageBehMod,
-
-                        type.plDynaFootMgr,
-                        type.plResponderModifier, //crashes POD district of LiveBahroCaves, and minkCameras district of Minkata.
-                        type.plSittingModifier,
-                        type.plImageLibMod,
-                        type.plLimitedDirLightInfo,
-                        type.plAgeGlobalAnim,
-                        type.plDynaPuddleMgr,
-                        type.plWaveSet7,
-                        type.plDynamicEnvMap,
-
-                        //version2
-                        type.plSoftVolumeInvert,
-
-                        //moul personal
-                        type.plDynaRippleMgr,
-                        type.plLayerSDLAnimation,
-                        type.plParticleCollisionEffectBeat,
-                        type.plParticleFadeVolumeEffect,
-
-                        //some GUI stuff
-                        type.pfGUIButtonMod,
-                        type.pfGUIDialogMod,
-                        type.plPostEffectMod,
-                        type.pfGUIDragBarCtrl,
-
-                        type.plMaintainersMarkerModifier,
-                        type.plDistOpacityMod,
-                        type.plMorphSequence,
-                        type.plMorphDataSet,
-                        type.plClothingItem,
-                        type.plSharedMesh,
-
-                        type.plEmoteAnim,
-                        type.pfGUIDraggableMod,
-                        type.pl2WayWinAudible,
-                        type.plArmatureLODMod,
-                        type.plClothingOutfit,
-                        type.plClothingBase,
-                        type.plArmatureEffectsMgr,
-                        type.plLayerLinkAnimation,
-                        type.plAliasModifier,
-                        type.plPrintShape,
-                };*/
-                //Typeid[] typeequals = mystAutomation.moulReadable;
-                Typeid[] typeequals = null;
-
-                String[] namestarts={
-                };
-                if(typeequals==null) return true;
-                for(Typeid curtype: typeequals) if(curtype==type) return true;
-                for(String start: namestarts) if(name.toLowerCase().startsWith(start.toLowerCase())) return true;
-
-                m.msg("Skipping type(1): ",type.toString());
-                return false;
+                // accept the rest
+                return true;
             }
         };
         r.prpmodifier = new conversion.PostConversionModifier() {
