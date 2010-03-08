@@ -93,6 +93,7 @@ public abstract class dvNode
             if(info.cls==Uruobjectref.class) return new dvUruobjectref(info);
             if(info.cls==Byte.class) return new dvByte(info);
             if(info.cls==Flt.class) return new dvFlt(info);
+            if(info.cls==Short.class) return new dvShort(info);
 
             return new dvObject(info);
         }

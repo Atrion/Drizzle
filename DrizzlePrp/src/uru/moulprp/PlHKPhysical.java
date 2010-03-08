@@ -71,6 +71,12 @@ public class PlHKPhysical extends uruobj
     }*/
     public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
     {
+        //General notes:
+        //flag 0x20 in group always seems to be dropped.
+        //LOSDB always seems to remain unchanged.
+        //u1 and u2 and u3 always seem to be 0.
+        //is mass required for things to be movable in PhysX?
+
         potsflags pots = new potsflags();
         byte u14 = moul.u14;
         int u15 = moul.u15;
@@ -116,6 +122,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = LOSDB; //bugfix.
             pots.zzzgroup0 = 0x0;
+            //pots.givemass = true; //mar7-2010 added. Makes you fall through the ground :P
         }
         else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
                 ||( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x4 )
@@ -238,14 +245,18 @@ public class PlHKPhysical extends uruobj
         {
             //e.g. PanicRegion in delin.
             pots.zzzu1 = 0x0;
-            pots.zzzcoltype = 0x400;
-            pots.zzzflagsdetect = 0x1020000;
+            //pots.zzzcoltype = 0x400;
+            pots.zzzcoltype = 0x200;
+            //pots.zzzflagsdetect = 0x1020000;
+            pots.zzzflagsdetect = 0x0;
             pots.zzzflagsrespond = 0x0;
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x5;
-            pots.zzzgroup0 = 0x124; //just a guess.
-
+            //pots.zzzgroup0 = 0x124; //just a guess.
+            pots.zzzgroup0 = 0x104; //new guess as we always seem to drop the 0x20.
+            //m.status("Changed physics for object: "+objname);
+            //Mar7 2010: changed to fix Delin/Tsogal doors.  Need to test if they'll move still.
         }
         else if( u14==0x5 && u15==0x18 && LOSDB==0x0 && group0==0x0 )
         {
@@ -399,10 +410,10 @@ public class PlHKPhysical extends uruobj
         }
         else
         {
-            if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
-            {
-                m.warn("plHKPhysical: Unhandled flag combination.: u14=0x",Integer.toHexString(u14),";u15=0x",Integer.toHexString(u15),";losdb=0x",Integer.toHexString(LOSDB),";group0=0x",Integer.toHexString(group0),";name=",objname);
-            }
+            //if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))
+            //{
+                m.err("plHKPhysical: Unhandled flag combination.: u14=0x",Integer.toHexString(u14),";u15=0x",Integer.toHexString(u15),";losdb=0x",Integer.toHexString(LOSDB),";group0=0x",Integer.toHexString(group0),";name=",objname);
+            //}
             return null;
         }
         return pots;
@@ -549,11 +560,11 @@ public class PlHKPhysical extends uruobj
     {
         PlSynchedObject parent;
         public Flt mass;
-        Flt RC;
-        Flt EL;
-        byte format;
-        byte u14; //6,4,2,1 //5 I think I missed.
-        int u15; //8,18,10
+        Flt RC; //friction
+        Flt EL; //restitution
+        byte format; //bounds
+        byte u14; //6,4,2,1 //5 I think I missed.    //group
+        int u15; //8,18,10    //reportsOn
         short LOSDB;
         Uruobjectref sceneobject;
         Uruobjectref scenenode;
@@ -561,7 +572,7 @@ public class PlHKPhysical extends uruobj
         Uruobjectref soundgroup;
         public Vertex position;
         public Quat orientation;
-        HsBitVector group; //4,20,200,24,120,100,124,300,700  //count is always 1 in moul
+        HsBitVector group; //4,20,200,24,120,100,124,300,700  //count is always 1 in moul //props
         PXSphereBounds xu24a;
         PXBoxBounds xu24b;
         PXConeBounds xu24c;
@@ -695,6 +706,11 @@ public class PlHKPhysical extends uruobj
             
             //extras
             if(pots.givemass) mass = Flt.one();
+            //if(!RC.approxequals(0.0f) && mass.approxequals(0.0f))
+            //{
+            //    //give mass if RC is set?
+            //    mass = Flt.one();
+            //}
 
             
             //compile as if it were an HKPhysical.
