@@ -187,34 +187,7 @@ public class mystv //was myst5Fixes
             "tdlmEsher-TodelmerP1_Mx.ogg",
             "thgrIceFildsMx_loop.ogg",
         };
-        r.decider = new uru.moulprp.prputils.Compiler.Decider() {
-            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
-                //return false;
-                Typeid type = desc.objecttype;
-                String name = desc.objectname.toString();
-                Pageid pageid = desc.pageid;
-
-                //blacklist some plBoundInterface
-                /*if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
-                if(type==Typeid.plBoundInterface && pageid.prefix==89) //Siralehn/Noloben
-                {
-                    if(name.equals("Cone01") || name.equals("doorParticleColliderMesh") || name.startsWith("RainDef0") || name.startsWith("RainDef1") || name.equals("RsinDefTop"))
-                    {
-                        return false;
-                    }
-                }
-                if(type==Typeid.plBoundInterface && pageid.prefix==88) //tahgira
-                {
-                    if(name.equals("CaveSnowKiller01")) return false;
-                    if(name.equals("FieldBubbleKiller")) return false; //this makes tahgira crash when you link there in 3rd person, I think.
-                }*/
-
-                // accept the rest
-                return true;
-            }
-        };
+        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider(); // accept every object
         //These are the oggs from MystV, that aren't already present in Pots or MoulOffline(they might be in the rest of Moul).
         //As it turns out, this is the same as the ones that simply aren't present in Pots.
         /*public static String[] mystvOggsNotInPotsNorMouloffline = {
