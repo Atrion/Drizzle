@@ -517,4 +517,36 @@ public class prpfile
         }
         return r;
     }
+
+    public void _markScenenodeSceneobjects()
+    {
+        PrpRootObject[] sns = FindAllObjectsOfType(Typeid.plSceneNode);
+        if(sns.length==0)
+        {
+            //e.g. texture files.
+        }
+        else if(sns.length==1)
+        {
+            uru.moulprp.x0000Scenenode sn = sns[0].castTo();
+            for(PrpRootObject ro: objects2)
+            {
+                if(ro.header.objecttype==Typeid.plSceneObject)
+                {
+                    uru.moulprp.x0001Sceneobject so = ro.castTo();
+                    if(sn.objectrefs1.contains(ro.getref()))
+                    {
+                        so.includeInScenenode = true;
+                    }
+                    else
+                    {
+                        so.includeInScenenode = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            m.throwUncaughtException("unexpected");
+        }
+    }
 }

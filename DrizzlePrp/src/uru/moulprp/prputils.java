@@ -391,9 +391,13 @@ public class prputils
             }
         }
         
-        m.msg("Process All was successful!");
         //result.objects = uru.generics.convertVectorToArray(objects,PrpRootObject.class);
         result.objects2 = objects;
+
+        //mark the objects that are present in the scenenode:
+        result._markScenenodeSceneobjects();
+
+        m.msg("Process All was successful!");
         return result;
         
     }

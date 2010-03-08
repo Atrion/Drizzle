@@ -95,7 +95,7 @@ public class x0000Scenenode extends uruobj
         result.objectrefs2 = new Vector<Uruobjectref>();
         return result;
     }
-    public void regenerateAllSceneobjectsFromPrpRootObjects(Vector<PrpRootObject> objs,x0000Scenenode orig)
+    public void regenerateAllSceneobjectsFromPrpRootObjects(Vector<PrpRootObject> objs/*,x0000Scenenode orig*/)
     {
         this.count1 = 0;
         this.objectrefs1.clear();
@@ -107,15 +107,18 @@ public class x0000Scenenode extends uruobj
             if(obj.header.desc.objecttype==Typeid.plSceneObject)
             {
                 //boolean oldScenenodeHadThis = orig.objectrefs1.contains(obj.getref());
-                //uru.moulprp.x0001Sceneobject so = obj.castTo();
+                uru.moulprp.x0001Sceneobject so = obj.castTo();
                 //if(oldScenenodeHadThis || !so.wasread) //if we had it before or it was newly created
                 //{
+                if(so.includeInScenenode==null || so.includeInScenenode==true)
+                {
                     this.addToObjectrefs1(obj.header.desc.toRef());
-                //}
-                //else
-                //{
-                //    int dummy=0;
-                //}
+                }
+                else
+                {
+                    //do nothing.
+                    int dummy=0;
+                }
             }
         }
     }
@@ -135,10 +138,10 @@ public class x0000Scenenode extends uruobj
     }
     public void compileSpecial(Bytedeque deque, Vector<PrpRootObject> allobjects, prputils.Compiler.Decider decider)
     {
-        x0000Scenenode orig = this.shallowcopy();
+        //x0000Scenenode orig = this.shallowcopy();
 
         //this will get all the sceneobjects, except those tagged as deleted.
-        this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects,orig);
+        this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects/*,orig*/);
 
         
         ///prputils.Compiler.isNormalObjectToBeIncluded(desc);
