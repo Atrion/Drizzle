@@ -42,11 +42,11 @@ public strictfp class Vertex extends uruobj implements ICompilable
         z = new Flt(c);
     }
     
-    public Vertex(context c) throws readexception
+    public Vertex(context c)
     {
-        x = c.readObj(Flt.class);
-        y = c.readObj(Flt.class);
-        z = c.readObj(Flt.class);
+        x = new Flt(c);
+        y = new Flt(c);
+        z = new Flt(c);
     }
     //static public Vertex create(Bytestream data)
     //{

@@ -39,9 +39,12 @@ public class x000CBoundInterface extends uruobj
     //int u1;
     //Uruobjectref parentobject; //should be a scene node.
     //int u2;
-    short u3;
-    int count;
-    Flt[][] u4 = new Flt[4][];
+
+    //short u3;
+    //int count;
+    //Flt[][] u4 = new Flt[4][];
+
+    PrpTaggedObject convexvolume;
     
     
     public x000CBoundInterface(context c) throws readexception
@@ -54,7 +57,7 @@ public class x000CBoundInterface extends uruobj
         //u2 = data.readInt();
         
         //this is an embedded object.  Check the type and implement it.
-        u3 = data.readShort();
+        /*u3 = data.readShort();
         count = data.readInt(); //number of planes, each plane has 4 flts: a vertex(the normal) and W
         for(int i=0;i<4;i++)
         {
@@ -63,21 +66,25 @@ public class x000CBoundInterface extends uruobj
             {
                 u4[i][j] = new Flt(c);
             }
-        }
+        }*/
+
+        convexvolume = new PrpTaggedObject(c);
         
     }
     public void compile(Bytedeque deque)
     {
         parent.compile(deque);
-        deque.writeShort(u3);
-        deque.writeInt(count);
-        
-        for(int i=0;i<4;i++)
-        {
-            for(int j=0;j<count;j++)
-            {
-                u4[i][j].compile(deque);
-            }
-        }
+
+        //deque.writeShort(u3);
+        //deque.writeInt(count);
+        //for(int i=0;i<4;i++)
+        //{
+        //    for(int j=0;j<count;j++)
+        //    {
+        //        u4[i][j].compile(deque);
+        //    }
+        //}
+
+        convexvolume.compile(deque);
     }
 }

@@ -220,8 +220,11 @@ public class FileUtils {
         if(file.exists())
         {
             boolean result = file.delete();
-            if(!result) m.err("Unable to delete file: ",filename);
-            if(throwexception) m.throwUncaughtException("");
+            if(!result)
+            {
+                m.err("Unable to delete file: ",filename);
+                if(throwexception) m.throwUncaughtException("");
+            }
         }
     }
     public static void CopyTree(String from, String to, boolean overwrite, boolean throwexception)
@@ -351,6 +354,14 @@ public class FileUtils {
     }
     static public void WriteFile(File filename, byte[] content, boolean createdirs)
     {
+        WriteFile(filename,content,createdirs,false);
+    }
+    static public void WriteFile(String filename, byte[] content, boolean createdirs, boolean throwexception)
+    {
+        WriteFile(new File(filename),content,createdirs,throwexception);
+    }
+    static public void WriteFile(File filename, byte[] content, boolean createdirs, boolean throwexception)
+    {
         if(createdirs)
         {
             boolean success = filename.getParentFile().mkdirs();
@@ -373,7 +384,11 @@ public class FileUtils {
         }
         catch(Exception e)
         {
-            m.err("Error writing file:",filename.getAbsolutePath()+":"+e.getMessage());
+            String[] msg = {"Error writing file:",filename.getAbsolutePath()+":"+e.getMessage()};
+            if(throwexception)
+                m.throwUncaughtException(msg);
+            else
+                m.err(msg);
         }
         
     }

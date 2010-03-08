@@ -195,7 +195,7 @@ public class mystv //was myst5Fixes
                 Pageid pageid = desc.pageid;
 
                 //blacklist some plBoundInterface
-                if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
+                /*if(type==Typeid.plBoundInterface&&name.equals("PartColl08")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl07")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface&&name.equals("PartColl06")&&pageid.prefix==0x5C&&pageid.suffix==0x23) return false; //Kveer
                 if(type==Typeid.plBoundInterface && pageid.prefix==89) //Siralehn/Noloben
@@ -209,7 +209,7 @@ public class mystv //was myst5Fixes
                 {
                     if(name.equals("CaveSnowKiller01")) return false;
                     if(name.equals("FieldBubbleKiller")) return false; //this makes tahgira crash when you link there in 3rd person, I think.
-                }
+                }*/
 
                 // accept the rest
                 return true;
@@ -279,8 +279,8 @@ public class mystv //was myst5Fixes
         //r.addInplacemod("Cleft","/dat/Cleft_District_Desert.prp", "RemoveFence");
         //r.addInplacemod("Cleft","/dat/Cleft_District_tmnaDesert.prp", "RemoveFence");
         r.addInplacemods(
-            "/dat/Cleft_District_Desert.prp",
-            "/dat/Cleft_District_tmnaDesert.prp"
+        //    "/dat/Cleft_District_Desert.prp",
+        //    "/dat/Cleft_District_tmnaDesert.prp"
         );
         return r;
     }

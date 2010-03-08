@@ -30,7 +30,7 @@ public class Inplace
         GahreesenWallSoundFix, //so that you don't crash when nearing the Gahreesen wall.
 
         //manual ones:
-        FixGeostates,
+        FixGeostates, //fixes the water problem many fanages have.
     }
     public static ModName getModName(String modname)
     {
@@ -62,6 +62,7 @@ public class Inplace
         InplaceFile f = potsfolder.File(info.relpath);
         byte[] data = f.ReadAsBytes();
         prpfile prp = prpfile.createFromBytes(data, true);
+        boolean waschanged = true;
 
         for(ModName modname: info.modnames)
         {
@@ -112,15 +113,18 @@ public class Inplace
             else if(modname==ModName.AhnonayTranslation)
             {
                 String actualmd5 = b.BytesToHexString(shared.CryptHashes.GetMd5(data));
-                Inplace_Misc.TranslateAhny(info, prp, actualmd5);
+                if(!Inplace_Misc.TranslateAhny(info, prp, actualmd5))
+                    waschanged = false;
             }
             else if(modname==ModName.ReltoFixPineTree)
             {
-                Inplace_Misc.ReltoFixPineTree(info, prp);
+                if(!Inplace_Misc.ReltoFixPineTree(info, prp))
+                    waschanged = false;
             }
             else if(modname==ModName.ReltoMakeDynamicCovers)
             {
-                Inplace_Misc.ReltoMakeDynamicCovers(info, prp);
+                if(!Inplace_Misc.ReltoMakeDynamicCovers(info, prp))
+                    waschanged = false;
             }
             else if(modname==ModName.GahreesenWallSoundFix)
             {
@@ -131,8 +135,13 @@ public class Inplace
                 m.err("Unable to find modname: "+modname.toString());
             }
         }
-        f.SaveFile(prp.saveAsBytes());
-        UpdateSumfile(potsfolder, info);
+
+        if(waschanged)
+        {
+            f.SaveFile(prp.saveAsBytes());
+            UpdateSumfile(potsfolder, info);
+        }
+        
     }
 
     public static class InplaceModInfo

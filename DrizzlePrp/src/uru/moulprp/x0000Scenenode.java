@@ -39,7 +39,7 @@ public class x0000Scenenode extends uruobj
     public int count2;
     //public Uruobjectref[] objectrefs2; //misc others.
     public Vector<Uruobjectref> objectrefs2;
-    
+
     public x0000Scenenode(context c) throws readexception
     {
         shared.IBytestream data = c.in;
@@ -75,6 +75,15 @@ public class x0000Scenenode extends uruobj
         
     }
     private x0000Scenenode(){}
+    private x0000Scenenode shallowcopy()
+    {
+        x0000Scenenode r = new x0000Scenenode();
+        r.count1 = count1;
+        r.objectrefs1 = (Vector)objectrefs1.clone();
+        r.count2 = count2;
+        r.objectrefs2 = (Vector)objectrefs2.clone();
+        return r;
+    }
     public static x0000Scenenode createDefault()
     {
         x0000Scenenode result = new x0000Scenenode();
@@ -86,7 +95,7 @@ public class x0000Scenenode extends uruobj
         result.objectrefs2 = new Vector<Uruobjectref>();
         return result;
     }
-    public void regenerateAllSceneobjectsFromPrpRootObjects(Vector<PrpRootObject> objs)
+    public void regenerateAllSceneobjectsFromPrpRootObjects(Vector<PrpRootObject> objs,x0000Scenenode orig)
     {
         this.count1 = 0;
         this.objectrefs1.clear();
@@ -97,7 +106,16 @@ public class x0000Scenenode extends uruobj
             
             if(obj.header.desc.objecttype==Typeid.plSceneObject)
             {
-                this.addToObjectrefs1(obj.header.desc.toRef());
+                //boolean oldScenenodeHadThis = orig.objectrefs1.contains(obj.getref());
+                //uru.moulprp.x0001Sceneobject so = obj.castTo();
+                //if(oldScenenodeHadThis || !so.wasread) //if we had it before or it was newly created
+                //{
+                    this.addToObjectrefs1(obj.header.desc.toRef());
+                //}
+                //else
+                //{
+                //    int dummy=0;
+                //}
             }
         }
     }
@@ -117,11 +135,13 @@ public class x0000Scenenode extends uruobj
     }
     public void compileSpecial(Bytedeque deque, Vector<PrpRootObject> allobjects, prputils.Compiler.Decider decider)
     {
+        x0000Scenenode orig = this.shallowcopy();
+
         //this will get all the sceneobjects, except those tagged as deleted.
-        this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects);
+        this.regenerateAllSceneobjectsFromPrpRootObjects(allobjects,orig);
 
         
-        //prputils.Compiler.isNormalObjectToBeIncluded(desc);
+        ///prputils.Compiler.isNormalObjectToBeIncluded(desc);
         int newcount1 = 0;
         int newcount2 = 0;
 
@@ -186,7 +206,7 @@ public class x0000Scenenode extends uruobj
             }
         }
     }
-    public void compileSpecial(Bytedeque deque, prputils.Compiler.Decider decider)
+    /*public void compileSpecial(Bytedeque deque, prputils.Compiler.Decider decider)
     {
         m.warn("Using deprecated Scenenode compileSpecial.  Change this!");
         
@@ -254,5 +274,5 @@ public class x0000Scenenode extends uruobj
                 }
             }
         }
-    }
+    }*/
 }

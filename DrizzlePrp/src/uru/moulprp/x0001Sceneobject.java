@@ -44,9 +44,13 @@ public class x0001Sceneobject extends uruobj
     public Vector<Uruobjectref> objectrefs2 = new Vector<Uruobjectref>();
     //public Uruobjectref[] objectrefs2;
     Uruobjectref scenenode;
+
+    public boolean wasread; //was this object read rather than created from scratch
     
     public x0001Sceneobject(context c) throws readexception //,boolean hasHeader)
     {
+        wasread = true;
+
         shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
         parent = new PlSynchedObject(c);//,false);

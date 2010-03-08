@@ -292,10 +292,11 @@ public class m
             message(s);
     }
 
-    public static void throwUncaughtException(String s)
+    public static void throwUncaughtException(String... s)
     {
         if(debugCount!=null) m.msg("CurPos: "+Integer.toString(debugCount));
-        throw new shared.uncaughtexception(s);
+        String msg = m.trans(s);
+        throw new shared.uncaughtexception(msg);
     }
     public static void cancel()
     {

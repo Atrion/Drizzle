@@ -246,16 +246,16 @@ public class moul
         };
         r.addAutomods(moulAutomods);
         r.addInplacemods(
-            "/dat/city_District_palace.prp",
-            "/dat/city_District_courtyard.prp",
-            "/dat/city_District_canyon.prp",
-            "/dat/city_District_cavetjunction.prp",
-            "/dat/city_District_ferry.prp",
-            "/dat/city_District_greatstair.prp",
-            "/dat/city_District_KadishGallery.prp",
-            "/dat/city_District_KahloPub.prp",
-            "/dat/city_District_library.prp",
-            "/dat/city_District_harbor.prp"
+            //"/dat/city_District_palace.prp",
+            //"/dat/city_District_courtyard.prp",
+            //"/dat/city_District_canyon.prp",
+            //"/dat/city_District_cavetjunction.prp",
+            //"/dat/city_District_ferry.prp",
+            //"/dat/city_District_greatstair.prp",
+            //"/dat/city_District_KadishGallery.prp",
+            //"/dat/city_District_KahloPub.prp",
+            //"/dat/city_District_library.prp",
+            //"/dat/city_District_harbor.prp"
         );
         return r;
     }

@@ -269,7 +269,7 @@ public class conversion
         }
 
         byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
-        FileUtils.WriteFile(outfile, wdysData);
+        FileUtils.WriteFile(outfile, wdysData,true,true);
     }
     public static void convertSum(Info info, FileInfo file)
     {
@@ -278,7 +278,7 @@ public class conversion
         byte[] sum1 = uru.moulprp.sumfile.createEmptySumfile().getByteArray();
         String outfile = info.outfolder + "/dat/"+info.g.getNewAgename(file)+".sum";
         //FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, ri.agenames), sum1);
-        FileUtils.WriteFile(outfile, sum1);
+        FileUtils.WriteFile(outfile, sum1,true,true);
     }
     public static void convertFni(Info info, FileInfo file)
     {
@@ -303,7 +303,7 @@ public class conversion
             }
 
             byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
-            FileUtils.WriteFile(outfile, wdysData);
+            FileUtils.WriteFile(outfile, wdysData,true,true);
         //}
     }
     public static void convertBik(Info info, FileInfo file)
@@ -328,6 +328,6 @@ public class conversion
         //}
 
         byte[] wdysData = UruCrypt.EncryptWhatdoyousee(decryptedData);
-        FileUtils.WriteFile(outfile, wdysData);
+        FileUtils.WriteFile(outfile, wdysData,true,true);
     }
 }

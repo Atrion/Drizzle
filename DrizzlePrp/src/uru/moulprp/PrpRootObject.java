@@ -42,9 +42,12 @@ public class PrpRootObject extends uruobj implements Comparable
     int readversion;
     
     public boolean tagDeleted = false;
+    //public boolean wasread; //was this object read rather than created from scratch
     
     public PrpRootObject(context c, boolean readRaw, int length) throws readexception
     {
+        //wasread = true;
+
         int headerStart = c.in.getAbsoluteOffset();
         header = new Objheader(c);
         int headerEnd = c.in.getAbsoluteOffset();

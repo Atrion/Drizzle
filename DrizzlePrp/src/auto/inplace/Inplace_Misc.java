@@ -10,7 +10,7 @@ import uru.moulprp.*;
 public class Inplace_Misc
 {
 
-    public static void TranslateAhny(Inplace.InplaceModInfo info, prpfile prp, String actualmd5)
+    public static boolean TranslateAhny(Inplace.InplaceModInfo info, prpfile prp, String actualmd5)
     {
         actualmd5 = actualmd5.toUpperCase();
         String page = prp.header.pagename.toString();
@@ -20,6 +20,7 @@ public class Inplace_Misc
             if(!actualmd5.equals(offlinekimd5))
             {
                 auto.mod.AutoMod_TranslateAge.DustinModAhnySphere01(prp);
+                return true;
             }
         }
         else if(page.equals("MaintRoom01"))
@@ -28,6 +29,7 @@ public class Inplace_Misc
             if(!actualmd5.equals(offlinekimd5))
             {
                 auto.mod.AutoMod_TranslateAge.DustinModAhnyMaint01(prp);
+                return true;
             }
         }
         else if(page.equals("Sphere01OutBuildingInterior"))
@@ -36,34 +38,40 @@ public class Inplace_Misc
             if(!actualmd5.equals(offlinekimd5))
             {
                 auto.mod.AutoMod_TranslateAge.DustinModAhnyOutBuilding(prp);
+                return true;
             }
         }
+        return false;
 
     }
 
-    public static void ReltoFixPineTree(Inplace.InplaceModInfo info, prpfile prp)
+    public static boolean ReltoFixPineTree(Inplace.InplaceModInfo info, prpfile prp)
     {
         PrpRootObject ro = prp.findObject("cPythYeeshaPage21 - PineTrees_0", Typeid.plPythonFileMod);
         if(ro==null)
         {
             auto.mod.AutoMod_Relto.ModRelto_FixPineTrees(prp);
+            return true;
         }
         else
         {
             //otherwise we have the Offline-KI pre-modded version.
+            return false;
         }
     }
 
-    public static void ReltoMakeDynamicCovers(Inplace.InplaceModInfo info, prpfile prp)
+    public static boolean ReltoMakeDynamicCovers(Inplace.InplaceModInfo info, prpfile prp)
     {
         PrpRootObject ro = prp.findObject("book15DynTexture", Typeid.plDynamicTextMap);
         if(ro==null)
         {
             auto.mod.AutoMod_Relto.ModRelto_AddBookCovers(prp);
+            return true;
         }
         else
         {
             //otherwise we have the Offline-KI pre-modded version.
+            return false;
         }
     }
 

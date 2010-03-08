@@ -304,6 +304,9 @@ public enum Typeid implements compilable, java.io.Serializable
     pfGUITextBoxMod,
     plAvatarMgr,
 
+    //myst5 bugfix
+    plConvexVolume,
+
     plLeafController,
     nil,
     unknown;
@@ -564,6 +567,8 @@ public enum Typeid implements compilable, java.io.Serializable
 
         tri( 0xAB, 0xAB, -2, -2, pfGUITextBoxMod), //not present in moul prps, but in mqo.
         tri( 0xF4, 0xF4, -2, -2, plAvatarMgr), //not present in moul prps, but in mqo.
+
+        tri( 0x2D1, 0x2D6, 0x25F, -2, plConvexVolume),
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle

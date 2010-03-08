@@ -481,7 +481,7 @@ public class PlDrawableSpans extends uruobj
                 xspacetree.compile(data);
                 break;
             default:
-                m.err("unknown type.");
+                m.throwUncaughtException("unknown type.");
                 break;
         }
         scenenode.compile(data);
