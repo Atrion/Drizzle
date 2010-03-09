@@ -611,8 +611,11 @@ public class PlHKPhysical extends uruobj
             sceneobject = new Uruobjectref(c); //sceneobject?
             scenenode = new Uruobjectref(c); //scenenode?
             subworld = new Uruobjectref(c); //subworld??
-            //if(subworld.hasRef!=0)
-            //    dummy=0;
+            if(subworld.hasRef!=0) {
+                m.warn("Subworld in PhysX physical not supported, object: "+c.curRootObject.toString());
+                // the subworld reference makes AhnonayMOUL crash... or at least, removing it fixes the crash
+                subworld = Uruobjectref.none();
+            }
             soundgroup = new Uruobjectref(c); //soundgroup??
             //if(soundgroup.hasRef!=0)
             //    dummy=0;
