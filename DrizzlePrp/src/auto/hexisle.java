@@ -43,14 +43,7 @@ public class hexisle
         r.renameinfo.prefices.put("PumpkinJungle", 1167);
         //r.info.infolder = infolder;
         //r.info.outfolder = outfolder;
-        r.decider = new uru.moulprp.prputils.Compiler.Decider() {
-            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
-                Typeid tid = desc.objecttype;
-                if(tid==Typeid.plPanicLinkRegion) return false;
-                if(tid==Typeid.plVisRegion) return false;
-                return true;
-            }
-        };
+        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider(); // accept every object
         r.prpmodifier = new conversion.PostConversionModifier() {
             public void ModifyPrp(conversion.Info info, conversion.FileInfo file, prpfile prp) {
                 String age = prp.header.agename.toString();
@@ -60,7 +53,7 @@ public class hexisle
                 //remove old physics and create new drawable-based physics for every main prp.
                 if(f.equals("DessertDesert_Desert.prp")||f.equals("MoldyDungeon_Dungeon.prp")||f.equals("PlasmaMiasma_PlasmaTube.prp")||f.equals("LouderSpace_Space.prp")||f.equals("PumpkinJungle_JungleExterior.prp")||f.equals("CatfishCanyon_Canyon.prp"))
                 {
-                    removeAllPhysics(prp);
+                    removeAllPhysics(prp); // this also effectively disables all kinds of regions
                     createStaticCollidersForAllDrawables(prp);
                     //fixStartAndLoopForAudio(prp);
                 }
@@ -386,6 +379,7 @@ public class hexisle
         }
     }
 
+    /*
     public static void fixStartAndLoopForAudio(prpfile prp)
     {
         for(PrpRootObject obj: prp.objects2)
@@ -409,6 +403,7 @@ public class hexisle
             }
         }
     }
+    */
 
     public static void removeAllPhysics(prpfile prp)
     {
