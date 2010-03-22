@@ -247,7 +247,16 @@ public class wikispider
                     case Unknown:
                     case WikiPage:
                         data = shared.HttpUtils.geturl(sourceurl);
-                        if(data==null) return;
+                        if(data==null)
+                        {
+                            m.warn("Unable to download page: ",sourceurl);
+                            return;
+                        }
+                        if(data.length==0)
+                        {
+                            m.warn("Page had zero length: ",sourceurl);
+                            int dummy=0;
+                        }
                         FileUtils.WriteFile(outputName+".txt", data, true);
                         String text = b.BytesToString(data);
                         Vector<String> strlinks = wikispider.getwikilinks(text);
@@ -262,7 +271,16 @@ public class wikispider
                         //if(true)break;
                         String pageurl=startingUrl + "/index.php?title="+safeinname;
                         data = shared.HttpUtils.geturl(pageurl);
-                        if(data==null) return;
+                        if(data==null)
+                        {
+                            m.warn("Unable to download page: ",pageurl);
+                            return;
+                        }
+                        if(data.length==0)
+                        {
+                            m.warn("Page had zero length: ",pageurl);
+                            int dummy=0;
+                        }
                         String imgurl=null;
                         int method = 1;
                         switch(method)

@@ -31,6 +31,8 @@ public class moul
         r.GameName = "MOUL";
         r.DetectionFile = "tos.txt";
         r.prpMarkerForAgename = "_District_";
+        r.PythonVersion = 23;
+        r.game = Game.moul;
         r.renameinfo = getMoulRenameInfo();
         r.renameinfo.simplefiles.put("psnlMusicPlayer.ogg", "psnlMusicPlayerMOUL.ogg");
         r.agemodifier = new conversion.AgeModifier() {
@@ -187,7 +189,26 @@ public class moul
             "psnlGalleryMusic.ogg", //like islmGalleryMusic.ogg, but more tinny, like from a device.
             "tmnaCreditsMusic.ogg", //the file in ABM, but missing from Pots.
         };
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider(); // accept every object
+        /*r.decider = new uru.moulprp.prputils.Compiler.Decider() {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
+                Typeid type = desc.objecttype;
+                String name = desc.objectname.toString();
+                Pageid pageid = desc.pageid;
+
+                //blacklist
+                //if(type==type.plSceneNode) return false; //do not allow Scene node in here, it must be treated separately.
+                //if(pageid.getRawData()==0x220024 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                //if(pageid.getRawData()==0x2A0025 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+                //if(pageid.prefix==0x22 && pageid.suffix==0x24 && type==type.plResponderModifier && name.equals("RespWedges")) return false; //livebahrocaves pod district problem. (crashes when linking.)
+                if(pageid.prefix==0x2A && pageid.suffix==0x25 && type==type.plResponderModifier && name.equals("cRespExcludeRgn")) return false; //minkata cameras district problem. (crashes when going to night).
+
+                if(pageid.prefix==83 && pageid.suffix==42 && type==type.plHKPhysical && name.equals("ChairFallProxy")) return false; //Ahnonay: this physical crashes it on link in.
+
+                // accept the rest
+                return true;
+            }
+        };*/
+        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
         r.prpmodifier = new conversion.PostConversionModifier() {
             public void ModifyPrp(Info info, FileInfo file, prpfile prp) {
                 if(!file.agename.equals("Dereno"))

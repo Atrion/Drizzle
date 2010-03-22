@@ -22,4 +22,12 @@ package uru;
  *
  * @author user
  */
-public enum UruFileTypes{ whatdoyousee, notthedroids, eoaenc, briceissmart, unknown  }
+public enum UruFileTypes{
+    whatdoyousee,
+    notthedroids,
+    notthedroids_mqo,
+    eoaenc,
+    briceissmart,
+    unencrypted,
+    unknown,
+}

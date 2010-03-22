@@ -541,6 +541,16 @@ public class Gui extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jButton77 = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
+        TheArtTab = new javax.swing.JPanel();
+        jPanel34 = new javax.swing.JPanel();
+        textfieldState68 = new shared.State.TextfieldState();
+        jButton168 = new javax.swing.JButton();
+        jButton166 = new javax.swing.JButton();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel77 = new javax.swing.JLabel();
+        textfieldState69 = new shared.State.TextfieldState();
+        jLabel76 = new javax.swing.JLabel();
         MiscPanel = new javax.swing.JPanel();
         jPanel41 = new javax.swing.JPanel();
         jButton126 = new javax.swing.JButton();
@@ -571,6 +581,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel25 = new javax.swing.JPanel();
         sliderState1 = new shared.State.SliderState();
         jButton132 = new javax.swing.JButton();
+        jButton167 = new javax.swing.JButton();
         AdvTabState = new shared.State.TabsState();
         jPanel48 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
@@ -719,18 +730,6 @@ public class Gui extends javax.swing.JFrame {
         jButton154 = new javax.swing.JButton();
         jButton155 = new javax.swing.JButton();
         jButton156 = new javax.swing.JButton();
-        jPanel33 = new javax.swing.JPanel();
-        textfieldState13 = new shared.State.TextfieldState();
-        jButton80 = new javax.swing.JButton();
-        jButton81 = new javax.swing.JButton();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jButton83 = new javax.swing.JButton();
-        jButton84 = new javax.swing.JButton();
-        textfieldState14 = new shared.State.TextfieldState();
-        jButton85 = new javax.swing.JButton();
-        jButton117 = new javax.swing.JButton();
-        jButton118 = new javax.swing.JButton();
         tabsState2 = new shared.State.TabsState();
         jPanel15 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -824,6 +823,8 @@ public class Gui extends javax.swing.JFrame {
         jButton111 = new javax.swing.JButton();
         jButton112 = new javax.swing.JButton();
         jButton113 = new javax.swing.JButton();
+        LegTab = new javax.swing.JTabbedPane();
+        jPanel35 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
@@ -845,6 +846,29 @@ public class Gui extends javax.swing.JFrame {
         checkboxState19 = new shared.State.CheckboxState();
         checkboxState22 = new shared.State.CheckboxState();
         jLabel58 = new javax.swing.JLabel();
+        jPanel33 = new javax.swing.JPanel();
+        textfieldState13 = new shared.State.TextfieldState();
+        jButton80 = new javax.swing.JButton();
+        jButton81 = new javax.swing.JButton();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jButton83 = new javax.swing.JButton();
+        jButton84 = new javax.swing.JButton();
+        textfieldState14 = new shared.State.TextfieldState();
+        jButton85 = new javax.swing.JButton();
+        jButton117 = new javax.swing.JButton();
+        jButton118 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        textfieldState23 = new shared.State.TextfieldState();
+        textfieldState41 = new shared.State.TextfieldState();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jButton162 = new javax.swing.JButton();
+        jButton163 = new javax.swing.JButton();
+        jButton164 = new javax.swing.JButton();
+        jButton165 = new javax.swing.JButton();
+        jLabel59 = new javax.swing.JLabel();
+        textfieldState67 = new shared.State.TextfieldState();
         HelpTab = new javax.swing.JPanel();
         imagePanel2 = new shared.ImagePanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -1703,1437 +1727,1421 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState3.addTab("Proxy", ProxyTab);
 
-            MiscPanel.setLayout(null);
+            TheArtTab.setLayout(null);
 
-            jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Advanced"));
-            jPanel41.setLayout(null);
+            jPanel34.setBorder(javax.swing.BorderFactory.createTitledBorder("3dsmax->Pots"));
+            jPanel34.setLayout(null);
 
-            jButton126.setText("List Available Ages...");
-            jButton126.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton126ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton126);
-            jButton126.setBounds(10, 180, 240, 36);
+            textfieldState68.setText("C:\\PlasmaTest\\");
+                textfieldState68.setName("theart1"); // NOI18N
+                jPanel34.add(textfieldState68);
+                textfieldState68.setBounds(390, 60, 280, 20);
 
-            jButton137.setText("Get Offline list.");
-            jButton137.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton137ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton137);
-            jButton137.setBounds(10, 210, 240, 36);
+                jButton168.setText("Convert");
+                jButton168.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton168ActionPerformed(evt);
+                    }
+                });
+                jPanel34.add(jButton168);
+                jButton168.setBounds(550, 90, 110, 36);
 
-            jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Sanity check"));
-            jPanel6.setLayout(null);
+                jButton166.setText("select...");
+                jButton166.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton166ActionPerformed(evt);
+                    }
+                });
+                jPanel34.add(jButton166);
+                jButton166.setBounds(670, 50, 110, 36);
 
-            checkboxState25.setSelected(true);
-            checkboxState25.setText("ignore known overrides");
-            checkboxState25.setName("uamig"); // NOI18N
-            jPanel6.add(checkboxState25);
-            checkboxState25.setBounds(20, 50, 240, 28);
+                jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+                jLabel74.setText("3dsmax's output folder (set in PlasmaMax2.ini):");
+                jPanel34.add(jLabel74);
+                jLabel74.setBounds(10, 60, 370, 16);
 
-            jButton139.setText("Run Tests...");
-            jButton139.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton139ActionPerformed(evt);
-                }
-            });
-            jPanel6.add(jButton139);
-            jButton139.setBounds(10, 20, 130, 36);
+                jLabel75.setForeground(new java.awt.Color(0, 102, 102));
+                jLabel75.setText("(The created files will be placed in the Pots folder given on the UAM tab.)");
+                jPanel34.add(jLabel75);
+                jLabel75.setBounds(20, 30, 710, 16);
 
-            jPanel41.add(jPanel6);
-            jPanel6.setBounds(10, 260, 300, 90);
+                jLabel77.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+                jLabel77.setText("Ages:");
+                jPanel34.add(jLabel77);
+                jLabel77.setBounds(250, 100, 130, 16);
 
-            jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
-            jPanel7.setLayout(null);
+                textfieldState69.setName("theartages"); // NOI18N
+                jPanel34.add(textfieldState69);
+                textfieldState69.setBounds(390, 100, 150, 20);
 
-            jButton134.setText("Select...");
-            jButton134.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton134ActionPerformed(evt);
-                }
-            });
-            jPanel7.add(jButton134);
-            jButton134.setBounds(300, 10, 110, 36);
+                TheArtTab.add(jPanel34);
+                jPanel34.setBounds(30, 150, 790, 140);
 
-            textfieldState42.setName("genFolder"); // NOI18N
-            jPanel7.add(textfieldState42);
-            textfieldState42.setBounds(130, 20, 170, 20);
+                jLabel76.setForeground(new java.awt.Color(0, 102, 102));
+                jLabel76.setText("This area is for things related to the writing of Ages.");
+                TheArtTab.add(jLabel76);
+                jLabel76.setBounds(20, 20, 480, 16);
 
-            jButton133.setText("Generate uam.status.txt");
-            jButton133.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton133ActionPerformed(evt);
-                }
-            });
-            jPanel7.add(jButton133);
-            jButton133.setBounds(10, 40, 180, 36);
+                tabsState3.addTab("The Art", TheArtTab);
 
-            jLabel44.setText("archive folder:");
-            jPanel7.add(jLabel44);
-            jLabel44.setBounds(10, 20, 120, 16);
+                MiscPanel.setLayout(null);
 
-            jPanel41.add(jPanel7);
-            jPanel7.setBounds(10, 60, 420, 80);
+                jPanel41.setBorder(javax.swing.BorderFactory.createTitledBorder("UAM Advanced"));
+                jPanel41.setLayout(null);
 
-            jButton15.setText("Name a random Age!");
-            jButton15.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton15ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton15);
-            jButton15.setBounds(10, 150, 240, 36);
+                jButton126.setText("List Available Ages...");
+                jButton126.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton126ActionPerformed(evt);
+                    }
+                });
+                jPanel41.add(jButton126);
+                jButton126.setBounds(10, 180, 240, 36);
 
-            jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
-            jPanel46.setLayout(null);
+                jButton137.setText("Get Offline list.");
+                jButton137.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton137ActionPerformed(evt);
+                    }
+                });
+                jPanel41.add(jButton137);
+                jButton137.setBounds(10, 210, 240, 36);
 
-            textfieldState45.setText("EderRiltahInaltahv");
-            textfieldState45.setName("ageReportPath"); // NOI18N
-            jPanel46.add(textfieldState45);
-            textfieldState45.setBounds(140, 20, 150, 20);
+                jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Sanity check"));
+                jPanel6.setLayout(null);
 
-            jButton145.setText("Report");
-            jButton145.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton145ActionPerformed(evt);
-                }
-            });
-            jPanel46.add(jButton145);
-            jButton145.setBounds(210, 40, 80, 36);
+                checkboxState25.setSelected(true);
+                checkboxState25.setText("ignore known overrides");
+                checkboxState25.setName("uamig"); // NOI18N
+                jPanel6.add(checkboxState25);
+                checkboxState25.setBounds(20, 50, 240, 28);
 
-            jLabel56.setText("Agename:");
-            jPanel46.add(jLabel56);
-            jLabel56.setBounds(20, 20, 110, 16);
+                jButton139.setText("Run Tests...");
+                jButton139.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton139ActionPerformed(evt);
+                    }
+                });
+                jPanel6.add(jButton139);
+                jButton139.setBounds(10, 20, 130, 36);
 
-            jPanel41.add(jPanel46);
-            jPanel46.setBounds(10, 350, 300, 80);
+                jPanel41.add(jPanel6);
+                jPanel6.setBounds(10, 260, 300, 90);
 
-            jLabel62.setFont(jLabel62.getFont());
-            jLabel62.setForeground(new java.awt.Color(0, 102, 102));
-            jLabel62.setText("Everything here uses the Pots folder from the UAM tab.");
-            jPanel41.add(jLabel62);
-            jLabel62.setBounds(20, 30, 410, 16);
+                jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
+                jPanel7.setLayout(null);
 
-            jButton140.setText("Delete old archives...");
-            jButton140.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton140ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton140);
-            jButton140.setBounds(250, 150, 240, 36);
+                jButton134.setText("Select...");
+                jButton134.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton134ActionPerformed(evt);
+                    }
+                });
+                jPanel7.add(jButton134);
+                jButton134.setBounds(300, 10, 110, 36);
 
-            jButton159.setText("Clear .sum files.");
-            jButton159.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton159ActionPerformed(evt);
-                }
-            });
-            jPanel41.add(jButton159);
-            jButton159.setBounds(250, 180, 240, 36);
+                textfieldState42.setName("genFolder"); // NOI18N
+                jPanel7.add(textfieldState42);
+                textfieldState42.setBounds(130, 20, 170, 20);
 
-            MiscPanel.add(jPanel41);
-            jPanel41.setBounds(400, 10, 500, 440);
+                jButton133.setText("Generate uam.status.txt");
+                jButton133.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton133ActionPerformed(evt);
+                    }
+                });
+                jPanel7.add(jButton133);
+                jButton133.setBounds(10, 40, 180, 36);
 
-            jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
+                jLabel44.setText("archive folder:");
+                jPanel7.add(jLabel44);
+                jLabel44.setBounds(10, 20, 120, 16);
 
-            textfieldState46.setText("start url");
-            textfieldState46.setName("wspurl"); // NOI18N
+                jPanel41.add(jPanel7);
+                jPanel7.setBounds(10, 60, 420, 80);
 
-            textfieldState47.setText("c:\\place\\to\\save");
-            textfieldState47.setName("wspout"); // NOI18N
-            textfieldState47.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    textfieldState47ActionPerformed(evt);
-                }
-            });
+                jButton15.setText("Name a random Age!");
+                jButton15.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton15ActionPerformed(evt);
+                    }
+                });
+                jPanel41.add(jButton15);
+                jButton15.setBounds(10, 150, 240, 36);
 
-            jButton146.setText("start");
-            jButton146.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton146ActionPerformed(evt);
-                }
-            });
+                jPanel46.setBorder(javax.swing.BorderFactory.createTitledBorder("Age reports"));
+                jPanel46.setLayout(null);
 
-            jButton147.setText("select...");
-            jButton147.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton147ActionPerformed(evt);
-                }
-            });
+                textfieldState45.setText("EderRiltahInaltahv");
+                textfieldState45.setName("ageReportPath"); // NOI18N
+                jPanel46.add(textfieldState45);
+                textfieldState45.setBounds(140, 20, 150, 20);
 
-            jLabel54.setText("Url:");
+                jButton145.setText("Report");
+                jButton145.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton145ActionPerformed(evt);
+                    }
+                });
+                jPanel46.add(jButton145);
+                jButton145.setBounds(210, 40, 80, 36);
 
-            jLabel55.setText("outfolder:");
+                jLabel56.setText("Agename:");
+                jPanel46.add(jLabel56);
+                jLabel56.setBounds(20, 20, 110, 16);
 
-            javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
-            jPanel47.setLayout(jPanel47Layout);
-            jPanel47Layout.setHorizontalGroup(
-                jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel47Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel55)
-                        .addComponent(jLabel54))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                jPanel41.add(jPanel46);
+                jPanel46.setBounds(10, 350, 300, 80);
+
+                jLabel62.setFont(jLabel62.getFont());
+                jLabel62.setForeground(new java.awt.Color(0, 102, 102));
+                jLabel62.setText("Everything here uses the Pots folder from the UAM tab.");
+                jPanel41.add(jLabel62);
+                jLabel62.setBounds(20, 30, 410, 16);
+
+                jButton140.setText("Delete old archives...");
+                jButton140.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton140ActionPerformed(evt);
+                    }
+                });
+                jPanel41.add(jButton140);
+                jButton140.setBounds(250, 150, 240, 36);
+
+                jButton159.setText("Clear .sum files.");
+                jButton159.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton159ActionPerformed(evt);
+                    }
+                });
+                jPanel41.add(jButton159);
+                jButton159.setBounds(250, 180, 240, 36);
+
+                MiscPanel.add(jPanel41);
+                jPanel41.setBounds(400, 10, 500, 440);
+
+                jPanel47.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiki spider"));
+
+                textfieldState46.setText("start url");
+                textfieldState46.setName("wspurl"); // NOI18N
+
+                textfieldState47.setText("c:\\place\\to\\save");
+                textfieldState47.setName("wspout"); // NOI18N
+                textfieldState47.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        textfieldState47ActionPerformed(evt);
+                    }
+                });
+
+                jButton146.setText("start");
+                jButton146.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton146ActionPerformed(evt);
+                    }
+                });
+
+                jButton147.setText("select...");
+                jButton147.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton147ActionPerformed(evt);
+                    }
+                });
+
+                jLabel54.setText("Url:");
+
+                jLabel55.setText("outfolder:");
+
+                javax.swing.GroupLayout jPanel47Layout = new javax.swing.GroupLayout(jPanel47);
+                jPanel47.setLayout(jPanel47Layout);
+                jPanel47Layout.setHorizontalGroup(
+                    jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel55)
+                            .addComponent(jLabel54))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton146)
+                            .addGroup(jPanel47Layout.createSequentialGroup()
+                                .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(textfieldState46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textfieldState47, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton147)))
+                        .addGap(39, 39, 39))
+                );
+                jPanel47Layout.setVerticalGroup(
+                    jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel47Layout.createSequentialGroup()
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfieldState46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel54))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfieldState47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel55)
+                            .addComponent(jButton147))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton146)
-                        .addGroup(jPanel47Layout.createSequentialGroup()
-                            .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(textfieldState46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textfieldState47, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton147)))
-                    .addGap(39, 39, 39))
-            );
-            jPanel47Layout.setVerticalGroup(
-                jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel47Layout.createSequentialGroup()
-                    .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfieldState46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel54))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfieldState47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel55)
-                        .addComponent(jButton147))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton146)
-                    .addContainerGap(8, Short.MAX_VALUE))
-            );
-
-            MiscPanel.add(jPanel47);
-            jPanel47.setBounds(10, 10, 370, 140);
-
-            jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("How rainy of a day is it?"));
-
-            sliderState1.setMinimum(20);
-            sliderState1.setValue(76);
-            sliderState1.setName("raininess"); // NOI18N
-            sliderState1.addChangeListener(new javax.swing.event.ChangeListener() {
-                public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                    sliderState1StateChanged(evt);
-                }
-            });
-
-            javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-            jPanel25.setLayout(jPanel25Layout);
-            jPanel25Layout.setHorizontalGroup(
-                jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel25Layout.createSequentialGroup()
-                    .addGap(14, 14, 14)
-                    .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(19, Short.MAX_VALUE))
-            );
-            jPanel25Layout.setVerticalGroup(
-                jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel25Layout.createSequentialGroup()
-                    .addGap(23, 23, 23)
-                    .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(40, Short.MAX_VALUE))
-            );
-
-            MiscPanel.add(jPanel25);
-            jPanel25.setBounds(20, 240, 330, 110);
-
-            jButton132.setText("Start DrizzleDeepview");
-            jButton132.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton132ActionPerformed(evt);
-                }
-            });
-            MiscPanel.add(jButton132);
-            jButton132.setBounds(20, 170, 170, 36);
-
-            tabsState3.addTab("Misc", MiscPanel);
-
-            AdvTabState.setName("subadv"); // NOI18N
-
-            jPanel48.setLayout(null);
-
-            jPanel31.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            jPanel31.setLayout(null);
-
-            textfieldState12.setText("textfieldState12");
-            textfieldState12.setName("logFile"); // NOI18N
-            jPanel31.add(textfieldState12);
-            textfieldState12.setBounds(10, 20, 87, 20);
-
-            jButton74.setText("jButton74");
-            jPanel31.add(jButton74);
-            jButton74.setBounds(100, 20, 76, 36);
-
-            jButton75.setText("jButton75");
-            jPanel31.add(jButton75);
-            jButton75.setBounds(10, 56, 80, 40);
-
-            jButton76.setText("jButton76");
-            jPanel31.add(jButton76);
-            jButton76.setBounds(100, 60, 76, 36);
-
-            jPanel48.add(jPanel31);
-            jPanel31.setBounds(20, 10, 200, 100);
-
-            jButton87.setText("Copy all text to clipboard");
-            jButton87.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton87ActionPerformed(evt);
-                }
-            });
-            jPanel48.add(jButton87);
-            jButton87.setBounds(190, 60, 160, 36);
-
-            jButton72.setText("copy from main output");
-            jButton72.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton72ActionPerformed(evt);
-                }
-            });
-            jPanel48.add(jButton72);
-            jButton72.setBounds(230, 10, 150, 36);
-
-            jPanel30.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            jPanel30.setLayout(null);
-
-            jLabel18.setText("Prefix:");
-            jPanel30.add(jLabel18);
-            jLabel18.setBounds(10, 10, 33, 16);
-
-            textfieldState11.setText("textfieldState11");
-            textfieldState11.setName("logPrefix"); // NOI18N
-            jPanel30.add(textfieldState11);
-            textfieldState11.setBounds(70, 10, 160, 20);
-
-            jButton73.setText("remove all that don't start with prefix");
-            jPanel30.add(jButton73);
-            jButton73.setBounds(10, 40, 220, 36);
-
-            jPanel48.add(jPanel30);
-            jPanel30.setBounds(310, 20, 240, 80);
-
-            jTextArea6.setColumns(20);
-            jTextArea6.setRows(5);
-            jScrollPane1.setViewportView(jTextArea6);
-
-            jPanel48.add(jScrollPane1);
-            jScrollPane1.setBounds(30, 130, 770, 250);
-
-            AdvTabState.addTab("List Analysis", jPanel48);
-
-            jPanel4.setLayout(null);
-
-            jButton23.setText("delete marked entities");
-            jButton23.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton23ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton23);
-            jButton23.setBounds(650, 220, 170, 36);
-
-            jButton22.setText("clear all marks");
-            jButton22.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton22ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton22);
-            jButton22.setBounds(700, 100, 120, 36);
-
-            jButton29.setText("mark links");
-            jButton29.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton29ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton29);
-            jButton29.setBounds(710, 130, 110, 36);
-
-            jButton24.setText("mark links from selected");
-            jButton24.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton24ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton24);
-            jButton24.setBounds(670, 160, 150, 36);
-
-            jButton25.setText("mark all that start with STRING");
-            jButton25.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton25ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton25);
-            jButton25.setBounds(630, 310, 191, 36);
-
-            jButton28.setText("load");
-            jButton28.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton28ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton28);
-            jButton28.setBounds(760, 40, 80, 36);
-
-            jButton27.setText("mark links to selected");
-            jButton27.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton27ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton27);
-            jButton27.setBounds(650, 190, 170, 36);
-
-            jButton26.setText("... end with STRING");
-            jButton26.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton26ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton26);
-            jButton26.setBounds(660, 340, 160, 36);
-
-            crossRefPanel1.setBackground(new java.awt.Color(153, 255, 153));
-            crossRefPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-            javax.swing.GroupLayout crossRefPanel1Layout = new javax.swing.GroupLayout(crossRefPanel1);
-            crossRefPanel1.setLayout(crossRefPanel1Layout);
-            crossRefPanel1Layout.setHorizontalGroup(
-                crossRefPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 558, Short.MAX_VALUE)
-            );
-            crossRefPanel1Layout.setVerticalGroup(
-                crossRefPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 398, Short.MAX_VALUE)
-            );
-
-            jPanel4.add(crossRefPanel1);
-            crossRefPanel1.setBounds(10, 10, 560, 400);
-
-            textfieldState50.setText("textfieldState50");
-            textfieldState50.setName("creffile"); // NOI18N
-            jPanel4.add(textfieldState50);
-            textfieldState50.setBounds(620, 20, 130, 20);
-
-            jButton19.setText("select...");
-            jButton19.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton19ActionPerformed(evt);
-                }
-            });
-            jPanel4.add(jButton19);
-            jButton19.setBounds(746, 10, 110, 36);
-
-            jLabel57.setText("file:");
-            jPanel4.add(jLabel57);
-            jLabel57.setBounds(580, 20, 40, 16);
-
-            textfieldState51.setText("textfieldState51");
-            textfieldState51.setName("crstr"); // NOI18N
-            jPanel4.add(textfieldState51);
-            textfieldState51.setBounds(620, 280, 87, 20);
-
-            AdvTabState.addTab("CrossRefTool", jPanel4);
-
-            jButton13.setText("Make prp report");
-            jButton13.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton13ActionPerformed(evt);
-                }
-            });
-
-            jButton14.setText("Dump some objects");
-            jButton14.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton14ActionPerformed(evt);
-                }
-            });
-
-            jButton17.setText("Recompile prp");
-            jButton17.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton17ActionPerformed(evt);
-                }
-            });
-
-            jButton21.setText("Find Objects of a certain type");
-            jButton21.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton21ActionPerformed(evt);
-                }
-            });
-
-            jButton32.setText("convert from xml escaped text (TEXT:)");
-            jButton32.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton32ActionPerformed(evt);
-                }
-            });
-
-            jButton33.setText("convert to escaped double quotes (TEXT:)");
-            jButton33.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton33ActionPerformed(evt);
-                }
-            });
-
-            jLabel3.setText("Use these to convert text from .loc files to an escaped string that can be used by Python:");
-
-            jButton44.setText("Dump All Objects");
-            jButton44.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton44ActionPerformed(evt);
-                }
-            });
-
-            jButton48.setText("create .sum file");
-            jButton48.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton48ActionPerformed(evt);
-                }
-            });
-
-            textfieldState48.setText("textfieldState48");
-            textfieldState48.setName("oldfile"); // NOI18N
-
-            textfieldState49.setText("textfieldState49");
-            textfieldState49.setName("oldout"); // NOI18N
-
-            javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-            jPanel1.setLayout(jPanel1Layout);
-            jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(174, 174, 174)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton48))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jButton44))
-                                        .addComponent(jButton21)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(241, 241, 241)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(textfieldState49, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(textfieldState48, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(101, 101, 101)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton32)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton33))
-                                .addComponent(jLabel3))))
-                    .addContainerGap(395, Short.MAX_VALUE))
-            );
-            jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jButton13)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton14)
-                        .addComponent(jButton44))
-                    .addGap(22, 22, 22)
-                    .addComponent(textfieldState48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton17)
-                        .addComponent(textfieldState49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton21))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(68, 68, 68)
-                            .addComponent(jButton48)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton32)
-                        .addComponent(jButton33))
-                    .addGap(42, 42, 42))
-            );
-
-            AdvTabState.addTab("Old", jPanel1);
-
-            jPanel49.setLayout(null);
-
-            jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder("Chat"));
-
-            jButton143.setText("jButton143");
-            jButton143.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton143ActionPerformed(evt);
-                }
-            });
-
-            textfieldState44.setText("textfieldState44");
-            textfieldState44.setName("chatmsg"); // NOI18N
-
-            javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
-            jPanel45.setLayout(jPanel45Layout);
-            jPanel45Layout.setHorizontalGroup(
-                jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel45Layout.createSequentialGroup()
-                    .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel45Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(textfieldState44, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton143))
-                    .addContainerGap(52, Short.MAX_VALUE))
-            );
-            jPanel45Layout.setVerticalGroup(
-                jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel45Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textfieldState44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton143)
-                    .addGap(34, 34, 34))
-            );
-
-            jPanel49.add(jPanel45);
-            jPanel45.setBounds(40, 30, 288, 130);
-
-            textfieldState43.setText("defaulttest");
-            textfieldState43.setName("wha"); // NOI18N
-            jPanel49.add(textfieldState43);
-            textfieldState43.setBounds(20, 200, 61, 20);
-
-            jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            jPanel36.setLayout(null);
-
-            jButton105.setText("Check(url,timer,search)");
-            jButton105.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton105ActionPerformed(evt);
-                }
-            });
-            jPanel36.add(jButton105);
-            jButton105.setBounds(10, 210, 180, 36);
-
-            textfieldState26.setText("http://example.com/page.html");
-            textfieldState26.setName("address"); // NOI18N
-            jPanel36.add(textfieldState26);
-            textfieldState26.setBounds(90, 10, 210, 20);
-
-            textfieldState27.setText("60");
-            textfieldState27.setName("updateTime"); // NOI18N
-            jPanel36.add(textfieldState27);
-            textfieldState27.setBounds(90, 40, 70, 20);
-
-            textfieldState28.setText("c:\\path\\to\\outfolder");
-            textfieldState28.setName("searchnet"); // NOI18N
-            jPanel36.add(textfieldState28);
-            textfieldState28.setBounds(90, 70, 210, 20);
-
-            jLabel1.setText("url:");
-            jPanel36.add(jLabel1);
-            jLabel1.setBounds(10, 10, 50, 16);
-
-            jLabel2.setText("timer(s)");
-            jPanel36.add(jLabel2);
-            jLabel2.setBounds(10, 40, 70, 16);
-
-            jButton16.setText("Start saving(url,timer,outfolder)");
-            jButton16.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton16ActionPerformed(evt);
-                }
-            });
-            jPanel36.add(jButton16);
-            jButton16.setBounds(10, 180, 210, 36);
-
-            jButton18.setText("Cancel All");
-            jButton18.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton18ActionPerformed(evt);
-                }
-            });
-            jPanel36.add(jButton18);
-            jButton18.setBounds(260, 150, 80, 36);
-
-            jLabel51.setText("outfolder");
-            jPanel36.add(jLabel51);
-            jLabel51.setBounds(10, 70, 70, 16);
-
-            textfieldState52.setText("textfieldState52");
-            textfieldState52.setName("tmsrch"); // NOI18N
-            jPanel36.add(textfieldState52);
-            textfieldState52.setBounds(90, 100, 210, 20);
-
-            textfieldState53.setText("Mar 14 2009, 2:05:00 PM");
-            textfieldState53.setName("tmtime"); // NOI18N
-            jPanel36.add(textfieldState53);
-            textfieldState53.setBounds(90, 130, 210, 20);
-
-            jLabel60.setText("search");
-            jPanel36.add(jLabel60);
-            jLabel60.setBounds(10, 100, 38, 16);
-
-            jLabel61.setText("date & time:");
-            jPanel36.add(jLabel61);
-            jLabel61.setBounds(10, 130, 80, 16);
-
-            jButton37.setText("Save at time(url, outfolder, date&time)");
-            jButton37.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton37ActionPerformed(evt);
-                }
-            });
-            jPanel36.add(jButton37);
-            jButton37.setBounds(10, 240, 250, 36);
-
-            jPanel49.add(jPanel36);
-            jPanel36.setBounds(350, 10, 350, 300);
-
-            jButton1.setText("Run Code Validation");
-            jButton1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton1ActionPerformed(evt);
-                }
-            });
-            jPanel49.add(jButton1);
-            jButton1.setBounds(50, 170, 170, 36);
-
-            jButton6.setText("test!!!");
-            jButton6.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton6ActionPerformed(evt);
-                }
-            });
-            jPanel49.add(jButton6);
-            jButton6.setBounds(90, 210, 80, 36);
-
-            jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
-            jPanel13.setLayout(null);
-
-            jButton38.setText("list all strings");
-            jButton38.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton38ActionPerformed(evt);
-                }
-            });
-            jPanel13.add(jButton38);
-            jButton38.setBounds(0, 20, 180, 36);
-
-            jButton40.setText("test current language");
-            jButton40.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton40ActionPerformed(evt);
-                }
-            });
-            jPanel13.add(jButton40);
-            jButton40.setBounds(0, 50, 180, 36);
-
-            jButton46.setText("Save Missing Translations");
-            jButton46.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton46ActionPerformed(evt);
-                }
-            });
-            jPanel13.add(jButton46);
-            jButton46.setBounds(10, 120, 240, 36);
-
-            jPanel49.add(jPanel13);
-            jPanel13.setBounds(30, 240, 260, 170);
-
-            jButton158.setText("as float");
-            jButton158.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton158ActionPerformed(evt);
-                }
-            });
-            jPanel49.add(jButton158);
-            jButton158.setBounds(260, 200, 64, 36);
-
-            textfieldState65.setText("0x4F800000");
-            textfieldState65.setName("bitflt"); // NOI18N
-            jPanel49.add(textfieldState65);
-            textfieldState65.setBounds(260, 170, 72, 20);
-
-            jButton161.setText("Create Distillation Profiles");
-            jButton161.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton161ActionPerformed(evt);
-                }
-            });
-            jPanel49.add(jButton161);
-            jButton161.setBounds(340, 340, 210, 36);
-
-            AdvTabState.addTab("Misc", jPanel49);
-
-            jButton5.setText("Decrypt notthedroids");
-            jButton5.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton5ActionPerformed(evt);
-                }
-            });
-
-            jButton4.setText("Decrypt whatdoyousee");
-            jButton4.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton4ActionPerformed(evt);
-                }
-            });
-
-            jButton11.setText("Decrypt elf");
-            jButton11.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton11ActionPerformed(evt);
-                }
-            });
-
-            jButton8.setText("Decrypt eoa");
-            jButton8.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton8ActionPerformed(evt);
-                }
-            });
-
-            jButton7.setText("Encrypt notthedroids");
-            jButton7.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton7ActionPerformed(evt);
-                }
-            });
-
-            jButton10.setText("Encrypt whatdoyousee");
-            jButton10.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton10ActionPerformed(evt);
-                }
-            });
-
-            jButton9.setText("Encrypt eoa");
-            jButton9.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton9ActionPerformed(evt);
-                }
-            });
-
-            jButton12.setText("Encrypt elf");
-            jButton12.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton12ActionPerformed(evt);
-                }
-            });
-
-            jButton47.setText("Calculate md5");
-            jButton47.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton47ActionPerformed(evt);
-                }
-            });
-
-            textfieldState15.setText("D:\\a\\leftoff\\decrypted\\sdl\\personal.sdl");
-            textfieldState15.setName("encryptionIn"); // NOI18N
-
-            textfieldState16.setText("C:\\Documents and Settings\\user\\Desktop\\output");
-            textfieldState16.setName("encryptionOut"); // NOI18N
-
-            jButton88.setText("select...");
-            jButton88.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton88ActionPerformed(evt);
-                }
-            });
-
-            jButton89.setText("select...");
-            jButton89.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton89ActionPerformed(evt);
-                }
-            });
-
-            jButton128.setText("Calculate Whirlpool");
-            jButton128.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton128ActionPerformed(evt);
-                }
-            });
-
-            jButton138.setText("Caclulate Sha1");
-            jButton138.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton138ActionPerformed(evt);
-                }
-            });
-
-            jButton3.setText("Detect Type");
-            jButton3.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton3ActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-            jPanel3.setLayout(jPanel3Layout);
-            jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jButton5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(102, 102, 102)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton4)
-                                        .addComponent(jButton8)
-                                        .addComponent(jButton11)
-                                        .addComponent(jButton47)
-                                        .addComponent(jButton138))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(jButton128))
-                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textfieldState16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textfieldState15, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
-                            .addGap(6, 6, 6)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton88)
-                                .addComponent(jButton89))))
-                    .addContainerGap(458, Short.MAX_VALUE))
-            );
-            jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(25, 25, 25)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfieldState15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton88))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textfieldState16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton89))
-                    .addGap(29, 29, 29)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5)
-                        .addComponent(jButton7)
-                        .addComponent(jButton3))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
-                        .addComponent(jButton10))
-                    .addGap(4, 4, 4)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton8)
-                        .addComponent(jButton9))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton11)
-                        .addComponent(jButton12))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton47)
-                        .addComponent(jButton128))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton138)
-                    .addContainerGap(50, Short.MAX_VALUE))
-            );
-
-            AdvTabState.addTab("Encryption", jPanel3);
-
-            jPanel10.setLayout(null);
-
-            jButton45.setText("Depack");
-            jButton45.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton45ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton45);
-            jButton45.setBounds(50, 120, 130, 36);
-
-            textfieldState21.setText("textfieldState21");
-            textfieldState21.setName("realmystIn"); // NOI18N
-            jPanel10.add(textfieldState21);
-            textfieldState21.setBounds(130, 30, 370, 20);
-
-            jButton95.setText("select");
-            jButton95.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton95ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton95);
-            jButton95.setBounds(500, 20, 110, 36);
-
-            jButton101.setText("select");
-            jButton101.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton101ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton101);
-            jButton101.setBounds(500, 70, 110, 36);
-
-            textfieldState24.setText("textfieldState24");
-            textfieldState24.setName("realmystOut"); // NOI18N
-            jPanel10.add(textfieldState24);
-            textfieldState24.setBounds(130, 80, 370, 20);
-
-            jLabel25.setText("in file:");
-            jPanel10.add(jLabel25);
-            jLabel25.setBounds(10, 30, 100, 16);
-
-            jLabel26.setText("out folder:");
-            jPanel10.add(jLabel26);
-            jLabel26.setBounds(10, 80, 110, 16);
-
-            textfieldState25.setText("textfieldState25");
-            textfieldState25.setName("realmystObjFile"); // NOI18N
-            jPanel10.add(textfieldState25);
-            textfieldState25.setBounds(90, 210, 340, 20);
-
-            jButton102.setText("Attempt to read.");
-            jButton102.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton102ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton102);
-            jButton102.setBounds(90, 250, 160, 36);
-
-            jLabel27.setText("File:");
-            jPanel10.add(jLabel27);
-            jLabel27.setBounds(30, 210, 48, 16);
-
-            jButton103.setText("select");
-            jButton103.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton103ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton103);
-            jButton103.setBounds(440, 200, 110, 36);
-
-            jButton104.setText("sdb test");
-            jButton104.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton104ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton104);
-            jButton104.setBounds(210, 120, 100, 36);
-
-            jButton106.setText("mdb test");
-            jButton106.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton106ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton106);
-            jButton106.setBounds(302, 120, 100, 36);
-
-            jButton108.setText("hsm test");
-            jButton108.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton108ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton108);
-            jButton108.setBounds(400, 120, 120, 36);
-
-            jButton109.setText("string search");
-            jButton109.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton109ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton109);
-            jButton109.setBounds(646, 60, 140, 36);
-
-            jButton110.setText("full test");
-            jButton110.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton110ActionPerformed(evt);
-                }
-            });
-            jPanel10.add(jButton110);
-            jButton110.setBounds(380, 160, 130, 36);
-
-            textfieldState29.setText("textfieldState29");
-            textfieldState29.setName("searchString"); // NOI18N
-            jPanel10.add(textfieldState29);
-            textfieldState29.setBounds(650, 40, 130, 20);
-
-            textfieldState30.setText("textfieldState30");
-            textfieldState30.setName("searchPath"); // NOI18N
-            jPanel10.add(textfieldState30);
-            textfieldState30.setBounds(650, 10, 130, 20);
-
-            AdvTabState.addTab("realMyst", jPanel10);
-
-            jButton50.setText("jButton50");
-            jButton50.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton50ActionPerformed(evt);
-                }
-            });
-
-            javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-            jPanel12.setLayout(jPanel12Layout);
-            jPanel12Layout.setHorizontalGroup(
-                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel12Layout.createSequentialGroup()
-                    .addGap(79, 79, 79)
-                    .addComponent(jButton50)
-                    .addContainerGap(827, Short.MAX_VALUE))
-            );
-            jPanel12Layout.setVerticalGroup(
-                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel12Layout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(jButton50)
-                    .addContainerGap(348, Short.MAX_VALUE))
-            );
-
-            AdvTabState.addTab("Riven", jPanel12);
-
-            tabsState4.setName("dstabs"); // NOI18N
-
-            jPanel2.setLayout(null);
-
-            jButton82.setText("Start...");
-            jButton82.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton82ActionPerformed(evt);
-                }
-            });
-            jPanel2.add(jButton82);
-            jButton82.setBounds(240, 260, 90, 36);
-
-            checkboxState26.setSelected(true);
-            checkboxState26.setText("Include general files");
-            checkboxState26.setName("dsop1"); // NOI18N
-            jPanel2.add(checkboxState26);
-            checkboxState26.setBounds(390, 40, 150, 28);
-
-            checkboxState27.setSelected(true);
-            checkboxState27.setText("Include Pots Ages");
-            checkboxState27.setName("dsop2"); // NOI18N
-            jPanel2.add(checkboxState27);
-            checkboxState27.setBounds(390, 80, 150, 28);
-
-            checkboxState28.setSelected(true);
-            checkboxState28.setText("Include agelist.txt Ages");
-            checkboxState28.setName("dsop3"); // NOI18N
-            jPanel2.add(checkboxState28);
-            checkboxState28.setBounds(390, 120, 170, 28);
-
-            checkboxState29.setSelected(true);
-            checkboxState29.setText("Include AvailableLinks.inf Ages");
-            checkboxState29.setName("dsop4"); // NOI18N
-            jPanel2.add(checkboxState29);
-            checkboxState29.setBounds(390, 160, 210, 28);
-
-            textfieldState55.setText("192.168.0.102");
-            textfieldState55.setName("dsserv"); // NOI18N
-            jPanel2.add(textfieldState55);
-            textfieldState55.setBounds(90, 50, 230, 20);
-
-            jLabel64.setText("Server:");
-            jPanel2.add(jLabel64);
-            jLabel64.setBounds(10, 50, 70, 16);
-
-            jLabel65.setText("Save folder:");
-            jPanel2.add(jLabel65);
-            jLabel65.setBounds(10, 110, 80, 16);
-
-            textfieldState56.setText("C:\\somepath\\");
-                textfieldState56.setName("dssave"); // NOI18N
-                jPanel2.add(textfieldState56);
-                textfieldState56.setBounds(90, 110, 200, 20);
-
-                jButton148.setText("Select...");
-                jButton148.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton148ActionPerformed(evt);
+                        .addContainerGap(8, Short.MAX_VALUE))
+                );
+
+                MiscPanel.add(jPanel47);
+                jPanel47.setBounds(10, 10, 370, 140);
+
+                jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("How rainy of a day is it?"));
+
+                sliderState1.setMinimum(20);
+                sliderState1.setValue(76);
+                sliderState1.setName("raininess"); // NOI18N
+                sliderState1.addChangeListener(new javax.swing.event.ChangeListener() {
+                    public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                        sliderState1StateChanged(evt);
                     }
                 });
-                jPanel2.add(jButton148);
-                jButton148.setBounds(290, 100, 70, 36);
 
-                checkboxState30.setSelected(true);
-                checkboxState30.setText("Include Custom Ages:");
-                checkboxState30.setName("dsop5"); // NOI18N
-                jPanel2.add(checkboxState30);
-                checkboxState30.setBounds(390, 200, 160, 28);
+                javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+                jPanel25.setLayout(jPanel25Layout);
+                jPanel25Layout.setHorizontalGroup(
+                    jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(19, Short.MAX_VALUE))
+                );
+                jPanel25Layout.setVerticalGroup(
+                    jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(40, Short.MAX_VALUE))
+                );
 
-                textareaState2.setColumns(20);
-                textareaState2.setRows(5);
-                textareaState2.setText("#one Age per line;\n#e.g.\n#EderRiltahInaltahv");
-                textareaState2.setName("dsop5list"); // NOI18N
-                jScrollPane3.setViewportView(textareaState2);
+                MiscPanel.add(jPanel25);
+                jPanel25.setBounds(20, 240, 330, 110);
 
-                jPanel2.add(jScrollPane3);
-                jScrollPane3.setBounds(550, 200, 310, 87);
-
-                tabsState4.addTab("DataserverMirror", jPanel2);
-
-                jPanel29.setLayout(null);
-
-                textfieldState57.setText("C:\\path\\to\\installation");
-                textfieldState57.setName("dsorig"); // NOI18N
-                jPanel29.add(textfieldState57);
-                textfieldState57.setBounds(150, 30, 360, 20);
-
-                jLabel66.setText("Uru folder to use:");
-                jPanel29.add(jLabel66);
-                jLabel66.setBounds(20, 30, 120, 16);
-
-                jLabel67.setText("Output folder:");
-                jPanel29.add(jLabel67);
-                jLabel67.setBounds(20, 60, 110, 16);
-
-                textfieldState58.setText("C:\\path\\to\\dataserver");
-                textfieldState58.setName("dsout"); // NOI18N
-                jPanel29.add(textfieldState58);
-                textfieldState58.setBounds(150, 60, 360, 20);
-
-                checkboxState31.setSelected(true);
-                checkboxState31.setText("Create data files");
-                checkboxState31.setName("adjdsdf"); // NOI18N
-                jPanel29.add(checkboxState31);
-                checkboxState31.setBounds(70, 120, 160, 28);
-
-                jButton149.setText("Start");
-                jButton149.addActionListener(new java.awt.event.ActionListener() {
+                jButton132.setText("Start DrizzleDeepview");
+                jButton132.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton149ActionPerformed(evt);
+                        jButton132ActionPerformed(evt);
                     }
                 });
-                jPanel29.add(jButton149);
-                jButton149.setBounds(70, 170, 80, 36);
+                MiscPanel.add(jButton132);
+                jButton132.setBounds(20, 170, 170, 36);
 
-                jButton150.setText("select");
-                jButton150.addActionListener(new java.awt.event.ActionListener() {
+                jButton167.setText("List Gamenames");
+                jButton167.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton150ActionPerformed(evt);
+                        jButton167ActionPerformed(evt);
                     }
                 });
-                jPanel29.add(jButton150);
-                jButton150.setBounds(520, 50, 60, 36);
+                MiscPanel.add(jButton167);
+                jButton167.setBounds(30, 380, 140, 36);
 
-                jButton151.setText("select");
-                jButton151.addActionListener(new java.awt.event.ActionListener() {
+                tabsState3.addTab("Misc", MiscPanel);
+
+                AdvTabState.setName("subadv"); // NOI18N
+
+                jPanel48.setLayout(null);
+
+                jPanel31.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                jPanel31.setLayout(null);
+
+                textfieldState12.setText("textfieldState12");
+                textfieldState12.setName("logFile"); // NOI18N
+                jPanel31.add(textfieldState12);
+                textfieldState12.setBounds(10, 20, 87, 20);
+
+                jButton74.setText("jButton74");
+                jPanel31.add(jButton74);
+                jButton74.setBounds(100, 20, 76, 36);
+
+                jButton75.setText("jButton75");
+                jPanel31.add(jButton75);
+                jButton75.setBounds(10, 56, 80, 40);
+
+                jButton76.setText("jButton76");
+                jPanel31.add(jButton76);
+                jButton76.setBounds(100, 60, 76, 36);
+
+                jPanel48.add(jPanel31);
+                jPanel31.setBounds(20, 10, 200, 100);
+
+                jButton87.setText("Copy all text to clipboard");
+                jButton87.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton151ActionPerformed(evt);
+                        jButton87ActionPerformed(evt);
                     }
                 });
-                jPanel29.add(jButton151);
-                jButton151.setBounds(520, 20, 60, 36);
+                jPanel48.add(jButton87);
+                jButton87.setBounds(190, 60, 160, 36);
 
-                tabsState4.addTab("DataserverGenerator", jPanel29);
-
-                AdvTabState.addTab("Server", tabsState4);
-
-                jPanel32.setLayout(null);
-
-                textfieldState59.setText("-help");
-                textfieldState59.setName("cl0"); // NOI18N
-                jPanel32.add(textfieldState59);
-                textfieldState59.setBounds(160, 70, 170, 20);
-
-                jLabel68.setText("command:");
-                jPanel32.add(jLabel68);
-                jLabel68.setBounds(80, 70, 70, 16);
-
-                jLabel70.setText("arg1:");
-                jPanel32.add(jLabel70);
-                jLabel70.setBounds(80, 120, 60, 16);
-
-                jLabel71.setText("arg2:");
-                jPanel32.add(jLabel71);
-                jLabel71.setBounds(80, 160, 70, 16);
-
-                jLabel72.setText("arg3:");
-                jPanel32.add(jLabel72);
-                jLabel72.setBounds(80, 200, 70, 16);
-
-                textfieldState60.setName("cl1"); // NOI18N
-                jPanel32.add(textfieldState60);
-                textfieldState60.setBounds(160, 120, 370, 20);
-
-                textfieldState61.setName("cl2"); // NOI18N
-                jPanel32.add(textfieldState61);
-                textfieldState61.setBounds(160, 160, 370, 20);
-
-                textfieldState62.setName("cl3"); // NOI18N
-                jPanel32.add(textfieldState62);
-                textfieldState62.setBounds(160, 200, 370, 20);
-
-                jButton152.setText("Call...");
-                jButton152.addActionListener(new java.awt.event.ActionListener() {
+                jButton72.setText("copy from main output");
+                jButton72.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton152ActionPerformed(evt);
+                        jButton72ActionPerformed(evt);
                     }
                 });
-                jPanel32.add(jButton152);
-                jButton152.setBounds(150, 270, 80, 36);
+                jPanel48.add(jButton72);
+                jButton72.setBounds(230, 10, 150, 36);
 
-                jLabel73.setText("arg4:");
-                jPanel32.add(jLabel73);
-                jLabel73.setBounds(80, 240, 70, 16);
+                jPanel30.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                jPanel30.setLayout(null);
 
-                textfieldState63.setName("cl4"); // NOI18N
-                jPanel32.add(textfieldState63);
-                textfieldState63.setBounds(160, 240, 370, 20);
+                jLabel18.setText("Prefix:");
+                jPanel30.add(jLabel18);
+                jLabel18.setBounds(10, 10, 33, 16);
 
-                jButton153.setText("Select...");
-                jButton153.addActionListener(new java.awt.event.ActionListener() {
+                textfieldState11.setText("textfieldState11");
+                textfieldState11.setName("logPrefix"); // NOI18N
+                jPanel30.add(textfieldState11);
+                textfieldState11.setBounds(70, 10, 160, 20);
+
+                jButton73.setText("remove all that don't start with prefix");
+                jPanel30.add(jButton73);
+                jButton73.setBounds(10, 40, 220, 36);
+
+                jPanel48.add(jPanel30);
+                jPanel30.setBounds(310, 20, 240, 80);
+
+                jTextArea6.setColumns(20);
+                jTextArea6.setRows(5);
+                jScrollPane1.setViewportView(jTextArea6);
+
+                jPanel48.add(jScrollPane1);
+                jScrollPane1.setBounds(30, 130, 770, 250);
+
+                AdvTabState.addTab("List Analysis", jPanel48);
+
+                jPanel4.setLayout(null);
+
+                jButton23.setText("delete marked entities");
+                jButton23.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton153ActionPerformed(evt);
+                        jButton23ActionPerformed(evt);
                     }
                 });
-                jPanel32.add(jButton153);
-                jButton153.setBounds(530, 110, 80, 36);
+                jPanel4.add(jButton23);
+                jButton23.setBounds(650, 220, 170, 36);
 
-                jButton154.setText("Select...");
-                jButton154.addActionListener(new java.awt.event.ActionListener() {
+                jButton22.setText("clear all marks");
+                jButton22.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton154ActionPerformed(evt);
+                        jButton22ActionPerformed(evt);
                     }
                 });
-                jPanel32.add(jButton154);
-                jButton154.setBounds(530, 150, 80, 36);
+                jPanel4.add(jButton22);
+                jButton22.setBounds(700, 100, 120, 36);
 
-                jButton155.setText("Select...");
-                jButton155.addActionListener(new java.awt.event.ActionListener() {
+                jButton29.setText("mark links");
+                jButton29.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton155ActionPerformed(evt);
+                        jButton29ActionPerformed(evt);
                     }
                 });
-                jPanel32.add(jButton155);
-                jButton155.setBounds(530, 190, 80, 36);
+                jPanel4.add(jButton29);
+                jButton29.setBounds(710, 130, 110, 36);
 
-                jButton156.setText("Help");
-                jButton156.addActionListener(new java.awt.event.ActionListener() {
+                jButton24.setText("mark links from selected");
+                jButton24.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton156ActionPerformed(evt);
+                        jButton24ActionPerformed(evt);
                     }
                 });
-                jPanel32.add(jButton156);
-                jButton156.setBounds(400, 270, 110, 36);
+                jPanel4.add(jButton24);
+                jButton24.setBounds(670, 160, 150, 36);
 
-                AdvTabState.addTab("CommandLine", jPanel32);
-
-                jPanel33.setLayout(null);
-
-                textfieldState13.setText("C:\\Documents and Settings\\user\\Desktop\\output\\ahny\\Ahnonay_District_BuiltIn.prp");
-                textfieldState13.setName("deepViewFilename"); // NOI18N
-                jPanel33.add(textfieldState13);
-                textfieldState13.setBounds(10, 10, 455, 20);
-
-                jButton80.setText("Select...");
-                jButton80.addActionListener(new java.awt.event.ActionListener() {
+                jButton25.setText("mark all that start with STRING");
+                jButton25.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton80ActionPerformed(evt);
+                        jButton25ActionPerformed(evt);
                     }
                 });
-                jPanel33.add(jButton80);
-                jButton80.setBounds(470, 0, 120, 36);
+                jPanel4.add(jButton25);
+                jButton25.setBounds(630, 310, 191, 36);
 
-                jButton81.setText("Read");
-                jButton81.addActionListener(new java.awt.event.ActionListener() {
+                jButton28.setText("load");
+                jButton28.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton81ActionPerformed(evt);
+                        jButton28ActionPerformed(evt);
                     }
                 });
-                jPanel33.add(jButton81);
-                jButton81.setBounds(580, 0, 110, 36);
+                jPanel4.add(jButton28);
+                jButton28.setBounds(760, 40, 80, 36);
 
-                jScrollPane13.setViewportView(jDesktopPane1);
-
-                jPanel33.add(jScrollPane13);
-                jScrollPane13.setBounds(10, 70, 760, 340);
-
-                jButton83.setText("Clear");
-                jButton83.addActionListener(new java.awt.event.ActionListener() {
+                jButton27.setText("mark links to selected");
+                jButton27.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton83ActionPerformed(evt);
+                        jButton27ActionPerformed(evt);
                     }
                 });
-                jPanel33.add(jButton83);
-                jButton83.setBounds(680, 0, 120, 36);
+                jPanel4.add(jButton27);
+                jButton27.setBounds(650, 190, 170, 36);
 
-                jButton84.setText("Save changes.");
-                jButton84.addActionListener(new java.awt.event.ActionListener() {
+                jButton26.setText("... end with STRING");
+                jButton26.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton84ActionPerformed(evt);
+                        jButton26ActionPerformed(evt);
                     }
                 });
-                jPanel33.add(jButton84);
-                jButton84.setBounds(460, 30, 150, 36);
+                jPanel4.add(jButton26);
+                jButton26.setBounds(660, 340, 160, 36);
 
-                textfieldState14.setText("C:\\Documents and Settings\\user\\Desktop\\output\\");
-                    textfieldState14.setName("deepViewOutput"); // NOI18N
-                    jPanel33.add(textfieldState14);
-                    textfieldState14.setBounds(10, 40, 272, 20);
+                crossRefPanel1.setBackground(new java.awt.Color(153, 255, 153));
+                crossRefPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-                    jButton85.setText("Select...");
-                    jButton85.addActionListener(new java.awt.event.ActionListener() {
+                javax.swing.GroupLayout crossRefPanel1Layout = new javax.swing.GroupLayout(crossRefPanel1);
+                crossRefPanel1.setLayout(crossRefPanel1Layout);
+                crossRefPanel1Layout.setHorizontalGroup(
+                    crossRefPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGap(0, 558, Short.MAX_VALUE)
+                );
+                crossRefPanel1Layout.setVerticalGroup(
+                    crossRefPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGap(0, 398, Short.MAX_VALUE)
+                );
+
+                jPanel4.add(crossRefPanel1);
+                crossRefPanel1.setBounds(10, 10, 560, 400);
+
+                textfieldState50.setText("textfieldState50");
+                textfieldState50.setName("creffile"); // NOI18N
+                jPanel4.add(textfieldState50);
+                textfieldState50.setBounds(620, 20, 130, 20);
+
+                jButton19.setText("select...");
+                jButton19.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton19ActionPerformed(evt);
+                    }
+                });
+                jPanel4.add(jButton19);
+                jButton19.setBounds(746, 10, 110, 36);
+
+                jLabel57.setText("file:");
+                jPanel4.add(jLabel57);
+                jLabel57.setBounds(580, 20, 40, 16);
+
+                textfieldState51.setText("textfieldState51");
+                textfieldState51.setName("crstr"); // NOI18N
+                jPanel4.add(textfieldState51);
+                textfieldState51.setBounds(620, 280, 87, 20);
+
+                AdvTabState.addTab("CrossRefTool", jPanel4);
+
+                jButton13.setText("Make prp report");
+                jButton13.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton13ActionPerformed(evt);
+                    }
+                });
+
+                jButton14.setText("Dump some objects");
+                jButton14.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton14ActionPerformed(evt);
+                    }
+                });
+
+                jButton17.setText("Recompile prp");
+                jButton17.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton17ActionPerformed(evt);
+                    }
+                });
+
+                jButton21.setText("Find Objects of a certain type");
+                jButton21.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton21ActionPerformed(evt);
+                    }
+                });
+
+                jButton32.setText("convert from xml escaped text (TEXT:)");
+                jButton32.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton32ActionPerformed(evt);
+                    }
+                });
+
+                jButton33.setText("convert to escaped double quotes (TEXT:)");
+                jButton33.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton33ActionPerformed(evt);
+                    }
+                });
+
+                jLabel3.setText("Use these to convert text from .loc files to an escaped string that can be used by Python:");
+
+                jButton44.setText("Dump All Objects");
+                jButton44.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton44ActionPerformed(evt);
+                    }
+                });
+
+                jButton48.setText("create .sum file");
+                jButton48.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton48ActionPerformed(evt);
+                    }
+                });
+
+                textfieldState48.setText("textfieldState48");
+                textfieldState48.setName("oldfile"); // NOI18N
+
+                textfieldState49.setText("textfieldState49");
+                textfieldState49.setName("oldout"); // NOI18N
+
+                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                jPanel1.setLayout(jPanel1Layout);
+                jPanel1Layout.setHorizontalGroup(
+                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(174, 174, 174)
+                                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton48))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButton44))
+                                            .addComponent(jButton21)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(241, 241, 241)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(textfieldState49, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(textfieldState48, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton32)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton33))
+                                    .addComponent(jLabel3))))
+                        .addContainerGap(395, Short.MAX_VALUE))
+                );
+                jPanel1Layout.setVerticalGroup(
+                    jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton14)
+                            .addComponent(jButton44))
+                        .addGap(22, 22, 22)
+                        .addComponent(textfieldState48, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton17)
+                            .addComponent(textfieldState49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton21))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(jButton48)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton32)
+                            .addComponent(jButton33))
+                        .addGap(42, 42, 42))
+                );
+
+                AdvTabState.addTab("Old", jPanel1);
+
+                jPanel49.setLayout(null);
+
+                jPanel45.setBorder(javax.swing.BorderFactory.createTitledBorder("Chat"));
+
+                jButton143.setText("jButton143");
+                jButton143.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton143ActionPerformed(evt);
+                    }
+                });
+
+                textfieldState44.setText("textfieldState44");
+                textfieldState44.setName("chatmsg"); // NOI18N
+
+                javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
+                jPanel45.setLayout(jPanel45Layout);
+                jPanel45Layout.setHorizontalGroup(
+                    jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel45Layout.createSequentialGroup()
+                        .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel45Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(textfieldState44, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton143))
+                        .addContainerGap(52, Short.MAX_VALUE))
+                );
+                jPanel45Layout.setVerticalGroup(
+                    jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel45Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textfieldState44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton143)
+                        .addGap(34, 34, 34))
+                );
+
+                jPanel49.add(jPanel45);
+                jPanel45.setBounds(40, 30, 288, 130);
+
+                textfieldState43.setText("defaulttest");
+                textfieldState43.setName("wha"); // NOI18N
+                jPanel49.add(textfieldState43);
+                textfieldState43.setBounds(20, 200, 61, 20);
+
+                jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                jPanel36.setLayout(null);
+
+                jButton105.setText("Check(url,timer,search)");
+                jButton105.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton105ActionPerformed(evt);
+                    }
+                });
+                jPanel36.add(jButton105);
+                jButton105.setBounds(10, 210, 180, 36);
+
+                textfieldState26.setText("http://example.com/page.html");
+                textfieldState26.setName("address"); // NOI18N
+                jPanel36.add(textfieldState26);
+                textfieldState26.setBounds(90, 10, 210, 20);
+
+                textfieldState27.setText("60");
+                textfieldState27.setName("updateTime"); // NOI18N
+                jPanel36.add(textfieldState27);
+                textfieldState27.setBounds(90, 40, 70, 20);
+
+                textfieldState28.setText("c:\\path\\to\\outfolder");
+                textfieldState28.setName("searchnet"); // NOI18N
+                jPanel36.add(textfieldState28);
+                textfieldState28.setBounds(90, 70, 210, 20);
+
+                jLabel1.setText("url:");
+                jPanel36.add(jLabel1);
+                jLabel1.setBounds(10, 10, 50, 16);
+
+                jLabel2.setText("timer(s)");
+                jPanel36.add(jLabel2);
+                jLabel2.setBounds(10, 40, 70, 16);
+
+                jButton16.setText("Start saving(url,timer,outfolder)");
+                jButton16.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton16ActionPerformed(evt);
+                    }
+                });
+                jPanel36.add(jButton16);
+                jButton16.setBounds(10, 180, 210, 36);
+
+                jButton18.setText("Cancel All");
+                jButton18.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton18ActionPerformed(evt);
+                    }
+                });
+                jPanel36.add(jButton18);
+                jButton18.setBounds(260, 150, 80, 36);
+
+                jLabel51.setText("outfolder");
+                jPanel36.add(jLabel51);
+                jLabel51.setBounds(10, 70, 70, 16);
+
+                textfieldState52.setText("textfieldState52");
+                textfieldState52.setName("tmsrch"); // NOI18N
+                jPanel36.add(textfieldState52);
+                textfieldState52.setBounds(90, 100, 210, 20);
+
+                textfieldState53.setText("Mar 14 2009, 2:05:00 PM");
+                textfieldState53.setName("tmtime"); // NOI18N
+                jPanel36.add(textfieldState53);
+                textfieldState53.setBounds(90, 130, 210, 20);
+
+                jLabel60.setText("search");
+                jPanel36.add(jLabel60);
+                jLabel60.setBounds(10, 100, 38, 16);
+
+                jLabel61.setText("date & time:");
+                jPanel36.add(jLabel61);
+                jLabel61.setBounds(10, 130, 80, 16);
+
+                jButton37.setText("Save at time(url, outfolder, date&time)");
+                jButton37.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton37ActionPerformed(evt);
+                    }
+                });
+                jPanel36.add(jButton37);
+                jButton37.setBounds(10, 240, 250, 36);
+
+                jPanel49.add(jPanel36);
+                jPanel36.setBounds(350, 10, 350, 300);
+
+                jButton1.setText("Run Code Validation");
+                jButton1.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton1ActionPerformed(evt);
+                    }
+                });
+                jPanel49.add(jButton1);
+                jButton1.setBounds(50, 170, 170, 36);
+
+                jButton6.setText("test!!!");
+                jButton6.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton6ActionPerformed(evt);
+                    }
+                });
+                jPanel49.add(jButton6);
+                jButton6.setBounds(90, 210, 80, 36);
+
+                jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
+                jPanel13.setLayout(null);
+
+                jButton38.setText("list all strings");
+                jButton38.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton38ActionPerformed(evt);
+                    }
+                });
+                jPanel13.add(jButton38);
+                jButton38.setBounds(0, 20, 180, 36);
+
+                jButton40.setText("test current language");
+                jButton40.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton40ActionPerformed(evt);
+                    }
+                });
+                jPanel13.add(jButton40);
+                jButton40.setBounds(0, 50, 180, 36);
+
+                jButton46.setText("Save Missing Translations");
+                jButton46.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton46ActionPerformed(evt);
+                    }
+                });
+                jPanel13.add(jButton46);
+                jButton46.setBounds(10, 120, 240, 36);
+
+                jPanel49.add(jPanel13);
+                jPanel13.setBounds(30, 240, 260, 170);
+
+                jButton158.setText("as float");
+                jButton158.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton158ActionPerformed(evt);
+                    }
+                });
+                jPanel49.add(jButton158);
+                jButton158.setBounds(260, 200, 64, 36);
+
+                textfieldState65.setText("0x4F800000");
+                textfieldState65.setName("bitflt"); // NOI18N
+                jPanel49.add(textfieldState65);
+                textfieldState65.setBounds(260, 170, 72, 20);
+
+                jButton161.setText("Create Distillation Profiles");
+                jButton161.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton161ActionPerformed(evt);
+                    }
+                });
+                jPanel49.add(jButton161);
+                jButton161.setBounds(340, 340, 210, 36);
+
+                AdvTabState.addTab("Misc", jPanel49);
+
+                jButton5.setText("Decrypt notthedroids");
+                jButton5.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton5ActionPerformed(evt);
+                    }
+                });
+
+                jButton4.setText("Decrypt whatdoyousee");
+                jButton4.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton4ActionPerformed(evt);
+                    }
+                });
+
+                jButton11.setText("Decrypt elf");
+                jButton11.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton11ActionPerformed(evt);
+                    }
+                });
+
+                jButton8.setText("Decrypt eoa");
+                jButton8.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton8ActionPerformed(evt);
+                    }
+                });
+
+                jButton7.setText("Encrypt notthedroids");
+                jButton7.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton7ActionPerformed(evt);
+                    }
+                });
+
+                jButton10.setText("Encrypt whatdoyousee");
+                jButton10.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton10ActionPerformed(evt);
+                    }
+                });
+
+                jButton9.setText("Encrypt eoa");
+                jButton9.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton9ActionPerformed(evt);
+                    }
+                });
+
+                jButton12.setText("Encrypt elf");
+                jButton12.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton12ActionPerformed(evt);
+                    }
+                });
+
+                jButton47.setText("Calculate md5");
+                jButton47.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton47ActionPerformed(evt);
+                    }
+                });
+
+                textfieldState15.setText("D:\\a\\leftoff\\decrypted\\sdl\\personal.sdl");
+                textfieldState15.setName("encryptionIn"); // NOI18N
+
+                textfieldState16.setText("C:\\Documents and Settings\\user\\Desktop\\output");
+                textfieldState16.setName("encryptionOut"); // NOI18N
+
+                jButton88.setText("select...");
+                jButton88.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton88ActionPerformed(evt);
+                    }
+                });
+
+                jButton89.setText("select...");
+                jButton89.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton89ActionPerformed(evt);
+                    }
+                });
+
+                jButton128.setText("Calculate Whirlpool");
+                jButton128.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton128ActionPerformed(evt);
+                    }
+                });
+
+                jButton138.setText("Caclulate Sha1");
+                jButton138.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton138ActionPerformed(evt);
+                    }
+                });
+
+                jButton3.setText("Detect Type");
+                jButton3.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton3ActionPerformed(evt);
+                    }
+                });
+
+                javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+                jPanel3.setLayout(jPanel3Layout);
+                jPanel3Layout.setHorizontalGroup(
+                    jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jButton5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(102, 102, 102)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton4)
+                                            .addComponent(jButton8)
+                                            .addComponent(jButton11)
+                                            .addComponent(jButton47)
+                                            .addComponent(jButton138))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(jButton128))
+                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textfieldState16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(textfieldState15, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton88)
+                                    .addComponent(jButton89))))
+                        .addContainerGap(458, Short.MAX_VALUE))
+                );
+                jPanel3Layout.setVerticalGroup(
+                    jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfieldState15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton88))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfieldState16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton89))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton7)
+                            .addComponent(jButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton10))
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton8)
+                            .addComponent(jButton9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton11)
+                            .addComponent(jButton12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton47)
+                            .addComponent(jButton128))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton138)
+                        .addContainerGap(50, Short.MAX_VALUE))
+                );
+
+                AdvTabState.addTab("Encryption", jPanel3);
+
+                jPanel10.setLayout(null);
+
+                jButton45.setText("Depack");
+                jButton45.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton45ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton45);
+                jButton45.setBounds(50, 120, 130, 36);
+
+                textfieldState21.setText("textfieldState21");
+                textfieldState21.setName("realmystIn"); // NOI18N
+                jPanel10.add(textfieldState21);
+                textfieldState21.setBounds(130, 30, 370, 20);
+
+                jButton95.setText("select");
+                jButton95.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton95ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton95);
+                jButton95.setBounds(500, 20, 110, 36);
+
+                jButton101.setText("select");
+                jButton101.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton101ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton101);
+                jButton101.setBounds(500, 70, 110, 36);
+
+                textfieldState24.setText("textfieldState24");
+                textfieldState24.setName("realmystOut"); // NOI18N
+                jPanel10.add(textfieldState24);
+                textfieldState24.setBounds(130, 80, 370, 20);
+
+                jLabel25.setText("in file:");
+                jPanel10.add(jLabel25);
+                jLabel25.setBounds(10, 30, 100, 16);
+
+                jLabel26.setText("out folder:");
+                jPanel10.add(jLabel26);
+                jLabel26.setBounds(10, 80, 110, 16);
+
+                textfieldState25.setText("textfieldState25");
+                textfieldState25.setName("realmystObjFile"); // NOI18N
+                jPanel10.add(textfieldState25);
+                textfieldState25.setBounds(90, 210, 340, 20);
+
+                jButton102.setText("Attempt to read.");
+                jButton102.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton102ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton102);
+                jButton102.setBounds(90, 250, 160, 36);
+
+                jLabel27.setText("File:");
+                jPanel10.add(jLabel27);
+                jLabel27.setBounds(30, 210, 48, 16);
+
+                jButton103.setText("select");
+                jButton103.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton103ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton103);
+                jButton103.setBounds(440, 200, 110, 36);
+
+                jButton104.setText("sdb test");
+                jButton104.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton104ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton104);
+                jButton104.setBounds(210, 120, 100, 36);
+
+                jButton106.setText("mdb test");
+                jButton106.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton106ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton106);
+                jButton106.setBounds(302, 120, 100, 36);
+
+                jButton108.setText("hsm test");
+                jButton108.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton108ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton108);
+                jButton108.setBounds(400, 120, 120, 36);
+
+                jButton109.setText("string search");
+                jButton109.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton109ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton109);
+                jButton109.setBounds(646, 60, 140, 36);
+
+                jButton110.setText("full test");
+                jButton110.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton110ActionPerformed(evt);
+                    }
+                });
+                jPanel10.add(jButton110);
+                jButton110.setBounds(380, 160, 130, 36);
+
+                textfieldState29.setText("textfieldState29");
+                textfieldState29.setName("searchString"); // NOI18N
+                jPanel10.add(textfieldState29);
+                textfieldState29.setBounds(650, 40, 130, 20);
+
+                textfieldState30.setText("textfieldState30");
+                textfieldState30.setName("searchPath"); // NOI18N
+                jPanel10.add(textfieldState30);
+                textfieldState30.setBounds(650, 10, 130, 20);
+
+                AdvTabState.addTab("realMyst", jPanel10);
+
+                jButton50.setText("jButton50");
+                jButton50.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton50ActionPerformed(evt);
+                    }
+                });
+
+                javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+                jPanel12.setLayout(jPanel12Layout);
+                jPanel12Layout.setHorizontalGroup(
+                    jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jButton50)
+                        .addContainerGap(827, Short.MAX_VALUE))
+                );
+                jPanel12Layout.setVerticalGroup(
+                    jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton50)
+                        .addContainerGap(348, Short.MAX_VALUE))
+                );
+
+                AdvTabState.addTab("Riven", jPanel12);
+
+                tabsState4.setName("dstabs"); // NOI18N
+
+                jPanel2.setLayout(null);
+
+                jButton82.setText("Start...");
+                jButton82.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton82ActionPerformed(evt);
+                    }
+                });
+                jPanel2.add(jButton82);
+                jButton82.setBounds(240, 260, 90, 36);
+
+                checkboxState26.setSelected(true);
+                checkboxState26.setText("Include general files");
+                checkboxState26.setName("dsop1"); // NOI18N
+                jPanel2.add(checkboxState26);
+                checkboxState26.setBounds(390, 40, 150, 28);
+
+                checkboxState27.setSelected(true);
+                checkboxState27.setText("Include Pots Ages");
+                checkboxState27.setName("dsop2"); // NOI18N
+                jPanel2.add(checkboxState27);
+                checkboxState27.setBounds(390, 80, 150, 28);
+
+                checkboxState28.setSelected(true);
+                checkboxState28.setText("Include agelist.txt Ages");
+                checkboxState28.setName("dsop3"); // NOI18N
+                jPanel2.add(checkboxState28);
+                checkboxState28.setBounds(390, 120, 170, 28);
+
+                checkboxState29.setSelected(true);
+                checkboxState29.setText("Include AvailableLinks.inf Ages");
+                checkboxState29.setName("dsop4"); // NOI18N
+                jPanel2.add(checkboxState29);
+                checkboxState29.setBounds(390, 160, 210, 28);
+
+                textfieldState55.setText("192.168.0.102");
+                textfieldState55.setName("dsserv"); // NOI18N
+                jPanel2.add(textfieldState55);
+                textfieldState55.setBounds(90, 50, 230, 20);
+
+                jLabel64.setText("Server:");
+                jPanel2.add(jLabel64);
+                jLabel64.setBounds(10, 50, 70, 16);
+
+                jLabel65.setText("Save folder:");
+                jPanel2.add(jLabel65);
+                jLabel65.setBounds(10, 110, 80, 16);
+
+                textfieldState56.setText("C:\\somepath\\");
+                    textfieldState56.setName("dssave"); // NOI18N
+                    jPanel2.add(textfieldState56);
+                    textfieldState56.setBounds(90, 110, 200, 20);
+
+                    jButton148.setText("Select...");
+                    jButton148.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            jButton85ActionPerformed(evt);
+                            jButton148ActionPerformed(evt);
                         }
                     });
-                    jPanel33.add(jButton85);
-                    jButton85.setBounds(280, 30, 140, 36);
+                    jPanel2.add(jButton148);
+                    jButton148.setBounds(290, 100, 70, 36);
 
-                    jButton117.setText("Strings");
-                    jButton117.addActionListener(new java.awt.event.ActionListener() {
+                    checkboxState30.setSelected(true);
+                    checkboxState30.setText("Include Custom Ages:");
+                    checkboxState30.setName("dsop5"); // NOI18N
+                    jPanel2.add(checkboxState30);
+                    checkboxState30.setBounds(390, 200, 160, 28);
+
+                    textareaState2.setColumns(20);
+                    textareaState2.setRows(5);
+                    textareaState2.setText("#one Age per line;\n#e.g.\n#EderRiltahInaltahv");
+                    textareaState2.setName("dsop5list"); // NOI18N
+                    jScrollPane3.setViewportView(textareaState2);
+
+                    jPanel2.add(jScrollPane3);
+                    jScrollPane3.setBounds(550, 200, 310, 87);
+
+                    tabsState4.addTab("DataserverMirror", jPanel2);
+
+                    jPanel29.setLayout(null);
+
+                    textfieldState57.setText("C:\\path\\to\\installation");
+                    textfieldState57.setName("dsorig"); // NOI18N
+                    jPanel29.add(textfieldState57);
+                    textfieldState57.setBounds(150, 30, 360, 20);
+
+                    jLabel66.setText("Uru folder to use:");
+                    jPanel29.add(jLabel66);
+                    jLabel66.setBounds(20, 30, 120, 16);
+
+                    jLabel67.setText("Output folder:");
+                    jPanel29.add(jLabel67);
+                    jLabel67.setBounds(20, 60, 110, 16);
+
+                    textfieldState58.setText("C:\\path\\to\\dataserver");
+                    textfieldState58.setName("dsout"); // NOI18N
+                    jPanel29.add(textfieldState58);
+                    textfieldState58.setBounds(150, 60, 360, 20);
+
+                    checkboxState31.setSelected(true);
+                    checkboxState31.setText("Create data files");
+                    checkboxState31.setName("adjdsdf"); // NOI18N
+                    jPanel29.add(checkboxState31);
+                    checkboxState31.setBounds(70, 120, 160, 28);
+
+                    jButton149.setText("Start");
+                    jButton149.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            jButton117ActionPerformed(evt);
+                            jButton149ActionPerformed(evt);
                         }
                     });
-                    jPanel33.add(jButton117);
-                    jButton117.setBounds(780, 120, 63, 36);
+                    jPanel29.add(jButton149);
+                    jButton149.setBounds(70, 170, 80, 36);
 
-                    jButton118.setText("Refs");
-                    jButton118.addActionListener(new java.awt.event.ActionListener() {
+                    jButton150.setText("select");
+                    jButton150.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            jButton118ActionPerformed(evt);
+                            jButton150ActionPerformed(evt);
                         }
                     });
-                    jPanel33.add(jButton118);
-                    jButton118.setBounds(790, 160, 50, 36);
+                    jPanel29.add(jButton150);
+                    jButton150.setBounds(520, 50, 60, 36);
 
-                    AdvTabState.addTab("DeepView", jPanel33);
+                    jButton151.setText("select");
+                    jButton151.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton151ActionPerformed(evt);
+                        }
+                    });
+                    jPanel29.add(jButton151);
+                    jButton151.setBounds(520, 20, 60, 36);
+
+                    tabsState4.addTab("DataserverGenerator", jPanel29);
+
+                    AdvTabState.addTab("Server", tabsState4);
+
+                    jPanel32.setLayout(null);
+
+                    textfieldState59.setText("-help");
+                    textfieldState59.setName("cl0"); // NOI18N
+                    jPanel32.add(textfieldState59);
+                    textfieldState59.setBounds(160, 70, 170, 20);
+
+                    jLabel68.setText("command:");
+                    jPanel32.add(jLabel68);
+                    jLabel68.setBounds(80, 70, 70, 16);
+
+                    jLabel70.setText("arg1:");
+                    jPanel32.add(jLabel70);
+                    jLabel70.setBounds(80, 120, 60, 16);
+
+                    jLabel71.setText("arg2:");
+                    jPanel32.add(jLabel71);
+                    jLabel71.setBounds(80, 160, 70, 16);
+
+                    jLabel72.setText("arg3:");
+                    jPanel32.add(jLabel72);
+                    jLabel72.setBounds(80, 200, 70, 16);
+
+                    textfieldState60.setName("cl1"); // NOI18N
+                    jPanel32.add(textfieldState60);
+                    textfieldState60.setBounds(160, 120, 370, 20);
+
+                    textfieldState61.setName("cl2"); // NOI18N
+                    jPanel32.add(textfieldState61);
+                    textfieldState61.setBounds(160, 160, 370, 20);
+
+                    textfieldState62.setName("cl3"); // NOI18N
+                    jPanel32.add(textfieldState62);
+                    textfieldState62.setBounds(160, 200, 370, 20);
+
+                    jButton152.setText("Call...");
+                    jButton152.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton152ActionPerformed(evt);
+                        }
+                    });
+                    jPanel32.add(jButton152);
+                    jButton152.setBounds(150, 270, 80, 36);
+
+                    jLabel73.setText("arg4:");
+                    jPanel32.add(jLabel73);
+                    jLabel73.setBounds(80, 240, 70, 16);
+
+                    textfieldState63.setName("cl4"); // NOI18N
+                    jPanel32.add(textfieldState63);
+                    textfieldState63.setBounds(160, 240, 370, 20);
+
+                    jButton153.setText("Select...");
+                    jButton153.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton153ActionPerformed(evt);
+                        }
+                    });
+                    jPanel32.add(jButton153);
+                    jButton153.setBounds(530, 110, 80, 36);
+
+                    jButton154.setText("Select...");
+                    jButton154.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton154ActionPerformed(evt);
+                        }
+                    });
+                    jPanel32.add(jButton154);
+                    jButton154.setBounds(530, 150, 80, 36);
+
+                    jButton155.setText("Select...");
+                    jButton155.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton155ActionPerformed(evt);
+                        }
+                    });
+                    jPanel32.add(jButton155);
+                    jButton155.setBounds(530, 190, 80, 36);
+
+                    jButton156.setText("Help");
+                    jButton156.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            jButton156ActionPerformed(evt);
+                        }
+                    });
+                    jPanel32.add(jButton156);
+                    jButton156.setBounds(400, 270, 110, 36);
+
+                    AdvTabState.addTab("CommandLine", jPanel32);
 
                     tabsState2.setName("tabs1"); // NOI18N
 
@@ -3894,6 +3902,19 @@ public class Gui extends javax.swing.JFrame {
 
                                 AdvTabState.addTab("Manual Conversion", tabsState2);
 
+                                javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+                                jPanel35.setLayout(jPanel35Layout);
+                                jPanel35Layout.setHorizontalGroup(
+                                    jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGap(0, 978, Short.MAX_VALUE)
+                                );
+                                jPanel35Layout.setVerticalGroup(
+                                    jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGap(0, 394, Short.MAX_VALUE)
+                                );
+
+                                LegTab.addTab("tab1", jPanel35);
+
                                 jPanel24.setLayout(null);
 
                                 jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Quaternion Compression Test"));
@@ -3963,7 +3984,7 @@ public class Gui extends javax.swing.JFrame {
                                 textfieldState35.setText("textfieldState35");
                                 textfieldState35.setName("vaultInFile"); // NOI18N
                                 jPanel24.add(textfieldState35);
-                                textfieldState35.setBounds(30, 380, 87, 20);
+                                textfieldState35.setBounds(40, 370, 87, 20);
 
                                 jButton120.setText("Select...");
                                 jButton120.addActionListener(new java.awt.event.ActionListener() {
@@ -4029,84 +4050,233 @@ public class Gui extends javax.swing.JFrame {
                                 jPanel24.add(jLabel58);
                                 jLabel58.setBounds(170, 320, 320, 40);
 
-                                AdvTabState.addTab("Legacy", jPanel24);
+                                LegTab.addTab("OldLegacy", jPanel24);
 
-                                tabsState3.addTab("Advanced", AdvTabState);
+                                jPanel33.setLayout(null);
 
-                                HelpTab.setLayout(null);
+                                textfieldState13.setText("C:\\Documents and Settings\\user\\Desktop\\output\\ahny\\Ahnonay_District_BuiltIn.prp");
+                                textfieldState13.setName("deepViewFilename"); // NOI18N
+                                jPanel33.add(textfieldState13);
+                                textfieldState13.setBounds(10, 10, 455, 20);
 
-                                imagePanel2.setImageFile("/gui/Pterosaur2b4.png");
-
-                                javax.swing.GroupLayout imagePanel2Layout = new javax.swing.GroupLayout(imagePanel2);
-                                imagePanel2.setLayout(imagePanel2Layout);
-                                imagePanel2Layout.setHorizontalGroup(
-                                    imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGap(0, 135, Short.MAX_VALUE)
-                                );
-                                imagePanel2Layout.setVerticalGroup(
-                                    imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGap(0, 124, Short.MAX_VALUE)
-                                );
-
-                                HelpTab.add(imagePanel2);
-                                imagePanel2.setBounds(10, 40, 135, 124);
-
-                                jTextArea5.setColumns(20);
-                                jTextArea5.setRows(5);
-                                jScrollPane2.setViewportView(jTextArea5);
-
-                                HelpTab.add(jScrollPane2);
-                                jScrollPane2.setBounds(150, 40, 810, 370);
-
-                                tabsState3.addTab("Help", HelpTab);
-
-                                getContentPane().add(tabsState3);
-                                tabsState3.setBounds(10, 10, 990, 490);
-
-                                jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
-                                jPanel27.setLayout(null);
-
-                                jButton2.setText("Clear log.");
-                                jButton2.addActionListener(new java.awt.event.ActionListener() {
+                                jButton80.setText("Select...");
+                                jButton80.addActionListener(new java.awt.event.ActionListener() {
                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                        jButton2ActionPerformed(evt);
+                                        jButton80ActionPerformed(evt);
                                     }
                                 });
-                                jPanel27.add(jButton2);
-                                jButton2.setBounds(10, 20, 140, 36);
+                                jPanel33.add(jButton80);
+                                jButton80.setBounds(470, 0, 120, 36);
 
-                                jButton20.setText("Remove dupes.");
-                                jButton20.addActionListener(new java.awt.event.ActionListener() {
+                                jButton81.setText("Read");
+                                jButton81.addActionListener(new java.awt.event.ActionListener() {
                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                        jButton20ActionPerformed(evt);
+                                        jButton81ActionPerformed(evt);
                                     }
                                 });
-                                jPanel27.add(jButton20);
-                                jButton20.setBounds(10, 50, 140, 36);
+                                jPanel33.add(jButton81);
+                                jButton81.setBounds(580, 0, 110, 36);
 
-                                jButton54.setText("Alphabetise.");
-                                jButton54.addActionListener(new java.awt.event.ActionListener() {
+                                jScrollPane13.setViewportView(jDesktopPane1);
+
+                                jPanel33.add(jScrollPane13);
+                                jScrollPane13.setBounds(10, 70, 760, 340);
+
+                                jButton83.setText("Clear");
+                                jButton83.addActionListener(new java.awt.event.ActionListener() {
                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                        jButton54ActionPerformed(evt);
+                                        jButton83ActionPerformed(evt);
                                     }
                                 });
-                                jPanel27.add(jButton54);
-                                jButton54.setBounds(10, 80, 140, 36);
+                                jPanel33.add(jButton83);
+                                jButton83.setBounds(680, 0, 120, 36);
 
-                                jTextArea1.setColumns(20);
-                                jTextArea1.setRows(5);
-                                jScrollPane10.setViewportView(jTextArea1);
+                                jButton84.setText("Save changes.");
+                                jButton84.addActionListener(new java.awt.event.ActionListener() {
+                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                        jButton84ActionPerformed(evt);
+                                    }
+                                });
+                                jPanel33.add(jButton84);
+                                jButton84.setBounds(460, 30, 150, 36);
 
-                                jPanel27.add(jScrollPane10);
-                                jScrollPane10.setBounds(160, 27, 430, 110);
-                                jPanel27.add(jProgressBar1);
-                                jProgressBar1.setBounds(20, 150, 570, 14);
+                                textfieldState14.setText("C:\\Documents and Settings\\user\\Desktop\\output\\");
+                                    textfieldState14.setName("deepViewOutput"); // NOI18N
+                                    jPanel33.add(textfieldState14);
+                                    textfieldState14.setBounds(10, 40, 272, 20);
 
-                                getContentPane().add(jPanel27);
-                                jPanel27.setBounds(10, 510, 610, 180);
+                                    jButton85.setText("Select...");
+                                    jButton85.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton85ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel33.add(jButton85);
+                                    jButton85.setBounds(280, 30, 140, 36);
 
-                                pack();
-                            }// </editor-fold>//GEN-END:initComponents
+                                    jButton117.setText("Strings");
+                                    jButton117.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton117ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel33.add(jButton117);
+                                    jButton117.setBounds(780, 120, 63, 36);
+
+                                    jButton118.setText("Refs");
+                                    jButton118.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton118ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel33.add(jButton118);
+                                    jButton118.setBounds(790, 160, 50, 36);
+
+                                    LegTab.addTab("DeepView", jPanel33);
+
+                                    AdvTabState.addTab("Legacy", LegTab);
+
+                                    jPanel5.setLayout(null);
+
+                                    textfieldState23.setName("dridec1"); // NOI18N
+                                    jPanel5.add(textfieldState23);
+                                    textfieldState23.setBounds(150, 120, 480, 20);
+
+                                    textfieldState41.setName("dridec2"); // NOI18N
+                                    jPanel5.add(textfieldState41);
+                                    textfieldState41.setBounds(150, 160, 480, 20);
+
+                                    jLabel20.setText("Pyc or Pak file:");
+                                    jPanel5.add(jLabel20);
+                                    jLabel20.setBounds(20, 120, 120, 16);
+
+                                    jLabel42.setText("Output folder:");
+                                    jPanel5.add(jLabel42);
+                                    jLabel42.setBounds(20, 160, 110, 16);
+
+                                    jButton162.setText("Decompile");
+                                    jButton162.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton162ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel5.add(jButton162);
+                                    jButton162.setBounds(370, 240, 120, 36);
+
+                                    jButton163.setText("Unpack");
+                                    jButton163.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton163ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel5.add(jButton163);
+                                    jButton163.setBounds(500, 240, 120, 36);
+
+                                    jButton164.setText("select...");
+                                    jButton164.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton164ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel5.add(jButton164);
+                                    jButton164.setBounds(630, 110, 110, 36);
+
+                                    jButton165.setText("select...");
+                                    jButton165.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton165ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel5.add(jButton165);
+                                    jButton165.setBounds(630, 150, 110, 36);
+
+                                    jLabel59.setText("Gamename (for a list, go to Misc->ListGamenames):");
+                                    jPanel5.add(jLabel59);
+                                    jLabel59.setBounds(20, 200, 480, 16);
+
+                                    textfieldState67.setText("pots");
+                                    textfieldState67.setName("dridec3"); // NOI18N
+                                    jPanel5.add(textfieldState67);
+                                    textfieldState67.setBounds(510, 200, 120, 20);
+
+                                    AdvTabState.addTab("Decompile", jPanel5);
+
+                                    tabsState3.addTab("Advanced", AdvTabState);
+
+                                    HelpTab.setLayout(null);
+
+                                    imagePanel2.setImageFile("/gui/Pterosaur2b4.png");
+
+                                    javax.swing.GroupLayout imagePanel2Layout = new javax.swing.GroupLayout(imagePanel2);
+                                    imagePanel2.setLayout(imagePanel2Layout);
+                                    imagePanel2Layout.setHorizontalGroup(
+                                        imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(0, 135, Short.MAX_VALUE)
+                                    );
+                                    imagePanel2Layout.setVerticalGroup(
+                                        imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(0, 124, Short.MAX_VALUE)
+                                    );
+
+                                    HelpTab.add(imagePanel2);
+                                    imagePanel2.setBounds(10, 40, 135, 124);
+
+                                    jTextArea5.setColumns(20);
+                                    jTextArea5.setRows(5);
+                                    jScrollPane2.setViewportView(jTextArea5);
+
+                                    HelpTab.add(jScrollPane2);
+                                    jScrollPane2.setBounds(150, 40, 810, 370);
+
+                                    tabsState3.addTab("Help", HelpTab);
+
+                                    getContentPane().add(tabsState3);
+                                    tabsState3.setBounds(10, 10, 990, 490);
+
+                                    jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("Log"));
+                                    jPanel27.setLayout(null);
+
+                                    jButton2.setText("Clear log.");
+                                    jButton2.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton2ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel27.add(jButton2);
+                                    jButton2.setBounds(10, 20, 140, 36);
+
+                                    jButton20.setText("Remove dupes.");
+                                    jButton20.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton20ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel27.add(jButton20);
+                                    jButton20.setBounds(10, 50, 140, 36);
+
+                                    jButton54.setText("Alphabetise.");
+                                    jButton54.addActionListener(new java.awt.event.ActionListener() {
+                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                            jButton54ActionPerformed(evt);
+                                        }
+                                    });
+                                    jPanel27.add(jButton54);
+                                    jButton54.setBounds(10, 80, 140, 36);
+
+                                    jTextArea1.setColumns(20);
+                                    jTextArea1.setRows(5);
+                                    jScrollPane10.setViewportView(jTextArea1);
+
+                                    jPanel27.add(jScrollPane10);
+                                    jScrollPane10.setBounds(160, 27, 430, 110);
+                                    jPanel27.add(jProgressBar1);
+                                    jProgressBar1.setBounds(20, 150, 570, 14);
+
+                                    getContentPane().add(jPanel27);
+                                    jPanel27.setBounds(10, 510, 610, 180);
+
+                                    pack();
+                                }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.jTextArea1.setText("");
@@ -5420,7 +5590,7 @@ private void textfieldState47ActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_textfieldState47ActionPerformed
 
 private void jButton146ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton146ActionPerformed
-    wikispider.wikispider.start(this.textfieldState46.getText(),this.textfieldState47.getText());
+    ThreadedTasks.wikispider(this.textfieldState46.getText(),this.textfieldState47.getText());
 }//GEN-LAST:event_jButton146ActionPerformed
 
 private void jButton147ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton147ActionPerformed
@@ -5650,6 +5820,34 @@ private void jButton160ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton161ActionPerformed
     auto.mod.AutoMod.CreateAllProfiles(textfieldState33.getText(), textfieldState34.getText(), null);        // TODO add your handling code here:
 }//GEN-LAST:event_jButton161ActionPerformed
+
+private void jButton164ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton164ActionPerformed
+    GuiUtils.getUserSelectedFile(textfieldState23);
+}//GEN-LAST:event_jButton164ActionPerformed
+
+private void jButton165ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton165ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState41);
+}//GEN-LAST:event_jButton165ActionPerformed
+
+private void jButton162ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton162ActionPerformed
+    auto.Python.DecompilePakOrPyc(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+}//GEN-LAST:event_jButton162ActionPerformed
+
+private void jButton163ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton163ActionPerformed
+    auto.Python.UnpackPak(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+}//GEN-LAST:event_jButton163ActionPerformed
+
+private void jButton166ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton166ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState68);
+}//GEN-LAST:event_jButton166ActionPerformed
+
+private void jButton168ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton168ActionPerformed
+    gui.ThreadedTasks.convert3dsmaxToPots(textfieldState68.getText(),textfieldState39.getText(),textfieldState69.getText());
+}//GEN-LAST:event_jButton168ActionPerformed
+
+private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton167ActionPerformed
+    m.msg(auto.Game.getAllGamenames());
+}//GEN-LAST:event_jButton167ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -5690,10 +5888,12 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TabsState AdvTabState;
     private javax.swing.JPanel GHelpTab;
     private javax.swing.JPanel HelpTab;
+    private javax.swing.JTabbedPane LegTab;
     private javax.swing.JPanel MemTab;
     private javax.swing.JPanel MiscPanel;
     private javax.swing.JPanel ProxyTab;
     private javax.swing.JPanel SimpTab;
+    private javax.swing.JPanel TheArtTab;
     private javax.swing.JPanel UAMTab;
     private javax.swing.JLabel ageInfo3;
     private shared.State.CheckboxState checkboxState1;
@@ -5804,6 +6004,13 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton160;
     private javax.swing.JButton jButton161;
+    private javax.swing.JButton jButton162;
+    private javax.swing.JButton jButton163;
+    private javax.swing.JButton jButton164;
+    private javax.swing.JButton jButton165;
+    private javax.swing.JButton jButton166;
+    private javax.swing.JButton jButton167;
+    private javax.swing.JButton jButton168;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
@@ -5908,6 +6115,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -5931,6 +6139,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
@@ -5948,6 +6157,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
@@ -5964,6 +6174,10 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
@@ -5996,6 +6210,8 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel4;
@@ -6008,6 +6224,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel47;
     private javax.swing.JPanel jPanel48;
     private javax.swing.JPanel jPanel49;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -6066,6 +6283,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState20;
     private shared.State.TextfieldState textfieldState21;
     private shared.State.TextfieldState textfieldState22;
+    private shared.State.TextfieldState textfieldState23;
     private shared.State.TextfieldState textfieldState24;
     private shared.State.TextfieldState textfieldState25;
     private shared.State.TextfieldState textfieldState26;
@@ -6085,6 +6303,7 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState39;
     private shared.State.TextfieldState textfieldState4;
     private shared.State.TextfieldState textfieldState40;
+    private shared.State.TextfieldState textfieldState41;
     private shared.State.TextfieldState textfieldState42;
     private shared.State.TextfieldState textfieldState43;
     private shared.State.TextfieldState textfieldState44;
@@ -6112,6 +6331,9 @@ private void jButton161ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState64;
     private shared.State.TextfieldState textfieldState65;
     private shared.State.TextfieldState textfieldState66;
+    private shared.State.TextfieldState textfieldState67;
+    private shared.State.TextfieldState textfieldState68;
+    private shared.State.TextfieldState textfieldState69;
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;

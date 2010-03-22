@@ -132,6 +132,9 @@ Use xyzw for PlPXPhysical orientation.{->}Use xyzw for PlPXPhysical orientation.
 Server{->}Server
 CommandLine{->}CommandLine
 ...{->}...
+3dsmax->Pots{->}3dsmax->Pots
+restStop4.bik{->}restStop4.bik
+de{->}de
 
 
 Warning: {->}Warnung: 
@@ -365,5 +368,32 @@ Delete old archives...{->}Lösche alte Archive...
 Clear .sum files.{->}Leere .sum Dateien.
 //Version?{->}Version Nummer?
 Version?{->}Version?
+
+//Drizzle24
+Convert{->}Konvertieren
+3dsmax's output folder (set in PlasmaMax2.ini):{->}3dsmax Zielverzeichnis (wie in PlasmaMax2.ini angegeben):
+(The created files will be placed in the Pots folder given on the UAM tab.){->}(Die erstellten Dateien werden in dem Pots Ordner platziert, der in der UAM Registerkarte angegeben ist.)
+This area is for things related to the writing of Ages.{->}Dieser Bereich ist für Alles rund um das Schreiben von Zeitaltern vorgesehen.
+Pyc or Pak file:{->}Pyc oder Pak Datei:
+Decompile{->}Dekompilieren
+Unpack{->}Entpacken
+Gamename (for a list, go to Misc->ListGamenames):{->}Spielname (um die Liste zu erhalten, gehe zu Sonstiges->Spielenamen auflisten):
+//The Art{->} Die Kunst (Welten zu schreiben)
+The Art{->}Die Kunst
+Unpacking pak file...{->}Entpacke pak Datei...
+Done unpacking!{->}Fertig mit Entpacken!
+Decompiling pak file...{->}Dekompiliere pak Datei...
+Done decompiling!{->}Fertig mit Dekompilieren!
+Converting Age: {->}Konvertiere das Zeitalter: 
+Unknown encryption type; assuming it is unencrypted.{->}Unbekannte Verschlüsselung; es wird angenommen, die Datei sei unverschlüsselt.
+Converting Prp: {->}Konvertiere Prp: 
+Process All was successful!{->}Das Konvertieren der Prp-Dateien war erfolgreich!
+Recompilated completed!{->}Fertig mit Rekompilieren!
+Done converting Age!: {->}Fertig mit Konvertieren des Zeitalters!: 
+Decompiling pyc file...{->}Dekompiliere pyc Datei...
+List Gamenames{->}Spielenamen auflisten
+
+
+
 
 

@@ -17,6 +17,18 @@ public class ThreadedTasks
         r.rootpanes.add(gui.Main.guiform);
         return r;
     }
+    public static void wikispider(final String startingUrl, final String outfolder)
+    {
+        shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
+            wikispider.wikispider.start(startingUrl, outfolder);
+        }});
+    }
+    public static void convert3dsmaxToPots(final String Maxfolder, final String potsfolder, final String agenames)
+    {
+        shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
+            auto.Max.convert3dsmaxToPots(Maxfolder,potsfolder,agenames);
+        }});
+    }
     public static void uamClearSumFiles()
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {

@@ -75,7 +75,8 @@ public class PlHKPhysical extends uruobj
         //flag 0x20 in group always seems to be dropped.
         //LOSDB always seems to remain unchanged.
         //u1 and u2 and u3 always seem to be 0.
-        //is mass required for things to be movable in PhysX?
+        //group: 0x4=kWarp and 0x100=kPhysAnim
+
 
         potsflags pots = new potsflags();
         byte u14 = moul.u14;
@@ -122,6 +123,7 @@ public class PlHKPhysical extends uruobj
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = LOSDB; //bugfix.
             pots.zzzgroup0 = 0x0;
+            //pots.zzzgroup0 = 0x104; //seems okay, but didn't fix the bug I was looking at.
             //pots.givemass = true; //mar7-2010 added. Makes you fall through the ground :P
         }
         else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x0 )
@@ -352,16 +354,17 @@ public class PlHKPhysical extends uruobj
         }
         else if( u14==0x0 && u15==0x0 && LOSDB==0x80 && group0==0x0 )
         {
-            //untested; ahnonay moul
-            //cannot find example of 80 flag, so just pretending it's 0 (but removing givemass, because I feel like it :P)
+            //swimrgn!
+            ////untested; ahnonay moul
+            ////cannot find example of 80 flag, so just pretending it's 0 (but removing givemass, because I feel like it :P)
             pots.zzzu1 = 0x0;
-            pots.zzzcoltype = 0x200;
-            pots.zzzflagsdetect = 0x0;
-            pots.zzzflagsrespond = 0x20000;
+            pots.zzzcoltype = 0x0;
+            pots.zzzflagsdetect = 0x20000;
+            pots.zzzflagsrespond = 0x0;
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
-            pots.zzzLOSDB = 0x0;
-            pots.zzzgroup0 = 0x4;
+            pots.zzzLOSDB = 0x80;
+            pots.zzzgroup0 = 0x0;
 
             //pots.givemass = true; //delete this.
         }
@@ -611,7 +614,8 @@ public class PlHKPhysical extends uruobj
             sceneobject = new Uruobjectref(c); //sceneobject?
             scenenode = new Uruobjectref(c); //scenenode?
             subworld = new Uruobjectref(c); //subworld??
-            if(subworld.hasRef!=0) {
+            if(subworld.hasRef!=0)
+            {
                 m.warn("Subworld in PhysX physical not supported, object: "+c.curRootObject.toString());
                 // the subworld reference makes AhnonayMOUL crash... or at least, removing it fixes the crash
                 subworld = Uruobjectref.none();

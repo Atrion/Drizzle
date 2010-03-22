@@ -24,6 +24,8 @@ import shared.m;
 import shared.b;
 import java.io.File;
 import shared.IBytestream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,7 +37,9 @@ public class pakfile
     public int objectcount;
     public IndexEntry[] indices;
     public PythonObject[] objects;
-    
+
+    int pythonversion;
+
     public void packPakFile(String inputFolder)
     {
         File inputDir = new File(inputFolder);
@@ -51,8 +55,44 @@ public class pakfile
             }
         }
     }
-    
-    public void extractPakFile(boolean prependPYCHeader, int pythonversion, String outfolder)
+    public List<pythondec.pycfile> extractPakFile(boolean prependPYCHeader)
+    {
+        List<pythondec.pycfile> r = new ArrayList();
+
+        for(int i=0;i<objectcount;i++)
+        {
+            int size = objects[i].objectsize;
+            byte[] rawdata = objects[i].rawCompiledPythonObjectData;
+            String name = indices[i].objectname.toString();
+            if(prependPYCHeader)
+            {
+                //The first 4 bytes are the magic number for that version of python.  The next 4 are a timestamp that doesn't matter, so I just set it to 0.
+                byte[] header = null;
+                if(pythonversion==22)
+                {
+                    header = new byte[]{(byte)0x2D,(byte)0xED,(byte)0x0D,(byte)0x0A,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00};
+                }
+                else if(pythonversion==23)
+                {
+                    header = new byte[]{(byte)0x3B,(byte)0xF2,(byte)0x0D,(byte)0x0A,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00};
+                }
+                else
+                {
+                    m.err("unhandled python version in extractPakFile");
+                }
+                rawdata = b.appendBytes(header,rawdata);
+            }
+
+            shared.IBytestream c = shared.ByteArrayBytestream.createFromByteArray(rawdata);
+            pythondec.pycfile pyc = new pythondec.pycfile(c);
+            pyc.filename = name;
+
+            r.add(pyc);
+        }
+        
+        return r;
+    }
+    public void extractPakFile(boolean prependPYCHeader, String outfolder)
     {
         for(int i=0;i<objectcount;i++)
         {
@@ -79,11 +119,18 @@ public class pakfile
             }
             
             //String filename = _staticsettings.outputdir+name+".pyc";
-            String filename = outfolder+"/"+name+".pyc";
-            FileUtils.WriteFile(filename, rawdata,true);
+            String filename = outfolder+"/"+name;
+            if(filename.endsWith(".py")) filename += "c";
+            else filename+=".pyc";
+            FileUtils.WriteFile(filename, rawdata,true,true);
         }
     }
 
+    public static pakfile create(String filename, auto.AllGames.GameConversionSub g)
+    {
+        pakfile r = new pakfile(filename,g.g,true);
+        return r;
+    }
     public pakfile(String f, auto.AllGames.GameInfo g, boolean readPythonObjects)
     {
         this(new File(f),g,readPythonObjects);
@@ -92,13 +139,14 @@ public class pakfile
     {
         //byte[] data = shared.FileUtils.ReadFile(f);
         //data = uru.UruCrypt.DecryptWhatdoyousee(data);
+        this.pythonversion = g.PythonVersion;
         byte[] data = uru.UruCrypt.DecryptAny(f.getAbsolutePath(), g);
         IBytestream c = shared.ByteArrayBytestream.createFromByteArray(data);
         objectcount = c.readInt();
         indices = new IndexEntry[objectcount];
         for(int i=0;i<objectcount;i++)
         {
-            indices[i] = new IndexEntry(c, g.readversion);
+            indices[i] = new IndexEntry(c, g.game.readversion);
         }
         if(readPythonObjects)
         {
@@ -107,7 +155,7 @@ public class pakfile
             {
                 int offset = indices[i].offset;
                 IBytestream c2 = c.Fork(offset);
-                objects[i] = new PythonObject(c2, g.readversion);
+                objects[i] = new PythonObject(c2, g.game.readversion);
             }
         }
     }

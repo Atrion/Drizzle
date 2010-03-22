@@ -40,6 +40,8 @@ public class m
     private static JTextArea _outputTextArea; //you must set this from the GUI.
     private static JProgressBar _outputProgressBar; //you must set this from the GUI.
     private static boolean justUseConsole = true;
+    private static int tab = 0;
+    private static final String tabsp = "  ";
     
     public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
     {
@@ -77,6 +79,14 @@ public class m
 
     private static long lasttime = -1;
     private static String lasttimemsg;
+    public static void increaseindentation()
+    {
+        tab++;
+    }
+    public static void decreaseindentation()
+    {
+        tab--;
+    }
     public static void time()
     {
         long time = gettime();
@@ -188,6 +198,10 @@ public class m
 
         //merge the string parts
         StringBuilder sb = new StringBuilder();
+        for(int i=0;i<tab;i++)
+        {
+            sb.append(tabsp);
+        }
         for(String spart: ss)
         {
             sb.append(spart);

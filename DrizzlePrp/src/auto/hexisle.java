@@ -31,6 +31,8 @@ public class hexisle
         r.GameName = "HexIsle";
         r.DetectionFile = "HexisleGDF.dll";
         r.prpMarkerForAgename = "_";
+        r.PythonVersion = 23;
+        r.game = Game.hexisle;
         r.MusicFiles = new String[] {
             "CatFishCanyonMx.ogg","DessertDesertMx.ogg","LouderSpaceMx.ogg","MoldyDungeonMx.ogg","PlasmaMiasmaMx.ogg","PumpkinJungleMx.ogg",
         };
@@ -43,7 +45,15 @@ public class hexisle
         r.renameinfo.prefices.put("PumpkinJungle", 1167);
         //r.info.infolder = infolder;
         //r.info.outfolder = outfolder;
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider(); // accept every object
+        /*r.decider = new uru.moulprp.prputils.Compiler.Decider() {
+            public boolean isObjectToBeIncluded(Uruobjectdesc desc) {
+                Typeid tid = desc.objecttype;
+                //if(tid==Typeid.plPanicLinkRegion) return false;
+                //if(tid==Typeid.plVisRegion) return false;
+                return true;
+            }
+        };*/
+        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
         r.prpmodifier = new conversion.PostConversionModifier() {
             public void ModifyPrp(conversion.Info info, conversion.FileInfo file, prpfile prp) {
                 String age = prp.header.agename.toString();

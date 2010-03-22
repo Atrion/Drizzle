@@ -59,15 +59,63 @@ public class UruCrypt {
     }
     public static byte[] DecryptAny(byte[] encdata, auto.AllGames.GameInfo game)
     {
-        if(b.startswith(encdata, whatdoyouseeHeader)) return DecryptWhatdoyousee(encdata);
+        UruFileTypes type = DetectType(encdata,game);
+        return DecryptAny(encdata,type);
+    }
+    public static byte[] DecryptAny(byte[] encdata, UruFileTypes type)
+    {
+        /*if(b.startswith(encdata, whatdoyouseeHeader)) return DecryptWhatdoyousee(encdata);
         else if(b.startswith(encdata, notthedroidsHeader))
         {
-            if(game.readversion==8) return DecryptNotthedroids(encdata,true); ///mqo
+            if(game.game==auto.Game.mqo) return DecryptNotthedroids(encdata,true); ///mqo
             else return DecryptNotthedroids(encdata,false); //moul
         }
         else if(b.startswith(encdata, eoaHeader)) return DecryptEoa(encdata);
-        else m.throwUncaughtException("Unknown encryption type.");
-        return null;
+        else
+        {
+            //m.throwUncaughtException("Unknown encryption type.");
+            m.msg("Unknown encryption type; assuming it is unencrypted.");
+            return encdata;
+        }
+        //return null;*/
+
+        switch(type)
+        {
+            case whatdoyousee:
+                return DecryptWhatdoyousee(encdata);
+            case notthedroids:
+                return DecryptNotthedroids(encdata,false);
+            case notthedroids_mqo:
+                return DecryptNotthedroids(encdata,true);
+            case eoaenc:
+                return DecryptEoa(encdata);
+            case unencrypted:
+                return encdata;
+            case unknown:
+                m.msg("Unknown encryption type; assuming it is unencrypted.");
+                return encdata;
+            default:
+                throw new shared.uncaughtexception("unexpected");
+        }
+    }
+    public static UruFileTypes DetectType(byte[] encdata, auto.AllGames.GameInfo game)
+    {
+        if(b.startswith(encdata, whatdoyouseeHeader)) return UruFileTypes.whatdoyousee;
+        else if(b.startswith(encdata, notthedroidsHeader))
+        {
+            if(game.game==auto.Game.mqo) return UruFileTypes.notthedroids_mqo; //mqo
+            else return UruFileTypes.notthedroids; //moul
+        }
+        else if(b.startswith(encdata, eoaHeader)) return UruFileTypes.eoaenc;
+        else
+        {
+            //return UruFileTypes.unknown;
+
+            //m.throwUncaughtException("Unknown encryption type.");
+            m.msg("Unknown encryption type; assuming it is unencrypted.");
+            return UruFileTypes.unencrypted;
+        }
+        //return null;
     }
     public static UruFileTypes DetectType(String filename)
     {

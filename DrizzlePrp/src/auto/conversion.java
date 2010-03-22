@@ -151,7 +151,7 @@ public class conversion
         IBytestream bytestream = shared.SerialBytestream.createFromFilename(infile);
         uru.context c = uru.context.createFromBytestream(bytestream);
         c.curFile = file.filename; //helpful for debugging.
-        c.realreadversion = info.g.readversion;
+        c.realreadversion = info.g.game.readversion;
 
         //modify sequence prefix if Age is in list.
         Integer prefix = info.g.renameinfo.prefices.get(file.agename);

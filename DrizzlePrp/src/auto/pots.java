@@ -17,7 +17,9 @@ public class pots
         r.GameName = "PathOfTheShell/CompleteChronicles";
         r.DetectionFile = "UruExplorer.exe";
         r.prpMarkerForAgename = "_District_";
-        r.readversion = 3;
+        r.PythonVersion = 22;
+        r.game = Game.pots;
+        //r.readversion = 3;
         r.MusicFiles = new String[]{
             //AtrusIntro.bik has some music.
             "ahnyCathedralMusic.ogg",

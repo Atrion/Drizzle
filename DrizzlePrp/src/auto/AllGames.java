@@ -12,12 +12,33 @@ import java.io.File;
 
 public class AllGames
 {
-
     private static GameConversionSub _hexisle;
     private static GameConversionSub _moul;
     private static GameConversionSub _crowthistle;
     private static GameConversionSub _mystv;
     private static GameConversionSub _pots;
+    public static GameConversionSub get(String gamename)
+    {
+        return get(Game.getFromName(gamename));
+    }
+    public static GameConversionSub get(Game game)
+    {
+        switch(game)
+        {
+            case hexisle:
+                return getHexisle();
+            case moul:
+                return getMoul();
+            case crowthistle:
+                return getCrowthistle();
+            case mystv:
+                return getMystV();
+            case pots:
+                return getPots();
+            default:
+                throw new shared.uncaughtexception("unexpected");
+        }
+    }
     public static GameConversionSub getHexisle()
     {
         if(_hexisle==null) _hexisle = new GameConversionSub(hexisle.getGameInfo());
@@ -52,11 +73,13 @@ public class AllGames
     public static class GameInfo
     {
         String GameName;
-        public int readversion;
+        //public int readversion;
         String DetectionFile;
         String[] MusicFiles;
         //String[] AviFiles;
-        String prpMarkerForAgename;
+        public String prpMarkerForAgename;
+        public int PythonVersion;
+        public Game game;
         
         //conversion stuff:
         //conversion.Info info;
@@ -259,7 +282,7 @@ public class AllGames
         {
             //byte[] decrypteddata = uru.UruCrypt.DecryptAny(pakfile, this.g);
             uru.moulprp.pakfile pak = new uru.moulprp.pakfile(pakfile, g, true);
-            pak.extractPakFile(true, 23, outfolder);
+            pak.extractPakFile(true, outfolder);
         }
         private void inplacemod(String potsfolder)
         {

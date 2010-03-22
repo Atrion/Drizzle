@@ -231,5 +231,28 @@ Delete old archives...{->}Verwijder oude archieven
 Clear .sum files.{->}Wis .sum files.
 Version?{->}Versie?
 
-//Still needs updated conversion paragraph in help.txt
+//Drizzle24
+Convert:{->}Omzetten
+3dsmax's output folder (set in PlasmaMax2.ini):{->}3dsmax's output map (gemaakt in PlasmaMax2.ini)
+(The created files will be placed in the Pots folder given on the UAM tab.){->}(De gemaakte files worden geplaatst in de Pots map onder de UAM tab.)
+This area is for things related to the writing of Ages.{->}Dit gedeelte is voor dingen die verband houden met het schrijven van werelden.
+Pyc or Pak file:{->}Pyc of Pak file:
+Decompile{->}Splitsen
+Unpack{->}Uitpakken
+Gamename (for a list, go to Misc->ListGamenames):{->}Spelnaam(voor een lijst, ga naar Overig->LijstSpellen)
+The Art{->}De Kunst
+Unpacking pak file...{->}pak file uitpakken...
+Done unpacking!{->}Uitpakken gereed!
+Decompiling pak file...{->}pak file veranderen...
+Done decompiling!{->}Klaar met veranderen
+Converting Age: {->}Omzetten wereld 
+Unknown encryption type; assuming it is unencrypted.{->}Onbekend versleuteld bestand; waarschijnlijk onversleuteld!.
+Converting Prp: {->}Prp omzetten 
+Process All was successful!{->}Alle processen waren succesvol!
+Recompilated completed!{->}Herschrijven compleet!
+Done converting Age!: {->}Omzetten wereld klaar! 
+Decompiling pyc file...{->}pyc file veranderen...
+List Gamenames{->}Spellijst
+
+
 
