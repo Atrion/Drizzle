@@ -993,23 +993,25 @@ public class Expr extends Ast
             s.out(funcname);
             s.out("(");
             int numarg = 0;
+            //final String comma = ","; //Drizzle24
+            final String comma = ", "; //Drizzle25
             for(int i=0;i<positionals.size();i++)
             {
                 Ast positional = positionals.get(positionals.size()-i-1);
-                if(numarg!=0) s.out(",");
+                if(numarg!=0) s.out(comma);
                 positional.gen(s);
                 numarg++;
             }
             for(int i=0;i<keywords.size();i++)
             {
                 Ast keyword = keywords.get(keywords.size()-i-1);
-                if(numarg!=0) s.out(",");
+                if(numarg!=0) s.out(comma);
                 keyword.gen(s);
                 numarg++;
             }
             if(var!=null)
             {
-                if(numarg!=0) s.out(",");
+                if(numarg!=0) s.out(comma);
                 s.out("*");
                 var.gen(s);
                 numarg++;
