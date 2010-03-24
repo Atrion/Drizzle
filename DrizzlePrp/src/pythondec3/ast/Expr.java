@@ -239,13 +239,35 @@ public class Expr extends Ast
 
         public void gen2(sgen s)
         {
-            s.out("{");
-            for(int i=0;i<entries.size();i++)
+            if(!pythondec3.options.breakDictionariesOntoMultipleLines)
             {
-                if(i!=0) s.out(", ");
-                entries.get(i).gen(s);
+                s.out("{");
+                for(int i=0;i<entries.size();i++)
+                {
+                    if(i!=0) s.out(", ");
+                    entries.get(i).gen(s);
+                }
+                s.out("}");
             }
-            s.out("}");
+            else
+            {
+                s.out("{");
+                s.endline();
+                s.increaseindentation();
+                for(int i=0;i<entries.size();i++)
+                {
+                    s.indent();
+                    entries.get(i).gen(s);
+                    if(i<entries.size()-1) //if not the last item
+                    {
+                        s.out(",");
+                    }
+                    s.endline();
+                }
+                s.decreaseindentation();
+                s.endline();
+                s.out("}");
+            }
         }
 
         public static class Entry extends Ast

@@ -259,7 +259,8 @@ public abstract class Stmt extends Ast
                 s.out(" import ");
                 for(int i=0;i<importerlist.size();i++)
                 {
-                    if(i!=0)s.out(" ,");
+                    //if(i!=0)s.out(" ,"); //Drizzle24
+                    if(i!=0)s.out(", "); //Drizzle25
                     importerlist.get(i).gen(s);
                 }
                 s.endline();

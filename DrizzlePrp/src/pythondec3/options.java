@@ -19,5 +19,9 @@ public class options
     public static final boolean jumpFalls = false; //used to handle the transitive jump optimisation from Python 2.3
     public static final boolean regenerateStructure = true; //used to reorder the LANDs in the token list so that it looks correct like Python 2.2.
 
+    //optimizations:
     public static final boolean simpleLists = true; //creates a fake token to represent a simple list or tuple.
+
+    //formatting:
+    public static final boolean breakDictionariesOntoMultipleLines = false;
 }
