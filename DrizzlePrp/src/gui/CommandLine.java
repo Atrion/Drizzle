@@ -7,10 +7,11 @@ package gui;
 
 import shared.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class CommandLine
 {
-    public static void HandleArguments(String[] args)
+    public static void HandleCommand(String[] args)
     {
         if(args[0].equals("-version"))
         {
@@ -111,5 +112,58 @@ public class CommandLine
         {
             m.err("Unknown command.  Use -help for some of the options.");
         }
+    }
+    public static void HandleArguments(String[] args)
+    {
+        ArrayList<ArrayList<String>> commands = CommandLine.SplitArgumentsIntoCommands(args);
+        if(commands==null) return;
+
+        for(ArrayList<String> command: commands)
+        {
+            String[] cargs = command.toArray(new String[]{});
+            HandleCommand(cargs);
+        }
+
+    }
+
+    public static ArrayList<ArrayList<String>> SplitArgumentsIntoCommands(String[] args)
+    {
+        //split into commands:
+        ArrayList<ArrayList<String>> commands = new ArrayList();
+        ArrayList<String> command = null;
+        for(String arg: args)
+        {
+            if(arg.startsWith("--"))
+            {
+                //command within a command; treat as arg.
+                if(command==null)
+                {
+                    m.err("Commands must start with a -, e.g. '-help'.");
+                    return null;
+                }
+                command.add(arg);
+            }
+            else if(arg.startsWith("-"))
+            {
+                //new command.
+                if(command!=null) commands.add(command); //save the current one
+                command = new ArrayList(); //start a new one
+                command.add(arg);
+            }
+            else
+            {
+                //regular arg.
+                if(command==null)
+                {
+                    m.err("Commands must start with a -, e.g. '-help'.");
+                    return null;
+                }
+                command.add(arg);
+            }
+        }
+        if(command!=null) commands.add(command); //save the last one
+
+        return commands;
+
     }
 }
