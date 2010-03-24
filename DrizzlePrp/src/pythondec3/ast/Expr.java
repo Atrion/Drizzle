@@ -265,7 +265,7 @@ public class Expr extends Ast
                     s.endline();
                 }
                 s.decreaseindentation();
-                s.endline();
+                s.indent();
                 s.out("}");
             }
         }
