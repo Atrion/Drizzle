@@ -20,6 +20,7 @@ public class CommandLine
         else if(args[0].equals("-help"))
         {
             m.msg("Welcome to Drizzle!");
+            m.msg("  (Any of these commands can be compounded into a list, e.g. '-version -prpdiff c:/source.prp c:/dest.prp -help')");
             m.msg("  -version    ->Shows Drizzle's version.");
             m.msg("  -help    ->This help screen.");
             m.msg("  -mirrordataserver exampleserver.com c:/outfolder    ->Mirrors an Alcugs dataserver at the given address, saving to the given output folder.");
