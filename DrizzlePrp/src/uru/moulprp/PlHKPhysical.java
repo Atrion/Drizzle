@@ -614,11 +614,20 @@ public class PlHKPhysical extends uruobj
             sceneobject = new Uruobjectref(c); //sceneobject?
             scenenode = new Uruobjectref(c); //scenenode?
             subworld = new Uruobjectref(c); //subworld??
-            if(subworld.hasRef!=0)
+            boolean nullifysubworlds = false;
+            if(nullifysubworlds)
             {
-                m.warn("Subworld in PhysX physical not supported, object: "+c.curRootObject.toString());
-                // the subworld reference makes AhnonayMOUL crash... or at least, removing it fixes the crash
-                subworld = Uruobjectref.none();
+                if(subworld.hasRef!=0)
+                {
+                    m.warn("Subworld in PhysX physical not supported, object: "+c.curRootObject.toString());
+                    // the subworld reference makes AhnonayMOUL crash... or at least, removing it fixes the crash
+                    subworld = Uruobjectref.none();
+                }
+            }
+            else
+            {
+                //fix havok subworlds
+                //subworld is the sceneobject
             }
             soundgroup = new Uruobjectref(c); //soundgroup??
             //if(soundgroup.hasRef!=0)
@@ -1099,6 +1108,10 @@ public class PlHKPhysical extends uruobj
             LOSDB = c.readInt();
             //if(LOSDB!=0) m.msg("LOSDB="+Integer.toHexString(LOSDB));
             subworld = new Uruobjectref(c);
+            if(subworld.hasref())
+            {
+                int dummy=0;
+            }
             soundgroup = new Uruobjectref(c);
 
             if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))

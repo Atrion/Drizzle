@@ -21,6 +21,7 @@ import org.apache.commons.math.linear.RealMatrixImpl;
 import auto.conversion.FileInfo;
 import auto.conversion.Info;
 import auto.conversion.RenameInfo;
+import java.util.LinkedHashSet;
 
 public class moul
 {
@@ -245,6 +246,9 @@ public class moul
                 //all the crazy stuff, should be cleaned up:
                 HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
                 moul.proccessPrp(prp, file.agename, info.g.renameinfo.agenames, info.outfolder, info.infolder, refReassigns);
+
+                //fix subworlds:
+                PostMod_FixSubworlds(prp);
             }
         };
         r.addAutomods(moulAutomods);
@@ -1183,7 +1187,17 @@ public class moul
             }
         }
     }
-
+    public static void PostMod_FixSubworlds(prpfile prp)
+    {
+        //find subworlds
+        java.util.LinkedHashSet<Uruobjectref> subworlds = new java.util.LinkedHashSet();
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSubworldRegionDetector))
+        {
+            plSubworldRegionDetector rd = ro.castTo();
+            subworlds.add(rd.sub); //subworld
+        }
+        //Should we find the references in physics objects too?
+    }
     public static void PostMod_FixMinkata(prpfile prp, String finalname, String outfolder)
     {
         if(finalname.toLowerCase().equals("minkata") && prp.header.pagename.toString().toLowerCase().equals("minkexteriorday"))

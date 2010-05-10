@@ -121,7 +121,7 @@ public class regenerator
                 dest = l;
 
             //find the Land that belongs to Jump:
-            Tok land = null;
+            /*Tok land = null;
             for(Tok t: ts)
             {
                 if(t.oi.o==op.LAND)
@@ -133,13 +133,42 @@ public class regenerator
                         break;
                     }
                 }
-            }
+            }*/
+            Tok land = tryToFindLand(jump);
             if(land==null)
                 m.throwUncaughtException("unexpected");
 
             //move the land
             moveToken(land,dest);
         }
+    }
+
+    public Tok tryToFindLand(Tok jump)
+    {
+        int jumpoffset = jump.oi.offset;
+
+        Tok land = null;
+        for(Tok t: ts)
+        {
+            if(t.oi.o==op.LAND)
+            {
+                int curLandOffset = (Integer)t.oi.pattr;
+                if(jumpoffset==curLandOffset)
+                {
+                    land = t;
+                    break;
+                }
+            }
+        }
+
+        return land;
+    }
+
+    public void replaceToken(Tok oldtok, Tok newtok)
+    {
+        int curpos = ts.indexOf(oldtok);
+        ts.set(curpos, newtok);
+        this.renumber();
     }
 
     public regenerator(PyCode code)
@@ -569,9 +598,36 @@ public class regenerator
                 }
                 else
                 {
-                    //should be continue
+                    //should be continue, or possibly an optimised "if(expr and 1):"
+                    //continue should always be JUMP_ABSOLUTE.
+                    //so if it's JUMP_FORWARD, it should be an optimised short-circuit expr.
                     if(curt.oi.o!=op.JUMP_ABSOLUTE)
-                        m.throwUncaughtException("unexpected"); //this could be okay, but I don't have it in the grammar file either.
+                    {
+                        //m.throwUncaughtException("unexpected"); //this could be okay, but I don't have it in the grammar file either.
+                        //m.warn("Experimental optimised short-circuit expr.");
+                        //fixes Myst5's xLinkingBookGUIPopup and Moul/Mqo's xPsnlVaultSDL
+                        //change it to a LOAD_CONST (which is unoptimised) and kill its LAND.
+                        Tok land = tryToFindLand(curt);
+                        boolean successfullyremoved = ts.remove(land);
+                        if(!successfullyremoved)
+                            m.throwUncaughtException("unexpected");
+                        //Tok newt = Tok.customToken(null, ts., last);
+                        //curt.oi.o = op.LOAD_CONST;
+                        //curt.oi.pattr = 1;
+                        Tok newt = Tok.fakeToken(op.LOAD_CONST, curt.getPrsStream(), curt.oi.offset, PyInt.create(1));
+                        replaceToken(curt, newt); //this will renumber too.
+                        curt = newt;
+                        //renumber();
+
+                        //move LAND //no don't do this, the LAND is correct, if we interpret as:
+                        //  if x==3:
+                        //      if 1:
+                        //m.warn("Experimental short-circuit optimisation support");
+                        //Tok jumpiffalse = getTokAtRelativePosIgnoringLands(curt, -2);
+                        //Tok nexttok = getTokAtRelativePosIgnoringLands(curt, 1);
+                        //addLandMove(jumpiffalse,nexttok);
+
+                    }
                     curt = getTokAtRelativePos(curt,1);
                 }
             }

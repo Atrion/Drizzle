@@ -344,6 +344,7 @@
     expr ::= expr JUMP_IF_TRUE POP_TOP expr$e2 LAND             /. set(new Expr.ShortcircuitOr(s(1),s(4))); ./
     expr ::= expr JUMP_IF_FALSE POP_TOP expr$e2 LAND            /. set(new Expr.ShortcircuitAnd(s(1),s(4))); ./
     expr ::= jump JUMP_IF_FALSE POP_TOP LAND expr$a2 LAND$e6    /. set(new Expr.ShortcircuitAnd(null,s($a2))); ./    --Python2.3 optimised "if(1 and expr):"
+    --expr ::= expr JUMP_IF_FALSE POP_TOP jump LAND (this is "if(x==3 and 1):", e.g.) ...the jump lands at the start of the stmt block.  Let's replace jump with LOAD_CONST 1, to remove this optimisation.
  
     --exec statement
     stmt ::= expr expr$e2 expr$e3 EXEC_STMT    /. set(new Stmt.Exec(s(1),s(2),s(3))); ./

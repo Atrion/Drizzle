@@ -62,6 +62,11 @@ strictfp public class Flt extends uruobj implements ICompilable
             int dummy=0;
         }
     }
+    public static float IntCodeToJavafloat(int i)
+    {
+        float r = Float.intBitsToFloat(i);
+        return r;
+    }
     public static int FloatToIntCode(float f)
     {
         int r = Float.floatToRawIntBits(f);

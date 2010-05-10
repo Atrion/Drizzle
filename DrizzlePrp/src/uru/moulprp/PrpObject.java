@@ -382,7 +382,7 @@ public class PrpObject extends uruobj
             case plVolumeSensorConditionalObjectNoArbitration:
                 return new PlVolumeSensorConditionalObject.PlVolumeSensorConditionalObjectNoArbitration(c);
             case plSubworldRegionDetector:
-                return new PlSubworldRegionDetector(c);
+                return new plSubworldRegionDetector(c);
             case plResponderEnableMsg:
                 return new PrpMessage.PlResponderEnableMsg(c);
             case plParticleUniformWind:
@@ -390,6 +390,9 @@ public class PrpObject extends uruobj
             //case plAvatarMgr:
             //    return new plAvatarMgr(c);
             default:
+                //if(type==Typeid.plHKSubWorld){
+                //    int d3 = 0;
+                //}
                 uruobj result = tryread(c,type);
                 if(result!=null) return result;
                 //m.err("prprootobject: unhandled type.");

@@ -29,24 +29,43 @@ import shared.readexception;
 import shared.*;
 
 
-public class plSubworldRegionDetector extends uruobj
+public class plHKSubWorld extends uruobj
 {
-    public uru.moulprp.PlDetectorModifier parent;
-    public Uruobjectref sub;
-    public byte onExit;
+    PlObjInterface parent;
+    float f1;
+    float f2;
+    float f3;
     
-    public plSubworldRegionDetector(context c) throws readexception
+    public plHKSubWorld(context c) throws readexception
     {
-        parent = new PlDetectorModifier(c);
-        sub = new Uruobjectref(c);
-        onExit = c.readByte();
+        //Pyprp reads this as a plSynchedObject, a ref, a vertex, and a 32bit int flags.
+        //But that is wrong I think, and this here is correct.
+
+        //When setting, just use all defaults and set the sceneobject in the plObjInterface to the subworld sceneobject.
+
+        parent = new PlObjInterface(c);
+        f1 = c.readFloat(); //0
+        f2 = c.readFloat(); //0
+        f3 = c.readFloat(); //-32.17405==0xC200B23A
     }
-    
+    private plHKSubWorld(){}
+
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        sub.compile(c);
-        c.writeByte(onExit);
+        c.writeFloat(f1);
+        c.writeFloat(f2);
+        c.writeFloat(f3);
+    }
+
+    public static plHKSubWorld createWithSceneobject(Uruobjectref sceneobject)
+    {
+        plHKSubWorld r = new plHKSubWorld();
+        r.parent = PlObjInterface.createDefault(sceneobject);
+        r.f1 = 0.0f;
+        r.f2 = 0.0f;
+        r.f3 = Flt.IntCodeToJavafloat(0xC200B23A); //-32.17405
+        return r;
     }
     
 }

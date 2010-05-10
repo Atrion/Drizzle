@@ -17,6 +17,7 @@ public class AllGames
     private static GameConversionSub _crowthistle;
     private static GameConversionSub _mystv;
     private static GameConversionSub _pots;
+    private static GameConversionSub _mqo;
     public static GameConversionSub get(String gamename)
     {
         return get(Game.getFromName(gamename));
@@ -35,9 +36,16 @@ public class AllGames
                 return getMystV();
             case pots:
                 return getPots();
+            case mqo:
+                return getMqo();
             default:
                 throw new shared.uncaughtexception("unexpected");
         }
+    }
+    public static GameConversionSub getMqo()
+    {
+        if(_mqo==null) _mqo = new GameConversionSub(magiquest.getGameInfo());
+        return _mqo;
     }
     public static GameConversionSub getHexisle()
     {

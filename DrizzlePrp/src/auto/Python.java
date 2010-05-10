@@ -22,8 +22,10 @@ public class Python
     {
         if(infile.endsWith(".pak"))
             DecompilePak(infile,outfolder,gamename);
-        else
+        else if(infile.endsWith(".pyc"))
             DecompilePyc(infile,outfolder);
+        else
+            m.err("Filename must end with .pyc or .pak");
     }
     public static void DecompilePak(String infile, String outfolder, String gamename)
     {
@@ -32,6 +34,7 @@ public class Python
         java.util.List<pythondec.pycfile> pycs = pak.extractPakFile(true);
         for(pythondec.pycfile pyc: pycs)
         {
+            m.msg("Decompiling: ",pyc.filename);
             pyc.decompile();
             String source = pyc.generateSourceCode();
             String outfile = outfolder+"/"+pyc.filename;
