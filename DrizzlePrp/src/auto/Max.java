@@ -17,6 +17,7 @@ import prpobjects.prpfile;
 
 public class Max
 {
+    static final boolean deleteTextureFileAfterConvert = true;
 
     public static void convert3dsmaxToPots(String maxfolder, String potsfolder, String agenames)
     {
@@ -159,6 +160,17 @@ public class Max
                 };
                 auto.AllGames.GameConversionSub maxconv = new auto.AllGames.GameConversionSub(moulinfo);
                 maxconv.ConvertFiles(maxfolder, potsfolder, files);
+
+                //Bugfix for Cyan's plugin.  It makes duplicate textures and can even produce a corrupt prp when doing so.
+                if(Max.deleteTextureFileAfterConvert)
+                {
+                    if(prp.endsWith("_District_Textures.prp"))
+                    {
+                        //m.msg("(Removing Textures prp to fix a Plasma bug.)");
+                        String filetodelete = maxfolder+"/dat/"+prp;
+                        FileUtils.DeleteFile(filetodelete, false);
+                    }
+                }
 
                 m.decreaseindentation();
             }

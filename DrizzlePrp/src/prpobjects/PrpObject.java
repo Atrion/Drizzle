@@ -26,6 +26,8 @@ import shared.m;
 public class PrpObject extends uruobj
 {
     public uruobj object;
+    static final String objpackage = plSceneObject.class.getPackage().getName();
+
     
     public uruobj getObject(context c, Typeid type) throws readexception
     {
@@ -401,9 +403,9 @@ public class PrpObject extends uruobj
     }
     public uruobj tryread(context c, Typeid type)
     {
-        final String prefix = "uru.moulprp.";
+        //final String prefix = "uru.moulprp."; //not typesafe!
         try{
-            String classname = prefix+type.toString();
+            String classname = objpackage+"."+type.toString();
             Class plasmaClass = Class.forName(classname);
             Class<uruobj> plasmaClass2 = (Class<uruobj>)plasmaClass;
             uruobj r = shared.generic.createObjectWithSingleArgumentConstructor(plasmaClass2, context.class, c);

@@ -111,8 +111,7 @@ public class UruCrypt {
         {
             //return UruFileTypes.unknown;
 
-            //m.throwUncaughtException("Unknown encryption type.");
-            m.msg("Unknown encryption type; assuming it is unencrypted.");
+            //m.msg("Unknown encryption type; assuming it is unencrypted."); //let's not annoy the user
             return UruFileTypes.unencrypted;
         }
         //return null;
