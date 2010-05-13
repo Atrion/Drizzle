@@ -23,10 +23,11 @@ public class ThreadedTasks
             wikispider.wikispider.start(startingUrl, outfolder);
         }});
     }
-    public static void convert3dsmaxToPots(final String Maxfolder, final String potsfolder, final String agenames)
+    public static void convert3dsmaxToPots(final String Maxfolder, final String potsfolder, final String agenames, final boolean launchUruAfterwards)
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
             auto.Max.convert3dsmaxToPots(Maxfolder,potsfolder,agenames);
+            if(launchUruAfterwards) uam.Uam.launchUru();
         }});
     }
     public static void uamClearSumFiles()

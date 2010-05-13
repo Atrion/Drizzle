@@ -550,6 +550,8 @@ public class Gui extends javax.swing.JFrame {
         jLabel75 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
         textfieldState69 = new shared.State.TextfieldState();
+        jPanel38 = new javax.swing.JPanel();
+        checkboxState32 = new shared.State.CheckboxState();
         jLabel76 = new javax.swing.JLabel();
         MiscPanel = new javax.swing.JPanel();
         jPanel41 = new javax.swing.JPanel();
@@ -1735,7 +1737,7 @@ public class Gui extends javax.swing.JFrame {
             textfieldState68.setText("C:\\PlasmaTest\\");
                 textfieldState68.setName("theart1"); // NOI18N
                 jPanel34.add(textfieldState68);
-                textfieldState68.setBounds(390, 60, 280, 20);
+                textfieldState68.setBounds(390, 130, 280, 20);
 
                 jButton168.setText("Convert");
                 jButton168.addActionListener(new java.awt.event.ActionListener() {
@@ -1744,7 +1746,7 @@ public class Gui extends javax.swing.JFrame {
                     }
                 });
                 jPanel34.add(jButton168);
-                jButton168.setBounds(550, 90, 110, 36);
+                jButton168.setBounds(550, 160, 110, 36);
 
                 jButton166.setText("select...");
                 jButton166.addActionListener(new java.awt.event.ActionListener() {
@@ -1753,12 +1755,12 @@ public class Gui extends javax.swing.JFrame {
                     }
                 });
                 jPanel34.add(jButton166);
-                jButton166.setBounds(670, 50, 110, 36);
+                jButton166.setBounds(670, 120, 110, 36);
 
                 jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                 jLabel74.setText("3dsmax's output folder (set in PlasmaMax2.ini):");
                 jPanel34.add(jLabel74);
-                jLabel74.setBounds(10, 60, 370, 16);
+                jLabel74.setBounds(10, 130, 370, 16);
 
                 jLabel75.setForeground(new java.awt.Color(0, 102, 102));
                 jLabel75.setText("(The created files will be placed in the Pots folder given on the UAM tab.)");
@@ -1768,14 +1770,38 @@ public class Gui extends javax.swing.JFrame {
                 jLabel77.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                 jLabel77.setText("Ages:");
                 jPanel34.add(jLabel77);
-                jLabel77.setBounds(250, 100, 130, 16);
+                jLabel77.setBounds(250, 170, 130, 16);
 
                 textfieldState69.setName("theartages"); // NOI18N
                 jPanel34.add(textfieldState69);
-                textfieldState69.setBounds(390, 100, 150, 20);
+                textfieldState69.setBounds(390, 170, 150, 20);
+
+                jPanel38.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
+
+                checkboxState32.setText("Launch Uru after converting");
+                checkboxState32.setName("maxlaunch"); // NOI18N
+
+                javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
+                jPanel38.setLayout(jPanel38Layout);
+                jPanel38Layout.setHorizontalGroup(
+                    jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel38Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(checkboxState32, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(112, Short.MAX_VALUE))
+                );
+                jPanel38Layout.setVerticalGroup(
+                    jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel38Layout.createSequentialGroup()
+                        .addComponent(checkboxState32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+
+                jPanel34.add(jPanel38);
+                jPanel38.setBounds(540, 20, 320, 60);
 
                 TheArtTab.add(jPanel34);
-                jPanel34.setBounds(30, 150, 790, 140);
+                jPanel34.setBounds(30, 150, 910, 210);
 
                 jLabel76.setForeground(new java.awt.Color(0, 102, 102));
                 jLabel76.setText("This area is for things related to the writing of Ages.");
@@ -5842,7 +5868,7 @@ private void jButton166ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton166ActionPerformed
 
 private void jButton168ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton168ActionPerformed
-    gui.ThreadedTasks.convert3dsmaxToPots(textfieldState68.getText(),textfieldState39.getText(),textfieldState69.getText());
+    gui.ThreadedTasks.convert3dsmaxToPots(textfieldState68.getText(),textfieldState39.getText(),textfieldState69.getText(),checkboxState32.isSelected());
 }//GEN-LAST:event_jButton168ActionPerformed
 
 private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton167ActionPerformed
@@ -5921,6 +5947,7 @@ private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.CheckboxState checkboxState3;
     private shared.State.CheckboxState checkboxState30;
     private shared.State.CheckboxState checkboxState31;
+    private shared.State.CheckboxState checkboxState32;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;
     private shared.State.CheckboxState checkboxState6;
@@ -6214,6 +6241,7 @@ private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
+    private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
