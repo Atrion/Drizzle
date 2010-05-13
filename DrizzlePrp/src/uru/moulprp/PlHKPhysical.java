@@ -34,7 +34,7 @@ import shared.FileUtils;
 
 //Not working fully!
 //About the <=256 branches: 256 should be the right number, but in any event, I tested to find that x is such that: 254<=x<262.
-public class PlHKPhysical extends uruobj
+public class plHKPhysical extends uruobj
 {
     public int _version; //do not compile!
     
@@ -467,8 +467,8 @@ public class PlHKPhysical extends uruobj
         this.ode = null;
         this._version = 3; //set as pots version.
     }
-    public PlHKPhysical(){}
-    public PlHKPhysical(context c) throws readexception
+    public plHKPhysical(){}
+    public plHKPhysical(context c) throws readexception
     {
         String filenameStart = "";
         String filenameEnd = "";
@@ -503,9 +503,9 @@ public class PlHKPhysical extends uruobj
         
     }
 
-    public static PlHKPhysical createStaticTriangleMeshFromVerticesAndFaces(Vertex[] vertices, ShortTriplet[] faces, Uruobjectref scenenode, Uruobjectref sceneobject)
+    public static plHKPhysical createStaticTriangleMeshFromVerticesAndFaces(Vertex[] vertices, ShortTriplet[] faces, Uruobjectref scenenode, Uruobjectref sceneobject)
     {
-        PlHKPhysical r = new PlHKPhysical();
+        plHKPhysical r = new plHKPhysical();
         r._version = 3;
         r.havok = new HKPhysical();
         r.havok.parent = PlSynchedObject.createDefault();
@@ -571,7 +571,7 @@ public class PlHKPhysical extends uruobj
         short LOSDB;
         Uruobjectref sceneobject;
         Uruobjectref scenenode;
-        Uruobjectref subworld;
+        public Uruobjectref subworld;
         Uruobjectref soundgroup;
         public Vertex position;
         public Quat orientation;
@@ -689,7 +689,7 @@ public class PlHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
             if(pots==null)
             {
                 String msg = "plHKPhysical: Can read okay, but failing in order to ignore. (u14="+Integer.toString(moul.u14)+", u15="+Integer.toString(moul.u15)+", losdb=0x"+Integer.toHexString(moul.LOSDB)+", group0=0x"+Integer.toHexString(moul.group0)+" ) ("+c.curRootObject.toString()+")";
@@ -705,7 +705,7 @@ public class PlHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
             if(pots==null)
             {
                 m.err("plHKPhysical: Unexpected combination.");
@@ -846,7 +846,7 @@ public class PlHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = PlHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
             if(pots==null)
             {
                 m.err("plHKPhysical: Unexpected combination.");

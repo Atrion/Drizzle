@@ -66,13 +66,13 @@ public class PlODEPhysical extends uruobj
     Flt f6a;
     Flt f6b;
     
-    public PlHKPhysical.HKPhysical convertee;
-    public PlHKPhysical.HKPhysical convertToHKPhysical(prpfile prp)
+    public plHKPhysical.HKPhysical convertee;
+    public plHKPhysical.HKPhysical convertToHKPhysical(prpfile prp)
     {
         if(type==5)
         {
             convertee.format = 4;
-            convertee.xproxybounds = new PlHKPhysical.HKProxyBounds();
+            convertee.xproxybounds = new plHKPhysical.HKProxyBounds();
             convertee.xproxybounds.parent.vertexcount = vertexcount;
             e.ensure(vertices.length==vertexcount);
             convertee.xproxybounds.parent.vertices = vertices;
@@ -95,7 +95,7 @@ public class PlODEPhysical extends uruobj
         {
             convertee.format = 1;
 
-            convertee.xboxbounds = new PlHKPhysical.HKBoxBounds();
+            convertee.xboxbounds = new plHKPhysical.HKBoxBounds();
             //convertee.xboxbounds.parent.
 
             Vertex center = findOffsetVectorFromSceneObject(prp, sceneobject);
@@ -166,7 +166,7 @@ public class PlODEPhysical extends uruobj
         {
             convertee.format = 2;
 
-            convertee.xspherebounds = new PlHKPhysical.HKSphereBounds();
+            convertee.xspherebounds = new plHKPhysical.HKSphereBounds();
             Vertex offset = findOffsetVectorFromSceneObject(prp, sceneobject);
             convertee.xspherebounds.offset = offset;
             convertee.xspherebounds.radius = u4;
@@ -261,7 +261,7 @@ public class PlODEPhysical extends uruobj
         
         
         //make converted version...
-        convertee = PlHKPhysical.HKPhysical.createBlank();
+        convertee = plHKPhysical.HKPhysical.createBlank();
         convertee.parent = this.parent;
         convertee.position = Vertex.zero();
         convertee.orientation = Quat.identity();
@@ -707,11 +707,11 @@ public class PlODEPhysical extends uruobj
         e.ensure(sceneobject.hasref());
         PrpRootObject a = prp.findObjectWithDesc(sceneobject.xdesc);
         e.ensure(a.header.objecttype==Typeid.plSceneObject);
-        x0001Sceneobject b = a.castTo();
-        Uruobjectref d = b.regioninfo;
+        plSceneObject b = a.castTo();
+        Uruobjectref d = b.coordinateinterface;
         e.ensure(d.hasref());
         PrpRootObject f = prp.findObjectWithDesc(d.xdesc);
-        x0015CoordinateInterface g = f.castTo();
+        plCoordinateInterface g = f.castTo();
         Vertex offset = g.localToParent.convertTo3Vector();
         return offset;
     }

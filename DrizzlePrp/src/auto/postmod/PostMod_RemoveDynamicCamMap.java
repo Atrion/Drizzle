@@ -38,8 +38,8 @@ public class PostMod_RemoveDynamicCamMap
         for(PrpRootObject obj: objs)
         {
             boolean removeThisSceneobject = false;
-            uru.moulprp.x0001Sceneobject so = obj.castTo();
-            for(Uruobjectref ref: so.objectrefs2)
+            uru.moulprp.plSceneObject so = obj.castTo();
+            for(Uruobjectref ref: so.modifiers)
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
                 {

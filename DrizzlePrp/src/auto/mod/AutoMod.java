@@ -16,7 +16,7 @@ import uru.moulprp.Uruobjectref;
 import uru.moulprp.Urustring;
 import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
 import uru.moulprp.Bstr;
-import uru.moulprp.x0001Sceneobject;
+import uru.moulprp.plSceneObject;
 import uru.moulprp.Pageid;
 import uru.moulprp.Pagetype;
 import uru.moulprp.Uruobjectdesc;

@@ -147,6 +147,11 @@ public class Uruobjectref extends uruobj
         if(!this.hasref()) return true;
         return this.xdesc.equals(o2.xdesc);
     }
+    public int hashCode()
+    {
+        if(this.hasRef==0) return 0;
+        return this.xdesc.objectname.hashCode()+this.xdesc.objecttype.hashCode();
+    }
 
     public Uruobjectref deepClone()
     {

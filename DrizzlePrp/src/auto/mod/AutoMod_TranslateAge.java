@@ -47,7 +47,7 @@ public class AutoMod_TranslateAge
         //Instead translate by -38.47841 to move to -87
         //but now 3 spwanpoints are inside the swimdetectregion, so move them up.
         PrpRootObject sdrroot = prp.findObject("SwimDetectRegion01", Typeid.plHKPhysical);
-        PlHKPhysical sdr = sdrroot.castTo();
+        plHKPhysical sdr = sdrroot.castTo();
         //Transmatrix translation = Transmatrix.createFromVector(0, 0, -42);
         Transmatrix translation = Transmatrix.createFromVector(0, 0, -38.47841f);
         sdr.havok.transformVertices(translation);
@@ -60,9 +60,9 @@ public class AutoMod_TranslateAge
         float cz = +4f;
         Transmatrix translation2 = Transmatrix.createFromVector(0, 0, cz);
         Transmatrix invtranslation2 = Transmatrix.createFromVector(0, 0, -cz);
-        x0015CoordinateInterface c1 = prp.findObject("SaveClothPoint4", Typeid.plCoordinateInterface).castTo();
-        x0015CoordinateInterface c2 = prp.findObject("SaveClothPoint5", Typeid.plCoordinateInterface).castTo();
-        x0015CoordinateInterface c3 = prp.findObject("SaveClothPoint6", Typeid.plCoordinateInterface).castTo();
+        plCoordinateInterface c1 = prp.findObject("SaveClothPoint4", Typeid.plCoordinateInterface).castTo();
+        plCoordinateInterface c2 = prp.findObject("SaveClothPoint5", Typeid.plCoordinateInterface).castTo();
+        plCoordinateInterface c3 = prp.findObject("SaveClothPoint6", Typeid.plCoordinateInterface).castTo();
         c1.localToParent.multModify(translation2);
         c1.parentToLocal.multModify(invtranslation2);
         c1.localToWorld.multModify(translation2);
@@ -291,8 +291,8 @@ public class AutoMod_TranslateAge
         //do the animations, through the sceneobjects.
         for(PrpRootObject obj: sceneobjects)
         {
-            x0001Sceneobject o = obj.castTo();
-            for(Uruobjectref ref: o.objectrefs2)
+            plSceneObject o = obj.castTo();
+            for(Uruobjectref ref: o.modifiers)
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plAGMasterMod)
                 {
@@ -304,7 +304,7 @@ public class AutoMod_TranslateAge
                             //found an ATCAnim, translate it.
                             PrpRootObject animroot = prp.findObjectWithRef(ref2);
                             PlATCAnim anim = animroot.castTo();
-                            boolean hasparent = x0015CoordinateInterface.findCIParent(obj.getref(), coordinateinterfaces) != null;
+                            boolean hasparent = plCoordinateInterface.findCIParent(obj.getref(), coordinateinterfaces) != null;
 
                             for(int i=0;i<anim.parent.effectcount;i++)
                             {
@@ -570,7 +570,7 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: coordinateinterfaces)
         {
             obj.hasChanged = true;
-            x0015CoordinateInterface ci = obj.castTo();
+            plCoordinateInterface ci = obj.castTo();
 
             for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, ci))
             {
@@ -603,7 +603,7 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: physicals)
         {
             obj.hasChanged = true;
-            PlHKPhysical phys = obj.castTo();
+            plHKPhysical phys = obj.castTo();
 
             if(obj.header.desc.objectname.toString().toLowerCase().equals("swimdetectregion01"))
             {

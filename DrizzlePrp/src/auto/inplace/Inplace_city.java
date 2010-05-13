@@ -32,9 +32,9 @@ public class Inplace_city
         //A'moaca and Ashtar's fix for the player not being able to interact with the marker on Alcugs because they link in too close.
         //This would be *much* simpler if we could just translate it down -25.796 in the y direction.  But we can't because it must be compatible with the pre-existing prp change.
         PrpRootObject ci_ro = prp.findObject("GZMarkerDetector21Far", Typeid.plCoordinateInterface);
-        uru.moulprp.x0015CoordinateInterface ci = ci_ro.castTo();
-        PrpRootObject parent_ro = uru.moulprp.x0015CoordinateInterface.findParent(prp, ci_ro);
-        uru.moulprp.x0015CoordinateInterface parent = parent_ro.castTo();
+        uru.moulprp.plCoordinateInterface ci = ci_ro.castTo();
+        PrpRootObject parent_ro = uru.moulprp.plCoordinateInterface.findParent(prp, ci_ro);
+        uru.moulprp.plCoordinateInterface parent = parent_ro.castTo();
         //Transmatrix p2w = parent.localToWorld;
         Transmatrix w2p = parent.worldToLocal;
         // set l2w
@@ -110,10 +110,10 @@ public class Inplace_city
 
             //change sceneobject
             PrpRootObject so_ro = prp.findObject("MuseumDoorSencor", Typeid.plSceneObject);
-            uru.moulprp.x0001Sceneobject so = so_ro.castTo();
-            so.objectrefs2.remove(oldopen_ro.getref());
-            so.objectrefs2.remove(oldclose_ro.getref());
-            so.objectrefs2.add(newdoor);
+            uru.moulprp.plSceneObject so = so_ro.castTo();
+            so.modifiers.remove(oldopen_ro.getref());
+            so.modifiers.remove(oldclose_ro.getref());
+            so.modifiers.add(newdoor);
 
             pfm_ro.markAsChanged();
             so_ro.markAsChanged();
@@ -137,13 +137,13 @@ public class Inplace_city
             PrpRootObject ro1_b = prp.findObject("cSfxSoRegUnion-Gallery-Verb01", Typeid.plSoftVolumeUnion);
             PrpRootObject ro3_a = prp.findObject("KAdishGAlleryRegionVis", Typeid.plSceneObject);
             PrpRootObject ro3_b = prp.findObject("VisRegionKDSHgallery", Typeid.plVisRegion);
-            uru.moulprp.x0001Sceneobject a1 = ro1_a.castTo();
+            uru.moulprp.plSceneObject a1 = ro1_a.castTo();
             uru.moulprp.PlSoftVolumeUnion b1 = ro1_b.castTo();
-            uru.moulprp.x0001Sceneobject a3 = ro3_a.castTo();
+            uru.moulprp.plSceneObject a3 = ro3_a.castTo();
             uru.moulprp.PlVisRegion b3 = ro3_b.castTo();
-            a1.objectrefs1.get(0).xdesc.pageid = newpid;
+            a1.interfaces.get(0).xdesc.pageid = newpid;
             b1.refs.get(1).xdesc.pageid = newpid;
-            a3.objectrefs1.get(0).xdesc.pageid = newpid;
+            a3.interfaces.get(0).xdesc.pageid = newpid;
             b3.softvolumesimple.xdesc.pageid = newpid;
             ro1_a.markAsChanged();
             ro1_b.markAsChanged();

@@ -285,22 +285,22 @@ public class hexisle
         for(int i=0;i<objs.length;i++)
         {
             PrpRootObject sod_ro = objs[i];
-            uru.moulprp.x0001Sceneobject sod = sod_ro.castTo();
+            uru.moulprp.plSceneObject sod = sod_ro.castTo();
             //if(sod_ro.header.desc.objectname.toString().toLowerCase().equals("capsule02"))
             //{
             //    int dummy=0;
             //}
-            if(sod.spaninfo.hasref()) //if it has a draw interface
+            if(sod.drawinterface.hasref()) //if it has a draw interface
             {
                 //try to get a coordinateInterface.
                 uru.moulprp.Transmatrix transform = null;
-                if(sod.regioninfo.hasref())
+                if(sod.coordinateinterface.hasref())
                 {
-                    uru.moulprp.x0015CoordinateInterface ci = prp.findObjectWithRef(sod.regioninfo).castTo();
+                    uru.moulprp.plCoordinateInterface ci = prp.findObjectWithRef(sod.coordinateinterface).castTo();
                     transform = ci.localToWorld;
                 }
 
-                uru.moulprp.plDrawInterface di = prp.findObjectWithRef(sod.spaninfo).castTo();
+                uru.moulprp.plDrawInterface di = prp.findObjectWithRef(sod.drawinterface).castTo();
                 for(int j=0;j<di.subsetgroups.length;j++)
                 {
                     if(di.subsetgroups[j].subsetgroupindex!=-1)
@@ -367,13 +367,13 @@ public class hexisle
                             }
 
                             //prepare new objects
-                            uru.moulprp.x0001Sceneobject so = uru.moulprp.x0001Sceneobject.createDefaultWithScenenode(sn_ro.getref());
+                            uru.moulprp.plSceneObject so = uru.moulprp.plSceneObject.createDefaultWithScenenode(sn_ro.getref());
                             Uruobjectref so_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plSceneObject, name, prp);
-                            uru.moulprp.PlHKPhysical phys = uru.moulprp.PlHKPhysical.createStaticTriangleMeshFromVerticesAndFaces(verticesX, facesX, sn_ref, so_ref);
+                            uru.moulprp.plHKPhysical phys = uru.moulprp.plHKPhysical.createStaticTriangleMeshFromVerticesAndFaces(verticesX, facesX, sn_ref, so_ref);
                             Uruobjectref phys_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plHKPhysical, name, prp);
-                            uru.moulprp.x001CSimulationInterface sim = uru.moulprp.x001CSimulationInterface.createWithPlHKPhysical(so_ref, phys_ref);
+                            uru.moulprp.plSimulationInterface sim = uru.moulprp.plSimulationInterface.createWithPlHKPhysical(so_ref, phys_ref);
                             Uruobjectref sim_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plSimulationInterface, name, prp);
-                            so.animationinfo = sim_ref;
+                            so.simulationinterface = sim_ref;
                             //sn.addToObjectrefs1(so_ref);
                             //m.msg(so_ref.toString());
 
@@ -425,7 +425,7 @@ public class hexisle
 
     public static void makePhysicalIntoStaticCollider(prpfile prp, String objname)
     {
-        uru.moulprp.PlHKPhysical phys = prp.findObject(objname, Typeid.plHKPhysical).castTo();
+        uru.moulprp.plHKPhysical phys = prp.findObject(objname, Typeid.plHKPhysical).castTo();
         phys.convertODEtoHK(prp);
         phys.havok.RC = Flt.createFromJavaFloat(0.5f);
         phys.havok.EL = Flt.createFromJavaFloat(0.0f);

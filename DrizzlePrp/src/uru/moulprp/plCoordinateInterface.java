@@ -26,13 +26,14 @@ import shared.m;
 import shared.b;
 import uru.moulprp.Transmatrix;
 import shared.*;
-//import java.util.Vector;
+import java.util.Vector;
 
 /**
  *
  * @author user
  */
-public class x0015CoordinateInterface extends uruobj
+//was x0015CoordinateInterface
+public class plCoordinateInterface extends uruobj
 {
     //Objheader xheader;
     public PlObjInterface parent;
@@ -43,7 +44,7 @@ public class x0015CoordinateInterface extends uruobj
     public int count;
     public Uruobjectref[] children;
     
-    public x0015CoordinateInterface(context c) throws readexception
+    public plCoordinateInterface(context c) throws readexception
     {
         if(c.curRootObject.objectname.toString().toLowerCase().startsWith("ropeladder"))
         {
@@ -76,10 +77,10 @@ public class x0015CoordinateInterface extends uruobj
     }
     public static PrpRootObject findParent(prpfile prp, PrpRootObject childcoordinterface)
     {
-        x0015CoordinateInterface ci = childcoordinterface.castTo();
+        plCoordinateInterface ci = childcoordinterface.castTo();
         for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plCoordinateInterface))
         {
-            x0015CoordinateInterface possibleparent = ro.castTo();
+            plCoordinateInterface possibleparent = ro.castTo();
             for(Uruobjectref ch: possibleparent.children)
             {
                 if(ch.equals(ci.parent.sceneobject))
@@ -130,7 +131,7 @@ public class x0015CoordinateInterface extends uruobj
     {
         for(PrpRootObject obj: coordinateinterfaces)
         {
-            x0015CoordinateInterface ci2 = obj.castTo();
+            plCoordinateInterface ci2 = obj.castTo();
             for(Uruobjectref ref: ci2.children)
             {
                 if(ref.equals(sceneobject)) return ref;
@@ -138,10 +139,10 @@ public class x0015CoordinateInterface extends uruobj
         }
         return null;
     }
-    private x0015CoordinateInterface(){}
-    public static x0015CoordinateInterface createDefault(Uruobjectref sceneobject)
+    private plCoordinateInterface(){}
+    public static plCoordinateInterface createDefault(Uruobjectref sceneobject)
     {
-        x0015CoordinateInterface result = new x0015CoordinateInterface();
+        plCoordinateInterface result = new plCoordinateInterface();
         result.parent = PlObjInterface.createDefault(sceneobject);
         result.localToParent = Transmatrix.createDefault();
         result.parentToLocal = Transmatrix.createDefault();
@@ -151,9 +152,9 @@ public class x0015CoordinateInterface extends uruobj
         result.children = new Uruobjectref[0];
         return result;
     }
-    public static x0015CoordinateInterface createWithMatrix44(Uruobjectref sceneobject, Matrix44 coords)
+    public static plCoordinateInterface createWithMatrix44(Uruobjectref sceneobject, Matrix44 coords)
     {
-        x0015CoordinateInterface r = new x0015CoordinateInterface();
+        plCoordinateInterface r = new plCoordinateInterface();
         Matrix44 inv = coords.getInverse();
         r.parent = PlObjInterface.createDefault(sceneobject);
         r.localToParent = Transmatrix.createFromMatrix44(coords);

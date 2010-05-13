@@ -31,12 +31,12 @@ import shared.readexception;
 public class PlSoftVolumeInvert extends uruobj
 {
     PlSoftVolume parent;
-    UruobjectrefVector refs;
+    Refvector refs;
     
     public PlSoftVolumeInvert(context c) throws readexception
     {
         parent = new PlSoftVolume(c);
-        refs = new UruobjectrefVector(c);
+        refs = new Refvector(c);
     }
     
     public void compile(Bytedeque c)

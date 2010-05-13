@@ -34,7 +34,7 @@ public class PrpObject extends uruobj
             case plSceneNode:
                 return new x0000Scenenode(c);
             case plSceneObject:
-                return new x0001Sceneobject(c);
+                return new plSceneObject(c);
             //case 0x0002:
             //    return new x0002Keyedobject(stream,true);
             case plMipMap:
@@ -54,7 +54,7 @@ public class PrpObject extends uruobj
             case plWinAudio:
                 return new PlWinAudible(c);
             case plCoordinateInterface:
-                return new x0015CoordinateInterface(c);
+                return new plCoordinateInterface(c);
             //case plDrawInterface:
             //    return new plDrawInterface(c);
             case plSpawnModifier:
@@ -76,9 +76,9 @@ public class PrpObject extends uruobj
             case plPointShadowMaster:
                 return new x00D5PointShadowMaster(c);
             case plSimulationInterface:
-                return new x001CSimulationInterface(c);
+                return new plSimulationInterface(c);
             case plHKPhysical:
-                return new PlHKPhysical(c);
+                return new plHKPhysical(c);
             case plViewFaceModifier:
                 return new PlViewFaceModifier(c);
             case plSittingModifier: //haven't

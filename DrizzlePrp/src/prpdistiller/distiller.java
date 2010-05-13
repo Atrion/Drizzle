@@ -599,7 +599,7 @@ public class distiller
         {
             for(PrpRootObject ro: dest.FindAllObjectsOfType(Typeid.plCoordinateInterface))
             {
-                uru.moulprp.x0015CoordinateInterface ci = ro.castTo();
+                uru.moulprp.plCoordinateInterface ci = ro.castTo();
                 Vector<Uruobjectref> newchildren = new Vector();
                 for(Uruobjectref ref: ci.children)
                 {

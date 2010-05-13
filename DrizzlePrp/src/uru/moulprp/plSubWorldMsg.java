@@ -26,31 +26,24 @@ import shared.m;
 import shared.b;
 import shared.readexception;
 //import java.util.Vector;
+import shared.*;
 
 
-public class UruobjectrefVector extends uruobj
+public class plSubWorldMsg extends uruobj
 {
-    int count;
-    Uruobjectref[] refs;
+    PrpMessage.PlMessage parent;
+    Uruobjectref subworld; //could be none.
     
-    public UruobjectrefVector(context c) throws readexception
+    public plSubWorldMsg(context c) throws readexception
     {
-        count = c.readInt();
-        refs = new Uruobjectref[count];
-        for(int i=0;i<count;i++)
-        {
-            refs[i] = new Uruobjectref(c);
-        }
-        
+        parent = new PrpMessage.PlMessage(c);
+        subworld = new Uruobjectref(c);
     }
     
     public void compile(Bytedeque c)
     {
-        c.writeInt(count);
-        for(int i=0;i<count;i++)
-        {
-            refs[i].compile(c);
-        }
+        parent.compile(c);
+        subworld.compile(c);
     }
     
 }

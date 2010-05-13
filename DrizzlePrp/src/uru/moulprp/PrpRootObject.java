@@ -210,10 +210,10 @@ public class PrpRootObject extends uruobj implements Comparable
         return result;
     }
     
-    public x0001Sceneobject castToSceneObject()
+    public plSceneObject castToSceneObject()
     {
         this.ensureParsed();
-        x0001Sceneobject result = this.castTo();
+        plSceneObject result = this.castTo();
         return result;
     }
     

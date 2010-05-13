@@ -547,7 +547,7 @@ public class mystv //was myst5Fixes
                     sn = obj;
             
             
-            x0001Sceneobject so = x0001Sceneobject.createDefaultWithScenenode(sn.header.desc.toRef());
+            plSceneObject so = plSceneObject.createDefaultWithScenenode(sn.header.desc.toRef());
             so.addToObjectrefs2(modref);
             Uruobjectref soref = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plSceneObject, ref.xdesc.objectname.toString()+"_so", prp.header.pageid);
             PrpRootObject soroot = PrpRootObject.createFromDescAndObject(soref.xdesc, so);
@@ -561,9 +561,9 @@ public class mystv //was myst5Fixes
     public static void modifyPythonfilemod(prpfile prp, String sceneobjectname, String... pythonparams)
     {
         m.warn("Untested modifyPythonfilemod.");
-        x0001Sceneobject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
+        plSceneObject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
         PlLogicModifier logmod=null;
-        for(Uruobjectref curref: so.objectrefs2)
+        for(Uruobjectref curref: so.modifiers)
         {
             if(curref.hasref() && curref.xdesc.objecttype==Typeid.plLogicModifier)
             {
@@ -586,9 +586,9 @@ public class mystv //was myst5Fixes
     }
     public static void makeClickableUsePythonfilemod(prpfile prp, String sceneobjectname, String... pythonparams)
     {
-        x0001Sceneobject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
+        plSceneObject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
         PlLogicModifier logmod=null;
-        for(Uruobjectref curref: so.objectrefs2)
+        for(Uruobjectref curref: so.modifiers)
         {
             if(curref.hasref() && curref.xdesc.objecttype==Typeid.plLogicModifier)
             {
@@ -622,8 +622,8 @@ public class mystv //was myst5Fixes
     }
     public static void restoreClickability(prpfile prp, String clickableSceneObject)
     {
-        x0001Sceneobject so = prp.findObject(clickableSceneObject, Typeid.plSceneObject).castTo();
-        for(Uruobjectref ref: so.objectrefs2)
+        plSceneObject so = prp.findObject(clickableSceneObject, Typeid.plSceneObject).castTo();
+        for(Uruobjectref ref: so.modifiers)
         {
             if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
             {
@@ -1107,7 +1107,7 @@ public class mystv //was myst5Fixes
 
         if(newAgename.toLowerCase().equals("descentmystv") && prp.header.pagename.toString().toLowerCase().equals("dsntgreatshaftlowerrm"))
         {
-            PlHKPhysical erf = prp.findObject("ElevRisingFloor", Typeid.plHKPhysical).castTo();
+            plHKPhysical erf = prp.findObject("ElevRisingFloor", Typeid.plHKPhysical).castTo();
             erf.ode.convertee.coltype = 0x200;
             erf.ode.convertee.LOSDB = 0x44;
             erf.ode.convertee.group = new HsBitVector(4);

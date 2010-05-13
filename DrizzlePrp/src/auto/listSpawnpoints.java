@@ -19,8 +19,8 @@ public class listSpawnpoints
         
         for(PrpRootObject obj2: sceneobjects)
         {
-            x0001Sceneobject so = obj2.castTo();
-            for(Uruobjectref ref: so.objectrefs2)
+            plSceneObject so = obj2.castTo();
+            for(Uruobjectref ref: so.modifiers)
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plSpawnModifier)
                 {

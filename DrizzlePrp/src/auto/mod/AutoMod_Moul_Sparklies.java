@@ -103,7 +103,7 @@ public class AutoMod_Moul_Sparklies
         {
             //CalendarStarDecal has messed up coordinateinterface, as if it should have a parent but doesn't.  Perhaps it is on another page, tied to pillar03, so that it moves up with pillar03.
             //let's translate it by the height pillar03 moves up (48 feet)
-            uru.moulprp.x0015CoordinateInterface ci = dest.findObject("CalendarStarDecal", Typeid.plCoordinateInterface).castTo();
+            uru.moulprp.plCoordinateInterface ci = dest.findObject("CalendarStarDecal", Typeid.plCoordinateInterface).castTo();
             ci.translate(0, 0, (-89.4645)-(-137.4645), false);
             ci.localToParent = ci.localToWorld;
             ci.parentToLocal = ci.worldToLocal;
@@ -553,7 +553,7 @@ public class AutoMod_Moul_Sparklies
         //translate the page since the entire sphere was shifted over for moul to accomodate all the sphere's in one age. Also, translate 3.5 units to the right so it is not in the same place as the other.
         double yoff = 3.5; //move the page a little to the right.
         double x = 43.0636-32.8057; double y = 548.7101-665.3181-yoff; double z = 2.5576-0.3330;
-        uru.moulprp.x0015CoordinateInterface ci = dest.findObject("YeeshaPage24", Typeid.plCoordinateInterface).castTo();
+        uru.moulprp.plCoordinateInterface ci = dest.findObject("YeeshaPage24", Typeid.plCoordinateInterface).castTo();
         ci.translate(x,y,z, true);
         ci = dest.findObject("YeeshaPage24Decal", Typeid.plCoordinateInterface).castTo();
         ci.translate(x,y,z, true);
@@ -566,12 +566,12 @@ public class AutoMod_Moul_Sparklies
 
         //ci = dest.findObject("RgnYeeshaPageStorm", Typeid.plCoordinateInterface).castTo();
         //ci.translate(x, y, z, true);
-        uru.moulprp.PlHKPhysical phys = dest.findObject("RgnYeeshaPageStorm", Typeid.plHKPhysical).castTo();
+        uru.moulprp.plHKPhysical phys = dest.findObject("RgnYeeshaPageStorm", Typeid.plHKPhysical).castTo();
         phys.convertPXtoHK();
         phys.havok.position = Vertex.zero();
         phys.havok.transformVertices(Transmatrix.createFromVector2(x,y,z));
 
-        uru.moulprp.PlHKPhysical phys2 = dest.findObject("YeeshaPage24", Typeid.plHKPhysical).castTo();
+        uru.moulprp.plHKPhysical phys2 = dest.findObject("YeeshaPage24", Typeid.plHKPhysical).castTo();
         phys2.convertPXtoHK();
         phys2.havok.position = Vertex.zero();
         phys2.havok.transformVertices(Transmatrix.createFromVector2(x,y,z));
@@ -724,7 +724,7 @@ public class AutoMod_Moul_Sparklies
         //set this page to only be visible when the relto book isn't.
         for(String sobj: new String[]{"RgnYeeshaPage01","YeeshaPage01","YeeshaPage01Decal",})
         {
-            uru.moulprp.x0001Sceneobject so = dest.findObject(sobj,Typeid.plSceneObject).castTo();
+            uru.moulprp.plSceneObject so = dest.findObject(sobj,Typeid.plSceneObject).castTo();
             //AddXAgeSDLBoolShowHideToObject(dest, so, "clftYeeshaBookVis", true);
             //AddXAgeSDLBoolShowHideToObject(dest, so, "clftZandiVis", true);
             AutoMod_Shared.AddXDustChronicleShowHideToObject(dest, so, "CleftSolved","yes", false);

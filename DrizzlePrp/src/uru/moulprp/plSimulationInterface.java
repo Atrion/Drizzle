@@ -30,7 +30,8 @@ import shared.b;
  *
  * @author user
  */
-public class x001CSimulationInterface extends uruobj
+//was x001CSimulationInterface
+public class plSimulationInterface extends uruobj
 {
     //Objheader xheader;
     public PlObjInterface parent;
@@ -40,7 +41,7 @@ public class x001CSimulationInterface extends uruobj
     public int u2;
     public Uruobjectref physical;
     
-    public x001CSimulationInterface(context c) throws readexception
+    public plSimulationInterface(context c) throws readexception
     {
         //if(hasHeader) xheader = new Objheader(c);
         if(c.curRootObject.objectname.toString().toLowerCase().startsWith("ropeladder"))
@@ -64,10 +65,10 @@ public class x001CSimulationInterface extends uruobj
         }
         physical = new Uruobjectref(c);
     }
-    public x001CSimulationInterface(){}
-    public static x001CSimulationInterface createWithPlHKPhysical(Uruobjectref sceneobj, Uruobjectref physref)
+    public plSimulationInterface(){}
+    public static plSimulationInterface createWithPlHKPhysical(Uruobjectref sceneobj, Uruobjectref physref)
     {
-        x001CSimulationInterface r = new x001CSimulationInterface();
+        plSimulationInterface r = new plSimulationInterface();
         r.parent = PlObjInterface.createDefault(sceneobj);
         r.physical = physref;
         r.u2 = 0;

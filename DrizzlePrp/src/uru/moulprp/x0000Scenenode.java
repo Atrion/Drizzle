@@ -107,7 +107,7 @@ public class x0000Scenenode extends uruobj
             if(obj.header.desc.objecttype==Typeid.plSceneObject)
             {
                 //boolean oldScenenodeHadThis = orig.objectrefs1.contains(obj.getref());
-                uru.moulprp.x0001Sceneobject so = obj.castTo();
+                uru.moulprp.plSceneObject so = obj.castTo();
                 //if(oldScenenodeHadThis || !so.wasread) //if we had it before or it was newly created
                 //{
                 if(so.includeInScenenode==null || so.includeInScenenode==true)

@@ -36,7 +36,7 @@ public class AutoMod_Relto
         for(String s: new String[]{"Ponderosa17","Ponderosa18","Ponderosa19","Ponderosa20","Ponderosa21","Ponderosa22","Ponderosa24","Ponderosa25","Ponderosa26","Ponderosa27","Ponderosa28","Ponderosa32","Ponderosa33","Ponderosa34","Ponderosa35","Ponderosa36",/*"Ponderosa39","Ponderosa40",*/"Ponderosa41","Ponderosa42",})
         {
             PrpRootObject so_ro2 = prp.findObject(s, Typeid.plSceneObject);
-            uru.moulprp.x0001Sceneobject so2 =so_ro2.castTo();
+            uru.moulprp.plSceneObject so2 =so_ro2.castTo();
             so2.clearObjectrefs2(); //this shouldn't be needed, but it may be a good idea incase it has already been modded.
             so2.addToObjectrefs2(pfm2_ro.getref());
             so_ro2.markAsChanged();
@@ -52,7 +52,7 @@ public class AutoMod_Relto
 
         //fix the tree whose collider remains even when the tree is invisible.
         PrpRootObject so_ro = prp.findObject("TreeCollision27", Typeid.plSceneObject);
-        uru.moulprp.x0001Sceneobject so = so_ro.castTo();
+        uru.moulprp.plSceneObject so = so_ro.castTo();
         so.clearObjectrefs2(); //there shouldn't be anything in this one anyway.
         so.addToObjectrefs2(pfm2_ro.getref());
         so_ro.markAsChanged();

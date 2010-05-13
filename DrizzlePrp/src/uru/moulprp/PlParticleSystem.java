@@ -60,10 +60,10 @@ public class PlParticleSystem extends uruobj
     //plParticleEmitter xplParticleEmitter;
     //plSimpleParticleGenerator xplSimpleParticleGenerator;
     PrpTaggedObject[] particleObjects;
-    UruobjectrefVector refs1;
-    UruobjectrefVector refs2;
-    UruobjectrefVector refs3;
-    UruobjectrefVector refs4;
+    Refvector refs1;
+    Refvector refs2;
+    Refvector refs3;
+    Refvector refs4;
     
     /*Flt[] u11;
     int u12;
@@ -119,11 +119,11 @@ public class PlParticleSystem extends uruobj
         //{
         //    xplSimpleParticleGenerator = new plSimpleParticleGenerator(data);
         //}
-        refs1 = new UruobjectrefVector(c);
-        refs2 = new UruobjectrefVector(c);
-        refs3 = new UruobjectrefVector(c);
+        refs1 = new Refvector(c);
+        refs2 = new Refvector(c);
+        refs3 = new Refvector(c);
         
-        refs4 = new UruobjectrefVector(c);
+        refs4 = new Refvector(c);
         
         /*u11 = new Flt[5];
         for(int i=0;i<5;i++)

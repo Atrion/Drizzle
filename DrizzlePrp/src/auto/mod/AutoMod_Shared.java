@@ -14,12 +14,12 @@ import uru.moulprp.Typeid;
 import uru.moulprp.Uruobjectdesc;
 import uru.moulprp.Uruobjectref;
 
-import uru.moulprp.x0001Sceneobject;
+import uru.moulprp.plSceneObject;
 import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
 
 public class AutoMod_Shared
 {
-    public static void AddXDustChronicleShowHideToObject(prpfile prp, x0001Sceneobject sceneobject, String sdlvar, String valToMatch, boolean reverse)
+    public static void AddXDustChronicleShowHideToObject(prpfile prp, plSceneObject sceneobject, String sdlvar, String valToMatch, boolean reverse)
     {
         //create pfm
         //add the pfm to the prp if it doesn't have it already:
@@ -46,7 +46,7 @@ public class AutoMod_Shared
 
     }
 
-    public static void AddXAgeSDLBoolShowHideToObject(prpfile prp, x0001Sceneobject sceneobject, String sdlvar, boolean reverse)
+    public static void AddXAgeSDLBoolShowHideToObject(prpfile prp, plSceneObject sceneobject, String sdlvar, boolean reverse)
     {
         //create pfm
         //add the pfm to the prp if it doesn't have it already:
@@ -71,7 +71,7 @@ public class AutoMod_Shared
         sceneobject.addToObjectrefs2(pfmref);
 
     }
-    public static void AddXDustShowToObject(prpfile prp, x0001Sceneobject sceneobject)
+    public static void AddXDustShowToObject(prpfile prp, plSceneObject sceneobject)
     {
         //create pfm
         //add the pfm to the prp if it doesn't have it already:
@@ -112,7 +112,7 @@ public class AutoMod_Shared
                 sn = obj;
 
         //create sceneobject
-        x0001Sceneobject so = x0001Sceneobject.createDefaultWithScenenode(sn.header.desc.toRef());
+        plSceneObject so = plSceneObject.createDefaultWithScenenode(sn.header.desc.toRef());
         so.addToObjectrefs2(pfmref);
         Uruobjectref soref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plSceneObject, arbitraryPfmName+"_so", prp);
         PrpRootObject soroot = PrpRootObject.createFromDescAndObject(soref.xdesc, so);

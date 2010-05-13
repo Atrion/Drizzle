@@ -30,13 +30,13 @@ import shared.readexception;
 
 public class PlFilterCoordInterface extends uruobj
 {
-    x0015CoordinateInterface parent;
+    plCoordinateInterface parent;
     int u1;
     Transmatrix matrix;
     
     public PlFilterCoordInterface(context c) throws readexception
     {
-        parent = new x0015CoordinateInterface(c);
+        parent = new plCoordinateInterface(c);
         u1 = c.readInt();
         matrix = new Transmatrix(c);
         

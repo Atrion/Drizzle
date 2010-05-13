@@ -21,6 +21,7 @@ import org.apache.commons.math.linear.RealMatrixImpl;
 import auto.conversion.FileInfo;
 import auto.conversion.Info;
 import auto.conversion.RenameInfo;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 public class moul
@@ -1189,14 +1190,114 @@ public class moul
     }
     public static void PostMod_FixSubworlds(prpfile prp)
     {
-        //find subworlds
-        java.util.LinkedHashSet<Uruobjectref> subworlds = new java.util.LinkedHashSet();
+        class Subworlds
+        {
+            class SubworldInfo
+            {
+                Vector<PrpRootObject> subworldregion = new Vector();
+                Vector<PrpRootObject> subworldphysics = new Vector();
+                Uruobjectref subworld;
+            }
+            public java.util.LinkedHashMap<Uruobjectref,SubworldInfo> worlds = new java.util.LinkedHashMap();
+            private SubworldInfo get(Uruobjectref subworld)
+            {
+                SubworldInfo r = worlds.get(subworld);
+                if(r==null)
+                {
+                    r = new SubworldInfo();
+                    r.subworld = subworld;
+                    worlds.put(subworld, r);
+                }
+                return r;
+            }
+            public void addSubworldRegion(Uruobjectref subworld, PrpRootObject subworldregion)
+            {
+                get(subworld).subworldregion.add(subworldregion);
+            }
+            public void addSubworldPhysics(Uruobjectref subworld, PrpRootObject subworldphysics)
+            {
+                get(subworld).subworldphysics.add(subworldphysics);
+            }
+        }
+
+        Subworlds subworlds = new Subworlds();
+        //find subworlds in plSubworldRegionDetectors
+        //java.util.LinkedHashSet<Uruobjectref> subworlds = new java.util.LinkedHashSet();
         for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSubworldRegionDetector))
         {
             plSubworldRegionDetector rd = ro.castTo();
-            subworlds.add(rd.sub); //subworld
+            //subworlds.add(rd.sub); //subworld
+            subworlds.addSubworldRegion(rd.sub, ro);
         }
-        //Should we find the references in physics objects too?
+
+        //find subworlds in plHKPhysicals
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plHKPhysical))
+        {
+            plHKPhysical phys = ro.castTo();
+            //phys.convertPXtoHK();
+            if(phys.physx !=null && phys.physx.subworld.hasref())
+            {
+                //subworlds.add(phys.physx.subworld);
+                subworlds.addSubworldPhysics(phys.physx.subworld, ro);
+            }
+        }
+
+        for(Subworlds.SubworldInfo swi: subworlds.worlds.values())
+        {
+            //fix plHKSubworld
+            plSceneObject so = prp.findObjectWithRef(swi.subworld).castTo();
+            plHKSubWorld sw = plHKSubWorld.createWithSceneobject(swi.subworld);
+            PrpRootObject sw_ro = prp.addObject(Typeid.plHKSubWorld, swi.subworld.xdesc.objectname.toString(), sw);
+            Uruobjectref sw_ref = sw_ro.getref();
+
+            //fix subworld sceneobject
+            so.interfaces.add(sw_ref);
+
+            //fix physics
+            for(PrpRootObject phys_ro: swi.subworldphysics)
+            {
+                plHKPhysical phys = phys_ro.castTo();
+                phys.physx.subworld = sw_ref;
+                //phys.physx.subworld = Uruobjectref.none();
+            }
+
+            //fix subworld regions
+            for(PrpRootObject reg_ro: swi.subworldregion)
+            {
+                plSubworldRegionDetector reg = reg_ro.castTo();
+                //reg.sub = sw_ref;
+            }
+
+            //find children
+            /*plCoordinateInterface ci = prp.findObjectWithRef(so.coordinateinterface).castTo();
+            for(PrpRootObject child_ro: prp.getAllChildren(swi.subworld))
+            {
+                plSceneObject child_so = child_ro.castTo();
+                plHKPhysical phys = child_so.getPhysics(prp);
+                
+                //attach subworld.
+                if(phys!=null)
+                    phys.physx.subworld = sw_ro.getref();
+            }*/
+        }
+        /*for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plHKPhysical))
+        {
+            plHKPhysical phys = ro.castTo();
+            if(phys.physx!=null && phys.physx.subworld.hasref())
+            {
+                PrpRootObject so_ro = prp.findObjectWithRef(phys.physx.subworld);
+                if(so_ro.header.objecttype!=Typeid.plSceneObject)
+                    m.throwUncaughtException("unexpected");
+                plSceneObject so = so_ro.castTo();
+                Uruobjectref sw_ref = so.interfaces.find(Typeid.plHKSubWorld);
+                if(sw_ref==null)
+                    m.throwUncaughtException("unexpected");
+                phys.physx.subworld = sw_ref;
+            }
+        }*/
+
+        //do we need to change it in plSubWorldMsg(probably embedded in a plResponderModifier) like we did with plHKPhysicals?
+        
     }
     public static void PostMod_FixMinkata(prpfile prp, String finalname, String outfolder)
     {
@@ -1251,8 +1352,8 @@ public class moul
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSceneObject);
         for(PrpRootObject obj: objs)
         {
-            uru.moulprp.x0001Sceneobject so = obj.castTo();
-            for(Uruobjectref ref: so.objectrefs2)
+            uru.moulprp.plSceneObject so = obj.castTo();
+            for(Uruobjectref ref: so.modifiers)
             {
                 if(ref.hasref()&&ref.xdesc.objecttype==Typeid.plOneShotMod)
                 {
@@ -1260,11 +1361,11 @@ public class moul
                     if(osm.smartseek!=0)
                     {
                         //found it!
-                        Uruobjectref coordsref = so.regioninfo;
+                        Uruobjectref coordsref = so.coordinateinterface;
                         if(coordsref.hasref())
                         {
                             m.msg("Translating smartseek for object... ",obj.header.desc.toString());
-                            uru.moulprp.x0015CoordinateInterface coords = prp.findObjectWithDesc(coordsref.xdesc).castTo();
+                            uru.moulprp.plCoordinateInterface coords = prp.findObjectWithDesc(coordsref.xdesc).castTo();
                             Transmatrix m = coords.localToParent;
                             RealMatrix m2 = m.convertToMatrix();
                             //org.apache.commons.math.linear.RealMatrixImpl b;

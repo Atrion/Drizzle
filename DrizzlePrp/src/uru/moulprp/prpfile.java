@@ -193,8 +193,8 @@ public class prpfile
         {
             if(obj.header.objecttype==Typeid.plSceneObject)
             {
-                uru.moulprp.x0001Sceneobject so = obj.castTo();
-                for(Uruobjectref ref: so.objectrefs2)
+                uru.moulprp.plSceneObject so = obj.castTo();
+                for(Uruobjectref ref: so.modifiers)
                 {
                     if(ref.hasref() && ref.xdesc.objecttype==Typeid.plPythonFileMod && ref.xdesc.objectname.toString().equals(pfmname))
                     {
@@ -532,7 +532,7 @@ public class prpfile
             {
                 if(ro.header.objecttype==Typeid.plSceneObject)
                 {
-                    uru.moulprp.x0001Sceneobject so = ro.castTo();
+                    uru.moulprp.plSceneObject so = ro.castTo();
                     if(sn.objectrefs1.contains(ro.getref()))
                     {
                         so.includeInScenenode = true;
@@ -549,4 +549,33 @@ public class prpfile
             m.throwUncaughtException("unexpected");
         }
     }
+
+    public Vector<PrpRootObject> getAllChildren(Uruobjectref ref)
+    {
+        Vector<PrpRootObject> r = new Vector();
+        getAllChildren(ref,r);
+        return r;
+    }
+    private void getAllChildren(Uruobjectref ref, Vector<PrpRootObject> r)
+    {
+        PrpRootObject so_ro = findObjectWithRef(ref);
+        if(so_ro!=null)
+        {
+            r.add(so_ro);
+
+            plSceneObject so = so_ro.castTo();
+            PrpRootObject ci_ro = findObjectWithRef(so.coordinateinterface);
+            if(ci_ro!=null)
+            {
+                plCoordinateInterface ci = ci_ro.castTo();
+
+                //do children
+                for(Uruobjectref childref: ci.children)
+                {
+                    getAllChildren(childref,r);
+                }
+            }
+        }
+  }
+
 }

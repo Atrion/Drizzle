@@ -18,7 +18,7 @@ import uru.moulprp.Pageid;
 import uru.moulprp.Pagetype;
 import uru.moulprp.prpfile;
 import shared.Bytes;
-import uru.moulprp.x0001Sceneobject;
+import uru.moulprp.plSceneObject;
 import uru.moulprp.x0000Scenenode;
 import uru.moulprp.*;
 import java.util.Vector;
@@ -38,13 +38,13 @@ public class hackFactory
     
     public static void createAndAddCoordinateInterface(prpfile prp, PrpRootObject sceneobject)
     {
-        x0015CoordinateInterface ci = x0015CoordinateInterface.createDefault(sceneobject.header.desc.toRef());
+        plCoordinateInterface ci = plCoordinateInterface.createDefault(sceneobject.header.desc.toRef());
         Uruobjectref ciref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plCoordinateInterface, sceneobject.header.desc.objectname.toString()+"_ci", prp.header.pageid, prp.header.pagetype);
         PrpRootObject ciroot = PrpRootObject.createFromDescAndObject(ciref.xdesc, ci);
         ci.parent.bv = HsBitVector.createWithValues(0);
         
-        x0001Sceneobject so = prp.findObjectWithRef(sceneobject.header.desc.toRef()).castTo();
-        so.regioninfo = ciref;
+        plSceneObject so = prp.findObjectWithRef(sceneobject.header.desc.toRef()).castTo();
+        so.coordinateinterface = ciref;
         sceneobject.hasChanged = true;
         
         //prp.extraobjects.add(ciroot);
@@ -74,7 +74,7 @@ public class hackFactory
         pm.pyfile = Urustring.createFromString(agename);
         
         //create sceneobject
-        x0001Sceneobject so = x0001Sceneobject.createDefaultWithScenenode(Uruobjectref.none());
+        plSceneObject so = plSceneObject.createDefaultWithScenenode(Uruobjectref.none());
         Uruobjectref soref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plSceneObject, "AgeSDLHook", pid, Pagetype.createWithType(8));
         PrpRootObject soroot = PrpRootObject.createFromDescAndObject(soref.xdesc, so);
         so.addToObjectrefs2(pmref);
@@ -95,7 +95,7 @@ public class hackFactory
     
     public static PrpRootObject createSceneObject(PrpRootObject scenenode, String name, Pageid pid)
     {
-        x0001Sceneobject so = x0001Sceneobject.createDefaultWithScenenode(Uruobjectref.createFromUruobjectdesc(scenenode.header.desc));
+        plSceneObject so = plSceneObject.createDefaultWithScenenode(Uruobjectref.createFromUruobjectdesc(scenenode.header.desc));
         Uruobjectref soref = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plSceneObject, name, pid);
         PrpRootObject soroot = PrpRootObject.createFromDescAndObject(soref.xdesc, so);
         return soroot;
@@ -109,12 +109,12 @@ public class hackFactory
         Uruobjectref spawnref = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plSpawnModifier, name+"_spawnmod", pid);
         PrpRootObject spawnmodro = PrpRootObject.createFromDescAndObject(spawnref.xdesc, spawnmod);
         
-        x0015CoordinateInterface coordinter = x0015CoordinateInterface.createDefault(sceneobject.header.desc.toRef());
+        plCoordinateInterface coordinter = plCoordinateInterface.createDefault(sceneobject.header.desc.toRef());
         Uruobjectref coordref = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plCoordinateInterface, name+"_coordint", pid);
         PrpRootObject coordro = PrpRootObject.createFromDescAndObject(coordref.xdesc, coordinter);
 
         coordinter.parent.bv = new HsBitVector(6);
-        sceneobject.castToSceneObject().regioninfo = coordref;
+        sceneobject.castToSceneObject().coordinateinterface = coordref;
         sceneobject.castToSceneObject().addToObjectrefs2(spawnref);
         
         objects.add(sceneobject);
