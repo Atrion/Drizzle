@@ -10,15 +10,15 @@ import auto.conversion.Info;
 import shared.*;
 import uru.Bytestream;
 import uru.context;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.prpfile;
-import uru.moulprp.Typeid;
+import prpobjects.Uruobjectdesc;
+import prpobjects.prpfile;
+import prpobjects.Typeid;
 import java.util.HashMap;
-import uru.moulprp.Typeid;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Uruobjectref;
+import prpobjects.Typeid;
+import prpobjects.PrpRootObject;
+import prpobjects.Uruobjectref;
 import shared.Flt;
-import uru.moulprp.textfile;
+import prpobjects.textfile;
 
 
 public class hexisle
@@ -53,7 +53,7 @@ public class hexisle
                 return true;
             }
         };*/
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
+        r.decider = prpobjects.prputils.Compiler.getDefaultDecider();
         r.prpmodifier = new conversion.PostConversionModifier() {
             public void ModifyPrp(conversion.Info info, conversion.FileInfo file, prpfile prp) {
                 String age = prp.header.agename.toString();
@@ -275,7 +275,7 @@ public class hexisle
     public static void createStaticCollidersForAllDrawables(prpfile prp)
     {
         PrpRootObject sn_ro = prp.findFirstScenenode();
-        uru.moulprp.x0000Scenenode sn = sn_ro.castTo();
+        prpobjects.x0000Scenenode sn = sn_ro.castTo();
         Uruobjectref sn_ref = sn_ro.getref();
 
         //change this to be:
@@ -285,7 +285,7 @@ public class hexisle
         for(int i=0;i<objs.length;i++)
         {
             PrpRootObject sod_ro = objs[i];
-            uru.moulprp.plSceneObject sod = sod_ro.castTo();
+            prpobjects.plSceneObject sod = sod_ro.castTo();
             //if(sod_ro.header.desc.objectname.toString().toLowerCase().equals("capsule02"))
             //{
             //    int dummy=0;
@@ -293,28 +293,28 @@ public class hexisle
             if(sod.drawinterface.hasref()) //if it has a draw interface
             {
                 //try to get a coordinateInterface.
-                uru.moulprp.Transmatrix transform = null;
+                prpobjects.Transmatrix transform = null;
                 if(sod.coordinateinterface.hasref())
                 {
-                    uru.moulprp.plCoordinateInterface ci = prp.findObjectWithRef(sod.coordinateinterface).castTo();
+                    prpobjects.plCoordinateInterface ci = prp.findObjectWithRef(sod.coordinateinterface).castTo();
                     transform = ci.localToWorld;
                 }
 
-                uru.moulprp.plDrawInterface di = prp.findObjectWithRef(sod.drawinterface).castTo();
+                prpobjects.plDrawInterface di = prp.findObjectWithRef(sod.drawinterface).castTo();
                 for(int j=0;j<di.subsetgroups.length;j++)
                 {
                     if(di.subsetgroups[j].subsetgroupindex!=-1)
                     {
-                        uru.moulprp.PlDrawableSpans ds = prp.findObjectWithRef(di.subsetgroups[j].span).castTo();
-                        uru.moulprp.PlDrawableSpans.PlDISpanIndex dispi = ds.DIIndices[di.subsetgroups[j].subsetgroupindex];
+                        prpobjects.plDrawableSpans ds = prp.findObjectWithRef(di.subsetgroups[j].span).castTo();
+                        prpobjects.plDrawableSpans.PlDISpanIndex dispi = ds.DIIndices[di.subsetgroups[j].subsetgroupindex];
                         for(int k=0;k<dispi.indices.length;k++)
                         {
                             int subsetind = dispi.indices[k];
-                            uru.moulprp.PlDrawableSpans.PlIcicle ice = ds.icicles[subsetind];
-                            uru.moulprp.PlDrawableSpans.PlGBufferGroup group = ds.groups[ice.parent.groupIdx];
+                            prpobjects.plDrawableSpans.PlIcicle ice = ds.icicles[subsetind];
+                            prpobjects.plDrawableSpans.PlGBufferGroup group = ds.groups[ice.parent.groupIdx];
                             String name = "HexisleDrizzleColliderIcicle-"+Integer.toString(i)+"-"+Integer.toString(j)+"-"+Integer.toString(k);
 
-                            uru.moulprp.PlDrawableSpans.PlGBufferGroup.SubMesh mesh = group.submeshes[ice.parent.VBufferIdx];
+                            prpobjects.plDrawableSpans.PlGBufferGroup.SubMesh mesh = group.submeshes[ice.parent.VBufferIdx];
                             float[] vertices = mesh.getVertices(group.fformat);
                             Vertex[] vertices2 = new Vertex[vertices.length/3];
                             for(int l=0;l<vertices.length/3;l++)
@@ -324,7 +324,7 @@ public class hexisle
                             }
 
                             //get surfaces
-                            uru.moulprp.PlDrawableSpans.PlGBufferGroup.Surface surface = group.surfaces[ice.IBufferIdx];
+                            prpobjects.plDrawableSpans.PlGBufferGroup.Surface surface = group.surfaces[ice.IBufferIdx];
                             shared.ShortTriplet[] faces = surface.faces;
 
                             //just get the part we want.
@@ -367,11 +367,11 @@ public class hexisle
                             }
 
                             //prepare new objects
-                            uru.moulprp.plSceneObject so = uru.moulprp.plSceneObject.createDefaultWithScenenode(sn_ro.getref());
+                            prpobjects.plSceneObject so = prpobjects.plSceneObject.createDefaultWithScenenode(sn_ro.getref());
                             Uruobjectref so_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plSceneObject, name, prp);
-                            uru.moulprp.plHKPhysical phys = uru.moulprp.plHKPhysical.createStaticTriangleMeshFromVerticesAndFaces(verticesX, facesX, sn_ref, so_ref);
+                            prpobjects.plHKPhysical phys = prpobjects.plHKPhysical.createStaticTriangleMeshFromVerticesAndFaces(verticesX, facesX, sn_ref, so_ref);
                             Uruobjectref phys_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plHKPhysical, name, prp);
-                            uru.moulprp.plSimulationInterface sim = uru.moulprp.plSimulationInterface.createWithPlHKPhysical(so_ref, phys_ref);
+                            prpobjects.plSimulationInterface sim = prpobjects.plSimulationInterface.createWithPlHKPhysical(so_ref, phys_ref);
                             Uruobjectref sim_ref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plSimulationInterface, name, prp);
                             so.simulationinterface = sim_ref;
                             //sn.addToObjectrefs1(so_ref);
@@ -425,7 +425,7 @@ public class hexisle
 
     public static void makePhysicalIntoStaticCollider(prpfile prp, String objname)
     {
-        uru.moulprp.plHKPhysical phys = prp.findObject(objname, Typeid.plHKPhysical).castTo();
+        prpobjects.plHKPhysical phys = prp.findObject(objname, Typeid.plHKPhysical).castTo();
         phys.convertODEtoHK(prp);
         phys.havok.RC = Flt.createFromJavaFloat(0.5f);
         phys.havok.EL = Flt.createFromJavaFloat(0.0f);
@@ -437,7 +437,7 @@ public class hexisle
         phys.havok.u2 = 0x0;
         phys.havok.u3 = 0x0;
         phys.havok.LOSDB = 0x44; //avatarWalkable and collidesWithCamera.
-        phys.havok.group = new uru.moulprp.HsBitVector(0x104); //or should this be 0?
+        phys.havok.group = new prpobjects.HsBitVector(0x104); //or should this be 0?
     }
 
     /*private static String[] HexisleSounds = {

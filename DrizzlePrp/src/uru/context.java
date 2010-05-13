@@ -25,8 +25,8 @@ import uru.Bytedeque;
 import java.util.Vector;
 import shared.readexception;
 
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Typeid;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Typeid;
 import shared.Pair;
 import java.util.HashMap;
 import shared.cmap;

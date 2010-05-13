@@ -5,7 +5,7 @@
 
 package auto.postmod;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.Vector;
 
 public class PostMod_Moul

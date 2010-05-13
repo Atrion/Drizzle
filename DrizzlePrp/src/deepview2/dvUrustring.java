@@ -6,7 +6,7 @@
 package deepview2;
 
 import shared.m;
-import uru.moulprp.*;
+import prpobjects.*;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 

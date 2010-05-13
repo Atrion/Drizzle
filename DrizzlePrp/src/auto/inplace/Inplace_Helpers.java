@@ -6,7 +6,7 @@
 package auto.inplace;
 
 import java.util.Vector;
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.HashMap;
 
 public class Inplace_Helpers

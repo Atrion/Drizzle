@@ -5,7 +5,7 @@
 
 package auto;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.m;
 
 public class listSpawnpoints

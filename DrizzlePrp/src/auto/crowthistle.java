@@ -9,7 +9,7 @@ import shared.m;
 import java.io.File;
 import java.util.Vector;
 import shared.FileUtils;
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.HashMap;
 import shared.*;
 import uru.UruCrypt;
@@ -106,7 +106,7 @@ public class crowthistle
             "mntnAmbientMx.ogg",
             "mrshAmbientMx.ogg",
         };
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider(); // accept every object
+        r.decider = prpobjects.prputils.Compiler.getDefaultDecider(); // accept every object
         r.prpmodifier = new conversion.PostConversionModifier() {
 
             public void ModifyPrp(Info info, FileInfo file, prpfile prp) {

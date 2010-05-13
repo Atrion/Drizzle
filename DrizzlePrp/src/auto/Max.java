@@ -12,8 +12,8 @@ import shared.m;
 import java.util.ArrayList;
 import shared.FileUtils;
 import java.util.Vector;
-import uru.moulprp.Typeid;
-import uru.moulprp.prpfile;
+import prpobjects.Typeid;
+import prpobjects.prpfile;
 
 public class Max
 {
@@ -85,7 +85,7 @@ public class Max
             }
             byte[] agefilebs = uru.UruCrypt.DecryptAny(agefilebs_enc, type);
             //byte[] agefilebs = uru.UruCrypt.DecryptAny(agefilename, auto.AllGames.getPots().g);
-            uru.moulprp.textfile agefile = uru.moulprp.textfile.createFromBytes(agefilebs);
+            prpobjects.textfile agefile = prpobjects.textfile.createFromBytes(agefilebs);
             String prefixstr = agefile.getVariable("SequencePrefix");
             int prefix = Integer.parseInt(prefixstr); //bugfix for PlasmaPlugin
             byte[] agefileoutbs = agefile.saveToByteArray();
@@ -95,21 +95,21 @@ public class Max
 
             //convert .sum file:
             String sumfileout = potsfolder+"/dat/"+agename+".sum";
-            FileUtils.WriteFile(sumfileout, uru.moulprp.sumfile.createEmptySumfile().getByteArray(),true,true);
+            FileUtils.WriteFile(sumfileout, prpobjects.sumfile.createEmptySumfile().getByteArray(),true,true);
 
             //convert .fni file:
             String fnifilename = maxfolder + "/dat/"+agename+".fni";
             File fnifile = new File(fnifilename);
-            uru.moulprp.textfile fnifilet;
+            prpobjects.textfile fnifilet;
             if(fnifile.exists())
             {
                 byte[] fnifilebs = uru.UruCrypt.DecryptAny(fnifilename, auto.AllGames.getPots().g);
-                fnifilet = uru.moulprp.textfile.createFromBytes(fnifilebs);
+                fnifilet = prpobjects.textfile.createFromBytes(fnifilebs);
             }
             else
             {
                 //create a default
-                fnifilet = new uru.moulprp.textfile();
+                fnifilet = new prpobjects.textfile();
                 fnifilet.appendLine("Graphics.Renderer.SetYon 100000");
                 //fnifilet.appendLine("Graphics.Renderer.Fog.SetDefLinear 1 1000 1");
                 fnifilet.appendLine("Graphics.Renderer.Fog.SetDefLinear 0 0 0");

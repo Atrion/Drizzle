@@ -9,7 +9,7 @@ import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreePath;
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.Vector;
 import shared.m;
 

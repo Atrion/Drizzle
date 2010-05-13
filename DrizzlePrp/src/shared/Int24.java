@@ -5,7 +5,7 @@
 
 package shared;
 
-import uru.moulprp.uruobj;
+import prpobjects.uruobj;
 
 public class Int24 extends uruobj implements ICompilable
 {

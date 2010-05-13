@@ -5,7 +5,7 @@
 
 package auto.inplace;
 
-import uru.moulprp.*;
+import prpobjects.*;
 
 public class Inplace_Misc
 {
@@ -79,12 +79,12 @@ public class Inplace_Misc
     {
         PrpRootObject ro1 = prp.findObject("cSfxRespFeet-MaintOnGlass", Typeid.plResponderModifier);
         PrpRootObject ro2 = prp.findObject("cSfxRespFeet-MainOnStone", Typeid.plResponderModifier);
-        PlResponderModifier rm1 = ro1.castTo();
-        PlResponderModifier rm2 = ro2.castTo();
+        plResponderModifier rm1 = ro1.castTo();
+        plResponderModifier rm2 = ro2.castTo();
         PrpTaggedObject to1 = rm1.messages.get(0).commands.get(0).message;
         PrpTaggedObject to2 = rm2.messages.get(0).commands.get(0).message;
-        uru.moulprp.PrpMessage.PlArmatureEffectStateMsg aesm1 = to1.castTo();
-        uru.moulprp.PrpMessage.PlArmatureEffectStateMsg aesm2 = to2.castTo();
+        prpobjects.PrpMessage.PlArmatureEffectStateMsg aesm1 = to1.castTo();
+        prpobjects.PrpMessage.PlArmatureEffectStateMsg aesm2 = to2.castTo();
         aesm1.surface = 4; //choose a different sound (was 16)
         aesm2.surface = 11; //choose a different sound (was 17)
 

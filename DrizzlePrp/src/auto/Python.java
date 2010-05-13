@@ -14,7 +14,7 @@ public class Python
     public static void UnpackPak(String infile, String outfolder, String gamename)
     {
             m.status("Unpacking pak file...");
-            uru.moulprp.pakfile pak = uru.moulprp.pakfile.create(infile, auto.AllGames.get(gamename));
+            prpobjects.pakfile pak = prpobjects.pakfile.create(infile, auto.AllGames.get(gamename));
             pak.extractPakFile(true, outfolder);
             m.status("Done unpacking!");
     }
@@ -30,7 +30,7 @@ public class Python
     public static void DecompilePak(String infile, String outfolder, String gamename)
     {
         m.status("Decompiling pak file...");
-        uru.moulprp.pakfile pak = uru.moulprp.pakfile.create(infile, auto.AllGames.get(gamename));
+        prpobjects.pakfile pak = prpobjects.pakfile.create(infile, auto.AllGames.get(gamename));
         java.util.List<pythondec.pycfile> pycs = pak.extractPakFile(true);
         for(pythondec.pycfile pyc: pycs)
         {

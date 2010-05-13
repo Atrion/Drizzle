@@ -6,7 +6,7 @@
 package uru;
 
 import shared.reporter;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.Uruobjectdesc;
 
 public abstract class reporterReports
 {

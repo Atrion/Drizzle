@@ -6,7 +6,7 @@
 package deepview2;
 
 import java.lang.reflect.Field;
-import uru.moulprp.*;
+import prpobjects.*;
 
 public class dvObject extends dvNode
 {

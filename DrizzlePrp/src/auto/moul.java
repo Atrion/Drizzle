@@ -9,11 +9,11 @@ import shared.*;
 import java.io.File;
 import java.util.Vector;
 import java.util.HashMap;
-import uru.moulprp.Typeid;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Pageid;
-import uru.moulprp.prpfile;
-import uru.moulprp.*;
+import prpobjects.Typeid;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Pageid;
+import prpobjects.prpfile;
+import prpobjects.*;
 import uru.context;
 import uru.UruCrypt;
 import org.apache.commons.math.linear.RealMatrix;
@@ -210,7 +210,7 @@ public class moul
                 return true;
             }
         };*/
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
+        r.decider = prpobjects.prputils.Compiler.getDefaultDecider();
         r.prpmodifier = new conversion.PostConversionModifier() {
             public void ModifyPrp(Info info, FileInfo file, prpfile prp) {
                 if(!file.agename.equals("Dereno"))
@@ -552,7 +552,7 @@ public class moul
             prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
 
             //change link sound
-            uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
+            prpobjects.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
             sb.flags = 3;
         }
         if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
@@ -572,7 +572,7 @@ public class moul
             m.msg("Levels deep: ",Integer.toString(levels));
 
             //change link sound
-            uru.moulprp.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
+            prpobjects.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
             sb.flags = 3;
         }
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
@@ -580,7 +580,7 @@ public class moul
             //String newname = "Bahro1";
             //String newname = "kg";
             String newname = "Blake";
-            PlAliasModifier alias = PlAliasModifier.createFromName(newname);
+            plAliasModifier alias = plAliasModifier.createFromName(newname);
             Uruobjectref aliasref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plAliasModifier,"LODAvatar01",prp);
             PrpRootObject aliasroot = PrpRootObject.createFromDescAndObject(aliasref.xdesc, alias);
             //prp.extraobjects.add(aliasroot);
@@ -594,7 +594,7 @@ public class moul
             pfm.getListingByIndex(4).xString = Bstr.createFromString("MystMystV");
             
             //change respondermodifier from Myst to MystMystV.
-            PlResponderModifier rm = prp.findObject("cRespLinkOutMyst", Typeid.plResponderModifier).castTo();
+            plResponderModifier rm = prp.findObject("cRespLinkOutMyst", Typeid.plResponderModifier).castTo();
             PrpMessage.PlLinkToAgeMsg ltam = rm.messages.get(0).commands.get(1).message.castTo();
             ltam.ageLinkStruct.xageinfo.ageFilename = Wpstr.create("MystMystV");
             //ltam.ageLinkStruct.xageinfo.ageInstanceName = Wpstr.create("MystMystV");
@@ -629,24 +629,24 @@ public class moul
             prp.markObjectDeleted(Typeid.plHKPhysical, "BahroRockBook");
             
             //set new python files:
-            uru.moulprp.x00A2Pythonfilemod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
             pfm1.pyfile = Urustring.createFromString("ahnyKadishDoorMOUL");
-            uru.moulprp.x00A2Pythonfilemod pfm2 = prp.findObject("cPythHutInside", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm2 = prp.findObject("cPythHutInside", Typeid.plPythonFileMod).castTo();
             pfm2.pyfile = Urustring.createFromString("ahnyKadishHutMOUL");
-            uru.moulprp.x00A2Pythonfilemod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
             pfm3.pyfile = Urustring.createFromString("ahnySaveClothMOUL");
 
             //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
-            uru.moulprp.x00A2Pythonfilemod pfm4 = prp.findObject("cPythPOTSsymbol", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm4 = prp.findObject("cPythPOTSsymbol", Typeid.plPythonFileMod).castTo();
             pfm4.getListingByIndex(10).xBoolean = 0;
         }
         if(agename.equals("Ahnonay") && pagename.equals("Vortex"))
         {
-            uru.moulprp.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
             pfm.pyfile = Urustring.createFromString("ahnyVogondolaRideV2MOUL.py");
             
             //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
-            uru.moulprp.x00A2Pythonfilemod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
             pfm2.getListingByIndex(7).xBoolean = 0;
         }
         if(agename.equals("GreatTreePub") && pagename.equals("Pub"))
@@ -656,7 +656,7 @@ public class moul
             pfm.getListingByIndex(4).xString = Bstr.createFromString("AhnonayMOUL");
             
             //change respondermodifier from AhnonayCathedral to AhnonayMOUL.
-            PlResponderModifier rm = prp.findObject("cRespLinkOutAhnonay", Typeid.plResponderModifier).castTo();
+            plResponderModifier rm = prp.findObject("cRespLinkOutAhnonay", Typeid.plResponderModifier).castTo();
             PrpMessage.PlLinkToAgeMsg ltam = rm.messages.get(0).commands.get(1).message.castTo();
             ltam.ageLinkStruct.xageinfo.ageFilename = Wpstr.create("AhnonayMOUL");
 
@@ -1178,12 +1178,12 @@ public class moul
         {
             if(prp.header.pagename.toString().equals("FemaleDanceMOUL"))
             {
-                PlEmoteAnim ea = prp.findObject("FemaleDance", Typeid.plEmoteAnim).castTo();
+                plEmoteAnim ea = prp.findObject("FemaleDance", Typeid.plEmoteAnim).castTo();
                 ea.parent.parent.name = Urustring.createFromString("FemaleDanceMOUL");
             }
             if(prp.header.pagename.toString().equals("MaleDanceMOUL"))
             {
-                PlEmoteAnim ea = prp.findObject("MaleDance", Typeid.plEmoteAnim).castTo();
+                plEmoteAnim ea = prp.findObject("MaleDance", Typeid.plEmoteAnim).castTo();
                 ea.parent.parent.name = Urustring.createFromString("MaleDanceMOUL");
             }
         }
@@ -1352,12 +1352,12 @@ public class moul
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSceneObject);
         for(PrpRootObject obj: objs)
         {
-            uru.moulprp.plSceneObject so = obj.castTo();
+            prpobjects.plSceneObject so = obj.castTo();
             for(Uruobjectref ref: so.modifiers)
             {
                 if(ref.hasref()&&ref.xdesc.objecttype==Typeid.plOneShotMod)
                 {
-                    uru.moulprp.PlOneShotMod osm = prp.findObjectWithDesc(ref.xdesc).castTo();
+                    prpobjects.plOneShotMod osm = prp.findObjectWithDesc(ref.xdesc).castTo();
                     if(osm.smartseek!=0)
                     {
                         //found it!
@@ -1365,7 +1365,7 @@ public class moul
                         if(coordsref.hasref())
                         {
                             m.msg("Translating smartseek for object... ",obj.header.desc.toString());
-                            uru.moulprp.plCoordinateInterface coords = prp.findObjectWithDesc(coordsref.xdesc).castTo();
+                            prpobjects.plCoordinateInterface coords = prp.findObjectWithDesc(coordsref.xdesc).castTo();
                             Transmatrix m = coords.localToParent;
                             RealMatrix m2 = m.convertToMatrix();
                             //org.apache.commons.math.linear.RealMatrixImpl b;

@@ -378,12 +378,12 @@ public class Dataserver
         {
             if(fus.name.endsWith(".prp"))
             {
-                uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(root+fus.name, true);
+                prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(root+fus.name, true);
                 String age = fus.name.substring(0,fus.name.indexOf("_District_"));
                 age = age.substring(age.lastIndexOf("/")+1);
-                for(uru.moulprp.PrpRootObject ro: prp.FindAllObjectsOfType(uru.moulprp.Typeid.plSoundBuffer))
+                for(prpobjects.PrpRootObject ro: prp.FindAllObjectsOfType(prpobjects.Typeid.plSoundBuffer))
                 {
-                    uru.moulprp.x0029SoundBuffer sb = ro.castTo();
+                    prpobjects.x0029SoundBuffer sb = ro.castTo();
                     String ogg = "sfx/"+sb.oggfile;
                     if(usage.has(ogg)) //we don't want to add any ogg files we don't actually have.
                     {

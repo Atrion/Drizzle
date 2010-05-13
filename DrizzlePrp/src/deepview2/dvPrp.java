@@ -5,7 +5,7 @@
 
 package deepview2;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.Vector;
 import shared.m;
 

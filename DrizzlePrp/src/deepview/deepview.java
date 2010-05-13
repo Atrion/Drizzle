@@ -10,17 +10,17 @@ import shared.FileUtils;
 import shared.reporter.ReportEvent;
 import uru.context;
 import uru.Bytestream;
-import uru.moulprp.PrpHeader;
-import uru.moulprp.PrpObjectIndex;
+import prpobjects.PrpHeader;
+import prpobjects.PrpObjectIndex;
 import java.util.Vector;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.prpprocess;
+import prpobjects.PrpRootObject;
+import prpobjects.prpprocess;
 import shared.m;
-import uru.moulprp.prpfile;
-import uru.moulprp.Typeid;
-import uru.moulprp.uruobj;
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.prpfile;
+import prpobjects.Typeid;
+import prpobjects.uruobj;
+import prpobjects.Uruobjectref;
+import prpobjects.Uruobjectdesc;
 
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
@@ -37,10 +37,10 @@ import java.util.Vector;
 import java.util.Set;
 import java.util.EnumSet;
 import java.io.File;
-import uru.moulprp.prputils;
+import prpobjects.prputils;
 import shared.Bytes;
-import uru.moulprp.Urustring;
-import uru.moulprp.*;
+import prpobjects.Urustring;
+import prpobjects.*;
 import shared.*;
 
 public class deepview
@@ -84,10 +84,10 @@ public class deepview
         c.curFile = filename;
         //allreflinks.acceptNewEntries = true;
         allreflinks.startListening();
-        uru.moulprp.prpprocess.ProcessAllObjects(c.Fork(), false); //parse all to find all Uruobjectdesc links.
+        prpobjects.prpprocess.ProcessAllObjects(c.Fork(), false); //parse all to find all Uruobjectdesc links.
         allreflinks.stopListening();
         //allreflinks.acceptNewEntries = false;
-        prpfile prp = uru.moulprp.prpprocess.ProcessAllObjects(c,true);
+        prpfile prp = prpobjects.prpprocess.ProcessAllObjects(c,true);
         prp.filename = filename;
         prps.add(prp);
         
@@ -326,22 +326,22 @@ public class deepview
             panel.add(new dvUruobjectref((Uruobjectref)obj,name,this,true));
             return;
         }
-        else if(objclass==uru.moulprp.Urustring.class)
+        else if(objclass==prpobjects.Urustring.class)
         {
             panel.add(new dvUrustring((Urustring)obj,name,this,true));
             return;
         }
-        else if(objclass==uru.moulprp.Wpstr.class)
+        else if(objclass==prpobjects.Wpstr.class)
         {
             panel.add(new dvWpstr((Wpstr)obj,name,this));
             return;
         }
-        else if(objclass==uru.moulprp.Bstr.class)
+        else if(objclass==prpobjects.Bstr.class)
         {
             panel.add(new dvBstr((Bstr)obj,name,this));
             return;
         }
-        else if(objclass==uru.moulprp.Transmatrix.class)
+        else if(objclass==prpobjects.Transmatrix.class)
         {
             panel.add(new dvTransmatrix((Transmatrix)obj,name,this));
             return;
@@ -412,7 +412,7 @@ public class deepview
 
             //if inherited, do parent
             Class superclass = objclass.getSuperclass();
-            if(superclass!=Object.class && superclass!=uru.moulprp.uruobj.class) //get ancestor's info
+            if(superclass!=Object.class && superclass!=prpobjects.uruobj.class) //get ancestor's info
             {
                 //we don't actually use inheritance this way.
                 //deepReflectionReport(obj,objclass.getSuperclass(),result, depth+0);

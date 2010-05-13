@@ -24,7 +24,7 @@ import shared.mystobj;
 import shared.Bytes;
 import java.util.ArrayDeque;
 import java.util.Iterator;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.Uruobjectdesc;
 
 /**
  *
@@ -72,7 +72,7 @@ public class Bytedeque2 extends IBytedeque
         deque.addLast(data);
         int oldpos = curpos;
         curpos += data.length;
-        int breakpoint = uru.moulprp._staticsettings.breakpoint;
+        int breakpoint = prpobjects._staticsettings.breakpoint;
         if(breakpoint > oldpos && breakpoint <= curpos)
         {
             int i = 0; //this should be set as a breakpoint.

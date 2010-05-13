@@ -5,7 +5,7 @@
 
 package auto.postmod;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.*;
 import java.util.Vector;
 
@@ -22,7 +22,7 @@ public class PostMod_RemoveDynamicCamMap
                 if(objs.length>0)
                 {
                     if(objs.length>1) m.err("More than one VeryVerySpecialPythonFileMod found, just handling the first.");
-                    uru.moulprp.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
+                    prpobjects.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
                     Urustring oldpyfile = pythfilemod.pyfile;
                     pythfilemod.pyfile = Urustring.createFromString(pythfilemod.pyfile.toString().replace(oldAgename, newAgename));
                     if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Changing Agename in VeryVerySpecialPythonFileMod from ",oldAgename," to ",newAgename);
@@ -38,18 +38,18 @@ public class PostMod_RemoveDynamicCamMap
         for(PrpRootObject obj: objs)
         {
             boolean removeThisSceneobject = false;
-            uru.moulprp.plSceneObject so = obj.castTo();
+            prpobjects.plSceneObject so = obj.castTo();
             for(Uruobjectref ref: so.modifiers)
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
                 {
-                    uru.moulprp.PlLogicModifier lmod = prp.findObjectWithDesc(ref.xdesc).castTo();
+                    prpobjects.plLogicModifier lmod = prp.findObjectWithDesc(ref.xdesc).castTo();
                     if(lmod.parent.message.type==Typeid.plNotifyMsg)
                     {
-                        uru.moulprp.uruobj a = lmod.parent.message.prpobject.object;
-                        if(a instanceof uru.moulprp.PrpMessage.PlNotifyMsg)
+                        prpobjects.uruobj a = lmod.parent.message.prpobject.object;
+                        if(a instanceof prpobjects.PrpMessage.PlNotifyMsg)
                         {
-                            uru.moulprp.PrpMessage.PlNotifyMsg notifymsg = (uru.moulprp.PrpMessage.PlNotifyMsg)a;
+                            prpobjects.PrpMessage.PlNotifyMsg notifymsg = (prpobjects.PrpMessage.PlNotifyMsg)a;
                             for(Uruobjectref notmsgref: notifymsg.parent.refs)
                             {
                                 if(notmsgref.hasref()&&notmsgref.xdesc.objecttype==Typeid.plLadderModifier)
@@ -86,7 +86,7 @@ public class PostMod_RemoveDynamicCamMap
         PrpRootObject[] layers = prputils.FindAllObjectsOfType(prp, Typeid.plLayer);
         for(PrpRootObject layer2: layers)
         {
-            uru.moulprp.x0006Layer layer = layer2.castTo();
+            prpobjects.x0006Layer layer = layer2.castTo();
             m.msg("Making wireframes!");
             layer.flags5 |= 0x1; //wireframe! //misc
         }
@@ -96,7 +96,7 @@ public class PostMod_RemoveDynamicCamMap
         PrpRootObject[] layers = prp.FindAllObjectsOfType(Typeid.plLayer);
         for(PrpRootObject layer2: layers)
         {
-            uru.moulprp.x0006Layer layer = layer2.castTo();
+            prpobjects.x0006Layer layer = layer2.castTo();
             if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plDynamicCamMap)
             {
                 //found it!

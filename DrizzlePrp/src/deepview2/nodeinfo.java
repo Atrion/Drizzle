@@ -18,8 +18,8 @@ public class nodeinfo
     nodeinfo parent;
 
     java.lang.reflect.Field field;
-    uru.moulprp.PrpRootObject rootobject;
-    uru.moulprp.prpfile prp;
+    prpobjects.PrpRootObject rootobject;
+    prpobjects.prpfile prp;
     dvAges root;
 
     public nodeinfo copyinherited()

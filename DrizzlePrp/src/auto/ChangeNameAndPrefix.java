@@ -5,13 +5,13 @@
 
 package auto;
 
-import uru.moulprp.prpfile;
-import uru.moulprp.Pageid;
-import uru.moulprp.Urustring;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.prpfile;
+import prpobjects.Pageid;
+import prpobjects.Urustring;
+import prpobjects.Uruobjectdesc;
 import shared.m;
-import uru.moulprp.Typeid;
-import uru.moulprp.PrpRootObject;
+import prpobjects.Typeid;
+import prpobjects.PrpRootObject;
 
 public class ChangeNameAndPrefix
 {
@@ -104,7 +104,7 @@ public class ChangeNameAndPrefix
             //rename python files
             for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
             {
-                uru.moulprp.x00A2Pythonfilemod pfm = ro.castTo();
+                prpobjects.x00A2Pythonfilemod pfm = ro.castTo();
                 String curpyfile = pfm.pyfile.toString();
                 boolean ignore = false;
                 for(String py: auto.fileLists.partialListOfSharedPythonFiles)
@@ -130,7 +130,7 @@ public class ChangeNameAndPrefix
             //rename sounds
             for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
-                uru.moulprp.x0029SoundBuffer sb = ro.castTo();
+                prpobjects.x0029SoundBuffer sb = ro.castTo();
                 String curoggfile = sb.oggfile.toString();
                 boolean ignore = false;
                 for(String ogg: auto.fileLists.partialListofSharedSoundFiles)

@@ -5,8 +5,8 @@
 
 package auto;
 
-import uru.moulprp.prpfile;
-import uru.moulprp.PrpRootObject;
+import prpobjects.prpfile;
+import prpobjects.PrpRootObject;
 import shared.m;
 import shared.b;
 

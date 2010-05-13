@@ -7,7 +7,7 @@ package auto.mod;
 
 import auto.mod.*;
 import auto.mod.AutoMod.AutoModInfo;
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.Vector;
 import prpdistiller.distiller;
 
@@ -274,7 +274,7 @@ public class AutoMod_Moul_Others
 
         helper.postmod = new DistillHelper.PostMod() {
             public void Proccess(prpfile dest) {
-                uru.moulprp.x0029SoundBuffer sb = dest.findObject("NB01AhyoheekDrone_Loop.ogg", Typeid.plSoundBuffer).castTo();
+                prpobjects.x0029SoundBuffer sb = dest.findObject("NB01AhyoheekDrone_Loop.ogg", Typeid.plSoundBuffer).castTo();
                 sb.flags |= 0x4; //set "Left Channel Only" flag.
             }
         };

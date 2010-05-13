@@ -6,7 +6,7 @@
 package uru.vault;
 
 import shared.*;
-import uru.moulprp.Urustring;
+import prpobjects.Urustring;
 
 public class VaultSDL
 {

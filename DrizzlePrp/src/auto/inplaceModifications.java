@@ -7,8 +7,8 @@ package auto;
 
 import shared.Vertex;
 import shared.Flt;
-import uru.moulprp.*;
-import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.*;
+import prpobjects.x00A2Pythonfilemod.Pythonlisting;
 import shared.FileUtils;
 import uru.context;
 import uru.Bytestream;

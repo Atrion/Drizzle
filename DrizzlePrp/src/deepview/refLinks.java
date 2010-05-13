@@ -7,7 +7,7 @@ package deepview;
 
 import java.util.Vector;
 import shared.reporter.ReportEvent;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.Uruobjectdesc;
 
 public class refLinks
 {

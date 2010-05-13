@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.RowMapper;
-import uru.moulprp.*;
+import prpobjects.*;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.ExpandVetoException;

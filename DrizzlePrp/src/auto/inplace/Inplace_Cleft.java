@@ -5,7 +5,7 @@
 
 package auto.inplace;
 
-import uru.moulprp.*;
+import prpobjects.*;
 
 public class Inplace_Cleft
 {

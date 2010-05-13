@@ -5,8 +5,8 @@
 
 package deepview;
 
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.Uruobjectref;
+import prpobjects.Uruobjectdesc;
 
 public class dvAllObjects extends dvPanel
 {

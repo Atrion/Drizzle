@@ -11,10 +11,10 @@ import uru.UruCrypt;
 import java.util.HashMap;
 import shared.cmap;
 import shared.m;
-import uru.moulprp.textfile;
+import prpobjects.textfile;
 import shared.IBytestream;
-import uru.moulprp.Urustring;
-import uru.moulprp.prpfile;
+import prpobjects.Urustring;
+import prpobjects.prpfile;
 
 public class conversion
 {
@@ -174,8 +174,8 @@ public class conversion
             c.ageName = newAgename;
         }
 
-        uru.moulprp.Typeid[] typesToRead = null; //null means real them all.
-        uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromContext(c, typesToRead);
+        prpobjects.Typeid[] typesToRead = null; //null means real them all.
+        prpobjects.prpfile prp = prpobjects.prpfile.createFromContext(c, typesToRead);
 
         //Change pagename, if applicable.
         String oldpagename = prp.header.pagename.toString();
@@ -275,7 +275,7 @@ public class conversion
     {
         //String agename = common.getAgenameFromFilename(filename);
         //Bytes sum1 = uru.moulprp.sumfile.createSumfile(outfolder+"/dat/", common.replaceAgenameIfApplicable(agename, agenames));
-        byte[] sum1 = uru.moulprp.sumfile.createEmptySumfile().getByteArray();
+        byte[] sum1 = prpobjects.sumfile.createEmptySumfile().getByteArray();
         String outfile = info.outfolder + "/dat/"+info.g.getNewAgename(file)+".sum";
         //FileUtils.WriteFile(outfolder+"/dat/"+common.replaceAgenameIfApplicable(filename, ri.agenames), sum1);
         FileUtils.WriteFile(outfile, sum1,true,true);

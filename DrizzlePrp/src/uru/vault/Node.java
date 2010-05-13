@@ -6,9 +6,9 @@
 package uru.vault;
 
 import shared.*;
-import uru.moulprp.HsBitVector;
-import uru.moulprp.Wpstr;
-import uru.moulprp.Bstr;
+import prpobjects.HsBitVector;
+import prpobjects.Wpstr;
+import prpobjects.Bstr;
 import shared.m;
 
 public class Node //implements NodeTypes.ImageType

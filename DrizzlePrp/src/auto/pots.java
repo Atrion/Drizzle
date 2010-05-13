@@ -7,7 +7,7 @@ package auto;
 
 import java.io.File;
 import shared.*;
-import uru.moulprp.*;
+import prpobjects.*;
 
 public class pots
 {
@@ -136,13 +136,13 @@ public class pots
         //for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename+"_District_", ".prp", false,false))
         {
-            uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(f, true);
+            prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(f, true);
             m.status("Prp file:",f.getName());
             m.status("  Pageid:",prp.header.pageid.toString2());
             
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
-                uru.moulprp.x0029SoundBuffer sound = obj.castTo();
+                prpobjects.x0029SoundBuffer sound = obj.castTo();
                 m.status("  Ogg file:",sound.oggfile.toString()," flags:",Integer.toString(sound.flags)," chans:",Integer.toString(sound.channels));
 
                 //check if ogg file is present:
@@ -154,7 +154,7 @@ public class pots
 
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
             {
-                uru.moulprp.x00A2Pythonfilemod pfm = obj.castTo();
+                prpobjects.x00A2Pythonfilemod pfm = obj.castTo();
                 m.status("  Python file:",pfm.pyfile.toString());
             }
             
@@ -165,8 +165,8 @@ public class pots
         for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false,false))
         {
             m.status("Pak file:",f.getName());
-            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f,auto.AllGames.getPots().g,false);
-            for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
+            prpobjects.pakfile pak = new prpobjects.pakfile(f,auto.AllGames.getPots().g,false);
+            for(prpobjects.pakfile.IndexEntry ind: pak.indices)
             {
                 m.status("  Python file:",ind.objectname.toString());
             }
@@ -208,8 +208,8 @@ public class pots
         {
             m.status("Sum file:",f.getName());
             //uru.moulprp.sumfile sum = new uru.moulprp.sumfile(FileUtils.ReadFile(f), true, 3);
-            uru.moulprp.sumfile sum = uru.moulprp.sumfile.readFromFile(f, 3);
-            for(uru.moulprp.sumfile.sumfileFileinfo info: sum.files)
+            prpobjects.sumfile sum = prpobjects.sumfile.readFromFile(f, 3);
+            for(prpobjects.sumfile.sumfileFileinfo info: sum.files)
             {
                 m.status("  file:",info.filename.toString());
             }

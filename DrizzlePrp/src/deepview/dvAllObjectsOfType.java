@@ -5,9 +5,9 @@
 
 package deepview;
 
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Typeid;
+import prpobjects.Uruobjectref;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Typeid;
 
 public class dvAllObjectsOfType extends dvPanel
 {

@@ -5,15 +5,15 @@
 
 package auto.mod;
 
-import uru.moulprp.prpfile;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Typeid;
-import uru.moulprp.x0006Layer;
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Pageid;
-import uru.moulprp.Pagetype;
-import uru.moulprp.x00A2Pythonfilemod;
-import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.prpfile;
+import prpobjects.PrpRootObject;
+import prpobjects.Typeid;
+import prpobjects.x0006Layer;
+import prpobjects.Uruobjectref;
+import prpobjects.Pageid;
+import prpobjects.Pagetype;
+import prpobjects.x00A2Pythonfilemod;
+import prpobjects.x00A2Pythonfilemod.Pythonlisting;
 
 public class AutoMod_NexusImages
 {

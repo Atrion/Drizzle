@@ -16,9 +16,9 @@ import shared.*;
 import java.util.HashMap;
 import java.io.File;
 
-import uru.moulprp.prpfile;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Typeid;
+import prpobjects.prpfile;
+import prpobjects.PrpRootObject;
+import prpobjects.Typeid;
 
 public class Uam
 {
@@ -163,7 +163,7 @@ public class Uam
         if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
 
         m.status("Clearing all .sum files...");
-        byte[] sumdata = uru.moulprp.sumfile.createEmptySumfile().getByteArray();
+        byte[] sumdata = prpobjects.sumfile.createEmptySumfile().getByteArray();
         for(File sumfile: FileUtils.FindAllFiles(Uam.getPotsFolder()+"/dat/", ".sum", false))
         {
             FileUtils.WriteFile(sumfile, sumdata);
@@ -337,8 +337,8 @@ public class Uam
         for(File f: pakfiles)
         {
             //m.msg(f.getName());
-            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(f.getAbsolutePath(), auto.AllGames.getPots().g, true);
-            for(uru.moulprp.pakfile.IndexEntry ind: pak.indices)
+            prpobjects.pakfile pak = new prpobjects.pakfile(f.getAbsolutePath(), auto.AllGames.getPots().g, true);
+            for(prpobjects.pakfile.IndexEntry ind: pak.indices)
             {
                 String pyname = ind.objectname.toString();
                 Vector<String> paklist = pyfiles.get(pyname);
@@ -388,7 +388,7 @@ public class Uam
         Vector<File> agefiles = shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".age", false);
         for(File f: agefiles)
         {
-            uru.moulprp.textfile agefile = uru.moulprp.textfile.createFromBytes(uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f)));
+            prpobjects.textfile agefile = prpobjects.textfile.createFromBytes(uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f)));
             String seq = agefile.getVariable("SequencePrefix");
             if(seqprefs.containsKey(seq))
             {
@@ -420,12 +420,12 @@ public class Uam
         m.msg("Done checking for missing ogg files.");*/
 
         m.msg("Checking for prps with duplicate page IDs...");
-        java.util.HashMap<uru.moulprp.Pageid,String> pageids = new java.util.HashMap();
+        java.util.HashMap<prpobjects.Pageid,String> pageids = new java.util.HashMap();
         Vector<File> prpfiles = shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".prp", false);
         for(File f: prpfiles)
         {
             IBytestream c = shared.SerialBytestream.createFromFile(f);
-            uru.moulprp.PrpHeader header = new uru.moulprp.PrpHeader(c);
+            prpobjects.PrpHeader header = new prpobjects.PrpHeader(c);
             if(pageids.containsKey(header.pageid))
             {
                 m.msg("  Pageid ",header.pageid.toString2()," used in both ",f.getName()," and ",pageids.get(header.pageid));
@@ -441,8 +441,8 @@ public class Uam
         m.msg("Checking .sum files...");
         for(File f: shared.FileUtils.FindAllFiles(potsfolder+"/dat/", ".sum", false))
         {
-            uru.moulprp.sumfile sf = uru.moulprp.sumfile.readFromFile(f, 3);
-            for(uru.moulprp.sumfile.sumfileFileinfo sfi: sf.files)
+            prpobjects.sumfile sf = prpobjects.sumfile.readFromFile(f, 3);
+            for(prpobjects.sumfile.sumfileFileinfo sfi: sf.files)
             {
                 String filename = potsfolder+"/"+sfi.filename.toString();
                 if(FileUtils.Exists(filename))

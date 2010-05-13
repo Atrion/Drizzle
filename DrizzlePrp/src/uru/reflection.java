@@ -21,7 +21,7 @@ package uru;
 import shared.FileUtils;
 import shared.m;
 import java.lang.reflect.Field;
-import uru.moulprp._staticsettings;
+import prpobjects._staticsettings;
 
 public class reflection
 {

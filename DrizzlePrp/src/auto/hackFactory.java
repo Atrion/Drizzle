@@ -5,29 +5,29 @@
 
 package auto;
 
-import uru.moulprp.prpfile;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.x00A2Pythonfilemod;
-import uru.moulprp.PlSynchedObject;
-import uru.moulprp.PlMultiModifier;
-import uru.moulprp.Urustring;
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Typeid;
-import uru.moulprp.Pageid;
-import uru.moulprp.Pagetype;
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
+import prpobjects.PrpRootObject;
+import prpobjects.x00A2Pythonfilemod;
+import prpobjects.plSynchedObject;
+import prpobjects.plMultiModifier;
+import prpobjects.Urustring;
+import prpobjects.Uruobjectref;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Typeid;
+import prpobjects.Pageid;
+import prpobjects.Pagetype;
+import prpobjects.prpfile;
 import shared.Bytes;
-import uru.moulprp.plSceneObject;
-import uru.moulprp.x0000Scenenode;
-import uru.moulprp.*;
+import prpobjects.plSceneObject;
+import prpobjects.x0000Scenenode;
+import prpobjects.*;
 import java.util.Vector;
 
 public class hackFactory
 {
     public static PrpRootObject createAndAddDynamicTextMap(prpfile prp, String name, int visWidth, int visHeight)
     {
-        PlDynamicTextMap map = PlDynamicTextMap.createBlank(visWidth,visHeight);//1024,1024);
+        plDynamicTextMap map = plDynamicTextMap.createBlank(visWidth,visHeight);//1024,1024);
         Uruobjectref mapref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, name, prp.header.pageid, prp.header.pagetype);
         PrpRootObject maproot = PrpRootObject.createFromDescAndObject(mapref.xdesc, map);
         //prp.extraobjects.add(maproot);

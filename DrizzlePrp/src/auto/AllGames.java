@@ -94,7 +94,7 @@ public class AllGames
         //Vector<String> allfiles;
         conversion.RenameInfo renameinfo = new conversion.RenameInfo();
         Vector<conversion.FileInfo> allfiles = new Vector();
-        uru.moulprp.prputils.Compiler.Decider decider;
+        prpobjects.prputils.Compiler.Decider decider;
         conversion.PostConversionModifier prpmodifier;
         conversion.FniModifier fnimodifier;
         conversion.AgeModifier agemodifier;
@@ -289,7 +289,7 @@ public class AllGames
         public void ExtractPak(String pakfile, String outfolder)
         {
             //byte[] decrypteddata = uru.UruCrypt.DecryptAny(pakfile, this.g);
-            uru.moulprp.pakfile pak = new uru.moulprp.pakfile(pakfile, g, true);
+            prpobjects.pakfile pak = new prpobjects.pakfile(pakfile, g, true);
             pak.extractPakFile(true, outfolder);
         }
         private void inplacemod(String potsfolder)

@@ -31,14 +31,14 @@ import uru.UruCrypt;
 import uru.UruFileTypes;
 import shared.CryptHashes;
 //import uru.Moul;
-import uru.moulprp.prputils;
+import prpobjects.prputils;
 import uru.Bytestream;
 import shared.m;
 import relationvis.CrossRefPanel;
 import shared.b;
-import uru.moulprp._staticsettings;
+import prpobjects._staticsettings;
 import uru.context;
-import uru.moulprp.Typeid;
+import prpobjects.Typeid;
 import shared.Bytes;
 import java.util.Vector;
 import shared.GuiUtils;
@@ -4548,7 +4548,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         //uru.moulprp.prputils.findAllObjectsOfType("D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/", uru.moulprp.Typeid.plBoundInterface);
-        uru.moulprp.prputils.findAllObjectsOfType("D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/", uru.moulprp.Typeid.plClusterGroup);
+        prpobjects.prputils.findAllObjectsOfType("D:/DontBackup/deletable/deletable/Program Files/Ubi Soft/Cyan Worlds/Uru - Ages Beyond Myst/dat/", prpobjects.Typeid.plClusterGroup);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -4716,7 +4716,7 @@ public class Gui extends javax.swing.JFrame {
         float result3 = (float)decoded3;*/
         int data1 = Integer.parseInt(this.jTextField3.getText());
         int data2 = Integer.parseInt(this.jTextField4.getText());
-        uru.moulprp.PrpController.decompressQuaternion(data1,data2);
+        prpobjects.PrpController.decompressQuaternion(data1,data2);
         
     }//GEN-LAST:event_jButton39ActionPerformed
 
@@ -5598,7 +5598,7 @@ private void jButton147ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton147ActionPerformed
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if(!uru.moulprp.Typeid.validateTriplets()) m.err("Triplets not valid!");
+    if(!prpobjects.Typeid.validateTriplets()) m.err("Triplets not valid!");
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void textfieldState37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState37ActionPerformed

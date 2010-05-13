@@ -8,32 +8,32 @@ package auto;
 import shared.FileUtils;
 import shared.Bytes;
 import uru.UruCrypt;
-import uru.moulprp.textfile;
+import prpobjects.textfile;
 import java.util.HashMap;
 import uru.Bytestream;
 import uru.context;
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
 import shared.m;
-import uru.moulprp.Typeid;
-import uru.moulprp.prputils.Compiler.Decider;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Pageid;
+import prpobjects.Typeid;
+import prpobjects.prputils.Compiler.Decider;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Pageid;
 import java.util.Vector;
 import java.io.File;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.prputils;
-import uru.moulprp.Uruobjectref;
+import prpobjects.PrpRootObject;
+import prpobjects.prputils;
+import prpobjects.Uruobjectref;
 import shared.Flt;
-import uru.moulprp.Rgba;
+import prpobjects.Rgba;
 import shared.State.AllStates;
-import uru.moulprp.Urustring;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Transmatrix;
+import prpobjects.Urustring;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Transmatrix;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
-import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
-import uru.moulprp.x00A2Pythonfilemod;
-import uru.moulprp.*;
+import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.x00A2Pythonfilemod;
+import prpobjects.*;
 import shared.Pair;
 import shared.generic;
 import shared.cmap;
@@ -985,7 +985,7 @@ public class mystAutomation
         byte[] filedata = FileUtils.ReadFile(filename);
         context c = context.createFromBytestream(new Bytestream(filedata));
         c.curFile = filename;
-        uru.moulprp.prpprocess.ProcessAllObjects(c, false);
+        prpobjects.prpprocess.ProcessAllObjects(c, false);
     }
     public static void readPotsPrps(String infolder, Vector<String> files)
     {
@@ -999,7 +999,7 @@ public class mystAutomation
             context c = context.createFromBytestream(new Bytestream(filedata));
             //c.readversion = version;
             c.curFile = file;
-            uru.moulprp.prpprocess.ProcessAllObjects(c,false);
+            prpobjects.prpprocess.ProcessAllObjects(c,false);
             //if(version==3) prputils.ProcessPotsPrp(filedata);
         }
     }
@@ -1026,7 +1026,7 @@ public class mystAutomation
                 context c = context.createFromBytestream(new Bytestream(filedata));
                 //c.readversion = version;
                 c.curFile = curfile.getName();
-                uru.moulprp.prpprocess.ProcessAllObjects(c,false);
+                prpobjects.prpprocess.ProcessAllObjects(c,false);
                 //if(version==3) prputils.ProcessPotsPrp(filedata);
                 //if(version==6) prputils.ProcessAll(filedata);
             }

@@ -5,7 +5,7 @@
 
 package auto.postmod;
 
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
 import auto.*;
 
 public class PostMod

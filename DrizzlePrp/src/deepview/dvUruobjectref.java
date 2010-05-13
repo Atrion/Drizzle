@@ -8,14 +8,14 @@ package deepview;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.event.ListSelectionEvent;
-import uru.moulprp.Uruobjectref;
+import prpobjects.Uruobjectref;
 import javax.swing.JButton;
 import shared.m;
 import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.JComboBox;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.prpfile;
+import prpobjects.PrpRootObject;
+import prpobjects.prpfile;
 
 public class dvUruobjectref extends dvPanel
 {

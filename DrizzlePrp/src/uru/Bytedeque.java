@@ -23,7 +23,7 @@ import shared.mystobj;
 import shared.Bytes;
 import java.util.ArrayDeque;
 import java.util.Iterator;
-import uru.moulprp.Uruobjectdesc;
+import prpobjects.Uruobjectdesc;
 import java.util.Vector;
 
 /**
@@ -33,7 +33,7 @@ import java.util.Vector;
 public class Bytedeque extends shared.Bytedeque2
 {
     public Uruobjectdesc curRootObject = null;
-    public uru.moulprp.prpfile prp = null;
+    public prpobjects.prpfile prp = null;
     
     
     //these generic functions are tied to uru.

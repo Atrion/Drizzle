@@ -5,7 +5,7 @@
 
 package auto.inplace;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.*;
 
 public class Inplace_Fanages
@@ -14,8 +14,8 @@ public class Inplace_Fanages
     {
         for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plWaveSet7))
         {
-            uru.moulprp.PlWaveSet7 ws7 = ro.castTo();
-            uru.moulprp.PlWaveSet7.WaveState ws = ws7.sub1.fGeoState;
+            prpobjects.plWaveSet7 ws7 = ro.castTo();
+            prpobjects.plWaveSet7.WaveState ws = ws7.sub1.fGeoState;
             if(ws.fMaxLength.isequalto(0) && ws.fMinLength.isequalto(0) && ws.fAmpOverLen.isequalto(0) && ws.fChop.isequalto(0) && ws.fAngleDev.isequalto(0))
             {
                 m.msg("Setting default waveset in object: ",ro.toString());

@@ -6,9 +6,9 @@
 package auto;
 
 import shared.Flt;
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.m;
-import uru.moulprp.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.x00A2Pythonfilemod.Pythonlisting;
 import java.io.File;
 import java.util.Vector;
 import shared.*;
@@ -17,7 +17,7 @@ import uru.UruCrypt;
 import uru.context;
 import auto.conversion.FileInfo;
 import auto.conversion.Info;
-import uru.moulprp.textfile;
+import prpobjects.textfile;
 
 
 public class mystv //was myst5Fixes
@@ -217,7 +217,7 @@ public class mystv //was myst5Fixes
                 return true;
             }
         };*/
-        r.decider = uru.moulprp.prputils.Compiler.getDefaultDecider();
+        r.decider = prpobjects.prputils.Compiler.getDefaultDecider();
         //These are the oggs from MystV, that aren't already present in Pots or MoulOffline(they might be in the rest of Moul).
         //As it turns out, this is the same as the ones that simply aren't present in Pots.
         /*public static String[] mystvOggsNotInPotsNorMouloffline = {
@@ -356,7 +356,7 @@ public class mystv //was myst5Fixes
         
         for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plLayerBink))
         {
-            PlLayerBink binkobj = obj.castTo();
+            plLayerBink binkobj = obj.castTo();
             if((binkobj.parent.parent.tc.flags&0x2)!=0) //if loop
             {
                 //Set loop length based on bink video length.
@@ -517,7 +517,7 @@ public class mystv //was myst5Fixes
         {
             prp.markObjectDeleted(Typeid.plSceneObject, "PlanetariumDoorBlocker");
             
-            PlRandomSoundMod rsm = prp.findObject("cSfxRndThunder", Typeid.plRandomSoundMod).castTo();
+            plRandomSoundMod rsm = prp.findObject("cSfxRndThunder", Typeid.plRandomSoundMod).castTo();
             rsm.parent.state = 0; //turn it on
             rsm.parent.mode = 3; //must disable the kOneCmd
             //rsm.parent.minDelay = Flt.createFromJavaFloat(4); //just picked a number.
@@ -562,7 +562,7 @@ public class mystv //was myst5Fixes
     {
         m.warn("Untested modifyPythonfilemod.");
         plSceneObject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
-        PlLogicModifier logmod=null;
+        plLogicModifier logmod=null;
         for(Uruobjectref curref: so.modifiers)
         {
             if(curref.hasref() && curref.xdesc.objecttype==Typeid.plLogicModifier)
@@ -587,7 +587,7 @@ public class mystv //was myst5Fixes
     public static void makeClickableUsePythonfilemod(prpfile prp, String sceneobjectname, String... pythonparams)
     {
         plSceneObject so = prp.findObject(sceneobjectname, Typeid.plSceneObject).castTo();
-        PlLogicModifier logmod=null;
+        plLogicModifier logmod=null;
         for(Uruobjectref curref: so.modifiers)
         {
             if(curref.hasref() && curref.xdesc.objecttype==Typeid.plLogicModifier)
@@ -610,7 +610,7 @@ public class mystv //was myst5Fixes
         //logmod.parent.disabled = 0;
         makeLogicModifierUsePythonFileMod(logmod,pfmref);
     }
-    public static void makeLogicModifierUsePythonFileMod(PlLogicModifier logicmod, Uruobjectref pythonfilemod)
+    public static void makeLogicModifierUsePythonFileMod(plLogicModifier logicmod, Uruobjectref pythonfilemod)
     {
         if(logicmod.parent.message.type!=Typeid.plNotifyMsg)
         {
@@ -627,7 +627,7 @@ public class mystv //was myst5Fixes
         {
             if(ref.hasref() && ref.xdesc.objecttype==Typeid.plLogicModifier)
             {
-                PlLogicModifier lm2 = prp.findObjectWithRef(ref).castTo();
+                plLogicModifier lm2 = prp.findObjectWithRef(ref).castTo();
                 lm2.parent.disabled = 0; //set disabled to false.
                 /*for(Uruobjectref condref: lm2.conditionals)
                 {
@@ -953,7 +953,7 @@ public class mystv //was myst5Fixes
         {
             for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plLayer))
             {
-                uru.moulprp.x0006Layer layer = ro.castTo();
+                prpobjects.x0006Layer layer = ro.castTo();
                 if(layer.texture.hasref() && layer.texture.xdesc.objecttype==Typeid.plCubicEnvironMap)
                 {
                     if((layer.flags5&0x400000)!=0) //kMiscCam2Screen flag
@@ -1009,7 +1009,7 @@ public class mystv //was myst5Fixes
     public static void PostMod_InvertEnvironmaps(prpfile prp, String objname)
     {
         PrpRootObject ro = prp.findObject(objname, Typeid.plCubicEnvironMap);
-        uru.moulprp.x0005Environmap em = ro.castTo();
+        prpobjects.x0005Environmap em = ro.castTo();
         em.invert();
     }
     public static void PostMod_AutomateMyst5(prpfile prp, String infolder, String newAgename)

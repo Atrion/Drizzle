@@ -5,20 +5,20 @@
 
 package auto;
 
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
 import shared.m;
-import uru.moulprp.Pageid;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Typeid;
+import prpobjects.Pageid;
+import prpobjects.PrpRootObject;
+import prpobjects.Typeid;
 import java.util.Vector;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Pagetype;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Uruobjectref;
+import prpobjects.Pagetype;
 import shared.Bytes;
 import java.util.IdentityHashMap;
 import shared.IdentityVector;
-import uru.moulprp.x0000Scenenode;
-import uru.moulprp.Urustring;
+import prpobjects.x0000Scenenode;
+import prpobjects.Urustring;
 
 public class fixCraters
 {
@@ -36,7 +36,7 @@ public class fixCraters
         for(PrpRootObject clustergroup: clustergroups)
         {
             //remove visregions.
-            uru.moulprp.PlClusterGroup plcg = clustergroup.castTo();
+            prpobjects.plClusterGroup plcg = clustergroup.castTo();
             plcg.count2 = 0;
             plcg.fRegions = new Uruobjectref[0];
             clustergroup.header.desc.objectname = Urustring.createFromString(clustergroup.header.desc.objectname.toString()+"_"+pagename);

@@ -5,21 +5,21 @@
 
 package auto.mod;
 
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
 import shared.m;
-import uru.moulprp.Urustring;
-import uru.moulprp.Bstr;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Typeid;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Uruobjectref;
+import prpobjects.Urustring;
+import prpobjects.Bstr;
+import prpobjects.PrpRootObject;
+import prpobjects.Typeid;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Uruobjectref;
 import java.util.Vector;
-import uru.moulprp.Pageid;
-import uru.moulprp.Pagetype;
+import prpobjects.Pageid;
+import prpobjects.Pagetype;
 import auto.mod.AutoMod.AutoModInfo;
 import prpdistiller.distiller;
 import shared.Vertex;
-import uru.moulprp.Transmatrix;
+import prpobjects.Transmatrix;
 
 public class AutoMod_Moul_Sparklies
 {
@@ -86,12 +86,12 @@ public class AutoMod_Moul_Sparklies
             for(String sobj: new String[]{"CalendarStarDecal",})
             {
                 try{
-                uru.moulprp.plDrawInterface di = dest.findObject(sobj, Typeid.plDrawInterface).castTo();
-                for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    prpobjects.plDrawInterface di = dest.findObject(sobj, Typeid.plDrawInterface).castTo();
+                for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                 {
                     if(sgr.subsetgroupindex!=-1)
                     {
-                        uru.moulprp.PlDrawableSpans spans = dest.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
+                            prpobjects.plDrawableSpans spans = dest.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
                         //spans.criteria = 0x10000007; //the fog is 20000008
                         spans.criteria = 0x20000003; //0x20000007 was too high.
                     }
@@ -103,7 +103,7 @@ public class AutoMod_Moul_Sparklies
         {
             //CalendarStarDecal has messed up coordinateinterface, as if it should have a parent but doesn't.  Perhaps it is on another page, tied to pillar03, so that it moves up with pillar03.
             //let's translate it by the height pillar03 moves up (48 feet)
-            uru.moulprp.plCoordinateInterface ci = dest.findObject("CalendarStarDecal", Typeid.plCoordinateInterface).castTo();
+            prpobjects.plCoordinateInterface ci = dest.findObject("CalendarStarDecal", Typeid.plCoordinateInterface).castTo();
             ci.translate(0, 0, (-89.4645)-(-137.4645), false);
             ci.localToParent = ci.localToWorld;
             ci.parentToLocal = ci.worldToLocal;
@@ -294,12 +294,12 @@ public class AutoMod_Moul_Sparklies
         for(String sobj: new String[]{"Butte04btm01","Butte06btm",})
         {
             try{
-            uru.moulprp.plDrawInterface di = dest.findObject(sobj, Typeid.plDrawInterface).castTo();
-            for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                prpobjects.plDrawInterface di = dest.findObject(sobj, Typeid.plDrawInterface).castTo();
+            for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
             {
                 if(sgr.subsetgroupindex!=-1)
                 {
-                    uru.moulprp.PlDrawableSpans spans = dest.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
+                        prpobjects.plDrawableSpans spans = dest.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
                     spans.criteria = 0x20000007; //the fog is 20000008
                 }
             }
@@ -318,7 +318,7 @@ public class AutoMod_Moul_Sparklies
 
         //change cleft pole python page:
         try{
-        uru.moulprp.x00A2Pythonfilemod pfm = dest.findObject("cPythBahroPoles", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythBahroPoles", Typeid.plPythonFileMod).castTo();
         pfm.pyfile = Urustring.createFromString("psnlBahroPolesMOUL");
         /*Vector<uru.moulprp.x00A2Pythonfilemod.Pythonlisting> listings = new Vector();
         for(int i=0;i<pfm.listcount;i++)
@@ -349,7 +349,7 @@ public class AutoMod_Moul_Sparklies
 
         //switch calendar yeesha page number from 20 to 26:
         try{
-        uru.moulprp.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20- Calendar_1", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20- Calendar_1", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm.listcount;i++)
         {
             if(i%2==0)
@@ -364,7 +364,7 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
         //switch bench yeesha page number from 15 to 18:
         try{
-        uru.moulprp.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage15 - Bench_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage15 - Bench_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm2.listcount;i++)
         {
             if(i%2==0)
@@ -379,7 +379,7 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
         //switch activation states for cleft pole from "0,2,4" to "1,3"
         try{
-        uru.moulprp.x00A2Pythonfilemod pfm3 = dest.findObject("cPythYeeshaPage25 - CleftPole_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm3 = dest.findObject("cPythYeeshaPage25 - CleftPole_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm3.listcount;i++)
         {
             if(i%2==1)
@@ -394,8 +394,8 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
 
         //add flag to imager for the Offline-KI to use.
-        uru.moulprp.x00A2Pythonfilemod pfm4 = dest.findObject("cPythYeeshaPage12 - Imager_8", Typeid.plPythonFileMod).castTo();
-        pfm4.addListing(uru.moulprp.x00A2Pythonfilemod.Pythonlisting.createWithInteger(8, 1));
+        prpobjects.x00A2Pythonfilemod pfm4 = dest.findObject("cPythYeeshaPage12 - Imager_8", Typeid.plPythonFileMod).castTo();
+        pfm4.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithInteger(8, 1));
 
         //take away the mass from the CalendarStoneProxyXX
         /*try{
@@ -553,7 +553,7 @@ public class AutoMod_Moul_Sparklies
         //translate the page since the entire sphere was shifted over for moul to accomodate all the sphere's in one age. Also, translate 3.5 units to the right so it is not in the same place as the other.
         double yoff = 3.5; //move the page a little to the right.
         double x = 43.0636-32.8057; double y = 548.7101-665.3181-yoff; double z = 2.5576-0.3330;
-        uru.moulprp.plCoordinateInterface ci = dest.findObject("YeeshaPage24", Typeid.plCoordinateInterface).castTo();
+        prpobjects.plCoordinateInterface ci = dest.findObject("YeeshaPage24", Typeid.plCoordinateInterface).castTo();
         ci.translate(x,y,z, true);
         ci = dest.findObject("YeeshaPage24Decal", Typeid.plCoordinateInterface).castTo();
         ci.translate(x,y,z, true);
@@ -566,12 +566,12 @@ public class AutoMod_Moul_Sparklies
 
         //ci = dest.findObject("RgnYeeshaPageStorm", Typeid.plCoordinateInterface).castTo();
         //ci.translate(x, y, z, true);
-        uru.moulprp.plHKPhysical phys = dest.findObject("RgnYeeshaPageStorm", Typeid.plHKPhysical).castTo();
+        prpobjects.plHKPhysical phys = dest.findObject("RgnYeeshaPageStorm", Typeid.plHKPhysical).castTo();
         phys.convertPXtoHK();
         phys.havok.position = Vertex.zero();
         phys.havok.transformVertices(Transmatrix.createFromVector2(x,y,z));
 
-        uru.moulprp.plHKPhysical phys2 = dest.findObject("YeeshaPage24", Typeid.plHKPhysical).castTo();
+        prpobjects.plHKPhysical phys2 = dest.findObject("YeeshaPage24", Typeid.plHKPhysical).castTo();
         phys2.convertPXtoHK();
         phys2.havok.position = Vertex.zero();
         phys2.havok.transformVertices(Transmatrix.createFromVector2(x,y,z));
@@ -641,7 +641,7 @@ public class AutoMod_Moul_Sparklies
 
         //switch calendar yeesha page number from 20 to 26:
         try{
-        uru.moulprp.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm.listcount;i++)
         {
             if(i%2==1)
@@ -653,7 +653,7 @@ public class AutoMod_Moul_Sparklies
                 pfm.listings.get(i).xInteger = 26; //switch calendar page from 20 to 26.
             }
         }
-        uru.moulprp.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage20_1", Typeid.plPythonFileMod).castTo();
+            prpobjects.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage20_1", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm2.listcount;i++)
         {
             if(i%2==1)
@@ -724,7 +724,7 @@ public class AutoMod_Moul_Sparklies
         //set this page to only be visible when the relto book isn't.
         for(String sobj: new String[]{"RgnYeeshaPage01","YeeshaPage01","YeeshaPage01Decal",})
         {
-            uru.moulprp.plSceneObject so = dest.findObject(sobj,Typeid.plSceneObject).castTo();
+            prpobjects.plSceneObject so = dest.findObject(sobj,Typeid.plSceneObject).castTo();
             //AddXAgeSDLBoolShowHideToObject(dest, so, "clftYeeshaBookVis", true);
             //AddXAgeSDLBoolShowHideToObject(dest, so, "clftZandiVis", true);
             AutoMod_Shared.AddXDustChronicleShowHideToObject(dest, so, "CleftSolved","yes", false);

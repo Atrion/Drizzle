@@ -18,7 +18,7 @@
 
 package shared;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.Flt;
 import uru.Bytestream;
 import uru.Bytedeque;

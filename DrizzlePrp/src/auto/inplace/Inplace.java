@@ -5,11 +5,11 @@
 
 package auto.inplace;
 
-import uru.moulprp.Typeid;
-import uru.moulprp.prpfile;
+import prpobjects.Typeid;
+import prpobjects.prpfile;
 import java.util.Vector;
 import java.util.HashMap;
-import uru.moulprp.*;
+import prpobjects.*;
 import shared.m;
 import shared.b;
 
@@ -82,7 +82,7 @@ public class Inplace
                 PrpRootObject[] relregs = prp.FindAllObjectsOfType(Typeid.plRelevanceRegion);
                 for(PrpRootObject relreg: relregs)
                 {
-                    uru.moulprp.PlRelevanceRegion rr = relreg.castTo();
+                    prpobjects.plRelevanceRegion rr = relreg.castTo();
                     Uruobjectref r1 = rr.ref;
                     Uruobjectref r2 = rr.parent.ref;
                     prp.markObjectDeleted(relreg.getref(),false);
@@ -199,7 +199,7 @@ public class Inplace
         InplaceFile sumfile = potsfolder.File("/dat/"+info.age+".sum");
         if(sumfile.exists())
         {
-            byte[] sumdata = uru.moulprp.sumfile.createEmptySumfile().getByteArray();
+            byte[] sumdata = prpobjects.sumfile.createEmptySumfile().getByteArray();
             sumfile.SaveFile(sumdata);
         }
     }

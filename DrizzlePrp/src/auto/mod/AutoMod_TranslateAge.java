@@ -5,21 +5,21 @@
 
 package auto.mod;
 
-//import uru.moulprp.prpfile;
-//import uru.moulprp.Transmatrix;
+//import prpobjects.*;
+//import prpobjects.*;
 import shared.Vertex;
-//import uru.moulprp.PrpRootObject;
-//import uru.moulprp.Typeid;
-//import uru.moulprp.PlCameraBrain1_Circle;
-//import uru.moulprp.PlRailCameraMod;
+//import prpobjects.*;
+//import prpobjects.*;
+//import prpobjects.*;
+//import prpobjects.*;
 import java.util.Vector;
-//import uru.moulprp.PrpController;
+//import prpobjects.*;
 import shared.m;
-//import uru.moulprp.x0001Sceneobject;
-//import uru.moulprp.Uruobjectref;
-//import uru.moulprp.PlAGMasterMod;
-//import uru.moulprp.PlATCAnim;
-import uru.moulprp.*;
+//import prpobjects.*;
+//import prpobjects.*;
+//import prpobjects.*;
+//import prpobjects.*;
+import prpobjects.*;
 import shared.Flt;
 
 public class AutoMod_TranslateAge
@@ -125,16 +125,16 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: cams3)
         {
             obj.hasChanged = true;
-            PlCameraBrain1_Circle o = obj.castTo();
+            plCameraBrain1_Circle o = obj.castTo();
             o.centre.addModify(translationvertex);
         }
         for(PrpRootObject obj: cams7)
         {
-            PlRailCameraMod o = obj.castTo();
+            plRailCameraMod o = obj.castTo();
             if(o.u1a.type==Typeid.plAnimPath)
             {
                 obj.hasChanged = true;
-                PlRailCameraMod.plAnimPath ap = o.u1a.castTo();
+                plRailCameraMod.plAnimPath ap = o.u1a.castTo();
 
                 ap.u3.u1.addModify(translationvertex);
 
@@ -296,14 +296,14 @@ public class AutoMod_TranslateAge
             {
                 if(ref.hasref() && ref.xdesc.objecttype==Typeid.plAGMasterMod)
                 {
-                    PlAGMasterMod mm = prp.findObjectWithRef(ref).castTo();
+                    plAGMasterMod mm = prp.findObjectWithRef(ref).castTo();
                     for(Uruobjectref ref2: mm.ATCAnim)
                     {
                         if(ref2.hasref() && ref2.xdesc.objecttype==Typeid.plATCAnim)
                         {
                             //found an ATCAnim, translate it.
                             PrpRootObject animroot = prp.findObjectWithRef(ref2);
-                            PlATCAnim anim = animroot.castTo();
+                            plATCAnim anim = animroot.castTo();
                             boolean hasparent = plCoordinateInterface.findCIParent(obj.getref(), coordinateinterfaces) != null;
 
                             for(int i=0;i<anim.parent.effectcount;i++)
@@ -315,8 +315,8 @@ public class AutoMod_TranslateAge
                                 {
                                     if(!hasparent)
                                     {
-                                        Vector<PlAGAnim.plMatrixControllerChannel> mccs = shared.FindAllDescendants.FindAllDescendantsByClass(PlAGAnim.plMatrixControllerChannel.class, anim);
-                                        for(PlAGAnim.plMatrixControllerChannel mcc: mccs)
+                                        Vector<plAGAnim.plMatrixControllerChannel> mccs = shared.FindAllDescendants.FindAllDescendantsByClass(plAGAnim.plMatrixControllerChannel.class, anim);
+                                        for(plAGAnim.plMatrixControllerChannel mcc: mccs)
                                         {
                                             m.msg("Changing ATCAnim plMatrixControllerChannel's uk("+animroot.toString()+") from:"+mcc.u3.u1.toString());
                                             //change the uk
@@ -424,7 +424,7 @@ public class AutoMod_TranslateAge
         {
             //m.warn("soft volume simples not tested, because of no examples");
             obj.hasChanged = true;
-            PlSoftVolumeSimple sv = obj.castTo();
+            plSoftVolumeSimple sv = obj.castTo();
             m.warn("I changed this, but it should still work, but watch out ;)");
             if(sv.prpvolumeisect.prpobject.object instanceof plConvexIsect)
             {
@@ -442,9 +442,9 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: occluders)
         {
             obj.hasChanged = true;
-            PlOccluder occ = obj.castTo();
+            plOccluder occ = obj.castTo();
             occ.fWorldBounds.transform(translation);
-            for(PlOccluder.plCullPoly cullpoly: occ.blocks)
+            for(plOccluder.plCullPoly cullpoly: occ.blocks)
             {
                 cullpoly.fCenter = cullpoly.fCenter.add(translationvertex);
                 for(Vertex v: cullpoly.vertices)
@@ -459,7 +459,7 @@ public class AutoMod_TranslateAge
         {
             m.warn("Uncertain if dynamicenvmaps are translated right; need example.");
             obj.hasChanged = true;
-            PlDynamicEnvMap dem = obj.castTo();
+            plDynamicEnvMap dem = obj.castTo();
             for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, dem))
             {
                 if(flt.approxequals(8.3f, 1))
@@ -474,7 +474,7 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: drawablespans)
         {
             obj.hasChanged = true; //make sure to write new version.
-            PlDrawableSpans drawspan = obj.castTo();
+            plDrawableSpans drawspan = obj.castTo();
 
             for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, drawspan))
             {
@@ -493,12 +493,12 @@ public class AutoMod_TranslateAge
             for(int i=0;i<drawspan.icicles.length;i++)
             {
                 //drawspan.subsets[i].localBounds.transform(translation);
-                PlDrawableSpans.PlIcicle ss = drawspan.icicles[i];
+                plDrawableSpans.PlIcicle ss = drawspan.icicles[i];
                 drawspan.icicles[i].parent.parent.worldBounds.transform(translation);
             }
             if(drawspan.xspacetree!=null) //fixes e.g. treetrunks
             {
-                for(PlDrawableSpans.PlSpaceTree.Nodes node: drawspan.xspacetree.nodes2)
+                for(plDrawableSpans.PlSpaceTree.Nodes node: drawspan.xspacetree.nodes2)
                 {
                     node.boundingbox.transform(translation);
                 }
@@ -654,7 +654,7 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: wavesets)
         {
             obj.hasChanged = true;
-            PlWaveSet7 waveset = obj.castTo();
+            plWaveSet7 waveset = obj.castTo();
 
             //only u7 needs to be changed.  u8 and u13 would seem to be relevant, but I didn't need them.
             waveset.sub1.u7 = waveset.sub1.u7.add(z);
@@ -670,7 +670,7 @@ public class AutoMod_TranslateAge
         {
             obj.hasChanged = true;
 
-            PlViewFaceModifier vfm = obj.castTo();
+            plViewFaceModifier vfm = obj.castTo();
             vfm.LocalToParent = translation.mult(vfm.LocalToParent);
             vfm.ParentToLocal = vfm.ParentToLocal.mult(invtranslation);
 
@@ -683,7 +683,7 @@ public class AutoMod_TranslateAge
         for(PrpRootObject obj: clustergroups)
         {
             obj.hasChanged = true;
-            PlClusterGroup cg = obj.castTo();
+            plClusterGroup cg = obj.castTo();
 
             //translate vertices
             /*for(PlClusterGroup.FData fdata: cg.fData2)
@@ -692,9 +692,9 @@ public class AutoMod_TranslateAge
             }*/
 
             //move fL2W
-            for(PlClusterGroup.plCluster cluster: cg.subclustergroups)
+            for(plClusterGroup.plCluster cluster: cg.subclustergroups)
             {
-                for(PlClusterGroup.plCluster.plSpanInstance inst: cluster.fInstances)
+                for(plClusterGroup.plCluster.plSpanInstance inst: cluster.fInstances)
                 {
                     double[][] data = Flt.convertFltArrayToDoubleArray(inst.fL2W);
                     Transmatrix mat = Transmatrix.createFrom3x4Array(data);

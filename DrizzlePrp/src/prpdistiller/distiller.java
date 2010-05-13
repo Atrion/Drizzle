@@ -7,7 +7,7 @@ package prpdistiller;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import uru.moulprp.*;
+import prpobjects.*;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.ArrayDeque;
@@ -19,7 +19,7 @@ public class distiller
 {
     //Moves part of a drawablespan to another drawablespan and changes the refs.
     //Not finished...
-    public static void distillDrawableSpans(prpfile prp, Vector<uru.moulprp.plDrawInterface> drawInterfacesToDistill, String targetDrawableSpansName)
+    public static void distillDrawableSpans(prpfile prp, Vector<prpobjects.plDrawInterface> drawInterfacesToDistill, String targetDrawableSpansName)
     {
         if(true) throw new shared.uncaughtexception("not finished.");
         //find or create the destination drawablespans.
@@ -34,7 +34,7 @@ public class distiller
             throw new shared.uncaughtexception("Unhandled case.");
         }
         PlDrawableSpans dest = destobj.castTo();*/
-        PlDrawableSpans.modPlDrawableSpans dest = new PlDrawableSpans.modPlDrawableSpans();
+        plDrawableSpans.modPlDrawableSpans dest = new plDrawableSpans.modPlDrawableSpans();
 
         //collect items for distillation:
         for(plDrawInterface di: drawInterfacesToDistill)
@@ -43,7 +43,7 @@ public class distiller
             {
                 if(sgr.subsetgroupindex!=-1)
                 {
-                    uru.moulprp.PlDrawableSpans spans = prp.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
+                    prpobjects.plDrawableSpans spans = prp.findObject(sgr.span.xdesc.objectname.toString(), sgr.span.xdesc.objecttype).castTo();
                     dest.addFromSubsetgroupindex(spans, sgr.subsetgroupindex);
                 }
             }
@@ -307,10 +307,10 @@ public class distiller
         else
         {
             m.msg("Trimming PlDrawableSpans.");
-            HashSet<uru.moulprp.PlDrawableSpans.PlGBufferGroup> usedgroups = new HashSet();
-            HashSet<uru.moulprp.PlDrawableSpans.PlIcicle> usedicicles = new HashSet();
+            HashSet<prpobjects.plDrawableSpans.PlGBufferGroup> usedgroups = new HashSet();
+            HashSet<prpobjects.plDrawableSpans.PlIcicle> usedicicles = new HashSet();
             HashSet<Uruobjectref> usedmaterials = new HashSet();
-            HashSet<uru.moulprp.PlDrawableSpans.PlDISpanIndex> usedspanindexs = new HashSet();
+            HashSet<prpobjects.plDrawableSpans.PlDISpanIndex> usedspanindexs = new HashSet();
 
             /*HashMap<Integer, Integer> groupsRenumbering = new HashMap();
             HashMap<Integer, Integer> groupsRenumberingRev = new HashMap();
@@ -324,19 +324,19 @@ public class distiller
             //find the used parts of the DrawableSpan:
             for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
             {
-                uru.moulprp.plDrawInterface di = diro.castTo();
-                for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                prpobjects.plDrawInterface di = diro.castTo();
+                for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                 {
                     if(sgr.subsetgroupindex!=-1)
                     {
-                        uru.moulprp.PlDrawableSpans spans = prpdistiller.distiller.findObject(sourceprpfiles, sgr.span.xdesc).castTo();
-                        uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
+                        prpobjects.plDrawableSpans spans = prpdistiller.distiller.findObject(sourceprpfiles, sgr.span.xdesc).castTo();
+                        prpobjects.plDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
                         usedspanindexs.add(spanindex);
                         for(int subsetind: spanindex.indices)
                         {
-                            uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
+                            prpobjects.plDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
                             Uruobjectref matrefb = spans.materials.get(icicle.parent.parent.materialindex);
-                            uru.moulprp.PlDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
+                            prpobjects.plDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
                             usedmaterials.add(matrefb);
                             usedicicles.add(icicle);
                             usedgroups.add(bg);
@@ -348,7 +348,7 @@ public class distiller
             boolean printflags = false;
             if(printflags)
             {
-                for(uru.moulprp.PlDrawableSpans.PlIcicle icicle: usedicicles)
+                for(prpobjects.plDrawableSpans.PlIcicle icicle: usedicicles)
                 {
                     m.msg("Props: 0x"+Integer.toHexString(icicle.parent.parent.props));
                     for(Uruobjectref ref: icicle.parent.parent.permaProjs)
@@ -361,7 +361,7 @@ public class distiller
             //null entries and make array remappings.
             for(PrpRootObject spanobj: dest.FindAllObjectsOfType(Typeid.plDrawableSpans))
             {
-                uru.moulprp.PlDrawableSpans spans = spanobj.castTo();
+                prpobjects.plDrawableSpans spans = spanobj.castTo();
 
                 HashMap<Integer, Integer> groupsRenumbering = new HashMap();
                 HashMap<Integer, Integer> groupsRenumberingRev = new HashMap();
@@ -420,10 +420,10 @@ public class distiller
                         cur++;
                     }
                 }
-                uru.moulprp.PlDrawableSpans.PlIcicle[] newicicles = new uru.moulprp.PlDrawableSpans.PlIcicle[cur];
+                prpobjects.plDrawableSpans.PlIcicle[] newicicles = new prpobjects.plDrawableSpans.PlIcicle[cur];
                 for(int i=0;i<cur;i++)
                 {
-                    uru.moulprp.PlDrawableSpans.PlIcicle ici = spans.icicles[iciclesRenumbering.get(i)];
+                    prpobjects.plDrawableSpans.PlIcicle ici = spans.icicles[iciclesRenumbering.get(i)];
                     newicicles[i] = ici;
                 }
                 spans.icicles = newicicles;
@@ -445,10 +445,10 @@ public class distiller
                         cur++;
                     }
                 }
-                uru.moulprp.PlDrawableSpans.PlGBufferGroup[] newgroups = new uru.moulprp.PlDrawableSpans.PlGBufferGroup[cur];
+                prpobjects.plDrawableSpans.PlGBufferGroup[] newgroups = new prpobjects.plDrawableSpans.PlGBufferGroup[cur];
                 for(int i=0;i<cur;i++)
                 {
-                    uru.moulprp.PlDrawableSpans.PlGBufferGroup group = spans.groups[groupsRenumbering.get(i)];
+                    prpobjects.plDrawableSpans.PlGBufferGroup group = spans.groups[groupsRenumbering.get(i)];
                     newgroups[i] = group;
                 }
                 spans.groups = newgroups;
@@ -469,10 +469,10 @@ public class distiller
                         cur++;
                     }
                 }
-                uru.moulprp.PlDrawableSpans.PlDISpanIndex[] newspanindexs = new uru.moulprp.PlDrawableSpans.PlDISpanIndex[cur];
+                prpobjects.plDrawableSpans.PlDISpanIndex[] newspanindexs = new prpobjects.plDrawableSpans.PlDISpanIndex[cur];
                 for(int i=0;i<cur;i++)
                 {
-                    uru.moulprp.PlDrawableSpans.PlDISpanIndex item = spans.DIIndices[spanindexRenumbering.get(i)];
+                    prpobjects.plDrawableSpans.PlDISpanIndex item = spans.DIIndices[spanindexRenumbering.get(i)];
                     newspanindexs[i] = item;
                 }
                 spans.DIIndices = newspanindexs;
@@ -500,10 +500,10 @@ public class distiller
                 //no count item here.
 
                 //trim spans (not actually compiled, but used during compilation, so we should do them too.
-                Vector<uru.moulprp.PlDrawableSpans.PlIcicle> newspans = new Vector();
+                Vector<prpobjects.plDrawableSpans.PlIcicle> newspans = new Vector();
                 for(int i=0;i<spans.icicleCount;i++)
                 {
-                    uru.moulprp.PlDrawableSpans.PlIcicle item = spans.spans.get(iciclesRenumbering.get(i));
+                    prpobjects.plDrawableSpans.PlIcicle item = spans.spans.get(iciclesRenumbering.get(i));
                     newspans.add(item);
                 }
                 spans.spans = newspans;
@@ -515,8 +515,8 @@ public class distiller
                     boolean advancedPlSpaceTrim = true;
                     if(advancedPlSpaceTrim)
                     {
-                        PlDrawableSpans.PlSpaceTree st = spans.xspacetree;
-                        PlDrawableSpans.modPlSpaceTree modst = new PlDrawableSpans.modPlSpaceTree();
+                        plDrawableSpans.PlSpaceTree st = spans.xspacetree;
+                        plDrawableSpans.modPlSpaceTree modst = new plDrawableSpans.modPlSpaceTree();
                         modst.treespansource = spans;
                         modst.readFromPlSpaceTree(st);
                         modst.renumber(RevIciclesRenumbering);
@@ -542,8 +542,8 @@ public class distiller
                 //change references to the arrays.
                 for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
                 {
-                    uru.moulprp.plDrawInterface di = diro.castTo();
-                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    prpobjects.plDrawInterface di = diro.castTo();
+                    for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
@@ -551,17 +551,17 @@ public class distiller
                             {
                                 //uru.moulprp.PlDrawableSpans spans = prpdistiller.distiller.findObject(sourceprpfiles, sgr.span.xdesc).castTo();
                                 sgr.subsetgroupindex = spanindexRenumberingRev.get(sgr.subsetgroupindex);
-                                uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
+                                prpobjects.plDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
                                 for(int i=0;i<spanindex.indices.length;i++)
                                 {
                                     spanindex.indices[i] = RevIciclesRenumbering.get(spanindex.indices[i]);
                                     int subsetind = spanindex.indices[i];
 
-                                    uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
+                                    prpobjects.plDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
                                     icicle.parent.parent.materialindex = materialsRenumberingRev.get(icicle.parent.parent.materialindex);
                                     icicle.parent.groupIdx = groupsRenumberingRev.get(icicle.parent.groupIdx);
                                     Uruobjectref matrefb = spans.materials.get(icicle.parent.parent.materialindex);
-                                    uru.moulprp.PlDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
+                                    prpobjects.plDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
                                 }
                             }
                         }
@@ -574,18 +574,18 @@ public class distiller
             {
                 for(PrpRootObject diro: dest.FindAllObjectsOfType(Typeid.plDrawInterface))
                 {
-                    uru.moulprp.plDrawInterface di = diro.castTo();
-                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    prpobjects.plDrawInterface di = diro.castTo();
+                    for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
-                            uru.moulprp.PlDrawableSpans spans = prpdistiller.distiller.findObject(sourceprpfiles, sgr.span.xdesc).castTo();
-                            uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
+                            prpobjects.plDrawableSpans spans = prpdistiller.distiller.findObject(sourceprpfiles, sgr.span.xdesc).castTo();
+                            prpobjects.plDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
                             for(int subsetind: spanindex.indices)
                             {
-                                uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
+                                prpobjects.plDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
                                 Uruobjectref matrefb = spans.materials.get(icicle.parent.parent.materialindex);
-                                uru.moulprp.PlDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
+                                prpobjects.plDrawableSpans.PlGBufferGroup bg = spans.groups[icicle.parent.groupIdx];
                             }
                         }
                     }
@@ -599,7 +599,7 @@ public class distiller
         {
             for(PrpRootObject ro: dest.FindAllObjectsOfType(Typeid.plCoordinateInterface))
             {
-                uru.moulprp.plCoordinateInterface ci = ro.castTo();
+                prpobjects.plCoordinateInterface ci = ro.castTo();
                 Vector<Uruobjectref> newchildren = new Vector();
                 for(Uruobjectref ref: ci.children)
                 {
@@ -709,28 +709,28 @@ public class distiller
                     //do this differently to skip all the other junk it references.
                     //refs are: materials, fogEnvironmentRefs, sceneobject,
                     //PrpRootObject obj = shared.generic.createSerializedClone(obj);
-                    uru.moulprp.PlDrawableSpans spans = obj.castTo();
+                    prpobjects.plDrawableSpans spans = obj.castTo();
 
                     if(spans.scenenode.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, spans.scenenode.xdesc), obj);
                     for(Uruobjectref fog: spans.fogEnvironmentRefs)
                     {
                         if(fog.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, fog.xdesc), obj);
                     }
-                    uru.moulprp.plDrawInterface di = callee.castTo();
+                    prpobjects.plDrawInterface di = callee.castTo();
                     /*for(Uruobjectref matref: di.findAllMaterials(sourceprpfiles))
                     {
                         if(matref.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, matref.xdesc), obj);
                     }*/
-                    for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+                    for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
                     {
                         if(sgr.subsetgroupindex!=-1)
                         {
                             if(sgr.span.hasref() && sgr.span.xdesc.equals(obj.header.desc))
                             {
-                                uru.moulprp.PlDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
+                                prpobjects.plDrawableSpans.PlDISpanIndex spanindex = spans.DIIndices[sgr.subsetgroupindex];
                                 for(int subsetind: spanindex.indices)
                                 {
-                                    uru.moulprp.PlDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
+                                    prpobjects.plDrawableSpans.PlIcicle icicle = spans.icicles[subsetind];
                                     Uruobjectref matref = spans.materials.get(icicle.parent.parent.materialindex);
                                     if(matref.hasref()) findDistillList(sourceprpfiles, everythingNeeded, findObject(sourceprpfiles, matref.xdesc), obj);
 
@@ -977,7 +977,7 @@ public class distiller
                             if(desc.objecttype==Typeid.plSceneObject)
                             {
                                 //add to scenenode.
-                                uru.moulprp.x0000Scenenode sn = dest.FindAllObjectsOfType(Typeid.plSceneNode)[0].castTo();
+                                prpobjects.x0000Scenenode sn = dest.FindAllObjectsOfType(Typeid.plSceneNode)[0].castTo();
                                 sn.addToObjectrefs1(Uruobjectref.createFromUruobjectdesc(desc));
                             }
                             found = true;

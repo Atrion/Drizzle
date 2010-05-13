@@ -5,9 +5,9 @@
 
 package deepview;
 
-import uru.moulprp.Uruobjectref;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Typeid;
+import prpobjects.Uruobjectref;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Typeid;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 

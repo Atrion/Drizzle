@@ -5,7 +5,7 @@
 
 package auto.inplace;
 
-import uru.moulprp.*;
+import prpobjects.*;
 import auto.inplace.Inplace.InplaceModInfo;
 
 public class Inplace_city
@@ -16,14 +16,14 @@ public class Inplace_city
 
         //change texture:
         PrpRootObject layer_ro = prp.findObject("Map #8251",Typeid.plLayer);
-        uru.moulprp.x0006Layer layer = layer_ro.castTo();
+        prpobjects.x0006Layer layer = layer_ro.castTo();
         layer.texture = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelkirel*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
         layer_ro.markAsChanged();
 
         //change pythonfilemod:
         PrpRootObject pfm_ro = prp.findObject("PythLinkBookGUITeledahn", Typeid.plPythonFileMod);
-        uru.moulprp.x00A2Pythonfilemod pfm = pfm_ro.castTo();
-        uru.moulprp.x00A2Pythonfilemod.Pythonlisting listing = pfm.listings.get(3);
+        prpobjects.x00A2Pythonfilemod pfm = pfm_ro.castTo();
+        prpobjects.x00A2Pythonfilemod.Pythonlisting listing = pfm.listings.get(3);
         listing.xString = Bstr.createFromString("KirelMOUL");
         pfm_ro.markAsChanged();
     }
@@ -32,9 +32,9 @@ public class Inplace_city
         //A'moaca and Ashtar's fix for the player not being able to interact with the marker on Alcugs because they link in too close.
         //This would be *much* simpler if we could just translate it down -25.796 in the y direction.  But we can't because it must be compatible with the pre-existing prp change.
         PrpRootObject ci_ro = prp.findObject("GZMarkerDetector21Far", Typeid.plCoordinateInterface);
-        uru.moulprp.plCoordinateInterface ci = ci_ro.castTo();
-        PrpRootObject parent_ro = uru.moulprp.plCoordinateInterface.findParent(prp, ci_ro);
-        uru.moulprp.plCoordinateInterface parent = parent_ro.castTo();
+        prpobjects.plCoordinateInterface ci = ci_ro.castTo();
+        PrpRootObject parent_ro = prpobjects.plCoordinateInterface.findParent(prp, ci_ro);
+        prpobjects.plCoordinateInterface parent = parent_ro.castTo();
         //Transmatrix p2w = parent.localToWorld;
         Transmatrix w2p = parent.worldToLocal;
         // set l2w
@@ -59,8 +59,8 @@ public class Inplace_city
         {
             PrpRootObject oldopen_ro = prp.findObject("MDoorOpenResponder", Typeid.plResponderModifier);
             PrpRootObject oldclose_ro = prp.findObject("MDoorCloseResponder", Typeid.plResponderModifier);
-            uru.moulprp.PlResponderModifier oldopen = oldopen_ro.castTo();
-            uru.moulprp.PlResponderModifier oldclose = oldclose_ro.castTo();
+            prpobjects.plResponderModifier oldopen = oldopen_ro.castTo();
+            prpobjects.plResponderModifier oldclose = oldclose_ro.castTo();
             Uruobjectref newdoor = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plResponderModifier, "MDoorResponder", prp);
 
             //remove old responder modifiers
@@ -68,8 +68,8 @@ public class Inplace_city
             prp.markObjectDeleted(oldclose_ro.getref(), true);
 
             //merge oldclose into oldopen.
-            uru.moulprp.PlResponderModifier.PlResponderState openrs = oldopen.messages.get(0);
-            uru.moulprp.PlResponderModifier.PlResponderState closers = oldclose.messages.get(0);
+            prpobjects.plResponderModifier.PlResponderState openrs = oldopen.messages.get(0);
+            prpobjects.plResponderModifier.PlResponderState closers = oldclose.messages.get(0);
             oldopen.messages.add(closers);
             for(Uruobjectref ref: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectref.class, oldopen.messages))
             {
@@ -84,18 +84,18 @@ public class Inplace_city
             }
             closers.switchToState = 1;
             closers.numCallbacks = 2;
-            uru.moulprp.PrpMessage.PlAnimCmdMsg acm = closers.commands.get(0).message.castTo();
-            uru.moulprp.PrpMessage.PlEventCallbackMsg othercallback = uru.moulprp.PrpMessage.PlEventCallbackMsg.createWithSenderAndReceiver(Uruobjectref.none(), newdoor);
+            prpobjects.PrpMessage.PlAnimCmdMsg acm = closers.commands.get(0).message.castTo();
+            prpobjects.PrpMessage.PlEventCallbackMsg othercallback = prpobjects.PrpMessage.PlEventCallbackMsg.createWithSenderAndReceiver(Uruobjectref.none(), newdoor);
             othercallback.parent.flags = 0x800;
             othercallback.event = 1;
             othercallback.user = 1;
             acm.parent.callbacks.add(PrpTaggedObject.createWithTypeidUruobj(Typeid.plEventCallbackMsg, othercallback));
-            closers.waitToCmdTable.add(uru.moulprp.PlResponderModifier.PlResponderState.WaitToCmd.createWithWaitCmd(1,0));
+            closers.waitToCmdTable.add(prpobjects.plResponderModifier.PlResponderState.WaitToCmd.createWithWaitCmd(1,0));
             closers.commands.get(3).waitOn = 1;
             //reorder commands, but I don't think we actually need to do this.
-            uru.moulprp.PlResponderModifier.PlResponderCmd anim = closers.commands.get(0);
-            uru.moulprp.PlResponderModifier.PlResponderCmd soun = closers.commands.get(1);
-            uru.moulprp.PlResponderModifier.PlResponderCmd excl = closers.commands.get(2);
+            prpobjects.plResponderModifier.PlResponderCmd anim = closers.commands.get(0);
+            prpobjects.plResponderModifier.PlResponderCmd soun = closers.commands.get(1);
+            prpobjects.plResponderModifier.PlResponderCmd excl = closers.commands.get(2);
             closers.commands.set(0, excl);
             closers.commands.set(1, anim);
             closers.commands.set(2, soun);
@@ -103,14 +103,14 @@ public class Inplace_city
 
             //change pythonfilemod
             PrpRootObject pfm_ro = prp.findObject("cPythMuseumDoor", Typeid.plPythonFileMod);
-            uru.moulprp.x00A2Pythonfilemod pfm = pfm_ro.castTo();
+            prpobjects.x00A2Pythonfilemod pfm = pfm_ro.castTo();
             pfm.pyfile = Urustring.createFromString("xNewHighLevelStarTrekDoor");
             pfm.getListingByIndex(4).xRef = newdoor;
             pfm.removeListingByIndex(5);
 
             //change sceneobject
             PrpRootObject so_ro = prp.findObject("MuseumDoorSencor", Typeid.plSceneObject);
-            uru.moulprp.plSceneObject so = so_ro.castTo();
+            prpobjects.plSceneObject so = so_ro.castTo();
             so.modifiers.remove(oldopen_ro.getref());
             so.modifiers.remove(oldclose_ro.getref());
             so.modifiers.add(newdoor);
@@ -132,15 +132,15 @@ public class Inplace_city
             //Vector<PrpRootObject> ro2refs = prp.FindObjectsThatReferenceAnother(ro1.getref().xdesc);
             //Vector<PrpRootObject> ro3refs = prp.FindObjectsThatReferenceAnother(ro3.getref().xdesc);
 
-            uru.moulprp.Pageid newpid = uru.moulprp.Pageid.createFromPrefixPagenum(6, 80); //6=city
+            prpobjects.Pageid newpid = prpobjects.Pageid.createFromPrefixPagenum(6, 80); //6=city
             PrpRootObject ro1_a = prp.findObject("SfxSoRegGallery-Verb02", Typeid.plSceneObject);
             PrpRootObject ro1_b = prp.findObject("cSfxSoRegUnion-Gallery-Verb01", Typeid.plSoftVolumeUnion);
             PrpRootObject ro3_a = prp.findObject("KAdishGAlleryRegionVis", Typeid.plSceneObject);
             PrpRootObject ro3_b = prp.findObject("VisRegionKDSHgallery", Typeid.plVisRegion);
-            uru.moulprp.plSceneObject a1 = ro1_a.castTo();
-            uru.moulprp.PlSoftVolumeUnion b1 = ro1_b.castTo();
-            uru.moulprp.plSceneObject a3 = ro3_a.castTo();
-            uru.moulprp.PlVisRegion b3 = ro3_b.castTo();
+            prpobjects.plSceneObject a1 = ro1_a.castTo();
+            prpobjects.plSoftVolumeUnion b1 = ro1_b.castTo();
+            prpobjects.plSceneObject a3 = ro3_a.castTo();
+            prpobjects.plVisRegion b3 = ro3_b.castTo();
             a1.interfaces.get(0).xdesc.pageid = newpid;
             b1.refs.get(1).xdesc.pageid = newpid;
             a3.interfaces.get(0).xdesc.pageid = newpid;
@@ -155,28 +155,28 @@ public class Inplace_city
         else if(info.relpath.equals("/dat/city_District_palace.prp"))
         {
             PrpRootObject ro1 = prp.findObject("SoftRegionUnionCantSeePalace", Typeid.plSoftVolumeUnion);
-            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            prpobjects.plSoftVolumeUnion un1 = ro1.castTo();
             un1.refs.remove(0);
             ro1.markAsChanged();
         }
         else if(info.relpath.equals("/dat/city_District_library.prp"))
         {
             PrpRootObject ro1 = prp.findObject("SoftRegionUnionKadishAndKahlo", Typeid.plSoftVolumeUnion);
-            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            prpobjects.plSoftVolumeUnion un1 = ro1.castTo();
             un1.refs.remove(0);
             ro1.markAsChanged();
         }
         else if(info.relpath.equals("/dat/city_District_canyon.prp"))
         {
             PrpRootObject ro1 = prp.findObject("SoftRegionUnionKadishAndKahlo", Typeid.plSoftVolumeUnion);
-            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            prpobjects.plSoftVolumeUnion un1 = ro1.castTo();
             un1.refs.remove(0);
             ro1.markAsChanged();
         }
         else if(info.relpath.equals("/dat/city_District_courtyard.prp"))
         {
             PrpRootObject ro1 = prp.findObject("SoftRegionUnionCantSeeCourtyard", Typeid.plSoftVolumeUnion);
-            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            prpobjects.plSoftVolumeUnion un1 = ro1.castTo();
             un1.refs.remove(0);
             ro1.markAsChanged();
         }
@@ -184,7 +184,7 @@ public class Inplace_city
         {
             //the harbor contains the D'ni backdrop for some reason, so we need to do this one too.
             PrpRootObject ro1 = prp.findObject("SoftRegionUnionExcludeHarborDrawables", Typeid.plSoftVolumeUnion);
-            uru.moulprp.PlSoftVolumeUnion un1 = ro1.castTo();
+            prpobjects.plSoftVolumeUnion un1 = ro1.castTo();
             un1.refs.remove(2);
             ro1.markAsChanged();
         }

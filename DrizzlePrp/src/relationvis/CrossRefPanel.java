@@ -77,8 +77,8 @@ public class CrossRefPanel extends javax.swing.JPanel
         boxsize = 6;
 
 
-        uru.moulprp.prpfile prp = uru.moulprp.prpfile.createFromFile(infile, false);
-        Vector<uru.moulprp.Uruobjectdesc> refs = shared.FindAllDescendants.FindAllDescendantsByClass(uru.moulprp.Uruobjectdesc.class, prp);
+        prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(infile, false);
+        Vector<prpobjects.Uruobjectdesc> refs = shared.FindAllDescendants.FindAllDescendantsByClass(prpobjects.Uruobjectdesc.class, prp);
         //read from input file.
         //byte[] filecontents = FileUtils.ReadFile(this.getSelectedFilename());
         //prputils.ReportCrossLinks(filecontents);
@@ -88,7 +88,7 @@ public class CrossRefPanel extends javax.swing.JPanel
         //int startline = 1; //skip the first line.
 
         //register all entities
-        for(uru.moulprp.Uruobjectdesc ref: refs)
+        for(prpobjects.Uruobjectdesc ref: refs)
         {
             this.addEntity(ref.toString());
         }
@@ -112,7 +112,7 @@ public class CrossRefPanel extends javax.swing.JPanel
         }*/
 
         //register all relations.
-        for(uru.moulprp.Uruobjectdesc ref: refs)
+        for(prpobjects.Uruobjectdesc ref: refs)
         {
             if(ref.rootobj!=null)
             {

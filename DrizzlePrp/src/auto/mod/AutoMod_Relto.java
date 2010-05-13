@@ -5,14 +5,14 @@
 
 package auto.mod;
 
-import uru.moulprp.prpfile;
+import prpobjects.prpfile;
 import shared.m;
-import uru.moulprp.Urustring;
-import uru.moulprp.Bstr;
-import uru.moulprp.PrpRootObject;
-import uru.moulprp.Typeid;
-import uru.moulprp.Uruobjectdesc;
-import uru.moulprp.Uruobjectref;
+import prpobjects.Urustring;
+import prpobjects.Bstr;
+import prpobjects.PrpRootObject;
+import prpobjects.Typeid;
+import prpobjects.Uruobjectdesc;
+import prpobjects.Uruobjectref;
 
 public class AutoMod_Relto
 {
@@ -21,12 +21,12 @@ public class AutoMod_Relto
     {
         //PythonFileMod stuff
         PrpRootObject pfm_ro = prp.findObject("cPythYeeshaPage7 - Jumping Pinnacles_0", Typeid.plPythonFileMod);
-        uru.moulprp.x00A2Pythonfilemod pfm2 = uru.moulprp.x00A2Pythonfilemod.createDefault();
+        prpobjects.x00A2Pythonfilemod pfm2 = prpobjects.x00A2Pythonfilemod.createDefault();
         pfm2.pyfile = Urustring.createFromString("psnlYeeshaPageChanges");
         for(int i=0;i<18;i++) //do we really need 18 copies, or just 1?
         {
-            pfm2.addListing(uru.moulprp.x00A2Pythonfilemod.Pythonlisting.createWithInteger(1, 21));
-            pfm2.addListing(uru.moulprp.x00A2Pythonfilemod.Pythonlisting.createWithString(2, Bstr.createFromString("0,2,4")));
+            pfm2.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithInteger(1, 21));
+            pfm2.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithString(2, Bstr.createFromString("0,2,4")));
         }
         //PrpRootObject pfm2_ro = prp.findObject("cPythYeeshaPage21 - PineTrees_0", Typeid.plPythonFileMod);
         PrpRootObject pfm2_ro = PrpRootObject.createFromDescAndObject(Uruobjectdesc.createDefaultWithTypeNamePrp(Typeid.plPythonFileMod, "cPythYeeshaPage21 - PineTrees_0", prp), pfm2);
@@ -36,7 +36,7 @@ public class AutoMod_Relto
         for(String s: new String[]{"Ponderosa17","Ponderosa18","Ponderosa19","Ponderosa20","Ponderosa21","Ponderosa22","Ponderosa24","Ponderosa25","Ponderosa26","Ponderosa27","Ponderosa28","Ponderosa32","Ponderosa33","Ponderosa34","Ponderosa35","Ponderosa36",/*"Ponderosa39","Ponderosa40",*/"Ponderosa41","Ponderosa42",})
         {
             PrpRootObject so_ro2 = prp.findObject(s, Typeid.plSceneObject);
-            uru.moulprp.plSceneObject so2 =so_ro2.castTo();
+            prpobjects.plSceneObject so2 =so_ro2.castTo();
             so2.clearObjectrefs2(); //this shouldn't be needed, but it may be a good idea incase it has already been modded.
             so2.addToObjectrefs2(pfm2_ro.getref());
             so_ro2.markAsChanged();
@@ -52,7 +52,7 @@ public class AutoMod_Relto
 
         //fix the tree whose collider remains even when the tree is invisible.
         PrpRootObject so_ro = prp.findObject("TreeCollision27", Typeid.plSceneObject);
-        uru.moulprp.plSceneObject so = so_ro.castTo();
+        prpobjects.plSceneObject so = so_ro.castTo();
         so.clearObjectrefs2(); //there shouldn't be anything in this one anyway.
         so.addToObjectrefs2(pfm2_ro.getref());
         so_ro.markAsChanged();
@@ -67,19 +67,19 @@ public class AutoMod_Relto
             if(i<10) book = "0"+book;
 
             PrpRootObject book01 = prp.findObject("ShelfA_book"+book, Typeid.plDrawInterface);
-            uru.moulprp.plDrawInterface di = book01.castTo();
-            for(uru.moulprp.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
+            prpobjects.plDrawInterface di = book01.castTo();
+            for(prpobjects.plDrawInterface.SubsetGroupRef sgr: di.subsetgroups)
             {
                 PrpRootObject dsroot = prp.findObjectWithRef(sgr.span);
                 dsroot.markAsChanged();
-                uru.moulprp.PlDrawableSpans ds = dsroot.castTo();
-                uru.moulprp.PlDrawableSpans.PlDISpanIndex sg = ds.DIIndices[sgr.subsetgroupindex];
+                prpobjects.plDrawableSpans ds = dsroot.castTo();
+                prpobjects.plDrawableSpans.PlDISpanIndex sg = ds.DIIndices[sgr.subsetgroupindex];
                 for(int subsetind: sg.indices)
                 {
-                    uru.moulprp.PlDrawableSpans.PlIcicle ss = ds.icicles[subsetind];
+                    prpobjects.plDrawableSpans.PlIcicle ss = ds.icicles[subsetind];
                     Uruobjectref matrefb = ds.materials.get(ss.parent.parent.materialindex);
-                    uru.moulprp.x0007Material mat = prp.findObjectWithRef(matrefb).castTo();
-                    uru.moulprp.x0006Layer layer = prp.findObjectWithRef(mat.layerrefs.get(0)).castTo();
+                    prpobjects.x0007Material mat = prp.findObjectWithRef(matrefb).castTo();
+                    prpobjects.x0006Layer layer = prp.findObjectWithRef(mat.layerrefs.get(0)).castTo();
                     //matclone.layerrefs.get(0)
 
                     //found it, now add a material and change ss.materialindex to point to it.
@@ -87,8 +87,8 @@ public class AutoMod_Relto
                     int width=512; int height=512;
                     PrpRootObject map = auto.hackFactory.createAndAddDynamicTextMap(prp, "book"+book+"DynTexture", width, height);
                     map.markAsChanged();
-                    uru.moulprp.x0007Material matclone = mat.deepClone();
-                    uru.moulprp.x0006Layer layerclone = layer.deepClone();
+                    prpobjects.x0007Material matclone = mat.deepClone();
+                    prpobjects.x0006Layer layerclone = layer.deepClone();
                     layerclone.texture = map.getref();
                     Uruobjectref layerref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plLayer, "book"+book+"Layer", prp);
                     matclone.layerrefs.get(0).shallowCopyFrom(layerref);
@@ -106,9 +106,9 @@ public class AutoMod_Relto
 
 
                     //resize the uv coords by doubling them. so we only need a quarter of the .jpg file.
-                    uru.moulprp.PlDrawableSpans.PlGBufferGroup bg = ds.groups[ss.parent.groupIdx];
-                    uru.moulprp.PlDrawableSpans.PlGBufferGroup.SubMesh submesh = bg.submeshes[ss.parent.VBufferIdx];
-                    uru.moulprp.PlDrawableSpansEncoders.DecompressedPotsVertices verts = submesh.decompressAllAndSave(bg.fformat);
+                    prpobjects.plDrawableSpans.PlGBufferGroup bg = ds.groups[ss.parent.groupIdx];
+                    prpobjects.plDrawableSpans.PlGBufferGroup.SubMesh submesh = bg.submeshes[ss.parent.VBufferIdx];
+                    prpobjects.DrawableSpansEncoders.DecompressedPotsVertices verts = submesh.decompressAllAndSave(bg.fformat);
                     for(int j=ss.parent.VStartIdx;j<ss.parent.VStartIdx+ss.parent.VLength;j++)
                     {
                         /*for(float[] fs: verts.uvss[j])
