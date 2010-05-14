@@ -60,6 +60,22 @@ public class plResponderModifier extends uruobj
         c.writeByte(enabled);
         c.writeByte(flags);
     }
+
+    public Vector<uruobj> findMessagesOfType(Typeid type)
+    {
+        Vector<uruobj> r = new Vector<uruobj>();
+        for(PlResponderState state: messages)
+        {
+            for(PlResponderCmd cmd: state.commands)
+            {
+                if(cmd.message.type==type)
+                {
+                    r.add(cmd.message.prpobject.object);
+                }
+            }
+        }
+        return r;
+    }
     
     public static class PlResponderState extends uruobj
     {

@@ -648,6 +648,9 @@ public class moul
             //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
             prpobjects.x00A2Pythonfilemod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
             pfm2.getListingByIndex(7).xBoolean = 0;
+
+            //disable subworld
+            PostMod_DisableSubworlds(prp);
         }
         if(agename.equals("GreatTreePub") && pagename.equals("Pub"))
         {
@@ -1188,6 +1191,17 @@ public class moul
             }
         }
     }
+    public static void PostMod_DisableSubworlds(prpfile prp)
+    {
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plHKPhysical))
+        {
+            plHKPhysical phys = ro.castTo();
+            if(phys.physx.subworld.hasref())
+            {
+                phys.physx.subworld = Uruobjectref.none();
+            }
+        }
+    }
     public static void PostMod_FixSubworlds(prpfile prp)
     {
         class Subworlds
@@ -1196,6 +1210,7 @@ public class moul
             {
                 Vector<PrpRootObject> subworldregion = new Vector();
                 Vector<PrpRootObject> subworldphysics = new Vector();
+                Vector<plSubWorldMsg> subworldmsgs = new Vector();
                 Uruobjectref subworld;
             }
             public java.util.LinkedHashMap<Uruobjectref,SubworldInfo> worlds = new java.util.LinkedHashMap();
@@ -1217,6 +1232,10 @@ public class moul
             public void addSubworldPhysics(Uruobjectref subworld, PrpRootObject subworldphysics)
             {
                 get(subworld).subworldphysics.add(subworldphysics);
+            }
+            public void addSubworldMsg(Uruobjectref subworld, plSubWorldMsg subworldmsg)
+            {
+                get(subworld).subworldmsgs.add(subworldmsg);
             }
         }
 
@@ -1242,6 +1261,29 @@ public class moul
             }
         }
 
+        //find subworld msgs
+        m.marktime("start");
+        /*for(plSubWorldMsg ro: prp.FindAllInstances(plSubWorldMsg.class))
+        {
+            if(ro.subworld.hasref())
+            {
+                subworlds.addSubworldMsg(ro.subworld, ro);
+            }
+        }*/
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plResponderModifier))
+        {
+            plResponderModifier resp = ro.castTo();
+            for(uruobj obj: resp.findMessagesOfType(Typeid.plSubWorldMsg))
+            {
+                plSubWorldMsg msg = (plSubWorldMsg)obj;
+                if(msg.subworld.hasref())
+                {
+                    subworlds.addSubworldMsg(msg.subworld,msg);
+                }
+            }
+        }
+        m.marktime("end");
+
         for(Subworlds.SubworldInfo swi: subworlds.worlds.values())
         {
             //fix plHKSubworld
@@ -1266,6 +1308,12 @@ public class moul
             {
                 plSubworldRegionDetector reg = reg_ro.castTo();
                 //reg.sub = sw_ref;
+            }
+
+            //fix subworld msgs
+            for(plSubWorldMsg msg: swi.subworldmsgs)
+            {
+                //msg.subworld = sw_ref; //neither one crashes on link-in.  We need more info.
             }
 
             //find children

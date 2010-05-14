@@ -125,6 +125,11 @@ public class prpfile
         }
         return r;
     }
+    public <T> Vector<T> FindAllInstances(Class<T> klass)
+    {
+        Vector<T> r = shared.FindAllDescendants.FindAllDescendantsByClass(klass, objects2);
+        return r;
+    }
     public PrpRootObject findFirstScenenode()
     {
         for(PrpRootObject obj: objects2)

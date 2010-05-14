@@ -69,16 +69,22 @@ public class FindAllDescendants
         //if array, do each element
         else if(objclass.isArray())
         {
-            int length = java.lang.reflect.Array.getLength(obj);
-            for(int i=0;i<length;i++)
+            //for efficiency, skip primitive arrays.
+            Class arrayclass = objclass.getComponentType();
+            if(!arrayclass.isPrimitive())
             {
-                Object arrayitem = java.lang.reflect.Array.get(obj, i);
-                FindAllDescendantsByClass2(classToFind,arrayitem,null,foundObjs,seenObjects);
+                int length = java.lang.reflect.Array.getLength(obj);
+                for(int i=0;i<length;i++)
+                {
+                    Object arrayitem = java.lang.reflect.Array.get(obj, i);
+                    FindAllDescendantsByClass2(classToFind,arrayitem,null,foundObjs,seenObjects);
+                }
             }
+            return;
         }
         
         
-        //if inherited, do parent
+        //if inherited, do parent (because the parent fields will not be included in objclass.getDeclaredFields().)
         Class superclass = objclass.getSuperclass();
         if(superclass!=Object.class)
         {

@@ -460,13 +460,13 @@ public class AutoMod_TranslateAge
             m.warn("Uncertain if dynamicenvmaps are translated right; need example.");
             obj.hasChanged = true;
             plDynamicEnvMap dem = obj.castTo();
-            for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, dem))
+            /*for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, dem))
             {
                 if(flt.approxequals(8.3f, 1))
                 {
                     int dummy=0;
                 }
-            }
+            }*/
             dem.fPos = dem.fPos.add(translationvertex);
         }
 
@@ -476,13 +476,13 @@ public class AutoMod_TranslateAge
             obj.hasChanged = true; //make sure to write new version.
             plDrawableSpans drawspan = obj.castTo();
 
-            for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, drawspan))
+            /*for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, drawspan))
             {
                 if(flt.approxequals(8.3f, 1))
                 {
                     int dummy=0;
                 }
-            }
+            }*/
             //do the bounds
             if(drawspan.icicleCount>0)
             {
@@ -572,13 +572,13 @@ public class AutoMod_TranslateAge
             obj.hasChanged = true;
             plCoordinateInterface ci = obj.castTo();
 
-            for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, ci))
+            /*for(Flt flt: shared.FindAllDescendants.FindAllDescendantsByClass(Flt.class, ci))
             {
                 if(flt.approxequals(8.3f, 1))
                 {
                     int dummy=0;
                 }
-            }
+            }*/
             //find a parent if it exists.
             Uruobjectref parent = ci.findCIParent(coordinateinterfaces);
 

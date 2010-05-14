@@ -31,8 +31,8 @@ import shared.*;
 
 public class plSubWorldMsg extends uruobj
 {
-    PrpMessage.PlMessage parent;
-    Uruobjectref subworld; //could be none.
+    public PrpMessage.PlMessage parent;
+    public Uruobjectref subworld; //could be none.
     
     public plSubWorldMsg(context c) throws readexception
     {
