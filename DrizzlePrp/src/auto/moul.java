@@ -139,8 +139,8 @@ public class moul
             "GlobalAnimations_District_FemaleDance.prp","GlobalAnimations_District_MaleDance.prp", /*arms disappear*/
         });
         r.addAgeFiles("Neighborhood", new String[]{
-            //"Neighborhood_District_nb01BahroPedestalShout.prp", "city_District_islmBahroShoutFerry.prp","city_District_islmBahroShoutLibrary.prp","city_District_islmBahroShoutPalace.prp",
-            "Neighborhood_District_nb01BahroPedestalShout.prp", //shouters
+            //"Neighborhood_District_nb01BahroPedestalShout.prp", //shouters //disabled for Drizzle25
+            "Neighborhood.age","Neighborhood.fni","Neighborhood.sum","Neighborhood_District_BuiltIn.prp","Neighborhood_District_Classroom.prp","Neighborhood_District_CommonRoom.prp","Neighborhood_District_nb01.prp","Neighborhood_District_nb01Ayhoheek5Man1Dead.prp","Neighborhood_District_nb01Ayhoheek5Man1State.prp","Neighborhood_District_nb01BahroPedestalShout.prp","Neighborhood_District_nb01ClockInfoSheetDlg.prp","Neighborhood_District_nb01DniPaper.prp","Neighborhood_District_nb01HNYVis.prp","Neighborhood_District_nb01LinkBookDelin.prp","Neighborhood_District_nb01LinkBookGarrisonVis.prp","Neighborhood_District_nb01LinkBookTeledahnVis.prp","Neighborhood_District_nb01LinkBookTsogal.prp","Neighborhood_District_nb01LiveAdditions.prp","Neighborhood_District_PrivateRm.prp","Neighborhood_District_Textures.prp", //enabled for Drizzle25.
         });
 
 
@@ -175,6 +175,13 @@ public class moul
             "NB01AhyoheekWin01.ogg","nb01AhyoheekWin02.ogg","NB01AyoheekCountdown01.ogg", //hood heek state
             //"NB01AhyoheekDrone_Loop.ogg"" //moul's has different stereo properties.
             "psnlGalleryMusic.ogg", //canen in KadishGallery makes this playable in your Relto.
+            //Drizzle25(for NeighborhoodMOUL):
+            "islmRandomAirNailer01.ogg","islmRandomAirNailer02.ogg",
+            "islmRandomDoubleHammers01.ogg","islmRandomDoubleHammers02.ogg","islmRandomDoubleHammers03.ogg","islmRandomDoubleHammers04.ogg","islmRandomDoubleHammers05.ogg","islmRandomDoubleHammers06.ogg",
+            "islmRandomRock01.ogg","islmRandomRock02.ogg","islmRandomRock03.ogg","islmRandomRock04.ogg","islmRandomRock05.ogg","islmRandomRock06.ogg","islmRandomRock07.ogg","islmRandomRock08.ogg","islmRandomRock09.ogg","islmRandomRock10.ogg","islmRandomRock11.ogg","islmRandomRock12.ogg",
+            "islmRandomSingleHammer01.ogg","islmRandomSingleHammer02.ogg","islmRandomSingleHammer03.ogg","islmRandomSingleHammer04.ogg","islmRandomSingleHammer05.ogg","islmRandomSingleHammer06.ogg",
+
+
 
         });
         r.MusicFiles = new String[]{
@@ -272,8 +279,8 @@ public class moul
         "city_District_KadishGalleryDustAdditions.prp",
         //Drizzle22:
         "city_District_guildhallDustAdditions.prp",
-        "Neighborhood_District_nb01Ayhoheek5Man1Dead.prp",
-        "Neighborhood_District_nb01Ayhoheek5Man1State.prp",
+        //"Neighborhood_District_nb01Ayhoheek5Man1Dead.prp", //removed for Drizzle25
+        //"Neighborhood_District_nb01Ayhoheek5Man1State.prp", //removed for Drizzle25
         //Drizzle21:
         "Teledahn_District_tldnDustAdditions.prp",
         "Personal02_District_philDustAdditions.prp",
@@ -302,12 +309,14 @@ public class moul
         r.prefices.put("GreatTreePub",84);
         //r.prefices.put("GlobalAnimations", 789);
         r.prefices.put("Ahnonay",83);
+        r.prefices.put("Neighborhood",1168); //Drizzle25
 
         //HashMap<String, String> agenames = new HashMap<String, String>();
         r.agenames.put("Kveer", "KveerMOUL");
         r.agenames.put("Neighborhood02", "KirelMOUL");
         r.agenames.put("Personal", "PersonalMOUL");
         r.agenames.put("Ahnonay", "AhnonayMOUL");
+        r.agenames.put("Neighborhood", "NeighborhoodMOUL"); //Drizzle25
 
         //these map from filename to oldpagenum to newpagenum
         //HashMap<String, HashMap<Integer,Integer>> suffices = new HashMap();
@@ -435,7 +444,7 @@ public class moul
         r.pagenums.put( "GlobalAnimations", 370, 398); //kgWalkingJump
         r.pagenums.put( "GlobalAnimations", 376, 399); //kgWave
 
-        r.pagenums.put( "Neighborhood", 12, 60); //nb01BahroPedestalShout
+        //r.pagenums.put( "Neighborhood", 12, 60); //nb01BahroPedestalShout //removed for Drizzle25.
 
         //cmap<String,cmap<String,String>> pagenames = new cmap();
         r.pagenames.put("GlobalAnimations", "FemaleDance", "FemaleDanceMOUL");
@@ -555,7 +564,8 @@ public class moul
             prpobjects.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
             sb.flags = 3;
         }
-        if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
+        //removed for Drizzle25:
+        /*if(agename.equals("Neighborhood") && pagename.equals("nb01BahroPedestalShout"))
         {
             prpfile textprp = prpfile.createFromFile(infolder + "/dat/Neighborhood_District_Textures.prp", true);
             //prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
@@ -574,7 +584,7 @@ public class moul
             //change link sound
             prpobjects.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
             sb.flags = 3;
-        }
+        }*/
         if(agename.equals("CustomAvatars") && pagename.equals("Blake"))//"Bahro1"))
         {
             //String newname = "Bahro1";
@@ -1262,7 +1272,7 @@ public class moul
         }
 
         //find subworld msgs
-        m.marktime("start");
+        //m.marktime("start");
         /*for(plSubWorldMsg ro: prp.FindAllInstances(plSubWorldMsg.class))
         {
             if(ro.subworld.hasref())
@@ -1282,7 +1292,7 @@ public class moul
                 }
             }
         }
-        m.marktime("end");
+        //m.marktime("end");
 
         for(Subworlds.SubworldInfo swi: subworlds.worlds.values())
         {
