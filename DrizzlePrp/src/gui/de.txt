@@ -135,6 +135,9 @@ CommandLine{->}CommandLine
 3dsmax->Pots{->}3dsmax->Pots
 restStop4.bik{->}restStop4.bik
 de{->}de
+tab1{->}tab1
+test{->}test
+MagiQuestOnline{->}MagiQuestOnline
 
 
 Warning: {->}Warnung: 
@@ -393,6 +396,19 @@ Done converting Age!: {->}Fertig mit Konvertieren des Zeitalters!:
 Decompiling pyc file...{->}Dekompiliere pyc Datei...
 List Gamenames{->}Spielenamen auflisten
 
+//Drizzle25
+Magiquest folder:{->}Magiquest Ordner:
+Magiquest music...{->}Magiquest Musik...
+Launch Uru after converting{->}Starte Uru nach der Konvertierung
+Options{->}Einstellungen
+Merge this Jar with Libs{->}Vereinige dieses Jar mit den Libs
+OldLegacy{->}Altes Erbe
+Error while updating Drizzle. It seems Drizzle.jar did not close.{->}Es ist ein Fehler beim Aktualisieren von Drizzle aufgetreten. Es scheint, als ob Drizzle.jar nicht geschlossen wurde.
+Please make sure there are no other copies of Drizzle running, and hit OK to try again.{->}Bitte stelle sicher, dass keine anderen Versionen von Drizzle aktiv sind und drücke auf OK um es erneut zu versuchen.
+Problem updating{->}Es gab ein Problem beim Aktualisieren.
+Restarting to update Drizzle...{->}Starte Drizzle neu zum Aktualisieren...
+Drizzle is about to restart, in order to update itself.  You should use the Drizzle.exe (or less preferably, Drizzle.jar) file in the 'Drizzle' subfolder of Uru to start it.  Please don't get confused and use copies elsewhere, and think they are updated; you can always see which version you're using at the top of Drizzle.  And don't forget to have fun :D{->}Drizzle ist im Begriff neu zu starten um sich zu aktualisieren. Du solltest Drizzle.exe (oder, weniger wünschenswert, Drizzle.jar) im 'Drizzle'-Unterordner von Uru benutzen, um es zu starten. Bitte verwirre dich nicht und benutze andere Kopien woanders und denke, dass sie aktualisiert sind; du kannst immer am Namen erkennen, welche Version du gerade benutzt. Und vergiss nicht, viel Spaß :D
+You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: {->}Du hast eine neuere Version von Drizzle installiert. Vielleicht möchtest du diese benutzen? Sie befindet sich hier: 
 
 
 

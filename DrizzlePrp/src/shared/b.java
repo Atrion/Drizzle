@@ -27,6 +27,125 @@ import java.util.Vector;
  */
 public class b
 {
+    public static String ShortsToString(short[] chars)
+    {
+        StringBuilder r = new StringBuilder();
+        for(short sh: chars)
+        {
+            r.append((char)sh);
+        }
+        return r.toString();
+    }
+    public static Vector<Integer> findBytes_All(byte[] data, byte[] pattern)
+    {
+        Vector<Integer> r = new Vector();
+        int pos = 0;
+        while(true)
+        {
+            int loc = findBytes_Once(data,pattern,pos);
+            if(loc==-1) break;
+            r.add(loc);
+            pos = loc+1;
+        }
+        return r;
+    }
+    public static int findBytes_Once(byte[] data, byte[] pattern)
+    {
+        return findBytes_Once(data, pattern, 0);
+    }
+    private static int findBytes_Once(byte[] data, byte[] pattern, int offset)
+    {
+        //This is the Knuth–Morris–Pratt algorithm
+        int[] table = gettable(pattern);
+        int j = 0;
+        for(int i=offset; i<data.length; i++)
+        {
+            while(j>0 && pattern[j]!=data[i])
+            {
+                j = table[j - 1];
+            }
+            if(pattern[j]==data[i])
+            {
+                j++;
+            }
+            if(j==pattern.length)
+            {
+                return i+1-pattern.length;
+            }
+        }
+        return -1;
+    }
+    private static int[] gettable(byte[] pattern) //helper for byte[] searching.
+    {
+        int[] table = new int[pattern.length];
+        int j = 0;
+        for(int i = 1; i<pattern.length; i++)
+        {
+            while(j>0 && pattern[j]!=pattern[i])
+            {
+                j = table[j - 1];
+            }
+            if(pattern[j]==pattern[i])
+            {
+                j++;
+            }
+            table[i] = j;
+        }
+        return table;
+    }
+
+    public static byte[] StringToUtf16Bytes(String str)
+    {
+        byte[] r = new byte[str.length()*2];
+        for(int i=0;i<str.length();i++)
+        {
+            char c = str.charAt(i);
+            r[i*2+0] = (byte)c;
+            r[i*2+1] = (byte)(c>>>8);
+        }
+        return r;
+    }
+    public static void reverseEndianness(byte[] data)
+    {
+        for(int i=0;i<data.length/2;i++)
+        {
+            byte temp = data[i];
+            data[i] = data[data.length-1-i];
+            data[data.length-1-i] = temp;
+        }
+    }
+    public static String readNullTerminatedUtf16FromBytes(byte[] data, int pos)
+    {
+        StringBuilder r = new StringBuilder();
+        while(true)
+        {
+            short sh = b.BytesToInt16(data, pos);
+            if(sh==0) break;
+            r.append((char)sh);
+            pos += 2;
+        }
+        return r.toString();
+    }
+    public static void writeNullTerminatedBytes(byte[] data, int pos, byte[] val)
+    {
+        for(int i=0;i<val.length;i++)
+        {
+            data[pos+i] = val[i];
+        }
+        data[pos+val.length] = 0;
+    }
+    public static void writeNullTerminatedUtf16FromString(byte[] data, int pos, String val)
+    {
+        for(int i=0;i<val.length();i++)
+        {
+            char ch = val.charAt(i);
+            data[pos] = (byte)(ch);
+            data[pos+1] = (byte)(ch>>>8);
+            pos += 2;
+        }
+        data[pos] = 0;
+        data[pos+1] = 0;
+    }
     public static boolean f(int flags, int mask)
     {
         boolean r = ((flags&mask)!=0);
@@ -229,10 +348,15 @@ public class b
     }*/
     public static void loadInt32IntoBytes(int value, byte[] bytes, int startpos)
     {
-        bytes[startpos+0] = (byte)((value >> 0) & 0xFF);
-        bytes[startpos+1] = (byte)((value >> 8) & 0xFF);
-        bytes[startpos+2] = (byte)((value >> 16) & 0xFF);
-        bytes[startpos+3] = (byte)((value >> 24) & 0xFF);
+        bytes[startpos+0] = (byte)((value >>> 0) & 0xFF);
+        bytes[startpos+1] = (byte)((value >>> 8) & 0xFF);
+        bytes[startpos+2] = (byte)((value >>> 16) & 0xFF);
+        bytes[startpos+3] = (byte)((value >>> 24) & 0xFF);
+    }
+    public static void loadInt16IntoBytes(short value, byte[] bytes, int startpos)
+    {
+        bytes[startpos+0] = (byte)((value >>> 0) & 0xFF);
+        bytes[startpos+1] = (byte)((value >>> 8) & 0xFF);
     }
     public static byte[] Int32ToBytes(int value)
     {
@@ -456,6 +580,17 @@ public class b
             result[i] = (char)ByteToInt16(bytes[i]);
         }
         return new String(result);
+    }
+    public static byte[] Utf16ToBytes(String str)
+    {
+        byte[] result = new byte[str.length()*2];
+        for(int i=0;i<str.length();i++)
+        {
+            char c = str.charAt(i);
+            result[i*2+0] = (byte)(c);
+            result[i*2+1] = (byte)(c>>>8);
+        }
+        return result;
     }
     public static byte[] StringToBytes(String str)
     {

@@ -46,7 +46,13 @@ abstract public class mystobj //implements compilable
     
     public void compile(Bytedeque data)
     {
-        m.err("Mystobj doesn't implement compile. ",this.toString());
+        //m.err("Mystobj doesn't implement compile. ",this.toString());
+        write(data); //fallback to write, if available.
+    }
+
+    public void write(IBytedeque c)
+    {
+        m.throwUncaughtException("Mystobj doesn't implement write: ",this.toString());
     }
     
     /*void compile(Bytedeque data)
@@ -59,12 +65,21 @@ abstract public class mystobj //implements compilable
 
     public <T> T serialClone(Class<T> klass)
     {
-        Bytedeque c = new Bytedeque();
-        this.compile(c);
-        byte[] serialdata = c.getAllBytes();
+        //Bytedeque c = new Bytedeque();
+        //this.compile(c);
+        byte[] serialdata = compileAlone();
         IBytestream c2 = shared.ByteArrayBytestream.createFromByteArray(serialdata);
         T result = c2.readObj(klass);
         return result;
     }
+
+    public byte[] compileAlone()
+    {
+        Bytedeque c = new Bytedeque();
+        this.compile(c);
+        byte[] r = c.getAllBytes();
+        return r;
+    }
+
     
 }

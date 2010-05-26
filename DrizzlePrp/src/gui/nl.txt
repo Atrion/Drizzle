@@ -254,5 +254,18 @@ Done converting Age!: {->}Omzetten wereld klaar!
 Decompiling pyc file...{->}pyc file veranderen...
 List Gamenames{->}Spellijst
 
+//Drizzle25
+Magiquest folder:{->}Magiquest map:
+Magiquest music...{->}Magiquest muziek...
+Launch Uru after converting{->}Start Uru na omzetten
+Options{->}Opties
+Merge this Jar with Libs{->}Voeg Jar samen met Libs
+OldLegacy{->}Oude Bestanden
+Error while updating Drizzle. It seems Drizzle.jar did not close.{->}Fout tijdens aanpassen Drizzle. Waarschijnlijk sloot Drizzle.jar niet af.
+Please make sure there are no other copies of Drizzle running, and hit OK to try again.{->}Kijk of er geen andere versies van Drizzle in werking zijn en druk dan op OK om opnieuw te proberen.
+Problem updating{->}Probleem updating
+Restarting to update Drizzle...{->}Herstart voor aanpassen Drizzle...
+Drizzle is about to restart, in order to update itself.  You should use the Drizzle.exe (or less preferably, Drizzle.jar) file in the 'Drizzle' subfolder of Uru to start it.  Please don't get confused and use copies elsewhere, and think they are updated; you can always see which version you're using at the top of Drizzle.  And don't forget to have fun :D{->}Drizzle gaat herstarten om zich zelf te updaten. Je kunt beter met Drizzle.exe starten dan met Drizzle.jar , te vinden in de submap van Uru. Gebruik liever geen andere versies, waarvan je niet weet of ze zijn aangepast; je kunt altijd zien welke versie je gebruikt boven in het venster van Drizzle. Veel plezier :D 
+You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: {->}Je hebt een nieuwere versie van Drizzle geinstalleerd. Wil je die mischien gebruiken? Deze is te vinden in: 
 
 

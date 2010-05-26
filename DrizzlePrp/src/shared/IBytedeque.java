@@ -7,6 +7,7 @@ package shared;
 
 import java.util.Vector;
 import java.util.Iterator;
+import java.io.OutputStream;
 
 public abstract class IBytedeque
 {
@@ -19,6 +20,10 @@ public abstract class IBytedeque
     abstract public void writeShorts(short[] shorts);
     abstract protected Iterator<byte[]> getIterator();
 
+    public OutputStream getChildStreamIfExists()
+    {
+        return null;
+    }
     public void writeLong(long l)
     {
        int i0 = (int)(l);
@@ -87,6 +92,17 @@ public abstract class IBytedeque
         {
             m.err("Error writing file:",filename+":"+e.getMessage());
         }
+    }
+    public void flush()
+    {
+        //does nothing unless overridden
+    }
+    public void writeIntAsTwoShorts(int n)
+    {
+        short s1 = (short)n;
+        short s2 = (short)(n>>>16);
+        this.writeShort(s2);
+        this.writeShort(s1);
     }
     
 }

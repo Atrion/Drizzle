@@ -36,6 +36,13 @@ public class Dataserver
     boolean writedatafiles = false;
     boolean writemanifestfiles = true;
 
+    enum DataserverType
+    {
+        alcugs,
+        moul,
+    }
+    DataserverType type;
+
     String root;
     String outroot;
     fileusers usage = new fileusers();
@@ -208,6 +215,14 @@ public class Dataserver
     {
         Dataserver ds = new Dataserver(root2,outfolder2);
         ds.writedatafiles = writeDataFiles;
+        ds.type = DataserverType.moul;
+        ds.generate();
+    }
+    public static void CreateFilesMoul(String root2, String outfolder2, boolean writeDataFiles)
+    {
+        Dataserver ds = new Dataserver(root2,outfolder2);
+        ds.writedatafiles = writeDataFiles;
+        ds.type = DataserverType.moul;
         ds.generate();
     }
     
@@ -232,7 +247,7 @@ public class Dataserver
         else
         {
 
-            //ignore these things:
+            //ignore these things(none of these should be present in Moul anyway:
             String[] ignores = {
                 "KIimages/",
                 "log/",
@@ -252,8 +267,8 @@ public class Dataserver
                 }
             }
             
-            //urusetup gets its own file:
-            if(relpath.equals("UruSetup.exe"))
+            //urusetup gets its own file (and UruLauncher is from Moul, so Vista/Win7 don't complain):
+            if(relpath.equals("UruSetup.exe")||relpath.equals("UruLauncher.exe"))
             {
                 usage.add(relpath, "ClientSetupNew.mfs");
                 return;
@@ -270,6 +285,8 @@ public class Dataserver
                 "SDL/",
                 //"sfx/",
                 "Xtras/",
+                "extras/", //moul
+                "uninstall", //moul
             };
             for(String s: always)
             {
@@ -300,6 +317,12 @@ public class Dataserver
                     return;
                 }
                 
+                if(file.endsWith(".loc"))
+                {
+                    usage.add(relpath, "GUI.mfs");
+                    return;
+                }
+
                 if(file.endsWith(".sum"))
                 {
                     return; //ignore
@@ -362,6 +385,236 @@ public class Dataserver
         }
     }
     public void generate()
+    {
+        if(type==DataserverType.alcugs)
+        {
+            generateAlcugs();
+            //generateMoul(); //should be fine for both.
+        }
+        else if(type==DataserverType.moul)
+        {
+            generateMoul();
+        }
+        else
+        {
+            m.throwUncaughtException("unhandled");
+        }
+    }
+    public void generateMoul()
+    {
+        //m.throwUncaughtException("unhandled");
+        
+        //by default, everything should be downloaded.
+        //some Ages may have some of their things moved to other folders
+        //every file gets marked as ignore, ClientSetupNew,client, a particular age, or
+
+        m.status("Starting dataserver file creation...");
+
+        //categorise which mfs files each file goes in.
+        readfileinfo(root, "", "");
+
+        //find ogg flags
+        fileusage[] fuses = usage.map.values().toArray(new fileusage[]{});
+        for(fileusage fus: fuses)
+        {
+            if(fus.name.endsWith(".prp"))
+            {
+                prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(root+fus.name, true);
+                String age = fus.name.substring(0,fus.name.indexOf("_District_"));
+                age = age.substring(age.lastIndexOf("/")+1);
+                for(prpobjects.PrpRootObject ro: prp.FindAllObjectsOfType(prpobjects.Typeid.plSoundBuffer))
+                {
+                    prpobjects.x0029SoundBuffer sb = ro.castTo();
+                    String ogg = "sfx/"+sb.oggfile;
+                    if(usage.has(ogg)) //we don't want to add any ogg files we don't actually have.
+                    {
+                        usage.add(ogg, age+".mfs");
+                        usage.remove(ogg, "client.mfs"); //we've got a home, remove it from the client.mfs
+                    }
+                    //1)If flag 0x4 or 0x8 is used, decompress to two wav files
+                    //2)if flag 0x10 is used, it shouldn't be decompressed at all
+                    //3)if neither flag 0x4 nor 0x8 is used, decompress to one wav file
+                    //if situation 1 and 2 occur, warn
+                    //if situation 1 and 3 occur, do both!
+                    boolean case1 = ((sb.flags&0x4)!=0)||(((sb.flags&0x8)!=0));
+                    boolean case2 = ((sb.flags&0x10)!=0);
+                    boolean case3 = !case1 && !case2;
+                    //if(case1) usage.get(ogg).soundusecases.add(1);
+                    //if(case2) usage.get(ogg).soundusecases.add(2);
+                    //if(case3) usage.get(ogg).soundusecases.add(4);
+                    fileusage ogf = usage.map.get(ogg);
+                    if(ogf==null)
+                    {
+                        m.warn("ogg file not found.");
+                    }
+                    else
+                    {
+                        fileusage fus2 = usage.addButNotFound(ogg);
+                        if(case1) fus2.sounduse |= 1;
+                        if(case2) fus2.sounduse |= 2;
+                        if(case3) fus2.sounduse |= 4;
+                    }
+                }
+            }
+        }
+
+        //move ogg files from client.mfs to GUI.mfs (includes MyMusic, but that should be okay.)
+        for(fileusage fus: usage.getFilesUsedByUser("client.mfs"))
+        {
+            if(fus.name.startsWith("sfx/") && fus.name.endsWith(".ogg"))
+            {
+                //usage.move(fus,"client.mfs","GUI.mfs");
+                fus.users.add("GUI.mfs");
+                fus.users.remove("client.mfs");
+            }
+        }
+
+
+        //add .age files for crowthistle/myst5
+        String[] forced = {
+            "dat/DescentMystV.age","dat/Direbo.age","dat/KveerMystV.age","dat/Laki.age","dat/MystMystV.age","dat/Siralehn.age","dat/Tahgira.age","dat/Todelmer.age",
+            "dat/MarshScene.age","dat/MountainScene.age",
+        };
+        for(String name: forced)
+        {
+            if(usage.has(name)) usage.add(name,"GUI.mfs");
+        }
+
+        //move GlobalMarkers into client.
+
+        //create the mfs files.
+        if(writemanifestfiles)
+        {
+            for(String mfs: usage.getAllUsers())
+            {
+                m.msg("Doing manifest file: ",mfs);
+                String outrelpath;
+                String outfolder;
+                String outmfs;
+                if(mfs.equals("ClientSetupNew.mfs"))
+                {
+                    outrelpath = "install/Expanded/";
+                    outfolder = outroot+"/"+outrelpath;
+                    outmfs = outroot+"/"+outrelpath;
+                }
+                else if(mfs.equals("client.mfs"))
+                {
+                    outrelpath = "game_clients/drcExplorer/";
+                    outfolder = outroot+"/"+outrelpath;
+                    outmfs = outroot+"/"+outrelpath;
+                }
+                else
+                {
+                    outrelpath = "game_data/";
+                    outfolder = outroot+"/"+outrelpath;
+                    outmfs = outroot+"/"+outrelpath+"dat/";
+                }
+                mfsfile mfsf = new mfsfile();
+                Vector<fileusage> fs = usage.getFilesUsedByUser(mfs);
+                /*if(false) //move GlobalMarkers.mfs items into client.mfs since client doesn't try to load them automatically.
+                {
+                    if(mfs.equals("GUI.mfs"))
+                    {
+                        for(fileusage f: usage.getFilesUsedByUser("GlobalMarkers.mfs"))
+                        {
+                            fs.add(f);
+                        }
+                    }
+                    else if(mfs.equals("GlobalMarkers.mfs"))
+                    {
+                        //continue; //don't create GlobalMarkers.mfs
+                    }
+                }*/
+
+                //uru.Bytedeque moulmanifest = new uru.Bytedeque();
+                Manifest moulmanifest = new Manifest();
+
+                for(fileusage f: fs)
+                {
+                    f.readinfo();
+                    String entry = f.toString();
+                    if(f.name.endsWith(".age")) mfsf.base.add(entry);
+                    else if(f.name.endsWith(".fni")) mfsf.base.add(entry);
+                    else if(f.name.endsWith(".csv")) mfsf.base.add(entry);
+                    else if(f.name.endsWith(".p2f")) mfsf.base.add(entry);
+                    else if(f.name.endsWith(".prp")) mfsf.pages.add(entry);
+                    else mfsf.other.add(entry);
+
+                    String outname;
+                    if(type==DataserverType.alcugs && f.compress!=8) outname = f.name;
+                    else outname = f.name+".gz";
+
+                    if(writedatafiles) FileUtils.WriteFile(outfolder+"/"+outname, f.data,true);
+                    f.data = null; //otherwise we leak memory.
+
+                    //moul writing.
+                    MoulFileInfo mi = new MoulFileInfo();
+                    mi.filename = new Utf16(f.name.replace("/", "\\"));
+                    mi.Downloadname = new Utf16((outrelpath+outname).replace("/", "\\"));
+                    mi.Hash = new Utf16(b.BytesToHexString(f.md5));
+                    mi.CompressedHash = new Utf16(b.BytesToHexString(f.compressedmd5));
+                    mi.Filesize = (int)f.filesize;
+                    mi.Compressedsize = (int)f.compressedfilesize;
+                    mi.Flags = (f.compress==8)?0:f.compress; //everything is compressed in Moul.  The value 8 therefore is no longer used.
+                    //mi.write(moulmanifest);
+                    moulmanifest.getFiles().add(mi);
+
+                }
+
+                //hack to move UruExplorer.exe to the top (not needed for Moul, I believe.)
+                if(mfs.equals("client.mfs"))
+                {
+                    for(int i=0;i<mfsf.other.size();i++)
+                    {
+                        String curs = mfsf.other.get(i);
+                        if(curs.startsWith("UruExplorer.exe,"))
+                        {
+                            mfsf.other.set(i, mfsf.other.get(0));
+                            mfsf.other.set(0, curs);
+                        }
+                    }
+                }
+
+                FileUtils.WriteFile(outmfs+"/"+mfs, mfsf.getBytes(),true);
+
+                //Create the Moul version of the manifest:
+                FileUtils.WriteFile(outmfs+"/"+mfs+"_moul", moulmanifest.compileAlone() ,true);
+
+            }
+        }
+
+
+        //write a few extra files (Do we want this in Moul?):
+        //String agelist_txt = "GlobalAnimations\nGlobalClothing\nGlobalMarkers\nGUI\nNeighborhood\nNexus\nPersonal\nCustomAvatars\nGlobalAvatars\nAvatarCustomization\n";
+        String agelist_txt = "GlobalAnimations\nGlobalClothing\nGlobalMarkers\nGUI\nCustomAvatars\nGlobalAvatars\n";
+        //read as GlobalAnimations, GlobalAvatars,GlobalClothing,GUI,CustomAvatars
+        FileUtils.WriteFile(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true);
+
+        /*if(true)return;
+
+        FileUtils.CreateFolder(outfolder+"install/Expanded/");
+        //StringBuilder s = new StringBuilder();
+        //s.append("[version]\nformat=5\n\n[base]\n\n[pages]\n\n[other]\n");
+        mfsfile mfs = new mfsfile();
+        file f = new file("","UruSetup.exe");
+        mfs.other.add(f.toString());
+        //s.append(f.getEntry());
+        //s.append("\n");
+        FileUtils.WriteFile(outfolder+"install/Expanded/ClientSetupNew.mfs", mfs.getBytes());
+        FileUtils.WriteFile(outfolder+"install/Expanded/UruSetup.exe.gz", f.data);
+
+        String[] clientfiles = {
+            "UruExplorer.exe",
+            "SoundDecompress.exe"
+        };
+
+        FileUtils.CreateFolder(outfolder+"game_clients/drcExplorer/");
+        mfs = new mfsfile();
+        f = new file("","UruExplorer.exe");*/
+
+        m.status("Done generating the dataserver!");
+    }
+    public void generateAlcugs()
     {
         //by default, everything should be downloaded.
         //some Ages may have some of their things moved to other folders
@@ -562,6 +815,8 @@ public class Dataserver
         long filesize;
         long modtime;
         byte[] md5;
+        byte[] compressedmd5; //used by Moul manifests
+        long compressedfilesize; //used by Moul manifests
 
         //String path;
         //String filename;
@@ -630,22 +885,29 @@ public class Dataserver
             }
             else
             {
-                compress = 0;
+                if(type==DataserverType.alcugs)
+                    compress = 0;
+                else
+                    compress = 8; //Moul forces everything to be compressed.
             }
 
             //String fullpath = root+"/"+relFilename;
             filesize = FileUtils.GetFilesize(fullpath);
             modtime = FileUtils.GetModtime(fullpath);
             byte[] rawdata = FileUtils.ReadFile(fullpath);
-            if(compress==8)
+            md5 = shared.CryptHashes.GetMd5(rawdata);
+            if(compress==8 || type==type.moul) //moul is always compressed
             {
                 data = zip.compressGzip(rawdata);
+                compressedmd5 = shared.CryptHashes.GetMd5(data); //needed for Moul manifests.
+                compressedfilesize = data.length; //needed for Moul manifests
             }
             else
             {
                 data = rawdata;
+                compressedmd5 = b.CopyBytes(md5);
+                compressedfilesize = filesize;
             }
-            md5 = shared.CryptHashes.GetMd5(rawdata);
         }
         public String toString()
         {

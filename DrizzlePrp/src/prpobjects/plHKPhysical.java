@@ -411,6 +411,22 @@ public class plHKPhysical extends uruobj
 
             //pots.givemass = true; //delete this.
         }
+        else if( u14==0x0 && u15==0x0 && LOSDB==0x0 && group0==0x220 )
+        {
+            //mqo Courtyard_District_QuestItems.prp, e.g.  untested.
+            //let's make this work with all u14=0, u15=0...
+            pots.zzzu1 = 0x0;
+            pots.zzzcoltype = 0x200;
+            pots.zzzflagsdetect = 0x0;
+            pots.zzzflagsrespond = 0x0;
+            pots.zzzu2 = 0x0;
+            pots.zzzu3 = 0x0;
+            pots.zzzLOSDB = LOSDB;
+            //turn off 0x020, turn on 0x004
+            pots.zzzgroup0 = ((group0 & ~0x020) | 0x004);
+
+            //pots.givemass = true; //delete this.
+        }
         else
         {
             //if(shared.State.AllStates.getStateAsBoolean("reportPhysics"))

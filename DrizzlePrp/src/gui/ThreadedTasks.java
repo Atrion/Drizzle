@@ -53,6 +53,8 @@ public class ThreadedTasks
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
             gui.UamGui.PerformDownload();
+            //check if we've installed a new Drizzle, and if so, restart.
+            Main.PerformUpdate(new String[]{},uam.Uam.getPotsFolder()+"/Drizzle/",true);
         }});
     }
     public static void uamDownloadAgeList(final String server, final String potsfolder)
@@ -110,6 +112,13 @@ public class ThreadedTasks
         }});
     }
 
+    public static void convertMagiquest(final String infolder, final String potsfolder)
+    {
+        shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
+            auto.AllGames.getMqo().ConvertGame(infolder, potsfolder);
+        }});
+    }
+
     public static void copyPotsMusic(final String infolder, final String outfolder)
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
@@ -142,6 +151,13 @@ public class ThreadedTasks
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
             auto.AllGames.getCrowthistle().CopyMusic(infolder, outfolder);
+        }});
+    }
+
+    public static void copyMagiquestMusic(final String infolder, final String outfolder)
+    {
+        shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
+            auto.AllGames.getMqo().CopyMusic(infolder, outfolder);
         }});
     }
 

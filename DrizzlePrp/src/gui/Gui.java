@@ -42,6 +42,7 @@ import prpobjects.Typeid;
 import shared.Bytes;
 import java.util.Vector;
 import shared.GuiUtils;
+import shared.*;
 
 /**
  *
@@ -56,8 +57,11 @@ public class Gui extends javax.swing.JFrame {
     //String pots;
     //String out;
     public String settingsfile;
+    //public String readsettingsfile;
+    //public String writesettingsfile;
     Settings settings = new Settings();
     //boolean dosavesettings = false;
+    public static final String settingsfilename = ".drizzlesettings.canbedeleted.dat";
     
     deepview.deepview deep;
     public final shared.State.TabsState tabs;
@@ -65,8 +69,9 @@ public class Gui extends javax.swing.JFrame {
     /** Creates new form Gui */
     public Gui()
     {
+        Main.guiform = this;
         shared.translation.enable("/gui/");
-        settingsfile = FileUtils.GetPresentWorkingDirectory()+"drizzlesettings.canbedeleted.dat";
+        settingsfile = FileUtils.GetPresentWorkingDirectory()+"/"+settingsfilename; //+"drizzlesettings.canbedeleted.dat";
         initComponents();
         int maxwidth = 1024; int maxheight = 740; //don't change these.
         //int width = 1016; int height = 732; //border of 4
@@ -79,6 +84,8 @@ public class Gui extends javax.swing.JFrame {
         this.setTitle("Drizzle "+Integer.toString(Version.version));
 
         shared.translation.registerGUIForm(this);
+        tabs = this.tabsState3;
+        Plugins.initialiseGui();
         
         gui.UamGui.guiform = this;
         gui.UamGui.agelist = this.jList1;
@@ -90,7 +97,6 @@ public class Gui extends javax.swing.JFrame {
         gui.UamGui.AgeLabel = this.ageInfo3;
         gui.UamGui.startup = this.uamStartupButtongroup;
         gui.UamGui.init();
-        tabs = this.tabsState3;
 
         //set icon:
         java.awt.Image img = shared.GetResource.getResourceAsImage("/gui/Pterosaur2b4-16.png");
@@ -338,6 +344,9 @@ public class Gui extends javax.swing.JFrame {
 
         SetBackgroundColour(true);
 
+        //initialise plugins
+        Plugins.initialiseGui2();
+
     }
     void pushlanguage(boolean silent)
     {
@@ -506,6 +515,11 @@ public class Gui extends javax.swing.JFrame {
         jButton100 = new javax.swing.JButton();
         jButton98 = new javax.swing.JButton();
         jButton160 = new javax.swing.JButton();
+        jLabel78 = new javax.swing.JLabel();
+        textfieldState70 = new shared.State.TextfieldState();
+        jButton169 = new javax.swing.JButton();
+        jButton170 = new javax.swing.JButton();
+        jButton171 = new javax.swing.JButton();
         MemTab = new javax.swing.JPanel();
         textfieldState36 = new shared.State.TextfieldState();
         jButton121 = new javax.swing.JButton();
@@ -654,6 +668,7 @@ public class Gui extends javax.swing.JFrame {
         jButton158 = new javax.swing.JButton();
         textfieldState65 = new shared.State.TextfieldState();
         jButton161 = new javax.swing.JButton();
+        jButton172 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -1438,6 +1453,41 @@ public class Gui extends javax.swing.JFrame {
             SimpTab.add(jButton160);
             jButton160.setBounds(710, 60, 90, 36);
 
+            jLabel78.setText("Magiquest folder:");
+            SimpTab.add(jLabel78);
+            jLabel78.setBounds(20, 300, 140, 16);
+
+            textfieldState70.setName("mqosimp"); // NOI18N
+            SimpTab.add(textfieldState70);
+            textfieldState70.setBounds(170, 300, 400, 20);
+
+            jButton169.setText("select...");
+            jButton169.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton169ActionPerformed(evt);
+                }
+            });
+            SimpTab.add(jButton169);
+            jButton169.setBounds(570, 290, 110, 36);
+
+            jButton170.setText("Magiquest music...");
+            jButton170.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton170ActionPerformed(evt);
+                }
+            });
+            SimpTab.add(jButton170);
+            jButton170.setBounds(790, 290, 170, 36);
+
+            jButton171.setText("Start...");
+            jButton171.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton171ActionPerformed(evt);
+                }
+            });
+            SimpTab.add(jButton171);
+            jButton171.setBounds(710, 290, 90, 36);
+
             tabsState3.addTab("Conversion(Simplicity)", SimpTab);
 
             textfieldState36.setName("vaultInFolder"); // NOI18N
@@ -1787,8 +1837,8 @@ public class Gui extends javax.swing.JFrame {
                     jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel38Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(checkboxState32, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(112, Short.MAX_VALUE))
+                        .addComponent(checkboxState32, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                        .addContainerGap())
                 );
                 jPanel38Layout.setVerticalGroup(
                     jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1798,10 +1848,10 @@ public class Gui extends javax.swing.JFrame {
                 );
 
                 jPanel34.add(jPanel38);
-                jPanel38.setBounds(540, 20, 320, 60);
+                jPanel38.setBounds(660, 20, 250, 60);
 
                 TheArtTab.add(jPanel34);
-                jPanel34.setBounds(30, 150, 910, 210);
+                jPanel34.setBounds(30, 150, 930, 210);
 
                 jLabel76.setForeground(new java.awt.Color(0, 102, 102));
                 jLabel76.setText("This area is for things related to the writing of Ages.");
@@ -2597,6 +2647,15 @@ public class Gui extends javax.swing.JFrame {
                 });
                 jPanel49.add(jButton161);
                 jButton161.setBounds(340, 340, 210, 36);
+
+                jButton172.setText("Merge this Jar with Libs");
+                jButton172.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jButton172ActionPerformed(evt);
+                    }
+                });
+                jPanel49.add(jButton172);
+                jButton172.setBounds(330, 370, 200, 36);
 
                 AdvTabState.addTab("Misc", jPanel49);
 
@@ -5874,6 +5933,22 @@ private void jButton168ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton167ActionPerformed
     m.msg(auto.Game.getAllGamenames());
 }//GEN-LAST:event_jButton167ActionPerformed
+
+private void jButton169ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton169ActionPerformed
+    GuiUtils.getUserSelectedFolder(textfieldState70);
+}//GEN-LAST:event_jButton169ActionPerformed
+
+private void jButton170ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton170ActionPerformed
+    ThreadedTasks.copyMagiquestMusic(textfieldState70.getText(), textfieldState34.getText());
+}//GEN-LAST:event_jButton170ActionPerformed
+
+private void jButton171ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton171ActionPerformed
+    ThreadedTasks.convertMagiquest(textfieldState70.getText(), textfieldState34.getText());
+}//GEN-LAST:event_jButton171ActionPerformed
+
+private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton172ActionPerformed
+    JarUtils.MergeThisJarWithLibs();
+}//GEN-LAST:event_jButton172ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -6038,7 +6113,11 @@ private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton166;
     private javax.swing.JButton jButton167;
     private javax.swing.JButton jButton168;
+    private javax.swing.JButton jButton169;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton170;
+    private javax.swing.JButton jButton171;
+    private javax.swing.JButton jButton172;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
@@ -6205,6 +6284,7 @@ private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
@@ -6363,6 +6443,7 @@ private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState68;
     private shared.State.TextfieldState textfieldState69;
     private shared.State.TextfieldState textfieldState7;
+    private shared.State.TextfieldState textfieldState70;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
     private shared.State.ButtongroupState uamStartupButtongroup;

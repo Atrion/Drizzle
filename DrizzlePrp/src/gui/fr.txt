@@ -226,3 +226,41 @@ Start DrizzleDeepview{->}Démarrer Drizzle Deepview
 Delete old archives...{->}Supprimer les anciennes archives...
 Clear .sum files.{->}Vider les fichiers .sum
 Version?{->}Version?
+
+//Drizzle24
+Convert{->}Convertir
+3dsmax's output folder (set in PlasmaMax2.ini):{->}Dossier de sortie de 3dsmax (choisi dans PlasmaMax2.ini):
+(The created files will be placed in the Pots folder given on the UAM tab.){->}(Les fichiers créés seront placés dans le dossier Pots choisi dans l'onglet UAM)
+This area is for things related to the writing of Ages.{->}Cet emplacementest pour tout ce qui concerne la conception d'Ages.
+Pyc or Pak file:{->}Fichier Pyc ou Pak:
+Decompile{->}Décompiler
+Unpack{->}Dépaqueter
+Gamename(for a list, go to Misc->ListGamenames):{->}Nom du jeu (pour la liste, voir Misc/Liste des jeux):
+The Art{->}L'Art
+Unpacking pak file...{->}Dépaquetage du fichier pak...
+Done unpacking!{->}Dépaquetage terminé.
+Decompiling pak file...{->}Décompilation du fichier pak...
+Done decompiling!{->}Décompilation terminée.
+Converting Age: {->}Conversion de l'Age: 
+Unknown encryption type; assuming it is unencrypted.{->}Type de chiffrementinconnu, on assume que c'est en clair.
+Converting Prp: {->}Conversion du Prp: 
+Process All was successful!{->}Processus terminé avec succès.
+Recompilated completed!{->}Recompilation terminée.
+Done converting Age!: {->}Conversion de l'Age terminée. 
+Decompiling pyc file...{->}Décompilation du fichier pyc...
+List Gamenames{->}Liste des jeux
+
+//Drizzle25
+Magiquest folder:{->}Dossier Magiquest:
+Magiquest music...{->}Musique de Magiquest
+Launch Uru after converting{->}Lancer Uru après conversion
+Options{->}Options
+Merge this Jar with Libs{->}Fusionner Jar avec Libs
+OldLegacy{->}Fonctions périmées
+Error while updating Drizzle. It seems Drizzle.jar did not close.{->}Erreur lors de la mise à jour de Drizzle. Il semble que Drizzle.jar soit encore ouvert.
+Please make sure there are no other copies of Drizzle running, and hit OK to try again.{->}Assurez-vous qu'aucune autre copie de Drizzle ne soit active, puis appuyez sur OK pour essayer de nouveau.
+Problem updating{->}Problème de mise à jour
+Restarting to update Drizzle...{->}Redémarrage de Drizzle pour la mise à jour...
+Drizzle is about to restart, in order to update itself.  You should use the Drizzle.exe (or less preferably, Drizzle.jar) file in the 'Drizzle' subfolder of Uru to start it.  Please don't get confused and use copies elsewhere, and think they are updated; you can always see which version you're using at the top of Drizzle.  And don't forget to have fun :D{->}Drizzle va redémarrer pour effectuer sa mise à jour. Il est préférable d'utiliser la copie de Drizzle.exe (ou à défaut, Drizzle.jar) située dans le sous-dossier "Drizzle" de Uru. L'utilisation d'une autre copie peut amenr une confusion quant à la version utilisée. Drizzle affiche toujours son numéro de version en haut de la fenêtre. Nous vous souhaitons bien du plaisir avec votre nouvelle version de Drizzle! :D
+You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: {->}Vous avez une version plus récente de Drizzle, préférez-vous l'utiliser? Elle est située ici: 
+

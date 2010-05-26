@@ -38,18 +38,28 @@ public class Main extends javax.swing.JFrame {
     static long requiredmemory;
 
     static public Runnable debugcheck;
+    static String jarpath;
+    static File thisJarsFile;
+
+    //settings
+    static final boolean updateenabled = true;
+    static int requestedheapsize;
+
     
     public static void main(String[] args)
     {
+        //shared.GuiUtils.getOKorCancelFromUserDos(m.trans("a"), "b");
+        //find memory info:
         //int requiredheapsize = 800; //900;  //all Simplicity works with 400 on Win32.
         int requiredheapsize = 720;
         requiredmemory = requiredheapsize*1024*1024;
-        int requestedheapsize = (int)(requiredheapsize*1.1); //1.01 is approximately correct, but lets leave lots of space.
+        requestedheapsize = (int)(requiredheapsize*1.1); //1.01 is approximately correct, but lets leave lots of space.
         try{
             maxmemory = Runtime.getRuntime().maxMemory();
         }catch(Exception e){}
         //m.msg("Heapsize="+Long.toString(maxmemory));
 
+        //find launcher info:
         String islauncherstr = System.getProperty("Drizzle.IsLauncher","true");
         boolean isLauncher = Boolean.parseBoolean(islauncherstr);
         if(maxmemory>=requiredmemory)
@@ -58,69 +68,69 @@ public class Main extends javax.swing.JFrame {
         }
         //m.msg("IsLauncher="+Boolean.toString(isLauncher));
 
-        if(isLauncher) //then launch with correct memsize, etc.
+        //find updater info:
+        String isupdaterstr = System.getProperty("Drizzle.IsUpdater","false");
+        boolean isUpdater = Boolean.parseBoolean(isupdaterstr);
+
+        //find path to this jar:
+        jarpath = shared.JarUtils.GetJarPath(Main.class);
+        if(jarpath==null) m.err("Jarpath is null.");
+        thisJarsFile = new File(jarpath);
+
+        //check if a new version has been downloaded, and install it, if so.
+        PerformUpdate(args,thisJarsFile.getParent(),false); //will halt the JVM if updated.
+
+
+
+
+        if(isLauncher) //then relaunch with correct memsize, etc.
         {
-            try
+            Main.LaunchDrizzle(jarpath, args, requestedheapsize);
+        }
+        else if(isUpdater)
+        {
+            int numretries = 10;
+            int mstowait = 2000; //2 seconds
+            boolean success = false;
+            String genericJar = thisJarsFile.getParent()+"/Drizzle.jar";
+            int numtries = 0;
+            while(true)
+            //for(int i=0;i<numretries;i++)
             {
-                /*if(args.length>0)
-                {
-                    System.out.println("commandline2!");
-                    for(String arg: args)
-                    {
-                        System.out.println(arg);
-                    }
-                }*/
+                try{
 
-                //File file = shared.GetResource.getResourceAsFile("/drizzle/DrizzlePrp.jar", true);
-                String jarpath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-                File ffile = new File(jarpath);
-                String file = ffile.getAbsolutePath();
-                //file = file.substring(1);
-                //String filepath = jarurl.getPath();
-                //m.msg("jarfile="+file);
+                    //copy self to Drizzle.jar
+                    shared.FileUtils.DeleteFile(genericJar, true);
+                    if(shared.FileUtils.Exists(genericJar)) throw new shared.uncaughtexception("Drizzle.jar isn't deleted yet.");
+                    shared.FileUtils.CopyFile(thisJarsFile.getAbsolutePath(), genericJar, true, false, true);
+                    success = true;
+                    break;
 
-                String[] command = new String[]{
-                    "java",
-                    "-Xmx"+Integer.toString(requestedheapsize)+"m",//"-Xmx1020m",//"-Xmx800m",
-                    "-DDrizzle.IsLauncher=false",
-                    "-jar",
-                    file,
-                };
-
-                String[] fullcommand = new String[command.length+args.length];
-                for(int i=0;i<command.length;i++)
-                {
-                    fullcommand[i] = command[i];
+                }catch(Exception e){
+                    m.err("Error while updating Drizzle. It seems Drizzle.jar did not close.");
+                    e.printStackTrace();
                 }
-                for(int i=0;i<args.length;i++)
+                numtries++;
+
+                if(numtries>numretries)
                 {
-                    fullcommand[command.length+i] = args[i];
-                }
-                /*System.out.println("commandline3!");
-                for(String arg: fullcommand)
-                {
-                    System.out.println(arg);
-                }*/
-                Process proc = Runtime.getRuntime().exec(fullcommand);
-                if(args.length>0)
-                {
-                    //only redirect the output/err streams if we have command-line arguments; i.e. command-line interface is being used.
-                    shared.m.StreamRedirector.Redirect(proc);
+                    boolean ok = shared.GuiUtils.getOKorCancelFromUserDos(m.trans("Please make sure there are no other copies of Drizzle running, and hit OK to try again."), m.trans("Problem updating")); //This never gets displayed for some reason.
+                    if(!ok) break;
                 }
 
-                if(args.length>0)
-                {
-                    //this is a command line invocation, so keep the parent open to redirect io.
-                    proc.waitFor();
-                }
-                //m.msg("exitval="+Integer.toString(proc.exitValue()));
+                //wait
+                try{
+                    Thread.sleep(mstowait);
+                }catch(Exception e){}
             }
-            catch(Exception e)
+
+            if(success)
             {
-                e.printStackTrace();
+                //launch Drizzle.jar
+                Main.LaunchDrizzle(genericJar, args, requestedheapsize);
             }
         }
-        else
+        else  //start normally
         {
             try{
                 //javaversion = System.getProperty("java.version");
@@ -149,14 +159,20 @@ public class Main extends javax.swing.JFrame {
                 osversion2 = Double.parseDouble(osversion);
             }catch(Exception e){}
 
+            //initialise plugins for all interfaces.
+            Plugins.initialise();
+
             if(args.length>0)
             {
                 //command-line mode.
+                
                 System.out.println("Using the commandline interface!");
                 gui.CommandLine.HandleArguments(args);
             }
             else
             {
+                //GUI mode.
+
                 //select whether to match the native widgets or use the Swing appearance.
                 try
                 {
@@ -224,4 +240,201 @@ public class Main extends javax.swing.JFrame {
         message("Error: "+msg);
     }*/
 
+    public static void PerformUpdate(String[] args, String installDir, boolean warnAboutRestart)
+    {
+
+        //detect if this is the first installation into this folder
+        boolean firstInstall = !(new File(installDir+"/Drizzle.jar").exists());
+
+        boolean thisIsGenericDrizzle = Main.thisJarsFile.getName().equals("Drizzle.jar");
+
+        //find version info:
+        String launchUpdater = FindUpdatedDrizzleJar(new File(installDir));
+
+        boolean doupdate = updateenabled && (launchUpdater!=null) && (firstInstall || thisIsGenericDrizzle);
+
+        if(doupdate)
+        {
+            try
+            {
+                if(firstInstall)
+                {
+                    //create Drizzle.jar
+                    String from = launchUpdater;
+                    String to = installDir+"/Drizzle.jar";
+                    shared.FileUtils.CopyFile(from, to, false, false, true);
+
+                    //copy over settings
+                    from = thisJarsFile.getParent()+"/"+Gui.settingsfilename;
+                    to = installDir+"/"+Gui.settingsfilename;
+                    shared.FileUtils.CopyFile(from, to, false, false, false);
+
+                    //if(warnAboutRestart)
+                    //{
+                    //    msg += m.trans("  Since this is the first time, we'll copy your settings over, and you should use this new copy installed");
+                    //}
+                }
+                
+                if(warnAboutRestart)
+                {
+                    //javax.swing.JOptionPane.sh
+                    //shared.GuiUtils.getStringFromUser(msg, msg)
+                    shared.GuiUtils.DisplayMessage(m.trans("Restarting to update Drizzle..."), m.trans("Drizzle is about to restart, in order to update itself.  You should use the Drizzle.exe (or less preferably, Drizzle.jar) file in the 'Drizzle' subfolder of Uru to start it.  Please don't get confused and use copies elsewhere, and think they are updated; you can always see which version you're using at the top of Drizzle.  And don't forget to have fun :D"));
+                }
+
+
+                //String jarpath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+                //File ffile = new File(jarpath);
+                //String file = ffile.getAbsolutePath();
+
+                String[] command = new String[]{
+                    "java",
+                    "-Xmx"+Integer.toString(requestedheapsize)+"m",//"-Xmx1020m",//"-Xmx800m",
+                    "-DDrizzle.IsUpdater=true",
+                    "-jar",
+                    launchUpdater,
+                };
+
+                String[] fullcommand = new String[command.length+args.length];
+                for(int i=0;i<command.length;i++)
+                {
+                    fullcommand[i] = command[i];
+                }
+                for(int i=0;i<args.length;i++)
+                {
+                    fullcommand[command.length+i] = args[i];
+                }
+
+                Process proc = Runtime.getRuntime().exec(fullcommand);
+
+                //don't wait for this process, terminate now.
+                System.exit(0);
+
+                /*if(args.length>0)
+                {
+                    //only redirect the output/err streams if we have command-line arguments; i.e. command-line interface is being used.
+                    shared.m.StreamRedirector.Redirect(proc);
+                }*/
+
+                /*if(args.length>0)
+                {
+                    //this is a command line invocation, so keep the parent open to redirect io.
+                    proc.waitFor();
+                }*/
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(launchUpdater!=null)
+        {
+            //so we're not going to update, *but* there is a newer version.
+            m.msg("You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: ",launchUpdater);
+        }
+        
+    }
+
+    private static void LaunchDrizzle(String drizzlefilename, String[] args, int requestedheapsize)
+    {
+        try
+        {
+            /*if(args.length>0)
+            {
+                System.out.println("commandline2!");
+                for(String arg: args)
+                {
+                    System.out.println(arg);
+                }
+            }*/
+
+            //File file = shared.GetResource.getResourceAsFile("/drizzle/DrizzlePrp.jar", true);
+            //String jarpath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            File ffile = new File(drizzlefilename);
+            String file = ffile.getAbsolutePath();
+            //file = file.substring(1);
+            //String filepath = jarurl.getPath();
+            //m.msg("jarfile="+file);
+
+            String[] command = new String[]{
+                "java",
+                "-Xmx"+Integer.toString(requestedheapsize)+"m",//"-Xmx1020m",//"-Xmx800m",
+                "-DDrizzle.IsLauncher=false",
+                "-jar",
+                file,
+            };
+
+            String[] fullcommand = new String[command.length+args.length];
+            for(int i=0;i<command.length;i++)
+            {
+                fullcommand[i] = command[i];
+            }
+            for(int i=0;i<args.length;i++)
+            {
+                fullcommand[command.length+i] = args[i];
+            }
+            /*System.out.println("commandline3!");
+            for(String arg: fullcommand)
+            {
+                System.out.println(arg);
+            }*/
+            Process proc = Runtime.getRuntime().exec(fullcommand);
+            if(args.length>0)
+            {
+                //only redirect the output/err streams if we have command-line arguments; i.e. command-line interface is being used.
+                shared.m.StreamRedirector.Redirect(proc);
+            }
+
+            if(args.length>0)
+            {
+                //this is a command line invocation, so keep the parent open to redirect io.
+                proc.waitFor();
+            }
+            //m.msg("exitval="+Integer.toString(proc.exitValue()));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public static Integer getVersionFromFilename(String filename)
+    {
+        if(!filename.startsWith("Drizzle")) return null;
+        if(!filename.endsWith(".jar")) return null;
+        String verstr = filename.substring(7, filename.length()-4);
+        if(verstr.equals("")) return null;
+        try{
+            int r = Integer.parseInt(verstr);
+            return r;
+        }catch(Exception e){}
+        return null;
+    }
+    private static String FindUpdatedDrizzleJar(File installDir)
+    {
+        String launchUpdater = null;
+        //String jarname = thisJarsFile.getName();
+        //if(jarname.equals("Drizzle.jar"))
+        {
+            //using general Drizzle, check for updates.
+            int thisver = Version.version;
+
+            //find the newest version in this folder.
+            int maxver = -1;
+            File maxjar = null;
+            //for(File f: thisJarsFile.getParentFile().listFiles())
+            for(File f: installDir.listFiles())
+            {
+                String curfilename = f.getName();
+                Integer ver = Main.getVersionFromFilename(curfilename);
+                if(ver!=null && ver>maxver)
+                {
+                    maxver = ver;
+                    maxjar = f;
+                }
+            }
+
+            if(maxver>thisver) launchUpdater = maxjar.getAbsolutePath();
+        }
+        return launchUpdater;
+    }
 }

@@ -3,3 +3,6 @@
 Warning: {->}Warning: 
 Crowthistle{->}Crowthistle
 Setting language to {->}Setting language to: 
+Recompilated completed!{->}Recompilation completed!
+
+

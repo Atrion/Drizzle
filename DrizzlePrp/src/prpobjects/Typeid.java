@@ -307,8 +307,9 @@ public enum Typeid implements compilable, java.io.Serializable
     //myst5 bugfix
     plConvexVolume,
 
-    //subworld
+    //drizzle25
     plHKSubWorld,
+    plCloneSpawnModifier,
 
     plLeafController,
     nil,
@@ -574,6 +575,7 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x2D1, 0x2D6, 0x25F, -2, plConvexVolume),
 
         tri( 0x0E2, -2, -2, -2, plHKSubWorld),
+        tri( 0x0B4, 0x0B4, -2, -2, plCloneSpawnModifier),
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle

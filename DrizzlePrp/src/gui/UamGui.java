@@ -667,6 +667,9 @@ public class UamGui
         }
 
         uam.Uam.installInfo.printStatsMessage();
+
+        //check if we've installed a new Drizzle, and if so, restart.
+        
     }
     public static void GetAgeListGuiOffline(String potsfolder)
     {

@@ -22,7 +22,7 @@ public class Node //implements NodeTypes.ImageType
     public int grp;
     public Timestamp mod_time;
     public int creator;
-    public Timestamp crt_time;
+    public Timestamp crt_time; //autotime
     public Timestamp age_time;
     public Wpstr age_name;
     //

@@ -106,6 +106,36 @@ public class FileUtils {
         }
         return null;
     }
+    public static Vector<String> FindAllDecendants(File dir, boolean relativepath)
+    {
+        Vector<String> r = new Vector();
+        FindAllDecendants(r,dir,relativepath,"");
+        return r;
+    }
+    private static void FindAllDecendants(Vector<String> r, File dir, boolean relativepath, String pathsofar)
+    {
+        if(dir.isDirectory())
+        {
+            for(File child: dir.listFiles())
+            {
+                if(child.isDirectory())
+                    FindAllDecendants(r,child,relativepath,pathsofar+child.getName()+"/");
+                else
+                    FindAllDecendants(r,child,relativepath,pathsofar+child.getName());
+            }
+        }
+        else
+        {
+            if(relativepath)
+            {
+                r.add(pathsofar);
+            }
+            else
+            {
+                r.add(dir.getAbsolutePath());
+            }
+        }
+    }
     public static Vector<File> FindAllFiles(String folder, String ext, boolean recurse)
     {
         return FindAllFiles(folder,null,ext,recurse);
@@ -226,6 +256,17 @@ public class FileUtils {
                 if(throwexception) m.throwUncaughtException("");
             }
         }
+    }
+    public static void DeleteTree(File dir, boolean throwexception)
+    {
+        if(dir.isDirectory())
+        {
+            for(File child: dir.listFiles())
+            {
+                DeleteTree(child, throwexception);
+            }
+        }
+        FileUtils.DeleteFile(dir.getAbsolutePath(), throwexception);
     }
     public static void CopyTree(String from, String to, boolean overwrite, boolean throwexception)
     {

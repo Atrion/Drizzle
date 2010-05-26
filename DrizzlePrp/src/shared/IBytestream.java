@@ -7,6 +7,7 @@ package shared;
 
 import java.util.Vector;
 import java.util.HashMap;
+import java.io.InputStream;
 
 //public abstract interface IBytestream
 public abstract class IBytestream
@@ -22,6 +23,11 @@ public abstract class IBytestream
     abstract public IBytestream Fork(long offset);
     abstract protected int read();
     private HashMap<String,Object> _context = new HashMap();
+    
+    public InputStream getChildStreamIfExists()
+    {
+        return null;
+    }
     public void set(String keyname, Object value)
     {
         _context.put(keyname, value);
@@ -241,5 +247,12 @@ public abstract class IBytestream
         int b4 = this.read();
         int result = (b1<<24 | b2<<16 | b3<<8 | b4);
         return result;
+    }
+    public int readIntAsTwoShorts()
+    {
+        short s1 = this.readShort();
+        short s2 = this.readShort();
+        int r = ((s1&0xFFFF) << 16) | ((s2&0xFFFF) << 0);
+        return r;
     }
 }

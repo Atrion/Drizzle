@@ -47,7 +47,8 @@ public class GuiUtils
 
     public static void DisplayMessage(String caption, String message)
     {
-        javax.swing.JOptionPane.showMessageDialog(null, message, caption, javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        //javax.swing.JOptionPane.showMessageDialog(null, message, caption, javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        GuiUtils_TextDialog.showMessageDialog(caption,message);
     }
     public static void DisplayTrayMessage(String caption, String message)
     {
@@ -512,7 +513,16 @@ public class GuiUtils
             return CustomJFileChooser.getInstance();
         }
     }
-
+    public static boolean getOKorCancelFromUserDos(String message, String title)
+    {
+        javax.swing.JFrame fr = new javax.swing.JFrame();
+        fr.setState(javax.swing.JFrame.ICONIFIED);
+        fr.show();
+        int r = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        fr.hide();
+        if(r==JOptionPane.OK_OPTION) return true;
+        else return false;
+    }
     public static boolean getOKorCancelFromUser(String message, String title)
     {
         int r = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
