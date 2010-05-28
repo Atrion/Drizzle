@@ -7,7 +7,7 @@ package auto;
 
 import prpobjects.prpfile;
 import prpobjects.PrpRootObject;
-import prpobjects.x00A2Pythonfilemod;
+import prpobjects.plPythonFileMod;
 import prpobjects.plSynchedObject;
 import prpobjects.plMultiModifier;
 import prpobjects.Urustring;
@@ -68,7 +68,7 @@ public class hackFactory
     public static prpfile createBuiltInPrp(String agename, Pageid pid)
     {        
         //create pythonfilemod
-        x00A2Pythonfilemod pm = x00A2Pythonfilemod.createDefault();
+        plPythonFileMod pm = plPythonFileMod.createDefault();
         Uruobjectref pmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plPythonFileMod, "VeryVerySpecialPythonFileMod", pid, Pagetype.createWithType(8));
         PrpRootObject pmroot = PrpRootObject.createFromDescAndObject(pmref.xdesc, pm);
         pm.pyfile = Urustring.createFromString(agename);
@@ -128,7 +128,7 @@ public class hackFactory
         //#minkExteriorDay, minkExteriorNight
         
         //create the pythonfilemod
-        x00A2Pythonfilemod pm = x00A2Pythonfilemod.createDefault();
+        plPythonFileMod pm = plPythonFileMod.createDefault();
         pm.pyfile = Urustring.createFromString("minkDustdummy");
         //pm.listcount = 1;
         
@@ -150,18 +150,18 @@ public class hackFactory
         Uruobjectref ref12 = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plClusterGroup, "cCluster_Crater03_3_minkDusttestNight", ngtpid);
         //pm.listings = new x00A2Pythonfilemod.Pythonlisting[1];
         //pm.listings[0] = pl;
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  1, ref01));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  2, ref02));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  3, ref03));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  4, ref04));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  5, ref05));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  6, ref06));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  7, ref07));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  8, ref08));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20,  9, ref09));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20, 10, ref10));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20, 11, ref11));
-        pm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithRef(20, 12, ref12));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  1, ref01));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  2, ref02));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  3, ref03));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  4, ref04));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  5, ref05));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  6, ref06));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  7, ref07));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  8, ref08));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20,  9, ref09));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20, 10, ref10));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20, 11, ref11));
+        pm.addListing(plPythonFileMod.Pythonlisting.createWithRef(20, 12, ref12));
         
         Uruobjectdesc desc = Uruobjectdesc.createDefaultWithTypeNamePage(Typeid.plPythonFileMod, "Dustin_craters_pfm", thispid);
         PrpRootObject ro = PrpRootObject.createFromDescAndObject(desc, pm);

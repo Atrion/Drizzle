@@ -22,7 +22,7 @@ public class client
         InetAddress add = null;
         try
         {
-            add = java.net.InetAddress.getByName("the-ancient-city.de");
+            add = java.net.InetAddress.getByName("shard.example.com");
         }
         catch(UnknownHostException e)
         {

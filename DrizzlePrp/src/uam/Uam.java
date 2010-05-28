@@ -356,7 +356,8 @@ public class Uam
             boolean complain = false;
             if(paklist.size()==2)
             {
-                if(ignoreKnownOverrides && (paklist.contains("moul.pak")||paklist.contains("offlineki.pak")||paklist.contains("UruLibraryManager.pak")))
+                if(ignoreKnownOverrides && (paklist.contains("moul.pak")||paklist.contains("offlineki.pak")||paklist.contains("UruLibraryManager.pak")
+                        ||paklist.contains("tpots-fixes.pak")||paklist.contains("tpots-addons.pak")))
                 {
                     //ignore
                 }

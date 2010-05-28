@@ -15,7 +15,7 @@ import prpobjects.Uruobjectdesc;
 import prpobjects.Uruobjectref;
 
 import prpobjects.plSceneObject;
-import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.plPythonFileMod.Pythonlisting;
 
 public class AutoMod_Shared
 {
@@ -28,11 +28,11 @@ public class AutoMod_Shared
         PrpRootObject pfmobj = prp.findObject(pfmname, Typeid.plPythonFileMod);
         if(pfmobj==null)
         {
-            prpobjects.x00A2Pythonfilemod pfm = prpobjects.x00A2Pythonfilemod.createDefault();
+            prpobjects.plPythonFileMod pfm = prpobjects.plPythonFileMod.createDefault();
             pfm.pyfile = Urustring.createFromString("xDustChronicleShowHide");
-            pfm.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithString(1, Bstr.createFromString(sdlvar)));
-            pfm.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithString(2, Bstr.createFromString(valToMatch)));
-            pfm.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithBoolean(3, !reverse));
+            pfm.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithString(1, Bstr.createFromString(sdlvar)));
+            pfm.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithString(2, Bstr.createFromString(valToMatch)));
+            pfm.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithBoolean(3, !reverse));
             //no pythonlistings here...
             pfmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plPythonFileMod, pfmname, prp);
             pfmobj = PrpRootObject.createFromDescAndObject(pfmref.xdesc, pfm);
@@ -55,10 +55,10 @@ public class AutoMod_Shared
         PrpRootObject pfmobj = prp.findObject(pfmname, Typeid.plPythonFileMod);
         if(pfmobj==null)
         {
-            prpobjects.x00A2Pythonfilemod pfm = prpobjects.x00A2Pythonfilemod.createDefault();
+            prpobjects.plPythonFileMod pfm = prpobjects.plPythonFileMod.createDefault();
             pfm.pyfile = Urustring.createFromString("xAgeSDLBoolShowHide");
-            pfm.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithString(1, Bstr.createFromString(sdlvar)));
-            pfm.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithBoolean(2, !reverse));
+            pfm.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithString(1, Bstr.createFromString(sdlvar)));
+            pfm.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithBoolean(2, !reverse));
             //no pythonlistings here...
             pfmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plPythonFileMod, pfmname, prp);
             pfmobj = PrpRootObject.createFromDescAndObject(pfmref.xdesc, pfm);
@@ -79,7 +79,7 @@ public class AutoMod_Shared
         PrpRootObject pfmobj = prp.findObject("PythXDustShow", Typeid.plPythonFileMod);
         if(pfmobj==null)
         {
-            prpobjects.x00A2Pythonfilemod pfm = prpobjects.x00A2Pythonfilemod.createDefault();
+            prpobjects.plPythonFileMod pfm = prpobjects.plPythonFileMod.createDefault();
             pfm.pyfile = Urustring.createFromString("xDustShow");
             //no pythonlistings here...
             pfmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plPythonFileMod, "PythXDustShow", prp);
@@ -97,7 +97,7 @@ public class AutoMod_Shared
     public static void CreatePythonfilemodReference(prpfile prp, String pyfilenameWithoutExtension, Uruobjectref objref, int type, String arbitraryPfmName)
     {
         //create pfm
-        prpobjects.x00A2Pythonfilemod pfm = prpobjects.x00A2Pythonfilemod.createDefault();
+        prpobjects.plPythonFileMod pfm = prpobjects.plPythonFileMod.createDefault();
         pfm.pyfile = Urustring.createFromString(pyfilenameWithoutExtension);
         pfm.addListing(Pythonlisting.createWithString(4, 1, Bstr.createFromString(objref.xdesc.objectname.toString())));
         pfm.addListing(Pythonlisting.createWithRef(type, 2, objref));

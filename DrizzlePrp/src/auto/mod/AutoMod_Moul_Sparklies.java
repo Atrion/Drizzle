@@ -318,7 +318,7 @@ public class AutoMod_Moul_Sparklies
 
         //change cleft pole python page:
         try{
-            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythBahroPoles", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm = dest.findObject("cPythBahroPoles", Typeid.plPythonFileMod).castTo();
         pfm.pyfile = Urustring.createFromString("psnlBahroPolesMOUL");
         /*Vector<uru.moulprp.x00A2Pythonfilemod.Pythonlisting> listings = new Vector();
         for(int i=0;i<pfm.listcount;i++)
@@ -349,7 +349,7 @@ public class AutoMod_Moul_Sparklies
 
         //switch calendar yeesha page number from 20 to 26:
         try{
-            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20- Calendar_1", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm = dest.findObject("cPythYeeshaPage20- Calendar_1", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm.listcount;i++)
         {
             if(i%2==0)
@@ -364,7 +364,7 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
         //switch bench yeesha page number from 15 to 18:
         try{
-            prpobjects.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage15 - Bench_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm2 = dest.findObject("cPythYeeshaPage15 - Bench_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm2.listcount;i++)
         {
             if(i%2==0)
@@ -379,7 +379,7 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
         //switch activation states for cleft pole from "0,2,4" to "1,3"
         try{
-            prpobjects.x00A2Pythonfilemod pfm3 = dest.findObject("cPythYeeshaPage25 - CleftPole_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm3 = dest.findObject("cPythYeeshaPage25 - CleftPole_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm3.listcount;i++)
         {
             if(i%2==1)
@@ -394,8 +394,8 @@ public class AutoMod_Moul_Sparklies
         }catch(Exception e){m.err("exception");}
 
         //add flag to imager for the Offline-KI to use.
-        prpobjects.x00A2Pythonfilemod pfm4 = dest.findObject("cPythYeeshaPage12 - Imager_8", Typeid.plPythonFileMod).castTo();
-        pfm4.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithInteger(8, 1));
+        prpobjects.plPythonFileMod pfm4 = dest.findObject("cPythYeeshaPage12 - Imager_8", Typeid.plPythonFileMod).castTo();
+        pfm4.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithInteger(8, 1));
 
         //take away the mass from the CalendarStoneProxyXX
         /*try{
@@ -641,7 +641,7 @@ public class AutoMod_Moul_Sparklies
 
         //switch calendar yeesha page number from 20 to 26:
         try{
-            prpobjects.x00A2Pythonfilemod pfm = dest.findObject("cPythYeeshaPage20_0", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm = dest.findObject("cPythYeeshaPage20_0", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm.listcount;i++)
         {
             if(i%2==1)
@@ -653,7 +653,7 @@ public class AutoMod_Moul_Sparklies
                 pfm.listings.get(i).xInteger = 26; //switch calendar page from 20 to 26.
             }
         }
-            prpobjects.x00A2Pythonfilemod pfm2 = dest.findObject("cPythYeeshaPage20_1", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm2 = dest.findObject("cPythYeeshaPage20_1", Typeid.plPythonFileMod).castTo();
         for(int i=0;i<pfm2.listcount;i++)
         {
             if(i%2==1)

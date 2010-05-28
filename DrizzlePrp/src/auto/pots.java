@@ -156,7 +156,7 @@ public class pots
 
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
             {
-                prpobjects.x00A2Pythonfilemod pfm = obj.castTo();
+                prpobjects.plPythonFileMod pfm = obj.castTo();
                 m.status("    Python file:",pfm.pyfile.toString());
             }
 

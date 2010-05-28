@@ -12,8 +12,8 @@ import prpobjects.x0006Layer;
 import prpobjects.Uruobjectref;
 import prpobjects.Pageid;
 import prpobjects.Pagetype;
-import prpobjects.x00A2Pythonfilemod;
-import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.plPythonFileMod;
+import prpobjects.plPythonFileMod.Pythonlisting;
 
 public class AutoMod_NexusImages
 {
@@ -46,7 +46,7 @@ public class AutoMod_NexusImages
         //add ptAttribDynamicMap to the pythonfilemod.
         PrpRootObject pfmroot = prp.findObject("KIHandler", Typeid.plPythonFileMod);
         pfmroot.hasChanged = true;
-        x00A2Pythonfilemod pfm = pfmroot.castTo();
+        plPythonFileMod pfm = pfmroot.castTo();
         pfm.addListing(Pythonlisting.createWithRef(9, 90, dtmroot.getref()));
 
         //create references to the dynamictextmaps used by the book gui.

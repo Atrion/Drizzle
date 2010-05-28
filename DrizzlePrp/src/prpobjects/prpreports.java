@@ -57,7 +57,7 @@ public class prpreports
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
         for(int i=0;i<objs.length;i++)
         {
-            x00A2Pythonfilemod curobj = objs[i].castTo();//x0029SoundBuffer.class);
+            plPythonFileMod curobj = objs[i].castTo();//x0029SoundBuffer.class);
             result.append(curobj.pyfile.toString() + "\n");
             
         }

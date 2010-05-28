@@ -8,7 +8,7 @@ package auto;
 import shared.Vertex;
 import shared.Flt;
 import prpobjects.*;
-import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.plPythonFileMod.Pythonlisting;
 import shared.FileUtils;
 import uru.context;
 import uru.Bytestream;

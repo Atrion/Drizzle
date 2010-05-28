@@ -25,11 +25,8 @@ import shared.e;
 import shared.m;
 import java.util.Vector;
 
-/**
- *
- * @author user
- */
-public class x00A2Pythonfilemod extends uruobj
+//was x00A2Pythonfilemod
+public class plPythonFileMod extends uruobj
 {
     //Objheader xheader;
     public plMultiModifier parent;
@@ -39,7 +36,7 @@ public class x00A2Pythonfilemod extends uruobj
     public int listcount;
     public Vector<Pythonlisting> listings;
     
-    public x00A2Pythonfilemod(context c) throws readexception//,boolean hasHeader)
+    public plPythonFileMod(context c) throws readexception//,boolean hasHeader)
     {
         shared.IBytestream data = c.in;
         //if(hasHeader) xheader = new Objheader(c);
@@ -60,7 +57,7 @@ public class x00A2Pythonfilemod extends uruobj
         }*/
         listings = c.readVector(Pythonlisting.class, listcount);
     }
-    private x00A2Pythonfilemod(){}
+    private plPythonFileMod(){}
     public Pythonlisting getListingByIndex(int index)
     {
         for(Pythonlisting listing: listings)
@@ -81,13 +78,13 @@ public class x00A2Pythonfilemod extends uruobj
             listings.remove(listing);
         }
     }
-    public static x00A2Pythonfilemod createEmpty()
+    public static plPythonFileMod createEmpty()
     {
-        return new x00A2Pythonfilemod();
+        return new plPythonFileMod();
     }
-    public static x00A2Pythonfilemod createDefault()
+    public static plPythonFileMod createDefault()
     {
-        x00A2Pythonfilemod result = x00A2Pythonfilemod.createEmpty();
+        plPythonFileMod result = plPythonFileMod.createEmpty();
         result.parent = plMultiModifier.createDefault();
         result.pyfile = Urustring.createFromString("changeme");
         result.refcount = 0;

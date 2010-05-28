@@ -74,7 +74,7 @@ public class PrpObject extends uruobj
             //case 0x0028:
             //    return new x0028Synchedobject(stream,true);
             case plPythonFileMod:
-                return new x00A2Pythonfilemod(c);
+                return new plPythonFileMod(c);
             case plPointShadowMaster:
                 return new x00D5PointShadowMaster(c);
             case plSimulationInterface:

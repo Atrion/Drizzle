@@ -8,7 +8,7 @@ package auto;
 import shared.Flt;
 import prpobjects.*;
 import shared.m;
-import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.plPythonFileMod.Pythonlisting;
 import java.io.File;
 import java.util.Vector;
 import shared.*;
@@ -534,7 +534,7 @@ public class mystv //was myst5Fixes
     {
         if(type==8) //responder
         {
-            x00A2Pythonfilemod mod = x00A2Pythonfilemod.createDefault();
+            plPythonFileMod mod = plPythonFileMod.createDefault();
             mod.pyfile = Urustring.createFromString("dusttest");
             mod.addListing(Pythonlisting.createWithString(4, 1, Bstr.createFromString("storeattrib")));
             mod.addListing(Pythonlisting.createWithRef(type, 10, ref));
@@ -575,12 +575,12 @@ public class mystv //was myst5Fixes
         if(logmod.parent.message.type!=Typeid.plNotifyMsg) throw new shared.uncaughtexception("modifyPythonfilemod found the wrong type.");
         PrpMessage.PlNotifyMsg msg = (PrpMessage.PlNotifyMsg)logmod.parent.message.prpobject.object;
         if(msg.parent.refcount!=1) throw new shared.uncaughtexception("Should only be one ref in modifyPythonfilemod.");
-        x00A2Pythonfilemod pfm = prp.findObjectWithRef(msg.parent.refs[0]).castTo(x00A2Pythonfilemod.class);
+        plPythonFileMod pfm = prp.findObjectWithRef(msg.parent.refs[0]).castTo(plPythonFileMod.class);
         pfm.pyfile = Urustring.createFromString("dusttest");
         pfm.clearListings();
         for(int i=0;i<pythonparams.length;i++)
         {
-            pfm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithString(4, i+1, Bstr.createFromString(pythonparams[i])));
+            pfm.addListing(plPythonFileMod.Pythonlisting.createWithString(4, i+1, Bstr.createFromString(pythonparams[i])));
         }
         
     }
@@ -597,11 +597,11 @@ public class mystv //was myst5Fixes
         }
 
         //PlLogicModifier logmod = prp.findObject(c, Typeid.plLogicModifier).castTo();
-        x00A2Pythonfilemod pfm = x00A2Pythonfilemod.createDefault();
+        plPythonFileMod pfm = plPythonFileMod.createDefault();
         pfm.pyfile = Urustring.createFromString("dusttest");
-        pfm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithString(4, 1, Bstr.createFromString(pythonparams[0])));//"linktoage"
-        pfm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithString(4, 2, Bstr.createFromString(pythonparams[1])));//"Direbo")));
-        pfm.addListing(x00A2Pythonfilemod.Pythonlisting.createWithString(4, 3, Bstr.createFromString(pythonparams[2])));//"LinkInPointDefault")));
+        pfm.addListing(plPythonFileMod.Pythonlisting.createWithString(4, 1, Bstr.createFromString(pythonparams[0])));//"linktoage"
+        pfm.addListing(plPythonFileMod.Pythonlisting.createWithString(4, 2, Bstr.createFromString(pythonparams[1])));//"Direbo")));
+        pfm.addListing(plPythonFileMod.Pythonlisting.createWithString(4, 3, Bstr.createFromString(pythonparams[2])));//"LinkInPointDefault")));
         Uruobjectref pfmref = Uruobjectref.createDefaultWithTypeNamePage(Typeid.plPythonFileMod, sceneobjectname+"_pfm" , prp.header.pageid);
         PrpRootObject pfmroot = PrpRootObject.createFromDescAndObject(pfmref.xdesc, pfm);
         //prp.extraobjects.add(pfmroot); //don't forget to add the PFM!
@@ -1020,7 +1020,7 @@ public class mystv //was myst5Fixes
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plPythonFileMod);
         for(PrpRootObject obj: objs)
         {
-            x00A2Pythonfilemod pfm = obj.castTo();
+            plPythonFileMod pfm = obj.castTo();
             if(newAgename.toLowerCase().equals("descentmystv")||newAgename.toLowerCase().equals("direbo"))
             {
                 if(pfm.pyfile.toString().toLowerCase().equals("xlinkingbookguipopup"))

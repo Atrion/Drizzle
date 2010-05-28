@@ -244,6 +244,11 @@ public class moul
 
                 PostMod_FixMinkata(prp,newAgename,info.outfolder);
 
+                if(file.agename.equals("Neighborhood"))
+                {
+                    auto.postmod.PostMod_RenamePython.RenamePython(prp,"nb01EmgrPhase0","nb01MOULEmgrPhase0");
+                }
+
 
                 if(file.agename.equals("EderDelin")||file.agename.equals("EderTsogal"))
                 {
@@ -600,7 +605,7 @@ public class moul
         if(agename.equals("Kveer") && pagename.equals("KveerHalls"))
         {
             //change pythonfilemod from Myst to MystMystV.
-            x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookMyst", Typeid.plPythonFileMod).castTo();
+            plPythonFileMod pfm = prp.findObject("cPythLinkBookMyst", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(4).xString = Bstr.createFromString("MystMystV");
             
             //change respondermodifier from Myst to MystMystV.
@@ -625,7 +630,7 @@ public class moul
         }
         if(agename.equals("EderDelin") && pagename.equals("garden"))
         {
-            x00A2Pythonfilemod pfm = prp.findObject("cPythYeeshaPage15_0", Typeid.plPythonFileMod).castTo();
+            plPythonFileMod pfm = prp.findObject("cPythYeeshaPage15_0", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(2).xInteger = 18;
             pfm = prp.findObject("cPythYeeshaPage15_1", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(2).xInteger = 18;
@@ -639,24 +644,24 @@ public class moul
             prp.markObjectDeleted(Typeid.plHKPhysical, "BahroRockBook");
             
             //set new python files:
-            prpobjects.x00A2Pythonfilemod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm1 = prp.findObject("cPythDoorConsole", Typeid.plPythonFileMod).castTo();
             pfm1.pyfile = Urustring.createFromString("ahnyKadishDoorMOUL");
-            prpobjects.x00A2Pythonfilemod pfm2 = prp.findObject("cPythHutInside", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm2 = prp.findObject("cPythHutInside", Typeid.plPythonFileMod).castTo();
             pfm2.pyfile = Urustring.createFromString("ahnyKadishHutMOUL");
-            prpobjects.x00A2Pythonfilemod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm3 = prp.findObject("cSaveCloth7", Typeid.plPythonFileMod).castTo();
             pfm3.pyfile = Urustring.createFromString("ahnySaveClothMOUL");
 
             //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
-            prpobjects.x00A2Pythonfilemod pfm4 = prp.findObject("cPythPOTSsymbol", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm4 = prp.findObject("cPythPOTSsymbol", Typeid.plPythonFileMod).castTo();
             pfm4.getListingByIndex(10).xBoolean = 0;
         }
         if(agename.equals("Ahnonay") && pagename.equals("Vortex"))
         {
-            prpobjects.x00A2Pythonfilemod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm = prp.findObject("PythVogondolaRide", Typeid.plPythonFileMod).castTo();
             pfm.pyfile = Urustring.createFromString("ahnyVogondolaRideV2MOUL.py");
             
             //set initialiseOnFirstUpdate to false, so that it does ServerInitComplete.
-            prpobjects.x00A2Pythonfilemod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
+            prpobjects.plPythonFileMod pfm2 = prp.findObject("cPythRigAnims", Typeid.plPythonFileMod).castTo();
             pfm2.getListingByIndex(7).xBoolean = 0;
 
             //disable subworld
@@ -665,7 +670,7 @@ public class moul
         if(agename.equals("GreatTreePub") && pagename.equals("Pub"))
         {
             //change pythonfilemod from AhnonayCathedral to AhnonayMOUL.
-            x00A2Pythonfilemod pfm = prp.findObject("cPythLinkBookAhnonay", Typeid.plPythonFileMod).castTo();
+            plPythonFileMod pfm = prp.findObject("cPythLinkBookAhnonay", Typeid.plPythonFileMod).castTo();
             pfm.getListingByIndex(4).xString = Bstr.createFromString("AhnonayMOUL");
             
             //change respondermodifier from AhnonayCathedral to AhnonayMOUL.

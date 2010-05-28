@@ -14,7 +14,7 @@ import prpobjects.PrpRootObject;
 import prpobjects.Typeid;
 import prpobjects.Uruobjectref;
 import prpobjects.Urustring;
-import prpobjects.x00A2Pythonfilemod.Pythonlisting;
+import prpobjects.plPythonFileMod.Pythonlisting;
 import prpobjects.Bstr;
 import prpobjects.plSceneObject;
 import prpobjects.Pageid;

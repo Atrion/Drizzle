@@ -104,7 +104,7 @@ public class ChangeNameAndPrefix
             //rename python files
             for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
             {
-                prpobjects.x00A2Pythonfilemod pfm = ro.castTo();
+                prpobjects.plPythonFileMod pfm = ro.castTo();
                 String curpyfile = pfm.pyfile.toString();
                 boolean ignore = false;
                 for(String py: auto.fileLists.partialListOfSharedPythonFiles)

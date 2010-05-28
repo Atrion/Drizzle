@@ -22,7 +22,7 @@ public class PostMod_RemoveDynamicCamMap
                 if(objs.length>0)
                 {
                     if(objs.length>1) m.err("More than one VeryVerySpecialPythonFileMod found, just handling the first.");
-                    prpobjects.x00A2Pythonfilemod pythfilemod =  objs[0].castTo();
+                    prpobjects.plPythonFileMod pythfilemod =  objs[0].castTo();
                     Urustring oldpyfile = pythfilemod.pyfile;
                     pythfilemod.pyfile = Urustring.createFromString(pythfilemod.pyfile.toString().replace(oldAgename, newAgename));
                     if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Changing Agename in VeryVerySpecialPythonFileMod from ",oldAgename," to ",newAgename);

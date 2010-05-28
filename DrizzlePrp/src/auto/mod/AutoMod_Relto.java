@@ -21,12 +21,12 @@ public class AutoMod_Relto
     {
         //PythonFileMod stuff
         PrpRootObject pfm_ro = prp.findObject("cPythYeeshaPage7 - Jumping Pinnacles_0", Typeid.plPythonFileMod);
-        prpobjects.x00A2Pythonfilemod pfm2 = prpobjects.x00A2Pythonfilemod.createDefault();
+        prpobjects.plPythonFileMod pfm2 = prpobjects.plPythonFileMod.createDefault();
         pfm2.pyfile = Urustring.createFromString("psnlYeeshaPageChanges");
         for(int i=0;i<18;i++) //do we really need 18 copies, or just 1?
         {
-            pfm2.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithInteger(1, 21));
-            pfm2.addListing(prpobjects.x00A2Pythonfilemod.Pythonlisting.createWithString(2, Bstr.createFromString("0,2,4")));
+            pfm2.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithInteger(1, 21));
+            pfm2.addListing(prpobjects.plPythonFileMod.Pythonlisting.createWithString(2, Bstr.createFromString("0,2,4")));
         }
         //PrpRootObject pfm2_ro = prp.findObject("cPythYeeshaPage21 - PineTrees_0", Typeid.plPythonFileMod);
         PrpRootObject pfm2_ro = PrpRootObject.createFromDescAndObject(Uruobjectdesc.createDefaultWithTypeNamePrp(Typeid.plPythonFileMod, "cPythYeeshaPage21 - PineTrees_0", prp), pfm2);

@@ -22,8 +22,8 @@ public class Inplace_city
 
         //change pythonfilemod:
         PrpRootObject pfm_ro = prp.findObject("PythLinkBookGUITeledahn", Typeid.plPythonFileMod);
-        prpobjects.x00A2Pythonfilemod pfm = pfm_ro.castTo();
-        prpobjects.x00A2Pythonfilemod.Pythonlisting listing = pfm.listings.get(3);
+        prpobjects.plPythonFileMod pfm = pfm_ro.castTo();
+        prpobjects.plPythonFileMod.Pythonlisting listing = pfm.listings.get(3);
         listing.xString = Bstr.createFromString("KirelMOUL");
         pfm_ro.markAsChanged();
     }
@@ -103,7 +103,7 @@ public class Inplace_city
 
             //change pythonfilemod
             PrpRootObject pfm_ro = prp.findObject("cPythMuseumDoor", Typeid.plPythonFileMod);
-            prpobjects.x00A2Pythonfilemod pfm = pfm_ro.castTo();
+            prpobjects.plPythonFileMod pfm = pfm_ro.castTo();
             pfm.pyfile = Urustring.createFromString("xNewHighLevelStarTrekDoor");
             pfm.getListingByIndex(4).xRef = newdoor;
             pfm.removeListingByIndex(5);
