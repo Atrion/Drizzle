@@ -128,47 +128,66 @@ public class pots
         m.state.curstate.showWarningMessages = false;
         m.state.curstate.showStatusMessages = true;
 
+        m.status("Age: "+agename);
+
         if(!FileUtils.Exists(potsfolder+"/dat/"+agename+".age"))
         {
-            m.status("Couldn't find "+agename+".age, you should probably have entered the filename of the Age. (e.g. 'EderRiltehInaltahv' for Eder Rilteh Inaltahv.)");
+            m.status("  Couldn't find "+agename+".age, you should probably have entered the filename of the Age. (e.g. 'EderRiltehInaltahv' for Eder Rilteh Inaltahv.)");
         }
 
-        //for(File f: FileUtils.FindAllFiles(folder, ".prp", false))
+        int totalvertcount = 0;
         for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename+"_District_", ".prp", false,false))
         {
             prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(f, true);
-            m.status("Prp file:",f.getName());
-            m.status("  Pageid:",prp.header.pageid.toString2());
+            m.status("  Prp file:",f.getName());
+            m.status("    Pageid:",prp.header.pageid.toString2());
             
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
                 prpobjects.x0029SoundBuffer sound = obj.castTo();
-                m.status("  Ogg file:",sound.oggfile.toString()," flags:",Integer.toString(sound.flags)," chans:",Integer.toString(sound.channels));
+                m.status("    Ogg file:",sound.oggfile.toString()," flags:",Integer.toString(sound.flags)," chans:",Integer.toString(sound.channels));
 
                 //check if ogg file is present:
                 if(!FileUtils.Exists(potsfolder+"/sfx/"+sound.oggfile.toString()))
                 {
-                    m.status("    Warning: this file is not present in the sfx folder.");
+                    m.status("      Warning: this file is not present in the sfx folder.");
                 }
             }
 
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plPythonFileMod))
             {
                 prpobjects.x00A2Pythonfilemod pfm = obj.castTo();
-                m.status("  Python file:",pfm.pyfile.toString());
+                m.status("    Python file:",pfm.pyfile.toString());
             }
+
+            int numverts = 0;
+            for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plDrawableSpans))
+            {
+                plDrawableSpans spans = obj.castTo();
+                for(plDrawableSpans.PlGBufferGroup group: spans.groups)
+                {
+                    for(plDrawableSpans.PlGBufferGroup.SubMesh mesh: group.submeshes)
+                    {
+                        numverts += mesh.getCount();
+                    }
+                }
+            }
+            if(numverts!=0) m.status("    Vertex count: "+Integer.toString(numverts));
+            totalvertcount += numverts;
             
             m.status("");
         }
+        if(totalvertcount!=0) m.status("  Total Vertex count: "+Integer.toString(totalvertcount));
+        m.status("");
         
         //for(File f: FileUtils.FindAllFiles(folder, ".pak", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/Python/", agename, ".pak", false,false))
         {
-            m.status("Pak file:",f.getName());
+            m.status("  Pak file:",f.getName());
             prpobjects.pakfile pak = new prpobjects.pakfile(f,auto.AllGames.getPots().g,false);
             for(prpobjects.pakfile.IndexEntry ind: pak.indices)
             {
-                m.status("  Python file:",ind.objectname.toString());
+                m.status("    Python file:",ind.objectname.toString());
             }
             m.status("");
         }
@@ -176,7 +195,7 @@ public class pots
         //for(File f: FileUtils.FindAllFiles(folder, ".age", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".age", false,false))
         {
-            m.status("Age file:",f.getName());
+            m.status("  Age file:",f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
             String data2 = b.BytesToString(data);
             m.status(data2);
@@ -186,7 +205,7 @@ public class pots
         //for(File f: FileUtils.FindAllFiles(folder, ".fni", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".fni", false,false))
         {
-            m.status("Fni file:",f.getName());
+            m.status("  Fni file:",f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
             String data2 = b.BytesToString(data);
             m.status(data2);
@@ -196,7 +215,7 @@ public class pots
         //for(File f: FileUtils.FindAllFiles(folder, ".sdl", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/SDL/", agename, ".sdl", false,false))
         {
-            m.status("Sdl file:",f.getName());
+            m.status("  Sdl file:",f.getName());
             byte[] data = uru.UruCrypt.DecryptWhatdoyousee(FileUtils.ReadFile(f));
             String data2 = b.BytesToString(data);
             m.status(data2);
@@ -206,12 +225,12 @@ public class pots
         //for(File f: FileUtils.FindAllFiles(folder, ".sum", false))
         for(File f: FileUtils.FindAllFiles(potsfolder+"/dat/", agename, ".sum", false,false))
         {
-            m.status("Sum file:",f.getName());
+            m.status("  Sum file:",f.getName());
             //uru.moulprp.sumfile sum = new uru.moulprp.sumfile(FileUtils.ReadFile(f), true, 3);
             prpobjects.sumfile sum = prpobjects.sumfile.readFromFile(f, 3);
             for(prpobjects.sumfile.sumfileFileinfo info: sum.files)
             {
-                m.status("  file:",info.filename.toString());
+                m.status("    file:",info.filename.toString());
             }
             m.status("");
         }
