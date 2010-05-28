@@ -529,6 +529,15 @@ public class b
         chars[1] = (char)(lower<10?lower+'0':lower-10+'a');
         return new String(chars);
     }
+    public static void ByteToHexString(StringBuilder r, byte b)
+    {
+        int upper = ((int)b & 0xF0)>>4;
+        int lower = (int)b & 0x0F;
+        char char0 = (char)(upper<10?upper+'0':upper-10+'a');
+        char char1 = (char)(lower<10?lower+'0':lower-10+'a');
+        r.append(char0);
+        r.append(char1);
+    }
     public static String CharToHexString(char b)
     {
         char[] chars = new char[4];
@@ -549,7 +558,8 @@ public class b
         for(int i=0;i<bytes.length;i++)
         {
             byte curbyte = bytes[i];
-            result.append(ByteToHexString(curbyte));
+            //result.append(ByteToHexString(curbyte));
+            ByteToHexString(result,curbyte);
         }
         return result.toString();
     }

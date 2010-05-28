@@ -422,14 +422,17 @@ public class Main extends javax.swing.JFrame {
             int maxver = -1;
             File maxjar = null;
             //for(File f: thisJarsFile.getParentFile().listFiles())
-            for(File f: installDir.listFiles())
+            if(installDir.exists())
             {
-                String curfilename = f.getName();
-                Integer ver = Main.getVersionFromFilename(curfilename);
-                if(ver!=null && ver>maxver)
+                for(File f: installDir.listFiles())
                 {
-                    maxver = ver;
-                    maxjar = f;
+                    String curfilename = f.getName();
+                    Integer ver = Main.getVersionFromFilename(curfilename);
+                    if(ver!=null && ver>maxver)
+                    {
+                        maxver = ver;
+                        maxjar = f;
+                    }
                 }
             }
 
