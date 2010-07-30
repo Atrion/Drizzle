@@ -63,23 +63,30 @@ abstract public class mystobj //implements compilable
     
     //int getNumBytesProcessed();
 
-    public <T> T serialClone(Class<T> klass)
+    public <T> T serialClone(Class<T> klass, Format format)
     {
         //Bytedeque c = new Bytedeque();
         //this.compile(c);
-        byte[] serialdata = compileAlone();
+        byte[] serialdata = compileAlone(format);
         IBytestream c2 = shared.ByteArrayBytestream.createFromByteArray(serialdata);
         T result = c2.readObj(klass);
         return result;
     }
 
-    public byte[] compileAlone()
+    /*public byte[] compileAlone()
     {
         Bytedeque c = new Bytedeque();
         this.compile(c);
         byte[] r = c.getAllBytes();
         return r;
-    }
+    }*/
 
+    public byte[] compileAlone(Format format)
+    {
+        Bytedeque c = new Bytedeque(format);
+        this.compile(c);
+        byte[] r = c.getAllBytes();
+        return r;
+    }
     
 }

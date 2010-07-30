@@ -27,6 +27,7 @@ public class magiquest
         AllGames.GameInfo r = new AllGames.GameInfo();
         r.GameName = "MagiQuestOnline";
         //r.readversion = 8;
+        r.format = shared.Format.mqo;
         r.PythonVersion = 23;
         r.game = auto.Game.mqo;
         r.prpMarkerForAgename = "_District_";

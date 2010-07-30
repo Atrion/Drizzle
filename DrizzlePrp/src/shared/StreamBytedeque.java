@@ -31,7 +31,7 @@ public class StreamBytedeque extends shared.IBytedeque
             out.write((n >>> 16) & 0xFF);
             out.write((n >>> 24) & 0xFF);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void writeShort(short n)
@@ -40,7 +40,7 @@ public class StreamBytedeque extends shared.IBytedeque
             out.write((n >>> 0) & 0xFF);
             out.write((n >>> 8) & 0xFF);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public IBytedeque Fork(){
@@ -55,7 +55,7 @@ public class StreamBytedeque extends shared.IBytedeque
         try{
             out.write(bytes);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void writeByte(byte b)
@@ -63,7 +63,7 @@ public class StreamBytedeque extends shared.IBytedeque
         try{
             out.write(((int)b)&0xFF);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void writeShorts(short[] shorts)
@@ -75,7 +75,7 @@ public class StreamBytedeque extends shared.IBytedeque
                 out.write((n >>> 8) & 0xFF);
             }
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     protected Iterator<byte[]> getIterator()
@@ -87,7 +87,7 @@ public class StreamBytedeque extends shared.IBytedeque
         try{
             out.flush();
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
 }

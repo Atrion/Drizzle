@@ -521,15 +521,24 @@ public class Gui extends javax.swing.JFrame {
         jButton170 = new javax.swing.JButton();
         jButton171 = new javax.swing.JButton();
         MemTab = new javax.swing.JPanel();
-        textfieldState36 = new shared.State.TextfieldState();
-        jButton121 = new javax.swing.JButton();
-        jButton122 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jPanel39 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
+        textfieldState36 = new shared.State.TextfieldState();
+        jButton122 = new javax.swing.JButton();
+        jButton121 = new javax.swing.JButton();
+        jPanel40 = new javax.swing.JPanel();
+        jButton173 = new javax.swing.JButton();
+        textfieldState71 = new shared.State.TextfieldState();
+        textfieldState72 = new shared.State.TextfieldState();
+        textfieldState73 = new shared.State.TextfieldState();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         textfieldState37 = new shared.State.TextfieldState();
         jButton123 = new javax.swing.JButton();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
         GHelpTab = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
@@ -1490,14 +1499,29 @@ public class Gui extends javax.swing.JFrame {
 
             tabsState3.addTab("Conversion(Simplicity)", SimpTab);
 
-            textfieldState36.setName("vaultInFolder"); // NOI18N
+            MemTab.setLayout(null);
 
-            jButton121.setText("Select...");
-            jButton121.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton121ActionPerformed(evt);
-                }
-            });
+            jLabel30.setFont(jLabel30.getFont());
+            jLabel30.setForeground(new java.awt.Color(0, 102, 102));
+            jLabel30.setText("Memories: this area is for extracting images, notes, etc. from Uru (either offline or online)");
+            MemTab.add(jLabel30);
+            jLabel30.setBounds(10, 10, 705, 16);
+
+            jLabel43.setForeground(new java.awt.Color(0, 102, 102));
+            jLabel43.setText("Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle");
+            MemTab.add(jLabel43);
+            jLabel43.setBounds(10, 40, 730, 16);
+
+            jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder("Pots / Alcugs"));
+            jPanel39.setLayout(null);
+
+            jLabel33.setText("infolder:");
+            jPanel39.add(jLabel33);
+            jLabel33.setBounds(20, 30, 111, 16);
+
+            textfieldState36.setName("vaultInFolder"); // NOI18N
+            jPanel39.add(textfieldState36);
+            textfieldState36.setBounds(140, 30, 602, 20);
 
             jButton122.setText("Start...");
             jButton122.addActionListener(new java.awt.event.ActionListener() {
@@ -1505,10 +1529,63 @@ public class Gui extends javax.swing.JFrame {
                     jButton122ActionPerformed(evt);
                 }
             });
+            jPanel39.add(jButton122);
+            jButton122.setBounds(70, 60, 80, 36);
 
-            jLabel33.setText("infolder:");
+            jButton121.setText("Select...");
+            jButton121.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton121ActionPerformed(evt);
+                }
+            });
+            jPanel39.add(jButton121);
+            jButton121.setBounds(750, 20, 110, 36);
+
+            MemTab.add(jPanel39);
+            jPanel39.setBounds(10, 130, 890, 110);
+
+            jPanel40.setBorder(javax.swing.BorderFactory.createTitledBorder("Moulagain"));
+            jPanel40.setLayout(null);
+
+            jButton173.setText("Start...");
+            jButton173.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton173ActionPerformed(evt);
+                }
+            });
+            jPanel40.add(jButton173);
+            jButton173.setBounds(70, 120, 83, 36);
+
+            textfieldState71.setName("ma_un"); // NOI18N
+            jPanel40.add(textfieldState71);
+            textfieldState71.setBounds(170, 30, 120, 20);
+
+            textfieldState72.setName("ma_pw"); // NOI18N
+            jPanel40.add(textfieldState72);
+            textfieldState72.setBounds(170, 60, 120, 20);
+
+            textfieldState73.setName("ma_av"); // NOI18N
+            jPanel40.add(textfieldState73);
+            textfieldState73.setBounds(170, 90, 120, 20);
+
+            jLabel79.setText("account name:");
+            jPanel40.add(jLabel79);
+            jLabel79.setBounds(20, 30, 140, 16);
+
+            jLabel80.setText("password:");
+            jPanel40.add(jLabel80);
+            jLabel80.setBounds(20, 60, 140, 16);
+
+            jLabel81.setText("avatar name:");
+            jPanel40.add(jLabel81);
+            jLabel81.setBounds(20, 90, 140, 16);
+
+            MemTab.add(jPanel40);
+            jPanel40.setBounds(10, 260, 320, 170);
 
             jLabel34.setText("outfolder:");
+            MemTab.add(jLabel34);
+            jLabel34.setBounds(30, 80, 110, 16);
 
             textfieldState37.setName("vaultOutFolder"); // NOI18N
             textfieldState37.addActionListener(new java.awt.event.ActionListener() {
@@ -1516,6 +1593,8 @@ public class Gui extends javax.swing.JFrame {
                     textfieldState37ActionPerformed(evt);
                 }
             });
+            MemTab.add(textfieldState37);
+            textfieldState37.setBounds(150, 80, 602, 20);
 
             jButton123.setText("Select...");
             jButton123.addActionListener(new java.awt.event.ActionListener() {
@@ -1523,59 +1602,8 @@ public class Gui extends javax.swing.JFrame {
                     jButton123ActionPerformed(evt);
                 }
             });
-
-            jLabel30.setFont(jLabel30.getFont());
-            jLabel30.setForeground(new java.awt.Color(0, 102, 102));
-            jLabel30.setText("Memories: this area is for extracting images, notes, etc. from Uru (either offline or online)");
-
-            jLabel43.setForeground(new java.awt.Color(0, 102, 102));
-            jLabel43.setText("Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle");
-
-            javax.swing.GroupLayout MemTabLayout = new javax.swing.GroupLayout(MemTab);
-            MemTab.setLayout(MemTabLayout);
-            MemTabLayout.setHorizontalGroup(
-                MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(MemTabLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel43)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(MemTabLayout.createSequentialGroup()
-                            .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel34)
-                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6)
-                            .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textfieldState36, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
-                                .addComponent(textfieldState37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton122))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton123)
-                                .addComponent(jButton121))))
-                    .addContainerGap(183, Short.MAX_VALUE))
-            );
-            MemTabLayout.setVerticalGroup(
-                MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(MemTabLayout.createSequentialGroup()
-                    .addGap(25, 25, 25)
-                    .addComponent(jLabel30)
-                    .addGap(18, 18, 18)
-                    .addComponent(jLabel43)
-                    .addGap(94, 94, 94)
-                    .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel33)
-                        .addComponent(textfieldState36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton121))
-                    .addGap(18, 18, 18)
-                    .addGroup(MemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel34)
-                        .addComponent(textfieldState37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton123))
-                    .addGap(18, 18, 18)
-                    .addComponent(jButton122)
-                    .addContainerGap(145, Short.MAX_VALUE))
-            );
+            MemTab.add(jButton123);
+            jButton123.setBounds(760, 70, 110, 36);
 
             tabsState3.addTab("Memories", MemTab);
 
@@ -5840,7 +5868,11 @@ private void jButton151ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton151ActionPerformed
 
 private void jButton152ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton152ActionPerformed
-    gui.CommandLine.HandleArguments(new String[]{textfieldState59.getText(),textfieldState60.getText(),textfieldState61.getText(),textfieldState62.getText(),textfieldState63.getText()});
+    gui.ThreadedTasks.custom(new java.lang.Runnable() {
+        public void run() {
+            gui.CommandLine.HandleArguments(new String[]{textfieldState59.getText(),textfieldState60.getText(),textfieldState61.getText(),textfieldState62.getText(),textfieldState63.getText()});
+        }
+    });
 }//GEN-LAST:event_jButton152ActionPerformed
 
 private void jButton153ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton153ActionPerformed
@@ -5949,6 +5981,14 @@ private void jButton171ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton172ActionPerformed
     JarUtils.MergeThisJarWithLibs();
 }//GEN-LAST:event_jButton172ActionPerformed
+
+private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton173ActionPerformed
+    ThreadedTasks.custom(new java.lang.Runnable() {
+            public void run() {
+                moulserver.Client_SaveMemories.SaveMemories(textfieldState71.getText(), textfieldState72.getText(), textfieldState73.getText(), textfieldState37.getText());
+            }
+        });
+}//GEN-LAST:event_jButton173ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -6118,6 +6158,7 @@ private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton170;
     private javax.swing.JButton jButton171;
     private javax.swing.JButton jButton172;
+    private javax.swing.JButton jButton173;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
@@ -6285,7 +6326,10 @@ private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
@@ -6322,7 +6366,9 @@ private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel41;
     private javax.swing.JPanel jPanel42;
     private javax.swing.JPanel jPanel43;
@@ -6444,6 +6490,9 @@ private void jButton172ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState69;
     private shared.State.TextfieldState textfieldState7;
     private shared.State.TextfieldState textfieldState70;
+    private shared.State.TextfieldState textfieldState71;
+    private shared.State.TextfieldState textfieldState72;
+    private shared.State.TextfieldState textfieldState73;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
     private shared.State.ButtongroupState uamStartupButtongroup;

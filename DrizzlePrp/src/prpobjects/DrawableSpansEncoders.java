@@ -24,7 +24,7 @@ public class DrawableSpansEncoders
         }
         public byte[] compileall()
         {
-            uru.Bytedeque c = new uru.Bytedeque();
+            uru.Bytedeque c = new uru.Bytedeque(shared.Format.pots);
             for(RawPotsVertex v: vertices)
             {
                 v.compile(c);
@@ -197,7 +197,7 @@ public class DrawableSpansEncoders
         }
         public byte[] compileall()
         {
-            uru.Bytedeque c = new uru.Bytedeque();
+            uru.Bytedeque c = new uru.Bytedeque(shared.Format.pots);
             //compileNaive(c);
             compileSophisticated(c);
             byte[] r = c.getAllBytes();

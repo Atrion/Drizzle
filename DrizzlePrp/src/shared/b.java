@@ -27,6 +27,14 @@ import java.util.Vector;
  */
 public class b
 {
+    public static byte BooleanToByte(boolean val)
+    {
+        return val?(byte)1:(byte)0;
+    }
+    public static byte Int32ToByte(int n)
+    {
+        return (byte)n;
+    }
     public static String ShortsToString(short[] chars)
     {
         StringBuilder r = new StringBuilder();

@@ -42,7 +42,7 @@ public class prpreports
         PrpRootObject[] objs = prputils.FindAllObjectsOfType(prp, Typeid.plSoundBuffer);
         for(int i=0;i<objs.length;i++)
         {
-            x0029SoundBuffer curobj = objs[i].castTo();//x0029SoundBuffer.class);
+            plSoundBuffer curobj = objs[i].castTo();//x0029SoundBuffer.class);
             result.append(curobj.oggfile.toString() + "\n");
             
         }

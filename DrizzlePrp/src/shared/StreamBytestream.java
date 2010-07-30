@@ -37,7 +37,7 @@ public class StreamBytestream extends IBytestream
         try{
             return in.read();
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public byte readByte()
@@ -45,7 +45,7 @@ public class StreamBytestream extends IBytestream
         try{
             return (byte)in.read();
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public byte[] readBytes(int num)
@@ -68,7 +68,7 @@ public class StreamBytestream extends IBytestream
             }
             return r;
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public int readInt()
@@ -80,7 +80,7 @@ public class StreamBytestream extends IBytestream
             int ch4 = in.read();
             return ((ch1 << 0) + (ch2 << 8) + (ch3 << 16) + (ch4 << 24));
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public short readShort()
@@ -90,7 +90,7 @@ public class StreamBytestream extends IBytestream
             int ch2 = in.read();
             return (short)((ch1 << 0) + (ch2 << 8));
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public int getAbsoluteOffset()

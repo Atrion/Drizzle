@@ -268,4 +268,7 @@ Restarting to update Drizzle...{->}Herstart voor aanpassen Drizzle...
 Drizzle is about to restart, in order to update itself.  You should use the Drizzle.exe (or less preferably, Drizzle.jar) file in the 'Drizzle' subfolder of Uru to start it.  Please don't get confused and use copies elsewhere, and think they are updated; you can always see which version you're using at the top of Drizzle.  And don't forget to have fun :D{->}Drizzle gaat herstarten om zich zelf te updaten. Je kunt beter met Drizzle.exe starten dan met Drizzle.jar , te vinden in de submap van Uru. Gebruik liever geen andere versies, waarvan je niet weet of ze zijn aangepast; je kunt altijd zien welke versie je gebruikt boven in het venster van Drizzle. Veel plezier :D 
 You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: {->}Je hebt een nieuwere versie van Drizzle geinstalleerd. Wil je die mischien gebruiken? Deze is te vinden in: 
 
-
+//Drizzle26
+account name:{->}account naam:
+password:{->}wachtwoord:
+avatar name:{->}avatar naam:

@@ -37,7 +37,7 @@ public class CryptoBytestream extends IBytestream
             int r = in.read();
             return b.ByteToInt32(cipher.returnByte((byte)r));
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public byte readByte()
@@ -46,7 +46,7 @@ public class CryptoBytestream extends IBytestream
             byte r = (byte)in.read();
             return cipher.returnByte(r);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public byte[] readBytes(int num)
@@ -71,7 +71,7 @@ public class CryptoBytestream extends IBytestream
             cipher.processBytes(r, 0, r.length, r2, 0);
             return r2;
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public int readInt()

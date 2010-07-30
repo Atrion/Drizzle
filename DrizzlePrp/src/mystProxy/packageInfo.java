@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import org.mortbay.jetty.Request;
+//import org.mortbay.jetty.Request;
+import org.eclipse.jetty.server.Request;
 import javax.servlet.http.Cookie;
 
 

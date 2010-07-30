@@ -77,6 +77,60 @@ public class plHKPhysical extends uruobj
         //u1 and u2 and u3 always seem to be 0.
         //group: 0x4=kWarp and 0x100=kPhysAnim
 
+        //Pots flags:
+        //  group0(aka props)
+        //    0x0001 kDisable
+        //    0x0002 kWeightless
+        //    0x0004 kPinned
+        //    0x0008 kWarp
+        //    0x0010 kUpright
+        //    0x0020 kPassive
+        //    0x0040 kRotationForces
+        //    0x0080 kCameraAvoidObject
+        //    0x0100 kPhysAnim
+        //    0x0200 kStartInactive
+        //    0x0400 kNoSynchronize
+        //    0x0800 kSuppressed
+        //    0x1000 kNoOwnershipChange
+        //    0x2000 kAvAnimPushable
+        //  losdb
+        //    0xFFFF kLOSDBForce16
+        //    0x0 kLOSDBNone
+        //    0x1 kLOSDBUIBLockers
+        //    0x2 kLOSDBUIItems
+        //    0x4 kLOSDBCameraBlockers
+        //    0x8 kLOSDBCustom
+        //    0x10 kLOSDBLocalAvatar
+        //    0x20 kLOSDBShootableItems
+        //    0x40 kLOSDBAvatarWalkable
+        //    0x80 kLOSDBSwimRegion
+        //    0x100 kLOSDBMax
+        //  group(but *not* group0)
+        //    0 kGroupStatic
+        //    1 kGroupAvatarBlocker
+        //    2 kGroupDynamicBlocker
+        //    3 kGroupAvatar
+        //    4 kGroupDynamic
+        //    5 kGroupDetector
+        //    6 kGroupLOSOnly
+        //    7 kGroupMax
+        //  coltype
+        //    0x0 cNone
+        //    0x20000(0x002) cIgnoreAvatars
+        //    0x1000000(0x100) cStorePosition
+        //    0x2000000(0x200) cResetPosition
+        //    0x4000000(0x400) cDetector
+        //  flagsdetect
+        //    0x0 cDetectNone
+        //    0x20000 cDetectVolume //used for swim detect regions
+        //    0x8000000 cDetectBoundaries //normal things that detect entry and exit
+        //  flagsrespond
+        //    0x0 cRespNone
+        //    0x20000 cRespClickable
+        //    0x2000000 cRespInitial
+
+
+
 
         potsflags pots = new potsflags();
         byte u14 = moul.u14;
@@ -136,6 +190,7 @@ public class plHKPhysical extends uruobj
             //detector: sitting, etc.
             //footprint sounds. needs a responderModifier too, I think.
             //works when mass is set.
+            //(swim detector)
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x400;
             pots.zzzflagsdetect = 0x8000000;
@@ -357,9 +412,10 @@ public class plHKPhysical extends uruobj
             //swimrgn!
             ////untested; ahnonay moul
             ////cannot find example of 80 flag, so just pretending it's 0 (but removing givemass, because I feel like it :P)
+            //(swim region)
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x0;
-            pots.zzzflagsdetect = 0x20000;
+            pots.zzzflagsdetect = 0x0; //changed from 0x20000->0x0 for Drizzle26
             pots.zzzflagsrespond = 0x0;
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;

@@ -27,6 +27,7 @@ import uru.Bytedeque;
 import shared.IBytestream;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import shared.*;
 
 /**
  *
@@ -116,22 +117,28 @@ public class Urustring extends uruobj implements java.io.Serializable
     }
     public void compile(Bytedeque deque)
     {
-        int actuallength = unencryptedString.length;
-        //byte[] result = new byte[actuallength+2];
-        
-        //write header
-        short startint = (short)(0xF000 | actuallength);
-        byte[] startbytes = b.Int16ToBytes(startint);
-        //b.CopyBytes(startbytes,result,0);
-        deque.writeBytes(startbytes);
-        
-        //encode bytes
-        for(int i=0;i<actuallength;i++)
+        if(deque.format==Format.pots || deque.format==Format.moul)
         {
-            //result[i+2] = (byte)~string[i];
-            deque.writeByte((byte)~unencryptedString[i]);
+            int actuallength = unencryptedString.length;
+            //byte[] result = new byte[actuallength+2];
+
+            //write header
+            short startint = (short)(0xF000 | actuallength);
+            byte[] startbytes = b.Int16ToBytes(startint);
+            //b.CopyBytes(startbytes,result,0);
+            deque.writeBytes(startbytes);
+
+            //encode bytes
+            for(int i=0;i<actuallength;i++)
+            {
+                //result[i+2] = (byte)~string[i];
+                deque.writeByte((byte)~unencryptedString[i]);
+            }
         }
-        
+        else
+        {
+            m.throwUncaughtException("unimplemented");
+        }
         //return result;
     }
     

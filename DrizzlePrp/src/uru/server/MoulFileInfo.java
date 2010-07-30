@@ -9,25 +9,26 @@ import shared.*;
 
 public class MoulFileInfo
 {
-    Utf16 filename;
-    Utf16 Downloadname;
-    Utf16 Hash;
-    Utf16 CompressedHash;
-    int Filesize; //two shorts, reversed order.  the other two ints are like this too.
+    public Str filename; //was Utf16 //name to save as, e.g. "dat\whatever.fni"
+    public Str Downloadname; //special name to be sent to and understood by the file server. e.g. "Data\dat\whatever.fni"
+    public Str Hash;
+    public Str CompressedHash;
+    public int Filesize; //two shorts, reversed order.  the other two ints are like this too.
     private short u1; //null to terminate xFilesize
-    int Compressedsize;
+    public int Compressedsize;
     private short u2; //null to terminate xCompressedsize
-    int Flags;
+    public int Flags;
     private short u3; //null to terminate xFlags
 
     //boolean hasfields = true;
 
     public MoulFileInfo(IBytestream c)
     {
-        filename = new Utf16(c);
-        Downloadname = new Utf16(c);
-        Hash = new Utf16(c);
-        CompressedHash = new Utf16(c);
+        filename = Str.readAsUtf16NT(c);
+        if(filename.toString().equals("")) return; //not actually a MoulFileInfo item :P
+        Downloadname = Str.readAsUtf16NT(c);
+        Hash = Str.readAsUtf16NT(c);
+        CompressedHash = Str.readAsUtf16NT(c);
         Filesize = c.readIntAsTwoShorts();
         u1 = c.readShort(); //0
         Compressedsize = c.readIntAsTwoShorts();
@@ -39,10 +40,11 @@ public class MoulFileInfo
 
     public void write(IBytedeque c)
     {
-        filename.write(c);
-        Downloadname.write(c);
-        Hash.write(c);
-        CompressedHash.write(c);
+        filename.writeAsUtf16NT(c);
+        if(filename.toString().equals("")) return; //not actually a MoulFileInfo item :P
+        Downloadname.writeAsUtf16NT(c);
+        Hash.writeAsUtf16NT(c);
+        CompressedHash.writeAsUtf16NT(c);
         c.writeIntAsTwoShorts(Filesize);
         c.writeShort(u1);
         c.writeIntAsTwoShorts(Compressedsize);

@@ -14,7 +14,8 @@ import javax.servlet.http.Cookie;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import org.mortbay.jetty.Request;
+//import org.mortbay.jetty.Request;
+import org.eclipse.jetty.server.Request;
 import java.io.File;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;

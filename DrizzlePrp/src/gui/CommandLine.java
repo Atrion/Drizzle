@@ -41,6 +41,45 @@ public class CommandLine
             m.msg("  -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc    ->Converts the files exported by the 3dsmax plugin to Pots.");
             m.msg("  -listgamenames    ->Lists the possible options for 'gamename' arguments in other commands.");
             //m.msg("(gamename is one of: "+auto.Game.getAllGamenames()+" )");
+            m.msg("  -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
+            m.msg("  -downloadmoulagainfiles c:/outputfolder");
+            m.msg("  -downloadsecuremoulagainfiles username password c:/outputfolder");
+            m.msg("  -startproxyserver c:/ProxyUruFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
+            m.msg("  -patchmoulbinary c:/path/to/binary.exe server.com");
+            m.msg("  -startmoulserver MainPassword server.com c:/DataFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
+            m.msg("  -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
+        }
+        else if(args[0].equals("-translateagedown"))
+        {
+            File f = new File(args[1]);
+            prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(args[1], true);
+            float z = Float.parseFloat(args[3]);
+            auto.mod.AutoMod_TranslateAge.translateAllObjects(prp, 0.0f, 0.0f, -z);
+            prp.saveAsFile(args[2]+"/"+f.getName());
+        }
+        else if(args[0].equals("-startmoulserver"))
+        {
+            moulserver.Manager.StartServers(args[1], args[2], args[3]);
+        }
+        else if(args[0].equals("-patachmoulbinary"))
+        {
+            moulserver.Patcher.PatchFile(args[1], args[2]);
+        }
+        else if(args[0].equals("-startproxyserver"))
+        {
+            moulserver.Proxy.start(args[1]);
+        }
+        else if(args[0].equals("-downloadsecuremoulagainfiles"))
+        {
+            moulserver.Client_SaveSecureDownloadFiles.SaveSecureDownloadQueue(args[1], args[2], args[3]);
+        }
+        else if(args[0].equals("-downloadmoulagainfiles"))
+        {
+            moulserver.Client_SaveFileServerFiles.SaveSecureDownloadQueue(args[1]);
+        }
+        else if(args[0].equals("-removepythonoverrides"))
+        {
+            auto.Python.RemovePythonOverrides(args[1], args[2], args[3], args[4]);
         }
         else if(args[0].equals("-listgamenames"))
         {

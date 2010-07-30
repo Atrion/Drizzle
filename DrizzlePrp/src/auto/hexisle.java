@@ -31,6 +31,7 @@ public class hexisle
         r.GameName = "HexIsle";
         r.DetectionFile = "HexisleGDF.dll";
         r.prpMarkerForAgename = "_";
+        r.format = shared.Format.hexisle;
         r.PythonVersion = 23;
         r.game = Game.hexisle;
         r.MusicFiles = new String[] {

@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame {
         //shared.GuiUtils.getOKorCancelFromUserDos(m.trans("a"), "b");
         //find memory info:
         //int requiredheapsize = 800; //900;  //all Simplicity works with 400 on Win32.
-        int requiredheapsize = 720;
+        int requiredheapsize = 710; //was 720, but Diafero found that it was reported as lower by Linux.
         requiredmemory = requiredheapsize*1024*1024;
         requestedheapsize = (int)(requiredheapsize*1.1); //1.01 is approximately correct, but lets leave lots of space.
         try{

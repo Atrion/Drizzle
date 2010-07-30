@@ -109,7 +109,7 @@ public class PrpHeader extends uruobj
                 }
                 
                 pageid = new Pageid(c);
-                short unknown2 = c.readShort();
+                //short unknown2 = c.readShort();
                 //pagetype = Bytes.ByteToInt16(data.readByte());
                 pagetype = new Pagetype(c);
                 agename = new Urustring(c); //the name of the age this prp file belongs to.
@@ -133,8 +133,8 @@ public class PrpHeader extends uruobj
             pagename = new Urustring(c);
             short majorversion = data.readShort(); e.ensureflags(majorversion,63);
             short minorversion = data.readShort(); e.ensureflags(minorversion,12,11); //11 is in some UntilUru files used in the Offline-KI.
-            int unknown3 = data.readInt(); e.ensureflags(unknown3,0);
-            int unknown4 = data.readInt(); e.ensureflags(unknown4,8);
+            int unknown3 = data.readInt(); //e.ensureflags(unknown3,0);
+            int unknown4 = data.readInt(); //e.ensureflags(unknown4,8); //0 seen too
             payloadlength = data.readInt();
             offsetToFirstObject = data.readInt();
             offsetToObjectIndex = data.readInt();

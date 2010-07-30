@@ -8,6 +8,7 @@ package shared;
 import java.util.Vector;
 import java.util.Iterator;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public abstract class IBytedeque
 {
@@ -59,6 +60,15 @@ public abstract class IBytedeque
             vector.get(i).compile(this);
         }
     }
+    public <T extends ICompilable> void writeArrayList(ArrayList<T> vector)
+    {
+        int length = vector.size();
+        for(int i=0;i<length;i++)
+        {
+            vector.get(i).compile(this);
+        }
+    }
+
     public void writeInts(int[] ints)
     {
         for(int i=0;i<ints.length;i++)
@@ -104,5 +114,7 @@ public abstract class IBytedeque
         this.writeShort(s2);
         this.writeShort(s1);
     }
+
+    public Format format;
     
 }

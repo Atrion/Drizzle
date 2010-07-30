@@ -43,7 +43,8 @@ public class generic
         }
         catch(Exception e)
         {
-            throw new shared.uncaughtexception("gereric: Unable to create an instance of this 1-arg class.");
+            //throw new shared.uncaughtexception("gereric: Unable to create an instance of this 1-arg class.");
+            throw new shared.nested(e);
         }
     }
     public static <T> T createShallowClone(T obj)

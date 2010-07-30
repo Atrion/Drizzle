@@ -17,6 +17,7 @@ public class pots
         r.GameName = "PathOfTheShell/CompleteChronicles";
         r.DetectionFile = "UruExplorer.exe";
         r.prpMarkerForAgename = "_District_";
+        r.format = shared.Format.pots;
         r.PythonVersion = 22;
         r.game = Game.pots;
         //r.readversion = 3;
@@ -144,7 +145,7 @@ public class pots
             
             for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
-                prpobjects.x0029SoundBuffer sound = obj.castTo();
+                prpobjects.plSoundBuffer sound = obj.castTo();
                 m.status("    Ogg file:",sound.oggfile.toString()," flags:",Integer.toString(sound.flags)," chans:",Integer.toString(sound.channels));
 
                 //check if ogg file is present:
@@ -185,9 +186,13 @@ public class pots
         {
             m.status("  Pak file:",f.getName());
             prpobjects.pakfile pak = new prpobjects.pakfile(f,auto.AllGames.getPots().g,false);
-            for(prpobjects.pakfile.IndexEntry ind: pak.indices)
+            //for(prpobjects.pakfile.IndexEntry ind: pak.indices)
+            for(int i=0;i<pak.indices.size();i++)
             {
+                prpobjects.pakfile.IndexEntry ind = pak.indices.get(i);
                 m.status("    Python file:",ind.objectname.toString());
+                //it is just the marshalled object, so no timestamp.
+                //prpobjects.pakfile.PythonObject po = pak.objects.get(i);
             }
             m.status("");
         }

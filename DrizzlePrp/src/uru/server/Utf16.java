@@ -10,11 +10,93 @@ import java.util.ArrayList;
 
 public class Utf16
 {
-    public static class Sized
+    public static class SizedAndNT //extends Utf16Base
+    {
+        short[] data;
+        public SizedAndNT(IBytestream c)
+        {
+            int numbytes = c.readInt();
+            int size = numbytes/2;
+            data = new short[size];
+            for(int i=0;i<size;i++)
+            {
+                data[i] = c.readShort();
+            }
+        }
+        public SizedAndNT(String s)
+        {
+            data = new short[s.length()+1];
+            for(int i=0;i<data.length;i++)
+            {
+                data[i] = (short)s.charAt(i);
+            }
+            data[data.length-1] = 0;
+        }
+        public void write(IBytedeque c)
+        {
+            int numbytes = data.length*2;
+            c.writeInt(numbytes);
+            for(short sh: data)
+            {
+                c.writeShort(sh);
+            }
+        }
+        public String toString()
+        {
+            StringBuilder r = new StringBuilder();
+            for(short sh: data)
+            {
+                if(sh==0) break;
+                r.append((char)sh);
+            }
+            return r.toString();
+        }
+
+    }
+    public abstract static class Utf16Base extends mystobj
     {
         short[] data;
 
-        public Sized(IBytestream c)
+        protected Utf16Base(IBytestream c, int size)
+        {
+            data = new short[size];
+            for(int i=0;i<size;i++)
+            {
+                data[i] = c.readShort();
+            }
+        }
+        //protected Utf16Base(){}
+        protected Utf16Base(String s)
+        {
+            data = new short[s.length()];
+            for(int i=0;i<data.length;i++)
+            {
+                data[i] = (short)s.charAt(i);
+            }
+        }
+        public void write(IBytedeque c)
+        {
+            for(int i=0;i<data.length;i++)
+            {
+                c.writeShort(data[i]);
+            }
+        }
+        public String toString()
+        {
+            StringBuilder r = new StringBuilder();
+            for(short sh: data)
+            {
+                r.append((char)sh);
+            }
+            return r.toString();
+        }
+
+    }
+    public static class Sized16
+    {
+        short[] data;
+
+        public Sized16(IBytestream c)
         {
             short size = c.readShort();
             int size2 = b.Int16ToInt32(size);
@@ -25,7 +107,7 @@ public class Utf16
             }
         }
 
-        public Sized(String s)
+        public Sized16(String s)
         {
             data = new short[s.length()];
             for(int i=0;i<data.length;i++)

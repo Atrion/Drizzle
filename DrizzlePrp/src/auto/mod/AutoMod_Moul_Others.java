@@ -274,7 +274,7 @@ public class AutoMod_Moul_Others
 
         helper.postmod = new DistillHelper.PostMod() {
             public void Proccess(prpfile dest) {
-                prpobjects.x0029SoundBuffer sb = dest.findObject("NB01AhyoheekDrone_Loop.ogg", Typeid.plSoundBuffer).castTo();
+                prpobjects.plSoundBuffer sb = dest.findObject("NB01AhyoheekDrone_Loop.ogg", Typeid.plSoundBuffer).castTo();
                 sb.flags |= 0x4; //set "Left Channel Only" flag.
             }
         };

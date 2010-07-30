@@ -16,7 +16,7 @@ public class Manifest extends mystobj
     private boolean israw;
     private byte[] rawdata;
 
-    private int count;
+    public int count; //total number when all manifest parts are put together.
     private ArrayList<MoulFileInfo> files = new ArrayList<MoulFileInfo>();
     short uk; //always 0?  Might just be a null terminator for the entire thing.
 
@@ -46,6 +46,19 @@ public class Manifest extends mystobj
         return files;
     }
 
+    /*public void setFiles(ArrayList<MoulFileInfo> newfiles)
+    {
+        israw = false;
+        files = newfiles;
+    }*/
+
+    /*public void removeEntry(MoulFileInfo mfi)
+    {
+        boolean hadit = files.remove(mfi);
+        if(!hadit) m.throwUncaughtException("Mfi entry not found.");
+        this.
+    }*/
+
     private void parse()
     {
         if(israw)
@@ -72,11 +85,26 @@ public class Manifest extends mystobj
         else
         {
             israw = false;
+            //rawdata = c.readBytes(charcount*2);
+            //IBytestream c2 = shared.ByteArrayBytestream.createFromByteArray(rawdata);
+            IBytestream c2 = c;
+
+            boolean readall = true; //will likely be set to false.
             for(int i=0;i<count;i++)
             {
-                files.add(new MoulFileInfo(c));
+                MoulFileInfo mfi = new MoulFileInfo(c2);
+                if(mfi.filename.toString().equals(""))
+                {
+                    readall = false;
+                    break;
+                }
+                files.add(mfi);
             }
-            uk = c.readShort(); e.ensure(uk==0);
+            if(readall)
+            {
+                uk = c.readShort(); //only on the final manifest part.
+            }
+            //uk = c.readShort(); e.ensure(uk==0); //this is now read as the breaker MoulFileInfo
         }
     }
 
@@ -96,7 +124,7 @@ public class Manifest extends mystobj
             c.writeInt(files.size());
 
             //find the size of the rest, so that we can find the length.
-            Bytedeque c2 = new Bytedeque();
+            Bytedeque c2 = new Bytedeque(shared.Format.moul);
             for(int i=0;i<files.size();i++)
             {
                 files.get(i).write(c2);

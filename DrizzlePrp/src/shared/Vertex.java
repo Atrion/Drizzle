@@ -52,6 +52,12 @@ public strictfp class Vertex extends uruobj implements ICompilable
     //{
     //    return new Vertex(data);
     //}
+    public Vertex(float x2, float y2, float z2)
+    {
+        x = new Flt(x2);
+        y = new Flt(y2);
+        z = new Flt(z2);
+    }
     public Vertex(Flt x2, Flt y2, Flt z2)
     {
         x = x2;

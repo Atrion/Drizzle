@@ -26,6 +26,7 @@ import uru.Bytedeque;
 import shared.IBytestream;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import shared.*;
 
 /**
  *
@@ -38,46 +39,65 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
     public Pageid pageid;
     //short pagetype;
     public Pagetype pagetype;
-    byte xu1;
+    byte loadMask;
     //short objecttype;
     public Typeid objecttype;
     public int objectnumber;
     public Urustring objectname;
     //int xsomeid;
     //int xclientid;
-    //byte xu1;
-    short xm5unknown;
+    byte xu1;
+    //short xm5unknown;
+    public int cloneId;
+    public int clonePlayerId;
 
     transient public Uruobjectdesc rootobj;
-    
+
+    public static final int kHasCloneIDs = 0x01;
+    public static final int kHasLoadMask = 0x02;
+
+    public boolean hasCloneIds()
+    {
+        return ((flag&kHasCloneIDs)!=0);
+    }
+    public boolean hasLoadMask()
+    {
+        return ((flag&kHasLoadMask)!=0);
+    }
     public Uruobjectdesc(context c)
     {
+
         IBytestream data = c.in;
 
         this.rootobj = c.curRootObject;
         
-        flag = data.readByte(); e.ensureflags(flag,0x00,0x02,0x04);//should be 0 normally,1 and 2 also happen, but we need to study them. 0x04 occurs in Myst5 for example.
+        flag = data.readByte(); //e.ensureflags(flag,0x00,0x02,0x04);//should be 0 normally,1 and 2 also happen, but we need to study them. 0x04 occurs in Myst5 for example.
         //pageid = data.readInt();
         pageid = new Pageid(c);
-        if(pageid.prefix==97)
-        {
-            int dummy=0;
-        }
+        //if(pageid.prefix==97)
+        //{
+        //    int dummy=0;
+        //}
         //pagetype = data.readShort(); e.ensure(pagetype,0,4,8,16,20); //should this be a byte? //0=page, 4=global, 8=texture/builtin.
         
         if(c.readversion==3)
         {
             pagetype = new Pagetype(c);
-            if(flag==0x02)
+            if((flag&kHasLoadMask)!=0)
             {
-                xu1 = data.readByte();
+                loadMask = data.readByte();
             }
             objecttype = Typeid.Read(c);
             objectname = new Urustring(c);
+            if((flag&kHasCloneIDs)!=0)
+            {
+                cloneId = c.readInt();
+                clonePlayerId = c.readInt();
+            }
         }
         else if(c.readversion==4||c.readversion==7)
         {
-            xm5unknown = c.readShort(); //only in crowthistle?(actually a part of the Pageid.)
+            //xm5unknown = c.readShort(); //only in crowthistle?(actually a part of the Pageid.)
             pagetype = new Pagetype(c);
             if(flag==0x02)
             {
@@ -86,7 +106,8 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
             objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
             objectname = new Urustring(c);
-            if(flag==0x02 || flag==0x04)
+            //if(flag==0x02 || flag==0x04)
+            if((flag&0x06)!=0) //if either or both.
             {
                 xu1 = data.readByte();
             }
@@ -94,18 +115,24 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         else if(c.readversion==6)
         {
             pagetype = new Pagetype(c);
-            if(flag==0x02)
+            if((flag&kHasLoadMask)!=0)
             {
-                xu1 = data.readByte();
+                loadMask = data.readByte();
             }
             objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
             objectname = new Urustring(c);
+            if((flag&kHasCloneIDs)!=0)
+            {
+                cloneId = c.readInt();
+                clonePlayerId = c.readInt();
+            }
         }
         
         //_staticsettings.reportReference(this);
         //deepview.deepview.allreflinks.add(c.curRootObject, this);
-        shared.reporter.reportEvent(new uru.reporterReports.refEncountered(c.curRootObject, this), "refEncountered");
+
+        //shared.reporter.reportEvent(new uru.reporterReports.refEncountered(c.curRootObject, this), "refEncountered");
     }
     private Uruobjectdesc(){}
     public static Uruobjectdesc createDefaultWithTypeNamePrp(Typeid type, String name, prpfile prp)
@@ -136,19 +163,47 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
     //{
     //    return new Uruobjectdesc(data);
     //}
-    public void compile(Bytedeque deque)
+    public void compile(Bytedeque c)
     {
-        deque.writeByte(flag);
-        pageid.compile(deque);
-        //deque.writeShort(pagetype);
-        pagetype.compile(deque);
-        if(flag==0x02)
+        if(c.format==Format.pots)
         {
-            deque.writeByte(xu1);
+            c.writeByte(flag);
+            pageid.compile(c);
+            pagetype.compile(c);
+            if((flag&kHasLoadMask)!=0)
+            {
+                c.writeByte(loadMask);
+            }
+            objecttype.compile(c);
+            //deque.appendInt(objectnumber); //not in pots
+            objectname.compile(c);
+            if((flag&kHasCloneIDs)!=0) //this should be in the other versions that have xu1, too.
+            {
+                c.writeInt(cloneId);
+                c.writeInt(clonePlayerId);
+            }
         }
-        objecttype.compile(deque);
-        //deque.appendInt(objectnumber); //not in pots
-        objectname.compile(deque);
+        else if(c.format==Format.moul)
+        {
+            c.writeByte(flag);
+            pageid.compile(c);
+            pagetype.compile(c);
+            if((flag&kHasLoadMask)!=0)
+            {
+                c.writeByte(loadMask);
+            }
+            objecttype.compile(c);
+            c.writeInt(objectnumber); //has this been set correctly?  In Talcum yes, in Pots->Moul no.
+            objectname.compile(c);
+            if((flag&kHasCloneIDs)!=0) //this should be in the other versions that have xu1, too.
+            {
+                c.writeInt(cloneId);
+                c.writeInt(clonePlayerId);
+            }
+
+        }
+        else m.throwUncaughtException("unimplemented");
+
     }
     public String toString()
     {
@@ -169,9 +224,11 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         if(!this.objecttype.equals(o.objecttype)) return false;
         if(!this.pageid.equals(o.pageid)) return false;
         if(!this.pagetype.equals(o.pagetype)) return false;
+        if(this.cloneId!=o.cloneId) return false;
+        if(this.clonePlayerId!=o.clonePlayerId) return false;
         return true;
     }
-    public void addXml(StringBuilder s)
+    /*public void addXml(StringBuilder s)
     {
         s.append("<desc>");
         s.append("<name>");objectname.addXml(s);s.append("</name>");
@@ -179,7 +236,7 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         s.append("<pageid>");pageid.addXml(s);s.append("</pageid>");
         s.append("<pagetype>");pagetype.addXml(s);s.append("</pagetype>");
         s.append("<flag>");s.append(Byte.toString(flag));s.append("</flag>");
-        s.append("<xu1>");s.append(Byte.toString(xu1));s.append("</xu1>");
+        s.append("<xu1>");s.append(Byte.toString(loadMask));s.append("</xu1>");
         s.append("</desc>");
     }
     public static Uruobjectdesc createFromXml(Element e1)
@@ -196,17 +253,17 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
                 else if(tag.equals("pageid")) result.pageid = Pageid.createFromXml(e2);
                 else if(tag.equals("pagetype")) result.pagetype = Pagetype.createFromXml(e2);
                 else if(tag.equals("flag")) result.flag = Byte.parseByte(e2.getTextContent());
-                else if(tag.equals("xu1")) result.xu1 = Byte.parseByte(e2.getTextContent());
+                else if(tag.equals("xu1")) result.loadMask = Byte.parseByte(e2.getTextContent());
             }
         }
         return result;
-    }
+    }*/
     public int hashCode()
     {
         int a = this.objectname.hashCode();
         int b = this.pageid.hashCode();
         int c = this.objecttype.hashCode();
-        return this.objectname.hashCode() + this.pageid.hashCode() + this.objecttype.hashCode();
+        return this.objectname.hashCode() + this.pageid.hashCode() + this.objecttype.hashCode() + this.cloneId + this.clonePlayerId*16;
     }
     public Uruobjectdesc deepClone()
     {
@@ -222,7 +279,10 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         result.objecttype = objecttype;
         result.pageid = pageid.deepClone();
         result.pagetype = pagetype.deepClone();
-        result.xm5unknown = xm5unknown;
+        //result.xm5unknown = xm5unknown;
+        result.loadMask = loadMask;
         result.xu1 = xu1;
+        result.cloneId = cloneId;
+        result.clonePlayerId = clonePlayerId;
     }
 }

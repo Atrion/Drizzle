@@ -25,6 +25,7 @@ import java.util.ArrayDeque;
 import java.util.Iterator;
 import prpobjects.Uruobjectdesc;
 import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,6 +35,11 @@ public class Bytedeque extends shared.Bytedeque2
 {
     public Uruobjectdesc curRootObject = null;
     public prpobjects.prpfile prp = null;
+
+    public Bytedeque(shared.Format format)
+    {
+        super(format);
+    }
     
     
     //these generic functions are tied to uru.
@@ -50,6 +56,16 @@ public class Bytedeque extends shared.Bytedeque2
         }
     }
     public <T extends mystobj> void writeVector2(Vector<T> vector)
+    {
+        //int length = vector.length;
+        int length = vector.size();
+        for(int i=0;i<length;i++)
+        {
+            //vector[i].compile(this);
+            vector.get(i).compile(this);
+        }
+    }
+    public <T extends mystobj> void writeArrayList2(ArrayList<T> vector)
     {
         //int length = vector.length;
         int length = vector.size();

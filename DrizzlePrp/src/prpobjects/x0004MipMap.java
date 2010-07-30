@@ -264,7 +264,7 @@ public class x0004MipMap extends uruobj
     public void compile(Bytedeque deque)
     {
         //get subportion first.
-        Bytedeque subdeque = new Bytedeque();
+        Bytedeque subdeque = new Bytedeque(shared.Format.pots);
         switch(parent.type)
         {
             case 0x00:

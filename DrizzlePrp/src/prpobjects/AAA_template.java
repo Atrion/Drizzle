@@ -21,10 +21,6 @@ package prpobjects;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
@@ -41,8 +37,7 @@ public class AAA_template extends uruobj
     
     public void compile(Bytedeque c)
     {
-        m.warn("compile not implemented.",this.toString());
-        m.warn("not tested with pots.",this.toString());
+        m.throwUncaughtException("compile not implemented.",this.toString());
     }
     
 }

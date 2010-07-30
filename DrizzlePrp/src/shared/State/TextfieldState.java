@@ -17,7 +17,7 @@ public class TextfieldState extends javax.swing.JTextField implements IState
         super();
         
         AllStates.register(this);
-        
+
         
     }
     

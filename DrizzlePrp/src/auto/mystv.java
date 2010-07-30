@@ -28,6 +28,7 @@ public class mystv //was myst5Fixes
         r.GameName = "MystV";
         r.DetectionFile = "MystV.exe";
         r.prpMarkerForAgename = "_";
+        r.format = shared.Format.crowthistle;
         r.PythonVersion = 23;
         r.game = Game.mystv;
         r.agemodifier = new conversion.AgeModifier() {
@@ -574,8 +575,8 @@ public class mystv //was myst5Fixes
         if(logmod==null) throw new shared.uncaughtexception("modifyPythonfilemod couldn't find a ref.");
         if(logmod.parent.message.type!=Typeid.plNotifyMsg) throw new shared.uncaughtexception("modifyPythonfilemod found the wrong type.");
         PrpMessage.PlNotifyMsg msg = (PrpMessage.PlNotifyMsg)logmod.parent.message.prpobject.object;
-        if(msg.parent.refcount!=1) throw new shared.uncaughtexception("Should only be one ref in modifyPythonfilemod.");
-        plPythonFileMod pfm = prp.findObjectWithRef(msg.parent.refs[0]).castTo(plPythonFileMod.class);
+        if(msg.parent.receivers.size()!=1) throw new shared.uncaughtexception("Should only be one ref in modifyPythonfilemod.");
+        plPythonFileMod pfm = prp.findObjectWithRef(msg.parent.receivers.get(0)).castTo(plPythonFileMod.class);
         pfm.pyfile = Urustring.createFromString("dusttest");
         pfm.clearListings();
         for(int i=0;i<pythonparams.length;i++)

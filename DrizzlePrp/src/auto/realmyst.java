@@ -68,7 +68,7 @@ public class realmyst
         }
         
         //save 3ds file.
-        IBytedeque out = new Bytedeque2();
+        IBytedeque out = new Bytedeque2(shared.Format.realmyst);
         main.compile(out);
         byte[] filedata = out.getAllBytes();
         FileUtils.WriteFile("c:/hsmout/000test.3ds", filedata);
@@ -269,7 +269,7 @@ public class realmyst
             }
         }
         
-        IBytedeque out = new Bytedeque2();
+        IBytedeque out = new Bytedeque2(shared.Format.realmyst);
         main.compile(out);
         byte[] filedata = out.getAllBytes();
         FileUtils.WriteFile("c:/hsmout/000test.3ds", filedata);
@@ -492,14 +492,14 @@ public class realmyst
             int compressionType = hsm.getCompressionType();
             if(compressionType==0)
             {
-                IBytedeque out = new Bytedeque2();
+                IBytedeque out = new Bytedeque2(shared.Format.realmyst);
                 images.dds.createFromUncompressed(out, hsm.xagrb, hsm.widthMaybe, hsm.heightMaybe);
                 byte[] outdata = out.getAllBytes();
                 FileUtils.WriteFile(outfolder+"/"+hsm.name+".dds", outdata);
             }
             else if(compressionType==1 || compressionType==5)
             {
-                IBytedeque out = new Bytedeque2();
+                IBytedeque out = new Bytedeque2(shared.Format.realmyst);
                 images.dds.createFromDxt(out, hsm.dxt);
                 byte[] outdata = out.getAllBytes();
                 FileUtils.WriteFile(outfolder+"/"+hsm.name+".dds", outdata);
@@ -529,7 +529,7 @@ public class realmyst
             }
         }
 
-        IBytedeque out = new Bytedeque2();
+        IBytedeque out = new Bytedeque2(shared.Format.realmyst);
         main.compile(out);
         byte[] filedata = out.getAllBytes();
         FileUtils.WriteFile("c:/test.3ds", filedata);

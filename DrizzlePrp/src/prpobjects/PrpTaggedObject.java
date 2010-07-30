@@ -91,7 +91,18 @@ public class PrpTaggedObject extends uruobj
         result.prpobject = PrpObject.createFromUruobj(obj);
         return result;
     }
+    public static PrpTaggedObject create(inhuruobj obj)
+    {
+        PrpTaggedObject r = new PrpTaggedObject();
+        r.type = obj.typeid();
+        r.prpobject = PrpObject.createFromUruobj(obj);
+        return r;
+    }
     public String toString()
+    {
+        return dump();
+    }
+    public String dump()
     {
         return "type:"+type.toString()+" info:"+(prpobject==null?"(null)":prpobject.toString());
     }

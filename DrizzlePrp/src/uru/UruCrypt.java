@@ -26,6 +26,7 @@ import java.lang.Byte;
 import shared.b;
 import shared.m;
 import shared.Bytes;
+import shared.*;
 
 import org.bouncycastle.crypto.engines.AESEngine;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -61,6 +62,17 @@ public class UruCrypt {
     {
         UruFileTypes type = DetectType(encdata,game);
         return DecryptAny(encdata,type);
+    }
+    public static byte[] EncryptAny(byte[] unencdata, Format format)
+    {
+        if(format==Format.pots)
+        {
+            return UruCrypt.EncryptWhatdoyousee(unencdata);
+        }
+        else
+        {
+            throw new shared.uncaughtexception("unimplemented");
+        }
     }
     public static byte[] DecryptAny(byte[] encdata, UruFileTypes type)
     {
@@ -493,8 +505,12 @@ public class UruCrypt {
         }
         return result;
     }
-    
+
     public static byte[] EncryptNotthedroids(byte[] unencrypted)
+    {
+        return EncryptNotthedroids(unencrypted,UruCrypt.notthedroidsKey);
+    }
+    public static byte[] EncryptNotthedroids(byte[] unencrypted, int[] key)
     {
         int length = unencrypted.length;
         int numblocks = length / 8;
@@ -520,20 +536,20 @@ public class UruCrypt {
             {
                 unencodedblock[j] = 0x00; //supposed to be random, but we don't care, since we don't chain cipher anyway.
             }
-            EncryptNotthedroidsBlock(unencodedblock, encodedblock);
+            EncryptNotthedroidsBlock(unencodedblock, encodedblock, key);
             b.CopyBytes(encodedblock,result,16+i);
         }
         
         return result;
     }
-    public static void EncryptNotthedroidsBlock(byte[] unencodedblock, byte[] encodedblock)
+    public static void EncryptNotthedroidsBlock(byte[] unencodedblock, byte[] encodedblock, int[] k)
     {
         int v0 = b.BytesToInt32(unencodedblock, 0);
         int v1 = b.BytesToInt32(unencodedblock, 4);
         
         //int[] k = {0x6c0a5452,0x03827d0f,0x3a170b92,0x16db7fc2};  //key
         //int[] k = {0x9a17342d,0xe40bc816,0x7b2ef65d,0xaa9d5539};  //key
-        int[] k = notthedroidsKey;
+        //int[] k = notthedroidsKey;
         int sum = 0;
         int e;
         int DELTA = 0x9e3779b9;
@@ -570,6 +586,11 @@ public class UruCrypt {
     public static byte[] DecryptNotthedroids(byte[] filecontents, boolean isMqo)
     {
         int[] key = isMqo?UruCrypt.notthedroidsKeyMqo:UruCrypt.notthedroidsKey;
+        return DecryptNotthedroids(filecontents,key);
+    }
+    public static byte[] DecryptNotthedroids(byte[] filecontents, int[] key)
+    {
+        //int[] key = isMqo?UruCrypt.notthedroidsKeyMqo:UruCrypt.notthedroidsKey;
 
         int filelength = filecontents.length;
         byte[] header = Arrays.copyOfRange(filecontents, 0, 12);

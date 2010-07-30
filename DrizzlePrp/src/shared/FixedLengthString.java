@@ -17,6 +17,13 @@ public class FixedLengthString
     {
         str = c.readBytes(length);
     }
+    public FixedLengthString(String s, int length)
+    {
+        if(s.length()>length) m.throwUncaughtException("is this okay?");
+        str = new byte[length];
+        byte[] str2 = b.StringToBytes(s);
+        b.CopyBytes(str2, str, str2.length);
+    }
     public void compile(IBytedeque c)
     {
         c.writeBytes(str);

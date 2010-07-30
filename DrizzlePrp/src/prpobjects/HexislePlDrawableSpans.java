@@ -349,7 +349,7 @@ public class HexislePlDrawableSpans extends uruobj
 
             public byte[] compileVertices()
             {
-                IBytedeque c = new shared.Bytedeque2();
+                IBytedeque c = new shared.Bytedeque2(shared.Format.pots);
                 for(int i=0;i<vertices.length;i++)
                 {
                     vertices[i].compileAsPots(c);

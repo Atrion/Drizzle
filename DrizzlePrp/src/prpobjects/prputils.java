@@ -531,8 +531,8 @@ public class prputils
 
             ////count # of object types //we don't need to do this, since the old version doesn't have the count in the header.
 
-            Bytedeque headerdeque = new Bytedeque();
-            Bytedeque oideque = new Bytedeque();
+            Bytedeque headerdeque = new Bytedeque(shared.Format.pots);
+            Bytedeque oideque = new Bytedeque(shared.Format.pots);
 
             //calculate header size and create first part of header deque. in=prp out=headerdeque
             PrpHeader header = prp.header;
@@ -597,7 +597,7 @@ public class prputils
                 {
                     uncompiledObjects.add(curobj);
                     
-                    Bytedeque deque = new Bytedeque();
+                    Bytedeque deque = new Bytedeque(shared.Format.pots);
                     deque.curRootObject = curobj.header.desc;
                     deque.prp = prp;
                     if(type==type.plSceneNode) //handle scene node; there should only be one of these per prp.
@@ -687,7 +687,7 @@ public class prputils
             headerdeque.writeInt(indexoffset);
             
             //put it all together. in=headerdeque, compiledObjects, oideque. out=fulldeque
-            Bytedeque fulldeque = new Bytedeque();
+            Bytedeque fulldeque = new Bytedeque(shared.Format.pots);
             fulldeque.writeBytedeque(headerdeque);
             for(int i=0;i<numObjects;i++)
             {

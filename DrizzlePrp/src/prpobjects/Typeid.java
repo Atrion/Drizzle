@@ -25,6 +25,7 @@ import shared.m;
 import shared.b;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import shared.*;
 
 /**
  *
@@ -302,7 +303,7 @@ public enum Typeid implements compilable, java.io.Serializable
 
     //mqo
     pfGUITextBoxMod,
-    plAvatarMgr,
+    plAvatarMgr, //mgr
 
     //myst5 bugfix
     plConvexVolume,
@@ -311,16 +312,88 @@ public enum Typeid implements compilable, java.io.Serializable
     plHKSubWorld,
     plCloneSpawnModifier,
 
+    //TheArt new classes
+    plCubicRenderTarget,
+    plCubicRenderTargetModifier,
+
+    //talcum
+    plNetMsgLoadClone,
+    plLoadAvatarMsg,
+    plNetClientMgr, //mgr
+    plNetMsgPlayerPage,
+    plNetMsgTestAndSet,
+    plNetMsgMembersListReq,
+    plNetMsgGameStateRequest,
+    plNetMsgRelevanceRegions,
+    plNetMsgGameMessage,
+    plAvatarInputStateMsg,
+    plServerReplyMsg,
+    plNetMsgMembersList,
+    plInputIfaceMgrMsg,
+    //plLoadCloneMsg,
+    plNetMsgSDLState,
+    plNetMsgInitialAgeStateSent,
+    plLinkEffectsTriggerMsg,
+    plLinkEffectsMgr, //mgr
+    plClient, //mgr (seen as a receiver for a plMessage)
+    plNetMsgPagingRoom,
+    plNetMsgGroupOwner,
+    plNetMsgSDLStateBCast,
+    plClothingMsg,
+    plAvTaskMsg,
+    plNetMsgMemberUpdate,
+    plAvOneShotLinkTask,
+    //talcumproxy
+    plAvAnimTask,
+    
+
     plLeafController,
     nil,
     unknown;
 
     public void compile(Bytedeque deque)
     {
-        short result = lookup(this);
+        //old:
+        //short result = lookup(this);
+
+        //new:
+        short result = getAsShort(deque.format);
+
         //short result = (short)
         deque.writeShort(result);
     }
+
+    public short getAsShort(IBytedeque c)
+    {
+        return getAsShort(c.format);
+    }
+    public short getAsShort(Format format)
+    {
+        triplet t2 = findTriByType(this);
+        if(t2!=null)
+        {
+            short val;
+            if(format==Format.pots) val = t2.pots;
+            else if(format==Format.moul) val = t2.moul;
+            else throw new shared.uncaughtexception("unimplemented");
+            if(val!=-2)
+            {
+                return val;
+            }
+            else
+            {
+                m.warn("Typeid: Compilation problem: "+format.toString()+" isn't listed as having type: ",this.toString());
+                return (short)0x8000;
+                //throw new shared.uncaughtexception("unimplemented for this game");
+            }
+        }
+        else
+        {
+            throw new shared.uncaughtexception("unimplemented for this class");
+        }
+
+    }
+
     
     //short type;
     
@@ -576,6 +649,42 @@ public enum Typeid implements compilable, java.io.Serializable
 
         tri( 0x0E2, -2, -2, -2, plHKSubWorld),
         tri( 0x0B4, 0x0B4, -2, -2, plCloneSpawnModifier),
+
+        //TheArt
+        tri( 0x00E, 0x00E, -2, -2, plCubicRenderTarget),
+        tri( 0x00F, 0x00F, -2, -2, plCubicRenderTargetModifier),
+
+
+        //actually, these are tested with Moulagain, and may or may not match with Moul.
+        tri( -2, 0x3B3, -2, -2, plNetMsgLoadClone),
+        tri( -2, 0x3B1, -2, -2, plLoadAvatarMsg),
+        tri( -2, 0x052, -2, -2, plNetClientMgr),
+        tri( -2, 0x3B4, -2, -2, plNetMsgPlayerPage),
+        tri( -2, 0x27D, -2, -2, plNetMsgTestAndSet),
+        tri( -2, 0x2AD, -2, -2, plNetMsgMembersListReq),
+        tri( -2, 0x265, -2, -2, plNetMsgGameStateRequest),
+        tri( -2, 0x3AC, -2, -2, plNetMsgRelevanceRegions),
+        tri( -2, 0x26B, -2, -2, plNetMsgGameMessage),
+        tri( -2, 0x347, -2, -2, plAvatarInputStateMsg),
+        tri( -2, 0x26F, -2, -2, plServerReplyMsg),
+        tri( -2, 0x2AE, -2, -2, plNetMsgMembersList),
+        tri( -2, 0x363, -2, -2, plInputIfaceMgrMsg),
+        //tri( -2, -2, -2, -2, plLoadCloneMsg),
+        tri( -2, 0x2CD, -2, -2, plNetMsgSDLState),
+        tri( -2, 0x2B8, -2, -2, plNetMsgInitialAgeStateSent),
+        tri( -2, 0x300, -2, -2, plLinkEffectsTriggerMsg),
+        tri( -2, 0x083, -2, -2, plLinkEffectsMgr),
+        tri( -2, 0x05B, -2, -2, plClient),
+        tri( -2, 0x218, -2, -2, plNetMsgPagingRoom),
+        tri( -2, 0x264, -2, -2, plNetMsgGroupOwner),
+        tri( -2, 0x329, -2, -2, plNetMsgSDLStateBCast),
+        tri( -2, 0x357, -2, -2, plClothingMsg),
+        tri( -2, 0x298, -2, -2, plAvTaskMsg),
+        tri( -2, 0x2B1, -2, -2, plNetMsgMemberUpdate),
+        //tri( -2, 0x2CB, -2, -2, plNetMsgTerminated),
+        tri( -2, 0x488, -2, -2, plAvOneShotLinkTask),
+        tri( -2, 0x36B, -2, -2, plAvAnimTask),
+        
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle
@@ -1193,5 +1302,17 @@ public enum Typeid implements compilable, java.io.Serializable
         String name = e1.getTextContent();
         Typeid result = java.lang.Enum.valueOf(Typeid.class, name);
         return result;
+    }
+
+    public Class<uruobj> findClass()
+    {
+        try{
+            String classname = PrpObject.objpackage+"."+this.toString();
+            Class plasmaClass = Class.forName(classname);
+            Class<uruobj> plasmaClass2 = (Class<uruobj>)plasmaClass;
+            return plasmaClass2;
+        }catch(Exception e){
+            throw new shared.nested(e);
+        }
     }
 }

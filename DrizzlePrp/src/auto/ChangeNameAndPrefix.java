@@ -130,7 +130,7 @@ public class ChangeNameAndPrefix
             //rename sounds
             for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
             {
-                prpobjects.x0029SoundBuffer sb = ro.castTo();
+                prpobjects.plSoundBuffer sb = ro.castTo();
                 String curoggfile = sb.oggfile.toString();
                 boolean ignore = false;
                 for(String ogg: auto.fileLists.partialListofSharedSoundFiles)

@@ -200,7 +200,7 @@ public class GetResource
     {
         try
         {
-            Bytedeque2 result = new Bytedeque2();
+            Bytedeque2 result = new Bytedeque2(Format.none);
 
             URL url = findResource(path);
             InputStream in = url.openStream();

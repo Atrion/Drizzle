@@ -420,8 +420,11 @@ public class FileUtils {
             writer.flush();
             writer.close();
             int actuallength = (int)filename.length(); //loss of precision.
-            if(actuallength != filelength) throw new Exception("Error writing file, not correct length.");
-            writer.close();
+            if(actuallength != filelength)
+            {
+                throw new Exception("Error writing file, not correct length.");
+            }
+            //writer.close();
         }
         catch(Exception e)
         {

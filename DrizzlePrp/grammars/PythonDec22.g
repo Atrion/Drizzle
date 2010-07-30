@@ -40,6 +40,15 @@
 --commenting out the dyn_tuple_expr and dyn_mkfunc lines increased the efficiency of the test from 0.00513 to 0.5, which is awesome!  These are strongly connected components, so they are causing trouble.
 --making dyn_mkfunc an expr has a big performance hit and makes it show up in the strongly connected list.
 
+%Globals
+    /.
+        //import lpg.runtime.*;
+        //Dustin added
+        import pythondec3.ast.*;
+        //Dustin added end
+    ./
+%End
+
 
 %Terminals
     --fake tokens

@@ -85,6 +85,7 @@ public class AllGames
         String DetectionFile;
         String[] MusicFiles;
         //String[] AviFiles;
+        public Format format;
         public String prpMarkerForAgename;
         public int PythonVersion;
         public Game game;

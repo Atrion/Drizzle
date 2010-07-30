@@ -25,6 +25,7 @@ public class crowthistle
         r.GameName = "Crowthistle";
         r.DetectionFile = "CT.exe";
         r.prpMarkerForAgename = "_";
+        r.format = shared.Format.crowthistle;
         r.PythonVersion = 23;
         r.game = Game.crowthistle;
         r.renameinfo.prefices.put("MarshScene", 96);

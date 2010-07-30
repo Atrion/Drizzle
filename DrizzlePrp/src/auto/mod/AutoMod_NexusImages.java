@@ -24,7 +24,8 @@ public class AutoMod_NexusImages
         PrpRootObject layerroot = prp.findObject("Map #825", Typeid.plLayer);
         layerroot.hasChanged = true;
         x0006Layer layer = layerroot.castTo();
-        Uruobjectref dtmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "dustDynamicBookTexture", Pageid.createFromPrefixSuffix(-2, 64), Pagetype.createWithType(4));
+        //Uruobjectref dtmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "dustDynamicBookTexture", Pageid.createFromPrefixSuffix(-2, 64), Pagetype.createWithType(4));
+        Uruobjectref dtmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "dustDynamicBookTexture", Pageid.createFromPrefixPagenum(-2, 63), Pagetype.createWithType(4));
         //layer.texture = dtmroot.getref();
         layer.texture = dtmref;
 
@@ -50,13 +51,17 @@ public class AutoMod_NexusImages
         pfm.addListing(Pythonlisting.createWithRef(9, 90, dtmroot.getref()));
 
         //create references to the dynamictextmaps used by the book gui.
-        Uruobjectref bkref1 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "LeftDTMap2_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        //Uruobjectref bkref1 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "LeftDTMap2_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        Uruobjectref bkref1 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "LeftDTMap2_dynText", Pageid.createFromPrefixPagenum(-2, 53), Pagetype.createWithType(4));
         pfm.addListing(Pythonlisting.createWithRef(9, 91, bkref1));
-        Uruobjectref bkref2 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "RightDTMap2_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        //Uruobjectref bkref2 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "RightDTMap2_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        Uruobjectref bkref2 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "RightDTMap2_dynText", Pageid.createFromPrefixPagenum(-2, 53), Pagetype.createWithType(4));
         pfm.addListing(Pythonlisting.createWithRef(9, 92, bkref2));
-        Uruobjectref bkref3 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnBackDTMap3_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        //Uruobjectref bkref3 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnBackDTMap3_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        Uruobjectref bkref3 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnBackDTMap3_dynText", Pageid.createFromPrefixPagenum(-2, 53), Pagetype.createWithType(4));
         pfm.addListing(Pythonlisting.createWithRef(9, 93, bkref3));
-        Uruobjectref bkref4 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnFrontDTMap3_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        //Uruobjectref bkref4 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnFrontDTMap3_dynText", Pageid.createFromPrefixSuffix(-2, 54), Pagetype.createWithType(4));
+        Uruobjectref bkref4 = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plDynamicTextMap, "TurnFrontDTMap3_dynText", Pageid.createFromPrefixPagenum(-2, 53), Pagetype.createWithType(4));
         pfm.addListing(Pythonlisting.createWithRef(9, 94, bkref4));
     }
 }

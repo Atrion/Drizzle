@@ -62,7 +62,7 @@ public class CryptoBytedeque extends shared.IBytedeque
             cipher.processBytes(bytes, 0, bytes.length, r, 0);
             out.write(r);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void writeByte(byte b1)
@@ -73,7 +73,7 @@ public class CryptoBytedeque extends shared.IBytedeque
             int b3 = b.ByteToInt32(b2);
             out.write(b3);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void write(int byt)
@@ -84,7 +84,7 @@ public class CryptoBytedeque extends shared.IBytedeque
             int b3 = b.ByteToInt32(b2);
             out.write(b3);
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
     public void writeShorts(short[] shorts)
@@ -110,7 +110,7 @@ public class CryptoBytedeque extends shared.IBytedeque
         try{
             out.flush();
         }catch(IOException e){
-            throw new uncaughtnestedexception(e);
+            throw new nested(e);
         }
     }
 }

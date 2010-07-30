@@ -13,6 +13,8 @@ public class ButtongroupState extends javax.swing.ButtonGroup implements IState
         super();
         
         AllStates.register(this);
+
+        //super.
         
     }
     

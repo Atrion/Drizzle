@@ -5,16 +5,22 @@
 
 package mystProxy;
 
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
-import org.mortbay.jetty.Handler;
+//import org.mortbay.jetty.Server;
+import org.eclipse.jetty.server.Server;
+//import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+//import org.mortbay.jetty.Handler;
+import org.eclipse.jetty.server.Handler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.bio.SocketConnector;
+//import org.mortbay.jetty.Request;
+import org.eclipse.jetty.server.Request;
+//import org.mortbay.jetty.Connector;
+import org.eclipse.jetty.server.Connector;
+//import org.mortbay.jetty.bio.SocketConnector;
+import org.eclipse.jetty.server.bio.SocketConnector;
 import javax.servlet.http.Cookie;
 
 import java.io.File;
@@ -136,6 +142,11 @@ public class mystProxy
             if(result==null) return new Cookie[0];
             else return result;
         }*/
+        public void handle(String target, Request req2, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+        {
+            //req2 just contains jetty specific stuff.
+            handle(target,request,response,0); //the dispatch is never used anyway.
+        }
         public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch) throws IOException, ServletException
         {
             fileHandler.handle(null, target, request, response, dispatch);

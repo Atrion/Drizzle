@@ -17,7 +17,8 @@ public class Inplace_city
         //change texture:
         PrpRootObject layer_ro = prp.findObject("Map #8251",Typeid.plLayer);
         prpobjects.x0006Layer layer = layer_ro.castTo();
-        layer.texture = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelkirel*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+        //layer.texture = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelkirel*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+        layer.texture = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelkirel*1#0.hsm", Pageid.createFromPrefixPagenum(-2, 54), Pagetype.createWithType(4));
         layer_ro.markAsChanged();
 
         //change pythonfilemod:
@@ -86,7 +87,7 @@ public class Inplace_city
             closers.numCallbacks = 2;
             prpobjects.PrpMessage.PlAnimCmdMsg acm = closers.commands.get(0).message.castTo();
             prpobjects.PrpMessage.PlEventCallbackMsg othercallback = prpobjects.PrpMessage.PlEventCallbackMsg.createWithSenderAndReceiver(Uruobjectref.none(), newdoor);
-            othercallback.parent.flags = 0x800;
+            othercallback.parent.broadcastFlags = 0x800;
             othercallback.event = 1;
             othercallback.user = 1;
             acm.parent.callbacks.add(PrpTaggedObject.createWithTypeidUruobj(Typeid.plEventCallbackMsg, othercallback));

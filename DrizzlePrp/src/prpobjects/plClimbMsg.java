@@ -31,7 +31,7 @@ import shared.*;
 
 public class plClimbMsg extends uruobj
 {
-    PrpMessage.PlMessage parent;
+    plMessage parent;
     int i1;
     int i2;
     byte b3;
@@ -39,7 +39,7 @@ public class plClimbMsg extends uruobj
     
     public plClimbMsg(context c) throws readexception
     {
-        parent = new PrpMessage.PlMessage(c);
+        parent = new plMessage(c);
         i1 = c.readInt();
         i2 = c.readInt();
         b3 = c.readByte();

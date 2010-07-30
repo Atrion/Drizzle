@@ -155,7 +155,7 @@ public class textfile
     
     public Bytes saveToBytes()
     {
-        Bytedeque result = new Bytedeque();
+        Bytedeque result = new Bytedeque(shared.Format.none);
         for(Bytes line: lines)
         {
             result.writeBytes(line);
@@ -167,7 +167,7 @@ public class textfile
     }
     public byte[] saveToByteArray()
     {
-        Bytedeque result = new Bytedeque();
+        Bytedeque result = new Bytedeque(shared.Format.none);
         for(Bytes line: lines)
         {
             result.writeBytes(line);

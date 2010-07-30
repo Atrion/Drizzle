@@ -50,7 +50,7 @@ public class PostMod_RemoveDynamicCamMap
                         if(a instanceof prpobjects.PrpMessage.PlNotifyMsg)
                         {
                             prpobjects.PrpMessage.PlNotifyMsg notifymsg = (prpobjects.PrpMessage.PlNotifyMsg)a;
-                            for(Uruobjectref notmsgref: notifymsg.parent.refs)
+                            for(Uruobjectref notmsgref: notifymsg.parent.receivers)
                             {
                                 if(notmsgref.hasref()&&notmsgref.xdesc.objecttype==Typeid.plLadderModifier)
                                 {

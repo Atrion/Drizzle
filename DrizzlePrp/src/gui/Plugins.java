@@ -56,7 +56,12 @@ public class Plugins
         //do gui callbacks
         for(Runnable r: guicallbacks)
         {
-            r.run();
+            try{
+                r.run();
+            }catch(Exception e){
+                m.err("Error while loading plugin.");
+                e.printStackTrace();
+            }
         }
 
     }

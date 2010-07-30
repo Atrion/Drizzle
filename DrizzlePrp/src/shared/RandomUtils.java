@@ -5,12 +5,12 @@
 
 package shared;
 
-/**
- *
- * @author user
- */
+import java.util.Random;
+
 public class RandomUtils
 {
+    public static final Random rng = new Random();
+
     public static <T> T GetRandomItem(T[] items)
     {
         int pos = (int)(Math.random()*items.length);

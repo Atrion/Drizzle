@@ -24,14 +24,20 @@ import java.util.zip.ZipOutputStream;
 
 public class zip
 {
+    //Zlib streams start with 0x78 0x9c
     public static byte[] decompressZlib(byte[] input)
+    {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        return decompressZlib(input,0,input.length, out);
+    }
+    public static byte[] decompressZlib(byte[] input, int offset, int length, ByteArrayOutputStream out)
     {
         try
         {
             //byte[] compressedData = c.readBytes(compressedLength);
             Inflater decomp = new Inflater();
-            decomp.setInput(input);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            decomp.setInput(input,offset,length);
+            //ByteArrayOutputStream out = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[1024];
             while(!decomp.finished())

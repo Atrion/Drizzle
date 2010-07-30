@@ -23,6 +23,7 @@ import uru.Bytestream;
 import shared.e;
 import shared.m;
 import uru.Bytedeque;
+import shared.*;
 
 /**
  *
@@ -119,10 +120,17 @@ public class Uruobjectref extends uruobj
     //}
     public void compile(Bytedeque deque)
     {
-        deque.writeByte(hasRef);
-        if(hasRef != 0)
+        if(deque.format==Format.pots || deque.format==Format.moul)
         {
-            xdesc.compile(deque);
+            deque.writeByte(hasRef);
+            if(hasRef != 0)
+            {
+                xdesc.compile(deque);
+            }
+        }
+        else
+        {
+            m.throwUncaughtException("unimplemented");
         }
     }
     

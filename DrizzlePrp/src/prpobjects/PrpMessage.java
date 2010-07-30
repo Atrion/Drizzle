@@ -27,6 +27,8 @@ import uru.Bytedeque;
 import shared.b;
 import shared.e;
 import java.util.Vector;
+import shared.*;
+import java.util.ArrayList;
 
 public abstract class PrpMessage extends PrpTaggedObject
 {
@@ -56,12 +58,12 @@ public abstract class PrpMessage extends PrpTaggedObject
     
     public static class PlResponderEnableMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         byte b1;
 
         public PlResponderEnableMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             b1 = c.readByte();
         }
 
@@ -73,12 +75,12 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlSimSuppressMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         byte b1;
         
         public PlSimSuppressMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             b1 = c.readByte();
         }
         
@@ -91,12 +93,12 @@ public abstract class PrpMessage extends PrpTaggedObject
     
     public static class PlDampMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         int u1;
         
         public PlDampMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             u1 = c.readInt();
         }
         
@@ -109,7 +111,7 @@ public abstract class PrpMessage extends PrpTaggedObject
     
     public static class PlRideAnimatedPhysMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         byte u1;
         Uruobjectref u2;
         
@@ -117,14 +119,14 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             e.ensure(c.readversion==6);
             
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             u1 = c.readByte();
             u2 = new Uruobjectref(c);
         }
     }
     public static class PlCameraMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         HsBitVector cmd;
         Double64 transtime;
         byte activated;
@@ -135,7 +137,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public PlCameraMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             cmd = new HsBitVector(c);
             transtime = new Double64(c);
             activated = c.readByte();
@@ -205,7 +207,7 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation.
     public static class PlEventCallbackMsg extends uruobj
     {
-        public PlMessage parent;
+        public plMessage parent;
         public Flt eventTime; //was u1
         public short event; //was u2
         public short index; //was u3
@@ -214,7 +216,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public PlEventCallbackMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             eventTime = new Flt(c);
             event = c.readShort();
             index = c.readShort();
@@ -236,7 +238,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         {
             PlEventCallbackMsg r = new PlEventCallbackMsg();
             r.eventTime = Flt.createFromJavaFloat(0);
-            r.parent = PlMessage.createWithSenderAndReceiver(sender,receiver);
+            r.parent = plMessage.createWithSenderAndReceiver(sender,receiver);
             return r;
         }
     }
@@ -244,13 +246,13 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation.
     public static class PlTimerCallbackMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         int u1;
         Flt u2;
         
         public PlTimerCallbackMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             u1 = c.readInt();
             u2 = new Flt(c);
         }
@@ -321,7 +323,7 @@ public abstract class PrpMessage extends PrpTaggedObject
     //I reverse-engineered this myself, via decompilation and a lot of pain!
     public static class PlLinkToAgeMsg extends uruobj
     {
-        public PlMessage parent;
+        public plMessage parent;
         public byte u1;
         public PlAgeLinkStruct ageLinkStruct;
         public Urustring ustr;
@@ -343,7 +345,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public PlLinkToAgeMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             if(c.readversion==6||c.readversion==3)
             {
                 u1 = c.readByte();
@@ -594,13 +596,13 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class plEventCallbackSetupMsg extends uruobj //not in pots
     {
-        PlMessage parent;
+        plMessage parent;
         int count;
         PlOneShotMsg.PlOneShotCallback[] callbacks;
 
         public plEventCallbackSetupMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             count = c.readInt();
             callbacks = new PlOneShotMsg.PlOneShotCallback[count];
             for(int i=0;i<count;i++)
@@ -611,13 +613,13 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlOneShotMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         int count;
         PlOneShotCallback[] callbacks;
         
         public PlOneShotMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             if(c.readversion==7)
             {
                 //has a plEventCallbackSetupMsg (o8AA1D8) at offset28  (offset32)
@@ -680,7 +682,7 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlNotifyMsg extends uruobj
     {
-        public PlMessage parent;
+        public plMessage parent;
         int type;
         Flt state;
         int id;
@@ -689,7 +691,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public PlNotifyMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             type = c.readInt();
             state = new Flt(c);
             if(c.readversion==3||c.readversion==6)
@@ -712,7 +714,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         public static PlNotifyMsg createWithRef(Uruobjectref ref)
         {
             PlNotifyMsg result = new PlNotifyMsg();
-            result.parent = PlMessage.createWithRef(ref);
+            result.parent = plMessage.createWithRef(ref);
             result.state = Flt.zero();
             result.count = 0;
             result.events = new proEventData[0];
@@ -734,6 +736,24 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public static class proEventData extends uruobj
         {
+            public static final int kCollision=1;
+            public static final int kPicked=2;
+            public static final int kControlKey=3;
+            public static final int kVariable=4;
+            public static final int kFacing=5;
+            public static final int kContained=6;
+            public static final int kActivate=7;
+            public static final int kCallback=8;
+            public static final int kResponderState=9;
+            public static final int kMultiStage=10;
+            public static final int kSpawned=11;
+            public static final int kClickDrag=12;
+            public static final int kCoop=13;
+            public static final int kOfferLinkBook=14;
+            public static final int kBook=15;
+            public static final int kClimbingBlockerHit=16;
+            public static final int kNone=17;
+
             int type;
             uruobj event;
             
@@ -742,11 +762,32 @@ public abstract class PrpMessage extends PrpTaggedObject
                 type = c.readInt();
                 switch(type)
                 {
-                    case 1:
+                    case kCollision:
                         event = new Collision(c);
                         break;
-                    case 8:
+                    case kPicked:
+                        event = new Picked(c);
+                        break;
+                    case kVariable:
+                        event = new Variable(c);
+                        break;
+                    case kFacing:
+                        event = new Facing(c);
+                        break;
+                    case kContained:
+                        event = new Contained(c);
+                        break;
+                    case kActivate:
+                        event = new Activate(c);
+                        break;
+                    case kCallback:
                         event = new Callback(c);
+                        break;
+                    case kResponderState:
+                        event = new ResponderState(c);
+                        break;
+                    case kSpawned:
+                        event = new Spawned(c);
                         break;
                     default:
                         throw new readexception("proeventdata: unhandled type:"+Integer.toString(type));
@@ -758,6 +799,130 @@ public abstract class PrpMessage extends PrpTaggedObject
             {
                 c.writeInt(type);
                 event.compile(c);
+            }
+        }
+        public static class ResponderState extends uruobj
+        {
+            int state;
+            public ResponderState(context c) throws readexception
+            {
+                state = c.readInt();
+            }
+            public void compile(Bytedeque c)
+            {
+                c.writeInt(state);
+            }
+        }
+        public static class Picked extends uruobj
+        {
+            Uruobjectref picker; //may be avatar clone
+            Uruobjectref picked; //may be sceneobject
+            byte enabled;
+            Vertex hitpoint;
+            public Picked(context c) throws readexception
+            {
+                picker = new Uruobjectref(c);
+                picked = new Uruobjectref(c);
+                enabled = c.readByte();
+                hitpoint = new Vertex(c);
+            }
+            public void compile(Bytedeque c)
+            {
+                picker.compile(c);
+                picked.compile(c);
+                c.writeByte(enabled);
+                hitpoint.compile(c);
+            }
+        }
+        public static class Facing extends uruobj
+        {
+            Uruobjectref facer; //may be an avatar clone
+            Uruobjectref facing; //may be a scene object
+            float dot; //the dot product?
+            byte enabled;
+            public Facing(context c) throws readexception
+            {
+                facer = new Uruobjectref(c);
+                facing = new Uruobjectref(c);
+                dot = c.readFloat();
+                enabled = c.readByte();
+            }
+            public void compile(Bytedeque c)
+            {
+                facer.compile(c);
+                facing.compile(c);
+                c.writeFloat(dot);
+                c.writeByte(enabled);
+            }
+        }
+        public static class Contained extends uruobj
+        {
+            Uruobjectref contained; //may be avatar clone
+            Uruobjectref container; //may be none
+            byte entering;
+            public Contained(context c) throws readexception
+            {
+                contained = new Uruobjectref(c);
+                container = new Uruobjectref(c);
+                entering = c.readByte();
+            }
+            public void compile(Bytedeque c)
+            {
+                contained.compile(c);
+                container.compile(c);
+                c.writeByte(entering);
+            }
+        }
+        public static class Variable extends uruobj
+        {
+            Urustring name;
+            int dataType;
+            float number;
+            Uruobjectref key;
+            public Variable(context c) throws readexception
+            {
+                name = new Urustring(c);
+                dataType = c.readInt();
+                number = c.readFloat();
+                key = new Uruobjectref(c);
+            }
+            public void compile(Bytedeque c)
+            {
+                name.compile(c);
+                c.writeInt(dataType);
+                c.writeFloat(number);
+                key.compile(c);
+            }
+        }
+        public static class Spawned extends uruobj
+        {
+            Uruobjectref spawner; //e.g. plNPCSpawnMod
+            Uruobjectref spawnee; //e.g. none
+            public Spawned(context c) throws readexception
+            {
+                spawner = new Uruobjectref(c);
+                spawnee = new Uruobjectref(c);
+            }
+            public void compile(Bytedeque c)
+            {
+                spawner.compile(c);
+                spawnee.compile(c);
+            }
+        }
+        public static class Activate extends uruobj
+        {
+            byte active;
+            byte activate;
+
+            public Activate(context c)
+            {
+                active = c.readByte();
+                activate = c.readByte();
+            }
+            public void compile(Bytedeque c)
+            {
+                c.writeByte(active);
+                c.writeByte(activate);
             }
         }
         public static class Callback extends uruobj
@@ -798,13 +963,13 @@ public abstract class PrpMessage extends PrpTaggedObject
     
     public static class PlEnableMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         HsBitVector cmd;
         HsBitVector types;
         
         public PlEnableMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             cmd = new HsBitVector(c);
             types = new HsBitVector(c);
         }
@@ -818,14 +983,14 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlActivatorMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         int u1;
         Vertex u2;
         
         public PlActivatorMsg(context c) throws readexception
         {
             m.warn("untested");
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             u1 = c.readInt();
             u2 = new Vertex(c);
         }
@@ -839,12 +1004,12 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlArmatureEffectStateMsg extends uruobj
     {
-        public PlMessage parent;
+        public plMessage parent;
         public byte surface;
         public byte addsurface;
         public PlArmatureEffectStateMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             surface = c.readByte();
             addsurface = c.readByte();
         }
@@ -858,7 +1023,7 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlExcludeRegionMsg extends uruobj
     {
-        PlMessage parent;
+        plMessage parent;
         
         byte u1;
         int u2;
@@ -866,7 +1031,7 @@ public abstract class PrpMessage extends PrpTaggedObject
         
         public PlExcludeRegionMsg(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             u1 = c.readByte();
             if(c.readversion==3||c.readversion==6)
             {
@@ -889,13 +1054,13 @@ public abstract class PrpMessage extends PrpTaggedObject
     }
     public static class PlMessageWithCallbacks extends uruobj
     {
-        public PlMessage parent;
+        public plMessage parent;
         public int count;
         public Vector<PrpTaggedObject> callbacks;
         
         public PlMessageWithCallbacks(context c) throws readexception
         {
-            parent = new PlMessage(c);
+            parent = new plMessage(c);
             count = c.readInt();
             //callbacks = c.readArray(PrpTaggedObject.class, count); //this may be wrong. the messages may be stripped of the header in plMessage
             callbacks = c.readVector(PrpTaggedObject.class, count);
@@ -961,70 +1126,6 @@ public abstract class PrpMessage extends PrpTaggedObject
         }
     }
     
-    public static class PlMessage extends uruobj
-    {
-        public Uruobjectref parentobj;
-        public int refcount;
-        public Uruobjectref[] refs;
-        int u1;
-        int u2;
-        public int flags;
-        
-        //int xu1;
-        
-        public PlMessage(context c) throws readexception
-        {
-            parentobj = new Uruobjectref(c);
-            refcount = c.readInt();
-            refs = c.readArray(Uruobjectref.class, refcount);
-            if(c.readversion==3||c.readversion==6)
-            {
-                u1 = c.readInt(); //timestamp p1
-                u2 = c.readInt(); //timestamp p2
-                flags = c.readInt();
-            }
-            else if(c.readversion==4||c.readversion==7)
-            {
-                //if(refcount!=0)
-                //{
-                    //changed xu1 to flags.
-                    flags = c.readInt();
-                    if(flags!=0)
-                    {
-                        //m.err("not an error, but remember to check this out.");
-                        int dummy=0;
-                    }
-                //}
-                //the other flags will all default to 0.
-            }
-        }
-        private PlMessage(){}
-        public static PlMessage createWithRef(Uruobjectref ref)
-        {
-            PlMessage result = new PlMessage();
-            result.parentobj = Uruobjectref.none();
-            result.refcount = 1;
-            result.refs = new Uruobjectref[]{ ref };
-            return result;
-        }
-        public static PlMessage createWithSenderAndReceiver(Uruobjectref sender, Uruobjectref receiver)
-        {
-            PlMessage r = new PlMessage();
-            r.parentobj = sender;
-            r.refcount = 1;
-            r.refs = new Uruobjectref[]{ receiver };
-            return r;
-        }
-        public void compile(Bytedeque c)
-        {
-            parentobj.compile(c);
-            c.writeInt(refcount);
-            c.writeArray2(refs);
-            c.writeInt(u1);
-            c.writeInt(u2);
-            c.writeInt(flags);
-        }
-    }
 
     //public String toString()
     //{

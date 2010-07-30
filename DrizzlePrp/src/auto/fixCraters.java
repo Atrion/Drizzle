@@ -108,10 +108,10 @@ public class fixCraters
         {
             if(!ref.hasref()) continue;
             
-            if(ref.xdesc.pageid.suffix!=34)
-            {
-                int dummy=0;
-            }
+            //if(ref.xdesc.pageid.suffix!=34)
+            //{
+            //    int dummy=0;
+            //}
             
             if(ref.xdesc.objecttype==Typeid.plSceneNode) //change to this page's scenenode.
             {

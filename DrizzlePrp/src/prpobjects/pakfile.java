@@ -26,17 +26,22 @@ import java.io.File;
 import shared.IBytestream;
 import java.util.ArrayList;
 import java.util.List;
+import shared.Format;
+import uru.Bytedeque;
 
 /**
  *
  * @author user
  */
 //untested and incomplete.
-public class pakfile
+public class pakfile extends uruobj
 {
-    public int objectcount;
-    public IndexEntry[] indices;
-    public PythonObject[] objects;
+    //public int objectcount;
+    //public IndexEntry[] indices;
+    //public PythonObject[] objects;
+    private int objectcount;
+    public ArrayList<IndexEntry> indices = new ArrayList();
+    public ArrayList<PythonObject> objects = new ArrayList();
 
     int pythonversion;
 
@@ -59,11 +64,11 @@ public class pakfile
     {
         List<pythondec.pycfile> r = new ArrayList();
 
-        for(int i=0;i<objectcount;i++)
+        for(int i=0;i<indices.size();i++)
         {
-            int size = objects[i].objectsize;
-            byte[] rawdata = objects[i].rawCompiledPythonObjectData;
-            String name = indices[i].objectname.toString();
+            //int size = objects.get(i).objectsize;
+            byte[] rawdata = objects.get(i).rawCompiledPythonObjectData;
+            String name = indices.get(i).objectname.toString();
             if(prependPYCHeader)
             {
                 //The first 4 bytes are the magic number for that version of python.  The next 4 are a timestamp that doesn't matter, so I just set it to 0.
@@ -94,11 +99,11 @@ public class pakfile
     }
     public void extractPakFile(boolean prependPYCHeader, String outfolder)
     {
-        for(int i=0;i<objectcount;i++)
+        for(int i=0;i<indices.size();i++)
         {
-            int size = objects[i].objectsize;
-            byte[] rawdata = objects[i].rawCompiledPythonObjectData;
-            String name = indices[i].objectname.toString();
+            //int size = objects.get(i).objectsize;
+            byte[] rawdata = objects.get(i).rawCompiledPythonObjectData;
+            String name = indices.get(i).objectname.toString();
             if(prependPYCHeader)
             {
                 //The first 4 bytes are the magic number for that version of python.  The next 4 are a timestamp that doesn't matter, so I just set it to 0.
@@ -142,25 +147,74 @@ public class pakfile
         this.pythonversion = g.PythonVersion;
         byte[] data = uru.UruCrypt.DecryptAny(f.getAbsolutePath(), g);
         IBytestream c = shared.ByteArrayBytestream.createFromByteArray(data);
+
         objectcount = c.readInt();
-        indices = new IndexEntry[objectcount];
+        //indices = new IndexEntry[objectcount];
         for(int i=0;i<objectcount;i++)
         {
-            indices[i] = new IndexEntry(c, g.game.readversion);
+            //indices[i] = new IndexEntry(c, g.game.readversion);
+            indices.add(new IndexEntry(c, g.game.readversion));
         }
         if(readPythonObjects)
         {
-            objects = new PythonObject[objectcount];
+            //objects = new PythonObject[objectcount];
             for(int i=0;i<objectcount;i++)
             {
-                int offset = indices[i].offset;
+                int offset = indices.get(i).offset;
                 IBytestream c2 = c.Fork(offset);
-                objects[i] = new PythonObject(c2, g.game.readversion);
+                //objects[i] = new PythonObject(c2, g.game.readversion);
+                objects.add(new PythonObject(c2, g.game.readversion));
             }
         }
     }
+    public byte[] compileEncrypted(Format format)
+    {
+        byte[] unencbs = this.compileAlone(format);
+        return uru.UruCrypt.EncryptAny(unencbs,format);
+    }
+    public void compile(Bytedeque c)
+    {
+        if(indices.size()!=objects.size()) m.throwUncaughtException("unexpected");
+        //Bytedeque c = new Bytedeque(format);
+
+        //this isn't very efficient!
+
+        //test run to set offsets
+        int offset = 0;
+        //c.writeInt(indices.size());
+        offset += 4;
+        for(int i=0;i<indices.size();i++)
+        {
+            pakfile.IndexEntry ind = indices.get(i);
+            byte[] bs = ind.compileAlone(c.format);
+            offset += bs.length;
+        }
+        for(int i=0;i<objects.size();i++)
+        {
+            indices.get(i).offset = offset;
+            pakfile.PythonObject obj = objects.get(i);
+            byte[] bs = obj.compileAlone(c.format);
+            offset += bs.length;
+        }
+
+        //real run
+        c.writeInt(indices.size());
+        for(int i=0;i<indices.size();i++)
+        {
+            indices.get(i).compile(c);
+        }
+        for(int i=0;i<objects.size();i++)
+        {
+            objects.get(i).compile(c);
+        }
+    }
+    public void remove(int idx)
+    {
+        indices.remove(idx);
+        objects.remove(idx);
+    }
     
-    public static class IndexEntry
+    public static class IndexEntry extends uruobj
     {
         public Urustring objectname;
         public int offset;
@@ -170,21 +224,31 @@ public class pakfile
             objectname = new Urustring(c, readversion);
             offset = c.readInt();
         }
+        public void compile(Bytedeque c)
+        {
+            objectname.compile(c);
+            c.writeInt(offset);
+        }
         
         //public static IndexEntry
     }
     
-    public static class PythonObject
+    public static class PythonObject extends uruobj
     {
         int objectsize;
-        byte[] rawCompiledPythonObjectData;
+        public byte[] rawCompiledPythonObjectData;
         
         public PythonObject(IBytestream c, int readversion)
         {
             objectsize = c.readInt();
-            //account for bug in some Python utils:
+            //account for bug in some Python creation utils: (Cyan paks don't have this bug.)
             if(objectsize+c.getAbsoluteOffset()>c.getFilelength()) objectsize-=4;
             rawCompiledPythonObjectData = c.readBytes(objectsize);
+        }
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(rawCompiledPythonObjectData.length); //this will repair the bug too.
+            c.writeBytes(rawCompiledPythonObjectData);
         }
         
         private PythonObject(){}

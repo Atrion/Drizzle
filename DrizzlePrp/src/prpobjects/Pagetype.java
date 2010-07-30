@@ -25,10 +25,16 @@ import shared.e;
 import shared.m;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import shared.*;
 
 public class Pagetype extends uruobj implements java.io.Serializable
 {
     //usually: 8 is Textures or BuiltIn, 4 is a global one, and 0 is a regular page.
+    public static final int kLocalOnly = 0x01;
+    public static final int kVolatile =  0x02;
+    public static final int kReserved =  0x04;
+    public static final int kBuiltIn =   0x08;
+    public static final int kItinerant = 0x10;
 
     short pagetype;
     
@@ -60,7 +66,14 @@ public class Pagetype extends uruobj implements java.io.Serializable
     }
     public void compile(Bytedeque c)
     {
-        c.writeShort(pagetype);
+        if(c.format==Format.pots || c.format==Format.moul)
+        {
+            c.writeShort(pagetype);
+        }
+        else
+        {
+            m.throwUncaughtException("unimplemented");
+        }
     }
     
     public String toString()

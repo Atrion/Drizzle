@@ -45,4 +45,10 @@ public class Timestamp
     {
         return Long.toString(this.toLong());
     }
+    private Timestamp(){}
+    public static Timestamp createDefault()
+    {
+        Timestamp r = new Timestamp();
+        return r;
+    }
 }

@@ -8,6 +8,7 @@ package shared;
 import java.util.Vector;
 import java.util.HashMap;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 //public abstract interface IBytestream
 public abstract class IBytestream
@@ -23,7 +24,12 @@ public abstract class IBytestream
     abstract public IBytestream Fork(long offset);
     abstract protected int read();
     private HashMap<String,Object> _context = new HashMap();
-    
+
+    public boolean areBytesKnownToBeAvailable() //override this if we can tell this without the exact number known.
+    {
+        return (getBytesRemaining()!=0);
+    }
+
     public InputStream getChildStreamIfExists()
     {
         return null;
@@ -130,6 +136,15 @@ public abstract class IBytestream
         }
         return result;
     }
+    public <T> ArrayList<T> readArrayList( Class<T> objclass, int size)
+    {
+        ArrayList<T> result = new ArrayList<T>();
+        for(int i=0;i<size;i++)
+        {
+            result.add((T)this.readObj(objclass));
+        }
+        return result;
+    }
     public <T> T[] readArray( Class<T> objclass, int size)
     {
         T[] result = generic.makeArray(objclass, size);
@@ -167,17 +182,20 @@ public abstract class IBytestream
         }
         catch(java.lang.NoSuchMethodException e)
         {
-            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            //throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.InstantiationException e)
         {
-            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            //throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.IllegalAccessException e)
         {
-            throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            //throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.reflect.InvocationTargetException e)
@@ -196,7 +214,8 @@ public abstract class IBytestream
             else
             {
                 e2.printStackTrace();
-                throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+                //throw new uncaughtexception("IBytestream: java gunk: unable to create new instance.");
+                throw new shared.nested(e);
                 //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
             }
         }

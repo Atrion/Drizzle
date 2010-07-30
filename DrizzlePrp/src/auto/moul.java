@@ -33,6 +33,7 @@ public class moul
         r.GameName = "MOUL";
         r.DetectionFile = "tos.txt";
         r.prpMarkerForAgename = "_District_";
+        r.format = shared.Format.moul;
         r.PythonVersion = 23;
         r.game = Game.moul;
         r.renameinfo = getMoulRenameInfo();
@@ -566,7 +567,7 @@ public class moul
             prpdistiller.distiller.distillTextures(prp, textprp, new String[]{}, refReassigns);
 
             //change link sound
-            prpobjects.x0029SoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
+            prpobjects.plSoundBuffer sb = prp.findObject("xLink-Stereo.ogg:L", Typeid.plSoundBuffer).castTo();
             sb.flags = 3;
         }
         //removed for Drizzle25:
@@ -624,7 +625,8 @@ public class moul
             //prpfile textureprp = prpfile.readHeaderAndIndexFromFile(texturefilename);
             //Uruobjectdesc mipmap = textureprp.findDescInIndex("xlinkpanelmystisland*1#0.hsm", Typeid.plMipMap);
             //Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePrp(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", textureprp);
-            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+            //Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelmystisland*1#0.hsm", Pageid.createFromPrefixPagenum(-2, 54), Pagetype.createWithType(4));
             //layer.texture = mipmap.toRef();
             layer.texture = mmref;
         }
@@ -680,7 +682,8 @@ public class moul
 
             //change Ahnonay image.
             x0006Layer layer = prp.findObject("Map #69950", Typeid.plLayer).castTo();
-            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelahnonayvortex*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+            //Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelahnonayvortex*1#0.hsm", Pageid.createFromPrefixSuffix(-2, 55), Pagetype.createWithType(4));
+            Uruobjectref mmref = Uruobjectref.createDefaultWithTypeNamePagePagetype(Typeid.plMipMap, "xlinkpanelahnonayvortex*1#0.hsm", Pageid.createFromPrefixPagenum(-2, 54), Pagetype.createWithType(4));
             layer.texture = mmref;
         
         }

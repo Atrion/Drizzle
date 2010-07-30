@@ -27,6 +27,7 @@ import shared.Bytes;
 import shared.e;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import shared.*;
 
 /**
  *
@@ -35,9 +36,208 @@ import org.w3c.dom.Node;
 //this is a class I made myself, to encapsulate changing page ids.
 
 //In pots GlobalAvatars, the pages wrap around so that MaleFall,6 has the same Pageid as MalePelletBookLeft,262
+
+//This is a new version, which just has the prefix and pagenum for modifyable values.
+
 public class Pageid extends uruobj implements java.io.Serializable
 {
     private static final long serialVersionUID = -4399754547712612873L; //change/remove this if we want to force a new version to not read an old version.
+
+    public static final int kStateInvalid = 0;
+    public static final int kStateNormal = 1;
+    public static final int kStateVirtual = 2;
+
+    private int type;
+    private int prefix;
+    private int pagenum;
+
+    public Pageid(context c)
+    {
+        int shift;
+        if(c.readversion==6)
+        {
+            shift = 16;
+        }
+        else if(c.readversion==3||c.readversion==4||c.readversion==7)
+        {
+            shift = 8;
+        }
+        else
+        {
+            throw new shared.uncaughtexception("unhandled"); //note that mqo can perhaps be handled by moul.
+        }
+
+        int rawdata = c.in.readInt();
+        if(rawdata==0xFFFFFFFF)
+        {
+            type = kStateInvalid;
+        }
+        else if(rawdata==0x00000000)
+        {
+            type = kStateVirtual;
+        }
+        else
+        {
+            type = kStateNormal;
+            if((rawdata&0x80000000)!=0)
+            {
+                int cleandata = rawdata - (shift==16?0xFF000001:0xFFFF0001);
+                prefix = cleandata >>> shift;
+                pagenum = cleandata - (prefix << shift);
+                prefix = -prefix;
+            }
+            else
+            {
+                int cleandata = rawdata - 33;
+                prefix = cleandata >>> shift;
+                pagenum = cleandata - (prefix << shift);
+            }
+        }
+        //sign extend:
+        if(shift==16)
+            pagenum = ((pagenum&0x00008000)!=0)?(pagenum|0xFFFF0000):pagenum;
+        else
+            pagenum = ((pagenum&0x00000080)!=0)?(pagenum|0xFFFFFF00):pagenum;
+
+        if(c.sequencePrefix!=null)
+        {
+            prefix = c.sequencePrefix;
+            //--We don't seem to need this now, I think.
+            // I have no clue why, but this seems to be necessary
+            // BultIn and Textures have a prefix which is one HIGHER than the rest of the pages for that age
+            // found for both Cyan and fan-created ages, it is what both PRPTool and PlasmaExplorer show
+            // so I'll just believe it
+            //if (suffix <= 0x20) {
+            //    ++prefix;
+            //}
+        }
+
+        //change suffix
+        if(c.pagenumMap!=null)
+        {
+            Integer newpagenum = c.pagenumMap.get(this.getPageNumber());
+            if(newpagenum!=null)
+            {
+                //if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Replacing Pagenum ",Integer.toString(pagenum)+" with "+Integer.toString(newpagenum));
+                this.setPagenum(newpagenum);
+            }
+        }
+    }
+
+    public int getPageNumber(){return pagenum;}
+    public void setPagenum(int val){pagenum = val;}
+
+    private Pageid(){}
+    public static Pageid createFromPrefixPagenum(int prefix, int pagenum)
+    {
+        if(pagenum<-2) m.err("Unhandled pagenum: investigate now!"); //could be lower.
+
+        Pageid r = new Pageid();
+        r.type = kStateNormal;
+        r.prefix = prefix;
+        r.pagenum = pagenum;
+        return r;
+    }
+
+    public int getSequencePrefix(){return prefix;}
+    public void setSequencePrefix(int val){prefix = val;}
+
+    public void compile(Bytedeque deque)
+    {
+        if(type==kStateInvalid)
+        {
+            deque.writeInt(0xFFFFFFFF);
+        }
+        else if(type==kStateVirtual)
+        {
+            deque.writeInt(0x00000000);
+        }
+        else
+        {
+            int shift;
+            if(deque.format==Format.moul)
+            {
+                shift = 16;
+            }
+            else if(deque.format==Format.pots||deque.format==Format.crowthistle||deque.format==Format.hexisle)
+            {
+                shift = 8;
+            }
+            else
+            {
+                throw new shared.uncaughtexception("unhandled"); //note that mqo can perhaps be handled by moul.
+            }
+
+            if(shift==8 && (pagenum<-10 || pagenum>200))
+            {
+                m.warn("unsure");
+            }
+
+            int smallpagenum = (shift==16)?(pagenum&0x0000FFFF):(pagenum&0x000000FF);
+            if(prefix<0)
+            {
+                int val = smallpagenum - (prefix<<shift) + (shift==16?0xFF000001:0xFFFF0001);
+                deque.writeInt(val);
+            }
+            else
+            {
+                int val = smallpagenum + (prefix<<shift) + 33;
+                deque.writeInt(val);
+            }
+
+        }
+
+        //int rawdata = getRawData();
+        // convert it to TPOTS format
+        //if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Writing ",toString());
+        //int newdata = (rawdata & 0x000000FF) | ((rawdata & 0x00FF0000) >>> 8);
+        //int newprefix = prefix<0 ? (0xFFFF00|(0xFF & (-prefix))) : prefix;
+        //int newdata = (suffix & 0x000000FF) | ((newprefix & 0x00FFFFFF)<<8);
+        //deque.writeInt(newdata);
+    }
+
+    public String toString()
+    {
+        //return "Prefix=0x"+Integer.toHexString(prefix)+", Suffix=0x"+Integer.toHexString(suffix);
+        return Integer.toString(prefix) + ":" + Integer.toString(pagenum);
+    }
+    public String toString2()
+    {
+        return "Prefix="+Integer.toString(prefix) + ", Pagenum="+Integer.toString(pagenum);
+    }
+
+    public boolean equals(Object o)
+    {
+        if(o==null) return false;
+        if(!(o instanceof Pageid)) return false;
+        Pageid o2 = (Pageid)o;
+        if(this.type!=o2.type) return false;
+        if(this.prefix!=o2.prefix) return false;
+        if(this.pagenum!=o2.pagenum) return false;
+        return true;
+    }
+    public int hashCode()
+    {
+        return this.prefix + this.pagenum<<16;
+    }
+    public Pageid deepClone()
+    {
+        Pageid result = new Pageid();
+        result.type = type;
+        result.prefix = prefix;
+        result.pagenum = pagenum;
+        return result;
+    }
+
+}
+
+/*public class Pageid extends uruobj implements java.io.Serializable
+{
+    private static final long serialVersionUID = -4399754547712612873L; //change/remove this if we want to force a new version to not read an old version.
+
+    public static final int kStateInvalid = 0;
+    public static final int kStateNormal = 1;
+    public static final int kStateVirtual = 2;
 
     public int prefix;
     public int suffix;
@@ -87,6 +287,7 @@ public class Pageid extends uruobj implements java.io.Serializable
             //fixme = (fixme & 0x000000FF) | ((fixme & 0x0000FF00) << 8);
             //rawdata = fixme;
             short rawdata = c.readShort();
+            short xm5unknown = c.readShort(); e.ensure(xm5unknown==0);
             prefix = (rawdata & 0x0000FF00) >>> 8;
             suffix = (rawdata & 0x000000FF);
             
@@ -99,10 +300,10 @@ public class Pageid extends uruobj implements java.io.Serializable
          
         //ctx = c;
         //xOverridePrefix = c.sequencePrefix;
-        //if(/*ctx.sequencePrefix*/xOverridePrefix!=null)
+        //if(xOverridePrefix!=null) //was ctx.sequencePrefix
         if(c.sequencePrefix!=null)
         {
-            //prefix = /*ctx.sequencePrefix*/xOverridePrefix;
+            //prefix = xOverridePrefix; //was ctx.sequencePrefix
             prefix = c.sequencePrefix;
             if(shared.State.AllStates.getStateAsBoolean("reportSuffixes")) m.msg("Suffix: Using forced sequence prefix 0x",Integer.toHexString(prefix));
             // I have no clue why, but this seems to be necessary
@@ -281,4 +482,4 @@ public class Pageid extends uruobj implements java.io.Serializable
         return result;
     }
 
-}
+}*/

@@ -88,7 +88,7 @@ public class PrpObject extends uruobj
             case plStereizer:
                 return new x00FFStereizer(c);
             case plSoundBuffer:
-                return new x0029SoundBuffer(c);
+                return new plSoundBuffer(c);
             case plRandomSoundMod:
                 return new plRandomSoundMod(c);
             case plWin32StreamingSound:
@@ -389,6 +389,18 @@ public class PrpObject extends uruobj
                 return new PrpMessage.PlResponderEnableMsg(c);
             case plParticleUniformWind:
                 return new plParticleWindEffect.PlParticleUniformWind(c);
+            case plCubicRenderTarget:
+                return new plDynamicEnvMap.ithinkthisisPlCubicRenderTarget(c);
+            //case plCubicRenderTargetModifier:
+            //    return new plCubicRenderTarg
+            case plNetMsgSDLState:
+                try{
+                  Class<uruobj> klass = (Class<uruobj>)Class.forName("prpobjects.plNetMsgSDLState"); //
+                  return shared.generic.createObjectWithSingleArgumentConstructor(klass, context.class, c);
+                }catch(Exception e){
+                    throw new shared.nested(e);
+                }
+
             //case plAvatarMgr:
             //    return new plAvatarMgr(c);
             default:
@@ -412,6 +424,7 @@ public class PrpObject extends uruobj
             return r;
         }catch(Exception e){
             return null;
+            //throw new shared.nested(e);
         }
     }
     public PrpObject(context c, Typeid type) throws readexception

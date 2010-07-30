@@ -319,7 +319,7 @@ public class pycfile
     }
     public byte[] compile()
     {
-        shared.IBytedeque c = new shared.Bytedeque2();
+        shared.IBytedeque c = new shared.Bytedeque2(shared.Format.none);
         c.writeInt(magicnum);
         c.writeInt(timestamp);
         code.marshal(c);

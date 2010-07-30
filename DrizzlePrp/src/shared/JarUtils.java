@@ -87,6 +87,21 @@ public class JarUtils
             curfilename = jar.getName();
         }
 
+        //delete signature files
+        File manifestdir = new File(outputdir+"/tempmerge/META-INF/");
+        for(File child: manifestdir.listFiles())
+        {
+            if(child.exists() && child.isFile())
+            {
+                String filename = child.getName().toLowerCase();
+                if(filename.endsWith(".rsa") || filename.endsWith(".dsa") || filename.endsWith(".sf") || filename.startsWith("sig-"))
+                {
+                    //delete it
+                    FileUtils.DeleteFile(child.getAbsolutePath(), true);
+                }
+            }
+        }
+
         //merge jars
         File outfile = new File(outputdir+"/"+curfilename+"-Merged.jar");
         zip.createZipFile(tempdir, outfile);

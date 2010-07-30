@@ -43,9 +43,14 @@ public class Bytedeque2 extends IBytedeque
     //public int curRootObjectSize;
     //public int curRootObjectEnd;
     
-    public Bytedeque2()
+    //public Bytedeque2()
+    //{
+    //}
+    public Bytedeque2(shared.Format format)
     {
+        this.format = format;
     }
+
     protected Iterator<byte[]> getIterator()
     {
         return deque.iterator();
@@ -213,7 +218,7 @@ public class Bytedeque2 extends IBytedeque
     }
     public IBytedeque Fork()
     {
-        Bytedeque2 result = new Bytedeque2();
+        Bytedeque2 result = new Bytedeque2(format);
         return result;
     }
 }

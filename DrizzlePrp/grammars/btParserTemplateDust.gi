@@ -160,7 +160,7 @@
     /.
         import lpg.runtime.*;
         //Dustin added
-        import pythondec3.ast.*;
+        //import pythondec3.ast.*;
         //Dustin added end
     ./
 %End

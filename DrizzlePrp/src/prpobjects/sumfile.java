@@ -131,7 +131,7 @@ public class sumfile
         //int count = files.size();
         int count = 0;
         
-        Bytedeque c = new Bytedeque();
+        Bytedeque c = new Bytedeque(shared.Format.none);
         c.writeInt(count);
         c.writeInt(0);
         
@@ -166,7 +166,7 @@ public class sumfile
         
         int count = files.size();
         
-        Bytedeque c = new Bytedeque();
+        Bytedeque c = new Bytedeque(shared.Format.none);
         c.writeInt(count);
         c.writeInt(0);
         for(int i=0;i<datfiles.length;i++)

@@ -31,6 +31,7 @@ import shared.Pair;
 import java.util.HashMap;
 import shared.cmap;
 import shared.IBytestream;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,6 +59,8 @@ public class context extends shared.BaseContext
     //public Integer sequenceSuffix;
     public cmap<Integer,Integer> pagenumMap;
     public String ageName;
+
+    //public Object extra;
     
     //whether to just read the PrpRootObject as raw data.
     public boolean isRaw;
@@ -221,6 +224,16 @@ public class context extends shared.BaseContext
         }
         return result;
     }
+    public <T extends mystobj> ArrayList<T> readArrayList(Class<T> klass, int size) throws readexception
+    {
+        ArrayList<T> result = new ArrayList<T>();
+        for(int i=0;i<size;i++)
+        {
+            result.add((T)this.readObj(klass));
+        }
+        return result;
+        //return in.readArrayList(klass,size);
+    }
         //T[] result = (T[])(new Object[size]); //cast from Object[], so we can create the array. Otherwise we get a compile error.
         //Vector<T> result = new Vector<T>();
             //T dummy = new T();
@@ -249,17 +262,20 @@ public class context extends shared.BaseContext
         }
         catch(java.lang.NoSuchMethodException e)
         {
-            throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            //throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.InstantiationException e)
         {
-            throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            //throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.IllegalAccessException e)
         {
-            throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            //throw new readexception("Bytestream: java gunk: unable to create new instance.");
+            throw new shared.nested(e);
             //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
         }
         catch(java.lang.reflect.InvocationTargetException e)
@@ -271,7 +287,8 @@ public class context extends shared.BaseContext
             }
             else
             {
-                throw new readexception("Bytestream: java gunk: unable to create new instance.");
+                //throw new readexception("Bytestream: java gunk: unable to create new instance.");
+                throw new shared.nested(e);
                 //If an exception is being thrown here, it's probably because an inner class was attempted.  Make it static(which just means that the outer class isn't passed as a parameter.)
             }
         }
@@ -317,6 +334,10 @@ public class context extends shared.BaseContext
     public float readFloat()
     {
         return in.readFloat();
+    }
+    public boolean areBytesKnownToBeAvailable()
+    {
+        return in.areBytesKnownToBeAvailable();
     }
     public String toString()
     {

@@ -94,13 +94,13 @@ public class plSwimDetector extends uruobj
     
     public static class PlSwimMsg extends uruobj
     {
-        PrpMessage.PlMessage parent;
+        plMessage parent;
         byte b1;
         Uruobjectref ref2;
         
         public PlSwimMsg(context c) throws readexception
         {
-            parent = new PrpMessage.PlMessage(c);
+            parent = new plMessage(c);
             b1 = c.readByte();
             ref2 = new Uruobjectref(c);
         }

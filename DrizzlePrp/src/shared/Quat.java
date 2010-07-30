@@ -45,6 +45,13 @@ public class Quat extends uruobj
         y = new Flt(c);
         z = new Flt(c);
     }
+    public Quat(float w, float x, float y, float z)
+    {
+        this.w = new Flt(w);
+        this.x = new Flt(x);
+        this.y = new Flt(y);
+        this.z = new Flt(z);
+    }
     private Quat(){}
     public static Quat readXYZW(IBytestream c)
     {
