@@ -168,20 +168,56 @@ public class Pageid extends uruobj implements java.io.Serializable
                 throw new shared.uncaughtexception("unhandled"); //note that mqo can perhaps be handled by moul.
             }
 
-            if(shift==8 && (pagenum<-10 || pagenum>200))
+            //we may have to modify these values if they are out of range, so use copies
+            int _pagenum = pagenum;
+            int _prefix = prefix;
+            //if there is overflow in the shift8 case, reproduce it here:
+            if(shift==8)
             {
-                m.warn("unsure");
+                if(_prefix<0)
+                {
+                    while(_pagenum>=256)
+                    {
+                        _prefix -= 1;
+                        _pagenum -= 256;
+                    }
+                }
+                else
+                {
+                    while(_pagenum>=256)
+                    {
+                        _prefix += 1;
+                        _pagenum -= 256;
+                    }
+                }
             }
 
-            int smallpagenum = (shift==16)?(pagenum&0x0000FFFF):(pagenum&0x000000FF);
-            if(prefix<0)
+
+            if(shift==8 && _pagenum<-10)
             {
-                int val = smallpagenum - (prefix<<shift) + (shift==16?0xFF000001:0xFFFF0001);
+                m.throwUncaughtException("unsure");
+            }
+            //if(shift==8 && _pagenum>200)
+            //{
+            //    if(_pagenum>500) m.throwUncaughtException("handle this");
+            //}
+
+            //sign
+            int smallpagenum = (shift==16)?(_pagenum&0x0000FFFF):(_pagenum&0x000000FF);
+            //if(shift==16)
+            //    pagenum = ((pagenum&0x00008000)!=0)?(pagenum|0xFFFF0000):pagenum;
+            //else
+            //    pagenum = ((pagenum&0x00000080)!=0)?(pagenum|0xFFFFFF00):pagenum;
+
+
+            if(_prefix<0)
+            {
+                int val = smallpagenum - (_prefix<<shift) + (shift==16?0xFF000001:0xFFFF0001);
                 deque.writeInt(val);
             }
             else
             {
-                int val = smallpagenum + (prefix<<shift) + 33;
+                int val = smallpagenum + (_prefix<<shift) + 33;
                 deque.writeInt(val);
             }
 
