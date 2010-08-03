@@ -31,7 +31,7 @@ import shared.*;
 
 public class plSwimDetector extends uruobj
 {
-    PlSimpleRegionSensor parent;
+    public PlSimpleRegionSensor parent;
     byte b1;
     Flt f2;
     Flt f3;
@@ -57,9 +57,9 @@ public class plSwimDetector extends uruobj
     {
         plSingleModifier parent;
         byte b1;
-        PrpTaggedObject xobj2;
+        public PrpTaggedObject enterMsg; //was xobj2
         byte b3;
-        PrpTaggedObject xobj4;
+        public PrpTaggedObject exitMsg; //was xobj4
         
         public PlSimpleRegionSensor(context c) throws readexception
         {
@@ -67,12 +67,12 @@ public class plSwimDetector extends uruobj
             b1 = c.readByte();
             if(b1!=0)
             {
-                xobj2 = new PrpTaggedObject(c);
+                enterMsg = new PrpTaggedObject(c);
             }
             b3 = c.readByte();
             if(b3!=0)
             {
-                xobj4 = new PrpTaggedObject(c);
+                exitMsg = new PrpTaggedObject(c);
             }
         }
         
@@ -82,21 +82,21 @@ public class plSwimDetector extends uruobj
             c.writeByte(b1);
             if(b1!=0)
             {
-                xobj2.compile(c);
+                enterMsg.compile(c);
             }
             c.writeByte(b3);
             if(b3!=0)
             {
-                xobj4.compile(c);
+                exitMsg.compile(c);
             }
         }
     }
     
     public static class PlSwimMsg extends uruobj
     {
-        plMessage parent;
-        byte b1;
-        Uruobjectref ref2;
+        public plMessage parent;
+        public byte b1;
+        public Uruobjectref ref2;
         
         public PlSwimMsg(context c) throws readexception
         {

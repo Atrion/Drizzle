@@ -256,6 +256,8 @@ public class moul
                     //shared.State.AllStates.setState("translateSmartseeks", true);
                     PostMod_TranslateSmartseeks(prp);
                 }
+
+                auto.postmod.PostMod_FixSwimRegions.FixSwimRegions(prp);
                 
                 //all the crazy stuff, should be cleaned up:
                 HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();

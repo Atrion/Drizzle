@@ -198,7 +198,8 @@ public class plHKPhysical extends uruobj
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = LOSDB;
-            pots.zzzgroup0 = 0x4;
+            pots.zzzgroup0 = 0x4; //changed for Drizzle27
+
             
             pots.givemass = true;
         }
@@ -529,15 +530,29 @@ public class plHKPhysical extends uruobj
 
     public void convertPXtoHK()
     {
-        this.havok = this.physx.convertToHavok();
-        this.physx = null;
-        this._version = 3; //set as pots version.
+        if(this.havok==null)
+        {
+            this.havok = this.physx.convertToHavok();
+            this.physx = null;
+            this._version = 3; //set as pots version.
+        }
+        else
+        {
+            if(this.physx!=null) m.throwUncaughtException("unexpected");
+        }
     }
     public void convertODEtoHK(prpfile prp)
     {
-        this.havok = this.ode.convertToHKPhysical(prp);
-        this.ode = null;
-        this._version = 3; //set as pots version.
+        if(this.havok==null)
+        {
+            this.havok = this.ode.convertToHKPhysical(prp);
+            this.ode = null;
+            this._version = 3; //set as pots version.
+        }
+        else
+        {
+            if(this.ode!=null) m.throwUncaughtException("unexpected");
+        }
     }
     public plHKPhysical(){}
     public plHKPhysical(context c) throws readexception
