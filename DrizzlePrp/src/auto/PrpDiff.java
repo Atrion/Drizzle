@@ -14,7 +14,7 @@ public class PrpDiff
 {
     static final boolean reportIdenticals = false;
 
-    public static void FindDiff(String sourceprp, String destprp, String outputfile)
+    public static void FindDiff(String sourceprp, String destprp)
     {
         prpfile prp1 = prpfile.createFromFile(sourceprp, true);
         prpfile prp2 = prpfile.createFromFile(destprp, true);

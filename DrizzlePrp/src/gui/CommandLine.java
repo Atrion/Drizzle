@@ -117,7 +117,7 @@ public class CommandLine
         }
         else if(args[0].equals("-prpdiff"))
         {
-            auto.PrpDiff.FindDiff(args[1], args[2], args[3]);
+            auto.PrpDiff.FindDiff(args[1], args[2]);
         }
         else if(args[0].equals("-changeagename"))
         {
