@@ -1,1 +1,1 @@
-java -Xmx800m -jar DrizzlePrp.jar $*
+java -Xmx800m -jar DrizzlePrp.jar "$@"
