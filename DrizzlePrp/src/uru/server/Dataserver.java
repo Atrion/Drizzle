@@ -339,6 +339,7 @@ public class Dataserver
                 "/vnode_cache/", //in fact, causes some problems, because the nodes don't match up.
                 "/vnodes/",
                 "/init/", //in fact, causes update problems, because Uru changes them immediately.
+                "/DrizzleDataserver", //DrizzleDataserverOverrides.txt,DrizzleDataserverInfo.dat
             };
             for(String i: ignorestarts) if(relpath.startsWith(i)) return;
             String[] ignoreends = {
