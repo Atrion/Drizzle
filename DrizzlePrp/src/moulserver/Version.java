@@ -127,7 +127,7 @@ public class Version
         talcum.httpserver = "dus.mine.nu";
         talcum.fileserver = "dus.mine.nu";
         talcum.authserver = "dus.mine.nu";
-        moulagain_1_893.port = 14617;
+        talcum.port = 14617;
     }
 
 
