@@ -21,33 +21,46 @@ public class CommandLine
         {
             m.msg("Welcome to Drizzle!");
             m.msg("  (Any of these commands can be compounded into a list, e.g. '-version -prpdiff c:/source.prp c:/dest.prp -help')");
-            m.msg("  -version    ->Shows Drizzle's version.");
-            m.msg("  -help    ->This help screen.");
-            m.msg("  -mirrordataserver exampleserver.com c:/outfolder    ->Mirrors an Alcugs dataserver at the given address, saving to the given output folder.");
-            m.msg("  -generatedataserver c:/infolder c:/outfolder    ->Generates an Alcugs dataserver using the given input Uru installation, saving to the given output folder.");
-            //m.msg("  -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
-            m.msg("  -prpdiff c:/source.prp c:/dest.prp");
-            //m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
-            m.msg("  -changeagename c:/inputfile.prp c:/outputfolder NewAgeName       ->Does not change python/ogg files.");
-            m.msg("  -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
-            m.msg("  -changepage c:/inputfile.prp c:/outputfolder NewPageName");
-            m.msg("  -deepview c:/inputfile.prp    ->Starts DrizzleDeepview.  The inputfile is optional.");
-            m.msg("  -changeagenameandprefix c:/inputfile.prp c:/outputfolder NewAgeName NewSequencePrefix    ->Changes python/ogg files.");
-            m.msg("  -inplacemod c:/potsfolder dat/inputfile.prp ModName");
-            m.msg("  -listinplacemods    ->Displays all the available InplaceMods.");
-            m.msg("  -unpackpak c:/pakfile.pak c:/outputfolder gamename    ->Extracts all the .pyc files from a Python22 .pak file.");
-            m.msg("  -decompilepyc c:/pycfile.pyc c:/outputfolder    ->Decompiles a .pyc file using DrizzleDecompile.");
-            m.msg("  -decompilepak c:/pakfile.pak c:/outputfolder gamename    ->Decompiles all .pyc files within a Python22 .pak file, using DrizzleDecompile.");
-            m.msg("  -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc    ->Converts the files exported by the 3dsmax plugin to Pots.");
-            m.msg("  -listgamenames    ->Lists the possible options for 'gamename' arguments in other commands.");
+            m.msg("  Misc:");
+            m.msg("    -version    ->Shows Drizzle's version.");
+            m.msg("    -help    ->This help screen.");
+            m.msg("    -listgamenames    ->Lists the possible options for 'gamename' arguments in other commands.");
             //m.msg("(gamename is one of: "+auto.Game.getAllGamenames()+" )");
-            m.msg("  -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
-            m.msg("  -downloadmoulagainfiles c:/outputfolder");
-            m.msg("  -downloadsecuremoulagainfiles username password c:/outputfolder");
-            m.msg("  -startproxyserver c:/ProxyUruFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
-            m.msg("  -patchmoulbinary c:/path/to/binary.exe server.com");
-            m.msg("  -startmoulserver MainPassword server.com c:/DataFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
-            m.msg("  -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
+            m.msg("  Server:");
+            m.msg("    -mirrordataserver exampleserver.com c:/outfolder    ->Mirrors an Alcugs dataserver at the given address, saving to the given output folder.");
+            m.msg("    -generatedataserver c:/infolder c:/outfolder    ->Generates an Alcugs dataserver using the given input Uru installation, saving to the given output folder.");
+            m.msg("    -downloadmoulagainfiles c:/outputfolder");
+            m.msg("    -downloadsecuremoulagainfiles username password c:/outputfolder");
+            m.msg("    -startproxyserver c:/ProxyUruFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
+            m.msg("    -patchmoulbinary c:/path/to/binary.exe server.com");
+            m.msg("    -encryptmoulfile c:/inputfile c:/outputfolder    ->Encrypts the input file with the notthedroids key Talcum uses.");
+            m.msg("    -startmoulserver MainPassword server.com c:/DataFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
+            m.msg("  Prp:");
+            //m.msg("    -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
+            m.msg("    -prpdiff c:/source.prp c:/dest.prp");
+            //m.msg("    -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
+            m.msg("    -changeagename c:/inputfile.prp c:/outputfolder NewAgeName       ->Does not change python/ogg files.");
+            m.msg("    -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
+            m.msg("    -changepage c:/inputfile.prp c:/outputfolder NewPageName");
+            m.msg("    -changeagenameandprefix c:/inputfile.prp c:/outputfolder NewAgeName NewSequencePrefix    ->Changes python/ogg files.");
+            m.msg("    -inplacemod c:/potsfolder dat/inputfile.prp ModName");
+            m.msg("    -listinplacemods    ->Displays all the available InplaceMods.");
+            m.msg("    -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc    ->Converts the files exported by the 3dsmax plugin to Pots.");
+            m.msg("    -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
+            m.msg("  Subtools:");
+            m.msg("    -deepview c:/inputfile.prp    ->Starts DrizzleDeepview.  The inputfile is optional.");
+            m.msg("  Python:");
+            m.msg("    -unpackpak c:/pakfile.pak c:/outputfolder gamename    ->Extracts all the .pyc files from a Python22 .pak file.");
+            m.msg("    -decompilepyc c:/pycfile.pyc c:/outputfolder    ->Decompiles a .pyc file using DrizzleDecompile.");
+            m.msg("    -decompilepak c:/pakfile.pak c:/outputfolder gamename    ->Decompiles all .pyc files within a Python22 .pak file, using DrizzleDecompile.");
+            m.msg("    -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
+        }
+        else if(args[0].equals("-encryptmoulfile"))
+        {
+            File f = new File(args[1]);
+            byte[] unencrypted = FileUtils.ReadFile(f);
+            byte[] encrypted = uru.UruCrypt.EncryptNotthedroids(unencrypted, moulserver.SuperManager.GetTalcumNotthedroids());
+            FileUtils.WriteFile(args[2]+"/"+f.getName(), encrypted, true, true);
         }
         else if(args[0].equals("-translateagedown"))
         {

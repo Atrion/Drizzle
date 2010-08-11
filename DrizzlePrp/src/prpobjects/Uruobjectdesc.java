@@ -46,7 +46,7 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
     public Urustring objectname;
     //int xsomeid;
     //int xclientid;
-    byte xu1;
+    //byte xu1; //was really just loadMask.
     //short xm5unknown;
     public int cloneId;
     public int clonePlayerId;
@@ -70,8 +70,12 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         IBytestream data = c.in;
 
         this.rootobj = c.curRootObject;
-        
+
+        ////flag seems to have different meaninsg in Myst5/Crow/Hex, as 0x02(kHasLoadMask) was removed because the loadMask was removed.
+        ////so we should probably actually remove the 0x02 and 0x04 flags when reading Myst5/Crow/Hex.
+        //nevermind the above 2 lines.  Value 0x1 only occurs online, 0x2 marks the presence of loadMask, and 0x4 seems to only be in Myst5, but also marks the presence of loadMask.
         flag = data.readByte(); //e.ensureflags(flag,0x00,0x02,0x04);//should be 0 normally,1 and 2 also happen, but we need to study them. 0x04 occurs in Myst5 for example.
+        //m.status("flag="+Integer.toHexString(b.ByteToInt32(flag)));
         //pageid = data.readInt();
         pageid = new Pageid(c);
         //if(pageid.prefix==97)
@@ -86,6 +90,7 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
             if((flag&kHasLoadMask)!=0)
             {
                 loadMask = data.readByte();
+                //m.status("loadMask="+Integer.toHexString(b.ByteToInt32(loadMask)));
             }
             objecttype = Typeid.Read(c);
             objectname = new Urustring(c);
@@ -97,20 +102,27 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         }
         else if(c.readversion==4||c.readversion==7)
         {
+            //in crowthistle/myst5/hexisle, we have this other flag.
             //xm5unknown = c.readShort(); //only in crowthistle?(actually a part of the Pageid.)
             pagetype = new Pagetype(c);
-            if(flag==0x02)
-            {
-                int dummy=0;
-            }
+            //if((flag&kHasLoadMask)!=0)
+            //{
+                //int dummy=0;
+            //}
             objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
             objectname = new Urustring(c);
             //if(flag==0x02 || flag==0x04)
             if((flag&0x06)!=0) //if either or both.
             {
-                xu1 = data.readByte();
+                ////is this byte the loadFlag?  No, loadFlag is always 0, and this can have many values, such as cc,ee,e,cf,ef,f,1,cc,c,e,ee,ef,f,f1,f3 in crow/hex/myst5.
+                //oops, yes it is loadFloag; my test had a type :P
+                //xu1 = data.readByte();
+                loadMask = data.readByte();
+                //m.status("xu1="+Integer.toHexString(b.ByteToInt32(xu1)));
             }
+            
+            //flag &= 0x1; //unset any other bits, because they are associated with something new.
         }
         else if(c.readversion==6)
         {
@@ -118,6 +130,7 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
             if((flag&kHasLoadMask)!=0)
             {
                 loadMask = data.readByte();
+                //m.status("loadMask="+Integer.toHexString(b.ByteToInt32(loadMask)));
             }
             objecttype = Typeid.Read(c);
             objectnumber = data.readInt(); //this objects unique number in the list.(the numbering starts anew for each objecttype in each page).
@@ -281,7 +294,7 @@ public class Uruobjectdesc extends uruobj implements java.io.Serializable
         result.pagetype = pagetype.deepClone();
         //result.xm5unknown = xm5unknown;
         result.loadMask = loadMask;
-        result.xu1 = xu1;
+        //result.xu1 = xu1;
         result.cloneId = cloneId;
         result.clonePlayerId = clonePlayerId;
     }
