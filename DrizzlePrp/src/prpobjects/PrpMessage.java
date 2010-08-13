@@ -963,6 +963,15 @@ public abstract class PrpMessage extends PrpTaggedObject
     
     public static class PlEnableMsg extends uruobj
     {
+        //which bit is set: 0th bit, 1st bit, etc.
+        public static final int kDisable = 0; //0x1  //1
+        public static final int kEnable = 1;  //0x2  //2
+        public static final int kDrawable = 2;//0x4  //4
+        public static final int kPhysical = 3;//0x8  //8
+        public static final int kAudible = 4; //0x10 //16
+        public static final int kAll = 5;     //0x20 //32
+        public static final int kByType = 6;  //0x40 //64
+        
         plMessage parent;
         HsBitVector cmd;
         HsBitVector types;

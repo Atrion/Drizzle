@@ -7,6 +7,8 @@ package shared;
 
 import shared.FileUtils;
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class Exec
 {
@@ -55,5 +57,51 @@ public class Exec
             e.printStackTrace();
             return -1; //should we use a different value?
         }
+    }
+    public static ReturnInfo RunAndWaitWithStreams(String dirstr, byte[] stdin_data, String command, String... commandsLineArguments)
+    {
+        ReturnInfo result = new ReturnInfo();
+        File dir = (dirstr==null)?null:new File(dirstr);
+        String[] cmdarray = new String[commandsLineArguments.length+1];
+        cmdarray[0] = command;
+        for(int i=0;i<commandsLineArguments.length;i++) cmdarray[i+1] = commandsLineArguments[i];
+
+        try{
+            java.lang.Process p = Runtime.getRuntime().exec(cmdarray, null, dir);
+            InputStream stdout = p.getInputStream();
+            InputStream stderr = p.getErrorStream();
+            OutputStream stdin = p.getOutputStream();
+
+            //send input
+            if(stdin_data!=null)
+            {
+                stdin.write(stdin_data);
+                //stdin.flush();
+                stdin.close();
+            }
+
+            //receive output
+            result.stdout = StreamUtils.ReadAll(stdout);
+
+            //look at stderr
+            result.stderr = StreamUtils.ReadAll(stderr);
+            //String errorstr = b.BytesToString(result.stderr);
+            //if(!errorstr.equals("")) m.err(errorstr);
+
+            int errorvalue = p.waitFor();
+            //if(errorvalue!=0) m.err(Integer.toString(errorvalue));
+            result.returnval = errorvalue;
+            return result;
+        }catch(Exception e){
+            e.printStackTrace();
+            //return -1; //should we use a different value?
+            return null;
+        }
+    }
+    public static class ReturnInfo
+    {
+        public byte[] stdout;
+        public byte[] stderr;
+        public int returnval;
     }
 }
