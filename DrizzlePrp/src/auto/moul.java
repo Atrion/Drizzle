@@ -325,6 +325,13 @@ public class moul
         r.agenames.put("Personal", "PersonalMOUL");
         r.agenames.put("Ahnonay", "AhnonayMOUL");
         r.agenames.put("Neighborhood", "NeighborhoodMOUL"); //Drizzle25
+        
+        // Drizzle27
+        r.pagenames.put("Neighborhood", "nb01Ayhoheek5Man1Dead", "nb01MOULAyhoheek5Man1Dead");
+        r.pagenames.put("Neighborhood", "nb01Ayhoheek5Man1State", "nb01MOULAyhoheek5Man1State");
+        r.pagenames.put("Neighborhood", "nb01LinkBookGarrisonVis", "nb01MOULLinkBookGarrisonVis");
+        r.pagenames.put("Neighborhood", "nb01LinkBookTeledahnVis", "nb01MOULLinkBookTeledahnVis");
+        r.pagenames.put("Neighborhood", "nb01BahroPedestalShout", "nb01MOULBahroPedestalShout");
 
         //these map from filename to oldpagenum to newpagenum
         //HashMap<String, HashMap<Integer,Integer>> suffices = new HashMap();

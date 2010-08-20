@@ -241,6 +241,38 @@ public class conversion
             decryptedData = agefile.saveToByteArray();
         }
 
+        //Change pagenames  (I guess I should really create an 'agefile' class and have things like this in there.)
+        {
+            textfile agefile = textfile.createFromBytes(decryptedData);
+            boolean changedpagenames = false;
+            for(textfile.textline line: agefile.getLines())
+            {
+                String linestr = line.getString();
+                String[] varparts = linestr.split("=");
+                if(varparts.length>1)
+                {
+                    if(varparts[0].equals("Page"))
+                    {
+                        String[] pageparts = varparts[1].split(",");
+                        String oldpagename = pageparts[0];
+                        String newpagename = (String)info.g.renameinfo.pagenames.get2(file.agename,oldpagename);
+                        if(newpagename!=null)
+                        {
+                            //changed pagename
+                            changedpagenames = true;
+                            String newlinestr = linestr.replace(oldpagename, newpagename);
+                            line.setString(newlinestr);
+                        }
+                    }
+                }
+            }
+            if(changedpagenames)
+            {
+                decryptedData = agefile.saveToByteArray();
+            }
+        }
+
+
         /*//modify Minkata's Age file.
         if(file.agename.toLowerCase().equals("minkata"))
         {
