@@ -39,6 +39,23 @@ public class Exec
 
                 
     }
+    public static void RunAndReturnImmediately(boolean throwexception, String command, String... commandLineArguments)
+    {
+        RunAndReturnImmediately(throwexception, null,command,commandLineArguments);
+    }
+    public static void RunAndReturnImmediately(boolean throwexception, String dir, String command, String... commandsLineArguments)
+    {
+        File d = (dir==null)?null:new File(dir);
+        String[] cmdarray = new String[commandsLineArguments.length+1];
+        cmdarray[0] = command;
+        for(int i=0;i<commandsLineArguments.length;i++) cmdarray[i+1] = commandsLineArguments[i];
+        try{
+            java.lang.Process p = Runtime.getRuntime().exec(cmdarray, null, d);
+        }catch(Exception e){
+            if(throwexception) throw new nested(e);
+            else e.printStackTrace();
+        }
+    }
     public static int RunAndWait(String command, String... commandsLineArguments)
     {
         return RunAndWait(null,command,commandsLineArguments);

@@ -106,12 +106,12 @@ public class Client_SaveMemories extends Client
                 StringBuilder xml2 = new StringBuilder();
                 xml2.append("<imagenode>");
                 xml2.append("<source>moulagain</source>");
-                xml2.append("<creationtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.createTime))+"</creationtime>");
-                //xml2.append("<agetime>"+escapeXmlString(n.age_time.toLongString())+"</agetime>");
-                xml2.append("<modtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
-                xml2.append("<owner>"+EscapeUtils.escapeXmlString(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
-                //xml2.append("<agename>"+EscapeUtils.escapeXmlString(n.n.createAgeName.toString())+"</agename>");
-                xml2.append("<caption>"+EscapeUtils.escapeXmlString(n.getTitle())+"</caption>");
+                xml2.append("<creationtime>"+CleanXml(Long.toString(1000L*n.n.createTime))+"</creationtime>");
+                //xml2.append("<agetime>"+CleanXml(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+CleanXml(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
+                xml2.append("<owner>"+CleanXml(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
+                //xml2.append("<agename>"+CleanXml(n.n.createAgeName.toString())+"</agename>");
+                xml2.append("<caption>"+CleanXml(n.getTitle())+"</caption>");
                 xml2.append("<imagesha1>"+sha1+"</imagesha1>");
                 xml2.append("</imagenode>");
                 saveFile(outfolder, xml2);
@@ -122,13 +122,14 @@ public class Client_SaveMemories extends Client
                 StringBuilder xml2 = new StringBuilder();
                 xml2.append("<textnotenode>");
                 xml2.append("<source>moulagain</source>");
-                xml2.append("<creationtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.createTime))+"</creationtime>");
-                //xml2.append("<agetime>"+EscapeUtils.escapeXmlString(n.age_time.toLongString())+"</agetime>");
-                xml2.append("<modtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
-                xml2.append("<owner>"+EscapeUtils.escapeXmlString(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
-                //xml2.append("<agename>"+EscapeUtils.escapeXmlString(n.n.createAgeName.toString())+"</agename>");
-                xml2.append("<title>"+EscapeUtils.escapeXmlString(n.getTitle())+"</title>");
-                xml2.append("<text>"+EscapeUtils.escapeXmlString(n.getContents())+"</text>");
+                xml2.append("<creationtime>"+CleanXml(Long.toString(1000L*n.n.createTime))+"</creationtime>");
+                //xml2.append("<agetime>"+CleanXml(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+CleanXml(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
+                xml2.append("<owner>"+CleanXml(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
+                //xml2.append("<agename>"+CleanXml(n.n.createAgeName.toString())+"</agename>");
+                //Str title = n.getTitle2();
+                xml2.append("<title>"+CleanXml(n.getTitle())+"</title>");
+                xml2.append("<text>"+CleanXml(n.getContents())+"</text>");
                 xml2.append("</textnotenode>");
                 saveFile(outfolder, xml2);
             }
@@ -138,12 +139,12 @@ public class Client_SaveMemories extends Client
                 StringBuilder xml2 = new StringBuilder();
                 xml2.append("<markerlistnode>");
                 xml2.append("<source>moulagain</source>");
-                xml2.append("<creationtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.createTime))+"</creationtime>");
-                //xml2.append("<agetime>"+EscapeUtils.escapeXmlString(n.age_time.toLongString())+"</agetime>");
-                xml2.append("<modtime>"+EscapeUtils.escapeXmlString(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
-                xml2.append("<owner>"+EscapeUtils.escapeXmlString(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
-                //xml2.append("<agename>"+EscapeUtils.escapeXmlString(n.n.createAgeName.toString())+"</agename>");
-                xml2.append("<gamename>"+EscapeUtils.escapeXmlString(n.getGamename())+"</gamename>");
+                xml2.append("<creationtime>"+CleanXml(Long.toString(1000L*n.n.createTime))+"</creationtime>");
+                //xml2.append("<agetime>"+CleanXml(n.age_time.toLongString())+"</agetime>");
+                xml2.append("<modtime>"+CleanXml(Long.toString(1000L*n.n.modifyTime))+"</modtime>");
+                xml2.append("<owner>"+CleanXml(getAvatarName(n.n.creatorIdx,nodes))+"</owner>");
+                //xml2.append("<agename>"+CleanXml(n.n.createAgeName.toString())+"</agename>");
+                xml2.append("<gamename>"+CleanXml(n.getGamename())+"</gamename>");
 
                 //the markers are stored as a chronicle now.
                 /*for(Node mn: nodes.getMarkers(n.owner, n.age_name.toString(), n.blob1))
@@ -209,6 +210,14 @@ public class Client_SaveMemories extends Client
         String sha1 = b.BytesToHexString(shared.CryptHashes.GetHash(data, shared.CryptHashes.Hashtype.sha1));
         String filename = sha1+".mem.xml";
         FileUtils.WriteFile(outfolder+"/"+filename, data);
+    }
+
+    private static String CleanXml(String s)
+    {
+        if(s==null) return "";
+        s = s.replace("\u001b", ""); //replace escape char, which occur sometimes at the end of textnote titles.
+        s = EscapeUtils.escapeXmlString(s);
+        return s;
     }
 
     /*private static ArrayList<Node> getMarkers(int KInumber, String age, int blob1, ArrayList<Node> nodes)

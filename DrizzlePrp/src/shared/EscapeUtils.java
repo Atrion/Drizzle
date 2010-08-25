@@ -139,13 +139,48 @@ public class EscapeUtils
 
     public static String escapeXmlString(String s)
     {
-        String result = s==null?"":s;
-        result = result.replace("&", "&amp;");
-        result = result.replace("<", "&lt;");
-        result = result.replace(">", "&gt;");
-        result = result.replace("\"", "&quot;");
-        result = result.replace("'", "&apos;");
-        return result;
+        if(s==null) s = "";
+        StringBuffer r = new StringBuffer();
+        for(int i = 0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            switch(ch)
+            {
+                case '<':
+                    r.append("&lt;");
+                    break;
+                case '>':
+                    r.append("&gt;");
+                    break;
+                case '&':
+                    r.append("&amp;");
+                    break;
+                case '"':
+                    r.append("&quot;");
+                    break;
+                case '\'':
+                    r.append("&apos;");
+                    break;
+                case 27: //esc
+                    r.append("&#");
+                    r.append(Integer.toString(ch));
+                    r.append(";");
+                    break;
+                default:
+                    r.append(ch);
+                    break;
+            }
+        }
+        return r.toString();
+
+        //String result = s==null?"":s;
+        //result = result.replace("&", "&amp;");
+        //result = result.replace("<", "&lt;");
+        //result = result.replace(">", "&gt;");
+        //result = result.replace("\"", "&quot;");
+        //result = result.replace("'", "&apos;");
+        //result = result.replace("", "&#38;");
+        //return result;
     }
 
 

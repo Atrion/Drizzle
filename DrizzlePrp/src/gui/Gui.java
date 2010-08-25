@@ -584,10 +584,11 @@ public class Gui extends javax.swing.JFrame {
         checkboxState25 = new shared.State.CheckboxState();
         jButton139 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        jButton134 = new javax.swing.JButton();
         textfieldState42 = new shared.State.TextfieldState();
         jButton133 = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        textfieldState74 = new shared.State.TextfieldState();
         jButton15 = new javax.swing.JButton();
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
@@ -1082,9 +1083,9 @@ public class Gui extends javax.swing.JFrame {
         jPanel42.add(jLabel35);
         jLabel35.setBounds(10, 30, 70, 16);
 
-        textfieldState38.setText("http://www.the-ancient-city.de/uru-ages/");
+        textfieldState38.setText("http://dusty.homeunix.net/uru-ages/");
         textfieldState38.setEnabled(false);
-        textfieldState38.setName("uamServer"); // NOI18N
+        textfieldState38.setName("uamServer2"); // NOI18N
         textfieldState38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textfieldState38ActionPerformed(evt);
@@ -1935,18 +1936,9 @@ public class Gui extends javax.swing.JFrame {
                 jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("uam.status.xml"));
                 jPanel7.setLayout(null);
 
-                jButton134.setText("Select...");
-                jButton134.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jButton134ActionPerformed(evt);
-                    }
-                });
-                jPanel7.add(jButton134);
-                jButton134.setBounds(300, 10, 110, 36);
-
                 textfieldState42.setName("genFolder"); // NOI18N
                 jPanel7.add(textfieldState42);
-                textfieldState42.setBounds(130, 20, 170, 20);
+                textfieldState42.setBounds(130, 20, 120, 20);
 
                 jButton133.setText("Generate uam.status.txt");
                 jButton133.addActionListener(new java.awt.event.ActionListener() {
@@ -1961,8 +1953,16 @@ public class Gui extends javax.swing.JFrame {
                 jPanel7.add(jLabel44);
                 jLabel44.setBounds(10, 20, 120, 16);
 
+                jLabel82.setText("shard folder:");
+                jPanel7.add(jLabel82);
+                jLabel82.setBounds(260, 20, 80, 16);
+
+                textfieldState74.setName("uamsh"); // NOI18N
+                jPanel7.add(textfieldState74);
+                textfieldState74.setBounds(360, 20, 110, 20);
+
                 jPanel41.add(jPanel7);
-                jPanel7.setBounds(10, 60, 420, 80);
+                jPanel7.setBounds(10, 60, 480, 80);
 
                 jButton15.setText("Name a random Age!");
                 jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -5648,13 +5648,10 @@ private void jButton131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     GuiUtils.getUserSelectedFolder(this.textfieldState40);
 }//GEN-LAST:event_jButton131ActionPerformed
 
-private void jButton134ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton134ActionPerformed
-    GuiUtils.getUserSelectedFolder(this.textfieldState42);
-}//GEN-LAST:event_jButton134ActionPerformed
-
 private void jButton133ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton133ActionPerformed
     //uam.UamConfigGenerator.generateStatusFile(this.textfieldState42.getText());
-    uam.UamConfigNew.generateStatusFile(this.textfieldState42.getText());
+    //uam.UamConfigNew.generateStatusFile(this.textfieldState42.getText());
+    uam.PrepareAge.DoAllWork(textfieldState42.getText(),textfieldState74.getText(),null);
 }//GEN-LAST:event_jButton133ActionPerformed
 
 private void textfieldState38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState38ActionPerformed
@@ -6115,7 +6112,6 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton jButton131;
     private javax.swing.JButton jButton132;
     private javax.swing.JButton jButton133;
-    private javax.swing.JButton jButton134;
     private javax.swing.JButton jButton135;
     private javax.swing.JButton jButton136;
     private javax.swing.JButton jButton137;
@@ -6330,6 +6326,7 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
@@ -6493,6 +6490,7 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState71;
     private shared.State.TextfieldState textfieldState72;
     private shared.State.TextfieldState textfieldState73;
+    private shared.State.TextfieldState textfieldState74;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
     private shared.State.ButtongroupState uamStartupButtongroup;

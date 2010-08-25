@@ -132,6 +132,7 @@ public class AuthServer extends Thread
     Queue<CommItem> items = Concurrent.getConcurrentQueue();
     Comm comm = new Comm();
     Manager manager;
+    AuthServerSecureFiles securefiles = new AuthServerSecureFiles();
 
     public AuthServer(Manager manager)
     {
@@ -327,8 +328,13 @@ public class AuthServer extends Thread
 
                 //File f = FileServer.GetFile(request.filename.toString(), true, manager);
                 File f = FileServer.GetFile(request.filename.toString(), manager.settings.getAuthFileserverPath());
-                int filesize = (int)f.length();
-                java.io.FileInputStream fis = new java.io.FileInputStream(f);
+
+                //we used to read from a file here, but we're now reading into ram and encrypting.
+                //java.io.FileInputStream fis = new java.io.FileInputStream(f);
+                //int filesize = (int)f.length();
+                byte[] encdata = securefiles.GetEncrypted(f.getAbsolutePath());
+                java.io.ByteArrayInputStream fis = new java.io.ByteArrayInputStream(encdata);
+                int filesize = encdata.length;
                 ChunkSendHandler.ChunkFile chunk = cs.chunksendhandler.startfile(request.filename.toString(), filesize, request.transId, fis, true);
 
                 FileDownloadChunk reply = new FileDownloadChunk();

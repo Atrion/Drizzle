@@ -10,5 +10,6 @@ The Jbdiff code is under a BSD license.
 The H2 code is under a modified MPL1.1 or EPL1.0 (at your choice), which cannot directly be mixed with GPL code, but our use of it is fine.
 The Jacksum code is GPLv2+.
 The Lpg code is EPL, which cannot be directly mixed with GPL code, but our use of it is fine.
+The java-diff-utils code is Apache2.0.
 
 All other files are GPLv3 or later, as noted at the start of each file.

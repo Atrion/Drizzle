@@ -5,6 +5,11 @@ import sys;
 import marshal
 import __builtin__
 
+#stupid hack because windows defaults to text-mode for stdout. Use -u instead
+#if sys.platform == "win32":
+#    import os, msvcrt
+#    msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
+
 #print 'hi';
 #print >> sys.stderr, 'ho';
 

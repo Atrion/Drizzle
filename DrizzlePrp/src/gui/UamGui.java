@@ -373,7 +373,8 @@ public class UamGui
                         break;
                     case 2:
                         //m.msg("2");
-                        String uamserver = shared.State.AllStates.getStateAsString("uamServer");
+                        //String uamserver = shared.State.AllStates.getStateAsString("uamServer");
+                        String uamserver = shared.State.AllStates.getStateAsString("uamServer2");
                         //m.msg(uamserver);
                         String potsfolder2 = shared.State.AllStates.getStateAsString("uamRoot");
                         //m.msg(potsfolder2);

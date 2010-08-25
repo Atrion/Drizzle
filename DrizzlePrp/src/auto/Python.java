@@ -14,6 +14,15 @@ import shared.*;
 
 public class Python
 {
+    public static void ListPak(String pakfilename, String gamename)
+    {
+        auto.AllGames.GameConversionSub game = auto.AllGames.get(gamename);
+        pakfile pak = pakfile.create(pakfilename, game);
+        for(pakfile.IndexEntry ind: pak.indices)
+        {
+            m.msg(ind.objectname.toString());
+        }
+    }
     public static void RemovePythonOverrides(String pakfolder, String outfolder, String overriddenpakfile, String gamename)
     {
         auto.AllGames.GameConversionSub game = auto.AllGames.get(gamename);

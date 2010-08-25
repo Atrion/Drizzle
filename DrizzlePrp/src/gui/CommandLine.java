@@ -13,11 +13,7 @@ public class CommandLine
 {
     public static void HandleCommand(String[] args)
     {
-        if(args[0].equals("-version"))
-        {
-            m.msg("This version of Drizzle is: ",Integer.toString(gui.Version.version));
-        }
-        else if(args[0].equals("-help"))
+        if(args[0].equals("-help"))
         {
             m.msg("Welcome to Drizzle!");
             m.msg("  (Any of these commands can be compounded into a list, e.g. '-version -prpdiff c:/source.prp c:/dest.prp -help')");
@@ -33,8 +29,9 @@ public class CommandLine
             m.msg("    -downloadsecuremoulagainfiles username password c:/outputfolder");
             m.msg("    -startproxyserver c:/ProxyUruFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
             m.msg("    -patchmoulbinary c:/path/to/binary.exe server.com");
-            m.msg("    -encryptmoulfile c:/inputfile c:/outputfolder    ->Encrypts the input file with the notthedroids key Talcum uses.");
+            //m.msg("    -encryptmoulfile c:/inputfile c:/outputfolder    ->Encrypts the input file with the notthedroids key Talcum uses.");
             m.msg("    -startmoulserver MainPassword server.com c:/DataFolder     ->(Please note that there is no cleanup after this runs, so you should restart Drizzle.)");
+            m.msg("    -drizzleintermediary   ->acts as go-between for UruSetup and UruExplorer for Alcugs");
             m.msg("  Prp:");
             //m.msg("    -prpdiff c:/source.prp c:/dest.prp c:/generated.diff.txt");
             m.msg("    -prpdiff c:/source.prp c:/dest.prp");
@@ -47,6 +44,7 @@ public class CommandLine
             m.msg("    -listinplacemods    ->Displays all the available InplaceMods.");
             m.msg("    -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc    ->Converts the files exported by the 3dsmax plugin to Pots.");
             m.msg("    -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
+            m.msg("    -pullintextures c:/inputfile.prp c:/texturefile.prp c:/outfolder  ->Pulls in the textures a prp file uses.");
             m.msg("  Subtools:");
             m.msg("    -deepview c:/inputfile.prp    ->Starts DrizzleDeepview.  The inputfile is optional.");
             m.msg("  Python:");
@@ -54,6 +52,24 @@ public class CommandLine
             m.msg("    -decompilepyc c:/pycfile.pyc c:/outputfolder    ->Decompiles a .pyc file using DrizzleDecompile.");
             m.msg("    -decompilepak c:/pakfile.pak c:/outputfolder gamename    ->Decompiles all .pyc files within a Python22 .pak file, using DrizzleDecompile.");
             m.msg("    -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
+            m.msg("    -listpak c:/pakfile.pak gamename         ->Lists the pyfiles that are present in the given .pak file.");
+            m.msg("    -diffpaks c:/origpakfile.pak gamename c:/newpakfile.pak gamename   ->Compares two .pak files.");
+        }
+        else if(args[0].equals("-drizzleintermediary"))
+        {
+            auto.DrizzleIntermediary.DoWork(args);
+        }
+        else if(args[0].equals("-pullintextures"))
+        {
+            auto.Distiller.DistillTextures(args[1],args[2],args[3]);
+        }
+        else if(args[0].equals("-diffpaks"))
+        {
+            onliner.Python.ComparePaks(args[1], args[2], args[3], args[4]);
+        }
+        else if(args[0].equals("-listpak"))
+        {
+            auto.Python.ListPak(args[1],args[2]);
         }
         else if(args[0].equals("-encryptmoulfile"))
         {
@@ -160,6 +176,10 @@ public class CommandLine
         else if(args[0].equals("-listinplacemods"))
         {
             auto.inplace.Inplace.printAllModNames();
+        }
+        else if(args[0].equals("-version"))
+        {
+            m.msg("This version of Drizzle is: ",Integer.toString(gui.Version.version));
         }
         else
         {

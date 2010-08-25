@@ -994,14 +994,14 @@ public class distiller
         return numSaw;
     }
 
-    public static HashMap<Uruobjectdesc, Uruobjectdesc> distillTextures(String texturePrp, String destinationPrp, String[] affectedPrps)
+    /*public static HashMap<Uruobjectdesc, Uruobjectdesc> distillTextures(String texturePrp, String destinationPrp, String[] affectedPrps)
     {
         prpfile destprp = prpfile.createFromFile(destinationPrp, true);
         prpfile textprp = prpfile.createFromFile(texturePrp, true);
         HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns = new HashMap();
         distillTextures(destprp, textprp, new String[]{}, refReassigns);
         return refReassigns;
-    }
+    }*/
     //moves the textures used by destinationPrp, into destinationPrp, and updates references in the affectedPrps.
     public static void distillTextures(prpfile destprp, prpfile textprp, String[] affectedPrps, HashMap<Uruobjectdesc, Uruobjectdesc> refReassigns)
     {

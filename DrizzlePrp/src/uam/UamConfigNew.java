@@ -36,6 +36,7 @@ import org.xml.sax.SAXParseException;
 import shared.m;
 import java.util.HashMap;
 import java.io.File;
+import java.util.ArrayList;
 
 import org.w3c.dom.Comment;
 
@@ -242,7 +243,9 @@ public class UamConfigNew
         else if(filename.equals("Zephyr Cove night")) return version+"(Night)";
         else return version;
     }
-    public static void generateStatusFile(String folderWith7zs)
+
+    //besides updating the xml file, it returns a list of new archives.
+    public static ArrayList<String> generateStatusFile(String folderWith7zs)
     {
         String sep = uam.Uam.versionSep;
         //String sep = "--";
@@ -253,13 +256,14 @@ public class UamConfigNew
         data.comments.add("The name of the file on the server isn't used; it's just renamed anyway.");
         data.comments.add("The aequalsatransposeequalsainverse tag is just used to mark the end, so we know we got the whole file.");
         data.welcome = "Welcome to the UruAgeManager sub-project of Drizzle!";*/
+        ArrayList<String> newarchives = new ArrayList();
         UamConfigNew config;
         String statusfile = folderWith7zs+"/"+uam.Uam.statusFilename;
         try{
             config = new UamConfigNew(new java.io.FileInputStream(statusfile));
         }catch(Exception e){
             m.err("Error reading config file.");
-            return;
+            return newarchives;
         }
         //UamConfigData data = new UamConfigData
         //data.loadFromUamConfig(config);
@@ -286,7 +290,8 @@ public class UamConfigNew
             versionstr = filenameToVersionname(name,versionstr);
             //byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
             //String server = "http://dustin.homeunix.net:88/uam/ages/";
-            String server = "http://www.the-ancient-city.de/uru-ages/";
+            //String server = "http://www.the-ancient-city.de/uru-ages/";
+            String server = "http://dusty.homeunix.net/uru-ages/";
             String mirurl = server+filename;
             
             UamConfigData.Age age = config.data.getAgeOrCreate(agename);
@@ -316,6 +321,9 @@ public class UamConfigNew
                 //add mirror:
                 UamConfigData.Age.Version.Mirror mirror = version.getMirrorOrCreate(mirurl);
                 mirror.url = mirurl;
+
+                //add to list
+                newarchives.add(f.getAbsolutePath());
             }
         }
         
@@ -326,7 +334,9 @@ public class UamConfigNew
         //m.msg(finalresult);
         shared.FileUtils.CopyFile(statusfile, statusfile+shared.DateTimeUtils.GetSortableCurrentDate()+".xml", false, false);
         shared.FileUtils.WriteFile(statusfile, b.StringToBytes(finalresult));
+        
         m.status("Finished creating new status file!");
+        return newarchives;
     }
     public static class UamConfigData
     {

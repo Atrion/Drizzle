@@ -60,6 +60,17 @@ public class pakfile extends uruobj
             }
         }
     }
+    public PythonObject findByFilename(String filename)
+    {
+        for(int i=0;i<indices.size();i++)
+        {
+            if(indices.get(i).objectname.toString().equals(filename))
+            {
+                return objects.get(i);
+            }
+        }
+        return null;
+    }
     public List<pythondec.pycfile> extractPakFile(boolean prependPYCHeader)
     {
         List<pythondec.pycfile> r = new ArrayList();

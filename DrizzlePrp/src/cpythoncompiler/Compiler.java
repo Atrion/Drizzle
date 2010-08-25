@@ -50,7 +50,7 @@ public class Compiler
         String program = shared.GetResource.getResourceAsString("/cpythoncompiler/getver.py");
         program = program.replace("\r\n", "\n");
         program = program.replace("\r", "\n");
-        String[] cmdarray = new String[]{"-E","-c",program};
+        String[] cmdarray = new String[]{"-u","-E","-c",program};
         Exec.ReturnInfo info = Exec.RunAndWaitWithStreams(null, null, CPythonPath, cmdarray);
         if(info==null) return null;
         if(info.stderr.length!=0) m.err(b.BytesToString(info.stderr));
@@ -73,6 +73,7 @@ public class Compiler
         //compileProgram = compileProgram.replace("\n", "");
         String[] cmdarray = new String[]{
             //CPythonPath,
+            "-u", //unbuffered stdin/stdout (makes it binary instead of text)
             "-E", //no environment variables
             "-c", //run the follow string as a program
             compileProgram

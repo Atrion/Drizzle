@@ -188,7 +188,8 @@ public abstract class Node
 
     public static class TextNoteNode extends Node
     {
-        public String getTitle(){return n.string64_1.toString();}
+        public Str getTitle2(){return n.string64_1;}
+        public String getTitle(){return (n.string64_1==null)?"":n.string64_1.toString();}
         public void setTitle(String val){n.string64_1 = new Str(val);}
         public String getContents(){return n.text_1b.toString();}
         public void setContents(String val){n.text_1b = new Str(val);}

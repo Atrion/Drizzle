@@ -74,6 +74,17 @@ public class UruCrypt {
             throw new shared.uncaughtexception("unimplemented");
         }
     }
+    public static byte[] DecryptAny(byte[] encdata, Format format)
+    {
+        if(format==Format.pots)
+        {
+            return UruCrypt.DecryptWhatdoyousee(encdata);
+        }
+        else
+        {
+            throw new shared.uncaughtexception("unimplemented");
+        }
+    }
     public static byte[] DecryptAny(byte[] encdata, UruFileTypes type)
     {
         /*if(b.startswith(encdata, whatdoyouseeHeader)) return DecryptWhatdoyousee(encdata);
