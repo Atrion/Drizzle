@@ -68,7 +68,7 @@ public class Client_SaveSecureDownloadFiles extends Client
         {
             //download and save the file.
             byte[] filedata = authconn.GetFile(entry.filename.toString());
-            String filepath = outputpath+"/"+entry.filename.toString();
+            String filepath = outputpath+"/"+entry.filename.toString().replace('\\', File.separatorChar);
             FileUtils.WriteFile(filepath, filedata, true, true); //create dirs and throw exception
             MemUtils.GarbageCollect();
         }
