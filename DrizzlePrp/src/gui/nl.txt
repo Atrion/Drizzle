@@ -272,3 +272,8 @@ You have a newer version of Drizzle installed.  Perhaps you want to use that?  I
 account name:{->}account naam:
 password:{->}wachtwoord:
 avatar name:{->}avatar naam:
+
+//Drizzle28
+There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: {->}Er is een privacy/beveiligings/instabiliteits risico. Het is aanbevolen dat je: a)'Netwerk Toegang' met versie '(uitgeschakeld)' installeerd, of b)handmatig de volgende file verwijderd: 
+ Either way, this warning should not be displayed afterwards.{->} Deze waarschuwing moet niet achteraf gegeven worden.
+

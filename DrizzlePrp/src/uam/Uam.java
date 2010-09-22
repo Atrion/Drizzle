@@ -158,6 +158,18 @@ public class Uam
             }
         }
     }*/
+    public static void CheckForProblems(boolean doDetailedCheck)
+    {
+        //if doDetailedCheck is false, we'll just do quick checks.
+
+        //check for _socket.pyd
+        String pathToFile = Uam.getPotsFolder()+"/Python/system/_socket.pyd";
+        if(FileUtils.Exists(pathToFile))
+        {
+            m.warn("There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: ",pathToFile," Either way, this warning should not be displayed afterwards.");
+        }
+        
+    }
     public static void ClearSumFiles()
     {
         if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;

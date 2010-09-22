@@ -28,6 +28,8 @@ import java.util.Vector;
 import java.io.PrintStream;
 import java.util.Stack;
 import java.io.InputStream;
+import javax.swing.text.JTextComponent;
+import shared.State.LogBoxStateless;
 
 /**
  *
@@ -37,12 +39,35 @@ public class m
 {
     public static Integer debugCount = 0;
 
-    private static JTextArea _outputTextArea; //you must set this from the GUI.
+    //private static JTextArea _outputTextArea; //you must set this from the GUI.
+    private static LogBoxStateless _outputTextArea;
     private static JProgressBar _outputProgressBar; //you must set this from the GUI.
     private static boolean justUseConsole = true;
     private static int tab = 0;
     private static final String tabsp = "  ";
     
+    public static enum MessageType
+    {
+        normal,warning,error,console,status;
+
+        public String getIndicator()
+        {
+            switch(this)
+            {
+                case warning:
+                    return shared.translation.translate("Warning: ");
+                case error:
+                    return shared.translation.translate("Error: ");
+                case console:
+                    return shared.translation.translate("Console: ");
+                case normal:
+                case status:
+                default:
+                    return "";
+            }
+        }
+    }
+
     public static class stateclass implements java.io.Serializable //Serializable is for the deepclone, if you want.
     {
         public boolean showNormalMessages = true;
@@ -168,7 +193,8 @@ public class m
         }*/
     }
     
-    public static void setJTextArea(JTextArea newJTextArea)
+    //public static void setJTextArea(JTextArea newJTextArea)
+    public static void setLogbox(LogBoxStateless newJTextArea)
     {
         if(newJTextArea==null)
         {
@@ -185,7 +211,7 @@ public class m
         _outputProgressBar = newProgressBar;
     }
     
-    private static void message(String... ss)
+    private static void message(final MessageType type, String... ss)
     {
         //translate if necessary.
         if(state.curstate.translate)
@@ -210,7 +236,8 @@ public class m
 
         if(justUseConsole)
         {
-            System.out.println(s);
+            String indicator = type.getIndicator();
+            System.out.println(indicator+s);
         }
         else if(_outputTextArea!=null)
         {
@@ -219,6 +246,9 @@ public class m
             final String s2 = s;
             javax.swing.SwingUtilities.invokeLater(new java.lang.Runnable() {
                 public void run() {
+                    //_outputTextArea.append(s2+"\n",type);
+                    String indicator = type.getIndicator();
+                    _outputTextArea.append(indicator,type);
                     _outputTextArea.append(s2+"\n");
                     if(state.curstate.scrollOutput)
                     {
@@ -238,7 +268,8 @@ public class m
         }
         else
         {
-            String errormsg = "Programming Error: shared.m messages are being generated before the output TextArea is set, or there is no output TextArea.\nThe error is: " + s;
+            String indicator = type.getIndicator();
+            String errormsg = "Programming Error: shared.m messages are being generated before the output TextArea is set, or there is no output TextArea.\nThe error is: " + indicator + s;
             System.out.println(errormsg);
             //javax.swing.JFrame frame = new javax.swing.JFrame();
             javax.swing.JOptionPane.showMessageDialog(null,errormsg);
@@ -274,14 +305,15 @@ public class m
     {
         //Main.message(s);
         if(state.curstate.showNormalMessages)
-            message(s);
+            message(MessageType.normal, s);
     }
 
     public static void err(String... s)
     {
         //Main.message(s);
         if(state.curstate.showErrorMessages)
-            message(shared.generic.prependToArray("Error: ", s, String.class));
+            //message(shared.generic.prependToArray("Error: ", s, String.class));
+            message(MessageType.error, s);
             //message("Error: "+s);
         //throw new Exception(s);
     }
@@ -289,21 +321,24 @@ public class m
     public static void warn(String... s)
     {
         if(state.curstate.showWarningMessages)
-            message(shared.generic.prependToArray("Warning: ", s, String.class));
+            //message(shared.generic.prependToArray("Warning: ", s, String.class));
+            message(MessageType.warning, s);
             //message("Warning: "+s);
     }
     
     public static void console(String... s)
     {
         if(state.curstate.showConsoleMessages)
-            message(shared.generic.prependToArray("Console: ", s, String.class));
+            //message(shared.generic.prependToArray("Console: ", s, String.class));
+            message(MessageType.console, s);
             //message("Console:"+s);
     }
 
     public static void status(String... s)
     {
         if(state.curstate.showStatusMessages)
-            message(s);
+            //message(s);
+            message(MessageType.status, s);
     }
 
     public static void throwUncaughtException(String... s)

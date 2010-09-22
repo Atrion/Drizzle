@@ -773,10 +773,12 @@ public class Dataserver
                 }
 
                 //Create the Alcugs version of the manifest:
-                FileUtils.WriteFile(outmfs+"/"+mfs, mfsf.getBytes(),true,true);
+                //FileUtils.WriteFile(outmfs+"/"+mfs, mfsf.getBytes(),true,true);
+                FileUtils.SaveFileIfChanged(outmfs+"/"+mfs, mfsf.getBytes(),true,true);
 
                 //Create the Moul version of the manifest:
-                FileUtils.WriteFile(outmfs+"/"+mfs+"_moul", moulmanifest.compileAlone(shared.Format.moul) ,true,true);
+                //FileUtils.WriteFile(outmfs+"/"+mfs+"_moul", moulmanifest.compileAlone(shared.Format.moul) ,true,true);
+                FileUtils.SaveFileIfChanged(outmfs+"/"+mfs+"_moul", moulmanifest.compileAlone(shared.Format.moul) ,true,true);
 
             }
         }
@@ -786,11 +788,15 @@ public class Dataserver
         //String agelist_txt = "GlobalAnimations\nGlobalClothing\nGlobalMarkers\nGUI\nNeighborhood\nNexus\nPersonal\nCustomAvatars\nGlobalAvatars\nAvatarCustomization\n";
         String agelist_txt = "GlobalAnimations\nGlobalClothing\nGlobalMarkers\nGUI\nCustomAvatars\nGlobalAvatars\n";
         //read as GlobalAnimations, GlobalAvatars,GlobalClothing,GUI,CustomAvatars
-        FileUtils.WriteFile(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true);
+        //FileUtils.WriteFile(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true);
+        FileUtils.SaveFileIfChanged(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true,true);
 
 
         //save the current info
-        SerializationUtils.SaveToFile(dataserverfileinfo, info);
+        //SerializationUtils.SaveToFile(dataserverfileinfo, info);
+        //but this file is always changing, probably because of the unpredictable nature of the HashMaps.
+        byte[] filebs = SerializationUtils.SaveToBytes(info);
+        FileUtils.SaveFileIfChanged(dataserverfileinfo, filebs, true, true);
 
         m.status("Done generating the dataserver!");
     }

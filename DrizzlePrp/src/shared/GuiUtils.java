@@ -323,6 +323,9 @@ public class GuiUtils
         UIManager.put("CheckBox.background", res);
         UIManager.put("TextField.background", res);
         UIManager.put("TabbedPane.background", res);
+        UIManager.put("TextPane.background", res);
+        //UIManager.put("ScrollPane.background", res);
+        //UIManager.put("ScrollPane.foreground", res);
 
         //UIManager.put("background", res);
         //UIManager.put("foreground", res);
@@ -456,7 +459,7 @@ public class GuiUtils
         UIManager.put("TextField.font", plain);
         UIManager.put("PasswordField.font", plain);
         UIManager.put("TextArea.font", fixed);
-        UIManager.put("TextPane.font", plain);
+        UIManager.put("TextPane.font", fixed); //changed to fixed
         UIManager.put("EditorPane.font", plain);
 
         //time = java.util.Calendar.getInstance().getTimeInMillis() - time;

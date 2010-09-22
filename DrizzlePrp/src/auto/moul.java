@@ -1314,46 +1314,54 @@ public class moul
         for(Subworlds.SubworldInfo swi: subworlds.worlds.values())
         {
             //fix plHKSubworld
-            plSceneObject so = prp.findObjectWithRef(swi.subworld).castTo();
-            plHKSubWorld sw = plHKSubWorld.createWithSceneobject(swi.subworld);
-            PrpRootObject sw_ro = prp.addObject(Typeid.plHKSubWorld, swi.subworld.xdesc.objectname.toString(), sw);
-            Uruobjectref sw_ref = sw_ro.getref();
-
-            //fix subworld sceneobject
-            so.interfaces.add(sw_ref);
-
-            //fix physics
-            for(PrpRootObject phys_ro: swi.subworldphysics)
+            if(swi.subworld.hasref())
             {
-                plHKPhysical phys = phys_ro.castTo();
-                phys.physx.subworld = sw_ref;
-                //phys.physx.subworld = Uruobjectref.none();
+                plSceneObject so = prp.findObjectWithRef(swi.subworld).castTo();
+                plHKSubWorld sw = plHKSubWorld.createWithSceneobject(swi.subworld);
+                PrpRootObject sw_ro = prp.addObject(Typeid.plHKSubWorld, swi.subworld.xdesc.objectname.toString(), sw);
+                Uruobjectref sw_ref = sw_ro.getref();
+
+                //fix subworld sceneobject
+                so.interfaces.add(sw_ref);
+
+                //fix physics
+                for(PrpRootObject phys_ro: swi.subworldphysics)
+                {
+                    plHKPhysical phys = phys_ro.castTo();
+                    phys.physx.subworld = sw_ref;
+                    //phys.physx.subworld = Uruobjectref.none();
+                }
+
+                //fix subworld regions
+                for(PrpRootObject reg_ro: swi.subworldregion)
+                {
+                    plSubworldRegionDetector reg = reg_ro.castTo();
+                    //reg.sub = sw_ref;
+                }
+
+                //fix subworld msgs
+                for(plSubWorldMsg msg: swi.subworldmsgs)
+                {
+                    //msg.subworld = sw_ref; //neither one crashes on link-in.  We need more info.
+                }
+
+                //find children
+                /*plCoordinateInterface ci = prp.findObjectWithRef(so.coordinateinterface).castTo();
+                for(PrpRootObject child_ro: prp.getAllChildren(swi.subworld))
+                {
+                    plSceneObject child_so = child_ro.castTo();
+                    plHKPhysical phys = child_so.getPhysics(prp);
+
+                    //attach subworld.
+                    if(phys!=null)
+                        phys.physx.subworld = sw_ro.getref();
+                }*/
             }
-
-            //fix subworld regions
-            for(PrpRootObject reg_ro: swi.subworldregion)
+            else
             {
-                plSubworldRegionDetector reg = reg_ro.castTo();
-                //reg.sub = sw_ref;
+                //subworld is none, so starting/default subworld. I.e. this is an exit region.
+                int dummy=0;
             }
-
-            //fix subworld msgs
-            for(plSubWorldMsg msg: swi.subworldmsgs)
-            {
-                //msg.subworld = sw_ref; //neither one crashes on link-in.  We need more info.
-            }
-
-            //find children
-            /*plCoordinateInterface ci = prp.findObjectWithRef(so.coordinateinterface).castTo();
-            for(PrpRootObject child_ro: prp.getAllChildren(swi.subworld))
-            {
-                plSceneObject child_so = child_ro.castTo();
-                plHKPhysical phys = child_so.getPhysics(prp);
-                
-                //attach subworld.
-                if(phys!=null)
-                    phys.physx.subworld = sw_ro.getref();
-            }*/
         }
         /*for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plHKPhysical))
         {

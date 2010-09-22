@@ -22,6 +22,7 @@ package gui;
 import javax.swing.UIManager;
 import shared.m;
 import java.io.File;
+import shared.FileUtils;
 
 public class Main extends javax.swing.JFrame {
 
@@ -242,6 +243,7 @@ public class Main extends javax.swing.JFrame {
 
     public static void PerformUpdate(String[] args, String installDir, boolean warnAboutRestart)
     {
+        //Called when the program starts up and whenever Uam downloads something.
 
         //detect if this is the first installation into this folder
         boolean firstInstall = !(new File(installDir+"/Drizzle.jar").exists());
@@ -249,18 +251,54 @@ public class Main extends javax.swing.JFrame {
         boolean thisIsGenericDrizzle = Main.thisJarsFile.getName().equals("Drizzle.jar");
 
         //find version info:
-        String launchUpdater = FindUpdatedDrizzleJar(new File(installDir));
+        //String launchUpdater = FindUpdatedDrizzleJar(new File(installDir),true);
+        VersionsInfo info = FindUpdatedDrizzleJar(new File(installDir));
 
-        boolean doupdate = updateenabled && (launchUpdater!=null) && (firstInstall || thisIsGenericDrizzle);
+        boolean doupdate = updateenabled && (info.launchUpdater!=null) && (firstInstall || thisIsGenericDrizzle);
+
+        //create the Drizzle.jar file if it doesn't exist, even when we are not doing an update:  (to fix the problem where installing DrizzleY from DrizzleY results in it not being considered an update, and thus Drizzle.jar not getting created.)
+        //if launchUpdater is null, then we're not dealing with an 'installed' Drizzle situation anyway.
+        /*if( firstInstall && !doupdate && launchUpdater!=null )
+        {
+            //create Drizzle.jar
+            String from = launchUpdater;
+            String to = installDir+"/Drizzle.jar";
+            shared.FileUtils.CopyFile(from, to, false, false, true);
+        }*/
+
+        //save the settings file if applicable.  (Drizzle28 added this save)
+        if(doupdate)
+        {
+            //we're going to terminate, so save settings if settings are set to be saved.
+            if(guiform!=null) guiform.SaveSettingsIfApplicable();
+        }
+
+        //if we do have an installation, but not Drizzle.jar file, create it.  (Drizzle28 moved this here, so that it is done whether there is an update or not.)
+        if(info.hasDrizzleExe && info.maxjar!=null && firstInstall)
+        {
+            //create the Drizzle.jar file if it doesn't exist, even when we are not doing an update:  (to fix the problem where installing DrizzleY from DrizzleY results in it not being considered an update, and thus Drizzle.jar not getting created.)
+            //if launchUpdater is null, then we're not dealing with an 'installed' Drizzle situation anyway.
+            String from = info.maxjar;
+            String to = installDir+"/Drizzle.jar";
+            FileUtils.CopyFile(from, to, false, false, true);
+
+            //copy over settings, if it doesn't already exist
+            from = thisJarsFile.getParent()+"/"+Gui.settingsfilename;
+            to = installDir+"/"+Gui.settingsfilename;
+            if( FileUtils.Exists(from) && !FileUtils.Exists(to) )
+            {
+                FileUtils.CopyFile(from, to, false, false, false);
+            }
+        }
 
         if(doupdate)
         {
             try
             {
-                if(firstInstall)
+                /*if(firstInstall)
                 {
                     //create Drizzle.jar
-                    String from = launchUpdater;
+                    String from = info.launchUpdater;
                     String to = installDir+"/Drizzle.jar";
                     shared.FileUtils.CopyFile(from, to, false, false, true);
 
@@ -273,7 +311,7 @@ public class Main extends javax.swing.JFrame {
                     //{
                     //    msg += m.trans("  Since this is the first time, we'll copy your settings over, and you should use this new copy installed");
                     //}
-                }
+                }*/
                 
                 if(warnAboutRestart)
                 {
@@ -292,7 +330,7 @@ public class Main extends javax.swing.JFrame {
                     "-Xmx"+Integer.toString(requestedheapsize)+"m",//"-Xmx1020m",//"-Xmx800m",
                     "-DDrizzle.IsUpdater=true",
                     "-jar",
-                    launchUpdater,
+                    info.launchUpdater,
                 };
 
                 String[] fullcommand = new String[command.length+args.length];
@@ -327,10 +365,10 @@ public class Main extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        else if(launchUpdater!=null)
+        else if(info.launchUpdater!=null)
         {
             //so we're not going to update, *but* there is a newer version.
-            m.msg("You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: ",launchUpdater);
+            m.msg("You have a newer version of Drizzle installed.  Perhaps you want to use that?  It's located at: ",info.launchUpdater);
         }
         
     }
@@ -409,12 +447,19 @@ public class Main extends javax.swing.JFrame {
         }catch(Exception e){}
         return null;
     }
-    private static String FindUpdatedDrizzleJar(File installDir)
+    private static class VersionsInfo
+    {
+        Integer maxver; //the largest installed version, or null if none are installed.
+        String maxjar; //the path to the largest installed version, or null if none are installed.
+        String launchUpdater; //the path to the largest installed version bigger than this one, or null if there are none bigger than this one.
+        boolean hasDrizzleExe; //whether Drizzle.exe is in this folder.
+    }
+    private static VersionsInfo FindUpdatedDrizzleJar(File installDir)
     {
         String launchUpdater = null;
         //String jarname = thisJarsFile.getName();
         //if(jarname.equals("Drizzle.jar"))
-        {
+        //{
             //using general Drizzle, check for updates.
             int thisver = Version.version;
 
@@ -436,8 +481,24 @@ public class Main extends javax.swing.JFrame {
                 }
             }
 
-            if(maxver>thisver) launchUpdater = maxjar.getAbsolutePath();
-        }
-        return launchUpdater;
+            ////do we want an older version?
+            //if(excludeIfNotNewerThanCurrent)
+            //{
+            //    if(maxver>thisver) launchUpdater = maxjar.getAbsolutePath();
+            //}
+            //else
+            //{
+            //    if(maxver>-1) launchUpdater = maxjar.getAbsolutePath();
+            //}
+        //}
+        //return launchUpdater;
+        boolean hasDrizzleExe = FileUtils.Exists(installDir+"/Drizzle.exe");
+
+        VersionsInfo r = new VersionsInfo();
+        if(maxver!=-1) r.maxver = maxver;
+        if(maxjar!=null) r.maxjar = maxjar.getAbsolutePath();
+        if(maxver>thisver) r.launchUpdater = r.maxjar;
+        r.hasDrizzleExe = hasDrizzleExe;
+        return r;
     }
 }

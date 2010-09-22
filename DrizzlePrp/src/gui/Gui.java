@@ -158,7 +158,8 @@ public class Gui extends javax.swing.JFrame {
         });
         
         //fc = new JFileChooser();
-        m.setJTextArea(this.jTextArea1); //make sure the messages will come through.
+        //m.setJTextArea(this.jTextArea1); //make sure the messages will come through.
+        m.setLogbox(logBoxStateless1);
         m.setProgressBar(jProgressBar1);
         //vis = new visualisation(this.jPanel5.getGraphics());
         m.redirectStdErr();
@@ -587,8 +588,6 @@ public class Gui extends javax.swing.JFrame {
         textfieldState42 = new shared.State.TextfieldState();
         jButton133 = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
-        jLabel82 = new javax.swing.JLabel();
-        textfieldState74 = new shared.State.TextfieldState();
         jButton15 = new javax.swing.JButton();
         jPanel46 = new javax.swing.JPanel();
         textfieldState45 = new shared.State.TextfieldState();
@@ -904,9 +903,9 @@ public class Gui extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jButton54 = new javax.swing.JButton();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea1 = new shared.State.TextareaStateless();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        logBoxStateless1 = new shared.State.LogBoxStateless();
 
         uamStartupButtongroup.setName("uamStartup");
 
@@ -1938,7 +1937,7 @@ public class Gui extends javax.swing.JFrame {
 
                 textfieldState42.setName("genFolder"); // NOI18N
                 jPanel7.add(textfieldState42);
-                textfieldState42.setBounds(130, 20, 120, 20);
+                textfieldState42.setBounds(130, 20, 230, 20);
 
                 jButton133.setText("Generate uam.status.txt");
                 jButton133.addActionListener(new java.awt.event.ActionListener() {
@@ -1952,14 +1951,6 @@ public class Gui extends javax.swing.JFrame {
                 jLabel44.setText("archive folder:");
                 jPanel7.add(jLabel44);
                 jLabel44.setBounds(10, 20, 120, 16);
-
-                jLabel82.setText("shard folder:");
-                jPanel7.add(jLabel82);
-                jLabel82.setBounds(260, 20, 80, 16);
-
-                textfieldState74.setName("uamsh"); // NOI18N
-                jPanel7.add(textfieldState74);
-                textfieldState74.setBounds(360, 20, 110, 20);
 
                 jPanel41.add(jPanel7);
                 jPanel7.setBounds(10, 60, 480, 80);
@@ -4375,15 +4366,13 @@ public class Gui extends javax.swing.JFrame {
                                     });
                                     jPanel27.add(jButton54);
                                     jButton54.setBounds(10, 80, 140, 36);
-
-                                    jTextArea1.setColumns(20);
-                                    jTextArea1.setRows(5);
-                                    jScrollPane10.setViewportView(jTextArea1);
-
-                                    jPanel27.add(jScrollPane10);
-                                    jScrollPane10.setBounds(160, 27, 430, 110);
                                     jPanel27.add(jProgressBar1);
                                     jProgressBar1.setBounds(20, 150, 570, 14);
+
+                                    jScrollPane9.setViewportView(logBoxStateless1);
+
+                                    jPanel27.add(jScrollPane9);
+                                    jScrollPane9.setBounds(160, 27, 430, 110);
 
                                     getContentPane().add(jPanel27);
                                     jPanel27.setBounds(10, 510, 610, 180);
@@ -4392,7 +4381,8 @@ public class Gui extends javax.swing.JFrame {
                                 }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.jTextArea1.setText("");
+        //this.jTextArea1.setText("");
+        logBoxStateless1.ClearAll();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -4631,32 +4621,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        //remove duplicate lines, even if they're not adjacent.
-        
-        String alltext = this.jTextArea1.getText();
-        String[] lines = alltext.split("\n");
-        int linecount = lines.length;
-        StringBuilder newtext = new StringBuilder();
-
-        for(int i=0;i<linecount;i++)
-        {
-            String curline = lines[i];
-            if(curline != null) //if the current line isn't empty.
-            {
-                newtext.append(curline);
-                newtext.append("\n");
-
-                for(int j=i+1;j<linecount;j++) //search for duplicates
-                {
-                    if(curline.equals(lines[j]))
-                    {
-                        lines[j] = null; //remove the duplicate.
-                    }
-                }
-            }
-        }
-        
-        this.jTextArea1.setText(newtext.toString());
+        logBoxStateless1.RemoveDuplicateLines();
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -4985,21 +4950,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton53ActionPerformed
 
 private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
-        //alphabetise...
-        String alltext = this.jTextArea1.getText();
-        String[] lines = alltext.split("\n");
-        java.util.List<String> list = java.util.Arrays.asList(lines);
-        java.util.Collections.sort(list);
-        
-        int linecount = list.size();
-        StringBuilder newtext = new StringBuilder();
-        for(int i=0;i<linecount;i++)
-        {
-            newtext.append(list.get(i));
-            newtext.append("\n");
-        }
-        this.jTextArea1.setText(newtext.toString());
-
+        this.logBoxStateless1.Alphabetise();
 }//GEN-LAST:event_jButton54ActionPerformed
 
 private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton58ActionPerformed
@@ -5053,11 +5004,16 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event
 
 }//GEN-LAST:event_formWindowOpened
 
-private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+public void SaveSettingsIfApplicable()
+{
     if(shared.State.AllStates.getStateAsBoolean("saveOnExit"))
     {
         shared.State.AllStates.pullandsave(settingsfile);
     }
+}
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    SaveSettingsIfApplicable();
 }//GEN-LAST:event_formWindowClosing
 int[] oldlist={};
 boolean skip=false;
@@ -5124,7 +5080,8 @@ private void jButton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton71ActionPerformed
 
 private void jButton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton72ActionPerformed
-    jTextArea6.setText(jTextArea1.getText());
+    //jTextArea6.setText(jTextArea1.getText());
+    jTextArea6.setText(logBoxStateless1.getText());
 }//GEN-LAST:event_jButton72ActionPerformed
 
 private void jButton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton77ActionPerformed
@@ -5651,7 +5608,12 @@ private void jButton131ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jButton133ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton133ActionPerformed
     //uam.UamConfigGenerator.generateStatusFile(this.textfieldState42.getText());
     //uam.UamConfigNew.generateStatusFile(this.textfieldState42.getText());
-    uam.PrepareAge.DoAllWork(textfieldState42.getText(),textfieldState74.getText(),null);
+    //uam.PrepareAge.DoAllWork(textfieldState42.getText(),textfieldState74.getText(),null);
+    ThreadedTasks.custom(new java.lang.Runnable() {
+            public void run() {
+                uam.PrepareAge.DoAllWork(textfieldState42.getText());//,checkboxState33.isSelected());
+            }
+        });
 }//GEN-LAST:event_jButton133ActionPerformed
 
 private void textfieldState38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldState38ActionPerformed
@@ -6326,7 +6288,6 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
@@ -6389,7 +6350,6 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
@@ -6401,7 +6361,7 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private shared.State.TextareaStateless jTextArea1;
+    private javax.swing.JScrollPane jScrollPane9;
     private shared.State.TextareaStateless jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private shared.State.TextareaStateless jTextArea5;
@@ -6413,6 +6373,7 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.ButtongroupState languageButtonGroup;
     private shared.State.ListState listState2;
     private shared.State.ListState listState3;
+    private shared.State.LogBoxStateless logBoxStateless1;
     private shared.State.SliderState sliderState1;
     private shared.State.TabsState tabsState2;
     private shared.State.TabsState tabsState3;
@@ -6490,7 +6451,6 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.TextfieldState textfieldState71;
     private shared.State.TextfieldState textfieldState72;
     private shared.State.TextfieldState textfieldState73;
-    private shared.State.TextfieldState textfieldState74;
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
     private shared.State.ButtongroupState uamStartupButtongroup;

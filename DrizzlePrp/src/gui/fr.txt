@@ -268,3 +268,8 @@ You have a newer version of Drizzle installed.  Perhaps you want to use that?  I
 account name:{->}Nom d'utilisateur:
 password:{->}Mot de passe:
 avatar name:{->}Nom de l'avatar:
+
+//Drizzle28
+There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: {->}Il y a un risque majeur pour pour la confidentialité de vos informations, la sécurité de votre PC et l'intégrité de vos données. Il est fortement recommandé d'installer la version désactivée ('disabled') du 'Network Access', ou bien de supprimer manuellement le fichier suivant: 
+ Either way, this warning should not be displayed afterwards.{->} Si vous choisissez une de ces deux options, cet avertissement ne sera pas répété.
+

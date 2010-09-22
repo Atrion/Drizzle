@@ -14,6 +14,7 @@ import shared.FileUtils;
 import java.util.Vector;
 import prpobjects.Typeid;
 import prpobjects.prpfile;
+import prpobjects.PrpRootObject;
 
 public class Max
 {
@@ -156,6 +157,9 @@ public class Max
                         maxinfo.numLights += prp.FindAllObjectsOfType(Typeid.plSpotLightInfo).length;
 
                         maxinfo.numPhysics += prp.FindAllObjectsOfType(Typeid.plSimulationInterface).length;
+
+                        //make sounds streaming
+                        Max.FixStreamingSounds(prp);
                     }
                 };
                 auto.AllGames.GameConversionSub maxconv = new auto.AllGames.GameConversionSub(moulinfo);
@@ -190,6 +194,15 @@ public class Max
 
             m.decreaseindentation();
             m.status("Done converting Age!: ",agename);
+        }
+    }
+    public static void FixStreamingSounds(prpfile prp)
+    {
+        //makes all the sounds streaming.
+        for(PrpRootObject ro: prp.FindAllObjectsOfType(Typeid.plSoundBuffer))
+        {
+            prpobjects.plSoundBuffer sb = ro.castTo();
+            sb.flags |= prpobjects.plSoundBuffer.kStreamCompressed;
         }
     }
     private static boolean ensureFolders(String maxfolder, String potsfolder)

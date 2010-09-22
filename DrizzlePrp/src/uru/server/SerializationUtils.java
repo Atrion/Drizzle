@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.File;
 import shared.*;
 import java.io.Serializable;
+import java.io.ByteArrayOutputStream;
 
 public abstract class SerializationUtils
 {
@@ -45,6 +46,25 @@ public abstract class SerializationUtils
             out = new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(obj);
             out.close();
+        }
+        catch(Exception e)
+        {
+            try{
+                if(out!=null) out.close();
+            }catch(Exception e2){}
+            throw new nested(e);
+        }
+    }
+    public static byte[] SaveToBytes(Serializable obj)
+    {
+        ObjectOutputStream out = null;
+        try
+        {
+            ByteArrayOutputStream r = new ByteArrayOutputStream();
+            out = new ObjectOutputStream(r);
+            out.writeObject(obj);
+            out.close();
+            return r.toByteArray();
         }
         catch(Exception e)
         {

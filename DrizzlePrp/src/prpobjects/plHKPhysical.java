@@ -69,8 +69,9 @@ public class plHKPhysical extends uruobj
             throw new shared.uncaughtexception("PlHKPhysical does not currently translate non-havok vertices.");
         }
     }*/
-    public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname)
+    public static potsflags convertMoulFlagsToPotsFlags(moulflags moul, String objname, String filename)
     {
+        if(filename==null) filename = "";
         //General notes:
         //flag 0x20 in group always seems to be dropped.
         //LOSDB always seems to remain unchanged.
@@ -332,7 +333,7 @@ public class plHKPhysical extends uruobj
         else if(( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x20 )
         || ( u14==0x5 && u15==0x8 && LOSDB==0x0 && group0==0x24 )) //in ahnonay, untested
         {
-            //e.g. some stuff in Jalak
+            //e.g. some stuff in Jalak.  Also Andy's subworld Age's exit region with a FilterCoordInterface.  group0 must have 0x20=kPassive.  W
             pots.zzzu1 = 0x0;
             pots.zzzcoltype = 0x400;
             pots.zzzflagsdetect = 0x8000000;
@@ -340,8 +341,8 @@ public class plHKPhysical extends uruobj
             pots.zzzu2 = 0x0;
             pots.zzzu3 = 0x0;
             pots.zzzLOSDB = 0x0;
-            pots.zzzgroup0 = 0x4;
-
+            pots.zzzgroup0 = 0x24; //was 0x4 before Drizzle28
+            //m.status("New physics in file: "+filename+", object: "+objname);
         }
         else if(( u14==0x0 && u15==0x0 && LOSDB==0x1 && group0==0x4 )
               ||( u14==0x0 && u15==0x0 && LOSDB==0x5 && group0==0x4 ))
@@ -776,7 +777,7 @@ public class plHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString());
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,c.curRootObject.toString(),c.curFile);
             if(pots==null)
             {
                 String msg = "plHKPhysical: Can read okay, but failing in order to ignore. (u14="+Integer.toString(moul.u14)+", u15="+Integer.toString(moul.u15)+", losdb=0x"+Integer.toHexString(moul.LOSDB)+", group0=0x"+Integer.toHexString(moul.group0)+" ) ("+c.curRootObject.toString()+")";
@@ -792,7 +793,7 @@ public class plHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"","");
             if(pots==null)
             {
                 m.err("plHKPhysical: Unexpected combination.");
@@ -933,7 +934,7 @@ public class plHKPhysical extends uruobj
             moul.u15 = u15;
             moul.LOSDB = LOSDB;
             moul.group0 = group.values[0];
-            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"");
+            potsflags pots = plHKPhysical.convertMoulFlagsToPotsFlags(moul,"","");
             if(pots==null)
             {
                 m.err("plHKPhysical: Unexpected combination.");

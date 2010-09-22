@@ -5,10 +5,9 @@
 
 package auto;
 
-/**
- *
- * @author user
- */
+import java.util.Set;
+import java.util.HashSet;
+
 public class ageLists
 {
     public static final String[] potsages = {
@@ -21,8 +20,28 @@ public class ageLists
     };
     
     public static final String[] convertedages = {
-        "AhnonayMOUL","Dereno","EderDelin","EderTsogal","GreatTreePub","GuildPub-Cartographers","GuildPub-Greeters","GuildPub-Maintainers","GuildPub-Messengers","GuildPub-Writers","Jalak","KirelMOUL","KveerMOUL","LiveBahroCaves","Minkata","Negilahn","Payiferen","Tetsonot",
+        //Moul
+        "AhnonayMOUL","Dereno","EderDelin","EderTsogal","GreatTreePub","GuildPub-Cartographers","GuildPub-Greeters","GuildPub-Maintainers","GuildPub-Messengers","GuildPub-Writers","Jalak","KirelMOUL","KveerMOUL","LiveBahroCaves","Minkata","Negilahn","NeighborhoodMOUL","Payiferen","Tetsonot",
+        //Myst5
         "DescentMystV","Direbo","KveerMystV","Laki","MystMystV","Siralehn","Tahgira","Todelmer",
+        //Crowthistle
         "MarshScene","MountainScene",
+        //Hexisle
+        "CatfishCanyon","DessertDesert","LouderSpace","MoldyDungeon","PlasmaMiasma","PumpkinJungle",
+        //Magiquest
+        "Courtyard","ForestMQ","PortalWell",
     };
+
+    public static final String[] othercyanages = {
+        "GlobalMarkers", //not in Pots, but in UU, e.g.
+    };
+
+    public static Set<String> AllCyanAges()
+    {
+        HashSet<String> r = new HashSet();
+        for(String age: potsages) r.add(age);
+        for(String age: convertedages) r.add(age);
+        for(String age: othercyanages) r.add(age);
+        return r;
+    }
 }

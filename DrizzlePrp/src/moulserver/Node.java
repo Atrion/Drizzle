@@ -959,7 +959,8 @@ public abstract class Node
 
         public int getType(){return n.int32_1;} //always 1?
         public void setType(int val){n.int32_1 = val;}
-        public String getTitle(){return n.string64_1.toString();}
+        //public String getTitle(){return n.string64_1.toString();}
+        public String getTitle(){return (n.string64_1==null)?"":n.string64_1.toString();}
         public void setTitle(String val){n.string64_1 = new Str(val);}
         public byte[] getImageData(){return n.blob_1b.blob;}
         public void setImageData(byte[] val){n.blob_1b.blob = val;}

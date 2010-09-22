@@ -45,6 +45,22 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
+    public static void SaveFileIfChanged(String filename, byte[] newcontents, boolean createdirs, boolean throwexception)
+    {
+        if(FileUtils.Exists(filename))
+        {
+            byte[] oldcontents = FileUtils.ReadFile(filename);
+            boolean changed = !b.isEqual(oldcontents, newcontents);
+            if(changed)
+            {
+               FileUtils.WriteFile(filename, newcontents, createdirs, throwexception);
+            }
+        }
+        else
+        {
+            FileUtils.WriteFile(filename, newcontents, createdirs, throwexception);
+        }
+    }
     public static void ZeroFile(String filename)
     {
         ZeroFile(new File(filename));
@@ -292,7 +308,11 @@ public class FileUtils {
     {
         CopyFile(infile,outfile,overwrite,createfolder,false);
     }
-    public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder, boolean throwexception)
+    //public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder, boolean throwexception)
+    //{
+    //    CopyFile(infile,outfile,overwrite,createfolder,throwexception,false);
+    //}
+    public static void CopyFile(String infile, String outfile, boolean overwrite, boolean createfolder, boolean throwexception/*, boolean copymodtime*/)
     {
         File in = new File(infile);
         File out = new File(outfile);
@@ -312,6 +332,7 @@ public class FileUtils {
             inchan = new FileInputStream(in).getChannel();
             outchan = new FileOutputStream(out).getChannel();
             inchan.transferTo(0, inchan.size(), outchan);
+
         }
         catch(Exception e)
         {
@@ -331,6 +352,14 @@ public class FileUtils {
                 if(throwexception) m.throwUncaughtException("");
             }
         }
+
+
+    }
+    static public void CopyModTime(String infile, String outfile)
+    {
+        //set modtime to match original.  I think this is the only way to do this in java.
+        long modtime = new File(infile).lastModified();
+        new File(outfile).setLastModified(modtime);
     }
     static public byte[] ReadFile(String filename)
     {

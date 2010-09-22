@@ -20,7 +20,9 @@ public class patches
         }
     }
     public static final String[] problems = {
-        "linkMgr.linkToAge(", //this should be replaced by the patches.
+        //"linkMgr.linkToAge(", //this should be replaced by the patches.
+        //"ptNetLinkingMgr()",
+        ".linkToAge(",
         "exec(", //can be difficult to verify safety, but can probably be let slide sometimes.
         //"eval(", //shows up in the glue code, but we must still be careful.
         "os.system(", //should definitely not be invoking command-line stuff.
@@ -29,7 +31,7 @@ public class patches
     };
     public static final patch[] patches = {
 
-        new patch(
+        /*new patch(
             "        als = ptAgeLinkStruct()\n"+
             "        ainfo = ptAgeInfoStruct()\n"+
             "        ainfo.setAgeFilename(ageName)\n"+
@@ -54,6 +56,35 @@ public class patches
         ,
             "        import uam\n"+
             "        uam.LinkToAge(ageName, spawnPoint)\n"
+        ),*/ //should be covered by new rule below
+        new patch(
+            "                linkMgr = ptNetLinkingMgr()\n"+
+            "                linkMgr.linkToAge(ageLinkStruct)\n"
+        ,
+            "                import uam\n"+
+            "                uam.LinkToAge(ageLinkStruct.getAgeInfo().getAgeFilename(), ageLinkStruct.getSpawnPoint().getName())\n"
+        ),
+        new patch(
+            "            mgr = ptNetLinkingMgr()\n"+
+            "            mgr.setEnabled(1)\n"+
+            "            mgr.linkToAge(link)\n"
+        ,
+            "            import uam\n"+
+            "            uam.LinkToAge(link.getAgeInfo().getAgeFilename(), link.getSpawnPoint().getName())\n"
+        ),
+        new patch(
+            "                        linkMgr = ptNetLinkingMgr()\n"+
+            "                        linkMgr.linkToAge(als)\n"
+        ,
+            "                        import uam\n"+
+            "                        uam.LinkToAge(als.getAgeInfo().getAgeFilename(), als.getSpawnPoint().getName())\n"
+        ),
+        new patch(
+            "        linkMgr = ptNetLinkingMgr()\n"+
+            "        linkMgr.linkToAge(als)\n"
+        ,
+            "        import uam\n"+
+            "        uam.LinkToAge(als.getAgeInfo().getAgeFilename(), als.getSpawnPoint().getName())\n"
         ),
 
 };

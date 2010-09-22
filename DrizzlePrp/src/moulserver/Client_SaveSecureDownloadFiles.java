@@ -68,7 +68,7 @@ public class Client_SaveSecureDownloadFiles extends Client
         {
             //download and save the file.
             byte[] filedata = authconn.GetFile(entry.filename.toString());
-            String filepath = outputpath+"/"+entry.filename.toString().replace('\\', File.separatorChar);
+            String filepath = outputpath+"/"+entry.filename.toString().replace("\\", "/"); //fix problem where linux creates the filename with a blackslash in it rather than in a folder.
             FileUtils.WriteFile(filepath, filedata, true, true); //create dirs and throw exception
             MemUtils.GarbageCollect();
         }

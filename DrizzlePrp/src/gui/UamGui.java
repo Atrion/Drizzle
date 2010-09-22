@@ -669,6 +669,8 @@ public class UamGui
 
         uam.Uam.installInfo.printStatsMessage();
 
+        uam.Uam.CheckForProblems(false);
+
         //check if we've installed a new Drizzle, and if so, restart.
         
     }

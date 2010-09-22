@@ -37,6 +37,7 @@ import shared.m;
 import java.util.HashMap;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.w3c.dom.Comment;
 
@@ -244,8 +245,15 @@ public class UamConfigNew
         else return version;
     }
 
+    public static class ArchivesInfo
+    {
+        ArrayList<String> newFilenames;
+        //String newStatusFileContents;
+        UamConfigNew config;
+    }
+
     //besides updating the xml file, it returns a list of new archives.
-    public static ArrayList<String> generateStatusFile(String folderWith7zs)
+    public static ArchivesInfo generateStatusFile(String folderWith7zs, gui.Interactor interactor)
     {
         String sep = uam.Uam.versionSep;
         //String sep = "--";
@@ -262,17 +270,31 @@ public class UamConfigNew
         try{
             config = new UamConfigNew(new java.io.FileInputStream(statusfile));
         }catch(Exception e){
-            m.err("Error reading config file.");
-            return newarchives;
+            //m.err("Error reading config file.");
+            //return newarchives;
+            throw new shared.uncaughtexception("Error reading config file.");
         }
         //UamConfigData data = new UamConfigData
         //data.loadFromUamConfig(config);
 
-        //set latest drizzle version.
-        if(gui.Version.version > Integer.parseInt(config.data.drizzle))
+        //do new status message
+        /*final boolean changemessage = true;
+        if(changemessage)
         {
-            config.data.drizzle = Integer.toString(gui.Version.version);
-        }
+            String curmessage = config.data.welcome;
+            String newmessage = interactor.AskQuestion("Do you want a new status message? (blank to keep the old one)");
+            if(!newmessage.equals(""))
+            {
+                config.data.comments.add(curmessage);
+                config.data.welcome = newmessage;
+            }
+        }*/
+
+        //set latest drizzle version.
+        //if(gui.Version.version > Integer.parseInt(config.data.drizzle))
+        //{
+        //    config.data.drizzle = Integer.toString(gui.Version.version);
+        //}
 
         for(File f: filesearcher.search.getAllFilesWithExtension(folderWith7zs, false, suffix))
         {
@@ -300,7 +322,8 @@ public class UamConfigNew
                 m.msg("New age: ",agename);
 
                 age.filename = agename;
-                age.propername = age.filename;
+                //age.propername = age.filename;
+                age.propername = interactor.AskQuestionDefault("There is a new Age.  What is the proper name for "+agename+"? (blank for default)", age.filename);
                 age.deletable = "true";
                 age.info = "";
             }
@@ -329,14 +352,21 @@ public class UamConfigNew
         
         //sort by minver and proper name:
         //config.data.sort();
+
+        //alphabetize everything past -Ages but before -Whatever
+        config.data.alphabetize("-Ages");
         
-        String finalresult = config.data.generateXml();
+        //String finalresult = config.data.generateXml();
         //m.msg(finalresult);
-        shared.FileUtils.CopyFile(statusfile, statusfile+shared.DateTimeUtils.GetSortableCurrentDate()+".xml", false, false);
-        shared.FileUtils.WriteFile(statusfile, b.StringToBytes(finalresult));
+        //shared.FileUtils.CopyFile(statusfile, statusfile+shared.DateTimeUtils.GetSortableCurrentDate()+".xml", false, false);
+        //shared.FileUtils.WriteFile(statusfile, b.StringToBytes(finalresult));
         
-        m.status("Finished creating new status file!");
-        return newarchives;
+        //m.status("Finished creating new status file!");
+        ArchivesInfo r = new ArchivesInfo();
+        r.newFilenames = newarchives;
+        //r.newStatusFileContents = finalresult;
+        r.config = config;
+        return r;
     }
     public static class UamConfigData
     {
@@ -435,7 +465,52 @@ public class UamConfigNew
                 }
             });
         }
-        
+
+        public void alphabetize(String startage) //I.e. should be passed "-Ages"
+        {
+            //find start and end
+            boolean foundstart = false;
+            int start = -1;
+            int end = -1;
+            for(int i=0;i<ages.size();i++)
+            {
+                Age age = ages.get(i);
+
+                if(foundstart)
+                {
+                    if(age.filename.startsWith("-"))
+                    {
+                        end = i;
+                        break; //done
+                    }
+
+
+                }
+
+                if(age.filename.equals(startage))
+                {
+                    foundstart = true;
+                    start = i+1;
+                }
+            }
+
+            if(start==-1) m.throwUncaughtException("unexpected");
+            if(end==-1) end = ages.size();
+
+            alphabetize(start,end);
+        }
+        public void alphabetize(int start, int end)
+        {
+            java.util.List<Age> sublist = ages.subList(start, end);
+            java.util.Collections.sort(sublist, new java.util.Comparator<Age>(){
+                public int compare(Age a1, Age a2)
+                {
+                    int r = a1.propername.toLowerCase().compareTo(a2.propername.toLowerCase());
+                    return r;
+                }
+            });
+        }
+
         public static class Age
         {
             public String filename = null;

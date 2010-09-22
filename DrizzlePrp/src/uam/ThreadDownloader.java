@@ -196,6 +196,7 @@ public class ThreadDownloader extends Thread
             try
             {
                 conn = url.openConnection();
+                conn.setRequestProperty("User-Agent", "Java/"+gui.Version.GetJavaVersion()+" ("+gui.Version.GetVersion()+")");
                 //sun.net.www.http.HttpClient httpclient;
                 conn.setConnectTimeout(sConnectTimeout*1000);
                 conn.setReadTimeout(sReadTimeout*1000);

@@ -14,12 +14,13 @@ import java.io.File;
 public class Python
 {
     
-    public static void CheckForProblems(String pakfile)
+    public static boolean CheckForProblems(String pakfile)
     {
         final int pythonVersion = 22;
 
         //File pakfile2 = new File(pakfile);
 
+        boolean success = true;
         prpobjects.pakfile pak = prpobjects.pakfile.create(pakfile, auto.AllGames.getPots());
         List<pycfile> pycs = pak.extractPakFile(true);
         for(pycfile pyc: pycs)
@@ -36,6 +37,7 @@ public class Python
                 int ind = py_orig.indexOf(problem);
                 if(ind!=-1)
                 {
+                    success = false;
                     m.warn("Python problem found: ",problem," in file: ",filename);
                     m.warn("Dumping source:");
                     m.msg("*********************************************");
@@ -46,6 +48,7 @@ public class Python
 
         }
 
+        return success;
     }
     
     //returning null indiciates that the file did not change.

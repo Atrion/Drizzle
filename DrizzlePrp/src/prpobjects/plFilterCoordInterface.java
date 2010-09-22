@@ -30,23 +30,28 @@ import shared.readexception;
 
 public class plFilterCoordInterface extends uruobj
 {
+    public static final int kNoRotation = 0x1;
+    public static final int kNoTransX   = 0x2;
+    public static final int kNoTransY   = 0x4;
+    public static final int kNoTransZ   = 0x8;
+
     plCoordinateInterface parent;
-    int u1;
-    Transmatrix matrix;
+    int filterMask; //filterMask was u1
+    Transmatrix refParentLocalToWorld; //refParentLocalToWorld was matrix
     
     public plFilterCoordInterface(context c) throws readexception
     {
         parent = new plCoordinateInterface(c);
-        u1 = c.readInt();
-        matrix = new Transmatrix(c);
+        filterMask = c.readInt();
+        refParentLocalToWorld = new Transmatrix(c);
         
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        c.writeInt(u1);
-        matrix.compile(c);
+        c.writeInt(filterMask);
+        refParentLocalToWorld.compile(c);
     }
     
 }

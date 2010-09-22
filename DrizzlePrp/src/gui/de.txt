@@ -415,4 +415,7 @@ account name:{->}Account Name:
 password:{->}Passwort:
 avatar name:{->}Name des Avatars:
 
+//Drizzle28
+There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: {->}Es besteht ein Risiko der Verletzung der Privatsphäre/Sicherheit und der Beständigkeit von Welten. Es wird dringend dazu geraten, a) den "Network Access" als '(disabled)' zu installieren, oder b) manuell folgende Datei zu löschen: 
+ Either way, this warning should not be displayed afterwards.{->} In beiden Fällen sollte diese Warnung nachher nicht (mehr) angezeigt werden.
 
