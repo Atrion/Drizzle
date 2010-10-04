@@ -68,6 +68,9 @@ public class Client_SaveFileServerFiles extends Client
             MemUtils.GarbageCollect();
         }
 
+        gateconn.Disconnect();
+        fileconn.Disconnect();
+
         //all done!
         m.msg("All done!");
 

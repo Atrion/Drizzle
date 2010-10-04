@@ -168,6 +168,9 @@ public class Main extends javax.swing.JFrame {
                 //command-line mode.
                 
                 System.out.println("Using the commandline interface!");
+
+                Main.CloseSplashScreen();
+                
                 gui.CommandLine.HandleArguments(args);
             }
             else
@@ -416,15 +419,33 @@ public class Main extends javax.swing.JFrame {
             {
                 System.out.println(arg);
             }*/
-            Process proc = Runtime.getRuntime().exec(fullcommand);
+
+            final Process proc = Runtime.getRuntime().exec(fullcommand);
             if(args.length>0)
             {
                 //only redirect the output/err streams if we have command-line arguments; i.e. command-line interface is being used.
                 shared.m.StreamRedirector.Redirect(proc);
             }
 
+
             if(args.length>0)
             {
+                //this is a command line invocation, so keep the parent open to redirect io.
+
+                Main.CloseSplashScreen();
+
+                //try a shutdown hook for ctrl-c.  There was a problem where ctrl-c would terminate the parent but not the child.  We never know if ctrl-c is hit, but we can do this.
+                Runtime.getRuntime().addShutdownHook(
+                    new java.lang.Thread(){
+                        public void run()
+                        {
+                            //shutting down, perhaps because of ctrl-c, so terminate the child.
+                            //System.out.println("ctrl-c?");
+                            proc.destroy(); //kill it!
+                        }
+                    }
+                );
+
                 //this is a command line invocation, so keep the parent open to redirect io.
                 proc.waitFor();
             }
@@ -500,5 +521,12 @@ public class Main extends javax.swing.JFrame {
         if(maxver>thisver) r.launchUpdater = r.maxjar;
         r.hasDrizzleExe = hasDrizzleExe;
         return r;
+    }
+
+    private static void CloseSplashScreen()
+    {
+        //close the splashscreen
+        java.awt.SplashScreen splashscreen = java.awt.SplashScreen.getSplashScreen();
+        if(splashscreen!=null) splashscreen.close();
     }
 }

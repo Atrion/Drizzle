@@ -155,10 +155,10 @@ public abstract class Client
         {
             AuthServer.FileDownloadRequest request = new AuthServer.FileDownloadRequest();
             request.transId = Client.this.getNextTransid();
-            m.msg("Transid="+Integer.toString(request.transId));
+            if(gui.Version.debug) m.msg("Transid="+Integer.toString(request.transId));
             request.filename = new Str(filename);
             AuthServer.FileDownloadChunk reply = SendMsgAndWaitForTransid(request);
-            m.msg("Transid="+Integer.toString(reply.transId));
+            if(gui.Version.debug) m.msg("Transid="+Integer.toString(reply.transId));
             
             //copy bytes to result
             byte[] result = new byte[reply.filesize];
@@ -166,18 +166,23 @@ public abstract class Client
             b.CopyBytes(reply.buffer, result, reply.chunkOffset);
             curpos += reply.buffer.length;
 
+            float percentage = 100.0f*((float)curpos / (float)result.length);
+            m.msg(String.format("%6.1f%% done. (%d bytes out of %d)", percentage,curpos,result.length));
+
             //send ack
             while(curpos!=result.length)
             {
                 AuthServer.FileDownloadChunkAck ack = new AuthServer.FileDownloadChunkAck();
                 ack.transId = reply.transId; //keep using the same transid
                 AuthServer.FileDownloadChunk reply2 = SendMsgAndWaitForTransid(ack);
-                m.msg("Transid="+Integer.toString(reply2.transId));
+                if(gui.Version.debug) m.msg("Transid="+Integer.toString(reply2.transId));
 
                 //copy bytes into result
                 b.CopyBytes(reply2.buffer, result, reply2.chunkOffset);
                 curpos += reply2.buffer.length;
 
+                percentage = 100.0f*((float)curpos / (float)result.length);
+                m.msg(String.format("%6.1f%% done. (%d bytes out of %d)", percentage,curpos,result.length));
             }
 
             AuthServer.FileDownloadChunkAck finalack = new AuthServer.FileDownloadChunkAck();
@@ -553,13 +558,18 @@ public abstract class Client
         }
         public class ClientConnectionReadThread extends Thread
         {
+            public ClientConnectionReadThread()
+            {
+                //this.setDaemon(true);
+                //this.setName("ClientConnectionReadThread");
+            }
             public void run()
             {
                 //int count=0;
                 if(doEncrypt)
                 {
                     ServerMsg encmsg = HandleConnectMsg();
-                    m.msg("Read Msg: "+encmsg.dump());
+                    if(gui.Version.debug) m.msg("Read Msg: "+encmsg.dump());
                     //HandleMsg(encmsg);
                     if(ClientConnection.this.msghandler!=null) ClientConnection.this.msghandler.HandleMsg(encmsg,ClientConnection.this);
                     HandleMsg2(encmsg);
@@ -579,7 +589,7 @@ public abstract class Client
                             //else
                             //{
                                 ServerMsg msg = ReadMessage();
-                                m.msg("Read Msg: "+msg.dump());
+                                if(gui.Version.debug) m.msg("Read Msg: "+msg.dump());
                                 //HandleMsg(msg);
                                 if(ClientConnection.this.msghandler!=null) ClientConnection.this.msghandler.HandleMsg(msg,ClientConnection.this);
                                 HandleMsg2(msg);
@@ -757,6 +767,11 @@ public abstract class Client
         }
         public class ClientConnectionWriteThread extends Thread
         {
+            public ClientConnectionWriteThread()
+            {
+                //this.setDaemon(true);
+                //this.setName("ClientConnectionWriteThread");
+            }
             public void run()
             {
                 try
@@ -804,7 +819,7 @@ public abstract class Client
             }
             private void SendMsg2(ServerMsg msg)
             {
-                m.msg("Sending Msg: "+msg.dump());
+                if(gui.Version.debug) m.msg("Sending Msg: "+msg.dump());
                 //try{
                 byte[] msgdata = msg.GetMsgBytes();
                 out.writeBytes(msgdata);

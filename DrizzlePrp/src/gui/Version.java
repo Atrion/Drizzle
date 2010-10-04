@@ -11,7 +11,7 @@ package gui;
  */
 public class Version
 {
-    public static final int version = 28;
+    public static final int version = 29;
     public static final boolean debug = false;
     private static String javaver;
 

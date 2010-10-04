@@ -64,14 +64,21 @@ public class Client_SaveSecureDownloadFiles extends Client
         ArrayList<moulserver.SecureDownloadManifest.Entry> sdlfiles = authconn.GetDirList("SDL","sdl");
         pythonfiles.addAll(sdlfiles);
 
+        int curfile = 0;
+        int numfiles = pythonfiles.size();
         for(moulserver.SecureDownloadManifest.Entry entry: pythonfiles)
         {
             //download and save the file.
+            curfile++;
+            m.msg("Downloading file ",Integer.toString(curfile)," of ",Integer.toString(numfiles));
             byte[] filedata = authconn.GetFile(entry.filename.toString());
             String filepath = outputpath+"/"+entry.filename.toString().replace("\\", "/"); //fix problem where linux creates the filename with a blackslash in it rather than in a folder.
             FileUtils.WriteFile(filepath, filedata, true, true); //create dirs and throw exception
             MemUtils.GarbageCollect();
         }
+
+        //close them down
+        authconn.Disconnect();
 
         //all done!
         m.msg("All done!");

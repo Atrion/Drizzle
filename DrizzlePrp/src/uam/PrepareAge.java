@@ -40,7 +40,7 @@ public class PrepareAge
         MergeFile urufiles = MergeFile.CreateWithRoot(urufilesfolder);
 
         //try to prepare the age for the shard
-        final String[] manualages = {"offlineki","Drizzle"}; //these Ages will not be automatically prepared.
+        final String[] manualages = {"offlineki","Drizzle","AgeInformation","officialnocd",}; //these Ages will not be automatically prepared.
         m.msg();
         m.msg("Preparing shard files...");
         //if(isDryRun) m.status("(Dry run)");
@@ -459,7 +459,7 @@ public class PrepareAge
         else if(f.isFile())
         {
             //regular files
-            if(name.endsWith(".prp")||name.endsWith(".age")||name.endsWith(".fni")||name.endsWith(".sum")||name.endsWith(".ogg")||name.endsWith(".p2f"))
+            if(name.endsWith(".prp")||name.endsWith(".age")||name.endsWith(".fni")||name.endsWith(".sum")||name.endsWith(".ogg")||name.endsWith(".p2f")||name.endsWith(".bik"))
             {
                 //FileUtils.CopyFile(f.getAbsolutePath(), shardfolder+relfilename, true, true, true);
                 shardfolder.CopyFileIntoHighestVersion(f.getAbsolutePath(), relfilename, true, true, true);
@@ -467,7 +467,7 @@ public class PrepareAge
             }
 
             //misc files
-            if(name.endsWith(".txt"))
+            if(name.endsWith(".txt")||name.endsWith(".jpg"))
             {
                 //FileUtils.CopyFile(f.getAbsolutePath(), shardfolder+relfilename, true, true, true);
                 shardfolder.CopyFileIntoHighestVersion(f.getAbsolutePath(), relfilename, true, true, true);

@@ -45,6 +45,8 @@ public class Client_GetNodes extends Client
 
         NodesInfo nodes = authconn.GetNodes(playermsg.playerId);
 
+        authconn.Disconnect();
+
         //all done!
         m.msg("All done!");
 
