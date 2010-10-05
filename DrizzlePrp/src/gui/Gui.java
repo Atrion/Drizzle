@@ -5906,11 +5906,19 @@ private void jButton165ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton165ActionPerformed
 
 private void jButton162ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton162ActionPerformed
-    auto.Python.DecompilePakOrPyc(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+    gui.ThreadedTasks.custom(new java.lang.Runnable() {
+        public void run() {
+            auto.Python.DecompilePakOrPyc(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+        }
+    });
 }//GEN-LAST:event_jButton162ActionPerformed
 
 private void jButton163ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton163ActionPerformed
-    auto.Python.UnpackPak(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+    gui.ThreadedTasks.custom(new java.lang.Runnable() {
+        public void run() {
+            auto.Python.UnpackPak(textfieldState23.getText(), textfieldState41.getText(), textfieldState67.getText());
+        }
+    });
 }//GEN-LAST:event_jButton163ActionPerformed
 
 private void jButton166ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton166ActionPerformed

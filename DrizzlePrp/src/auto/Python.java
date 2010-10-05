@@ -80,9 +80,12 @@ public class Python
         m.status("Decompiling pak file...");
         prpobjects.pakfile pak = prpobjects.pakfile.create(infile, auto.AllGames.get(gamename));
         java.util.List<pythondec.pycfile> pycs = pak.extractPakFile(true);
+        int curnum = 0;
+        int totalnum = pycs.size();
         for(pythondec.pycfile pyc: pycs)
         {
-            m.msg("Decompiling: ",pyc.filename);
+            curnum++;
+            m.msg("Decompiling: ",pyc.filename," (file ",Integer.toString(curnum)," of ",Integer.toString(totalnum),")");
             pyc.decompile();
             String source = pyc.generateSourceCode();
             String outfile = outfolder+"/"+pyc.filename;
