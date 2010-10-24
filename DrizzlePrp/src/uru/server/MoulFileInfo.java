@@ -61,4 +61,36 @@ public class MoulFileInfo
             +" flags="+Integer.toString(Flags);
         //return "filename="+filename.toString();
     }
+
+    /*public void CleanNames()
+    {
+        String str;
+        //Get rid of double slashes and a slash at the start.
+
+        str = filename.toString();
+        str = str.replace("/", "\\");
+        str = str.replace("\\\\", "\\");
+        if(str.startsWith("\\")) str = str.substring(1);
+        filename = new Str(str);
+
+        str = Downloadname.toString();
+        str = str.replace("/", "\\");
+        str = str.replace("\\\\", "\\");
+        if(str.startsWith("\\")) str = str.substring(1);
+        Downloadname = new Str(str);
+    }*/
+    public void SetFilename(String str)
+    {
+        str = str.replace("/", "\\");
+        str = str.replace("\\\\", "\\");
+        if(str.startsWith("\\")) str = str.substring(1);
+        filename = new Str(str);
+    }
+    public void SetDownloadname(String str)
+    {
+        str = str.replace("/", "\\");
+        str = str.replace("\\\\", "\\");
+        if(str.startsWith("\\")) str = str.substring(1);
+        Downloadname = new Str(str);
+    }
 }

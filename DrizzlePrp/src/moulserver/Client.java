@@ -652,24 +652,39 @@ public abstract class Client
                 }
 
                 //Transid triggers
-                if(msg.transid()!=null)
+                Integer transid = msg.transid();
+                if(transid!=null)
                 {
-                    Waiter trigger = waiters.get(msg.transid());
+                    /*Waiter trigger = waiters.get(transid);
                     if(trigger!=null)
                     {
                         trigger.trigger(msg);
-                        waiters.remove(trigger);
+                        //Object o1 = waiters.remove(trigger);
+                        waiters.remove(transid);
+                        //int dummy=0;
                     }
-                    //TriggerTransid(msg,msg.transid());
+                    //TriggerTransid(msg,msg.transid());*/
+                    Waiter trigger = waiters.remove(transid);
+                    if(trigger!=null)
+                    {
+                        trigger.trigger(msg);
+                    }
                 }
 
                 //Class trigers
                 Class klass = msg.getClass();
-                Waiter klassTrigger = waiters.get(klass);
+                /*Waiter klassTrigger = waiters.get(klass);
                 if(klassTrigger!=null)
                 {
                     klassTrigger.trigger(msg);
-                    waiters.remove(klassTrigger);
+                    //Object o2 = waiters.remove(klassTrigger);
+                    waiters.remove(klass);
+                    //int dummy=0;
+                }*/
+                Waiter klassTrigger = waiters.remove(klass);
+                if(klassTrigger!=null)
+                {
+                    klassTrigger.trigger(msg);
                 }
 
             }

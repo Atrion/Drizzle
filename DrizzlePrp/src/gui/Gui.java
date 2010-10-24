@@ -573,9 +573,10 @@ public class Gui extends javax.swing.JFrame {
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
-        textfieldState69 = new shared.State.TextfieldState();
         jPanel38 = new javax.swing.JPanel();
         checkboxState32 = new shared.State.CheckboxState();
+        checkboxState33 = new shared.State.CheckboxState();
+        textfieldState69 = new shared.State.TextfieldState();
         jLabel76 = new javax.swing.JLabel();
         MiscPanel = new javax.swing.JPanel();
         jPanel41 = new javax.swing.JPanel();
@@ -1815,7 +1816,7 @@ public class Gui extends javax.swing.JFrame {
             textfieldState68.setText("C:\\PlasmaTest\\");
                 textfieldState68.setName("theart1"); // NOI18N
                 jPanel34.add(textfieldState68);
-                textfieldState68.setBounds(390, 130, 280, 20);
+                textfieldState68.setBounds(390, 170, 280, 20);
 
                 jButton168.setText("Convert");
                 jButton168.addActionListener(new java.awt.event.ActionListener() {
@@ -1824,7 +1825,7 @@ public class Gui extends javax.swing.JFrame {
                     }
                 });
                 jPanel34.add(jButton168);
-                jButton168.setBounds(550, 160, 110, 36);
+                jButton168.setBounds(550, 200, 110, 36);
 
                 jButton166.setText("select...");
                 jButton166.addActionListener(new java.awt.event.ActionListener() {
@@ -1833,12 +1834,12 @@ public class Gui extends javax.swing.JFrame {
                     }
                 });
                 jPanel34.add(jButton166);
-                jButton166.setBounds(670, 120, 110, 36);
+                jButton166.setBounds(670, 160, 110, 36);
 
                 jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                 jLabel74.setText("3dsmax's output folder (set in PlasmaMax2.ini):");
                 jPanel34.add(jLabel74);
-                jLabel74.setBounds(10, 130, 370, 16);
+                jLabel74.setBounds(10, 170, 370, 16);
 
                 jLabel75.setForeground(new java.awt.Color(0, 102, 102));
                 jLabel75.setText("(The created files will be placed in the Pots folder given on the UAM tab.)");
@@ -1848,38 +1849,35 @@ public class Gui extends javax.swing.JFrame {
                 jLabel77.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                 jLabel77.setText("Ages:");
                 jPanel34.add(jLabel77);
-                jLabel77.setBounds(250, 170, 130, 16);
-
-                textfieldState69.setName("theartages"); // NOI18N
-                jPanel34.add(textfieldState69);
-                textfieldState69.setBounds(390, 170, 150, 20);
+                jLabel77.setBounds(250, 210, 130, 16);
 
                 jPanel38.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
+                jPanel38.setLayout(null);
 
                 checkboxState32.setText("Launch Uru after converting");
                 checkboxState32.setName("maxlaunch"); // NOI18N
+                jPanel38.add(checkboxState32);
+                checkboxState32.setBounds(10, 20, 226, 28);
 
-                javax.swing.GroupLayout jPanel38Layout = new javax.swing.GroupLayout(jPanel38);
-                jPanel38.setLayout(jPanel38Layout);
-                jPanel38Layout.setHorizontalGroup(
-                    jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(checkboxState32, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                        .addContainerGap())
-                );
-                jPanel38Layout.setVerticalGroup(
-                    jPanel38Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel38Layout.createSequentialGroup()
-                        .addComponent(checkboxState32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
+                checkboxState33.setText("Partial Age (i.e. no separate texture prp, and no .age file)");
+                checkboxState33.setName("maxsingle"); // NOI18N
+                checkboxState33.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        checkboxState33ActionPerformed(evt);
+                    }
+                });
+                jPanel38.add(checkboxState33);
+                checkboxState33.setBounds(10, 50, 490, 28);
 
                 jPanel34.add(jPanel38);
-                jPanel38.setBounds(660, 20, 250, 60);
+                jPanel38.setBounds(390, 60, 510, 90);
+
+                textfieldState69.setName("theartages"); // NOI18N
+                jPanel34.add(textfieldState69);
+                textfieldState69.setBounds(390, 210, 150, 20);
 
                 TheArtTab.add(jPanel34);
-                jPanel34.setBounds(30, 150, 930, 210);
+                jPanel34.setBounds(30, 150, 930, 250);
 
                 jLabel76.setForeground(new java.awt.Color(0, 102, 102));
                 jLabel76.setText("This area is for things related to the writing of Ages.");
@@ -5926,7 +5924,7 @@ private void jButton166ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_jButton166ActionPerformed
 
 private void jButton168ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton168ActionPerformed
-    gui.ThreadedTasks.convert3dsmaxToPots(textfieldState68.getText(),textfieldState39.getText(),textfieldState69.getText(),checkboxState32.isSelected());
+    gui.ThreadedTasks.convert3dsmaxToPots(textfieldState68.getText(),textfieldState39.getText(),textfieldState69.getText(),checkboxState32.isSelected(),checkboxState33.isSelected());
 }//GEN-LAST:event_jButton168ActionPerformed
 
 private void jButton167ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton167ActionPerformed
@@ -5956,6 +5954,9 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
         });
 }//GEN-LAST:event_jButton173ActionPerformed
+
+private void checkboxState33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxState33ActionPerformed
+}//GEN-LAST:event_checkboxState33ActionPerformed
     
 /*class c2 extends javax.swing.DefaultListSelectionModel
 {
@@ -6030,6 +6031,7 @@ private void jButton173ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private shared.State.CheckboxState checkboxState30;
     private shared.State.CheckboxState checkboxState31;
     private shared.State.CheckboxState checkboxState32;
+    private shared.State.CheckboxState checkboxState33;
     private shared.State.CheckboxState checkboxState4;
     private shared.State.CheckboxState checkboxState5;
     private shared.State.CheckboxState checkboxState6;

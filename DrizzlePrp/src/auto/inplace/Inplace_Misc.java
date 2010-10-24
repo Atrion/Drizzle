@@ -19,7 +19,7 @@ public class Inplace_Misc
             String offlinekimd5 = "52B861244614C328E9B36416D6EE48CC";
             if(!actualmd5.equals(offlinekimd5))
             {
-                auto.mod.AutoMod_TranslateAge.DustinModAhnySphere01(prp);
+                auto.mod.AutoMod_Translate.DustinModAhnySphere01(prp);
                 return true;
             }
         }
@@ -28,7 +28,7 @@ public class Inplace_Misc
             String offlinekimd5 = "012D1BB5B7D110F7700C41D747D2877E";
             if(!actualmd5.equals(offlinekimd5))
             {
-                auto.mod.AutoMod_TranslateAge.DustinModAhnyMaint01(prp);
+                auto.mod.AutoMod_Translate.DustinModAhnyMaint01(prp);
                 return true;
             }
         }
@@ -37,7 +37,7 @@ public class Inplace_Misc
             String offlinekimd5 = "636C36F916B25A0595088DEE01736B80";
             if(!actualmd5.equals(offlinekimd5))
             {
-                auto.mod.AutoMod_TranslateAge.DustinModAhnyOutBuilding(prp);
+                auto.mod.AutoMod_Translate.DustinModAhnyOutBuilding(prp);
                 return true;
             }
         }

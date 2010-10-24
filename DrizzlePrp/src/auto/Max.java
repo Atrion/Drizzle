@@ -20,7 +20,7 @@ public class Max
 {
     static final boolean deleteTextureFileAfterConvert = true;
 
-    public static void convert3dsmaxToPots(String maxfolder, String potsfolder, String agenames)
+    public static void convert3dsmaxToPots(String maxfolder, String potsfolder, String agenames, boolean partialAge)
     {
         File datfolder = new File(maxfolder+"/dat/");
         ArrayList<String> agenamelist = new ArrayList();
@@ -52,15 +52,15 @@ public class Max
         {
             //m.msg("You must specify an Age to conver");
             m.msg("No Ages specified; converting all Ages in 3dsmax's export folder...");
-            convert3dsmaxToPots(maxfolder,potsfolder);
+            convert3dsmaxToPots(maxfolder,potsfolder,partialAge);
             return;
         }
         else
         {
-            convert3dsmaxToPots(maxfolder,potsfolder,agenamelist);
+            convert3dsmaxToPots(maxfolder,potsfolder,agenamelist,partialAge);
         }
     }
-    public static void convert3dsmaxToPots(String maxfolder, String potsfolder, ArrayList<String> ages)
+    public static void convert3dsmaxToPots(String maxfolder, String potsfolder, ArrayList<String> ages, final boolean partialAge)
     {
         File datfolder = new File(maxfolder+"/dat/");
 
@@ -73,6 +73,15 @@ public class Max
         //convert each found Age:
         for(String agename: ages)
         {
+            if(!partialAge)
+            {
+                if(agename.toLowerCase().equals("personal") || agename.toLowerCase().equals("pahts"))
+                {
+                    m.err("Woah there!  You probably meant to have the 'Partial Age' option set when making a Relto page or AhraPahts shell.");
+                    return;
+                }
+            }
+
             m.status("Converting Age: ",agename);
             m.increaseindentation();
 
@@ -93,7 +102,10 @@ public class Max
             byte[] agefileoutbs = agefile.saveToByteArray();
             agefileoutbs = uru.UruCrypt.EncryptWhatdoyousee(agefileoutbs);
             String agefileout = potsfolder+"/dat/"+agename+".age";
-            FileUtils.WriteFile(agefileout, agefileoutbs, true, true);
+            if(!partialAge)
+            {
+                FileUtils.WriteFile(agefileout, agefileoutbs, true, true);
+            }
 
             //convert .sum file:
             String sumfileout = potsfolder+"/dat/"+agename+".sum";
@@ -120,7 +132,10 @@ public class Max
             }
             byte[] fnifileoutbs = uru.UruCrypt.EncryptWhatdoyousee(fnifilet.saveToByteArray());
             String fnifileout = potsfolder+"/dat/"+agename+".fni";
-            FileUtils.WriteFile(fnifileout, fnifileoutbs, true, true);
+            if(!partialAge)
+            {
+                FileUtils.WriteFile(fnifileout, fnifileoutbs, true, true);
+            }
 
             //convert .prp files:
             ArrayList<String> prpfiles = new ArrayList();
@@ -133,8 +148,34 @@ public class Max
             }
 
             final MaxInfo maxinfo = new MaxInfo();
+            //find textures prp
+            String texturesPrp = null;
             for(String prp: prpfiles)
             {
+                if(prp.endsWith("_District_Textures.prp"))
+                {
+                    texturesPrp = prp;
+                    break;
+                }
+            }
+
+            if(partialAge && texturesPrp==null)
+            {
+                //warn the user that this might not be right
+                m.warn("Conversion is set to 'Partial Age', but no Textures prp was found.  If your Age has no textures then this is normal, otherwise you should re-export with 3dsmax.");
+            }
+
+            for(String prp: prpfiles)
+            {
+                if(partialAge) //skip BuiltIn and Textures prps for patial ages.
+                {
+                    if(prp.toLowerCase().endsWith("_district_builtin.prp") || prp.toLowerCase().endsWith("_district_textures.prp"))
+                    {
+                        m.status("Skipping Prp: ",prp);
+                        continue;
+                    }
+                }
+
                 m.status("Converting Prp: ",prp);
                 m.increaseindentation();
 
@@ -160,23 +201,43 @@ public class Max
 
                         //make sounds streaming
                         Max.FixStreamingSounds(prp);
+
+                        //fix object order
+                        //moved into prpfile.java, since it will change the order one way or another.
+                        //Max.FixObjectOrder(prp);
                     }
                 };
+                moulinfo.renameinfo.agenames.remove("Personal"); //don't want this renamed as PersonalMoul.
                 auto.AllGames.GameConversionSub maxconv = new auto.AllGames.GameConversionSub(moulinfo);
                 maxconv.ConvertFiles(maxfolder, potsfolder, files);
 
-                //Bugfix for Cyan's plugin.  It makes duplicate textures and can even produce a corrupt prp when doing so.
-                if(Max.deleteTextureFileAfterConvert)
+                if(partialAge) //pull in the textures for partial Ages
                 {
-                    if(prp.endsWith("_District_Textures.prp"))
+                    if(texturesPrp!=null)
                     {
-                        //m.msg("(Removing Textures prp to fix a Plasma bug.)");
-                        String filetodelete = maxfolder+"/dat/"+prp;
-                        FileUtils.DeleteFile(filetodelete, false);
+                        String infile = potsfolder+"/dat/"+prp;
+                        String textfile = maxfolder+"/dat/"+texturesPrp;
+                        String outfolder = potsfolder+"/dat/";
+                        auto.Distiller.DistillTextures(infile,textfile,outfolder);
                     }
                 }
 
                 m.decreaseindentation();
+            }
+
+            //Bugfix for Cyan's plugin.  It makes duplicate textures and can even produce a corrupt prp when doing so.
+            if(Max.deleteTextureFileAfterConvert)
+            {
+                //for(String prp: prpfiles)
+                if(texturesPrp!=null)
+                {
+                    //if(prp.endsWith("_District_Textures.prp"))
+                    //{
+                    //m.msg("(Removing Textures prp to fix a Plasma bug.)");
+                    String filetodelete = maxfolder+"/dat/"+texturesPrp;
+                    FileUtils.DeleteFile(filetodelete, false);
+                    //}
+                }
             }
 
             if(maxinfo.numSpawnPoints==0)
@@ -223,7 +284,7 @@ public class Max
         }
         return true;
     }
-    public static void convert3dsmaxToPots(String maxfolder, String potsfolder)
+    public static void convert3dsmaxToPots(String maxfolder, String potsfolder, boolean partialAge)
     {
         //check folders:
         if(!ensureFolders(maxfolder,potsfolder)) return;
@@ -241,7 +302,7 @@ public class Max
             }
         }
 
-        convert3dsmaxToPots(maxfolder,potsfolder,ages);
+        convert3dsmaxToPots(maxfolder,potsfolder,ages,partialAge);
 
         
     }

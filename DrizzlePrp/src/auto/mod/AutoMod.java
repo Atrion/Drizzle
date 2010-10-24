@@ -135,19 +135,19 @@ public class AutoMod
         if(filename.equals("AhnySphere01_District_Sphere01.prp"))
         {
             prpfile prp = prpfile.createFromFile(infile, true);
-            AutoMod_TranslateAge.DustinModAhnySphere01(prp);
+            AutoMod_Translate.DustinModAhnySphere01(prp);
             prp.saveAsFile(outfolder+"/dat/"+filename);
         }
         if(filename.equals("AhnySphere01_District_MaintRoom01.prp"))
         {
             prpfile prp = prpfile.createFromFile(infile, true);
-            AutoMod_TranslateAge.DustinModAhnyMaint01(prp);
+            AutoMod_Translate.DustinModAhnyMaint01(prp);
             prp.saveAsFile(outfolder+"/dat/"+filename);
         }
         if(filename.equals("AhnySphere01_District_Sphere01OutBuildingInterior.prp"))
         {
             prpfile prp = prpfile.createFromFile(infile, true);
-            AutoMod_TranslateAge.DustinModAhnyOutBuilding(prp);
+            AutoMod_Translate.DustinModAhnyOutBuilding(prp);
             prp.saveAsFile(outfolder+"/dat/"+filename);
         }
         if(filename.equals("Neighborhood_District_nb01Ayhoheek5Man1Dead.prp"))

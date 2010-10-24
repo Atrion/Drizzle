@@ -24,6 +24,7 @@ import shared.*;
 import prpobjects.PrpRootObject;
 import prpobjects.prpfile;
 import prpobjects.plLayerBink;
+import java.util.ArrayList;
 
 //TODO:
 //The client.mfs needs UruExplorer.exe as the top item, and those two items from base have to go to others or be removed. (otherwise UruExplorer.exe won't be autostarted from UruSetup.)
@@ -290,7 +291,7 @@ public class Dataserver
 //            m.throwUncaughtException("unhandled");
 //        }
     }
-    private static final String[] installfiles = {"/UruSetup.exe","/UruLauncher.exe","/Uru.exe"};
+    private static final String[] installfiles = {"/UruSetup.exe","/UruLauncher.exe","/Uru.exe",/*"/ReleaseNotes.html"*/};
     private static final String[] agepaths = {"/dat/","/sfx/","/avi/"};
     public String GetPrefixPath(String relpath)
     {
@@ -300,6 +301,7 @@ public class Dataserver
     }
     private boolean IsAgeFile(String relpath)
     {
+        if(relpath.endsWith(".txt")) return false; //grr... buggy moulagain
         for(String s: agepaths) if(relpath.startsWith(s)) return true;
         return false;
     }
@@ -485,6 +487,9 @@ public class Dataserver
         HashMap<String,Integer> soundflags = new HashMap(); //oggfilename->dataserverFlags
         Concurrent.HashSetMap<String,String> files = new Concurrent.HashSetMap(); //relpath->set of manifests
         //HashMap<String,HashSet<String>> manifests = new HashMap(); //manifestname->set of filenames
+        //agefiles and sdlfiles just remember those files, so we can conveniently copy them later.
+        ArrayList<String> agefiles = new ArrayList();
+        ArrayList<String> sdlfiles = new ArrayList();
 
         //0th pass:
         //read overrides and assign those.
@@ -526,6 +531,7 @@ public class Dataserver
                 {
                     String age = relpath.substring(relpath.lastIndexOf("/")+1, relpath.length()-(".age".length()) );
                     files.addToSet(relpath, age+".mfs");
+                    agefiles.add(relpath);
                 }
                 else if(relpath.endsWith(".fni"))
                 {
@@ -595,7 +601,15 @@ public class Dataserver
             else
             {
                 //rest of the client manifest
-                files.addToSet(relpath, "client.mfs");
+                if(relpath.endsWith(".sdl"))
+                {
+                    files.addToSet(relpath, "client.mfs");
+                    sdlfiles.add(relpath);
+                }
+                else
+                {
+                    files.addToSet(relpath, "client.mfs");
+                }
             }
         }
 
@@ -612,8 +626,9 @@ public class Dataserver
             }
         }
 
-        final boolean forceConvertedAges = false;
+
         //add .age files for crowthistle/myst5/hexisle/mqo if present
+        final boolean forceConvertedAges = false;
         if(forceConvertedAges)
         {
             String[] forced = {
@@ -745,8 +760,11 @@ public class Dataserver
 
                     //moul writing.
                     MoulFileInfo mi = new MoulFileInfo();
-                    mi.filename = new Str(dfi.relpath.replace("/", "\\")); //should we skip the first slash?
-                    mi.Downloadname = new Str((outrelpath+dfi.relpath+".gz").replace("/", "\\"));
+                    //mi.filename = new Str(dfi.relpath.replace("/", "\\")); //should we skip the first slash?
+                    //mi.Downloadname = new Str((outrelpath+dfi.relpath+".gz").replace("/", "\\"));
+                    mi.SetFilename(dfi.relpath);
+                    mi.SetDownloadname(outrelpath+dfi.relpath+".gz");
+                    //mi.CleanNames(); //Get rid of starting \ and double \\
                     mi.Hash = new Str(b.BytesToHexString(dfi.md5));
                     mi.CompressedHash = new Str(b.BytesToHexString(dfi.compressedmd5));
                     mi.Filesize = (int)dfi.filesize;
@@ -791,6 +809,30 @@ public class Dataserver
         //FileUtils.WriteFile(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true);
         FileUtils.SaveFileIfChanged(outroot+"/game_data/dat/agelist.txt", b.StringToBytes(agelist_txt),true,true);
 
+
+        //copy uncompressed .age and .sdl files for convenience (they can be encrypted; Talcum and Alcugs are okay with that.)
+        for(String relpath: agefiles)
+        {
+            String filename = relpath.substring(relpath.lastIndexOf("/")+1);
+            if(relpath.toLowerCase().equals("/dat/"+filename.toLowerCase())) //don't do dummy .age files
+            {
+                String infile = root + "/" + relpath;
+                String outfile = outroot + "/agefiles/"+filename;
+                byte[] infiledata = FileUtils.ReadFile(infile);
+                FileUtils.SaveFileIfChanged(outfile, infiledata, true, true);
+            }
+        }
+        for(String relpath: sdlfiles)
+        {
+            String filename = relpath.substring(relpath.lastIndexOf("/")+1);
+            if(relpath.toLowerCase().equals("/sdl/"+filename.toLowerCase())) //don't do dummy .sdl files.  Not that they exist :P
+            {
+                String infile = root + "/" + relpath;
+                String outfile = outroot + "/sdlfiles/"+filename;
+                byte[] infiledata = FileUtils.ReadFile(infile);
+                FileUtils.SaveFileIfChanged(outfile, infiledata, true, true);
+            }
+        }
 
         //save the current info
         //SerializationUtils.SaveToFile(dataserverfileinfo, info);

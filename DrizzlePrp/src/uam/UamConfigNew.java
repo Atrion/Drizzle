@@ -505,7 +505,12 @@ public class UamConfigNew
             java.util.Collections.sort(sublist, new java.util.Comparator<Age>(){
                 public int compare(Age a1, Age a2)
                 {
-                    int r = a1.propername.toLowerCase().compareTo(a2.propername.toLowerCase());
+                    //Should be lowercase and ignore apostrophes.
+                    //String a1name = a1.propername.toLowerCase();
+                    //String a2name = a2.propername.toLowerCase();
+                    String a1name = a1.propername.toLowerCase().replace("'", "");
+                    String a2name = a2.propername.toLowerCase().replace("'", "");
+                    int r = a1name.compareTo(a2name);
                     return r;
                 }
             });

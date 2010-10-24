@@ -94,6 +94,8 @@ public abstract class dvNode
             if(info.cls==Byte.class) return new dvByte(info);
             if(info.cls==Flt.class) return new dvFlt(info);
             if(info.cls==Short.class) return new dvShort(info);
+            if(info.cls==Typeid.class) return new dvTypeid(info);
+            if(info.cls==Float.class) return new dvFloat(info);
 
             return new dvObject(info);
         }

@@ -42,9 +42,10 @@ public class CommandLine
             m.msg("    -changeagenameandprefix c:/inputfile.prp c:/outputfolder NewAgeName NewSequencePrefix    ->Changes python/ogg files.");
             m.msg("    -inplacemod c:/potsfolder dat/inputfile.prp ModName");
             m.msg("    -listinplacemods    ->Displays all the available InplaceMods.");
-            m.msg("    -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc    ->Converts the files exported by the 3dsmax plugin to Pots.");
+            m.msg("    -convert3dsmaxtopots c:/3dsmaxexportfolder c:/potsfolder agename1,agename2,etc     ->Converts the files exported by the 3dsmax plugin to Pots.");
             m.msg("    -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
             m.msg("    -pullintextures c:/inputfile.prp c:/texturefile.prp c:/outfolder  ->Pulls in the textures a prp file uses.");
+            m.msg("    -listobjects c:/inputfile.prp  ->Lists the objects in a prp file.");
             m.msg("  Subtools:");
             m.msg("    -deepview c:/inputfile.prp    ->Starts DrizzleDeepview.  The inputfile is optional.");
             m.msg("  Python:");
@@ -54,6 +55,10 @@ public class CommandLine
             m.msg("    -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
             m.msg("    -listpak c:/pakfile.pak gamename         ->Lists the pyfiles that are present in the given .pak file.");
             m.msg("    -diffpaks c:/origpakfile.pak gamename c:/newpakfile.pak gamename   ->Compares two .pak files.");
+        }
+        else if(args[0].equals("-listobjects"))
+        {
+            auto.prps.ListObjects(args[1]);
         }
         else if(args[0].equals("-drizzleintermediary"))
         {
@@ -83,7 +88,7 @@ public class CommandLine
             File f = new File(args[1]);
             prpobjects.prpfile prp = prpobjects.prpfile.createFromFile(args[1], true);
             float z = Float.parseFloat(args[3]);
-            auto.mod.AutoMod_TranslateAge.translateAllObjects(prp, 0.0f, 0.0f, -z);
+            auto.mod.AutoMod_Translate.translateAllObjects(prp, 0.0f, 0.0f, -z);
             prp.saveAsFile(args[2]+"/"+f.getName());
         }
         else if(args[0].equals("-startmoulserver"))
@@ -116,7 +121,7 @@ public class CommandLine
         }
         else if(args[0].equals("-convert3dsmaxtopots"))
         {
-            auto.Max.convert3dsmaxToPots(args[1], args[2], args[3]);
+            auto.Max.convert3dsmaxToPots(args[1], args[2], args[3], false);
         }
         else if(args[0].equals("-decompilepak"))
         {

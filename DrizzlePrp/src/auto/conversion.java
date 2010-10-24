@@ -208,7 +208,7 @@ public class conversion
 
         c.close();
 
-        //shared.MemUtils.GarbageCollect();
+        shared.MemUtils.GarbageCollect();
 
         //shared.State.AllStates.pop();
 

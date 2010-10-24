@@ -22,7 +22,7 @@ import shared.m;
 import prpobjects.*;
 import shared.Flt;
 
-public class AutoMod_TranslateAge
+public class AutoMod_Translate
 {
     public static void DustinModAhnyOutBuilding(prpfile prp)
     {
@@ -713,4 +713,19 @@ public class AutoMod_TranslateAge
     {
 
     }*/
+
+    public static void TranslateObject(prpfile prp, String sceneObjectName, float x, float y, float z)
+    {
+        //get the scene object
+        PrpRootObject so_ro = prp.findObject(sceneObjectName, Typeid.plSceneObject);
+        plSceneObject so = so_ro.castToSceneObject();
+
+        //get the coord interface
+        PrpRootObject ci_ro = prp.findObjectWithRef(so.coordinateinterface);
+        plCoordinateInterface ci = ci_ro.castTo();  //if this is a filterCooordInterface, we might need to change this
+
+        //translate
+        ci.translate(x, y, z, true);
+        ci_ro.markAsChanged();
+    }
 }

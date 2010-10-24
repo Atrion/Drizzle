@@ -24,6 +24,7 @@ public class PrepareAge
         String dataserverfolder = basefolder + "/files/http/dataserver/"; //The output folder for the generated dataserver files.
         String sdlfolder = basefolder + "/files/alcugs/sdl/"; //Folder Alcugs will look in for .sdl files.
         String agefolder = basefolder + "/files/alcugs/age/"; //Folder Alcugs will look in for .age files.
+        String statusfolder = basefolder + "/files/http/www/status/";
 
         gui.Interactor interactor = new gui.InteractorGui(); //this is a gui one, but we could have a commandline one passed in instead.
         StringBuilder summary = new StringBuilder();
@@ -145,6 +146,21 @@ public class PrepareAge
                 String dest = agefolder+"/"+abspath2.getName();
                 FileUtils.CopyFile(abspath, dest, true, true, true);
                 FileUtils.CopyModTime(abspath, dest);
+            }
+        }
+
+        //copy other files
+        String[][] copies = {
+            {absMergedPath+"/ReleaseNotes.html" , statusfolder+"/ReleaseNotes.html"} //we might use the ReleaseNotes as the welcome message!
+        };
+        for(String[] copy: copies)
+        {
+            String from = copy[0];
+            String to = copy[1];
+            if(FileUtils.Exists(from)) //just ignore ones that don't exist.
+            {
+                byte[] data = FileUtils.ReadFile(from);
+                FileUtils.SaveFileIfChanged(to, data, true, true);
             }
         }
 

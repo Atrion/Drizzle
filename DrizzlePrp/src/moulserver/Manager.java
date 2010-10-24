@@ -134,7 +134,8 @@ public class Manager extends AbstractManager
     {
         Manager.manager = this;
         settings = stngs;
-        SuperManager.SetAgeInfoFolder(settings.getPathToCleanFiles());
+        //SuperManager.SetAgeInfoFolder(settings.getPathToCleanFiles());
+        SuperManager.SetAgeInfoFolder(settings.getPathToAgeFiles(), settings.getPathToSdlFiles());
 
         /*final boolean threadstart = false;
         if(threadstart)
@@ -169,7 +170,8 @@ public class Manager extends AbstractManager
 
         //agesinfo = new AgesInfo(this);
         //agesinfo.initialize();
-        agesinfo = new AgesInfo(this.getPathToCleanFiles());
+        //agesinfo = new AgesInfo(this.getPathToCleanFiles());
+        agesinfo = new AgesInfo(settings.getPathToAgeFiles(),settings.getPathToSdlFiles());
 
         database = new Database();
         database.initialise(settings.getDatabasefile());
@@ -220,10 +222,10 @@ public class Manager extends AbstractManager
                 throw new shared.uncaughtexception("Unhandled state");
         }
     }
-    public String getPathToCleanFiles()
+    /*public String getPathToCleanFiles()
     {
         return settings.getPathToCleanFiles();
-    }
+    }*/
     public void removeConnectionState(ConnectionState cs)
     {
         this.netserver.removeConnectionState(cs);

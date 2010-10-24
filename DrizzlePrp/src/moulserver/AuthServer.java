@@ -601,6 +601,13 @@ public class AuthServer extends Thread
             LogPythonTraceback log = (LogPythonTraceback)msg;
             m.msg(log.text.toString());
         }
+        else if(klass==LogStackDump.class)
+        {
+            m.msg("AuthServer LogStackDump");
+            //This occurs when the *previous* session had a stackdump.  So it just lets us know that a stackdump occured during the player's last session.  A good idea, actually!
+            LogStackDump log = (LogStackDump)msg;
+            m.msg(log.dumptext.toString());
+        }
         else if(klass==VaultNodeFind.class)
         {
             m.msg("AuthServer VaultNodeFind");
@@ -684,6 +691,8 @@ public class AuthServer extends Thread
                     return new ScoreGetScores(c);
                 case kCli2Auth_PlayerDeleteRequest:
                     return new PlayerDeleteRequest(c);
+                case kCli2Auth_LogStackDump:
+                    return new LogStackDump(c);
                 default:
                     throw new shared.uncaughtexception("Unread AuthServer packet: "+Short.toString(msgId));
             }
@@ -744,6 +753,22 @@ public class AuthServer extends Thread
 
     }
 
+    public static class LogStackDump extends AuthMsg
+    {
+        Str dumptext;
+
+        public LogStackDump(){}
+        public LogStackDump(IBytestream c)
+        {
+            dumptext = Str.readAsUtf16Sized16(c);
+            //m.msg("Client stack dump! Reason: ",dumptext.toString());
+        }
+        public short type(){return AuthServer.kCli2Auth_LogStackDump;}
+        public void write(IBytedeque c)
+        {
+            dumptext.writeAsUtf16Sized16(c);
+        }
+    }
     public static class KickedOff extends AuthMsg
     {
         int reason;

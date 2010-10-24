@@ -32,9 +32,17 @@ public class Settings
     {
         datapath = val;
     }
-    public String getPathToCleanFiles()
+    /*public String getPathToCleanFiles()
     {
         return getDatapath()+"/files/";
+    }*/
+    public String getPathToAgeFiles() //path to the .age files for the server
+    {
+        return getDatapath()+"/fileserver/agefiles/";
+    }
+    public String getPathToSdlFiles() //path to the .sdl files for the server
+    {
+        return getDatapath()+"/fileserver/SecureDownload/SDL/";
     }
     public String getFileserverPath()
     {

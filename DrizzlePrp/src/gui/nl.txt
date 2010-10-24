@@ -4,7 +4,7 @@ Warning: {->}Waarschuwing:
 Ignoring: {->}Genegeerd: 
 //Get Latest List{->}Haal de nieuwste lijst
 Get Latest List{->}Ververs lijst
-( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( Hulp is te vinden onder het tabblad "Help", of uitgebreide hulp is te vinden op http://alcugs.almlys.org/Drizzle )
+( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( Hulp is te vinden onder het tabblad "Help", of uitgebreide hulp is te vinden op http://dusty.homeunix.net/wiki/Drizzle )
 Ages:{->}Werelden:
 Versions:{->}Versies:
 Download{->}Downloaden
@@ -31,7 +31,7 @@ Load last saved Age list at startup.{->}Laatst opgeslagen lijst met Werelden lad
 Download most recent Age list at startup.{->}Recentste lijst met Werelden downloaden bij opstarten.
 Automatically download list?{->}Lijst automatisch downloaden?
 Info:{->}Info:
-<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Dit gedeelte is voor het omzetten van MystV-/MOUL-/Crowthistle-bestanden om te spelen in Uru. Zie het tabblad Help of http://alcugs.almlys.org/Drizzle</html>
+<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Dit gedeelte is voor het omzetten van MystV-/MOUL-/Crowthistle-bestanden om te spelen in Uru. Zie het tabblad Help of http://dusty.homeunix.net/wiki/Drizzle</html>
 SoundDecompress (When conversion is done, it will ask you to run this.){->}SoundDecompress (Als het omzetten klaar is, word je gevraagd dit uit te voeren)
 Start...{->}Starten...
 Moul folder:{->}MOUL-map:
@@ -45,7 +45,7 @@ Moul music...{->}Muziek van MOUL...
 Crowthistle music...{->}Muziek van Crowthistle...
 Pots music...{->}Muziek van POTS...
 (Make sure you fill out the 'Pots Folder' on the Moul tab for this one.){->}(Let erop dat je hiervoor de POTS-map op het tabblad MOUL invult.)
-Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}Instructies zijn te vinden op het tabblad Help of op http://alcugs.almlys.org/Drizzle
+Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}Instructies zijn te vinden op het tabblad Help of op http://dusty.homeunix.net/wiki/Drizzle
 infolder:{->}Invoermap
 outfolder:{->}Uitvoermap
 Memories: this area is for extracting images, notes, etc. from Uru (either offline or online){->}Herinneringen: dit gedeelte is voor het uitlezen van afbeeldingen, notities, etc. van Uru (hetzij offline hetzij online)
@@ -59,7 +59,7 @@ port:{->}Poort:
 Stop Server{->}De server stoppen
 Indicate in the log when files are read?{->}In het logboek aangeven wanneer er bestanden worden gelezen?
 You have to stop and start the server for settings changes to take effect.{->}Je moet de server stoppen en starten om de gewijzigde instellingen te laten werken.
-This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}Deze proxyserver is voor het bekijken van oude, gearchiveerde websites. Meer informatie op het tabblad Help of op http://alcugs.almlys.org/Drizzle
+This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}Deze proxyserver is voor het bekijken van oude, gearchiveerde websites. Meer informatie op het tabblad Help of op http://dusty.homeunix.net/wiki/Drizzle
 List Available Ages...{->}De beschikbare Werelden opsommen
 Get Offline list.{->}Offline lijst laden.
 Run Tests...{->}Tests uitvoeren...
@@ -276,4 +276,10 @@ avatar name:{->}avatar naam:
 //Drizzle28
 There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: {->}Er is een privacy/beveiligings/instabiliteits risico. Het is aanbevolen dat je: a)'Netwerk Toegang' met versie '(uitgeschakeld)' installeerd, of b)handmatig de volgende file verwijderd: 
  Either way, this warning should not be displayed afterwards.{->} Deze waarschuwing moet niet achteraf gegeven worden.
+
+//Drizzle29
+Partial Age (i.e. no separate texture prp, and no .age file){->}Gedeeltelijke Age (geen separate texturen prp. en geen .age file)
+Woah there!  You probably meant to have the 'Partial Age' option set when making a Relto page or AhraPahts shell.{->}Stop daar! Vermoedelijk heb je de"Gedeeltelijke Age"optie gekozen toen je een Relto page of AhraPahts shell ging maken.
+Conversion is set to 'Partial Age', but no Textures prp was found.  If your Age has no textures then this is normal, otherwise you should re-export with 3dsmax.{->}Omzetten is op 'Gedeeltelijke Age' gezet, maar er is geen Texture prp gevonden. Als jouw Age geen textures heeft dan is dit normaal, anders moet je weer exporteren in 3dsmax.
+
 

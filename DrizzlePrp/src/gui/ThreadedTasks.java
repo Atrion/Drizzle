@@ -23,10 +23,10 @@ public class ThreadedTasks
             wikispider.wikispider.start(startingUrl, outfolder);
         }});
     }
-    public static void convert3dsmaxToPots(final String Maxfolder, final String potsfolder, final String agenames, final boolean launchUruAfterwards)
+    public static void convert3dsmaxToPots(final String Maxfolder, final String potsfolder, final String agenames, final boolean launchUruAfterwards, final boolean partialAge)
     {
         shared.GuiThread.run(getInfo(),new java.lang.Runnable() { public void run() {
-            auto.Max.convert3dsmaxToPots(Maxfolder,potsfolder,agenames);
+            auto.Max.convert3dsmaxToPots(Maxfolder,potsfolder,agenames,partialAge);
             if(launchUruAfterwards) uam.Uam.launchUru();
         }});
     }

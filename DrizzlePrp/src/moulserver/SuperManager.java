@@ -12,12 +12,16 @@ package moulserver;
 public class SuperManager
 {
     //age info stuff:
-    private static String rootFolder;
+    //private static String rootFolder;
+    private static String agefolder;
+    private static String sdlfolder;
     private static AgesInfo agesinfo;
 
-    public static void SetAgeInfoFolder(String rootFolder)
+    public static void SetAgeInfoFolder(String agefolder, String sdlfolder)
     {
-        SuperManager.rootFolder = rootFolder;
+        //SuperManager.rootFolder = rootFolder;
+        SuperManager.agefolder = agefolder;
+        SuperManager.sdlfolder = sdlfolder;
     }
 
     public static int[] GetTalcumNotthedroids()
@@ -29,7 +33,7 @@ public class SuperManager
     {
         if(agesinfo==null)
         {
-            agesinfo = new AgesInfo(rootFolder);
+            agesinfo = new AgesInfo(agefolder,sdlfolder);
         }
         return agesinfo;
     }

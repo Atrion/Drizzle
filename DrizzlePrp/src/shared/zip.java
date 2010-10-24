@@ -70,8 +70,9 @@ public class zip
                 //int num = decomp.inflate(buffer);
                 out.write(buffer,0,num);
             }
-            ginstr.close();
             out.close();
+            ginstr.close();
+            instr.close();
             byte[] result = out.toByteArray();
             return result;
         }

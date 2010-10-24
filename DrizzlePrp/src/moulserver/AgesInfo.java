@@ -17,10 +17,11 @@ public class AgesInfo
     AllAgeInfo age;
     //AbstractManager manager;
 
-    public AgesInfo(/*AbstractManager manager*/String rootPath)
+    public AgesInfo(/*AbstractManager manager*//*String rootPath*/String agefolder, String sdlfolder)
     {
         //this.manager = manager;
-        initialize(rootPath);
+        //initialize(rootPath);
+        initialize(agefolder,sdlfolder);
     }
     public Agefile getAge(String ageFilename)
     {
@@ -45,13 +46,14 @@ public class AgesInfo
         if(sd==null) m.throwUncaughtException("Statedesc name not found: "+name);
         return sd;
     }
-    public void initialize(String filepath)
+    public void initialize(/*String filepath*/String agefolder, String sdlfolder)
     {
         //String filepath = manager.getPathToCleanFiles();
 
         //read sdl info
         sdl = new AllSdlInfo();
-        File sdlpath = new File(filepath+"/SDL/");
+        //File sdlpath = new File(filepath+"/SDL/");
+        File sdlpath = new File(sdlfolder);
         for(File child: sdlpath.listFiles())
         {
             if(child.isFile() && child.getName().toLowerCase().endsWith(".sdl"))
@@ -64,7 +66,8 @@ public class AgesInfo
 
         //read age info
         age = new AllAgeInfo();
-        File agepath = new File(filepath+"/dat/");
+        //File agepath = new File(filepath+"/dat/");
+        File agepath = new File(agefolder);
         for(File child: agepath.listFiles())
         {
             if(child.isFile() && child.getName().toLowerCase().endsWith(".age"))

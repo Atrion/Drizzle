@@ -105,6 +105,7 @@ public class FileServer extends SharedServer
             ManifestRequest mr = (ManifestRequest)msg;
 
             String group = mr.group.toString();
+            m.msg("Manifest requested: "+group);
             ManifestReply reply = new ManifestReply();
             reply.transId = mr.transId;
             reply.result = ENetError.kNetSuccess;

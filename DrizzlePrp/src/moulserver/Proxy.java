@@ -80,7 +80,8 @@ public class Proxy
     }
     public void StartServers()
     {
-        SuperManager.SetAgeInfoFolder(uruPath);
+        //SuperManager.SetAgeInfoFolder(uruPath);
+        SuperManager.SetAgeInfoFolder(uruPath+"/dat/", uruPath+"/SDL/"); //changed in Drizzle29
 
         c2s = Concurrent.getConcurrentHashMap();
         s2c = Concurrent.getConcurrentHashMap();

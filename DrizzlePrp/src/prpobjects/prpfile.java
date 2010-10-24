@@ -29,6 +29,9 @@ import java.util.Vector;
 import shared.FileUtils;
 import java.io.File;
 import uru.Bytestream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 /**
  *
  * @author user
@@ -414,8 +417,11 @@ public class prpfile
     {
         if(decider==null) decider = prpobjects.prputils.Compiler.getDefaultDecider();
         //mergeExtras();
-        this.sort();
-        orderObjects();
+        //changed for Drizzle29:
+        //this.sort();
+        //orderObjects();
+        FixObjectOrder(); //better version that sorts and orders, but also makes sure plSceneObject trees are in the correct order.
+        //end Drizzle29 change
         shared.IBytedeque result = prputils.Compiler.RecompilePrp(this, decider);
         return result;
     }
@@ -581,6 +587,273 @@ public class prpfile
                 }
             }
         }
-  }
+    }
+
+    public static class ChildrenTree
+    {
+        PrpRootObject ro; //null iff root
+        ArrayList<ChildrenTree> children = new ArrayList();
+        ChildrenTree parent; //null iff root
+
+        public ChildrenTree(PrpRootObject ro2, ChildrenTree parent2)
+        {
+            ro = ro2;
+            parent = parent2;
+        }
+
+        public boolean isRoot()
+        {
+            return (parent==null);
+        }
+
+        public ChildrenTree RemoveChild(Uruobjectdesc desc)
+        {
+            for(int i=0;i<children.size();i++)
+            {
+                ChildrenTree child = children.get(i);
+                if(child.ro.header.desc.equals(desc))
+                {
+                    ChildrenTree r = children.remove(i);
+                    return r;
+                }
+            }
+            return null;
+        }
+
+        public void OrderElements() //put it into canonical form
+        {
+            //sort first by type, then by name
+            java.util.Collections.sort(children, new java.util.Comparator<ChildrenTree>(){
+                public int compare(ChildrenTree a, ChildrenTree b)
+                {
+                    //- means a<b, 0 means a=b, + means a>b
+                    //Hmm... we're using the order of the constants in Typeid.  This is okay, because we just have plCoordinateInterface and plFilterCoordInterface, which have the right order in Typeid.java.
+                    int r = a.ro.header.desc.objecttype.compareTo(b.ro.header.desc.objecttype);
+                    if(r!=0) return r;
+                    r = a.ro.header.desc.objectname.toString().compareTo(b.ro.header.desc.objectname.toString());
+                    if(r!=0) return r;
+                    return 0;
+                }
+            });
+
+            //do children
+            for(ChildrenTree child: children)
+            {
+                child.OrderElements();
+            }
+        }
+
+        public String toString()
+        {
+            if(this.isRoot()) return "(root)";
+            return ro.toString();
+        }
+
+        public Vector<PrpRootObject> SerializeElements()
+        {
+            Vector<PrpRootObject> r = new Vector();
+            SerializeElements(r);
+            return r;
+        }
+        private void SerializeElements(Vector<PrpRootObject> r)
+        {
+            /*//first these children, *then* the grandchildren.
+            for(ChildrenTree child: children)
+            {
+                r.add(child.ro);
+            }
+
+            for(ChildrenTree child: children)
+            {
+                child.SerializeElements(r);
+            }*/
+
+            //do depth-first
+            for(ChildrenTree child: children)
+            {
+                r.add(child.ro);
+                child.SerializeElements(r);
+            }
+        }
+
+    }
+    /*public ChildrenTree GetChildrenTree2(boolean includeRegularElements)
+    {
+        ChildrenTree root = new ChildrenTree(null, null); //root
+        HashMap<Uruobjectdesc,ChildrenTree> parents = new HashMap(); //maps a desc to its parent
+        //HashMap<Uruobjectdesc,ChildrenTree> entries = new HashMap(); //maps a desc to its tree
+
+        for(PrpRootObject ro: objects2)
+        {
+            //check if it's a coord interface and get the children:
+            //Uruobjectref[] ci_children = null;
+            plCoordinateInterface ci = null;
+            if(ro.header.objecttype==Typeid.plCoordinateInterface)
+            {
+                ci = ro.castTo();
+            }
+            else if(ro.header.objecttype == Typeid.plFilterCoordInterface)
+            {
+                plFilterCoordInterface fci = ro.castTo();
+                ci = fci.parent;
+            }
+
+            //it's one of the two types of coord interfaces:
+            if(ci!=null)
+            {
+                //check if it is a child of one already handled:
+                //ChildrenTree parent = parents.get(ci.parent.sceneobject.xdesc);
+                ChildrenTree parent = parents.get(ro.header.desc);
+                if(parent==null) parent = root;  //it doesn't have a parent (yet) so let's add it to the root
+
+                ChildrenTree node = new ChildrenTree(ro, parent);
+                parent.children.add(node);
+                //entries.put(ro.header.desc, node);
+                //parents.put(ci.parent.sceneobject.xdesc, parent);
+                parents.put(ro.header.desc, parent);
+
+                //let children know we're their parent:
+                for(Uruobjectref ref: ci.children)
+                {
+                    //get the coord interface desc
+                    //Uruobjectdesc desc = ref.xdesc;
+                    Uruobjectdesc desc = this.findObjectWithDesc(ref.xdesc).castToSceneObject().coordinateinterface.xdesc;
+
+                    //check if this child has been attached yet
+                    ChildrenTree curparent = parents.get(desc); //this should always be either null, or the root, (or after this point, us).
+                    if(curparent==null)
+                    {
+                        //this child hasn't been encountered yet
+                        parents.put(desc, node);
+                    }
+                    else
+                    {
+                        //this child is hooked up to the root, so move it to us:
+                        ChildrenTree child = parent.RemoveChild(desc);
+                        node.children.add(child);
+                    }
+                }
+            }
+            else
+            {
+                if(includeRegularElements)
+                {
+                    ChildrenTree parent = root;
+
+                    ChildrenTree node = new ChildrenTree(ro, parent);
+                    parent.children.add(node);
+                }
+            }
+        }
+        
+        return root;
+
+    }*/
+    public ChildrenTree GetChildrenTree(boolean includeRegularElements)
+    {
+        ChildrenTree root = new ChildrenTree(null, null); //root
+        HashMap<Uruobjectdesc,ChildrenTree> parents = new HashMap(); //maps a desc to its parent
+        //HashMap<Uruobjectdesc,ChildrenTree> entries = new HashMap(); //maps a desc to its tree
+
+        for(PrpRootObject ro: objects2)
+        {
+            boolean handled = false;
+            if(ro.header.objecttype==Typeid.plSceneObject)
+            {
+                plSceneObject so = ro.castToSceneObject();
+                if(so.coordinateinterface.hasref())
+                {
+                    //check if it's a coord interface and get it:
+                    PrpRootObject ci_ro = this.findObjectWithDesc(so.coordinateinterface.xdesc);
+                    //if(ci_ro==null || ci_ro.header==null || ci_ro.header.objecttype==null)
+                    //{
+                    //    int dummy=0;
+                    //}
+                    if(ci_ro!=null) //it might be null, if it's a deleted object or something.
+                    {
+                        plCoordinateInterface ci;
+                        if(ci_ro.header.objecttype==Typeid.plCoordinateInterface)
+                        {
+                            ci = ci_ro.castTo();
+                        }
+                        else if(ci_ro.header.objecttype==Typeid.plFilterCoordInterface)
+                        {
+                            plFilterCoordInterface fci = ci_ro.castTo();
+                            ci = fci.parent;
+                        }
+                        else throw new shared.uncaughtexception("unexpected");
+
+                        //check if it is a child of one already handled:
+                        ChildrenTree parent = parents.get(ro.header.desc);
+                        if(parent==null) parent = root;  //it doesn't have a parent (yet) so let's add it to the root
+
+                        ChildrenTree node = new ChildrenTree(ro, parent);
+                        handled = true;
+                        parent.children.add(node);
+                        //entries.put(ro.header.desc, node);
+                        //parents.put(ci.parent.sceneobject.xdesc, parent);
+                        parents.put(ro.header.desc, parent);
+
+                        //let children know we're their parent:
+                        for(Uruobjectref ref: ci.children)
+                        {
+                            //get the coord interface desc
+                            Uruobjectdesc desc = ref.xdesc;
+                            //Uruobjectdesc desc = this.findObjectWithDesc(ref.xdesc).castToSceneObject().coordinateinterface.xdesc;
+
+                            //check if this child has been attached yet
+                            ChildrenTree curparent = parents.get(desc); //this should always be either null, or the root, (or after this point, us).
+                            if(curparent==null)
+                            {
+                                //this child hasn't been encountered yet
+                                parents.put(desc, node);
+                            }
+                            else
+                            {
+                                //this child is hooked up to the root, so move it to us:
+                                ChildrenTree child = curparent.RemoveChild(desc);
+                                if(child==null)
+                                {
+                                    int dummy=0;
+                                }
+                                node.children.add(child);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(!handled)
+            {
+                if(includeRegularElements)
+                {
+                    ChildrenTree parent = root;
+
+                    ChildrenTree node = new ChildrenTree(ro, parent);
+                    parent.children.add(node);
+                }
+            }
+        }
+
+        return root;
+
+    }
+    public void FixObjectOrder()
+    {
+        //attempt to reorder the coordinate interfaces and filtercoordinterfaces so that there is no crash
+
+        //create tree
+        prpfile.ChildrenTree root = this.GetChildrenTree(true);
+
+        //alphabetize tree to achieve canonical form
+        root.OrderElements();
+
+        //order them
+        Vector<PrpRootObject> neworder = root.SerializeElements();
+
+        //assign this new ordering
+        this.objects2 = neworder;
+
+    }
 
 }

@@ -1399,12 +1399,23 @@ public class moul
                 plcg.fRegions = new Uruobjectref[0];
             }*/
 
+            //fix link in point
+            //auto.mod.AutoMod_Translate.TranslateObject(prp, "LinkInPointDefault", 0, 0, 1.0f);
+
+        }
+
+        if(finalname.toLowerCase().equals("minkata") && prp.header.pagename.toString().toLowerCase().equals("minkcameras"))
+        {
+            //fix link in point
+            auto.mod.AutoMod_Translate.TranslateObject(prp, "LinkInPointDefault", 0, 0, 1.0f);
         }
 
         if(finalname.toLowerCase().equals("minkata") && prp.header.pagename.toString().toLowerCase().equals("minkexteriornight"))
         {
             fixCraters.fixCraters(prp, finalname, "minkDusttestNight", outfolder, Pageid.createFromPrefixPagenum(42, 12));
 
+            //fix link in point
+            auto.mod.AutoMod_Translate.TranslateObject(prp, "LinkInPointDefault", 0, 0, 1.0f);
         }
 
             //disable visregion.
