@@ -95,7 +95,7 @@ public class CommandLine
         {
             moulserver.Manager.StartServers(args[1], args[2], args[3]);
         }
-        else if(args[0].equals("-patachmoulbinary"))
+        else if(args[0].equals("-patchmoulbinary"))
         {
             moulserver.Patcher.PatchFile(args[1], args[2]);
         }

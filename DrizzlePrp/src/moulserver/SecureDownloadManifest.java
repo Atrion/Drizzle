@@ -32,7 +32,7 @@ public class SecureDownloadManifest extends mystobj
         return r;
     }
 
-    public static SecureDownloadManifest getManifest(String folder, String extension, Manager manager)
+    public static SecureDownloadManifest getManifest(String folder, String extension, Manager manager, AuthServerSecureFiles securefiles)
     {
         SecureDownloadManifest r = new SecureDownloadManifest();
         String path = manager.settings.getFileserverPath()+"/SecureDownload/";
@@ -49,7 +49,8 @@ public class SecureDownloadManifest extends mystobj
             {
                 Entry entry = new Entry();
                 entry.filename = new Str(folder+"\\"+file.getName());
-                entry.filesize = (int)file.length();
+                //entry.filesize = (int)file.length();
+                entry.filesize = securefiles.GetEncrypted(file.getAbsolutePath()).length;
                 r.entries.add(entry);
             }
         }

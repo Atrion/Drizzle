@@ -315,7 +315,7 @@ public class AuthServer extends Thread
             FileListReply reply = new FileListReply();
             reply.transId = request.transId;
             reply.result = ENetError.kNetSuccess;
-            reply.manifest = SecureDownloadManifest.getManifest(request.dir.toString(), request.extension.toString(), manager);
+            reply.manifest = SecureDownloadManifest.getManifest(request.dir.toString(), request.extension.toString(), manager, securefiles);
             //reply.manifest = SecureDownloadManifest.getEmptyManifest(); //client crashes with manifest with no entries.
             AuthServer.SendMsg(cs, reply);
         }
