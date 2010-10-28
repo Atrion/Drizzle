@@ -175,7 +175,8 @@ public class Uam
 
         //check for _socket.pyd
         String pathToFile = Uam.getPotsFolder()+"/Python/system/_socket.pyd";
-        if(FileUtils.Exists(pathToFile))
+        String pathToFile2 = Uam.getPotsFolder()+"/dat/dummyages/NetworkAccess.age";
+        if(FileUtils.Exists(pathToFile) && !FileUtils.Exists(pathToFile2))
         {
             m.warn("There is a privacy/security/persistency risk.  It is strongly recommended that you either: a) install the 'Network Access' with version '(disabled)', or b) manually delete the following file: ",pathToFile," Either way, this warning should not be displayed afterwards.");
         }
