@@ -342,6 +342,7 @@ public class Dataserver
                 "/vnodes/",
                 "/init/", //in fact, causes update problems, because Uru changes them immediately.
                 "/DrizzleDataserver", //DrizzleDataserverOverrides.txt,DrizzleDataserverInfo.dat
+                "/originalfiles/", //Pots conversion original files
             };
             for(String i: ignorestarts) if(relpath.startsWith(i)) return;
             String[] ignoreends = {
