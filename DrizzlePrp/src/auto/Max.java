@@ -240,7 +240,7 @@ public class Max
                 }
             }
 
-            if(maxinfo.numSpawnPoints==0)
+            if(!partialAge && maxinfo.numSpawnPoints==0)
             {
                 m.warn("Your Age doesn't have a spawnpoint; you won't be able to link into it correctly.");
             }
@@ -248,7 +248,7 @@ public class Max
             {
                 m.warn("Your Age doesn't have any lights; everything may appear black.");
             }
-            if(maxinfo.numPhysics==0)
+            if(!partialAge && maxinfo.numPhysics==0)
             {
                 m.warn("Your Age doesn't have any colliders; you will fall right through the ground.");
             }

@@ -41,6 +41,20 @@ def SetAgeChronicle(varname, value):
     print "SetAgeChronicle name=" + `varname` + " value="+`value`
     ageVault = Plasma.ptAgeVault()
     _SetChronicle(varname,value,ageVault)
+
+def SetAgeSdl(varname, value, index=0):
+    #index could default to 0
+    sdl = Plasma.PtGetAgeSDL()
+    sdl.setFlags(varname, 1, 1)
+    sdl.sendToClients(varname)
+    sdl.setIndex(varname, index, value)
+
+
+def GetAgeSdl(varname, index=0):
+    #index could default to 0
+    sdl = Plasma.PtGetAgeSDL()
+    return sdl[varname][index]
+
     
 def _SetChronicle(varname, value, vault, type=1):
     chronnode = vault.findChronicleEntry(varname)

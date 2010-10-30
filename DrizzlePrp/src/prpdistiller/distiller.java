@@ -1017,9 +1017,21 @@ public class distiller
                 //if(texture2.header.objecttype==Typeid.plMipMap)
                 //{
                     //uru.moulprp.x0004MipMap texture = texture2.castTo();
+                if(texture2!=null)
+                {
                     distillInfo reallyShouldntDoThis = new distillInfo();
                     reallyShouldntDoThis.refReassigns = refReassigns;
                     distiller.copyObjectAndModifyRef(texture2, destprp/*, refReassigns*/,reallyShouldntDoThis);
+                }
+                else
+                {
+                    //Test to see if we still have this texture:
+                    PrpRootObject texture3 = destprp.findObjectWithRef(layer.texture);
+                    if(texture3==null)
+                    {
+                        m.warn("Unable to find texture in prp file: ",layer.texture.toString());
+                    }
+                }
                 //}
                 //else if (texture2.header.objecttype==Typeid.plCubicEnvironMap)
                 //{
@@ -1053,8 +1065,8 @@ public class distiller
             x0006Layer layer = layer2.castTo();
             if(layer.texture.hasref())
             {
-                int u1 = layer.texture.xdesc.hashCode();
-                int u2 = refReassigns.keySet().toArray()[0].hashCode();
+                //int u1 = layer.texture.xdesc.hashCode();
+                //int u2 = refReassigns.keySet().toArray()[0].hashCode();
                 Uruobjectdesc newdesc = refReassigns.get(layer.texture.xdesc);
                 if(newdesc!=null)
                 {
