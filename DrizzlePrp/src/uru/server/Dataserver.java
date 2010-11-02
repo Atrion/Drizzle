@@ -55,6 +55,12 @@ public class Dataserver
     DataserverInfo info;
     DataserverInfo oldinfo;
 
+    ArrayList<String> prpfiles;
+    //HashMap<String, String> pages; //maps page to age
+    //HashMap<String, String> anims;
+    //maps page to set of ages
+    HashMap<String, HashSet<String>> pages; //maps pagename to list of ages with that pagename.
+
     //********* WARNING: modifying this class will invalidate previously saved data ***********
     public static class DataserverInfo implements java.io.Serializable
     {
@@ -76,6 +82,7 @@ public class Dataserver
             byte[] md5;
             HashSet<String> avifiles = new HashSet<String>(); //only prpfiles
             HashMap<String,SfxInfo> sfxfiles = new HashMap<String,SfxInfo>(); //only prpfiles
+            HashSet<String> oneshotmods = new HashSet<String>(); //only prpfiles
             byte[] compressedmd5;
             long compressedfilesize;
 
@@ -273,6 +280,46 @@ public class Dataserver
     {
         root = root2 + "/";
         outroot = outfolder2 + "/";
+
+        //list all prp files
+        prpfiles = new ArrayList<String>();
+        File datdir = new File(root+"/dat/");
+        for(File f: datdir.listFiles())
+        {
+            if(f.isFile())
+            {
+                String filename = f.getName();
+                if(filename.endsWith(".prp"))
+                {
+                    prpfiles.add(f.getName());
+                }
+            }
+        }
+
+        //list all oneshotmod anims
+        pages = new HashMap();
+        for(String prpfile: prpfiles)
+        {
+            int idx = prpfile.indexOf("_District_");
+            String agename = prpfile.substring(0, idx);
+            String pagename = prpfile.substring(idx+"_District_".length(),prpfile.length()-".prp".length());
+            /*if(pagename.startsWith("Female"))
+            {
+                String anim = pagename.substring("Female".length());
+                String prevagename = anims.put(anim, agename);
+                if(prevagename!=null)
+                {
+                    m.warn("There are two prps for the animation: ",anim);
+                }
+            }*/
+            HashSet<String> ages = pages.get(pagename);
+            if(ages==null)
+            {
+                ages = new HashSet<String>();
+                pages.put(pagename, ages);
+            }
+            ages.add(agename);
+        }
     }
     public void generate()
     {
@@ -431,6 +478,44 @@ public class Dataserver
                         sfxinfo.flags = flags;
                         curinfo.sfxfiles.put(oggfilename, sfxinfo);
                     }
+                    for(PrpRootObject obj: prp.FindAllObjectsOfType(Typeid.plOneShotMod))
+                    {
+                        //do we care about plOneShotMsg?
+                        prpobjects.plOneShotMod osm = obj.castTo();
+                        String animname = osm.animobjectname.toString();
+                        //find the prp file for this animation:
+                        /*File dir = new File(root+"/dat/");
+                        String prpname = null;
+                        for(String prpfile: prpfiles)
+                        {
+                            if(prpfile.endsWith("_District_Female"+animname+".prp"))
+                            {
+                                if(prpname!=null)
+                                {
+                                    m.err("There are two prps for the animation: ",animname);
+                                }
+                                prpname = prpfile;
+                            }
+                        }
+                        //register it if it isn't Global nor belongs to this Age.
+                        if(prpname==null)
+                        {
+                            m.warn("Animation not found: ",animname);
+                        }
+                        else
+                        {
+                            if(prpname.startsWith("GlobalAnimations_District_") || prpname.startsWith(prp.header.agename.toString()+"_District_"))
+                            {
+                                //It's okay, it's a GlobalAnimation or belongs to this Age.
+                            }
+                            else
+                            {
+                                //The Age is doing the bad habit of using an animation from someone else's Age.
+                                curinfo.oneshotmods.add(prpname);
+                            }
+                        }*/
+                        curinfo.oneshotmods.add(animname);
+                    }
                 }
 
                 info.map.put(relpath, curinfo);
@@ -577,6 +662,58 @@ public class Dataserver
                     for(String bikfile: fileinfo.avifiles)
                     {
                         files.addToSet(bikfile, age+".mfs");
+                    }
+
+                    //register the OneShotMod animations we can
+                    for(String anim: fileinfo.oneshotmods)
+                    {
+                        HashSet<String> ages = pages.get("Female"+anim);
+                        if(ages==null)
+                        {
+                            m.warn("Animation not found: ",anim);
+                        }
+                        else
+                        {
+                            if(ages.contains("GlobalAnimations") || ages.contains(age))
+                            {
+                                //do nothing, we're good!
+                            }
+                            else
+                            {
+                                if(ages.size()>1)
+                                {
+                                    m.err("Age uses animation from another Age, but there is more than 1 possibility!");
+                                }
+                                for(String curage: ages)
+                                {
+                                    String prp1 = "/dat/"+curage+"_District_Female"+anim+".prp";
+                                    String prp2 = "/dat/"+curage+"_District_Male"+anim+".prp";
+                                    files.addToSet(prp1, age+".mfs");
+                                    files.addToSet(prp2, age+".mfs");
+                                    m.warn("Age uses animation from another Age: ",age," uses animation from ",curage);
+                                }
+                            }
+                        }
+                        //if(anim==null)
+                        //{
+                        //    m.warn("Animation not found: ",anim);
+                        //}
+                        //else
+                        //{
+                        //    String animAge = anims.get(anim);
+                        //    if(animAge.equals("GlobalAnimations") || animAge.equals(age))
+                        //    {
+                        //        //do nothing
+                        //    }
+                        //    else
+                        //    {
+                        //        String prp1 = animAge+"_District_Female"+anim+".prp";
+                        //        String prp2 = animAge+"_District_Male"+anim+".prp";
+                        //        files.addToSet(prp1, age+".mfs");
+                        //        files.addToSet(prp2, age+".mfs");
+                        //        m.warn("Age uses animation from another Age: ",age," uses animation from ",animAge);
+                        //    }
+                        //}
                     }
 
                 }
