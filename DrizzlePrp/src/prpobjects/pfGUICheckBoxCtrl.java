@@ -18,6 +18,8 @@
 
 package prpobjects;
 
+import shared.Vertex;
+import shared.Flt;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
@@ -26,39 +28,28 @@ import shared.m;
 import shared.b;
 import shared.readexception;
 //import java.util.Vector;
-import shared.*;
 
 
-public class pfGUITextBoxMod extends uruobj
+public class pfGUICheckBoxCtrl extends uruobj
 {
     pfGUIControlMod parent;
-    Bstr str1;
-    byte xb2;
-    Urustring16 xstr3; //e.g. ACA.GUI.Age.  Used for internationalization?
+    Refvector anims;
+    Urustring animname;
+    byte checked;
     
-    public pfGUITextBoxMod(context c) throws readexception
+    public pfGUICheckBoxCtrl(context c) throws readexception
     {
         parent = new pfGUIControlMod(c);
-        str1 = new Bstr(c);
-        if(c.readversion==6)
-        {
-            xb2 = c.readByte();
-            if(xb2!=0)
-            {
-                //read an Urustring?
-                xstr3 = new Urustring16(c);
-                //m.throwUncaughtException("Unhandled.");
-            }
-        }
+        anims = new Refvector(c);
+        animname = new Urustring(c);
+        checked = c.readByte();
     }
     
     public void compile(Bytedeque c)
     {
-        //m.warn("compile not implemented.",this.toString());
-        //m.warn("not tested with pots.",this.toString());
-        //m.warn("untested pfGUITextBoxMod");
         parent.compile(c);
-        str1.compile(c);
+        anims.compile(c);
+        animname.compile(c);
+        c.writeByte(checked);
     }
-    
 }

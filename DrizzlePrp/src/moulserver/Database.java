@@ -321,8 +321,9 @@ public class Database
 
     public void AddUser(String username, String password)
     {
-        byte[] pwbytes = b.StringToBytes(password);
-        byte[] hash = shared.CryptHashes.GetHash(pwbytes, CryptHashes.Hashtype.sha1);
+        //byte[] pwbytes = b.StringToBytes(password);
+        //byte[] hash = shared.CryptHashes.GetHash(pwbytes, CryptHashes.Hashtype.sha1);
+        byte[] hash = AuthServer.AcctLoginRequest.getStoredHash(username, password);
         byte[] guid  = Guid.newRandomPlayer();
         int flags = 8; //normal
         int billingtype = 1; //normal

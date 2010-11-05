@@ -35,7 +35,9 @@ public class StreamBytestream extends IBytestream
     protected int read()
     {
         try{
-            return in.read();
+            int r = in.read();
+            if(r==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
+            return r;
         }catch(IOException e){
             throw new nested(e);
         }
@@ -43,7 +45,10 @@ public class StreamBytestream extends IBytestream
     public byte readByte()
     {
         try{
-            return (byte)in.read();
+            //return (byte)in.read();
+            int r = in.read();
+            if(r==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
+            return (byte)r;
         }catch(IOException e){
             throw new nested(e);
         }
@@ -62,8 +67,9 @@ public class StreamBytestream extends IBytestream
             while (n < num)
             {
                 int count = in.read(r, n, num - n);
-                if (count < 0)
-                    throw new uncaughtexception("Read past end of stream.");
+                //if (count < 0)
+                //    throw new uncaughtexception("Read past end of stream.");
+                if(count==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
                 n += count;
             }
             return r;
@@ -73,25 +79,25 @@ public class StreamBytestream extends IBytestream
     }
     public int readInt()
     {
-        try{
-            int ch1 = in.read();
-            int ch2 = in.read();
-            int ch3 = in.read();
-            int ch4 = in.read();
+        //try{
+            int ch1 = this.read();
+            int ch2 = this.read();
+            int ch3 = this.read();
+            int ch4 = this.read();
             return ((ch1 << 0) + (ch2 << 8) + (ch3 << 16) + (ch4 << 24));
-        }catch(IOException e){
-            throw new nested(e);
-        }
+        //}catch(IOException e){
+        //    throw new nested(e);
+        //}
     }
     public short readShort()
     {
-        try{
-            int ch1 = in.read();
-            int ch2 = in.read();
+        //try{
+            int ch1 = this.read();
+            int ch2 = this.read();
             return (short)((ch1 << 0) + (ch2 << 8));
-        }catch(IOException e){
-            throw new nested(e);
-        }
+        //}catch(IOException e){
+        //    throw new nested(e);
+        //}
     }
     public int getAbsoluteOffset()
     {

@@ -5,6 +5,9 @@ _UamMod_Pots
 #_UamMod_UntilUru
 #_UamMod_Moulagain
 
+#Shard specific things:
+#_UamMod_UamShard
+
 #Commands for help relating to the Uam KI plugin:
 _UamMod_Help
 

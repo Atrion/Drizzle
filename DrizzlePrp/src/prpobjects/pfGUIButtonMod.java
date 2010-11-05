@@ -61,13 +61,15 @@ public class pfGUIButtonMod extends uruobj
             //u1: 1(x1) 2(x4) 0(x~230)
             //so, we could just write 0,0
             u1 = c.readInt();
-            b1 = c.readByte();
+            //b1 = c.readByte(); //no, this is an Uruobjectref
+            xref3 = new Uruobjectref(c);
             //m.msg("pfguibuttonmod: delme: "+Integer.toString(u1)+":"+Byte.toString(b1));
         }
         else if(c.readversion==4) //does 6 go here? no, it goes in the above one.
         {
             //these have no clear relation to the pots flags above.
-            xu1 = c.readInt();
+            //xu1 = c.readInt(); //maybe this is u1?
+            u1 = c.readInt();
             xu2 = c.readInt();
             xu3 = c.readInt();
             xref3 = new Uruobjectref(c);
@@ -86,8 +88,10 @@ public class pfGUIButtonMod extends uruobj
         str2.compile(c);
 
         //these next 2 lines are justified by the fact that they are usually 0, and I couldn't see a relation between them and the new flags.
-        c.writeInt(0);
-        c.writeByte((byte)0);
+        //c.writeInt(0);
+        c.writeInt(u1);
+        //c.writeByte((byte)0);
+        xref3.compile(c);
     }
     public static class PfGUIDialogMod extends uruobj
     {
@@ -100,7 +104,7 @@ public class pfGUIButtonMod extends uruobj
         Uruobjectref ref2;
         int u2;
         //wacky thing
-        pfGUIControlMod.whattheheck wha1;
+        pfGUIControlMod.pfGUIColorScheme wha1;
         Uruobjectref ref3;
         
         public PfGUIDialogMod(context c) throws readexception
@@ -113,7 +117,7 @@ public class pfGUIButtonMod extends uruobj
             u1 = c.readInt();
             ref2 = new Uruobjectref(c);
             u2 = c.readInt();
-            wha1 = new pfGUIControlMod.whattheheck(c);
+            wha1 = new pfGUIControlMod.pfGUIColorScheme(c);
             ref3 = new Uruobjectref(c);
         }
         

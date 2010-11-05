@@ -35,6 +35,7 @@ public class CryptoBytestream extends IBytestream
     {
         try{
             int r = in.read();
+            if(r==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
             return b.ByteToInt32(cipher.returnByte((byte)r));
         }catch(IOException e){
             throw new nested(e);
@@ -43,8 +44,10 @@ public class CryptoBytestream extends IBytestream
     public byte readByte()
     {
         try{
-            byte r = (byte)in.read();
-            return cipher.returnByte(r);
+            int r = in.read();
+            if(r==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
+            //byte r = (byte)in.read();
+            return cipher.returnByte((byte)r);
         }catch(IOException e){
             throw new nested(e);
         }
@@ -63,8 +66,9 @@ public class CryptoBytestream extends IBytestream
             while (n < num)
             {
                 int count = in.read(r, n, num - n);
-                if (count < 0)
-                    throw new uncaughtexception("Read past end of stream.");
+                //if (count < 0)
+                //    throw new uncaughtexception("Read past end of stream.");
+                if(count==-1) throw new java.net.SocketException("Connection reset"); //actually just closed gracefully.
                 n += count;
             }
             byte[] r2 = new byte[num];

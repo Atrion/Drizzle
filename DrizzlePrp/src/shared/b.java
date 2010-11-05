@@ -37,10 +37,20 @@ public class b
     }
     public static String ShortsToString(short[] chars)
     {
-        StringBuilder r = new StringBuilder();
+        return ShortsToString(chars,0,chars.length); //this would work too.
+        /*StringBuilder r = new StringBuilder();
         for(short sh: chars)
         {
             r.append((char)sh);
+        }
+        return r.toString();*/
+    }
+    public static String ShortsToString(short[] chars, int start, int length)
+    {
+        StringBuilder r = new StringBuilder();
+        for(int i=start;i<start+length;i++)
+        {
+            r.append((char)chars[i]);
         }
         return r.toString();
     }

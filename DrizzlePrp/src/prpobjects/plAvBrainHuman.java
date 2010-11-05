@@ -31,24 +31,26 @@ import shared.*;
 
 public class plAvBrainHuman extends uruobj
 {
-    int u1;
-    byte b2;
-    Uruobjectref xref;
-    int u3;
-    Flt f4;
-    Double64 d5;
+    plArmatureBrain parent;
+    //int u1;
+    //byte b2;
+    //Uruobjectref xref;
+    //int u3;
+    //Flt f4;
+    //Double64 d5;
     
     public plAvBrainHuman(context c) throws readexception
     {
-        u1 = c.readInt();
-        b2 = c.readByte();
-        if(b2!=0)
-        {
-            xref = new Uruobjectref(c);
-        }
-        u3 = c.readInt();
-        f4 = new Flt(c);
-        d5 = new Double64(c);
+        //u1 = c.readInt();
+        //b2 = c.readByte();
+        //if(b2!=0)
+        //{
+        //    xref = new Uruobjectref(c);
+        //}
+        //u3 = c.readInt();
+        //f4 = new Flt(c);
+        //d5 = new Double64(c);
+        parent = new plArmatureBrain(c);
         if(c.readversion==6)
         {
             byte b6 = c.readByte();
@@ -61,15 +63,51 @@ public class plAvBrainHuman extends uruobj
     
     public void compile(Bytedeque c)
     {
-        c.writeInt(u1);
-        c.writeByte(b2);
-        if(b2!=0)
+        //c.writeInt(u1);
+        //c.writeByte(b2);
+        //if(b2!=0)
+        //{
+        //    xref.compile(c);
+        //}
+        //c.writeInt(u3);
+        //f4.compile(c);
+        //d5.compile(c);
+        parent.compile(c);
+    }
+
+    public static class plArmatureBrain extends uruobj
+    {
+        int u1;
+        byte b2;
+        Uruobjectref xref;
+        int u3;
+        float f4;
+        Double64 d5;
+
+        public plArmatureBrain(context c) throws readexception
         {
-            xref.compile(c);
+            u1 = c.readInt();
+            b2 = c.readByte();
+            if(b2!=0)
+            {
+                xref = new Uruobjectref(c);
+            }
+            u3 = c.readInt();
+            f4 = c.readFloat();
+            d5 = new Double64(c);
         }
-        c.writeInt(u3);
-        f4.compile(c);
-        d5.compile(c);
+        public void compile(Bytedeque c)
+        {
+            c.writeInt(u1);
+            c.writeByte(b2);
+            if(b2!=0)
+            {
+                xref.compile(c);
+            }
+            c.writeInt(u3);
+            c.writeFloat(f4);
+            d5.compile(c);
+        }
     }
     
 }

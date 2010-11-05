@@ -36,15 +36,15 @@ public class plArmatureMod extends uruobj
     Uruobjectref ref;
     Urustring s1;
     int count;
-    PrpTaggedObject[] objects;
+    PrpTaggedObject[] brains;
     byte b1;
     Uruobjectref xref2;
     int u1;
     byte b2;
     Uruobjectref xref3;
     //offset 48???
-    Vertex v1;
-    Vertex v2;
+    Vertex mins;
+    Vertex maxs;
     Flt f1;
     Flt f2;
     
@@ -74,7 +74,7 @@ public class plArmatureMod extends uruobj
             ref = new Uruobjectref(c);
             s1 = new Urustring(c);
             count = c.readInt();
-            objects = c.readArray(PrpTaggedObject.class, count);
+            brains = c.readArray(PrpTaggedObject.class, count);
             b1 = c.readByte();
             if(b1!=0)
             {
@@ -86,9 +86,9 @@ public class plArmatureMod extends uruobj
             {
                 xref3 = new Uruobjectref(c);
             }
-            v1 = new Vertex(c);
-            v2 = new Vertex(c);
-            m.msg("v1="+v1.toString()+"  v2="+v2.toString());
+            mins = new Vertex(c);
+            maxs = new Vertex(c);
+            m.msg("v1="+mins.toString()+"  v2="+maxs.toString());
             f1 = new Flt(c);
             f2 = new Flt(c);
         }
@@ -99,7 +99,7 @@ public class plArmatureMod extends uruobj
             ref = new Uruobjectref(c);
             s1 = new Urustring(c);
             count = c.readInt();
-            objects = c.readArray(PrpTaggedObject.class, count);
+            brains = c.readArray(PrpTaggedObject.class, count);
             b1 = c.readByte();
             if(b1!=0)
             {
@@ -113,8 +113,8 @@ public class plArmatureMod extends uruobj
             }
             //v1 = new Vertex(c);
             //v2 = new Vertex(c);
-            v1 = Vertex.createFromFloats(0, 0, 0);
-            v2 = Vertex.createFromFloats(0, 0, 0);
+            mins = Vertex.createFromFloats(0, 0, 0);
+            maxs = Vertex.createFromFloats(0, 0, 0);
             //v1 = Vertex.createFromFloats(0, 0, 2);
             //v2 = Vertex.createFromFloats(0, 0, 4);
             //v1 = Vertex.createFromFlts(Flt.createFromData(0x0), Flt.createFromData(0xb3bbc0ac), Flt.createFromData(0x40000262));
@@ -122,7 +122,7 @@ public class plArmatureMod extends uruobj
             m.warn("Using identity vectors in PlArmatureMod.");
             f1 = new Flt(c);
             f2 = new Flt(c);
-            Urustring s1 = new Urustring(c); //kg
+            Urustring s1 = new Urustring(c); //kg,Male,Female,Quab
             Urustring s2 = new Urustring(c); //CustomAvatars
             Urustring s3 = new Urustring(c); //Audio
             int dummy=0;
@@ -135,7 +135,7 @@ public class plArmatureMod extends uruobj
         ref.compile(c);
         s1.compile(c);
         c.writeInt(count);
-        c.writeArray2(objects);
+        c.writeArray2(brains);
         c.writeByte(b1);
         if(b1!=0)
         {
@@ -147,8 +147,8 @@ public class plArmatureMod extends uruobj
         {
             xref3.compile(c);
         }
-        v1.compile(c);
-        v2.compile(c);
+        mins.compile(c);
+        maxs.compile(c);
         f1.compile(c);
         f2.compile(c);
     }

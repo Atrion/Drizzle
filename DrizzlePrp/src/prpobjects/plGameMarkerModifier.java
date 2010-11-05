@@ -21,44 +21,40 @@ package prpobjects;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
 
-public class pfGUITextBoxMod extends uruobj
+public class plGameMarkerModifier extends uruobj
 {
-    pfGUIControlMod parent;
-    Bstr str1;
-    byte xb2;
-    Urustring16 xstr3; //e.g. ACA.GUI.Age.  Used for internationalization?
+    plSingleModifier parent;
+    Uruobjectref greenAnim;
+    Uruobjectref redAnim;
+    Uruobjectref openAnim;
+    Uruobjectref bounceAnim;
+    short placeSoundIdx;
+    short hitSoundIdx;
     
-    public pfGUITextBoxMod(context c) throws readexception
+    public plGameMarkerModifier(context c) throws readexception
     {
-        parent = new pfGUIControlMod(c);
-        str1 = new Bstr(c);
-        if(c.readversion==6)
-        {
-            xb2 = c.readByte();
-            if(xb2!=0)
-            {
-                //read an Urustring?
-                xstr3 = new Urustring16(c);
-                //m.throwUncaughtException("Unhandled.");
-            }
-        }
+        parent = new plSingleModifier(c);
+        greenAnim = new Uruobjectref(c);
+        redAnim = new Uruobjectref(c);
+        openAnim = new Uruobjectref(c);
+        bounceAnim = new Uruobjectref(c);
+        placeSoundIdx = c.readShort();
+        hitSoundIdx = c.readShort();
     }
     
     public void compile(Bytedeque c)
     {
-        //m.warn("compile not implemented.",this.toString());
-        //m.warn("not tested with pots.",this.toString());
-        //m.warn("untested pfGUITextBoxMod");
         parent.compile(c);
-        str1.compile(c);
+        greenAnim.compile(c);
+        redAnim.compile(c);
+        openAnim.compile(c);
+        bounceAnim.compile(c);
+        c.writeShort(placeSoundIdx);
+        c.writeShort(hitSoundIdx);
     }
     
 }

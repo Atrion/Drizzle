@@ -48,6 +48,7 @@ public class ConnectionState extends Thread
 
     //server things
     ChunkSendHandler chunksendhandler = new ChunkSendHandler(); //used for file and auth servers. They will each have a separate ConnectionState, so this is fine.
+    Integer serverchallenge = null; // set at Cli2Auth_ClientRegisterRequest, read at Cli2Auth_AcctLoginRequest
     Database.accountinfo account = null;
     Integer playerId = null; //0 means in-game, but unset player. I.e. the StartUp Age.
     Integer playerInfoIdx = null;

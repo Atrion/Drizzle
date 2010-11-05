@@ -381,7 +381,7 @@ public class prputils
                     if(shortby!=0)
                     {
                         if(desc.objecttype!=Typeid.plHKPhysical)
-                            m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
+                            m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby)+" type="+desc.objecttype.toString());
                     }
                 }
                 //_staticsettings.onObjectLoaded(object);

@@ -349,7 +349,20 @@ public enum Typeid implements compilable, java.io.Serializable
 
     plLeafController,
     nil,
-    unknown;
+    unknown,
+
+    pfGUIEditBoxMod,
+    pfGUIClickMapCtrl,
+    pfGUIListBoxMod,
+    pfGUIDynDisplayCtrl,
+    pfGUIProgressCtrl,
+    pfGUIMultiLineEditCtrl,
+    pfGUISkin,
+    pfGUIUpDownPairMod,
+    plGameMarkerModifier,
+    plAvBrainCritter,
+
+    ;
 
     public void compile(Bytedeque deque)
     {
@@ -579,7 +592,7 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( -2, -2, 0x20D, -2, plCrossfadeMsg), //not in pots
         tri( -2, -2, 0x021, -2, plWindBoneMod), //not in pots
         tri( 0x08E, 0x08E, 0x07C, -2, plLayerLinkAnimation),
-        tri( 0x08F, -2, 0x07D, -2, plArmatureMod),
+        tri( 0x08F, 0x08F, 0x07D, -2, plArmatureMod),
         tri( -2, -2, 0x200, -2, plAvBrainPirahna), //not in pots
         tri( 0x494, -2, -2, -2, plAvBrainQuab),
         tri( 0x0CD, 0x0CD, 0x0AE, -2, plArmatureEffectsMgr),
@@ -590,15 +603,15 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x00B, 0x00B, 0x00B, -2, plParticleFadeVolumeEffect),
         
         tri( -2, -2, 0x2A9, 0x2A9, plParticleVelMinApplicator), //not in pots
-        tri( 0x0B1, -2, 0x097, -2, pfGUIKnobCtrl),
+        tri( 0x0B1, 0x0B1, 0x097, -2, pfGUIKnobCtrl),
         
         tri( 0x0E9, 0x0E9, -2, -2, plDynaRippleMgr),
         tri( 0x0F0, 0x0F0, -2, -2, plLayerSDLAnimation),
         
         tri( 0x0B9, 0x0B9, -2, -2, pfGUIDragBarCtrl),
-        tri( 0x0BA, -2, -2, -2, pfGUICheckBoxCtrl),
-        tri( 0x0BB, -2, -2, -2, pfGUIRadioGroupCtrl),
-        tri( 0x119, -2, -2, -2, pfGUIPopUpMenu),
+        tri( 0x0BA, 0x0BA, -2, -2, pfGUICheckBoxCtrl),
+        tri( 0x0BB, 0x0BB, -2, -2, pfGUIRadioGroupCtrl),
+        tri( 0x119, 0x119, -2, -2, pfGUIPopUpMenu),
         
         tri( 0x10D, 0x10D, -2, -2, plMaintainersMarkerModifier),
         tri( 0x131, 0x131, -2, -2, plDistOpacityMod),
@@ -685,6 +698,16 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( -2, 0x488, -2, -2, plAvOneShotLinkTask),
         tri( -2, 0x36B, -2, -2, plAvAnimTask),
         
+        tri( 0x0AC, 0x0AC, -2, -2, pfGUIEditBoxMod),
+        tri( 0x062, 0x062, -2, -2, pfGUIClickMapCtrl),
+        tri( 0x0AA, 0x0AA, -2, -2, pfGUIListBoxMod),
+        tri( 0x0BD, 0x0BD, -2, -2, pfGUIDynDisplayCtrl),
+        tri( 0x10C, 0x10C, -2, -2, pfGUIProgressCtrl),
+        tri( 0x0EE, 0x0EE, -2, -2, pfGUIMultiLineEditCtrl),
+        tri( 0x0C6, 0x0C6, -2, -2, pfGUISkin),
+        tri( 0x0AF, 0x0AF, -2, -2, pfGUIUpDownPairMod),
+        tri( 0x12C, 0x12C, -2, -2, plGameMarkerModifier),
+        tri( 0x358, 0x35D, -2, -2, plAvBrainCritter),
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle

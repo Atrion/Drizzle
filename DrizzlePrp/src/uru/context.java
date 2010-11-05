@@ -216,7 +216,7 @@ public class context extends shared.BaseContext
     public <T extends mystobj> Vector<T> readVector( Class<T> objclass,int size) throws readexception
     {
         //T[] result = (T[])java.lang.reflect.Array.newInstance(objclass, size);
-        Vector<T> result = new Vector<T>();
+        Vector<T> result = new Vector<T>(size);
         for(int i=0;i<size;i++)
         {
             //result[i] = (T)this.readObj(objclass);

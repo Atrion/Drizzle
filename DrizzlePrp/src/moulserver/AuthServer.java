@@ -233,16 +233,18 @@ public class AuthServer extends Thread
             //int b4 = c.readShort(); //0
             //short b5 = c.readShort();
             ClientRegisterReply reply = new ClientRegisterReply();
-            reply.serverchallenge = 0; //should be random I guess :P
+            //reply.serverchallenge = 0; //should be random I guess :P
             //reply.serverchallenge = sock.rng.nextInt();
             //reply.serverchallenge = 0x8b835969;
+            reply.serverchallenge = RandomUtils.rng.nextInt();
+            cs.serverchallenge = reply.serverchallenge;
             SendMsg(cs,reply);
         }
         //else if(msgId==AuthServer.kCli2Auth_AcctLoginRequest)
         else if(klass==AcctLoginRequest.class)
         {
-            m.msg("AuthServer AcctLoginRequest");
             AcctLoginRequest request = (AcctLoginRequest)msg;
+            m.msg("AuthServer AcctLoginRequest: " + request.accountName.toString());
             Database.accountinfo user = manager.database.GetUser(request.accountName.toString());
             AcctLoginReply reply = new AcctLoginReply();
             reply.transId = request.transId;
@@ -256,9 +258,10 @@ public class AuthServer extends Thread
             else
             {
                 //byte[] expectedhash = shared.CryptHashes.GetHash(new byte[]{}, CryptHashes.Hashtype.sha1);
-                byte[] givenhash = request.getProperPasswordHash(user.accountname);
-                boolean isPasswordCorrect = b.isEqual(user.passwordhash, givenhash);
-                if(!isPasswordCorrect)
+                //byte[] givenhash = request.getProperPasswordHash(user.accountname);
+                //boolean isPasswordCorrect = b.isEqual(user.passwordhash, givenhash);
+                //if(!isPasswordCorrect)
+                if(!request.checkPassword(user.passwordhash, cs.serverchallenge))
                 {
                     reply.result = ENetError.kNetErrAuthenticationFailed;
                     reply.accountUUID = Guid.none();
@@ -1776,7 +1779,7 @@ public class AuthServer extends Thread
             OS.writeAsUtf16Sized16(c);
         }
 
-        public byte[] getProperPasswordHash(String username)
+        /*public byte[] getProperPasswordHash(String username)
         {
             if(!isUsernameEmailForm(username))
             {
@@ -1795,9 +1798,36 @@ public class AuthServer extends Thread
             {
                 return passwordHash;
             }
+        }*/
+        public static byte[] getStoredHash(String username, String password)
+        {
+            if (isUsernameEmailForm(username))
+            {
+                byte[] pwbs = b.Utf16ToBytes(password);
+                byte[] unbs = b.Utf16ToBytes(username.toLowerCase());
+                byte[] both = new byte[pwbs.length+unbs.length];
+                b.CopyBytes(pwbs, both, 0);
+                b.CopyBytes(unbs, both, pwbs.length);
+                both[pwbs.length-1] = 0;
+                both[pwbs.length-2] = 0;
+                both[both.length-1] = 0;
+                both[both.length-2] = 0;
+                jonelo.jacksum.adapt.gnu.crypto.hash.Sha0 sha0 = new jonelo.jacksum.adapt.gnu.crypto.hash.Sha0();
+                sha0.update(both, 0, both.length);
+                return sha0.digest();
+            }
+            else
+            {
+                return shared.CryptHashes.GetHash(b.StringToBytes(password), CryptHashes.Hashtype.sha1);
+            }
+        }
+        
+        public boolean checkPassword(byte[] storedhash, int serverchallenge)
+        {
+            return b.isEqual(passwordHash, getTransmittedHash(accountName.toString(), storedhash, serverchallenge, clientchallenge));
         }
 
-        private void setIntHash(byte[] properhash)
+        /*private void setIntHash(byte[] properhash)
         {
             byte[] r = new byte[20];
             for(int i=0;i<5;i++)
@@ -1808,16 +1838,42 @@ public class AuthServer extends Thread
                 }
             }
             this.passwordHash = r;
-        }
-        public boolean isUsernameEmailForm(String username)
+        }*/
+        public static boolean isUsernameEmailForm(String username)
         {
             return username.matches(".+\\@.+\\..+"); //x@x.x, correctly allowing weird things like a.b@c@b.a@d.
+        }
+        public static byte[] getTransmittedHash(String username, byte[] storedhash, int serverchallenge, int clientchallenge)
+        {
+            if (isUsernameEmailForm(username))
+            {
+                byte[] all = new byte[4+4+storedhash.length];
+                b.loadInt32IntoBytes(clientchallenge, all, 0);
+                b.loadInt32IntoBytes(serverchallenge, all, 4);
+                b.CopyBytes(storedhash, all, 8);
+                jonelo.jacksum.adapt.gnu.crypto.hash.Sha0 sha0 = new jonelo.jacksum.adapt.gnu.crypto.hash.Sha0();
+                sha0.update(all, 0, all.length);
+                return sha0.digest();
+            }
+            else
+            {
+                //fix how Cyan produces it as b3 b2 b1 b0 b7 b6 b5 b4, etc.
+                byte[] r = new byte[20];
+                for(int i=0;i<5;i++)
+                {
+                    for(int j=0;j<4;j++)
+                    {
+                       r[i*4+j] = storedhash[i*4+(3-j)];
+                    }
+                }
+                return r;
+            }
         }
         public void setPassword(String username, String password, int serverchallenge, int clientchallenge)
         {
             //type=1 when username is simple, like on Talcum, but when long one like email address on Moulagain, it uses the other form(type=2), and it's unreversed, bizarrely.
             //after testing, I find that if it looks like x@x.x, then it uses the 2nd type. Other forms don't, including @x.x, x@x., and x@.x
-            boolean isEmailForm = isUsernameEmailForm(username);
+            /*boolean isEmailForm = isUsernameEmailForm(username);
             //isEmailForm = true;
             if(!isEmailForm)
             {
@@ -1828,8 +1884,8 @@ public class AuthServer extends Thread
             }
             else
             {
-                byte[] pwbs = b.Utf16ToBytes(password/*+(char)0*/);
-                byte[] unbs = b.Utf16ToBytes(username.toLowerCase()/*+(char)0*/);
+                byte[] pwbs = b.Utf16ToBytes(password); // +(char)0);
+                byte[] unbs = b.Utf16ToBytes(username.toLowerCase()); //+(char)0);
                 byte[] both = new byte[pwbs.length+unbs.length];
                 b.CopyBytes(pwbs, both, 0);
                 b.CopyBytes(unbs, both, pwbs.length);
@@ -1852,7 +1908,8 @@ public class AuthServer extends Thread
             }
 
             //shared.CryptHashes.GetHash(null, CryptHashes.Hashtype.md5)
-
+            */
+            this.passwordHash = getTransmittedHash(username, getStoredHash(username, password), serverchallenge, clientchallenge);
         }
 
     }
