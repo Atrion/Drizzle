@@ -361,6 +361,15 @@ public enum Typeid implements compilable, java.io.Serializable
     pfGUIUpDownPairMod,
     plGameMarkerModifier,
     plAvBrainCritter,
+    plParticleVelMaxApplicator,
+    plVehicleModifier,
+    plBlower,
+    plDynaTorpedoMgr,
+    plDynaBulletMgr,
+    plDynaTorpedoVSMgr,
+    plSplineEaseCurve,
+    plParticleScaleMinApplicator,
+
 
     ;
 
@@ -602,7 +611,7 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x00A, 0x00A, 0x00A, -2, plParticleCollisionEffectBeat),
         tri( 0x00B, 0x00B, 0x00B, -2, plParticleFadeVolumeEffect),
         
-        tri( -2, -2, 0x2A9, 0x2A9, plParticleVelMinApplicator), //not in pots
+        tri( 0x337, -2, 0x2A9, 0x2A9, plParticleVelMinApplicator), //not in pots.  oops, it is!
         tri( 0x0B1, 0x0B1, 0x097, -2, pfGUIKnobCtrl),
         
         tri( 0x0E9, 0x0E9, -2, -2, plDynaRippleMgr),
@@ -640,7 +649,7 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x0D2, 0x0D2, -2, -2, plInstanceDrawInterface),
         tri( 0x12D, -2, -2, -2, plLODMipmap),
         tri( 0x0F3, 0x0F3, -2, -2, plSubworldRegionDetector),
-        tri( -2, 0x0F6, -2, -2, plActivePrintShape),
+        tri( 0x0F6, 0x0F6, -2, -2, plActivePrintShape),
         tri( 0x0B3, 0x0B3, -2, -2, plCameraBrain1_FirstPerson),
         tri( 0x0D1, 0x0D1, -2, -2, plParticleUniformWind),
         tri( 0x107, 0x107, -2, -2, plSimpleRegionSensor),
@@ -708,6 +717,14 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x0AF, 0x0AF, -2, -2, pfGUIUpDownPairMod),
         tri( 0x12C, 0x12C, -2, -2, plGameMarkerModifier),
         tri( 0x358, 0x35D, -2, -2, plAvBrainCritter),
+        tri( 0x338, -2, 0x2AA, 0x2AA, plParticleVelMaxApplicator), //BahroCave02, Todelmer
+        tri( 0x0CF, -2, -2, -2, plVehicleModifier), //Cleft
+        tri( 0x0A9, -2, -2, -2, plBlower), //Garden
+        tri( 0x129, -2, -2, -2, plDynaTorpedoMgr), //Teledahn
+        tri( 0x0EA, -2, -2, -2, plDynaBulletMgr), //Teledahn
+        tri( 0x12A, -2, -2, -2, plDynaTorpedoVSMgr), //Teledahn
+        tri( 0x31B, -2, -2, -2, plSplineEaseCurve), //Teledahn
+        tri( 0x339, -2, -2, -2, plParticleScaleMinApplicator), //Teledahn
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle

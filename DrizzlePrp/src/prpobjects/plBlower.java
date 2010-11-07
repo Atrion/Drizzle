@@ -21,35 +21,34 @@ package prpobjects;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
-public class plPrintShape extends uruobj
+
+public class plBlower extends uruobj
 {
-    plObjInterface parent;
-    Flt width;
-    Flt length;
-    Flt height;
+    plSingleModifier parent;
+    float masterPower;
+    float directRate;
+    float impulseRate;
+    float springConstant;
     
-    public plPrintShape(context c) throws readexception
+    public plBlower(context c) throws readexception
     {
-        parent = new plObjInterface(c);
-        width = new Flt(c);
-        length = new Flt(c);
-        height = new Flt(c);
-        
+        parent = new plSingleModifier(c);
+        masterPower = c.readFloat();
+        directRate = c.readFloat();
+        impulseRate = c.readFloat();
+        springConstant = c.readFloat();
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        width.compile(c);
-        length.compile(c);
-        height.compile(c);
+        c.writeFloat(masterPower);
+        c.writeFloat(directRate);
+        c.writeFloat(impulseRate);
+        c.writeFloat(springConstant);
     }
     
 }

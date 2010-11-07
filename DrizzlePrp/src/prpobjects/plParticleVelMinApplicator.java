@@ -28,28 +28,22 @@ import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
-public class plPrintShape extends uruobj
+
+public class plParticleVelMinApplicator extends uruobj
 {
-    plObjInterface parent;
-    Flt width;
-    Flt length;
-    Flt height;
+    byte b1;
+    Urustring s2;
     
-    public plPrintShape(context c) throws readexception
+    public plParticleVelMinApplicator(context c) throws readexception
     {
-        parent = new plObjInterface(c);
-        width = new Flt(c);
-        length = new Flt(c);
-        height = new Flt(c);
-        
+        b1 = c.readByte();
+        s2 = new Urustring(c);
     }
     
     public void compile(Bytedeque c)
     {
-        parent.compile(c);
-        width.compile(c);
-        length.compile(c);
-        height.compile(c);
+        c.writeByte(b1);
+        s2.compile(c);
     }
     
 }

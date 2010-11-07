@@ -50,7 +50,7 @@ public class x0007Material extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         parent = new plSynchedObject(c);//,false);
         loadFlags = data.readInt(); e.ensureflags(loadFlags,0); //loadflags
-        compFlags = data.readInt(); e.ensureflags(compFlags,0x00,0x0400,0x1000,0x2000,0x2400/*fanages:*/,0x2010,0x10); //compflags
+        compFlags = data.readInt(); //e.ensureflags(compFlags,0x00,0x0400,0x1000,0x2000,0x2400/*fanages:*/,0x2010,0x10); //compflags
         layercount = data.readInt();
         piggybackcount = data.readInt();
         //layerrefs = new Uruobjectref[layercount];

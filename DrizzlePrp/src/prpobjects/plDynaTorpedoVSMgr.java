@@ -21,35 +21,25 @@ package prpobjects;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
-public class plPrintShape extends uruobj
+
+public class plDynaTorpedoVSMgr extends uruobj
 {
-    plObjInterface parent;
-    Flt width;
-    Flt length;
-    Flt height;
+    plDynaTorpedoMgr parent;
+    Uruobjectref wavesetbase;
     
-    public plPrintShape(context c) throws readexception
+    public plDynaTorpedoVSMgr(context c) throws readexception
     {
-        parent = new plObjInterface(c);
-        width = new Flt(c);
-        length = new Flt(c);
-        height = new Flt(c);
-        
+        parent = new plDynaTorpedoMgr(c);
+        wavesetbase = new Uruobjectref(c);
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        width.compile(c);
-        length.compile(c);
-        height.compile(c);
+        wavesetbase.compile(c);
     }
     
 }

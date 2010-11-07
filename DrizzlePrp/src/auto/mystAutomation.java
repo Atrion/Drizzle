@@ -1019,6 +1019,7 @@ public class mystAutomation
             File curfile = files[i];
             if(curfile.getName().toLowerCase().endsWith(".prp"))
             {
+                m.msg(curfile.getName());
                 //open prp file and process it.
                 byte[] filedata = FileUtils.ReadFile(curfile);
                 

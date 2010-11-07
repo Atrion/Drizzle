@@ -5039,7 +5039,12 @@ private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_jButton63ActionPerformed
 
 private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton62ActionPerformed
-    auto.mystAutomation.readAllPotsPrps(this.textfieldState7.getText());
+    final String pots = this.textfieldState7.getText();
+    gui.ThreadedTasks.custom(new java.lang.Runnable() {
+            public void run() {
+                auto.mystAutomation.readAllPotsPrps(pots);
+            }
+        });
 }//GEN-LAST:event_jButton62ActionPerformed
 
 private void jButton67ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton67ActionPerformed

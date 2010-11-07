@@ -21,35 +21,25 @@ package prpobjects;
 import uru.context; import shared.readexception;
 import uru.Bytestream;
 import uru.Bytedeque;
-import shared.e;
-import shared.m;
-import shared.b;
-import shared.readexception;
 //import java.util.Vector;
 import shared.*;
 
-public class plPrintShape extends uruobj
+
+public class plActivePrintShape extends uruobj
 {
-    plObjInterface parent;
-    Flt width;
-    Flt length;
-    Flt height;
+    plPrintShape parent;
+    Refvector decalManagers;
     
-    public plPrintShape(context c) throws readexception
+    public plActivePrintShape(context c) throws readexception
     {
-        parent = new plObjInterface(c);
-        width = new Flt(c);
-        length = new Flt(c);
-        height = new Flt(c);
-        
+        parent = new plPrintShape(c);
+        decalManagers = new Refvector(c);
     }
     
     public void compile(Bytedeque c)
     {
         parent.compile(c);
-        width.compile(c);
-        length.compile(c);
-        height.compile(c);
+        decalManagers.compile(c);
     }
     
 }

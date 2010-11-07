@@ -72,6 +72,32 @@ public class ChangeNameAndPrefix
         prp.saveAsFile(outputfilename);
 
     }
+    public static void ChangePagenumber(String inputfilename, String outputfolder, String newnumber)
+    {
+
+        //read old one:
+        prpfile prp = prpfile.createFromFile(inputfilename, false);
+
+        int newnum = Integer.parseInt(newnumber);
+        ChangePagenumber(prp,newnum);
+
+        //save it!
+        String outputfilename = outputfolder + "/" + prp.header.agename.toString()+"_District_"+prp.header.pagename.toString()+".prp";
+        prp.saveAsFile(outputfilename);
+
+    }
+    public static void ChangePagenumber(prpfile prp, int newnum)
+    {
+        Pageid oldpid = prp.header.pageid.deepClone();
+        prp.header.pageid.setPagenum(newnum);
+        for(Uruobjectdesc desc: shared.FindAllDescendants.FindAllDescendantsByClass(Uruobjectdesc.class, prp))
+        {
+            if(desc.pageid.getPageNumber()==oldpid.getPageNumber())
+            {
+                desc.pageid.setPagenum(newnum);
+            }
+        }
+    }
     public static void ChangePrefix(prpfile prp, int newpre)
     {
         //calculate new values:

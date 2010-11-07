@@ -38,7 +38,8 @@ public class CommandLine
             //m.msg("    -changeagename c:/inputfile.prp c:/outputfolder NewAgeName");
             m.msg("    -changeagename c:/inputfile.prp c:/outputfolder NewAgeName       ->Does not change python/ogg files.");
             m.msg("    -changeprefix c:/inputfile.prp c:/outputfolder NewSequencePrefix");
-            m.msg("    -changepage c:/inputfile.prp c:/outputfolder NewPageName");
+            m.msg("    -changepagename c:/inputfile.prp c:/outputfolder NewPageName");
+            m.msg("    -changepagenumber c:/inputfile.prp c:/outputfolder NewPageNumber");
             m.msg("    -changeagenameandprefix c:/inputfile.prp c:/outputfolder NewAgeName NewSequencePrefix    ->Changes python/ogg files.");
             m.msg("    -inplacemod c:/potsfolder dat/inputfile.prp ModName");
             m.msg("    -listinplacemods    ->Displays all the available InplaceMods.");
@@ -165,9 +166,13 @@ public class CommandLine
         {
             auto.ChangeNameAndPrefix.ChangeNameAndPrefix(args[1],args[2],args[3],args[4],true);
         }
-        else if(args[0].equals("-changepage"))
+        else if(args[0].equals("-changepagename"))
         {
             auto.ChangeNameAndPrefix.ChangePagename(args[1],args[2],args[3]);
+        }
+        else if(args[0].equals("-changepagenumber"))
+        {
+            auto.ChangeNameAndPrefix.ChangePagenumber(args[1],args[2],args[3]);
         }
         else if(args[0].equals("-deepview"))
         {

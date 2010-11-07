@@ -106,7 +106,7 @@ public class prpprocess
             if(shortby!=0)
             {
                 if(d.desc.objecttype!=Typeid.plHKPhysical)
-                    m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby));
+                    m.msg("Prp: Object was not the expected size. It was off by:",Integer.toString(shortby)+" type="+result.header.desc.objecttype.toString());
             }
         }
 

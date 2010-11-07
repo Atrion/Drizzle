@@ -46,7 +46,7 @@ public class x0003Bitmap extends uruobj
         //if(hasHeader) xheader = new Objheader(c);
         //parent = new x0002Keyedobject(data);
         version = data.readByte(); e.ensureflags(version,2);
-        bpp = data.readByte(); e.ensureflags(bpp,32);
+        bpp = data.readByte(); //e.ensureflags(bpp,32); //is set to 1 in Abysos, e.g.
         fSpace = data.readByte(); //unknown //space?
         flags = data.readShort();
         type = data.readByte();

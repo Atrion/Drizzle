@@ -21,6 +21,18 @@ public class Vector3
         this.y = y;
         this.z = z;
     }
+    public Vector3(IBytestream c)
+    {
+        x = c.readFloat();
+        y = c.readFloat();
+        z = c.readFloat();
+    }
+    public void compile(IBytedeque c)
+    {
+        c.writeFloat(x);
+        c.writeFloat(y);
+        c.writeFloat(z);
+    }
 
     public Vector3 getInverse()
     {
