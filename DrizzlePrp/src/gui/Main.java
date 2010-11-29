@@ -525,6 +525,7 @@ public class Main extends javax.swing.JFrame {
 
     private static void CloseSplashScreen()
     {
+        if (java.awt.GraphicsEnvironment.isHeadless()) return;
         //close the splashscreen
         java.awt.SplashScreen splashscreen = java.awt.SplashScreen.getSplashScreen();
         if(splashscreen!=null) splashscreen.close();
