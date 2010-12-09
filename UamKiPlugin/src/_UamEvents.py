@@ -39,7 +39,7 @@ __OnTimerListeners = []
 def RegisterForOnTimer(listener):
     __OnTimerListeners.append(weakref.ref(listener))
 def _OnTimer(self, id, old_method = BlackBarBodyKIHandler.xKI.OnTimer):
-    print "_UamEvents._OnTimer"
+    #print "_UamEvents._OnTimer"
     for weaklistener in __OnTimerListeners:
         listener = weaklistener()  #this makes it non weak
         if listener==None:
@@ -133,7 +133,7 @@ def RegisterForVaultEvent(listener):
     print "UamEvents.RegisterForVaultEvent: "+`listener`
     __VaultEventListeners.append(weakref.ref(listener))
 def _OnVaultEvent(self, event, tupdata, old_method = BlackBarBodyKIHandler.xKI.OnVaultEvent):
-    print "_UamEvents._OnVaultEvent"
+    #print "_UamEvents._OnVaultEvent"
     for weaklistener in __VaultEventListeners:
         listener = weaklistener()
         if listener==None:
@@ -156,7 +156,7 @@ def RegisterForAgeVaultEvent(listener):
     __AgeVaultEventListeners.append(weakref.ref(listener))
 def _OnAgeVaultEvent(self, event, tupdata, old_method = BlackBarBodyKIHandler.xKI.OnAgeVaultEvent):
     #print "UamEvents3 newOnAgeVaultEvent"
-    print "_UamEvents._OnAgeVaultEvent"
+    #print "_UamEvents._OnAgeVaultEvent"
     for weaklistener in __AgeVaultEventListeners:
         listener = weaklistener()
         if listener==None:
