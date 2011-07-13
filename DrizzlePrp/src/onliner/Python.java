@@ -117,13 +117,13 @@ public class Python
 
         if(pycs1.size()!=pycs2.size())
         {
-            m.msg("Not the same number of files in each one.");
+            //m.msg("Not the same number of files in each one.");
         }
 
         for(pythondec.pycfile pyc1: pycs1)
         {
             String filename = pyc1.filename;
-            m.msg("Filename: ",filename);
+            //m.msg("Filename: ",filename);
             pycfile pyc2 = Find(pycs2,filename);
             if(pyc2==null)
             {
@@ -150,10 +150,12 @@ public class Python
             int contextSize = 3; //3 lines of context around patches
             if(patch.getDeltas().isEmpty())
             {
-                m.msg("identical");
+                //m.msg("identical");
+                m.msg("Python file unchanged: ",filename);
             }
             else
             {
+                m.msg("Python file changed: ",filename);
                 List<String> unififf = difflib.DiffUtils.generateUnifiedDiff("infile.py", "outfile.py", lines1, patch, contextSize);
                 for(String s: unififf) m.msg(s);
             }

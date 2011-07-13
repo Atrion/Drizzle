@@ -161,6 +161,8 @@ public class Gui extends javax.swing.JFrame {
         //m.setJTextArea(this.jTextArea1); //make sure the messages will come through.
         m.setLogbox(logBoxStateless1);
         m.setProgressBar(jProgressBar1);
+        m.SetErrorLabel(errlabel);
+        m.SetWarningLabel(warnlabel);
         //vis = new visualisation(this.jPanel5.getGraphics());
         m.redirectStdErr();
         m.redirectStdOut();
@@ -169,7 +171,12 @@ public class Gui extends javax.swing.JFrame {
         //if(Main.maxmemory<256000000) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
         if(Main.maxmemory<Main.requiredmemory) m.warn("It appears that you unpacked Drizzle",Integer.toString(gui.Version.version),".jar and ran DrizzlePrp.jar.  You should run Drizzle",Integer.toString(gui.Version.version),".jar directly.  Alternatively, you could run Drizzle with a larger maximum heap space. E.g.: java -Xmx800m -jar DrizzlePrp.jar");
         if(Main.javaversion2<1.6) m.warn("Your version of java seems to be older than 1.6; some things might not work.");
-        if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://alcugs.almlys.org/Drizzle for details.");
+        //if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle for details.");
+        //if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1)
+        if(Main.isVistaPlus())
+        {
+            m.msg("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.");
+        }
         //try{
         //java.net.URL url = this.getClass().getResource("Image2.png");
         //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
@@ -351,6 +358,7 @@ public class Gui extends javax.swing.JFrame {
     }
     void pushlanguage(boolean silent)
     {
+        //m.marktime("start language");
         int langnum = shared.State.AllStates.getStateAsInt("language");
         switch(langnum)
         {
@@ -371,6 +379,7 @@ public class Gui extends javax.swing.JFrame {
                 break;
         }
         if(!silent) m.msg("Setting language to ",shared.translation.getCurLanguage());
+        //m.marktime("end language");
     }
     public static class Settings implements java.io.Serializable
     {
@@ -907,6 +916,10 @@ public class Gui extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane9 = new javax.swing.JScrollPane();
         logBoxStateless1 = new shared.State.LogBoxStateless();
+        errlabel = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        warnlabel = new javax.swing.JLabel();
+        jLabel83 = new javax.swing.JLabel();
 
         uamStartupButtongroup.setName("uamStartup");
 
@@ -1738,7 +1751,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(GHelpTabLayout.createSequentialGroup()
                             .addGap(47, 47, 47)
                             .addComponent(jButton43)))
-                    .addContainerGap(92, Short.MAX_VALUE))
+                    .addContainerGap(100, Short.MAX_VALUE))
             );
 
             tabsState3.addTab("GameHelp", GHelpTab);
@@ -2077,7 +2090,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jButton147))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton146)
-                        .addContainerGap(8, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                 );
 
                 MiscPanel.add(jPanel47);
@@ -2108,7 +2121,7 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(jPanel25Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(sliderState1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))
+                        .addContainerGap(44, Short.MAX_VALUE))
                 );
 
                 MiscPanel.add(jPanel25);
@@ -2497,7 +2510,7 @@ public class Gui extends javax.swing.JFrame {
                 );
 
                 jPanel49.add(jPanel45);
-                jPanel45.setBounds(40, 30, 288, 130);
+                jPanel45.setBounds(40, 30, 288, 126);
 
                 textfieldState43.setText("defaulttest");
                 textfieldState43.setName("wha"); // NOI18N
@@ -3637,7 +3650,7 @@ public class Gui extends javax.swing.JFrame {
                                     .addGroup(jPanel21Layout.createSequentialGroup()
                                         .addContainerGap()
                                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(14, Short.MAX_VALUE))
+                                .addContainerGap(18, Short.MAX_VALUE))
                         );
 
                         jPanel19.add(jPanel21);
@@ -4068,7 +4081,7 @@ public class Gui extends javax.swing.JFrame {
                                                 .addComponent(jButton39)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabel5)))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addContainerGap(8, Short.MAX_VALUE))
                                 );
 
                                 jPanel24.add(jPanel8);
@@ -4372,6 +4385,26 @@ public class Gui extends javax.swing.JFrame {
                                     jPanel27.add(jScrollPane9);
                                     jScrollPane9.setBounds(160, 27, 430, 110);
 
+                                    errlabel.setFont(new java.awt.Font("Dialog", 0, 10));
+                                    errlabel.setText("0");
+                                    jPanel27.add(errlabel);
+                                    errlabel.setBounds(58, 120, 30, 14);
+
+                                    jLabel82.setFont(new java.awt.Font("Dialog", 0, 10));
+                                    jLabel82.setText("Errors:");
+                                    jPanel27.add(jLabel82);
+                                    jLabel82.setBounds(20, 120, 60, 14);
+
+                                    warnlabel.setFont(new java.awt.Font("Dialog", 0, 10));
+                                    warnlabel.setText("0");
+                                    jPanel27.add(warnlabel);
+                                    warnlabel.setBounds(135, 120, 30, 14);
+
+                                    jLabel83.setFont(new java.awt.Font("Dialog", 0, 10));
+                                    jLabel83.setText("Warnings:");
+                                    jPanel27.add(jLabel83);
+                                    jLabel83.setBounds(76, 120, 70, 14);
+
                                     getContentPane().add(jPanel27);
                                     jPanel27.setBounds(10, 510, 610, 180);
 
@@ -4381,6 +4414,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //this.jTextArea1.setText("");
         logBoxStateless1.ClearAll();
+        m.ResetWarningsAndErrors();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -4405,11 +4439,13 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        uam.GuiModal uamform = new uam.GuiModal(null, false, null);
-        Object filechooser = shared.GuiUtils.getJFileChooser();
-        shared.translation.printStringsForAllGuiForms();
-        uamform.toString();
-        filechooser.toString();
+        m.err("this is an error");
+        m.warn("this is a warning");
+        //uam.GuiModal uamform = new uam.GuiModal(null, false, null);
+        //Object filechooser = shared.GuiUtils.getJFileChooser();
+        //shared.translation.printStringsForAllGuiForms();
+        //uamform.toString();
+        //filechooser.toString();
         //shared.GuiUtils.printUIManagerResources();
         //shared.GuiUtils.setBackgroundColour(java.awt.Color.cyan);
         //shared.GuiUtils.updateGui(this);
@@ -6044,6 +6080,7 @@ private void checkboxState33ActionPerformed(java.awt.event.ActionEvent evt) {//G
     private shared.State.CheckboxState checkboxState8;
     private shared.State.CheckboxState checkboxState9;
     private relationvis.CrossRefPanel crossRefPanel1;
+    private javax.swing.JLabel errlabel;
     private javax.swing.ButtonGroup filedirButtonGroup;
     private shared.ImagePanel imagePanel1;
     private shared.ImagePanel imagePanel2;
@@ -6303,6 +6340,8 @@ private void checkboxState33ActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
@@ -6469,6 +6508,7 @@ private void checkboxState33ActionPerformed(java.awt.event.ActionEvent evt) {//G
     private shared.State.TextfieldState textfieldState8;
     private shared.State.TextfieldState textfieldState9;
     private shared.State.ButtongroupState uamStartupButtongroup;
+    private javax.swing.JLabel warnlabel;
     // End of variables declaration//GEN-END:variables
     
 }

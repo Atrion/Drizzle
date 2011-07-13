@@ -1316,7 +1316,14 @@ public class moul
             //fix plHKSubworld
             if(swi.subworld.hasref())
             {
-                plSceneObject so = prp.findObjectWithRef(swi.subworld).castTo();
+                //plSceneObject so = prp.findObjectWithRef(swi.subworld).castTo();
+                PrpRootObject so_ro = prp.findObjectWithRef(swi.subworld);
+                //if(so_ro==null)
+                //{
+                //    m.warn("Subworld not found in this prp: ",swi.subworld.toString());
+                //    continue;
+                //}
+                plSceneObject so = so_ro.castTo();
                 plHKSubWorld sw = plHKSubWorld.createWithSceneobject(swi.subworld);
                 PrpRootObject sw_ro = prp.addObject(Typeid.plHKSubWorld, swi.subworld.xdesc.objectname.toString(), sw);
                 Uruobjectref sw_ref = sw_ro.getref();

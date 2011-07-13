@@ -47,8 +47,10 @@ public class CommandLine
             m.msg("    -translateagedown c:/inputfile.prp c:/outputfolder 200.0   ->Translates everying in the prp down so many units.");
             m.msg("    -pullintextures c:/inputfile.prp c:/texturefile.prp c:/outfolder  ->Pulls in the textures a prp file uses.");
             m.msg("    -listobjects c:/inputfile.prp  ->Lists the objects in a prp file.");
+            m.msg("    -simpledistill c:/inputfile.prp c:/texturefile.prp c:/outfolder SceneObject1,SceneObject2   ->Experimental!! List as many scene objects as you want.");
             m.msg("  Subtools:");
             m.msg("    -deepview c:/inputfile.prp    ->Starts DrizzleDeepview.  The inputfile is optional.");
+            m.msg("    -folderdiff c:/folder1 c:/folder2    ->Diffs all the files and subfolders between two folders.");
             m.msg("  Python:");
             m.msg("    -unpackpak c:/pakfile.pak c:/outputfolder gamename    ->Extracts all the .pyc files from a Python22 .pak file.");
             m.msg("    -decompilepyc c:/pycfile.pyc c:/outputfolder    ->Decompiles a .pyc file using DrizzleDecompile.");
@@ -56,6 +58,14 @@ public class CommandLine
             m.msg("    -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
             m.msg("    -listpak c:/pakfile.pak gamename         ->Lists the pyfiles that are present in the given .pak file.");
             m.msg("    -diffpaks c:/origpakfile.pak gamename c:/newpakfile.pak gamename   ->Compares two .pak files.");
+        }
+        else if(args[0].equals("-simpledistill"))
+        {
+            auto.Distiller.SimpleDistill(args[1],args[2],args[3],args[4]);
+        }
+        else if(args[0].equals("-folderdiff"))
+        {
+            auto.diffs.FolderDiff(args[1],args[2]);
         }
         else if(args[0].equals("-listobjects"))
         {

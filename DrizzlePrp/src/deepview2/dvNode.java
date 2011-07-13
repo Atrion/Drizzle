@@ -96,6 +96,7 @@ public abstract class dvNode
             if(info.cls==Short.class) return new dvShort(info);
             if(info.cls==Typeid.class) return new dvTypeid(info);
             if(info.cls==Float.class) return new dvFloat(info);
+            if(info.cls==Transmatrix.class) return new dvTransmatrix(info);
 
             return new dvObject(info);
         }

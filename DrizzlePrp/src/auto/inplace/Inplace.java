@@ -46,6 +46,7 @@ public class Inplace
     public static void InplaceMod(String potsfolder, String relpath, String modname)
     {
         if(!auto.AllGames.getPots().isFolderX(potsfolder)) m.cancel();
+
         InplaceFile pots = new InplaceFile(potsfolder);
         InplaceModInfo info = new InplaceModInfo();
         info.relpath = relpath;

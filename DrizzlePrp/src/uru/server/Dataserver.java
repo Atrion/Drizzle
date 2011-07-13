@@ -431,7 +431,7 @@ public class Dataserver
                 //String outfilename = outroot+GetPrefixPath(relpath)+relpath+".gz";
                 //FileUtils.WriteFile(outfilename, compressedfiledata, true, true);
                 //Save everything in the /game_data/ folder, even if it won't be used.
-                FileUtils.WriteFile(outroot+"/game_data/"+relpath+".gz", compressedfiledata, true, true);
+                FileUtils.WriteFile(new File(outroot+"/game_data/"+relpath+".gz"), compressedfiledata, true, true, false, true);
                 //Save it in another folder if it is wanted there too:
                 if(IsAgeFile(relpath))
                 {
@@ -439,11 +439,11 @@ public class Dataserver
                 }
                 else if(IsInstallFile(relpath))
                 {
-                    FileUtils.WriteFile(outroot+"/install/Expanded/"+relpath+".gz", compressedfiledata, true, true);
+                    FileUtils.WriteFile(new File(outroot+"/install/Expanded/"+relpath+".gz"), compressedfiledata, true, true, false, true);
                 }
                 else
                 {
-                    FileUtils.WriteFile(outroot+"/game_clients/drcExplorer/"+relpath+".gz", compressedfiledata, true, true);
+                    FileUtils.WriteFile(new File(outroot+"/game_clients/drcExplorer/"+relpath+".gz"), compressedfiledata, true, true, false, true);
                 }
 
                 if(relpath.toLowerCase().endsWith(".prp"))

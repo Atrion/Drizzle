@@ -38,15 +38,40 @@ public class Version
 
     static Version moul_9_853 = new Version(); //the final version of moul.
     static Version moulagain_1_893 = new Version();
+    static Version moulagain_1_902 = new Version();
     static Version talcum = new Version();
     static Version magiquest_1_1407 = new Version();
-    static Version currentMoulagain = moulagain_1_893;
+    //static Version currentMoulagain = moulagain_1_893;
+    static Version currentMoulagain = moulagain_1_902;
 
     private static final String enc_mod_talcum = "d7d3dcd3cd8be358a463a88bc40044d331d9f7d3fc12881a68ac405819d9e2b3405f7f64a698a1cdeaeb71ebb170904832b0a6652739058d7373c37047ff7ce1";
     public static final String enc_b_talcum = "b4573c3b62cb002b15e5501d1de44c65d25caced0f87753ab424ebf2a3db2979ded97782b15f655f7abac3b2030792f103b2369acde7e7d98675352057d421fb";
 
     static
     {
+        moulagain_1_902.buildId = 902;
+        moulagain_1_902.buildType = 50;
+        moulagain_1_902.branchId = 1;
+        moulagain_1_902.productId = new Guid(b.HexStringToBytes("219848ea356cd04b9daebb17c585e680"));
+        moulagain_1_902.gateserver_mod = "8DFA35E6F87A5050AB254B81D1D77A23A39A210F34AB662E169855B6FC49D550DCB84C4DC7DBF11C154C55F5920D6AEC60BC55FA292F6FC3D72180A36B4423B5";
+        moulagain_1_902.gateserver_B =   "B388FF0B90702B2E07BC6298839D0F0539FA3539A9F3B3FCCD5EA9A6610F9B380F9CBEA0BE6F7FE47CCBC4096C8DCE47688232C58994F9CA6969D06019B7F31A";
+        moulagain_1_902.gateserver_base = 4;
+        moulagain_1_902.csrserver_mod =  "BDF80317ED27740D768E7A8C88EBECDED773378F4BBCAE75F8DA22EE50C9B369970BE5289891F74497DF70F1866CFA037C4773B162004299F0C6E705D8CDD66D";
+        moulagain_1_902.csrserver_B =    "031D8362369263A6A86631BE2842C2E686983A81130EB7965E27876A06685121F374E911E9735FDB372A2D49A47612065836596DBB59572C34E45ED42C78C334";
+        moulagain_1_902.csrserver_base =  97;
+        moulagain_1_902.gameserver_mod = "38A4F76943D7A6C727723B126A76095DAA9A3844DE8422C4DE3FFD5026EABB20D6AD2ECDFEF2701B19D18215D7CB336020BC43C9550BC920D924D249D0284B90";
+        moulagain_1_902.gameserver_B =   "F9B293BD02BD7248A921BD093E44653EC2FD5AF0993B3F5C47765C1F84D80168DC5FB6BAC8FD79986293367F14CF33678404CFA37A65E9684F5858B38F3DDB3D";
+        moulagain_1_902.gameserver_base = 73;
+        moulagain_1_902.authserver_mod = "2D171942EB718F91297C61884375E5EE72FE451B43C38EB9475E03C80C78B7E44D315BCB66C2541A0A61115738669B346BAB6D12123887C53F20BE97A3A6568F";
+        moulagain_1_902.authserver_B =   "21CF1DC608C023AD5336CE6125DDB95505C1BB8FF40D59F920279AEEFB235BEBE5EC01552ED564EFEA43B19EB98C753FDAB2BBB36A3DCDBCFA6F03F355D8E91B";
+        moulagain_1_902.authserver_base = 41;
+        //67.202.54.141 is the file server, which while hardcoded, should be ignored since it asks the gateserver.
+        //184.73.198.22 is the gate *and* auth server, and that's where the confusion was.
+        //moulagain_1_893.gateserver = "67.202.54.141";
+        moulagain_1_902.gateserver = "184.73.198.22";
+        moulagain_1_902.authserver = "184.73.198.22";
+        moulagain_1_902.port = 14617;
+
         moulagain_1_893.buildId = 893;
         moulagain_1_893.buildType = 50;
         moulagain_1_893.branchId = 1;

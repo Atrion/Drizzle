@@ -45,6 +45,51 @@ public class FileUtils {
     {
         initialWorkingDirectory = GetPresentWorkingDirectory();
     }
+
+    public static boolean HasPermissions2(String foldername, boolean printerror)
+    {
+        //This is important for Vista/Win7, because we might not have write permissions there.
+        //It's also possible that we have write permissions but not full control, which might potentially be a problem.
+
+        //FileUtils.Exists(foldername);
+        File file = new File(foldername);
+        if(!file.exists())
+        {
+            if(printerror) m.err("Folder doesn't exist: ",foldername);
+            return false;
+        }
+        if(!file.canRead())
+        {
+            if(printerror) m.err("We don't have read permissions for this folder: ",foldername);
+            return false;
+        }
+        if(!file.canWrite())
+        {
+            if(printerror) m.err("We don't have permission to change this folder: ",foldername);
+            return false;
+        }
+
+        //this "canWrite()" isn't reliable.  Try creating a file instead.
+        File testname = new File(foldername + "/TempTest.dat");
+        //try{
+        boolean success = FileUtils.WriteFile(testname, new byte[]{'h','i','!'},false,false,false,false);
+        FileUtils.DeleteFile(testname, true);
+        if(!success)
+        {
+            if(printerror) m.err("We don't have permission to change this folder: ",foldername);
+            return false;
+        }
+        //}catch(Exception e){
+        //    //Error creating test file!
+        //}
+
+        //if(printerror) m.err("no perms message");
+
+        //return false; //remove this!
+        return true; //otherwise, we're okay!
+    }
+
+
     public static void SaveFileIfChanged(String filename, byte[] newcontents, boolean createdirs, boolean throwexception)
     {
         if(FileUtils.Exists(filename))
@@ -216,7 +261,7 @@ public class FileUtils {
     
     public static boolean HasFreeSpace(File file, long minimum)
     {
-        long usablespace = file.getUsableSpace();
+        long usablespace = file.getUsableSpace(); //also returns 0 if Vista/Win7 when not enough priviledges.
         boolean result = usablespace > minimum + freespaceMargin;
         return result;
     }
@@ -262,13 +307,17 @@ public class FileUtils {
     }
     public static void DeleteFile(String filename, boolean throwexception)
     {
-        File file = new File(filename);
+        DeleteFile(new File(filename),throwexception);
+    }
+    public static void DeleteFile(File file, boolean throwexception)
+    {
+        //File file = new File(filename);
         if(file.exists())
         {
             boolean result = file.delete();
             if(!result)
             {
-                m.err("Unable to delete file: ",filename);
+                m.err("Unable to delete file: ",file.getAbsolutePath());
                 if(throwexception) m.throwUncaughtException("");
             }
         }
@@ -430,7 +479,15 @@ public class FileUtils {
     {
         WriteFile(new File(filename),content,createdirs,throwexception);
     }
-    static public void WriteFile(File filename, byte[] content, boolean createdirs, boolean throwexception)
+    static public boolean WriteFile(File filename, byte[] content, boolean createdirs, boolean throwexception)
+    {
+        return WriteFile(filename,content,createdirs,throwexception,false,false);
+    }
+    static public boolean WriteFile(String filename, String content, boolean createdirs, boolean throwexception)
+    {
+        return WriteFile(new File(filename), b.StringToBytes(content), createdirs, throwexception);
+    }
+    static public boolean WriteFile(File filename, byte[] content, boolean createdirs, boolean throwexception, boolean printerror, boolean deletefirst)
     {
         if(createdirs)
         {
@@ -440,6 +497,10 @@ public class FileUtils {
                 //not a problem.
                 //m.err("Unable to create parent dirs: "+filename.getAbsolutePath());
             }
+        }
+        if(deletefirst)
+        {
+            FileUtils.DeleteFile(filename, throwexception);
         }
         try
         {
@@ -454,14 +515,20 @@ public class FileUtils {
                 throw new Exception("Error writing file, not correct length.");
             }
             //writer.close();
+            return true;
         }
         catch(Exception e)
         {
             String[] msg = {"Error writing file:",filename.getAbsolutePath()+":"+e.getMessage()};
             if(throwexception)
+            {
                 m.throwUncaughtException(msg);
-            else
+            }
+            if(printerror)
+            {
                 m.err(msg);
+            }
+            return false;
         }
         
     }

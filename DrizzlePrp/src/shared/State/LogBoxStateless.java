@@ -178,12 +178,12 @@ public class LogBoxStateless extends JTextPane
 
         //create warning style
         warningStyle = sc.addStyle("Warning", normalStyle);
-        Color warningColor = new java.awt.Color(0x00FF7011);
+        Color warningColor = shared.m.warningColor;
         StyleConstants.setForeground(warningStyle, warningColor);
 
         //create error style
         errorStyle = sc.addStyle("Error", normalStyle);
-        Color errorColor = Color.RED;
+        Color errorColor = shared.m.errorColor;
         StyleConstants.setForeground(errorStyle, errorColor);
 
         //test

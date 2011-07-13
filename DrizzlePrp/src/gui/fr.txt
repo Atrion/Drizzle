@@ -278,3 +278,8 @@ Partial Age (i.e. no separate texture prp, and no .age file){->}Age partiel (pas
 Woah there!  You probably meant to have the 'Partial Age' option set when making a Relto page or AhraPahts shell.{->}Attention! Pour une page de Relto, ou une parcelle de Ahra Pahts, vous devriez utiliser l'option 'Age partiel'.
 Conversion is set to 'Partial Age', but no Textures prp was found.  If your Age has no textures then this is normal, otherwise you should re-export with 3dsmax.{->}Vous avez choisi l'option 'Age partiel', mais Drizzle ne trouve pas votre fichier prp de textures. C'est normal si votre Age n'a pas de textures, sinon vous devriez l'exporter de nouveau à partir de 3dsmax.
 
+//Drizzle30
+You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.{->}Il semble que vous utilisiez Windows Vista ou Windows 7. Cela peut causer un problème avec Uru, voir la solution ici: http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above
+//Err: Avertissements:
+Errors:{->}Erreurs:
+Warnings:{->}Aver:

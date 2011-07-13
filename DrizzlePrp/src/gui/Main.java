@@ -46,6 +46,15 @@ public class Main extends javax.swing.JFrame {
     static final boolean updateenabled = true;
     static int requestedheapsize;
 
+
+    public static boolean isVistaPlus()
+    {
+        if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1)
+        {
+            return true;
+        }
+        return false;
+    }
     
     public static void main(String[] args)
     {
@@ -525,8 +534,15 @@ public class Main extends javax.swing.JFrame {
 
     private static void CloseSplashScreen()
     {
-        //close the splashscreen
-        java.awt.SplashScreen splashscreen = java.awt.SplashScreen.getSplashScreen();
-        if(splashscreen!=null) splashscreen.close();
+        try
+        {
+            //close the splashscreen
+            java.awt.SplashScreen splashscreen = java.awt.SplashScreen.getSplashScreen();
+            if(splashscreen!=null) splashscreen.close();
+        }
+        catch(Exception e)
+        {
+            //we only tried; it's no big deal if it fails.
+        }
     }
 }

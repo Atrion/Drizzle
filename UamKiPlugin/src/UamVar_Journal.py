@@ -103,7 +103,7 @@ class UamVar_Journal(ptResponder):
         return None
 
     def UamListenEvent(self, uamvar, prev, next):
-        print "UamVarLinkingBook.UamListenEvent uamvar="+uamvar+" prev="+`prev`+" next="+`next`
+        print "UamVarJournal.UamListenEvent uamvar="+uamvar+" prev="+`prev`+" next="+`next`
         if prev=="" and next=="1":
             print "Showing book..."
             

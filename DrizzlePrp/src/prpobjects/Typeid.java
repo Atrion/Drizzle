@@ -370,6 +370,8 @@ public enum Typeid implements compilable, java.io.Serializable
     plSplineEaseCurve,
     plParticleScaleMinApplicator,
 
+    plDecalEnableMod,
+
 
     ;
 
@@ -719,12 +721,13 @@ public enum Typeid implements compilable, java.io.Serializable
         tri( 0x358, 0x35D, -2, -2, plAvBrainCritter),
         tri( 0x338, -2, 0x2AA, 0x2AA, plParticleVelMaxApplicator), //BahroCave02, Todelmer
         tri( 0x0CF, -2, -2, -2, plVehicleModifier), //Cleft
-        tri( 0x0A9, -2, -2, -2, plBlower), //Garden
+        tri( 0x0A9, 0x0A9, -2, -2, plBlower), //Garden
         tri( 0x129, -2, -2, -2, plDynaTorpedoMgr), //Teledahn
         tri( 0x0EA, -2, -2, -2, plDynaBulletMgr), //Teledahn
         tri( 0x12A, -2, -2, -2, plDynaTorpedoVSMgr), //Teledahn
         tri( 0x31B, -2, -2, -2, plSplineEaseCurve), //Teledahn
         tri( 0x339, -2, -2, -2, plParticleScaleMinApplicator), //Teledahn
+        tri( 0x0EB, 0x0EB, -2, -2, plDecalEnableMod), //3dsmax
 
         tri( 0x8000, 0x8000, 0x8000, 0x8000, nil ),
         //cc -> moul -> mv -> hexisle

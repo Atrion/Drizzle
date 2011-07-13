@@ -55,6 +55,9 @@ def UamOnKiCommand(command):
         if _UamUtils.GetCorrectFilename("aerie")=="Aerie":
             uam.PrintKiMessage("Test7 successful!")
         return True
+    if command=="/uamtest 8":
+        uam.LinkToAge("Aerie","LinkInPointDefault")
+        return True
     if command=="/listmodules":
         import sys
         #uam.PrintKiMessage(`sys.modules.keys()`)

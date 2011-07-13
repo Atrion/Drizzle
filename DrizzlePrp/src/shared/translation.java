@@ -451,6 +451,16 @@ public class translation
 
         //if(!(c instanceof JTabbedPane)) return;
         
+        //skip components marked as not-to-be-translated.
+        if (c instanceof JComponent)
+        {
+            JComponent c2 = (JComponent)c;
+            Boolean trans = (Boolean)c2.getClientProperty("trans");
+            if(trans==null) trans = true; //default
+            
+            if(!trans) return;
+        }
+        
         if (c instanceof JLabel)
         {
             JLabel label = (JLabel)c;

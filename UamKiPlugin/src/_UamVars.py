@@ -34,6 +34,7 @@ errors = []
 
 def RegisterVar(uamvar):
     print "_UamVars.RegisterVar: "+uamvar
+    #DumpState()
     #if _UamUtils.GetAgeName()!=age:
     #    Reset()
     varobj = vars.get(uamvar)
@@ -48,7 +49,10 @@ def SetVar(uamvar, value):
     
 def ListenToVar(uamvar, listener):
     print "_UamVars.ListenToVar: "+uamvar
+    #DumpState()
     varobj = vars.get(uamvar)
+    print "varobj="+`varobj`
+    print "varobjlisteners="+`varobj.listeners`
     varobj.ListenTo(listener)
 
 def Reset():
@@ -71,14 +75,29 @@ def Warning(msg):
     warnings.append(msg);
     print "Warning: "+msg
 
+def DumpState():
+    print "*********** Dumping UamVar states ************"
+    print "vars:"
+    for var in vars:
+        varobj = vars[var]
+        print "  varname="+`var`+":"
+        print "    internalName="+`varobj.varname`
+        print "    isGlobal="+`varobj.isglobal`
+        print "    listeners:"
+        for listener in varobj.listeners:
+            print "      listener="+`listener`
+    print "******************* (end) *********************"
+
 class UamVar:
 
-    varname = None
-    listeners = []
-    isglobal = False
+    #varname #= None
+    #listeners #= []
+    #isglobal #= False
     
     def __init__(self, varname):
         self.varname = varname
+        self.listeners = []
+        self.isglobal = False
         if not _UamFormat.IsUamVarname(varname):
             Error("Invalid Uamvar name: "+`varname`)
         self.isglobal = varname[0].isupper()  #The varname had to start with a letter.  If uppercase, it's global, else it's local.
@@ -103,6 +122,7 @@ class UamVar:
         
     def NotifyListeners(self, prev, next):
         print "Notifying Listeners of: "+self.varname
+        #DumpState()
         for weaklistener in self.listeners:
             listener = weaklistener()
             if listener==None:

@@ -8,6 +8,7 @@ package uam;
 import shared.*;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class PrepareAge
         MergeFile urufiles = MergeFile.CreateWithRoot(urufilesfolder);
 
         //try to prepare the age for the shard
-        final String[] manualages = {"offlineki","Drizzle","AgeInformation","officialnocd",}; //these Ages will not be automatically prepared.
+        final String[] manualages = {"offlineki","Drizzle","AgeInformation","officialnocd","UamKiPlugin"}; //these Ages will not be automatically prepared.
         m.msg();
         m.msg("Preparing shard files...");
         //if(isDryRun) m.status("(Dry run)");
@@ -55,6 +56,21 @@ public class PrepareAge
             {
                 if(archf.getName().startsWith(manualage+"--")) ignore = true;
             }
+            
+            //check the date
+            String ver = PrepareAge.GetVersionFromFilename(archf.getName()) ;
+            java.util.Date verdate = PrepareAge.GetDateFromVersion(ver);
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.add(Calendar.DATE, -20); //get the day 20 days ago
+            if(verdate==null)
+            {
+                if(!interactor.AskOkCancel("Unable to parse the version's date: "+ver+"  Continue?")) return;
+            }
+            else if(verdate.before(cal.getTime())) //if before 20 days ago
+            {
+                if(!interactor.AskOkCancel("Version's date is very old: "+ver+"  Continue?")) return;
+            }
+            
 
             //do this age if appropriate
             if(ignore)
@@ -108,10 +124,23 @@ public class PrepareAge
                     //check if already in list.
                     if(nexusages.contains(agename)) continue; //already in the nexus list.
                     if(nexusages2.contains(agename)) continue; //already in the nexus list.
-
-                    //we could add it to the list here, but let's just warn for now.
-                    agesmissing = true;
-                    m.warn("Add this age to AvailableFanLinks.inf: ",agename);
+                    
+                    //try to add it
+                    boolean tryadd = interactor.AskOkCancel("The Age was ont found in the list, shall we try to add it to AvailableFanLinks.inf?");
+                    if(tryadd)
+                    {
+                        String propername = info.config.getAgeProperName(agename);
+                        inf.AddRestorationLinkLineAlphabetically(agename, propername);
+                        String infdata = inf.ToRawString();
+                        //FileUtils.CopyFile(nexusfilename, nexusfilename+"date", false, false, true); //don't make copy, or it will be put on dataserver :P
+                        FileUtils.WriteFile(nexusfilename, infdata, false, true);
+                    }
+                    else
+                    {
+                        //we could add it to the list here, but let's just warn for now.
+                        agesmissing = true;
+                        m.warn("Add this age to AvailableFanLinks.inf: ",agename);
+                    }
                 }
             }
             if(agesmissing) summary.append("There are Ages that need to be added to AvailableFanLinks.inf\n");
@@ -536,13 +565,16 @@ public class PrepareAge
     public static class OfflineKIInfFile
     {
         ArrayList<Line> Lines = new ArrayList();
+        ArrayList<String> RawLines = new ArrayList();
 
         public OfflineKIInfFile(String data)
         {
             data = data.replace("\r\n", "\n");
             String[] lines = data.split("\n");
-            for(String line: lines)
+            for(int i=0;i<lines.length;i++)
             {
+                String line = lines[i];
+                RawLines.add(line);
                 String[] lineparts = line.split(":");
                 if(lineparts.length>1) //test if a non-comment line
                 {
@@ -551,9 +583,20 @@ public class PrepareAge
                     String[] infoparts = lineparts[1].split(",");
                     _line.filename = infoparts[0];
                     _line.propername = infoparts[1];
+                    _line.linenum = i;
                     Lines.add(_line);
                 }
             }
+        }
+        public String ToRawString()
+        {
+            StringBuilder r = new StringBuilder();
+            for(String line: RawLines)
+            {
+                r.append(line);
+                r.append("\n");
+            }
+            return r.toString();
         }
         public Set<String> GetAllAgeFilenames()
         {
@@ -561,12 +604,74 @@ public class PrepareAge
             for(Line line: Lines) r.add(line.filename);
             return r;
         }
+        public void AddRestorationLinkLineAlphabetically(String AgeFilename, String AgePropername)
+        {
+            boolean posfound = false;
+            Line newline = new Line();
+            newline.type = "restorationlink";
+            newline.filename = AgeFilename;
+            newline.propername = AgePropername;
+            //find position
+            for(int i=0;i<Lines.size();i++)
+            {
+                Line line = Lines.get(i);
+                //find first propername bigger than this one
+                if(!posfound)
+                {
+                    if(!line.type.equals("restorationlink")) continue;
+                    if(line.propername.toLowerCase().compareTo(AgePropername.toLowerCase())>0)
+                    {
+                        //we'll take this i, and shift the rest.
+                        newline.linenum = i;
+                        posfound = true;
+                    }
+                }
+                //shift later lines
+                if(posfound)
+                {
+                    line.linenum += 1; 
+                }
+            }
+            
+            //insert new line
+            RawLines.add(newline.linenum, newline.toRawLine());
+        }
 
         public static class Line
         {
             String type; //e.g. restorationlink, link
             String filename;
             String propername;
+            int linenum;
+            
+            public String toRawLine()
+            {
+                return type + ":" + filename + "," + propername;
+            }
+        }
+    }
+    
+    public static String GetVersionFromFilename(String filename)
+    {
+        return filename.substring(filename.indexOf("--")+2, filename.length()-".7z".length());
+    }
+    
+    /*
+     * Tries to get the date from the version, returning null if failing.
+     */
+    public static java.util.Date GetDateFromVersion(String ver)
+    {
+        try
+        {
+            int leftbracket = ver.indexOf("(");
+            if(leftbracket!=-1) ver = ver.substring(0,leftbracket);
+            java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyyMMMd");
+            java.util.Date d = df.parse(ver);
+            return d;
+        }
+        catch(Exception e)
+        {
+            return null;
         }
     }
 }
