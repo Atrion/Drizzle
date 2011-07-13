@@ -73,6 +73,28 @@ public strictfp class Transmatrix extends uruobj
                     result[i][j] = i==j?1:0;
         }
     }*/
+    public float[][] convertToFloatArray()
+    {
+        float[][] r = new float[4][4];
+        if(isnotIdentity!=0)
+        {
+            for(int i=0;i<4;i++)
+            {
+                for(int j=0;j<4;j++)
+                {
+                    r[i][j] = Float.intBitsToFloat(xmatrix[i*4+j]);
+                }
+            }
+        }
+        else
+        {
+            for(int i=0;i<4;i++)
+            {
+                r[i][i] = 1.0f;
+            }
+        }
+        return r;
+    }
     public static Transmatrix createFromVector2(double x, double y, double z)
     {
         return createFromVector((float)x,(float)y,(float)z);
@@ -260,6 +282,22 @@ public strictfp class Transmatrix extends uruobj
         }
         RealMatrix rm = new RealMatrixImpl(rawdata);
         return rm;
+    }
+    
+    public static Transmatrix createFromFloatArray(float[][] arr)
+    {
+        Transmatrix r = new Transmatrix();
+        r.isnotIdentity = 1;
+        r.xmatrix = new int[16];
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                int intval = Float.floatToRawIntBits(arr[i][j]);
+                r.xmatrix[i*4+j] = intval;
+            }
+        }
+        return r;
     }
     public static Transmatrix createFromDoubleArray(double[][] arr)
     {

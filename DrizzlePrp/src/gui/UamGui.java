@@ -704,6 +704,8 @@ public class UamGui
         {
             return;
         }
+        if(!uam.Uam.HasPermissions(potsfolder)) return;
+
         
         final String potsfolder2 = potsfolder;
         
@@ -911,6 +913,8 @@ public class UamGui
         {
             return false;
         }
+        if(!uam.Uam.HasPermissions(potsfolder)) return false;
+
         
         //String age = (String)agelist.getSelectedValue();
         if(age==null)
@@ -994,6 +998,8 @@ public class UamGui
         {
             return false;
         }
+        if(!uam.Uam.HasPermissions(potsfolder)) return false;
+
 
         //String age = (String)agelist.getSelectedValue();
         //String ver = (String)verlist.getSelectedValue();

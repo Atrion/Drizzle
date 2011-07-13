@@ -30,6 +30,7 @@ public class guiEditor extends javax.swing.JInternalFrame {
         this.setMaximizable(true);
         this.setResizable(true);
         this.setSize(600,300);
+        //this.panel.setLayout(Layout);
     }
 
     /** This method is called from within the constructor to

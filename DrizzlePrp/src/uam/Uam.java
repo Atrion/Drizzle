@@ -146,6 +146,17 @@ public class Uam
         }
     }
 
+    public static boolean HasPermissions(String foldername)
+    {
+        boolean hasperms = FileUtils.HasPermissions2(foldername,false);
+        if(!hasperms)
+        {
+            m.err("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.");
+        }
+        return hasperms;
+    }
+
+
     /*public static void DeleteArchives()
     {
         if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
@@ -174,6 +185,7 @@ public class Uam
     public static void ClearSumFiles()
     {
         if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+        if(!uam.Uam.HasPermissions(Uam.getPotsFolder())) return;
 
         m.status("Clearing all .sum files...");
         byte[] sumdata = prpobjects.sumfile.createEmptySumfile().getByteArray();
@@ -226,6 +238,7 @@ public class Uam
     public static void DeleteOldArchives()
     {
         if(!auto.AllGames.getPots().isFolderX(Uam.getPotsFolder())) return;
+        if(!uam.Uam.HasPermissions(Uam.getPotsFolder())) return;
 
         if(Uam.ageList==null)
         {
@@ -343,6 +356,7 @@ public class Uam
     {
         if(!auto.AllGames.getPots().isFolderX(potsfolder)) return;
         boolean ignoreKnownOverrides = shared.State.AllStates.getStateAsBoolean("uamig");
+        uam.Uam.HasPermissions(potsfolder); //print message if no perms.
 
         m.msg("Checking for python file duplicates...");
         java.util.HashMap<String, Vector<String>> pyfiles = new java.util.HashMap();
@@ -482,7 +496,17 @@ public class Uam
     }
     public static void launchUru()
     {
-        shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");
+        //shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");
+
+        //Vista/Win7 can't start UruSetup.exe directly, because of the name.
+        if(gui.Main.isVistaPlus())
+        {
+            shared.Exec.LaunchProgram(getPotsFolder()+"/"+"Uru.exe", "Uru");
+        }
+        else
+        {
+            shared.Exec.LaunchProgram(getPotsFolder()+"/"+"UruSetup.exe", "Uru");
+        }
 
         /*String potsfolder = getPotsFolder()+"/";
         if(!automation.detectinstallation.isFolderPots(potsfolder)) return;

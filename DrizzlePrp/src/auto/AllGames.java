@@ -202,6 +202,7 @@ public class AllGames
             m.status("Checking the folders you gave...");
             if(!isFolderX(infolder)) return;
             if(!auto.AllGames.getPots().isFolderX(potsfolder)) return;
+            if(!uam.Uam.HasPermissions(potsfolder)) return;
 
             for(String filename: g.MusicFiles)
             {
@@ -249,6 +250,7 @@ public class AllGames
             m.status("Checking the folders you gave...");
             if(!isFolderX(infolder)) return;
             if(!auto.AllGames.getPots().isFolderX(potsfolder)) return;
+            if(!uam.Uam.HasPermissions(potsfolder)) return;
 
             m.status("Starting conversion of ",g.GameName,"...");
             if(true)

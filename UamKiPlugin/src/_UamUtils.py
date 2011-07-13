@@ -147,8 +147,14 @@ def _DecryptWdysBlock(block):
 
     
 def GetCorrectFilename(agename):
-    import xLinkMgr
-    return xLinkMgr.GetCorrectFilename(agename)
+    #Check which version of the offlineki is in use:
+    import xUserKI
+    if xUserKI.gUserKIVersion in ["3.4","3.5"]:
+        import xLinkMgr
+        return xLinkMgr.GetCorrectFilename(agename)
+    else:
+        import xLinkMgr
+        return xLinkMgr.GetCorrectFilenameCase(agename)
 
 #Returns a string identifying the game, e.g. "pots", "alcugs", etc.  (In the future, it could have "uu" and "moul" and "talcum" too.)  This should be set from _UamMod_Pots, e.g.
 _game = None

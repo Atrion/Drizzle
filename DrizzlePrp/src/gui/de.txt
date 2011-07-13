@@ -424,5 +424,8 @@ Partial Age (i.e. no separate texture prp, and no .age file){->}Teilwelt (meint,
 Woah there!  You probably meant to have the 'Partial Age' option set when making a Relto page or AhraPahts shell.{->}Whoa! Du wolltest wahrscheinlich die 'Teilwelt' Option beim Erstellen einer Reltoseite oder AhraPahts shell aktivieren oder nicht?
 Conversion is set to 'Partial Age', but no Textures prp was found.  If your Age has no textures then this is normal, otherwise you should re-export with 3dsmax.{->}Die Konvertierung ist auf 'Teilwelt' gesetzt, aber es wurde keine Textur prp Datei gefunden. Wenn deine Welt keine Texturen hat, ist dies normal, anderenfalls solltest du sie erneut mit 3dsmax exportieren.
 
-
-
+//Drizzle30
+You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.{->}Dein Computer scheint mit Windows Vista oder Windows 7 zu laufen. Uru hat ein Problem damit, welches umgangen werden muss. Mehr Details auf http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above .
+//Fehl: Warn:
+Errors:{->}Fehler:
+Warnings:{->}Warnungen:

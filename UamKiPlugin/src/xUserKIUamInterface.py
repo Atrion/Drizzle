@@ -156,7 +156,7 @@ def _Initialize(ki2):
 #        parts = chatmessage.split()
 #        numparts = len(parts)
 #        if parts[0]=="/bookshelf":
-#            import xLinkMgr
+#            import _UamUtils
 #            vault = ptVault()
 #            if not vault.inMyPersonalAge():
 #                #_ki.IAddRTChat(None, "You can only use /bookshelf from within your own Relto.", 0)
@@ -165,7 +165,7 @@ def _Initialize(ki2):
 #            try:
 #                booknum = int(parts[1])
 #                agename = parts[2]
-#                agename = xLinkMgr.GetCorrectFilename(agename)
+#                agename = _UamUtils.GetCorrectFilename(agename)
 #            except:
 #                #_ki.IAddRTChat(None, "Usage: e.g. to set the 3rd book to Galamay:  /bookshelf 3 Galamay", 0)
 #                uam.PrintKiMessage("Usage: e.g. to set the 3rd book to Galamay:  /bookshelf 3 Galamay")

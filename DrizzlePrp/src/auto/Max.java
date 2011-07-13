@@ -288,6 +288,7 @@ public class Max
     {
         //check folders:
         if(!ensureFolders(maxfolder,potsfolder)) return;
+        if(!uam.Uam.HasPermissions(potsfolder)) return;
         File datfolder = new File(maxfolder+"/dat/");
 
         //find ages in export folder:

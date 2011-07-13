@@ -20,6 +20,7 @@ package shared;
 
 //import gui.Main;
 //import javax.swing.text.JTextComponent;
+import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JProgressBar;
 import java.io.OutputStream;
@@ -30,6 +31,7 @@ import java.util.Stack;
 import java.io.InputStream;
 import javax.swing.text.JTextComponent;
 import shared.State.LogBoxStateless;
+import javax.swing.JLabel;
 
 /**
  *
@@ -45,6 +47,14 @@ public class m
     private static boolean justUseConsole = true;
     private static int tab = 0;
     private static final String tabsp = "  ";
+    private static int numerrors = 0;  //keeps track of number of errors in log.
+    private static int numwarnings = 0;
+    private static JLabel errorlabel;
+    private static JLabel warninglabel;
+    
+    public static final Color warningColor = new java.awt.Color(0x00FF7011);
+    public static final Color errorColor = Color.RED;
+
     
     public static enum MessageType
     {
@@ -112,6 +122,24 @@ public class m
     {
         tab--;
     }
+    public static void SetErrorLabel(JLabel label)
+    {
+        errorlabel = label;
+        label.putClientProperty("trans", false);
+        UpdateErrorCount();
+    }
+    public static void SetWarningLabel(JLabel label)
+    {
+        warninglabel = label;
+        label.putClientProperty("trans", false);
+        UpdateErrorCount();
+    }
+    public static void ResetWarningsAndErrors()
+    {
+        numerrors = 0;
+        numwarnings = 0;
+        UpdateErrorCount();
+    }
     public static void time()
     {
         long time = gettime();
@@ -122,6 +150,9 @@ public class m
         long time = java.util.Calendar.getInstance().getTimeInMillis();
         return time;
     }
+    /*
+     * Starts a timer or displays the time since the last call to marktime.
+     */
     public static void marktime(String msg)
     {
         long time = gettime();
@@ -211,8 +242,68 @@ public class m
         _outputProgressBar = newProgressBar;
     }
     
+    private static void UpdateErrorCount()
+    {
+        /*if(errorlabel!=null)
+        {
+            String s = "<html>";
+            s += shared.translation.translate("Errors: ");
+            if(numerrors>0)
+            {
+                s += "<font color='red'>";
+                s += Integer.toString(numerrors);
+                s += "</font>";
+            }
+            else
+            {
+                s += Integer.toString(numerrors);
+            }
+            s += "  ";
+            s += shared.translation.translate("Warnings: ");
+            if(numwarnings>0)
+            {
+                s += "<font color='orange'>";
+                s += Integer.toString(numwarnings);
+                s += "</font>";
+                javax.swing.JLabel a;
+                //a.getcl
+            }
+            else
+            {
+                s += Integer.toString(numwarnings);
+            }
+            s += "</html>";
+            errorlabel.setText(s);
+        }*/
+        
+        if(errorlabel!=null)
+        {
+            errorlabel.setText(Integer.toString(numerrors));
+            if(numerrors>0) errorlabel.setForeground(m.errorColor);
+            else errorlabel.setForeground(null);
+        }
+        if(warninglabel!=null)
+        {
+            warninglabel.setText(Integer.toString(numwarnings));
+            if(numwarnings>0) warninglabel.setForeground(m.warningColor);
+            else warninglabel.setForeground(null);
+        }
+    }
     private static void message(final MessageType type, String... ss)
     {
+        //update error and warning counts
+        switch(type)
+        {
+            case error:
+                numerrors++;
+                UpdateErrorCount();
+                break;
+            case warning:
+                numwarnings++;
+                UpdateErrorCount();
+                break;
+        }
+        
         //translate if necessary.
         if(state.curstate.translate)
         {
@@ -343,7 +434,7 @@ public class m
 
     public static void throwUncaughtException(String... s)
     {
-        if(debugCount!=null) m.msg("CurPos: "+Integer.toString(debugCount));
+        //if(debugCount!=null) m.msg("CurPos: "+Integer.toString(debugCount));
         String msg = m.trans(s);
         throw new shared.uncaughtexception(msg);
     }
