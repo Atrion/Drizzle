@@ -20,6 +20,7 @@
 import _UamEvents
 import _UamUtils
 import uam
+import _UamTimer
 
 #register for ki notifications
 def UamOnKiCommand(command):
