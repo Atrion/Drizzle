@@ -187,8 +187,8 @@ def ReadPageInfo():
                     if fr==None:
                         fr = dt
                     pagedict["text--en"] = en
-                    pagedict["text--de"] = en
-                    pagedict["text--fr"] = en
+                    pagedict["text--de"] = de
+                    pagedict["text--fr"] = fr
                     pagedict["pagename"] = pagename
                     pagedict["hide"] = hideitems
                     ReltoPages[pagename] = pagedict
