@@ -88,10 +88,10 @@ def RegisterForOnServerInitComplete(listener):
     print "UamEvents.RegisterForOnServerInitComplete: "+`listener`
     __ServerInitCompleteListeners.append(weakref.ref(listener))
 def _OnServerInitComplete(self, old_method = BlackBarBodyKIHandler.xKI.OnServerInitComplete):
-    global __Started
     #print "UamEvents3 newOnServerInitComplete"
     print "_UamEvents._OnServerInitComplete"
-    if (not (__Started)):
+    global __Started
+    if not __Started:
         __Started = True
         _OnFirstServerInitComplete()
     for weaklistener in __ServerInitCompleteListeners:
@@ -326,13 +326,13 @@ RegisterForOnBehaviorNotify(OnBehaviorNotify)
 
 
 def _OnFirstServerInitComplete():
-    print '_UamEvents._OnFirstServerInitComplete'
+    print "_UamEvents._OnFirstServerInitComplete"
     try:
+        #import _UamMod_GameFixes
+        #_UamMod_GameFixes.CheckMsgs()
         pass
     except:
         pass
-
-
 
     
     
