@@ -39,6 +39,7 @@ def _GetNextTimerId():
     
 def Timer(callback, time, isweak, removewhenlink):
     #calls the function with the given context in 'time' seconds
+    #print "_UamTimer.Timer adding timer"
     id = _GetNextTimerId()
     if isweak:
         callback =  weakref.ref(callback)
@@ -50,6 +51,7 @@ def _OnTimer(id):
     #print "_UamTimer._OnTimer"
     tuple = _timers.get(id)
     if tuple!=None:
+        "_UamTimer._OnTimer this is ours!"
         del _timers[id] #remove from dictionary
         
         (callback, isweak, removewhenlink) = tuple

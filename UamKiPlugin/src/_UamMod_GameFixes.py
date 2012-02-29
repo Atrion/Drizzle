@@ -20,6 +20,7 @@
 import _UamEvents
 import _UamUtils
 import uam
+import _UamTimer
 
 #register for ki notifications
 def UamOnKiCommand(command):
@@ -63,6 +64,5 @@ def UamOnServerInitComplete():
             uam.SetAgeSdl("bcoChristmasVis",0)
         
 _UamEvents.RegisterForOnServerInitComplete(UamOnServerInitComplete)
-
 
 
