@@ -338,7 +338,8 @@ public class Dataserver
 //            m.throwUncaughtException("unhandled");
 //        }
     }
-    private static final String[] installfiles = {"/UruSetup.exe","/UruLauncher.exe","/Uru.exe",/*"/ReleaseNotes.html"*/};
+    //private static final String[] installfiles = {"/UruSetup.exe","/UruLauncher.exe","/Uru.exe",/*"/ReleaseNotes.html"*/};
+    private static final String[] installfiles = {"/UruSetup.exe","/UruLauncher.exe","/Uru.exe"/*,"/ReleaseNotes.html"*/ /*,"/serverconfig.ini"*/};
     private static final String[] agepaths = {"/dat/","/sfx/","/avi/"};
     public String GetPrefixPath(String relpath)
     {

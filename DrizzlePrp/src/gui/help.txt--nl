@@ -1,6 +1,6 @@
 Welkom bij Drizzle!
 
-Uitgebreidere en up-to-date uitleg is beschikbaar op http://dusty.homeunix.net/wiki/Drizzle
+Uitgebreidere en up-to-date uitleg is beschikbaar op http://myst.dustbird.net/wiki/Drizzle
 
 Om UAM (UruAgeManager) te gebruiken:
 ------------------------------------
@@ -64,7 +64,7 @@ Dit geeft wat informatie over een Wereld of Werelden.
 Projectinformatie:
 ------------------
 Licentie: GPLv3, of een latere versie indien gewenst
-SVN: https://alcugs.almlys.org/svn/drizzle/
+SVN: http://sourceforge.net/p/drizzle/code/
 Sourceforge: http://sourceforge.net/projects/drizzle/
 Bijdragers (geen complete lijst):
   Dustin(alias ddb174): omzetten

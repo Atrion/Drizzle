@@ -1,6 +1,6 @@
 Willkommen in Drizzle!
 
-Aktuelle und detailliertere Hilfe gibt es bei http://dusty.homeunix.net/wiki/Drizzle
+Aktuelle und detailliertere Hilfe gibt es bei http://myst.dustbird.net/wiki/Drizzle
 
 
 Um UAM (UruAgeManager) zu benutzen:
@@ -71,7 +71,7 @@ Dies stellt dir Informationen über ein oder mehrere Zeitalter zur Verfügung.
 Projekt Info:
 -------------
 Lizenz: GPLv3, oder irgendeine spätere Version, wenn du möchtest.
-SVN: https://alcugs.almlys.org/svn/drizzle/
+SVN: http://sourceforge.net/p/drizzle/code/
 Sourceforge: http://sourceforge.net/projects/drizzle/
 Mitwirkende (keine komplette Liste):
   Dustin(aka ddb174): Konvertierung

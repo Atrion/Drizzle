@@ -151,7 +151,7 @@ public class Uam
         boolean hasperms = FileUtils.HasPermissions2(foldername,false);
         if(!hasperms)
         {
-            m.err("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.");
+            m.err("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://myst.dustbird.net/wiki/Drizzle#Vista_and_above for details.");
         }
         return hasperms;
     }

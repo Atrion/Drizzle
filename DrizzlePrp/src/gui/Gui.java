@@ -173,10 +173,7 @@ public class Gui extends javax.swing.JFrame {
         if(Main.javaversion2<1.6) m.warn("Your version of java seems to be older than 1.6; some things might not work.");
         //if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1) m.warn("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle for details.");
         //if(Main.os.toLowerCase().startsWith("windows") && Main.osversion2>5.1)
-        if(Main.isVistaPlus())
-        {
-            m.msg("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.");
-        }
+
         //try{
         //java.net.URL url = this.getClass().getResource("Image2.png");
         //javax.swing.ImageIcon image = new javax.swing.ImageIcon(url,"");
@@ -340,16 +337,32 @@ public class Gui extends javax.swing.JFrame {
 
         //if(!uru.moulprp.Typeid.validateTriplets()) m.err("Triplets not valid!");
         
+        
+        //Load Settings:
         //this.loadsettings();
         //dosavesettings = true;
-        shared.State.AllStates.loadandpush(settingsfile);
+        //shared.State.AllStates.loadandpush(settingsfile);
+        boolean result_loadsettings = shared.State.AllStates.load(settingsfile);
+        
+        //settings overrides:
+        if(shared.State.AllStates.getStateAsString("uamServer2").equals("http://dusty.homeunix.net/uru-ages/"))
+            shared.State.AllStates.setState("uamServer2", "http://myst.dustbird.net/uru-ages/");
+            
+        if(result_loadsettings) shared.State.AllStates.pushOutStates();
 
+        
         //language stuff:
         pushlanguage(true);
         //String helpstr = shared.GetResource.getResourceAsString("/gui/help.txt");
         //jTextArea5.setText(helpstr);
         shared.translation.registerResourceString("/gui/help.txt", jTextArea5);
 
+        //Permissions check not needed since permissions are now checked directly.
+        /*if(Main.isVistaPlus())
+        {
+            m.msg("You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://myst.dustbird.net/wiki/Drizzle#Vista_and_above for details.");
+        }*/
+        
         SetBackgroundColour(true);
 
         //initialise plugins
@@ -1096,7 +1109,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel42.add(jLabel35);
         jLabel35.setBounds(10, 30, 70, 16);
 
-        textfieldState38.setText("http://dusty.homeunix.net/uru-ages/");
+        textfieldState38.setText("http://myst.dustbird.net/uru-ages/");
         textfieldState38.setEnabled(false);
         textfieldState38.setName("uamServer2"); // NOI18N
         textfieldState38.addActionListener(new java.awt.event.ActionListener() {
@@ -4441,6 +4454,7 @@ public class Gui extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         m.err("this is an error");
         m.warn("this is a warning");
+        if(true) throw new RuntimeException("this is an exception");
         //uam.GuiModal uamform = new uam.GuiModal(null, false, null);
         //Object filechooser = shared.GuiUtils.getJFileChooser();
         //shared.translation.printStringsForAllGuiForms();

@@ -19,13 +19,14 @@ public class PrepareAge
     {
         //The base folder is expected to have a certain layout.
         String tempfolder = basefolder + "/temp/"; //temp folder whose contents can be safely deleted afterwards. Will be created if doesn't exist.
-        String archivefolder = basefolder + "/files/http/www/uru-ages/"; //where to find the .7z files, and to place the uam.status.xml file.
+        String archivefolder = basefolder + "/files/http/roots/myst.dustbird.net/uru-ages/"; //"/files/http/www/uru-ages/"; //where to find the .7z files, and to place the uam.status.xml file.
         String urufilesfolder = basefolder + "/UruFiles/"; //The location of Uru files.  This one has numbered subfolders, 0 is overriden by the contents of 1 which is overriden by the contents of 2, etc.  These subfolders are the ones that have Uru's directory structure.
         //String dataserverfolder = basefolder + "/files/alcugs/dataserver/"; //The output folder for the generated dataserver files.
-        String dataserverfolder = basefolder + "/files/http/dataserver/"; //The output folder for the generated dataserver files.
+        String dataserverfolder = basefolder + "/files/wwwuamsharddataserver/http/"; //The output folder for the generated dataserver files.
+          //dataserverfolder was "/files/http/dataserver/"
         String sdlfolder = basefolder + "/files/alcugs/sdl/"; //Folder Alcugs will look in for .sdl files.
         String agefolder = basefolder + "/files/alcugs/age/"; //Folder Alcugs will look in for .age files.
-        String statusfolder = basefolder + "/files/http/www/status/";
+        String statusfolder = basefolder + "/files/http/roots/myst.dustbird.net/status/";  //"/files/http/www/status/";
 
         gui.Interactor interactor = new gui.InteractorGui(); //this is a gui one, but we could have a commandline one passed in instead.
         StringBuilder summary = new StringBuilder();
@@ -96,7 +97,7 @@ public class PrepareAge
         
         //order shard list to match Uam
         //well, let's just warn about .age files without an entry for now.
-        final boolean donexuslist = true;
+        final boolean donexuslist = false;
         if(donexuslist)
         {
             boolean agesmissing = false;
@@ -126,7 +127,7 @@ public class PrepareAge
                     if(nexusages2.contains(agename)) continue; //already in the nexus list.
                     
                     //try to add it
-                    boolean tryadd = interactor.AskOkCancel("The Age was ont found in the list, shall we try to add it to AvailableFanLinks.inf?");
+                    boolean tryadd = interactor.AskOkCancel("The Age was not found in the list, shall we try to add it to AvailableFanLinks.inf?");
                     if(tryadd)
                     {
                         String propername = info.config.getAgeProperName(agename);
@@ -146,6 +147,68 @@ public class PrepareAge
             if(agesmissing) summary.append("There are Ages that need to be added to AvailableFanLinks.inf\n");
         }
 
+        // Check for Ages with missing info
+        final boolean checkageinfo = true;
+        if(checkageinfo)
+        {
+            boolean agesmissing = false;
+            //get cyan ages
+            Set<String> cyanages = auto.ageLists.AllCyanAges();
+            //read current inf file
+            String nexusfilename = urufiles.GetAbsPath("/AvailableFanLinks.inf");
+            String nexusdata = FileUtils.ReadFileAsString(nexusfilename);
+            OfflineKIInfFile inf = new OfflineKIInfFile(nexusdata);
+            Set<String> nexusages = inf.GetAllAgeFilenames();
+            //read current inf file
+            OfflineKIInfFile inf2 = new OfflineKIInfFile(FileUtils.ReadFileAsString(urufiles.GetAbsPath("/AvailableExtraLinks.inf")));
+            Set<String> nexusages2 = inf2.GetAllAgeFilenames();
+            //read UamAgeInfo files
+            Set<String> ageinfoages = new java.util.HashSet<String>();
+            for(String relpath: urufiles.listChildrenRelpaths("/img/UamAgeInfo/"))
+            {
+                String filename = new File(urufiles.GetAbsPath(relpath)).getName();
+                if (filename.startsWith("UamAgeInfo--") && filename.endsWith(".txt"))
+                {
+                    String agename = filename.substring("UamAgeInfo--".length(), filename.length()-".txt".length());
+                    ageinfoages.add(agename);
+                }
+            }
+
+            for(String relpath: urufiles.listChildrenRelpaths("/dat/"))
+            {
+                if(relpath.endsWith(".age"))
+                {
+                    String agename = new File(urufiles.GetAbsPath(relpath)).getName();
+                    agename = agename.substring(0, agename.indexOf("."));
+
+                    //check if Cyan Age.
+                    if(cyanages.contains(agename)) continue; //just a Cyan Age; continue.
+
+                    //check if already in list.
+                    if(nexusages.contains(agename)) continue; //already in the nexus list.
+                    if(nexusages2.contains(agename)) continue; //already in the nexus list.
+                    
+                    //check if already in ageinfo folder.
+                    if(ageinfoages.contains(agename)) continue;
+                    
+                    //try to add it
+                    agesmissing = true;
+                    boolean keepgoing = interactor.AskOkCancel("The Age was not found in the list, you should make a UamAgeInfo file for it. Continue anyway?");
+                    if (keepgoing)
+                    {
+                        summary.append("You should add the age info file to the archive and try again:  /img/UamAgeInfo/UamAgeInfo--"+agename+".txt");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+                }
+            }
+            //if(agesmissing) summary.append("There are Ages that need to be added to AvailableFanLinks.inf\n");
+        }
+        
+        
         //merge files, so that we can just pass the merged files on to the dataserver generator.  I'm too lazy to rewrite the dataserver generator, and these merged files aren't on the server anyway, so who cares.
         String absMergedPath = urufiles.MergeAllVersions();
 

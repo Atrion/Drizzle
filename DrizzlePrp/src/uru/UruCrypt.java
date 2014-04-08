@@ -48,7 +48,9 @@ public class UruCrypt {
     //private static final int[] notthedroidsKey = {0x6c0a5452,0x03827d0f,0x3a170b92,0x16db7fc2};
     //private static final int[] notthedroidsKey = {0x16db7fc2,0x3a170b92,0x03827d0f,0x6c0a5452};
 
-    private static final int[] notthedroidsKeyMqo = {0x75b2eb65,0x66c2cd85,0x5fc6bf8d,0x2e7a5cf4}; //mqo
+    //private static final int[] notthedroidsKeyMqo = {0x75b2eb65,0x66c2cd85,0x5fc6bf8d,0x2e7a5cf4}; //mqo
+    //private static final int[] notthedroidsKeyMqo =   {0xdb776285,0x0f775e2a,0x0aff40e0,0x3a2d830f}; //mqo
+    private static final int[] notthedroidsKeyMqo = {0x0cb41968,0xc3e387c6,0x0eec1dd8,0x466c8cd8}; //mqo
     //private static final int[] notthedroidsKey = {0x2e7a5cf4,0x5fc6bf8d,0x66c2cd85,0x75b2eb65,};
     //private static final int[] notthedroidsKey = {0xf45c7a2e,0x8dbfc65f,0x85cdc266,0x65ebb275,};
     //private static final int[] notthedroidsKey =   {0x65ebb275,0x85cdc266,0x8dbfc65f,0xf45c7a2e,};

@@ -41,10 +41,12 @@ public class Main extends javax.swing.JFrame {
     static public Runnable debugcheck;
     static String jarpath;
     static File thisJarsFile;
+    static long id = shared.RandomUtils.rng.nextLong(); //just a random id for this instance of Drizzle
 
     //settings
     static final boolean updateenabled = true;
     static int requestedheapsize;
+    static final boolean debugupdate = false;
 
 
     public static boolean isVistaPlus()
@@ -58,12 +60,53 @@ public class Main extends javax.swing.JFrame {
     
     public static void main(String[] args)
     {
-        //shared.GuiUtils.getOKorCancelFromUserDos(m.trans("a"), "b");
+        //This will work for other threads as well as this one.
+        //System.out might be redirected, and we can't unset it, because this might not be terminating the app.
+        //For thread names, "main" is used while initializing, and "AWT-EventQueue-<<something>>" may be used if initialized by a button press.
+        //If unset, it simply prints to stderr, so let's do that anyway.
+        java.lang.Thread.setDefaultUncaughtExceptionHandler(new java.lang.Thread.UncaughtExceptionHandler() {
+            public void uncaughtException(Thread t, Throwable e) {
+                String threadname = t.getName(); //"main" is the main thread.
+                String estring = shared.ExceptionUtils.ExceptionToString(e);
+                String msg = "Exception in thread: \""+threadname+"\"\n"+estring;
+                //System.err.println(msg);
+                m.err(msg);
+                if(threadname.equals("main"))
+                {
+                    javax.swing.JOptionPane.showMessageDialog(null, msg, "Uncaught Exception", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+                }
+            }
+        });
+        
+        //try
+        //{
+            main2(args);
+        //}
+        //catch(Exception e)
+        //{
+        //    System.out.println("exception 3 caught!");
+        //    javax.swing.JOptionPane.showMessageDialog(null, "message 3", "title", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+        //}
+    }
+    public static void main2(String[] args)
+    {
+        
+        //exception text:
+        //try{
+            
+        //if(true) throw new RuntimeException("hi");
+        //}catch(Exception e){
+        //    System.out.println("exception 1 caught!");
+        //    javax.swing.JOptionPane.showMessageDialog(null, "message 1", "title", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+        //}
+        
+        debug("New Drizzle instance started...");
+        
         //find memory info:
         //int requiredheapsize = 800; //900;  //all Simplicity works with 400 on Win32.
-        int requiredheapsize = 710; //was 720, but Diafero found that it was reported as lower by Linux.
-        requiredmemory = requiredheapsize*1024*1024;
-        requestedheapsize = (int)(requiredheapsize*1.1); //1.01 is approximately correct, but lets leave lots of space.
+        requiredmemory = 600*1024*1024; //We need 600MB to start normally.
+        requestedheapsize = 800; //We will ask for this many MB when launching Drizzle.
+        
         try{
             maxmemory = Runtime.getRuntime().maxMemory();
         }catch(Exception e){}
@@ -81,11 +124,14 @@ public class Main extends javax.swing.JFrame {
         //find updater info:
         String isupdaterstr = System.getProperty("Drizzle.IsUpdater","false");
         boolean isUpdater = Boolean.parseBoolean(isupdaterstr);
+        debug("Maxmemory: "+Long.toString(maxmemory)+" Requiredmemory: "+Long.toString(requiredmemory));
+        debug("isLauncher: "+Boolean.toString(isLauncher)+" isUpdater: "+Boolean.toString(isUpdater));
 
         //find path to this jar:
         jarpath = shared.JarUtils.GetJarPath(Main.class);
         if(jarpath==null) m.err("Jarpath is null.");
         thisJarsFile = new File(jarpath);
+        debug("thisJarFile: "+jarpath);
 
         //check if a new version has been downloaded, and install it, if so.
         PerformUpdate(args,thisJarsFile.getParent(),false); //will halt the JVM if updated.
@@ -110,6 +156,7 @@ public class Main extends javax.swing.JFrame {
                 try{
 
                     //copy self to Drizzle.jar
+                    debug("Trying to overwrite Drizzle.jar from main...");
                     shared.FileUtils.DeleteFile(genericJar, true);
                     if(shared.FileUtils.Exists(genericJar)) throw new shared.uncaughtexception("Drizzle.jar isn't deleted yet.");
                     shared.FileUtils.CopyFile(thisJarsFile.getAbsolutePath(), genericJar, true, false, true);
@@ -117,6 +164,7 @@ public class Main extends javax.swing.JFrame {
                     break;
 
                 }catch(Exception e){
+                    debug("Error while updating Drizzle. It seems Drizzle.jar did not close.");
                     m.err("Error while updating Drizzle. It seems Drizzle.jar did not close.");
                     e.printStackTrace();
                 }
@@ -124,6 +172,7 @@ public class Main extends javax.swing.JFrame {
 
                 if(numtries>numretries)
                 {
+                    debug("Giving up on Drizzle.jar overwriting...");
                     boolean ok = shared.GuiUtils.getOKorCancelFromUserDos(m.trans("Please make sure there are no other copies of Drizzle running, and hit OK to try again."), m.trans("Problem updating")); //This never gets displayed for some reason.
                     if(!ok) break;
                 }
@@ -142,6 +191,7 @@ public class Main extends javax.swing.JFrame {
         }
         else  //start normally
         {
+            debug("Normal start...");
             try{
                 //javaversion = System.getProperty("java.version");
                 javaversion = System.getProperty("java.specification.version");
@@ -220,7 +270,15 @@ public class Main extends javax.swing.JFrame {
                 {
                     public void run()
                     {
-                    //org.jvnet.substance.SubstanceLookAndFeel.setSkin(new org.jvnet.substance.skin.ModerateSkin());
+                        //exception test:
+                        //try{
+                            //if(true) throw new RuntimeException("hi");
+                        //}catch(Exception e){
+                        //    System.out.println("exception 2 caught!");
+                        //    javax.swing.JOptionPane.showMessageDialog(null, "message 2", "title", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+                        //}
+                        
+                        //org.jvnet.substance.SubstanceLookAndFeel.setSkin(new org.jvnet.substance.skin.ModerateSkin());
                         guiform = new Gui();
                         if(debugcheck!=null) debugcheck.run();
                         //java.net.URL url = this.getClass().getResource("Pterosaur2b4-16.png");
@@ -277,6 +335,15 @@ public class Main extends javax.swing.JFrame {
             String to = installDir+"/Drizzle.jar";
             shared.FileUtils.CopyFile(from, to, false, false, true);
         }*/
+        
+        debug("Performing Update...");
+        debug("firstInstall: "+Boolean.toString(firstInstall));
+        debug("doupdate: "+Boolean.toString(doupdate));
+        debug("hasDrizzleExe: "+Boolean.toString(info.hasDrizzleExe));
+        debug("maxjar: "+info.maxjar);
+        debug("installDir: "+installDir);
+        debug("launchUpdater: "+info.launchUpdater);
+        
 
         //save the settings file if applicable.  (Drizzle28 added this save)
         if(doupdate)
@@ -290,6 +357,7 @@ public class Main extends javax.swing.JFrame {
         {
             //create the Drizzle.jar file if it doesn't exist, even when we are not doing an update:  (to fix the problem where installing DrizzleY from DrizzleY results in it not being considered an update, and thus Drizzle.jar not getting created.)
             //if launchUpdater is null, then we're not dealing with an 'installed' Drizzle situation anyway.
+            debug("Attempting to overwrite Drizzle.jar...");
             String from = info.maxjar;
             String to = installDir+"/Drizzle.jar";
             FileUtils.CopyFile(from, to, false, false, true);
@@ -355,6 +423,7 @@ public class Main extends javax.swing.JFrame {
                     fullcommand[command.length+i] = args[i];
                 }
 
+                debug("Calling updater...");
                 Process proc = Runtime.getRuntime().exec(fullcommand);
 
                 //don't wait for this process, terminate now.
@@ -387,6 +456,7 @@ public class Main extends javax.swing.JFrame {
 
     private static void LaunchDrizzle(String drizzlefilename, String[] args, int requestedheapsize)
     {
+        debug("Launching another Drizzle...");
         try
         {
             /*if(args.length>0)
@@ -486,7 +556,7 @@ public class Main extends javax.swing.JFrame {
     }
     private static VersionsInfo FindUpdatedDrizzleJar(File installDir)
     {
-        String launchUpdater = null;
+        //String launchUpdater = null;
         //String jarname = thisJarsFile.getName();
         //if(jarname.equals("Drizzle.jar"))
         //{
@@ -543,6 +613,16 @@ public class Main extends javax.swing.JFrame {
         catch(Exception e)
         {
             //we only tried; it's no big deal if it fails.
+        }
+    }
+    
+    private static void debug(String msg)
+    {
+        if(debugupdate)
+        {
+            String time = shared.DateTimeUtils.GetSortableCurrentDate();
+            String line = Long.toString(id)+": "+time + ": "+msg + "\n";
+            shared.FileUtils.AppendText("C:\\DrizzleDebug\\debug.log", line);
         }
     }
 }

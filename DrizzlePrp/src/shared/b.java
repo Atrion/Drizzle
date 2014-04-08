@@ -71,7 +71,7 @@ public class b
     {
         return findBytes_Once(data, pattern, 0);
     }
-    private static int findBytes_Once(byte[] data, byte[] pattern, int offset)
+    public static int findBytes_Once(byte[] data, byte[] pattern, int offset)
     {
         //This is the Knuth–Morris–Pratt algorithm
         int[] table = gettable(pattern);

@@ -313,7 +313,8 @@ public class UamConfigNew
             //byte[] hash = shared.CryptHashes.GetWhirlpool(f.getAbsolutePath());
             //String server = "http://dustin.homeunix.net:88/uam/ages/";
             //String server = "http://www.the-ancient-city.de/uru-ages/";
-            String server = "http://dusty.homeunix.net/uru-ages/";
+            //String server = "http://dusty.homeunix.net/uru-ages/";
+            String server = "http://myst.dustbird.net/uru-ages/";
             String mirurl = server+filename;
             
             UamConfigData.Age age = config.data.getAgeOrCreate(agename);

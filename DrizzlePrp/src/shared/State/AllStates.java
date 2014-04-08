@@ -161,10 +161,10 @@ public class AllStates //implements java.io.Serializable
         boolean result = load(filename);
         
         //hack
-        for(IState state: refs)
-        {
-            state.initialise();
-        }
+        //for(IState state: refs)
+        //{
+        //    state.initialise();
+        //}
 
         if(result) pushOutStates();
 
@@ -231,6 +231,7 @@ public class AllStates //implements java.io.Serializable
             }
             return false;
         }
+        
         return true;
     }
     public static void pullInStates()
@@ -251,8 +252,14 @@ public class AllStates //implements java.io.Serializable
             states.put(name, val);
         }
     }
-    private static void pushOutStates()
+    public static void pushOutStates()
     {
+        //hack to initialize all registered states
+        for(IState state: refs)
+        {
+            state.initialise();
+        }
+        
         /*for(pair p: states)
         {
             if(p.ref!=null && p.val!=null)

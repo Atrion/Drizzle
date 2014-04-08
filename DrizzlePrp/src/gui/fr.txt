@@ -3,7 +3,7 @@
 Warning: {->}Avertissement: 
 Ignoring: {->}Ignoré: 
 Get Latest List{->}Rafraîchir la liste
-( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://dusty.homeunix.net/wiki/Drizzle )
+( Help can be found under the "Help" tab, or detailed help can be found at http://alcugs.almlys.org/Drizzle  ){->}( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://myst.dustbird.net/wiki/Drizzle )
 Ages:{->}Âges:
 Versions:{->}Versions:
 Download{->}Télécharger
@@ -28,7 +28,7 @@ Load last saved Age list at startup.{->}Charger la liste au démarrage.
 Download most recent Age list at startup.{->}Télécharger la liste au démarrage.
 Automatically download list?{->}Chargement automatique de la liste?
 Info:{->}Info:
-<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Cet onglet permet de convertir les fichiers de MystV, Moul et Crowthistle pour les intégrer à Uru. ( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://dusty.homeunix.net/wiki/Drizzle )</html>
+<html>This area is for converting MystV/Moul/Crowthistle files for play in Uru.  See the Help tab or http://alcugs.almlys.org/Drizzle</html>{->}<html>Cet onglet permet de convertir les fichiers de MystV, Moul et Crowthistle pour les intégrer à Uru. ( De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://myst.dustbird.net/wiki/Drizzle )</html>
 SoundDecompress (When conversion is done, it will ask you to run this.){->}Démarrer SoundDecompress (utiliser lorsque la conversion est terminée)
 Start...{->}Démarrer
 Moul folder:{->}Dossier MOUL:
@@ -42,7 +42,7 @@ Moul music...{->}Musique de Moul
 Crowthistle music...{->}Musique de Crowthistle
 Pots music...{->}Musique de POTS
 (Make sure you fill out the 'Pots Folder' on the Moul tab for this one.){->}(Assurez-vous d'avoir choisi le 'Dossier POTS' dans l'onglet 'Moul'.)
-Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://dusty.homeunix.net/wiki/Drizzle.
+Instructions can be found on the Help tab or at  http://alcugs.almlys.org/Drizzle{->}De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://myst.dustbird.net/wiki/Drizzle.
 infolder:{->}Dossier source:
 outfolder:{->}Dossier destination:
 Memories: this area is for extracting images, notes, etc. from Uru (either offline or online){->}Souvenirs: Cet onglet permet d'extraire images, notes, etc. de Uru (versions multi-joueurs ou autonome)
@@ -56,7 +56,7 @@ port:{->}Port:
 Stop Server{->}Arrêter serveur
 Indicate in the log when files are read?{->}Indiquez dans le journal quand les fichiers sont lus?
 You have to stop and start the server for settings changes to take effect.{->}Vous devex arrêter et redémarrer le serveur pour que les changements prennent effet.
-This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}<html>Ce serveur proxy permet de parcourir de vieux sites web archivés en .zip. De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://dusty.homeunix.net/wiki/Drizzle.</html>
+This proxy server is for viewing old archived web sites.  Details on the help tab or  http://alcugs.almlys.org/Drizzle{->}<html>Ce serveur proxy permet de parcourir de vieux sites web archivés en .zip. De l'aide est disponible sous l'onglet "Aide", pour plus de détails voir: http://myst.dustbird.net/wiki/Drizzle.</html>
 List Available Ages...{->}Liste des Âges disponibles
 Get Offline list.{->}Liste locale
 Run Tests...{->}Démarrer tests
@@ -279,7 +279,7 @@ Woah there!  You probably meant to have the 'Partial Age' option set when making
 Conversion is set to 'Partial Age', but no Textures prp was found.  If your Age has no textures then this is normal, otherwise you should re-export with 3dsmax.{->}Vous avez choisi l'option 'Age partiel', mais Drizzle ne trouve pas votre fichier prp de textures. C'est normal si votre Age n'a pas de textures, sinon vous devriez l'exporter de nouveau à partir de 3dsmax.
 
 //Drizzle30
-You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above for details.{->}Il semble que vous utilisiez Windows Vista ou Windows 7. Cela peut causer un problème avec Uru, voir la solution ici: http://dusty.homeunix.net/wiki/Drizzle#Vista_and_above
+You appear to be running Windows Vista or Windows Seven.  Uru has a bug that will require a workaround, see http://myst.dustbird.net/wiki/Drizzle#Vista_and_above for details.{->}Il semble que vous utilisiez Windows Vista ou Windows 7. Cela peut causer un problème avec Uru, voir la solution ici: http://myst.dustbird.net/wiki/Drizzle#Vista_and_above
 //Err: Avertissements:
 Errors:{->}Erreurs:
 Warnings:{->}Aver:
