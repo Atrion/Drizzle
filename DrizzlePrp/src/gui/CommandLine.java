@@ -17,7 +17,7 @@ public class CommandLine
         {
             m.msg("Welcome to Drizzle!");
             m.msg("  (Any of these commands can be compounded into a list, e.g. '-version -prpdiff c:/source.prp c:/dest.prp -help')");
-            m.msg("  Misc:");
+            m.msg("  Information:");
             m.msg("    -version    ->Shows Drizzle's version.");
             m.msg("    -help    ->This help screen.");
             m.msg("    -listgamenames    ->Lists the possible options for 'gamename' arguments in other commands.");
@@ -58,6 +58,12 @@ public class CommandLine
             m.msg("    -removepythonoverrides c:/pakfolder c:/outputfolder overriddenpakname.pak gamename    ->Removes the entries from a .pak file, which have overrides in other files.");
             m.msg("    -listpak c:/pakfile.pak gamename         ->Lists the pyfiles that are present in the given .pak file.");
             m.msg("    -diffpaks c:/origpakfile.pak gamename c:/newpakfile.pak gamename   ->Compares two .pak files.");
+            m.msg("  Misc:");
+            m.msg("    -findsdl c:/dumpfile.dat c:/outputfolder");
+        }
+        else if(args[0].equals("-findsdl"))
+        {
+            auto.FindSdlInDump.FindSdlInDump(args[1], args[2]);
         }
         else if(args[0].equals("-simpledistill"))
         {
